@@ -12,4 +12,14 @@
     <SolidColorBrush x:Key="PrimaryDisabled" Color="{StaticResource PrimaryDisabledEffect}" />
     <SolidColorBrush x:Key="PrimaryLight" Color="{StaticResource PrimaryLightEffect}" />
 
+
+    <!--  成功  -->
+    <Color x:Key="SuccessEffect">#19be6b</Color>
+    <Color x:Key="SuccessDarkEffect">#18b566</Color>
+    <Color x:Key="SuccessDisabledEffect">#71d5a1</Color>
+    <Color x:Key="SuccessLightEffect">#dbf1e1</Color>
+    <SolidColorBrush x:Key="Success" Color="{StaticResource SuccessEffect}" />
+    <SolidColorBrush x:Key="SuccessDark" Color="{StaticResource SuccessDarkEffect}" />
+    <SolidColorBrush x:Key="SuccessDisabled" Color="{StaticResource SuccessDisabledEffect}" />
+    <SolidColorBrush x:Key="SuccessLight" Color="{StaticResource SuccessLightEffect}" />
 </ResourceDictionary>

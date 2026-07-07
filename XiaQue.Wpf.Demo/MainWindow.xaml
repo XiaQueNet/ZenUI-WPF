@@ -15,6 +15,10 @@
         <xq:XQ_Button
             Margin="5"
             Content="Click Me"
+            Type="Success" />
+        <xq:XQ_Button
+            Margin="5"
+            Content="Click Me"
             IsEnabled="False" />
     </StackPanel>
 </Window>
