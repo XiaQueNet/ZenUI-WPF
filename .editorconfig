@@ -1,0 +1,8 @@
+[*.cs]
+end_of_line = lf
+
+[*.xaml]
+end_of_line = crlf
+
+[*.md]
+end_of_line = lf

@@ -1,0 +1,15 @@
+﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+
+
+    <!--  主色  -->
+    <Color x:Key="PrimaryEffect">#3c9cff</Color>
+    <Color x:Key="PrimaryDarkEffect">#398ade</Color>
+    <Color x:Key="PrimaryDisabledEffect">#9acafc</Color>
+    <Color x:Key="PrimaryLightEffect">#ecf5ff</Color>
+    <SolidColorBrush x:Key="Primary" Color="{StaticResource PrimaryEffect}" />
+    <SolidColorBrush x:Key="PrimaryDark" Color="{StaticResource PrimaryDarkEffect}" />
+    <SolidColorBrush x:Key="PrimaryDisabled" Color="{StaticResource PrimaryDisabledEffect}" />
+    <SolidColorBrush x:Key="PrimaryLight" Color="{StaticResource PrimaryLightEffect}" />
+
+</ResourceDictionary>
