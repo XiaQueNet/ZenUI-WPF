@@ -2,7 +2,7 @@
     x:Class="ZenUI.Wpf.Demo.MainWindow"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:Zen="http://www.mnorg.com/zenui/2026/"
+    xmlns:Zen="http://zenui.mnorg.com/zenui-wpf/2026/"
     xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
     xmlns:local="clr-namespace:ZenUI.Wpf.Demo"
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
@@ -11,14 +11,27 @@
     Height="450"
     mc:Ignorable="d">
     <StackPanel Height="45" Orientation="Horizontal">
-        <Zen:ZenButton Margin="5" Content="Click Me" />
+        <Zen:ZenButton Margin="5" Content="主题色按钮" />
         <Zen:ZenButton
             Margin="5"
-            Content="Click Me"
+            Content="主题色禁用按钮"
+            IsEnabled="False" />
+        <Zen:ZenButton
+            Margin="5"
+            Background="Red"
+            Content="自定义色按钮" />
+        <Zen:ZenButton
+            Margin="5"
+            Background="Red"
+            Content="自定义色禁用按钮"
+            IsEnabled="False" />
+        <Zen:ZenButton
+            Margin="5"
+            Content="成功色按钮"
             Type="Success" />
         <Zen:ZenButton
             Margin="5"
-            Content="Click Me"
-            IsEnabled="False" />
+            Content="警告色按钮"
+            Type="Warning" />
     </StackPanel>
 </Window>

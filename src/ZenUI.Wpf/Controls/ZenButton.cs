@@ -1,4 +1,5 @@
 ﻿using System;
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -14,6 +15,7 @@ namespace ZenUI.Wpf.Controls
         /// <summary>
         /// 圆角
         /// </summary>
+        [Bindable(true)]
         public CornerRadius CornerRadius
         {
             get { return (CornerRadius)GetValue(CornerRadiusProperty); }
@@ -26,8 +28,7 @@ namespace ZenUI.Wpf.Controls
 
 
 
-
-
+        [Bindable(true)]
         public ButtonStyle Type
         {
             get { return (ButtonStyle)GetValue(TypeProperty); }
