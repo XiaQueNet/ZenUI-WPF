@@ -1,0 +1,24 @@
+﻿<Window
+    x:Class="ZenUI.Wpf.Demo.MainWindow"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:Zen="http://www.mnorg.com/zenui/2026/"
+    xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+    xmlns:local="clr-namespace:ZenUI.Wpf.Demo"
+    xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+    Title="ZenUI 控件库"
+    Width="800"
+    Height="450"
+    mc:Ignorable="d">
+    <StackPanel Height="45" Orientation="Horizontal">
+        <Zen:ZenButton Margin="5" Content="Click Me" />
+        <Zen:ZenButton
+            Margin="5"
+            Content="Click Me"
+            Type="Success" />
+        <Zen:ZenButton
+            Margin="5"
+            Content="Click Me"
+            IsEnabled="False" />
+    </StackPanel>
+</Window>
