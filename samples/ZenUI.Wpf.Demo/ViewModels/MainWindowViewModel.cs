@@ -33,6 +33,7 @@ namespace ZenUI.Wpf.Demo.ViewModels
                 new MenuItemViewModel("概览", NavigationKeys.Overview, true),
                 new MenuItemViewModel("按钮  Button", NavigationKeys.Button),
                 new MenuItemViewModel("输入框  TextBox", NavigationKeys.TextBox),
+                new MenuItemViewModel("数字输入框  NumberBox", NavigationKeys.NumberBox),
                 new MenuItemViewModel("密码框  PasswordBox", NavigationKeys.PasswordBox),
                 new MenuItemViewModel("开关  Switch", NavigationKeys.Switch),
                 new MenuItemViewModel("复选框  CheckBox", NavigationKeys.CheckBox),

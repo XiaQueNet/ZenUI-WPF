@@ -29,6 +29,7 @@ namespace ZenUI.Wpf.Demo
             containerRegistry.RegisterForNavigation<OverviewView>(NavigationKeys.Overview);
             containerRegistry.RegisterForNavigation<ButtonView>(NavigationKeys.Button);
             containerRegistry.RegisterForNavigation<TextBoxView>(NavigationKeys.TextBox);
+            containerRegistry.RegisterForNavigation<NumberBoxView>(NavigationKeys.NumberBox);
             containerRegistry.RegisterForNavigation<PasswordBoxView>(NavigationKeys.PasswordBox);
             containerRegistry.RegisterForNavigation<SwitchView>(NavigationKeys.Switch);
             containerRegistry.RegisterForNavigation<CheckBoxView>(NavigationKeys.CheckBox);
