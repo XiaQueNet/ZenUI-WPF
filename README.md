@@ -1,4 +1,6 @@
-# ZenUI.Wpf
+<p align="center">
+  <img src="https://raw.githubusercontent.com/XiaQueNet/ZenUI-WPF/main/assets/brand/zenui-logo.png" alt="ZenUI for WPF" width="570" />
+</p>
 
 面向 .NET Framework 4.7.2 与现代 .NET 8 WPF 的控件库。
 

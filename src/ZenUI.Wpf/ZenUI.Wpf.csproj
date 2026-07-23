@@ -21,6 +21,7 @@
     <Description>A themeable and accessible WPF control library for .NET Framework 4.7.2 and modern .NET.</Description>
     <PackageTags>wpf;controls;ui;net472;net8;windows</PackageTags>
     <PackageReadmeFile>README.md</PackageReadmeFile>
+    <PackageIcon>zenui-icon.png</PackageIcon>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
     <PackageReleaseNotes>See CHANGELOG.md in the package for release details.</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/XiaQueNet/ZenUI-WPF</PackageProjectUrl>
@@ -36,6 +37,7 @@
   <ItemGroup>
     <None Include="..\..\README.md" Pack="true" PackagePath="\" />
     <None Include="..\..\CHANGELOG.md" Pack="true" PackagePath="\" />
+    <None Include="..\..\assets\brand\zenui-icon.png" Pack="true" PackagePath="\" />
     <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
   </ItemGroup>
 </Project>

@@ -1,0 +1,41 @@
+<svg xmlns="http://www.w3.org/2000/svg" width="760" height="320" viewBox="0 0 760 320" role="img" aria-labelledby="title description">
+  <title id="title">ZenUI for WPF</title>
+  <desc id="description">ZenUI logo with an open Zen circle, a geometric letter Z, and the words ZenUI for WPF.</desc>
+  <defs>
+    <linearGradient id="surface" x1="38" y1="26" x2="286" y2="294" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#2948B8" />
+      <stop offset="0.55" stop-color="#3D63D2" />
+      <stop offset="1" stop-color="#7C9CFF" />
+    </linearGradient>
+    <linearGradient id="ring" x1="82" y1="64" x2="242" y2="264" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#FFFFFF" />
+      <stop offset="1" stop-color="#EAF0FF" />
+    </linearGradient>
+  </defs>
+
+  <g>
+    <rect x="24" y="24" width="272" height="272" rx="70" fill="url(#surface)" />
+    <rect x="32" y="32" width="256" height="256" rx="62" fill="none" stroke="#FFFFFF" stroke-opacity="0.12" stroke-width="2" />
+    <circle
+      cx="160"
+      cy="160"
+      r="92"
+      fill="none"
+      stroke="url(#ring)"
+      stroke-width="18"
+      stroke-linecap="round"
+      stroke-dasharray="472 106"
+      transform="rotate(-43 160 160)" />
+    <path
+      d="M121 121H201L121 200H201"
+      fill="none"
+      stroke="#FFFFFF"
+      stroke-width="20"
+      stroke-linecap="round"
+      stroke-linejoin="round" />
+    <circle cx="237" cy="109" r="11" fill="#49C77E" stroke="#FFFFFF" stroke-width="5" />
+  </g>
+
+  <text x="352" y="174" fill="#3D63D2" font-family="Segoe UI Variable Display, Segoe UI, sans-serif" font-size="108" font-weight="700" letter-spacing="-4">ZenUI</text>
+  <text x="358" y="226" fill="#697386" font-family="Segoe UI Variable Text, Segoe UI, sans-serif" font-size="30" font-weight="600" letter-spacing="6">FOR WPF</text>
+</svg>
