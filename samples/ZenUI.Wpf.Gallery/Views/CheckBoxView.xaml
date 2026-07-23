@@ -1,0 +1,76 @@
+<UserControl
+    x:Class="ZenUI.Wpf.Gallery.Views.CheckBoxView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:gallery="clr-namespace:ZenUI.Wpf.Gallery.Controls"
+    xmlns:zen="http://zenui.mnorg.com/zenui-wpf">
+    <ScrollViewer Padding="40" HorizontalContentAlignment="Stretch" VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+            <gallery:PageHeader Description="用于在一组独立选项中选择零项、一项或多项。" Title="CheckBox 复选框" />
+            <Border Style="{StaticResource GalleryCardStyle}">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="选择状态" />
+                    <StackPanel Orientation="Horizontal">
+                        <zen:ZenCheckBox Margin="0,0,28,0" Content="未选中" />
+                        <zen:ZenCheckBox Margin="0,0,28,0" Content="已选中" IsChecked="True" />
+                        <zen:ZenCheckBox Content="不确定" IsChecked="{x:Null}" IsThreeState="True" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+            <Border Style="{StaticResource GalleryCardStyle}">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="禁用状态" />
+                    <StackPanel Orientation="Horizontal">
+                        <zen:ZenCheckBox Margin="0,0,28,0" Content="未选中禁用" IsEnabled="False" />
+                        <zen:ZenCheckBox Margin="0,0,28,0" Content="选中禁用" IsChecked="True" IsEnabled="False" />
+                        <zen:ZenCheckBox Content="不确定禁用" IsChecked="{x:Null}" IsEnabled="False" IsThreeState="True" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+            <Border Style="{StaticResource GalleryCardStyle}">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="选项组" />
+                    <zen:ZenCheckBox
+                        x:Name="SelectAllNotifications"
+                        Checked="SelectAllNotifications_OnSelectionChanged"
+                        Content="全选通知"
+                        IsChecked="{x:Null}"
+                        IsThreeState="True"
+                        Unchecked="SelectAllNotifications_OnSelectionChanged" />
+                    <StackPanel Margin="26,16,0,0">
+                        <zen:ZenCheckBox
+                            x:Name="ProductUpdates"
+                            Margin="0,0,0,14"
+                            Checked="NotificationOption_OnSelectionChanged"
+                            Content="产品更新"
+                            IsChecked="True"
+                            Unchecked="NotificationOption_OnSelectionChanged" />
+                        <zen:ZenCheckBox
+                            x:Name="SecurityAlerts"
+                            Margin="0,0,0,14"
+                            Checked="NotificationOption_OnSelectionChanged"
+                            Content="安全提醒"
+                            IsChecked="True"
+                            Unchecked="NotificationOption_OnSelectionChanged" />
+                        <zen:ZenCheckBox
+                            x:Name="EventRecommendations"
+                            Checked="NotificationOption_OnSelectionChanged"
+                            Content="活动推荐"
+                            Unchecked="NotificationOption_OnSelectionChanged" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+            <Border Style="{StaticResource GalleryCardStyle}">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="带说明的选项" />
+                    <zen:ZenCheckBox>
+                        <StackPanel>
+                            <TextBlock Text="自动保存工作区" />
+                            <TextBlock Style="{StaticResource GallerySupportingTextStyle}" Text="内容发生变化时自动保存，减少意外关闭造成的数据丢失。" />
+                        </StackPanel>
+                    </zen:ZenCheckBox>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

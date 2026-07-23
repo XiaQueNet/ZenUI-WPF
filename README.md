@@ -27,7 +27,7 @@
 </Window>
 ```
 
-目前提供 Button、TextBox、PasswordBox、Switch、CheckBox、RadioButton、ComboBox、DataGrid、Slider、ProgressBar 和 Alert 共 11 个常用控件。所有控件均自带默认主题，并覆盖悬停、焦点、选中和禁用等常见交互状态。
+目前提供 Button、TextBox、NumberBox、PasswordBox、Switch、CheckBox、RadioButton、ComboBox、DataGrid、Slider、ProgressBar 和 Alert 共 12 个常用控件。所有控件均自带默认主题，并覆盖悬停、焦点、选中和禁用等常见交互状态。
 
 控件的默认样式由 `Themes/Generic.xaml` 自动加载。应用需要直接使用 ZenUI 颜色资源或具名样式时，可以显式合并默认主题：
 
@@ -69,11 +69,11 @@ private void PasswordBox_OnPasswordChanged(object sender, RoutedEventArgs e)
 ## 构建
 
 - 控件库（`net472` 与 `net8.0-windows`）：`dotnet build src/ZenUI.Wpf/ZenUI.Wpf.csproj -c Release`
-- Prism + MVVM Demo：`dotnet build samples/ZenUI.Wpf.Demo/ZenUI.Wpf.Demo.csproj -c Release`
+- 控件 Gallery：`dotnet build samples/ZenUI.Wpf.Gallery/ZenUI.Wpf.Gallery.csproj -c Release`
 - 自动化测试：`dotnet test tests/ZenUI.Wpf.Tests/ZenUI.Wpf.Tests.csproj -c Release`
 - NuGet 包：`dotnet pack src/ZenUI.Wpf/ZenUI.Wpf.csproj -c Release`
 
-`samples/ZenUI.Wpf.Demo` 使用 Prism Region Navigation 和 MVVM：`MainWindow` 只负责 Shell 布局，菜单由 `MainWindowViewModel` 驱动，每个组件位于独立的 `Views/*View.xaml` 页面。Demo 仍以 .NET Framework 4.7.2 为目标框架，Prism 依赖不会传递到 `ZenUI.Wpf` 控件库。
+`samples/ZenUI.Wpf.Gallery` 是 ZenUI 控件目录，使用 Prism Region Navigation 和 MVVM：`MainWindow` 只负责 Shell 布局，菜单由 `MainWindowViewModel` 驱动，每个组件位于独立的 `Views/*View.xaml` 页面。Gallery 仍以 .NET Framework 4.7.2 为目标框架，Prism 依赖不会传递到 `ZenUI.Wpf` 控件库。`samples/ZenUI.Wpf.PosDemo` 则负责展示完整的业务应用场景。
 
 仓库在 Windows CI 中将编译器与 .NET 分析器警告视为错误，并同时运行 `net472`、`net8.0-windows` 测试及 NuGet/Symbol 包验证。
 

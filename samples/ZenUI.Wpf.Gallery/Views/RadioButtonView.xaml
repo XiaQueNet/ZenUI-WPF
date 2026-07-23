@@ -1,0 +1,56 @@
+<UserControl
+    x:Class="ZenUI.Wpf.Gallery.Views.RadioButtonView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:gallery="clr-namespace:ZenUI.Wpf.Gallery.Controls"
+    xmlns:zen="http://zenui.mnorg.com/zenui-wpf">
+    <ScrollViewer Padding="40" HorizontalContentAlignment="Stretch" VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+            <gallery:PageHeader Description="用于在一组互斥选项中选择唯一一项。" Title="RadioButton 单选按钮" />
+            <Border Style="{StaticResource GalleryCardStyle}">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="选择状态" />
+                    <StackPanel Orientation="Horizontal">
+                        <zen:ZenRadioButton Margin="0,0,28,0" Content="选项 A" GroupName="GalleryOptions" IsChecked="True" />
+                        <zen:ZenRadioButton Margin="0,0,28,0" Content="选项 B" GroupName="GalleryOptions" />
+                        <zen:ZenRadioButton Content="选项 C" GroupName="GalleryOptions" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+            <Border Style="{StaticResource GalleryCardStyle}">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="禁用状态" />
+                    <StackPanel Orientation="Horizontal">
+                        <zen:ZenRadioButton Margin="0,0,28,0" Content="未选中禁用" GroupName="DisabledOptions" IsEnabled="False" />
+                        <zen:ZenRadioButton Content="选中禁用" GroupName="DisabledOptions" IsChecked="True" IsEnabled="False" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+            <Border Style="{StaticResource GalleryCardStyle}">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="垂直选项组" />
+                    <zen:ZenRadioButton Margin="0,0,0,14" Content="标准版" GroupName="PlanOptions" />
+                    <zen:ZenRadioButton Margin="0,0,0,14" Content="专业版" GroupName="PlanOptions" IsChecked="True" />
+                    <zen:ZenRadioButton Content="企业版" GroupName="PlanOptions" />
+                </StackPanel>
+            </Border>
+            <Border Style="{StaticResource GalleryCardStyle}">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="带说明的选项" />
+                    <zen:ZenRadioButton GroupName="DeployOptions" IsChecked="True">
+                        <StackPanel>
+                            <TextBlock Text="自动发布" />
+                            <TextBlock Style="{StaticResource GallerySupportingTextStyle}" Text="代码合并后自动构建并部署到测试环境。" />
+                        </StackPanel>
+                    </zen:ZenRadioButton>
+                    <zen:ZenRadioButton Margin="0,18,0,0" GroupName="DeployOptions">
+                        <StackPanel>
+                            <TextBlock Text="手动发布" />
+                            <TextBlock Style="{StaticResource GallerySupportingTextStyle}" Text="由负责人确认构建结果后再执行部署。" />
+                        </StackPanel>
+                    </zen:ZenRadioButton>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

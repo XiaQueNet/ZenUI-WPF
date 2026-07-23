@@ -1,0 +1,39 @@
+<UserControl
+    x:Class="ZenUI.Wpf.Gallery.Views.ProgressBarView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:gallery="clr-namespace:ZenUI.Wpf.Gallery.Controls"
+    xmlns:prism="http://prismlibrary.com/"
+    xmlns:zen="http://zenui.mnorg.com/zenui-wpf"
+    prism:ViewModelLocator.AutoWireViewModel="True">
+    <ScrollViewer Padding="40" HorizontalContentAlignment="Stretch" VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+            <gallery:PageHeader Description="用于展示任务、上传或流程的当前完成进度。" Title="ProgressBar 进度条" />
+            <Border Style="{StaticResource GalleryCardStyle}">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="基本进度与自定义外观" />
+                    <TextBlock Margin="0,0,0,8" Foreground="{DynamicResource ZenTextSecondaryBrush}" Text="默认进度 · 72%" />
+                    <zen:ZenProgressBar Maximum="100" Value="72" />
+                    <TextBlock Margin="0,18,0,8" Foreground="{DynamicResource ZenTextSecondaryBrush}" Text="自定义颜色与高度 · 45%" />
+                    <zen:ZenProgressBar Height="12" CornerRadius="6" Foreground="{DynamicResource ZenSuccessBrush}" Maximum="100" Value="45" />
+                </StackPanel>
+            </Border>
+            <Border Style="{StaticResource GalleryCardStyle}">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="模拟进度" />
+                    <Grid Margin="0,0,0,10">
+                        <TextBlock Foreground="{DynamicResource ZenTextSecondaryBrush}" Text="点击按钮，从 0 开始模拟任务进度" />
+                        <TextBlock HorizontalAlignment="Right" Foreground="{DynamicResource ZenTextSecondaryBrush}" Text="{Binding SimulatedProgress, StringFormat={}{0:F0}%}" />
+                    </Grid>
+                    <zen:ZenProgressBar Maximum="100" Value="{Binding SimulatedProgress, Mode=OneWay}" />
+                    <zen:ZenButton
+                        Margin="0,18,0,0"
+                        HorizontalAlignment="Left"
+                        Command="{Binding StartProgressCommand}"
+                        Content="开始模拟"
+                        Style="{StaticResource GalleryButtonStyle}" />
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

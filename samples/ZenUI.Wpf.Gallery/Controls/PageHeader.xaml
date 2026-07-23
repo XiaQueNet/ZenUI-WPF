@@ -1,0 +1,9 @@
+<UserControl
+    x:Class="ZenUI.Wpf.Gallery.Controls.PageHeader"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    <StackPanel>
+        <TextBlock Style="{StaticResource PageTitleStyle}" Text="{Binding Title, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" />
+        <TextBlock Style="{StaticResource PageDescriptionStyle}" Text="{Binding Description, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}" />
+    </StackPanel>
+</UserControl>
