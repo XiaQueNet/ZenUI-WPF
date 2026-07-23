@@ -3,7 +3,7 @@ using System.Globalization;
 
 namespace ZenUI.Wpf.Converters
 {
-    public class NullToVisibilityConverter : BaseVisibilityConverter<NullToVisibilityConverter>
+    public class NullToVisibilityConverter : BaseVisibilityConverter
     {
         public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

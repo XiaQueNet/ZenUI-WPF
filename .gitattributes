@@ -1,11 +1,36 @@
 ###############################################################################
 # Set default behavior to automatically normalize line endings.
 ###############################################################################
-* text=auto
+* text=auto eol=crlf
 
-*.cs text eol=lf
+.gitattributes text eol=lf
+.editorconfig text eol=lf
+*.sh text eol=lf
+*.bash text eol=lf
+*.zsh text eol=lf
+*.fish text eol=lf
+*.ps1 text eol=lf
+*.psm1 text eol=lf
+*.psd1 text eol=lf
+*.cmd text eol=lf
+*.bat text eol=lf
+*.py text eol=lf
+*.rb text eol=lf
+*.pl text eol=lf
+*.js text eol=lf
+*.mjs text eol=lf
+*.cjs text eol=lf
+*.ts text eol=lf
+*.tsx text eol=lf
+*.jsx text eol=lf
+*.cs text eol=crlf
 *.xaml text eol=crlf
-*.md text eol=lf
+*.md text eol=crlf
+*.csproj text eol=crlf
+*.props text eol=crlf
+*.targets text eol=crlf
+*.slnx text eol=crlf
+*.json text eol=crlf
 
 ###############################################################################
 # Set default behavior for command prompt diff.

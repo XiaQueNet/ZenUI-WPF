@@ -1,15 +1,54 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <!--  主色  -->
-    <Color x:Key="PrimaryEffect">#095BFF</Color>
-    <SolidColorBrush x:Key="Primary" Color="{StaticResource PrimaryEffect}" />
+    <SolidColorBrush x:Key="ZenPrimaryBrush" Color="#3D63D2" />
+    <SolidColorBrush x:Key="ZenPrimaryHoverBrush" Color="#3457BE" />
+    <SolidColorBrush x:Key="ZenPrimaryPressedBrush" Color="#2C4AA5" />
 
     <!--  成功  -->
-    <Color x:Key="SuccessEffect">#19be6b</Color>
-    <SolidColorBrush x:Key="Success" Color="{StaticResource SuccessEffect}" />
+    <SolidColorBrush x:Key="ZenSuccessBrush" Color="#19BE6B" />
+    <SolidColorBrush x:Key="ZenSuccessActionBrush" Color="#07883F" />
+    <SolidColorBrush x:Key="ZenSuccessActionHoverBrush" Color="#067537" />
+    <SolidColorBrush x:Key="ZenSuccessActionPressedBrush" Color="#055F2E" />
 
     <!--  警告  -->
-    <Color x:Key="WarningEffect">#faad14</Color>
-    <SolidColorBrush x:Key="Warning" Color="{StaticResource WarningEffect}" />
+    <SolidColorBrush x:Key="ZenWarningBrush" Color="#FAAD14" />
+    <SolidColorBrush x:Key="ZenWarningHoverBrush" Color="#E89A00" />
+    <SolidColorBrush x:Key="ZenWarningPressedBrush" Color="#CC8500" />
+    <SolidColorBrush x:Key="ZenWarningForegroundBrush" Color="#5C3B00" />
+
+    <!--  错误与信息  -->
+    <SolidColorBrush x:Key="ZenErrorBrush" Color="#F53F3F" />
+
+    <SolidColorBrush x:Key="ZenInfoBrush" Color="#3D63D2" />
+
+    <!--  表面与边框  -->
+    <SolidColorBrush x:Key="ZenSurfaceBrush" Color="#FFFFFF" />
+    <SolidColorBrush x:Key="ZenSurfaceMutedBrush" Color="#F7F8FA" />
+    <SolidColorBrush x:Key="ZenSurfaceDisabledBrush" Color="#F2F3F5" />
+    <SolidColorBrush x:Key="ZenSurfaceHoverBrush" Color="#EEF3FA" />
+    <SolidColorBrush x:Key="ZenBorderBrush" Color="#D9DDE5" />
+    <SolidColorBrush x:Key="ZenBorderHoverBrush" Color="#AAB2C0" />
+    <SolidColorBrush x:Key="ZenDividerBrush" Color="#E7EAF0" />
+
+    <!--  文字  -->
+    <SolidColorBrush x:Key="ZenTextPrimaryBrush" Color="#1D2129" />
+
+    <SolidColorBrush x:Key="ZenTextSecondaryBrush" Color="#4E5969" />
+
+    <SolidColorBrush x:Key="ZenTextPlaceholderBrush" Color="#86909C" />
+
+    <!--  焦点  -->
+    <SolidColorBrush x:Key="ZenFocusBrush" Color="#7892E5" />
+
+    <!--  浅色语义背景  -->
+    <SolidColorBrush x:Key="ZenInfoLightBrush" Color="#EEF2FF" />
+    <SolidColorBrush x:Key="ZenSuccessLightBrush" Color="#E8FFEA" />
+    <SolidColorBrush x:Key="ZenWarningLightBrush" Color="#FFF7E8" />
+    <SolidColorBrush x:Key="ZenErrorLightBrush" Color="#FFECE8" />
+
+    <!--  表格  -->
+    <SolidColorBrush x:Key="ZenDataGridAlternatingRowBrush" Color="#FBFCFD" />
+    <SolidColorBrush x:Key="ZenDataGridRowHoverBrush" Color="#F4F6FD" />
 
 </ResourceDictionary>

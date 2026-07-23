@@ -1,0 +1,61 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:zen="clr-namespace:ZenUI.Wpf.Controls">
+
+    <Style x:Key="ZenProgressBarStyle" TargetType="{x:Type zen:ZenProgressBar}">
+        <Setter Property="Height" Value="8" />
+        <Setter Property="Background" Value="{DynamicResource ZenDividerBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource ZenPrimaryBrush}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type zen:ZenProgressBar}">
+                    <Border x:Name="PART_Track" Background="{TemplateBinding Background}" CornerRadius="{TemplateBinding CornerRadius}" SnapsToDevicePixels="True">
+                        <Grid ClipToBounds="True">
+                            <Border
+                                x:Name="PART_Indicator"
+                                HorizontalAlignment="Left"
+                                VerticalAlignment="Stretch"
+                                Background="{TemplateBinding Foreground}"
+                                CornerRadius="{TemplateBinding CornerRadius}" />
+                            <Border
+                                x:Name="IndeterminateIndicator"
+                                Background="{TemplateBinding Foreground}"
+                                CornerRadius="{TemplateBinding CornerRadius}"
+                                Opacity="0"
+                                Visibility="Collapsed" />
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Orientation" Value="Vertical">
+                            <Setter Property="Width" Value="8" />
+                            <Setter Property="Height" Value="Auto" />
+                            <Setter TargetName="PART_Indicator" Property="HorizontalAlignment" Value="Stretch" />
+                            <Setter TargetName="PART_Indicator" Property="VerticalAlignment" Value="Bottom" />
+                        </Trigger>
+                        <Trigger Property="IsIndeterminate" Value="True">
+                            <Setter TargetName="PART_Indicator" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="IndeterminateIndicator" Property="Visibility" Value="Visible" />
+                            <Trigger.EnterActions>
+                                <BeginStoryboard x:Name="IndeterminateStoryboard">
+                                    <Storyboard AutoReverse="True" RepeatBehavior="Forever">
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="IndeterminateIndicator"
+                                            Storyboard.TargetProperty="Opacity"
+                                            From="0.25"
+                                            To="1"
+                                            Duration="0:0:0.7" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </Trigger.EnterActions>
+                            <Trigger.ExitActions>
+                                <StopStoryboard BeginStoryboardName="IndeterminateStoryboard" />
+                            </Trigger.ExitActions>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style BasedOn="{StaticResource ZenProgressBarStyle}" TargetType="{x:Type zen:ZenProgressBar}" />
+</ResourceDictionary>

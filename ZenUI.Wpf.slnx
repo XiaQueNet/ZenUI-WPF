@@ -1,4 +1,5 @@
 <Solution>
   <Project Path="src/ZenUI.Wpf/ZenUI.Wpf.csproj" Id="8657e873-416d-4f61-b78f-c05ace906693" />
   <Project Path="samples/ZenUI.Wpf.Demo/ZenUI.Wpf.Demo.csproj" Id="bce4b9fa-37b9-46a0-9676-64ff6b8c632f" />
+  <Project Path="tests/ZenUI.Wpf.Tests/ZenUI.Wpf.Tests.csproj" Id="a7934738-e88a-4d95-b607-bb6dbe50c594" />
 </Solution>

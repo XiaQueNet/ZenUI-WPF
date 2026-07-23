@@ -1,0 +1,41 @@
+<UserControl
+    x:Class="ZenUI.Wpf.Demo.Views.ButtonView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:demo="clr-namespace:ZenUI.Wpf.Demo.Controls"
+    xmlns:zen="http://zenui.mnorg.com/zenui-wpf">
+    <ScrollViewer Padding="40" HorizontalContentAlignment="Stretch" VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+            <demo:PageHeader Description="用于触发操作，支持语义类型、自定义外观和禁用状态。" Title="Button 按钮" />
+            <Border Style="{StaticResource DemoCardStyle}">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="按钮类型" />
+                    <StackPanel Orientation="Horizontal">
+                        <zen:ZenButton Content="主要按钮" Style="{StaticResource DemoButtonStyle}" />
+                        <zen:ZenButton Content="成功按钮" Style="{StaticResource DemoButtonStyle}" Variant="Success" />
+                        <zen:ZenButton Content="警告按钮" Style="{StaticResource DemoButtonStyle}" Variant="Warning" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+            <Border Style="{StaticResource DemoCardStyle}">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="按钮状态" />
+                    <StackPanel Orientation="Horizontal">
+                        <zen:ZenButton Content="正常状态" Style="{StaticResource DemoButtonStyle}" />
+                        <zen:ZenButton Content="禁用状态" IsEnabled="False" Style="{StaticResource DemoButtonStyle}" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+            <Border Style="{StaticResource DemoCardStyle}">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="圆角" />
+                    <StackPanel Orientation="Horizontal">
+                        <zen:ZenButton Content="直角" CornerRadius="0" Style="{StaticResource DemoButtonStyle}" />
+                        <zen:ZenButton Content="小圆角" CornerRadius="4" Style="{StaticResource DemoButtonStyle}" />
+                        <zen:ZenButton Content="大圆角" CornerRadius="18" Style="{StaticResource DemoButtonStyle}" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

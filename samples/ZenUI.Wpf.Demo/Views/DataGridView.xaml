@@ -1,0 +1,47 @@
+<UserControl
+    x:Class="ZenUI.Wpf.Demo.Views.DataGridView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:demo="clr-namespace:ZenUI.Wpf.Demo.Controls"
+    xmlns:zen="http://zenui.mnorg.com/zenui-wpf">
+    <ScrollViewer Padding="40" HorizontalContentAlignment="Stretch" VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+            <demo:PageHeader Description="用于展示和操作结构化数据，支持列排序、列宽调整、行选择与滚动。" Title="DataGrid 数据表格" />
+
+            <Border Style="{StaticResource DemoCardStyle}">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="基础表格" />
+                    <zen:ZenDataGrid
+                        Height="310"
+                        AutoGenerateColumns="False"
+                        IsReadOnly="True"
+                        ItemsSource="{Binding Users}">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Width="80" Binding="{Binding Id}" Header="编号" />
+                            <DataGridTextColumn Width="*" MinWidth="130" Binding="{Binding Name}" Header="姓名" />
+                            <DataGridTextColumn Width="1.3*" MinWidth="170" Binding="{Binding Email}" Header="邮箱" />
+                            <DataGridTextColumn Width="120" Binding="{Binding Role}" Header="角色" />
+                            <DataGridTextColumn Width="100" Binding="{Binding Status}" Header="状态" />
+                        </DataGrid.Columns>
+                    </zen:ZenDataGrid>
+                </StackPanel>
+            </Border>
+
+            <Border Style="{StaticResource DemoCardStyle}">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="空状态" />
+                    <zen:ZenDataGrid
+                        Height="180"
+                        AutoGenerateColumns="False"
+                        EmptyContent="还没有成员数据"
+                        IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Width="*" Header="名称" />
+                            <DataGridTextColumn Width="180" Header="状态" />
+                        </DataGrid.Columns>
+                    </zen:ZenDataGrid>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

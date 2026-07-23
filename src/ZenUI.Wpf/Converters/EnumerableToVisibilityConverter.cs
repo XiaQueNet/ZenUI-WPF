@@ -10,7 +10,7 @@ namespace ZenUI.Wpf.Converters
     /// 将集合是否包含数据转换为可见性。
     /// </summary>
     [ValueConversion(typeof(IEnumerable), typeof(Visibility))]
-    public class EnumerableToVisibilityConverter : BaseVisibilityConverter<EnumerableToVisibilityConverter>
+    public class EnumerableToVisibilityConverter : BaseVisibilityConverter
     {
         /// <summary>
         /// 当集合包含至少一条数据时返回可见，否则返回隐藏。

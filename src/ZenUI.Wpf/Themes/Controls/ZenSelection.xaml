@@ -1,0 +1,119 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:zen="clr-namespace:ZenUI.Wpf.Controls">
+
+    <Style x:Key="ZenSelectionFocusVisualStyle" TargetType="{x:Type Control}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Control}">
+                    <Border CornerRadius="4" Style="{StaticResource ZenFocusVisualBorderStyle}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ZenCheckBoxStyle" TargetType="{x:Type zen:ZenCheckBox}">
+        <Setter Property="Foreground" Value="{DynamicResource ZenTextPrimaryBrush}" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="FocusVisualStyle" Value="{StaticResource ZenSelectionFocusVisualStyle}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type zen:ZenCheckBox}">
+                    <Grid Background="Transparent">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Border
+                            x:Name="Box"
+                            Width="18"
+                            Height="18"
+                            VerticalAlignment="Center"
+                            Background="{DynamicResource ZenSurfaceBrush}"
+                            BorderBrush="{DynamicResource ZenBorderBrush}"
+                            BorderThickness="1"
+                            CornerRadius="4">
+                            <Path
+                                x:Name="CheckMark"
+                                Width="10"
+                                Height="7"
+                                Data="M 1,3.5 L 4,6 L 9,1"
+                                Stroke="White"
+                                StrokeEndLineCap="Round"
+                                StrokeLineJoin="Round"
+                                StrokeStartLineCap="Round"
+                                StrokeThickness="2"
+                                Visibility="Collapsed" />
+                        </Border>
+                        <ContentPresenter
+                            Grid.Column="1"
+                            Margin="8,0,0,0"
+                            VerticalAlignment="Center"
+                            ContentSource="Content"
+                            RecognizesAccessKey="True" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Box" Property="BorderBrush" Value="{DynamicResource ZenPrimaryBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="Box" Property="Background" Value="{DynamicResource ZenPrimaryBrush}" />
+                            <Setter TargetName="Box" Property="BorderBrush" Value="{DynamicResource ZenPrimaryBrush}" />
+                            <Setter TargetName="CheckMark" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="{x:Null}">
+                            <Setter TargetName="Box" Property="Background" Value="{DynamicResource ZenPrimaryBrush}" />
+                            <Setter TargetName="Box" Property="BorderBrush" Value="{DynamicResource ZenPrimaryBrush}" />
+                            <Setter TargetName="CheckMark" Property="Data" Value="M 1,3.5 L 9,3.5" />
+                            <Setter TargetName="CheckMark" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.45" />
+                            <Setter Property="Cursor" Value="Arrow" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style BasedOn="{StaticResource ZenCheckBoxStyle}" TargetType="{x:Type zen:ZenCheckBox}" />
+
+    <Style x:Key="ZenRadioButtonStyle" TargetType="{x:Type zen:ZenRadioButton}">
+        <Setter Property="Foreground" Value="{DynamicResource ZenTextPrimaryBrush}" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="FocusVisualStyle" Value="{StaticResource ZenSelectionFocusVisualStyle}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type zen:ZenRadioButton}">
+                    <Grid Background="Transparent">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid Width="18" Height="18" VerticalAlignment="Center">
+                            <Ellipse x:Name="Ring" Fill="{DynamicResource ZenSurfaceBrush}" Stroke="{DynamicResource ZenBorderBrush}" StrokeThickness="1" />
+                            <Ellipse x:Name="Dot" Margin="5" Fill="{DynamicResource ZenPrimaryBrush}" Visibility="Collapsed" />
+                        </Grid>
+                        <ContentPresenter Grid.Column="1" Margin="8,0,0,0" VerticalAlignment="Center" ContentSource="Content" RecognizesAccessKey="True" />
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Ring" Property="Stroke" Value="{DynamicResource ZenPrimaryBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="Ring" Property="Stroke" Value="{DynamicResource ZenPrimaryBrush}" />
+                            <Setter TargetName="Ring" Property="StrokeThickness" Value="2" />
+                            <Setter TargetName="Dot" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.45" />
+                            <Setter Property="Cursor" Value="Arrow" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+    <Style BasedOn="{StaticResource ZenRadioButtonStyle}" TargetType="{x:Type zen:ZenRadioButton}" />
+</ResourceDictionary>

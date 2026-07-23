@@ -1,0 +1,87 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:zen="clr-namespace:ZenUI.Wpf.Controls">
+
+    <!--
+        Let WPF display this adorner only for keyboard-initiated focus.  A
+        template trigger on IsKeyboardFocused also fires after a mouse click,
+        which makes the switch look as though it has a permanent blue outline.
+    -->
+    <Style x:Key="ZenSwitchFocusVisualStyle" TargetType="{x:Type Control}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Control}">
+                    <Border
+                        CornerRadius="18"
+                        Style="{StaticResource ZenFocusVisualBorderStyle}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ZenSwitchStyle" TargetType="{x:Type zen:ZenSwitch}">
+        <Setter Property="Width" Value="64" />
+        <Setter Property="Height" Value="30" />
+        <Setter Property="MinWidth" Value="48" />
+        <Setter Property="MinHeight" Value="30" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="FocusVisualStyle" Value="{StaticResource ZenSwitchFocusVisualStyle}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type zen:ZenSwitch}">
+                    <Grid x:Name="Track" SnapsToDevicePixels="True">
+                        <!--  Two 30px circles joined by a rectangular center form a true capsule.  -->
+                        <Rectangle
+                            x:Name="TrackMiddle"
+                            Margin="15,0"
+                            Fill="{DynamicResource ZenTextPlaceholderBrush}" />
+                        <Ellipse
+                            x:Name="TrackLeft"
+                            Width="30"
+                            HorizontalAlignment="Left"
+                            Fill="{DynamicResource ZenTextPlaceholderBrush}" />
+                        <Ellipse
+                            x:Name="TrackRight"
+                            Width="30"
+                            HorizontalAlignment="Right"
+                            Fill="{DynamicResource ZenTextPlaceholderBrush}" />
+                        <Grid
+                            x:Name="ThumbHost"
+                            Width="{Binding ActualHeight, RelativeSource={RelativeSource TemplatedParent}}"
+                            HorizontalAlignment="Left">
+                            <Ellipse
+                                Margin="4"
+                                Fill="White"
+                                Stroke="#18000000"
+                                StrokeThickness="1" />
+                        </Grid>
+                    </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsChecked" Value="True">
+                            <Setter TargetName="TrackMiddle" Property="Fill" Value="{DynamicResource ZenPrimaryBrush}" />
+                            <Setter TargetName="TrackLeft" Property="Fill" Value="{DynamicResource ZenPrimaryBrush}" />
+                            <Setter TargetName="TrackRight" Property="Fill" Value="{DynamicResource ZenPrimaryBrush}" />
+                            <Setter TargetName="ThumbHost" Property="HorizontalAlignment" Value="Right" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="Track" Property="Opacity" Value="0.9" />
+                        </Trigger>
+                        <Trigger Property="IsPressed" Value="True">
+                            <Setter TargetName="Track" Property="Opacity" Value="0.78" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+        <Style.Triggers>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" Value="0.4" />
+                <Setter Property="Cursor" Value="Arrow" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style BasedOn="{StaticResource ZenSwitchStyle}" TargetType="{x:Type zen:ZenSwitch}" />
+
+</ResourceDictionary>

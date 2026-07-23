@@ -9,7 +9,7 @@ namespace ZenUI.Wpf.Converters
     /// 默认比较式成立则显示
     /// </summary>
     [ValueConversion(typeof(object), typeof(Visibility))]
-    public class ComparisonToVisibilityConverter : BaseVisibilityConverter<ComparisonToVisibilityConverter>
+    public class ComparisonToVisibilityConverter : BaseVisibilityConverter
     {
         /// <summary>
         /// 比较方式
@@ -50,7 +50,7 @@ namespace ZenUI.Wpf.Converters
         /// <summary>
         /// 将字符串参数转换为与目标值相同的类型（保证比较类型一致）
         /// </summary>
-        private object ConvertToMatchingType(string strValue, Type targetType, CultureInfo culture)
+        private static object ConvertToMatchingType(string strValue, Type targetType, CultureInfo culture)
         {
             // 处理可空类型（如int?）
             Type underlyingType = Nullable.GetUnderlyingType(targetType) ?? targetType;

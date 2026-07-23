@@ -6,7 +6,7 @@ using System.Windows.Data;
 namespace ZenUI.Wpf.Converters
 {
     [ValueConversion(typeof(bool), typeof(Visibility))]
-    public class BoolToVisibilityConverter : BaseVisibilityConverter<BoolToVisibilityConverter>
+    public class BoolToVisibilityConverter : BaseVisibilityConverter
     {
         public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {

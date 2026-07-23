@@ -1,19 +1,26 @@
-﻿using System;
+using System;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 
-using ZenUI.Wpf.Enums;
-
 namespace ZenUI.Wpf.Controls
 {
+    /// <summary>
+    /// 支持语义外观与自定义圆角的按钮。
+    /// </summary>
     public class ZenButton : Button
     {
-
         private static readonly Type SelfType = typeof(ZenButton);
 
+        static ZenButton()
+        {
+            DefaultStyleKeyProperty.OverrideMetadata(
+                SelfType,
+                new FrameworkPropertyMetadata(SelfType));
+        }
+
         /// <summary>
-        /// 圆角
+        /// 获取或设置按钮圆角。
         /// </summary>
         [Bindable(true)]
         public CornerRadius CornerRadius
@@ -22,24 +29,36 @@ namespace ZenUI.Wpf.Controls
             set { SetValue(CornerRadiusProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for CornerRadius.  This enables animation, styling, binding, etc...
+        /// <summary>
+        /// 标识 <see cref="CornerRadius"/> 依赖属性。
+        /// </summary>
         public static readonly DependencyProperty CornerRadiusProperty =
-            DependencyProperty.Register(nameof(CornerRadius), typeof(CornerRadius), SelfType, new PropertyMetadata(new CornerRadius(0)));
+            DependencyProperty.Register(
+                nameof(CornerRadius),
+                typeof(CornerRadius),
+                SelfType,
+                new FrameworkPropertyMetadata(
+                    default(CornerRadius),
+                    FrameworkPropertyMetadataOptions.AffectsRender));
 
-
-
+        /// <summary>
+        /// 获取或设置按钮的语义外观。
+        /// </summary>
         [Bindable(true)]
-        public ButtonStyle Type
+        public ButtonVariant Variant
         {
-            get { return (ButtonStyle)GetValue(TypeProperty); }
-            set { SetValue(TypeProperty, value); }
+            get { return (ButtonVariant)GetValue(VariantProperty); }
+            set { SetValue(VariantProperty, value); }
         }
 
-        // Using a DependencyProperty as the backing store for Type.  This enables animation, styling, binding, etc...
-        public static readonly DependencyProperty TypeProperty =
-            DependencyProperty.Register(nameof(Type), typeof(ButtonStyle), SelfType, new PropertyMetadata(ButtonStyle.Primary));
-
-
-
+        /// <summary>
+        /// 标识 <see cref="Variant"/> 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty VariantProperty =
+            DependencyProperty.Register(
+                nameof(Variant),
+                typeof(ButtonVariant),
+                SelfType,
+                new FrameworkPropertyMetadata(ButtonVariant.Primary));
     }
 }

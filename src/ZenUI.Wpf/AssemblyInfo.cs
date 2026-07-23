@@ -1,6 +1,11 @@
-﻿using System.Windows.Markup;
+using System.Windows;
+using System.Windows.Markup;
 
-[assembly: XmlnsDefinition("http://zenui.mnorg.com/zenui-wpf/2026/", "ZenUI.Wpf.Controls")]
-[assembly: XmlnsDefinition("http://zenui.mnorg.com/zenui-wpf/2026/", "ZenUI.Wpf.Converters")]
+[assembly: ThemeInfo(
+    ResourceDictionaryLocation.None,
+    ResourceDictionaryLocation.SourceAssembly)]
 
-[assembly: XmlnsPrefix("http://zenui.mnorg.com/zenui-wpf/2026/", "Zen")]
+[assembly: XmlnsDefinition("http://zenui.mnorg.com/zenui-wpf", "ZenUI.Wpf.Controls")]
+[assembly: XmlnsDefinition("http://zenui.mnorg.com/zenui-wpf", "ZenUI.Wpf.Converters")]
+[assembly: XmlnsDefinition("http://zenui.mnorg.com/zenui-wpf", "ZenUI.Wpf.Theming")]
+[assembly: XmlnsPrefix("http://zenui.mnorg.com/zenui-wpf", "zen")]

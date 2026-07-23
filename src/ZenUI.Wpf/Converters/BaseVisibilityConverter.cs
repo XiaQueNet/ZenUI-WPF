@@ -5,14 +5,13 @@ namespace ZenUI.Wpf.Converters
     /// <summary>
     /// 基础的可见性转换器
     /// </summary>
-    /// <typeparam name="T"></typeparam>
-    public abstract class BaseVisibilityConverter<T> : BaseValueConverter where T : class, new()
+    public abstract class BaseVisibilityConverter : BaseValueConverter
     {
 
         /// <summary>
         /// 是否反转转换结果
         /// </summary>
-        public bool IsReverse { get; set; } = false;
+        public bool IsReverse { get; set; }
 
         /// <summary>
         /// 是否返回Collapsed
@@ -22,7 +21,7 @@ namespace ZenUI.Wpf.Converters
         /// <summary>
         /// 根据UseCollapsed属性获取不可见的Visibility值
         /// </summary>
-        public Visibility GetInvisibleValue()
+        protected Visibility GetInvisibleValue()
         {
             return UseCollapsed ? Visibility.Collapsed : Visibility.Hidden;
         }
@@ -32,7 +31,7 @@ namespace ZenUI.Wpf.Converters
         /// </summary>
         /// <param name="boolValue"></param>
         /// <returns></returns>
-        public Visibility GetFinalResult(bool boolValue)
+        protected Visibility GetFinalResult(bool boolValue)
         {
             if (IsReverse)
             {
