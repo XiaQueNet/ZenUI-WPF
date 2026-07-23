@@ -79,6 +79,12 @@ private void PasswordBox_OnPasswordChanged(object sender, RoutedEventArgs e)
 
 CI 还会生成 Light、Dark、HighContrast 在 100%、150%、200% DPI 下的 PNG 快照，作为 `visual-regression-snapshots` 构件供界面审查。自动化测试同时覆盖 DataGrid 的虚拟化、编辑、排序、行头、行详情、冻结列、多选与 RTL 布局，以及各控件的基础 UI Automation 类型。
 
+## 维护文档
+
+- [版本与发布规范](docs/RELEASING.md)
+- [贡献指南](CONTRIBUTING.md)
+- [变更记录](CHANGELOG.md)
+
 ## License
 
 ZenUI.Wpf 使用 [MIT License](LICENSE)。

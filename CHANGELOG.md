@@ -4,10 +4,11 @@
 
 ## Unreleased
 
-计划发布的首个公开预览包版本为 `0.1.0-preview.1`。
+## [0.1.0-preview.1] - 2026-07-23
 
 ### Added
 
+- 增加 ZenUI 品牌 Logo，并作为 README 与 NuGet 包图标。
 - 增加 .NET 8 WPF 目标框架。
 - 增加 Dark、HighContrast 主题与运行时主题切换 API。
 - 增加输入验证、密码框与 Alert 无障碍语义。
@@ -22,3 +23,6 @@
 - ComboBox 支持可编辑模式。
 - Password 明文绑定默认关闭，并标记为过时兼容 API。
 - DataGrid 恢复行虚拟化、行头、行详情、全选、冻结列偏移和高级编辑契约。
+
+[Unreleased]: https://github.com/XiaQueNet/ZenUI-WPF/compare/v0.1.0-preview.1...HEAD
+[0.1.0-preview.1]: https://github.com/XiaQueNet/ZenUI-WPF/releases/tag/v0.1.0-preview.1
