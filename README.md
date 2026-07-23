@@ -64,8 +64,6 @@ private void PasswordBox_OnPasswordChanged(object sender, RoutedEventArgs e)
 }
 ```
 
-旧版 `Password` 依赖属性已标记为过时。必须同时设置 `EnableInsecurePasswordBinding="True"` 才会同步；该兼容模式会在托管内存和 WPF Binding 中保存密码明文，不建议用于新代码。
-
 ## 构建
 
 - 控件库（`net472` 与 `net8.0-windows`）：`dotnet build src/ZenUI.Wpf/ZenUI.Wpf.csproj -c Release`

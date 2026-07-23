@@ -57,7 +57,6 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.AreEqual(string.Empty, comboBox.Watermark);
             Assert.AreEqual(new CornerRadius(8), dataGrid.CornerRadius);
             Assert.AreEqual("暂无数据", dataGrid.EmptyContent);
-            Assert.IsFalse(passwordBox.EnableInsecurePasswordBinding);
             Assert.IsFalse(passwordBox.IsPasswordRevealEnabled);
             Assert.IsFalse(passwordBox.IsPasswordRevealed);
             Assert.IsNull(passwordBox.LeadingContent);
@@ -403,7 +402,6 @@ namespace ZenUI.Wpf.Tests.Controls
                 Assert.IsNotNull(nativePasswordBox);
                 nativePasswordBox.Password = "secret";
                 Assert.AreEqual(1, passwordChangedCount);
-                Assert.AreEqual(string.Empty, passwordBox.GetValue(ZenPasswordBox.PasswordProperty));
                 using (var securePassword = passwordBox.SecurePassword)
                 {
                     Assert.AreEqual(6, securePassword.Length);
@@ -556,37 +554,6 @@ namespace ZenUI.Wpf.Tests.Controls
                 Assert.AreEqual("custom value", editableTextBox.Text);
                 editableTextBox.Text = "updated value";
                 Assert.AreEqual("updated value", comboBox.Text);
-            }
-            finally
-            {
-                window.Close();
-            }
-        }
-
-        [TestMethod]
-        public void PasswordCompatibilityBindingRequiresExplicitOptIn()
-        {
-            var passwordBox = new ZenPasswordBox
-            {
-                EnableInsecurePasswordBinding = true
-            };
-            passwordBox.SetValue(ZenPasswordBox.PasswordProperty, "legacy");
-            var window = new Window
-            {
-                ShowInTaskbar = false,
-                WindowStyle = WindowStyle.None,
-                Width = 240,
-                Height = 100,
-                Content = passwordBox
-            };
-
-            try
-            {
-                window.Show();
-                window.UpdateLayout();
-                var nativePasswordBox = passwordBox.Template.FindName("PART_PasswordBox", passwordBox) as PasswordBox;
-                Assert.IsNotNull(nativePasswordBox);
-                Assert.AreEqual("legacy", nativePasswordBox.Password);
             }
             finally
             {
