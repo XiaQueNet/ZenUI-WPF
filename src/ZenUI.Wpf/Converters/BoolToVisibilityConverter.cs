@@ -5,9 +5,13 @@ using System.Windows.Data;
 
 namespace ZenUI.Wpf.Converters
 {
+    /// <summary>
+    /// 将布尔值转换为可见性。
+    /// </summary>
     [ValueConversion(typeof(bool), typeof(Visibility))]
     public class BoolToVisibilityConverter : BaseVisibilityConverter
     {
+        /// <inheritdoc />
         public override object Convert(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (value is bool boolValue)
@@ -18,6 +22,7 @@ namespace ZenUI.Wpf.Converters
             return GetInvisibleValue();
         }
 
+        /// <inheritdoc />
         public override object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
         {
             if (!(value is Visibility visibility))
@@ -26,7 +31,6 @@ namespace ZenUI.Wpf.Converters
             }
 
             bool isVisible = visibility == Visibility.Visible;
-            // 反向转换也对齐IsReverse规则：Visible对应的值随IsReverse反转
             return IsReverse ? !isVisible : isVisible;
         }
     }

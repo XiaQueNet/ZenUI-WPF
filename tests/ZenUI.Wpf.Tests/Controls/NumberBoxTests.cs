@@ -17,21 +17,34 @@ namespace ZenUI.Wpf.Tests.Controls
     public class NumberBoxTests
     {
         [TestMethod]
-        public void NumberBoxExposesDefaultsAndThemeStyle()
+        public void NumberBoxExposesDefaults()
         {
             var numberBox = new TestZenNumberBox();
-            var dictionary = new ResourceDictionary
-            {
-                Source = new Uri("/ZenUI.Wpf;component/Themes/Generic.xaml", UriKind.Relative)
-            };
 
             Assert.AreEqual(typeof(ZenNumberBox), numberBox.ExposedDefaultStyleKey);
             Assert.AreEqual(0m, numberBox.Value);
             Assert.AreEqual(1m, numberBox.Step);
             Assert.AreEqual(NumberBoxButtonMode.Horizontal, numberBox.ButtonMode);
+        }
+
+        [TestMethod]
+        public void GenericThemeContainsNumberBoxStyle()
+        {
+            var dictionary = new ResourceDictionary
+            {
+                Source = new Uri("/ZenUI.Wpf;component/Themes/Generic.xaml", UriKind.Relative)
+            };
+
             Assert.IsInstanceOfType<Style>(dictionary[typeof(ZenNumberBox)]);
+        }
+
+        [TestMethod]
+        public void NumberBoxAutomationPeerExposesRangeValuePattern()
+        {
+            var numberBox = new TestZenNumberBox();
 
             var peer = numberBox.ExposedAutomationPeer;
+
             Assert.AreEqual(AutomationControlType.Spinner, peer.GetAutomationControlType());
             Assert.IsInstanceOfType<IRangeValueProvider>(
                 peer.GetPattern(PatternInterface.RangeValue));

@@ -14,6 +14,15 @@ namespace ZenUI.Wpf.Theming
         /// <summary>
         /// 将主题应用到指定资源字典。系统处于高对比度模式时默认优先使用高对比度主题。
         /// </summary>
+        /// <param name="resources">接收主题资源的资源字典。</param>
+        /// <param name="theme">要应用的主题。</param>
+        /// <param name="respectSystemHighContrast">
+        /// 是否在 Windows 启用高对比度时优先应用高对比度主题。
+        /// </param>
+        /// <exception cref="ArgumentNullException">
+        /// <paramref name="resources"/> 为 <see langword="null"/>。
+        /// </exception>
+        /// <remarks>必须在拥有该资源字典的 UI 线程上调用。</remarks>
         public static void ApplyTheme(ResourceDictionary resources, ZenTheme theme, bool respectSystemHighContrast = true)
         {
 #if NET8_0_OR_GREATER

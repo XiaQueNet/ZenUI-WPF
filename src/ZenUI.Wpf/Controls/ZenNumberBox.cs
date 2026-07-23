@@ -61,6 +61,9 @@ namespace ZenUI.Wpf.Controls
             set { SetValue(ValueProperty, value); }
         }
 
+        /// <summary>
+        /// 标识 <see cref="Value"/> 依赖属性。
+        /// </summary>
         public static readonly DependencyProperty ValueProperty =
             DependencyProperty.Register(
                 nameof(Value),
@@ -82,6 +85,9 @@ namespace ZenUI.Wpf.Controls
             set { SetValue(MinimumProperty, value); }
         }
 
+        /// <summary>
+        /// 标识 <see cref="Minimum"/> 依赖属性。
+        /// </summary>
         public static readonly DependencyProperty MinimumProperty =
             DependencyProperty.Register(
                 nameof(Minimum),
@@ -99,6 +105,9 @@ namespace ZenUI.Wpf.Controls
             set { SetValue(MaximumProperty, value); }
         }
 
+        /// <summary>
+        /// 标识 <see cref="Maximum"/> 依赖属性。
+        /// </summary>
         public static readonly DependencyProperty MaximumProperty =
             DependencyProperty.Register(
                 nameof(Maximum),
@@ -119,6 +128,9 @@ namespace ZenUI.Wpf.Controls
             set { SetValue(StepProperty, value); }
         }
 
+        /// <summary>
+        /// 标识 <see cref="Step"/> 依赖属性。
+        /// </summary>
         public static readonly DependencyProperty StepProperty =
             DependencyProperty.Register(
                 nameof(Step),
@@ -137,6 +149,9 @@ namespace ZenUI.Wpf.Controls
             set { SetValue(ButtonModeProperty, value); }
         }
 
+        /// <summary>
+        /// 标识 <see cref="ButtonMode"/> 依赖属性。
+        /// </summary>
         public static readonly DependencyProperty ButtonModeProperty =
             DependencyProperty.Register(
                 nameof(ButtonMode),
@@ -154,6 +169,9 @@ namespace ZenUI.Wpf.Controls
             set { SetValue(IsReadOnlyProperty, value); }
         }
 
+        /// <summary>
+        /// 标识 <see cref="IsReadOnly"/> 依赖属性。
+        /// </summary>
         public static readonly DependencyProperty IsReadOnlyProperty =
             DependencyProperty.Register(
                 nameof(IsReadOnly),
@@ -170,6 +188,9 @@ namespace ZenUI.Wpf.Controls
             remove { RemoveHandler(ValueChangedEvent, value); }
         }
 
+        /// <summary>
+        /// 标识 <see cref="ValueChanged"/> 路由事件。
+        /// </summary>
         public static readonly RoutedEvent ValueChangedEvent =
             EventManager.RegisterRoutedEvent(
                 nameof(ValueChanged),
@@ -177,6 +198,7 @@ namespace ZenUI.Wpf.Controls
                 typeof(RoutedPropertyChangedEventHandler<decimal>),
                 SelfType);
 
+        /// <inheritdoc />
         public override void OnApplyTemplate()
         {
             DetachTemplateHandlers();
