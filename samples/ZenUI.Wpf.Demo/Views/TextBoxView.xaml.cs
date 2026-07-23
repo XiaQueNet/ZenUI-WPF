@@ -1,3 +1,4 @@
+using System.Windows;
 using System.Windows.Controls;
 
 namespace ZenUI.Wpf.Demo.Views
@@ -5,5 +6,11 @@ namespace ZenUI.Wpf.Demo.Views
     public partial class TextBoxView : UserControl
     {
         public TextBoxView() { InitializeComponent(); }
+
+        private void ClearSearchButton_Click(object sender, RoutedEventArgs e)
+        {
+            SearchInput.Clear();
+            SearchInput.Focus();
+        }
     }
 }

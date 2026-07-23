@@ -207,6 +207,86 @@ namespace ZenUI.Wpf.Controls
             DependencyProperty.Register(nameof(Watermark), typeof(string), typeof(ZenPasswordBox), new FrameworkPropertyMetadata(string.Empty));
 
         /// <summary>
+        /// 获取或设置显示在密码输入区域之前的内容。
+        /// </summary>
+        [Bindable(true)]
+        public object LeadingContent
+        {
+            get { return GetValue(LeadingContentProperty); }
+            set { SetValue(LeadingContentProperty, value); }
+        }
+
+        /// <summary>
+        /// 标识 <see cref="LeadingContent"/> 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty LeadingContentProperty =
+            DependencyProperty.Register(
+                nameof(LeadingContent),
+                typeof(object),
+                typeof(ZenPasswordBox),
+                new FrameworkPropertyMetadata(null));
+
+        /// <summary>
+        /// 获取或设置用于显示 <see cref="LeadingContent"/> 的数据模板。
+        /// </summary>
+        [Bindable(true)]
+        public DataTemplate LeadingContentTemplate
+        {
+            get { return (DataTemplate)GetValue(LeadingContentTemplateProperty); }
+            set { SetValue(LeadingContentTemplateProperty, value); }
+        }
+
+        /// <summary>
+        /// 标识 <see cref="LeadingContentTemplate"/> 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty LeadingContentTemplateProperty =
+            DependencyProperty.Register(
+                nameof(LeadingContentTemplate),
+                typeof(DataTemplate),
+                typeof(ZenPasswordBox),
+                new FrameworkPropertyMetadata(null));
+
+        /// <summary>
+        /// 获取或设置显示在密码输入区域和显隐按钮之间的内容。
+        /// </summary>
+        [Bindable(true)]
+        public object TrailingContent
+        {
+            get { return GetValue(TrailingContentProperty); }
+            set { SetValue(TrailingContentProperty, value); }
+        }
+
+        /// <summary>
+        /// 标识 <see cref="TrailingContent"/> 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty TrailingContentProperty =
+            DependencyProperty.Register(
+                nameof(TrailingContent),
+                typeof(object),
+                typeof(ZenPasswordBox),
+                new FrameworkPropertyMetadata(null));
+
+        /// <summary>
+        /// 获取或设置用于显示 <see cref="TrailingContent"/> 的数据模板。
+        /// </summary>
+        [Bindable(true)]
+        public DataTemplate TrailingContentTemplate
+        {
+            get { return (DataTemplate)GetValue(TrailingContentTemplateProperty); }
+            set { SetValue(TrailingContentTemplateProperty, value); }
+        }
+
+        /// <summary>
+        /// 标识 <see cref="TrailingContentTemplate"/> 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty TrailingContentTemplateProperty =
+            DependencyProperty.Register(
+                nameof(TrailingContentTemplate),
+                typeof(DataTemplate),
+                typeof(ZenPasswordBox),
+                new FrameworkPropertyMetadata(null));
+
+        /// <summary>
         /// 获取或设置密码框的圆角。
         /// </summary>
         [Bindable(true)]

@@ -38,32 +38,59 @@
                         CornerRadius="{TemplateBinding CornerRadius}"
                         SnapsToDevicePixels="True">
                         <Grid>
-                            <ScrollViewer
-                                x:Name="PART_ContentHost"
-                                HorizontalAlignment="Stretch"
-                                VerticalAlignment="Stretch" />
-                            <Border
-                                x:Name="WatermarkHost"
-                                Margin="{TemplateBinding Padding}"
-                                IsHitTestVisible="False">
-                                <TextBlock
-                                    x:Name="WatermarkText"
-                                    Margin="2,0"
-                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
-                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
-                                    FontFamily="{TemplateBinding FontFamily}"
-                                    FontSize="{TemplateBinding FontSize}"
-                                    FontStretch="{TemplateBinding FontStretch}"
-                                    FontStyle="{TemplateBinding FontStyle}"
-                                    FontWeight="{TemplateBinding FontWeight}"
-                                    Foreground="{DynamicResource ZenTextPlaceholderBrush}"
-                                    Text="{TemplateBinding Watermark}"
-                                    TextTrimming="CharacterEllipsis"
-                                    Visibility="Collapsed" />
-                            </Border>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <ContentPresenter
+                                x:Name="LeadingContentHost"
+                                Grid.Column="0"
+                                Margin="8,0,0,0"
+                                VerticalAlignment="Center"
+                                Content="{TemplateBinding LeadingContent}"
+                                ContentTemplate="{TemplateBinding LeadingContentTemplate}" />
+                            <Grid Grid.Column="1">
+                                <ScrollViewer
+                                    x:Name="PART_ContentHost"
+                                    HorizontalAlignment="Stretch"
+                                    VerticalAlignment="Stretch" />
+                                <Border
+                                    x:Name="WatermarkHost"
+                                    Margin="{TemplateBinding Padding}"
+                                    IsHitTestVisible="False">
+                                    <TextBlock
+                                        x:Name="WatermarkText"
+                                        Margin="2,0"
+                                        HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                        VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                        FontFamily="{TemplateBinding FontFamily}"
+                                        FontSize="{TemplateBinding FontSize}"
+                                        FontStretch="{TemplateBinding FontStretch}"
+                                        FontStyle="{TemplateBinding FontStyle}"
+                                        FontWeight="{TemplateBinding FontWeight}"
+                                        Foreground="{DynamicResource ZenTextPlaceholderBrush}"
+                                        Text="{TemplateBinding Watermark}"
+                                        TextTrimming="CharacterEllipsis"
+                                        Visibility="Collapsed" />
+                                </Border>
+                            </Grid>
+                            <ContentPresenter
+                                x:Name="TrailingContentHost"
+                                Grid.Column="2"
+                                Margin="0,0,8,0"
+                                VerticalAlignment="Center"
+                                Content="{TemplateBinding TrailingContent}"
+                                ContentTemplate="{TemplateBinding TrailingContentTemplate}" />
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
+                        <Trigger Property="LeadingContent" Value="{x:Null}">
+                            <Setter TargetName="LeadingContentHost" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                        <Trigger Property="TrailingContent" Value="{x:Null}">
+                            <Setter TargetName="TrailingContentHost" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
                                 <Condition Property="Text" Value="" />

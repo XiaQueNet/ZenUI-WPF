@@ -50,12 +50,20 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.AreEqual(ButtonAppearance.Filled, button.Appearance);
             Assert.AreEqual(string.Empty, textBox.Watermark);
             Assert.AreEqual(default(CornerRadius), textBox.CornerRadius);
+            Assert.IsNull(textBox.LeadingContent);
+            Assert.IsNull(textBox.LeadingContentTemplate);
+            Assert.IsNull(textBox.TrailingContent);
+            Assert.IsNull(textBox.TrailingContentTemplate);
             Assert.AreEqual(string.Empty, comboBox.Watermark);
             Assert.AreEqual(new CornerRadius(8), dataGrid.CornerRadius);
             Assert.AreEqual("暂无数据", dataGrid.EmptyContent);
             Assert.IsFalse(passwordBox.EnableInsecurePasswordBinding);
             Assert.IsFalse(passwordBox.IsPasswordRevealEnabled);
             Assert.IsFalse(passwordBox.IsPasswordRevealed);
+            Assert.IsNull(passwordBox.LeadingContent);
+            Assert.IsNull(passwordBox.LeadingContentTemplate);
+            Assert.IsNull(passwordBox.TrailingContent);
+            Assert.IsNull(passwordBox.TrailingContentTemplate);
             Assert.AreEqual(AlertVariant.Info, alert.Variant);
         }
 
@@ -216,6 +224,81 @@ namespace ZenUI.Wpf.Tests.Controls
                 textBox.Text = "ZenUI";
                 window.UpdateLayout();
                 Assert.AreEqual(Visibility.Collapsed, watermark.Visibility);
+            }
+            finally
+            {
+                window.Close();
+            }
+        }
+
+        [TestMethod]
+        public void InputControlsDisplayLeadingAndTrailingContent()
+        {
+            var textBoxLeading = new TextBlock { Text = "用户" };
+            var textBoxTrailing = new Button { Content = "清除" };
+            var passwordBoxLeading = new TextBlock { Text = "密码" };
+            var passwordBoxTrailing = new TextBlock { Text = "必填" };
+            var leadingTemplate = new DataTemplate();
+            var trailingTemplate = new DataTemplate();
+            var textBox = new ZenTextBox
+            {
+                LeadingContent = textBoxLeading,
+                LeadingContentTemplate = leadingTemplate,
+                TrailingContent = textBoxTrailing,
+                TrailingContentTemplate = trailingTemplate
+            };
+            var passwordBox = new ZenPasswordBox
+            {
+                LeadingContent = passwordBoxLeading,
+                TrailingContent = passwordBoxTrailing,
+                IsPasswordRevealEnabled = true
+            };
+            var panel = new StackPanel();
+            panel.Children.Add(textBox);
+            panel.Children.Add(passwordBox);
+            var window = CreateTestWindow(panel, 320, 140);
+
+            try
+            {
+                window.Show();
+                window.UpdateLayout();
+
+                var textLeadingHost = textBox.Template.FindName("LeadingContentHost", textBox) as ContentPresenter;
+                var textTrailingHost = textBox.Template.FindName("TrailingContentHost", textBox) as ContentPresenter;
+                var passwordLeadingHost = passwordBox.Template.FindName("LeadingContentHost", passwordBox) as ContentPresenter;
+                var passwordTrailingHost = passwordBox.Template.FindName("TrailingContentHost", passwordBox) as ContentPresenter;
+                var revealButton = passwordBox.Template.FindName("PART_RevealButton", passwordBox) as ToggleButton;
+
+                Assert.IsNotNull(textLeadingHost);
+                Assert.IsNotNull(textTrailingHost);
+                Assert.IsNotNull(passwordLeadingHost);
+                Assert.IsNotNull(passwordTrailingHost);
+                Assert.IsNotNull(revealButton);
+                Assert.AreSame(textBoxLeading, textLeadingHost.Content);
+                Assert.AreSame(textBoxTrailing, textTrailingHost.Content);
+                Assert.AreSame(leadingTemplate, textLeadingHost.ContentTemplate);
+                Assert.AreSame(trailingTemplate, textTrailingHost.ContentTemplate);
+                Assert.AreSame(passwordBoxLeading, passwordLeadingHost.Content);
+                Assert.AreSame(passwordBoxTrailing, passwordTrailingHost.Content);
+                Assert.AreEqual(Visibility.Visible, textLeadingHost.Visibility);
+                Assert.AreEqual(Visibility.Visible, textTrailingHost.Visibility);
+                Assert.AreEqual(Visibility.Visible, passwordLeadingHost.Visibility);
+                Assert.AreEqual(Visibility.Visible, passwordTrailingHost.Visibility);
+                Assert.AreEqual(Visibility.Visible, revealButton.Visibility);
+                Assert.AreEqual(2, Grid.GetColumn(passwordTrailingHost));
+                Assert.AreEqual(3, Grid.GetColumn(revealButton));
+
+                textBox.LeadingContent = null;
+                textBox.TrailingContent = null;
+                passwordBox.LeadingContent = null;
+                passwordBox.TrailingContent = null;
+                window.UpdateLayout();
+
+                Assert.AreEqual(Visibility.Collapsed, textLeadingHost.Visibility);
+                Assert.AreEqual(Visibility.Collapsed, textTrailingHost.Visibility);
+                Assert.AreEqual(Visibility.Collapsed, passwordLeadingHost.Visibility);
+                Assert.AreEqual(Visibility.Collapsed, passwordTrailingHost.Visibility);
+                Assert.AreEqual(Visibility.Visible, revealButton.Visibility);
             }
             finally
             {
