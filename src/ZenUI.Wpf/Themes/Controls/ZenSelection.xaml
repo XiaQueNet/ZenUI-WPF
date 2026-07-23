@@ -7,7 +7,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Control}">
-                    <Border CornerRadius="4" Style="{StaticResource ZenFocusVisualBorderStyle}" />
+                    <Border CornerRadius="4" Style="{DynamicResource ZenFocusVisualBorderStyle}" />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>

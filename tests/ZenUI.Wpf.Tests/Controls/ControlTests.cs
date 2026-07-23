@@ -123,6 +123,41 @@ namespace ZenUI.Wpf.Tests.Controls
         }
 
         [TestMethod]
+        public void FocusVisualTemplatesResolveSharedResourcesWhenInstantiated()
+        {
+            _ = new ZenButton();
+            var dictionary = new ResourceDictionary
+            {
+                Source = new Uri(
+                    "/ZenUI.Wpf;component/Themes/Generic.xaml",
+                    UriKind.Relative)
+            };
+            var styleKeys = new[]
+            {
+                "ZenButtonFocusVisualStyle",
+                "ZenSwitchFocusVisualStyle",
+                "ZenTextBoxFocusVisualStyle",
+                "ZenSelectionFocusVisualStyle"
+            };
+
+            foreach (var styleKey in styleKeys)
+            {
+                var style = dictionary[styleKey] as Style;
+                Assert.IsNotNull(style, $"Missing focus visual style '{styleKey}'.");
+                var templateSetter = style.Setters
+                    .OfType<Setter>()
+                    .Single(setter => setter.Property == Control.TemplateProperty);
+                var template = templateSetter.Value as ControlTemplate;
+                Assert.IsNotNull(template, $"Style '{styleKey}' does not define a control template.");
+
+                var content = template.LoadContent();
+                Assert.IsInstanceOfType<Border>(
+                    content,
+                    $"Focus visual template '{styleKey}' could not be instantiated.");
+            }
+        }
+
+        [TestMethod]
         public void BasicControlsLoadTemplatesWithoutApplicationResources()
         {
             var button = new ZenButton();
