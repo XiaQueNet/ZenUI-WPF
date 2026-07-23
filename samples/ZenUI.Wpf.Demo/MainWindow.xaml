@@ -8,15 +8,15 @@
     xmlns:prism="http://prismlibrary.com/"
     xmlns:zen="http://zenui.mnorg.com/zenui-wpf"
     Title="ZenUI 控件库"
-    Width="1120"
-    Height="720"
-    MinWidth="900"
-    MinHeight="600"
+    Width="1280"
+    Height="800"
+    MinWidth="1024"
+    MinHeight="640"
+    prism:ViewModelLocator.AutoWireViewModel="True"
     Background="{DynamicResource ZenSurfaceMutedBrush}"
     FontFamily="Microsoft YaHei UI"
     Foreground="{DynamicResource ZenTextPrimaryBrush}"
     WindowStartupLocation="CenterScreen"
-    prism:ViewModelLocator.AutoWireViewModel="True"
     mc:Ignorable="d">
     <Window.Resources>
         <Style x:Key="NavigationItemStyle" TargetType="{x:Type RadioButton}">
@@ -29,7 +29,10 @@
             <Setter Property="Template">
                 <Setter.Value>
                     <ControlTemplate TargetType="{x:Type RadioButton}">
-                        <Border x:Name="MenuItem" Background="Transparent" CornerRadius="8">
+                        <Border
+                            x:Name="MenuItem"
+                            Background="Transparent"
+                            CornerRadius="8">
                             <Grid>
                                 <Border
                                     x:Name="ActiveIndicator"
@@ -66,7 +69,7 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="224" />
+            <ColumnDefinition Width="248" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
@@ -79,8 +82,16 @@
                 </Grid.RowDefinitions>
 
                 <StackPanel Margin="8,28,8,4">
-                    <TextBlock FontSize="23" FontWeight="SemiBold" Foreground="White" Text="ZenUI" />
-                    <TextBlock Margin="0,5,0,0" FontSize="12" Foreground="{DynamicResource DemoSidebarSecondaryTextBrush}" Text="WPF Controls" />
+                    <TextBlock
+                        FontSize="23"
+                        FontWeight="SemiBold"
+                        Foreground="White"
+                        Text="ZenUI" />
+                    <TextBlock
+                        Margin="0,5,0,0"
+                        FontSize="12"
+                        Foreground="{DynamicResource DemoSidebarSecondaryTextBrush}"
+                        Text="WPF Controls" />
                 </StackPanel>
 
                 <ScrollViewer
@@ -129,8 +140,6 @@
             </Grid>
         </Border>
 
-        <ContentControl
-            Grid.Column="1"
-            prism:RegionManager.RegionName="{x:Static navigation:RegionNames.ContentRegion}" />
+        <ContentControl Grid.Column="1" prism:RegionManager.RegionName="{x:Static navigation:RegionNames.ContentRegion}" />
     </Grid>
 </Window>
