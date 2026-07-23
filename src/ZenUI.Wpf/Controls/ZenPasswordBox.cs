@@ -4,6 +4,7 @@ using System.Security;
 using System.Windows;
 using System.Windows.Automation.Peers;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 
 namespace ZenUI.Wpf.Controls
 {
@@ -11,10 +12,15 @@ namespace ZenUI.Wpf.Controls
     /// 表示支持水印和自定义圆角的密码输入控件。
     /// </summary>
     [TemplatePart(Name = PasswordBoxPartName, Type = typeof(PasswordBox))]
+    [TemplatePart(Name = RevealTextBoxPartName, Type = typeof(TextBox))]
+    [TemplatePart(Name = RevealButtonPartName, Type = typeof(ToggleButton))]
     public class ZenPasswordBox : Control
     {
         private const string PasswordBoxPartName = "PART_PasswordBox";
+        private const string RevealTextBoxPartName = "PART_RevealTextBox";
+        private const string RevealButtonPartName = "PART_RevealButton";
         private PasswordBox passwordBox;
+        private TextBox revealTextBox;
         private bool isSynchronizingPassword;
 
         static ZenPasswordBox()
@@ -32,8 +38,15 @@ namespace ZenUI.Wpf.Controls
                 passwordBox.PasswordChanged -= OnPasswordChanged;
             }
 
+            if (revealTextBox != null)
+            {
+                revealTextBox.TextChanged -= OnRevealTextChanged;
+                revealTextBox.Clear();
+            }
+
             base.OnApplyTemplate();
             passwordBox = GetTemplateChild(PasswordBoxPartName) as PasswordBox;
+            revealTextBox = GetTemplateChild(RevealTextBoxPartName) as TextBox;
 
             if (passwordBox != null)
             {
@@ -45,6 +58,13 @@ namespace ZenUI.Wpf.Controls
                 passwordBox.PasswordChanged += OnPasswordChanged;
                 HasPassword = passwordBox.Password.Length > 0;
             }
+
+            if (revealTextBox != null)
+            {
+                revealTextBox.TextChanged += OnRevealTextChanged;
+            }
+
+            UpdateRevealState(false);
         }
 
         /// <summary>
@@ -131,6 +151,46 @@ namespace ZenUI.Wpf.Controls
                 new FrameworkPropertyMetadata(false, OnEnableInsecurePasswordBindingChanged));
 
         /// <summary>
+        /// 获取或设置是否显示密码明文切换按钮。按钮的可见性不依赖密码是否为空。
+        /// </summary>
+        [Bindable(true)]
+        public bool IsPasswordRevealEnabled
+        {
+            get { return (bool)GetValue(IsPasswordRevealEnabledProperty); }
+            set { SetValue(IsPasswordRevealEnabledProperty, value); }
+        }
+
+        /// <summary>
+        /// 标识 <see cref="IsPasswordRevealEnabled"/> 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty IsPasswordRevealEnabledProperty =
+            DependencyProperty.Register(
+                nameof(IsPasswordRevealEnabled),
+                typeof(bool),
+                typeof(ZenPasswordBox),
+                new FrameworkPropertyMetadata(false, OnIsPasswordRevealEnabledChanged));
+
+        /// <summary>
+        /// 获取或设置当前是否以明文显示密码。
+        /// </summary>
+        [Bindable(true)]
+        public bool IsPasswordRevealed
+        {
+            get { return (bool)GetValue(IsPasswordRevealedProperty); }
+            set { SetValue(IsPasswordRevealedProperty, value); }
+        }
+
+        /// <summary>
+        /// 标识 <see cref="IsPasswordRevealed"/> 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty IsPasswordRevealedProperty =
+            DependencyProperty.Register(
+                nameof(IsPasswordRevealed),
+                typeof(bool),
+                typeof(ZenPasswordBox),
+                new FrameworkPropertyMetadata(false, OnIsPasswordRevealedChanged, CoerceIsPasswordRevealed));
+
+        /// <summary>
         /// 获取或设置密码框没有内容时显示的水印。
         /// </summary>
         [Bindable(true)]
@@ -202,16 +262,119 @@ namespace ZenUI.Wpf.Controls
             control.SetCurrentValue(PasswordProperty, string.Empty);
         }
 
+        private static void OnIsPasswordRevealEnabledChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var control = (ZenPasswordBox)d;
+            control.CoerceValue(IsPasswordRevealedProperty);
+        }
+
+        private static object CoerceIsPasswordRevealed(DependencyObject d, object baseValue)
+        {
+            var control = (ZenPasswordBox)d;
+            return control.IsPasswordRevealEnabled && (bool)baseValue;
+        }
+
+        private static void OnIsPasswordRevealedChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        {
+            var control = (ZenPasswordBox)d;
+            control.UpdateRevealState(control.IsKeyboardFocusWithin && control.IsEnabled);
+        }
+
         private void OnPasswordChanged(object sender, RoutedEventArgs e)
         {
+            if (isSynchronizingPassword)
+            {
+                return;
+            }
+
             isSynchronizingPassword = true;
             if (EnableInsecurePasswordBinding)
             {
                 SetCurrentValue(PasswordProperty, passwordBox.Password);
             }
+
+            if (IsPasswordRevealed && revealTextBox != null)
+            {
+                revealTextBox.Text = passwordBox.Password;
+            }
+
             isSynchronizingPassword = false;
             HasPassword = passwordBox.Password.Length > 0;
             RaiseEvent(new RoutedEventArgs(PasswordChangedEvent, this));
+        }
+
+        private void OnRevealTextChanged(object sender, TextChangedEventArgs e)
+        {
+            if (isSynchronizingPassword || passwordBox == null || !IsPasswordRevealed)
+            {
+                return;
+            }
+
+            isSynchronizingPassword = true;
+            passwordBox.Password = revealTextBox.Text;
+            if (EnableInsecurePasswordBinding)
+            {
+                SetCurrentValue(PasswordProperty, revealTextBox.Text);
+            }
+
+            isSynchronizingPassword = false;
+            HasPassword = revealTextBox.Text.Length > 0;
+            RaiseEvent(new RoutedEventArgs(PasswordChangedEvent, this));
+        }
+
+        private void UpdateRevealState(bool moveFocus)
+        {
+            if (revealTextBox == null)
+            {
+                return;
+            }
+
+            isSynchronizingPassword = true;
+            if (IsPasswordRevealed)
+            {
+                revealTextBox.Text = passwordBox?.Password ?? string.Empty;
+            }
+            else
+            {
+                revealTextBox.Clear();
+            }
+
+            isSynchronizingPassword = false;
+
+            if (!moveFocus)
+            {
+                return;
+            }
+
+            if (IsPasswordRevealed)
+            {
+                revealTextBox.Focus();
+                revealTextBox.CaretIndex = revealTextBox.Text.Length;
+            }
+            else if (passwordBox != null)
+            {
+                passwordBox.Focus();
+            }
+        }
+
+        /// <inheritdoc/>
+        protected override void OnIsKeyboardFocusWithinChanged(DependencyPropertyChangedEventArgs e)
+        {
+            base.OnIsKeyboardFocusWithinChanged(e);
+            if (!IsKeyboardFocusWithin && IsPasswordRevealed)
+            {
+                SetCurrentValue(IsPasswordRevealedProperty, false);
+            }
+        }
+
+        /// <inheritdoc/>
+        protected override void OnPropertyChanged(DependencyPropertyChangedEventArgs e)
+        {
+            base.OnPropertyChanged(e);
+            if (e.Property == IsEnabledProperty && !(bool)e.NewValue && IsPasswordRevealed)
+            {
+                SetCurrentValue(IsPasswordRevealedProperty, false);
+            }
         }
 
         /// <inheritdoc/>

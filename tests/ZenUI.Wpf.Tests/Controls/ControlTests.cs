@@ -54,6 +54,8 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.AreEqual(new CornerRadius(8), dataGrid.CornerRadius);
             Assert.AreEqual("暂无数据", dataGrid.EmptyContent);
             Assert.IsFalse(passwordBox.EnableInsecurePasswordBinding);
+            Assert.IsFalse(passwordBox.IsPasswordRevealEnabled);
+            Assert.IsFalse(passwordBox.IsPasswordRevealed);
             Assert.AreEqual(AlertVariant.Info, alert.Variant);
         }
 
@@ -349,6 +351,57 @@ namespace ZenUI.Wpf.Tests.Controls
                 var nativePasswordBox = passwordBox.Template.FindName("PART_PasswordBox", passwordBox) as PasswordBox;
                 Assert.IsNotNull(nativePasswordBox);
                 Assert.AreEqual("legacy", nativePasswordBox.Password);
+            }
+            finally
+            {
+                window.Close();
+            }
+        }
+
+        [TestMethod]
+        public void PasswordRevealButtonIsVisibleWhenEnabledAndPasswordIsEmpty()
+        {
+            var passwordBox = new ZenPasswordBox
+            {
+                IsPasswordRevealEnabled = true,
+                Width = 240
+            };
+            var window = new Window
+            {
+                ShowInTaskbar = false,
+                WindowStyle = WindowStyle.None,
+                Width = 280,
+                Height = 100,
+                Content = passwordBox
+            };
+
+            try
+            {
+                window.Show();
+                window.UpdateLayout();
+
+                var revealButton = passwordBox.Template.FindName("PART_RevealButton", passwordBox) as ToggleButton;
+                var nativePasswordBox = passwordBox.Template.FindName("PART_PasswordBox", passwordBox) as PasswordBox;
+                var revealTextBox = passwordBox.Template.FindName("PART_RevealTextBox", passwordBox) as TextBox;
+                Assert.IsNotNull(revealButton);
+                Assert.IsNotNull(nativePasswordBox);
+                Assert.IsNotNull(revealTextBox);
+                Assert.AreEqual(Visibility.Visible, revealButton.Visibility);
+                Assert.AreEqual(string.Empty, nativePasswordBox.Password);
+
+                nativePasswordBox.Password = "secret";
+                passwordBox.IsPasswordRevealed = true;
+                window.UpdateLayout();
+                Assert.AreEqual(Visibility.Collapsed, nativePasswordBox.Visibility);
+                Assert.AreEqual(Visibility.Visible, revealTextBox.Visibility);
+                Assert.AreEqual("secret", revealTextBox.Text);
+
+                passwordBox.IsPasswordRevealed = false;
+                window.UpdateLayout();
+                Assert.AreEqual(Visibility.Visible, nativePasswordBox.Visibility);
+                Assert.AreEqual(Visibility.Collapsed, revealTextBox.Visibility);
+                Assert.AreEqual(string.Empty, revealTextBox.Text);
+                Assert.AreEqual("secret", nativePasswordBox.Password);
             }
             finally
             {
