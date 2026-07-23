@@ -48,6 +48,7 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.AreEqual(typeof(ZenProgressBar), progressBar.ExposedDefaultStyleKey);
             Assert.AreEqual(typeof(ZenAlert), alert.ExposedDefaultStyleKey);
             Assert.AreEqual(ButtonVariant.Primary, button.Variant);
+            Assert.AreEqual(ButtonAppearance.Filled, button.Appearance);
             Assert.AreEqual(string.Empty, textBox.Watermark);
             Assert.AreEqual(default(CornerRadius), textBox.CornerRadius);
             Assert.AreEqual(string.Empty, comboBox.Watermark);
@@ -57,6 +58,32 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.IsFalse(passwordBox.IsPasswordRevealEnabled);
             Assert.IsFalse(passwordBox.IsPasswordRevealed);
             Assert.AreEqual(AlertVariant.Info, alert.Variant);
+        }
+
+        [TestMethod]
+        public void ButtonInteractionBrushesAreCustomizable()
+        {
+            var button = new ZenButton();
+            var hoverBackground = new SolidColorBrush(Colors.AliceBlue);
+            var pressedBackground = new SolidColorBrush(Colors.LightBlue);
+            var hoverForeground = new SolidColorBrush(Colors.Navy);
+            var pressedForeground = new SolidColorBrush(Colors.DarkBlue);
+            var hoverBorderBrush = new SolidColorBrush(Colors.CornflowerBlue);
+            var pressedBorderBrush = new SolidColorBrush(Colors.RoyalBlue);
+
+            button.HoverBackground = hoverBackground;
+            button.PressedBackground = pressedBackground;
+            button.HoverForeground = hoverForeground;
+            button.PressedForeground = pressedForeground;
+            button.HoverBorderBrush = hoverBorderBrush;
+            button.PressedBorderBrush = pressedBorderBrush;
+
+            Assert.AreSame(hoverBackground, button.HoverBackground);
+            Assert.AreSame(pressedBackground, button.PressedBackground);
+            Assert.AreSame(hoverForeground, button.HoverForeground);
+            Assert.AreSame(pressedForeground, button.PressedForeground);
+            Assert.AreSame(hoverBorderBrush, button.HoverBorderBrush);
+            Assert.AreSame(pressedBorderBrush, button.PressedBorderBrush);
         }
 
         [TestMethod]
