@@ -39,7 +39,7 @@ jobs:
           if-no-files-found: error
 
       - name: Pack
-        run: dotnet pack src/ZenUI.Wpf/ZenUI.Wpf.csproj -c Release --no-build -p:PackageVersion=1.0.0-ci.${{ github.run_number }} -o artifacts/packages
+        run: dotnet pack src/ZenUI.Wpf/ZenUI.Wpf.csproj -c Release --no-build -p:PackageVersion=0.1.0-ci.${{ github.run_number }} -o artifacts/packages
 
       - name: Upload packages
         uses: actions/upload-artifact@v4

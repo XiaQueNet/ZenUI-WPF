@@ -4,6 +4,8 @@
 
 ## Unreleased
 
+计划发布的首个公开预览包版本为 `0.1.0-preview.1`。
+
 ### Added
 
 - 增加 .NET 8 WPF 目标框架。
