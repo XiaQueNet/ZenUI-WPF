@@ -78,6 +78,8 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.IsInstanceOfType<Style>(dictionary[typeof(ZenSlider)]);
             Assert.IsInstanceOfType<Style>(dictionary[typeof(ZenProgressBar)]);
             Assert.IsInstanceOfType<Style>(dictionary[typeof(ZenAlert)]);
+            Assert.IsInstanceOfType<Style>(dictionary[typeof(ScrollBar)]);
+            Assert.IsInstanceOfType<Style>(dictionary["ZenScrollBarStyle"]);
             Assert.IsNotNull(dictionary["ZenPrimaryBrush"]);
             Assert.IsNotNull(dictionary["ZenFocusBrush"]);
             Assert.IsNotNull(dictionary["ZenErrorBrush"]);

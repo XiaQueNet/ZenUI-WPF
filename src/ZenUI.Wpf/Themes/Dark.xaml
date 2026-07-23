@@ -22,6 +22,10 @@
     <SolidColorBrush x:Key="ZenBorderBrush" Color="#4A5260" />
     <SolidColorBrush x:Key="ZenBorderHoverBrush" Color="#6B7483" />
     <SolidColorBrush x:Key="ZenDividerBrush" Color="#3A414D" />
+    <SolidColorBrush x:Key="ZenScrollBarTrackBrush" Color="#303641" />
+    <SolidColorBrush x:Key="ZenScrollBarThumbBrush" Color="#6B7483" />
+    <SolidColorBrush x:Key="ZenScrollBarThumbHoverBrush" Color="#91ABFF" />
+    <SolidColorBrush x:Key="ZenScrollBarThumbPressedBrush" Color="#7C9CFF" />
     <SolidColorBrush x:Key="ZenTextPrimaryBrush" Color="#F2F3F5" />
     <SolidColorBrush x:Key="ZenTextSecondaryBrush" Color="#C4C9D1" />
     <SolidColorBrush x:Key="ZenTextPlaceholderBrush" Color="#929AA8" />

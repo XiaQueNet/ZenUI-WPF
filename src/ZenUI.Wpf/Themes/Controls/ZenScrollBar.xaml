@@ -1,0 +1,142 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <Style x:Key="ZenScrollBarPageButtonStyle" TargetType="{x:Type RepeatButton}">
+        <Setter Property="Focusable" Value="False" />
+        <Setter Property="IsTabStop" Value="False" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type RepeatButton}">
+                    <Border Background="Transparent" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ZenVerticalScrollBarThumbStyle" TargetType="{x:Type Thumb}">
+        <Setter Property="MinHeight" Value="32" />
+        <Setter Property="Background" Value="{DynamicResource ZenScrollBarThumbBrush}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Thumb}">
+                    <Border
+                        x:Name="ThumbShape"
+                        Margin="3,0"
+                        Background="{TemplateBinding Background}"
+                        CornerRadius="3"
+                        SnapsToDevicePixels="True" />
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="ThumbShape" Property="Background" Value="{DynamicResource ZenScrollBarThumbHoverBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsDragging" Value="True">
+                            <Setter TargetName="ThumbShape" Property="Background" Value="{DynamicResource ZenScrollBarThumbPressedBrush}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style x:Key="ZenHorizontalScrollBarThumbStyle" TargetType="{x:Type Thumb}">
+        <Setter Property="MinWidth" Value="32" />
+        <Setter Property="Background" Value="{DynamicResource ZenScrollBarThumbBrush}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Thumb}">
+                    <Border
+                        x:Name="ThumbShape"
+                        Margin="0,3"
+                        Background="{TemplateBinding Background}"
+                        CornerRadius="3"
+                        SnapsToDevicePixels="True" />
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="ThumbShape" Property="Background" Value="{DynamicResource ZenScrollBarThumbHoverBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsDragging" Value="True">
+                            <Setter TargetName="ThumbShape" Property="Background" Value="{DynamicResource ZenScrollBarThumbPressedBrush}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <ControlTemplate x:Key="ZenVerticalScrollBarTemplate" TargetType="{x:Type ScrollBar}">
+        <Grid Width="{TemplateBinding Width}" Background="Transparent" SnapsToDevicePixels="True">
+            <Border
+                Width="6"
+                Background="{DynamicResource ZenScrollBarTrackBrush}"
+                CornerRadius="3" />
+            <Track
+                x:Name="PART_Track"
+                IsDirectionReversed="True"
+                IsEnabled="{TemplateBinding IsMouseOver}"
+                Orientation="Vertical">
+                <Track.DecreaseRepeatButton>
+                    <RepeatButton
+                        Command="{x:Static ScrollBar.PageUpCommand}"
+                        Style="{StaticResource ZenScrollBarPageButtonStyle}" />
+                </Track.DecreaseRepeatButton>
+                <Track.Thumb>
+                    <Thumb Style="{StaticResource ZenVerticalScrollBarThumbStyle}" />
+                </Track.Thumb>
+                <Track.IncreaseRepeatButton>
+                    <RepeatButton
+                        Command="{x:Static ScrollBar.PageDownCommand}"
+                        Style="{StaticResource ZenScrollBarPageButtonStyle}" />
+                </Track.IncreaseRepeatButton>
+            </Track>
+        </Grid>
+    </ControlTemplate>
+
+    <ControlTemplate x:Key="ZenHorizontalScrollBarTemplate" TargetType="{x:Type ScrollBar}">
+        <Grid Height="{TemplateBinding Height}" Background="Transparent" SnapsToDevicePixels="True">
+            <Border
+                Height="6"
+                Background="{DynamicResource ZenScrollBarTrackBrush}"
+                CornerRadius="3" />
+            <Track
+                x:Name="PART_Track"
+                IsEnabled="{TemplateBinding IsMouseOver}"
+                Orientation="Horizontal">
+                <Track.DecreaseRepeatButton>
+                    <RepeatButton
+                        Command="{x:Static ScrollBar.PageLeftCommand}"
+                        Style="{StaticResource ZenScrollBarPageButtonStyle}" />
+                </Track.DecreaseRepeatButton>
+                <Track.Thumb>
+                    <Thumb Style="{StaticResource ZenHorizontalScrollBarThumbStyle}" />
+                </Track.Thumb>
+                <Track.IncreaseRepeatButton>
+                    <RepeatButton
+                        Command="{x:Static ScrollBar.PageRightCommand}"
+                        Style="{StaticResource ZenScrollBarPageButtonStyle}" />
+                </Track.IncreaseRepeatButton>
+            </Track>
+        </Grid>
+    </ControlTemplate>
+
+    <Style x:Key="ZenScrollBarStyle" TargetType="{x:Type ScrollBar}">
+        <Setter Property="Width" Value="12" />
+        <Setter Property="Height" Value="Auto" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Template" Value="{StaticResource ZenVerticalScrollBarTemplate}" />
+        <Setter Property="UseLayoutRounding" Value="True" />
+        <Style.Triggers>
+            <Trigger Property="Orientation" Value="Horizontal">
+                <Setter Property="Width" Value="Auto" />
+                <Setter Property="Height" Value="12" />
+                <Setter Property="Template" Value="{StaticResource ZenHorizontalScrollBarTemplate}" />
+            </Trigger>
+            <Trigger Property="IsEnabled" Value="False">
+                <Setter Property="Opacity" Value="0.45" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style BasedOn="{StaticResource ZenScrollBarStyle}" TargetType="{x:Type ScrollBar}" />
+
+</ResourceDictionary>

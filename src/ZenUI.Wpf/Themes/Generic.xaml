@@ -3,6 +3,7 @@
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/ZenUI.Wpf;component/Themes/Colors.xaml" />
         <ResourceDictionary Source="/ZenUI.Wpf;component/Themes/Controls/Common.xaml" />
+        <ResourceDictionary Source="/ZenUI.Wpf;component/Themes/Controls/ZenScrollBar.xaml" />
         <ResourceDictionary Source="/ZenUI.Wpf;component/Themes/Controls/ZenButton.xaml" />
         <ResourceDictionary Source="/ZenUI.Wpf;component/Themes/Controls/ZenSwitch.xaml" />
         <ResourceDictionary Source="/ZenUI.Wpf;component/Themes/Controls/ZenTextBox.xaml" />
