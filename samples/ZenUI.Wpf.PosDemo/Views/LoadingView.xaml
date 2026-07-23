@@ -1,0 +1,94 @@
+<UserControl
+    x:Class="ZenUI.Wpf.PosDemo.Views.LoadingView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:zen="http://zenui.mnorg.com/zenui-wpf"
+    Background="{DynamicResource ZenSurfaceBrush}"
+    FontFamily="Microsoft YaHei UI"
+    Foreground="{DynamicResource ZenTextPrimaryBrush}">
+    <Grid>
+        <Grid
+            Width="620"
+            HorizontalAlignment="Center"
+            VerticalAlignment="Center">
+            <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" />
+            </Grid.RowDefinitions>
+
+            <StackPanel HorizontalAlignment="Center">
+                <Border
+                    Width="76"
+                    Height="76"
+                    Background="{DynamicResource ZenPrimaryBrush}"
+                    CornerRadius="22">
+                    <TextBlock
+                        HorizontalAlignment="Center"
+                        VerticalAlignment="Center"
+                        FontSize="36"
+                        FontWeight="Bold"
+                        Foreground="White"
+                        Text="Z" />
+                </Border>
+                <TextBlock
+                    Margin="0,18,0,0"
+                    HorizontalAlignment="Center"
+                    FontSize="26"
+                    FontWeight="SemiBold"
+                    Text="ZenUI POS" />
+                <TextBlock
+                    Margin="0,7,0,0"
+                    HorizontalAlignment="Center"
+                    Foreground="{DynamicResource ZenTextSecondaryBrush}"
+                    Text="正在准备您的收银工作台" />
+            </StackPanel>
+
+            <Grid Grid.Row="1" Margin="0,42,0,0">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="*" />
+                    <ColumnDefinition Width="16" />
+                    <ColumnDefinition Width="Auto" />
+                </Grid.ColumnDefinitions>
+                <zen:ZenProgressBar
+                    Height="12"
+                    VerticalAlignment="Center"
+                    Maximum="100"
+                    Value="{Binding LoadingProgress, Mode=OneWay}" />
+                <TextBlock
+                    Grid.Column="2"
+                    MinWidth="42"
+                    VerticalAlignment="Center"
+                    FontSize="13"
+                    FontWeight="SemiBold"
+                    Foreground="{DynamicResource ZenPrimaryBrush}"
+                    Text="{Binding LoadingProgress, StringFormat={}{0}%}" />
+            </Grid>
+
+            <TextBlock
+                x:Name="LoadingStatusText"
+                Grid.Row="2"
+                Margin="0,42,0,0"
+                HorizontalAlignment="Center"
+                FontSize="17"
+                Foreground="{DynamicResource ZenTextSecondaryBrush}"
+                Text="{Binding LoadingMessage}" />
+
+            <Border
+                Grid.Row="3"
+                Width="360"
+                Margin="0,26,0,0"
+                Padding="14,10"
+                HorizontalAlignment="Center"
+                Background="{DynamicResource ZenSurfaceMutedBrush}"
+                CornerRadius="9">
+                <TextBlock
+                    HorizontalAlignment="Center"
+                    FontSize="12"
+                    Foreground="{DynamicResource ZenTextSecondaryBrush}"
+                    Text="演示加载过程不会请求网络或外部设备" />
+            </Border>
+        </Grid>
+    </Grid>
+</UserControl>
