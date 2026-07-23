@@ -9,7 +9,6 @@
     <SolidColorBrush x:Key="DemoSidebarItemSelectedBrush" Color="#223657" />
     <SolidColorBrush x:Key="DemoSidebarSecondaryTextBrush" Color="#8E9BB1" />
     <SolidColorBrush x:Key="DemoSidebarFooterTextBrush" Color="#8491A8" />
-    <SolidColorBrush x:Key="DemoCanvasBrush" Color="#F4F6F8" />
     <SolidColorBrush x:Key="DemoOnPrimarySecondaryBrush" Color="#DFE6FA" />
     <SolidColorBrush x:Key="DemoOnPrimaryMutedSurfaceBrush" Color="#22FFFFFF" />
     <SolidColorBrush x:Key="DemoSuccessForegroundBrush" Color="#064E2C" />

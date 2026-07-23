@@ -6,13 +6,15 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:navigation="clr-namespace:ZenUI.Wpf.Demo.Navigation"
     xmlns:prism="http://prismlibrary.com/"
+    xmlns:zen="http://zenui.mnorg.com/zenui-wpf"
     Title="ZenUI 控件库"
     Width="1120"
     Height="720"
     MinWidth="900"
     MinHeight="600"
-    Background="{DynamicResource DemoCanvasBrush}"
+    Background="{DynamicResource ZenSurfaceMutedBrush}"
     FontFamily="Microsoft YaHei UI"
+    Foreground="{DynamicResource ZenTextPrimaryBrush}"
     WindowStartupLocation="CenterScreen"
     prism:ViewModelLocator.AutoWireViewModel="True"
     mc:Ignorable="d">
@@ -101,7 +103,29 @@
                     </ItemsControl>
                 </ScrollViewer>
 
-                <TextBlock Grid.Row="2" Margin="8,0,8,24" FontSize="11" Foreground="{DynamicResource DemoSidebarFooterTextBrush}" Text="ZenUI.Wpf · Prism Demo" />
+                <StackPanel Grid.Row="2" Margin="8,8,8,24">
+                    <TextBlock
+                        Margin="0,0,0,8"
+                        FontSize="12"
+                        Foreground="{DynamicResource DemoSidebarSecondaryTextBrush}"
+                        Text="界面主题" />
+                    <zen:ZenComboBox
+                        Height="34"
+                        AutomationProperties.Name="界面主题"
+                        ItemsSource="{Binding ThemeOptions}"
+                        SelectedItem="{Binding SelectedThemeOption, Mode=TwoWay}">
+                        <zen:ZenComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding DisplayName}" />
+                            </DataTemplate>
+                        </zen:ZenComboBox.ItemTemplate>
+                    </zen:ZenComboBox>
+                    <TextBlock
+                        Margin="0,12,0,0"
+                        FontSize="11"
+                        Foreground="{DynamicResource DemoSidebarFooterTextBrush}"
+                        Text="ZenUI.Wpf · Prism Demo" />
+                </StackPanel>
             </Grid>
         </Border>
 

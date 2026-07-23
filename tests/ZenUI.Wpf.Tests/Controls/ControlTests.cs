@@ -220,6 +220,43 @@ namespace ZenUI.Wpf.Tests.Controls
         }
 
         [TestMethod]
+        public void ComboBoxHonorsItemTemplateForSelectedItem()
+        {
+            var text = new FrameworkElementFactory(typeof(TextBlock));
+            text.SetBinding(TextBlock.TextProperty, new Binding(nameof(DisplayItem.DisplayName)));
+            var itemTemplate = new DataTemplate { VisualTree = text };
+            var comboBox = new ZenComboBox
+            {
+                ItemTemplate = itemTemplate,
+                ItemsSource = new[] { new DisplayItem("浅色") },
+                SelectedIndex = 0,
+                Width = 160
+            };
+            var window = new Window
+            {
+                ShowInTaskbar = false,
+                WindowStyle = WindowStyle.None,
+                Content = comboBox
+            };
+
+            try
+            {
+                window.Show();
+                window.UpdateLayout();
+
+                var selectionPresenter =
+                    comboBox.Template.FindName("SelectionPresenter", comboBox) as ContentPresenter;
+                Assert.IsNotNull(selectionPresenter);
+                Assert.AreSame(itemTemplate, comboBox.SelectionBoxItemTemplate);
+                Assert.AreSame(itemTemplate, selectionPresenter.ContentTemplate);
+            }
+            finally
+            {
+                window.Close();
+            }
+        }
+
+        [TestMethod]
         public void RangeAndSelectionControlsHonorInheritedContracts()
         {
             var slider = new ZenSlider
@@ -624,6 +661,16 @@ namespace ZenUI.Wpf.Tests.Controls
             public int Id { get; }
 
             public string Name { get; set; }
+        }
+
+        private sealed class DisplayItem
+        {
+            public DisplayItem(string displayName)
+            {
+                DisplayName = displayName;
+            }
+
+            public string DisplayName { get; }
         }
     }
 }
