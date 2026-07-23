@@ -19,6 +19,11 @@ dotnet pack src/ZenUI.Wpf/ZenUI.Wpf.csproj -c Release --no-build -o artifacts/pa
 
 公共 API 的不兼容修改必须记录在 `CHANGELOG.md`，并按语义化版本调整主版本号。
 
+## 提交信息
+
+- Git 提交的标题和正文统一使用中文。
+- 提交信息应简洁说明本次变更，例如：`美化各主题下的滚动条`。
+
 ## 分支与发布
 
 - 默认开发分支为 `main`。
