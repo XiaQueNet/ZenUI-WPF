@@ -1,157 +1,67 @@
-﻿# Testing Conventions
+# 测试规范
 
-本文件是项目测试代码的通用约定来源。
+本文约定 ZenUI.Wpf 的自动化测试写法。测试应保护公开行为、WPF 契约和跨目标框架兼容性，避免绑定到无关的实现细节。
 
-AI 生成或修改测试时，还必须遵守：
+## 工程与框架
 
-- `docs/conventions/ai-testing-workflow.md`
+- 测试统一放在 `tests/ZenUI.Wpf.Tests/`，目录与被测能力对应，例如 `Controls/`、`Converters/`、`Theming/`。
+- 使用项目现有的 MSTest，不为单个控件或功能新建测试工程。
+- 普通测试使用 `[TestClass]` 和 `[TestMethod]`。
+- 创建或操作 WPF 控件、窗口、模板、Dispatcher 或 UI Automation Peer 的测试使用 `[STATestClass]`。
+- 测试必须同时兼容项目当前目标框架 `net472` 和 `net8.0-windows`；不要使用仅在其中一个目标可用的测试 API。
 
-如果测试来源是 `docs/features/**/*.feature`，还必须遵守：
+## 命名与组织
 
-- `docs/prompts/feature-to-unit-tests.md`
+- 测试类按被测类型或一组紧密相关的公开能力命名，例如 `NumberBoxTests`。
+- 测试方法用英文描述可观察行为，例如 `InvalidStepIsRejected`。
+- 一个测试聚焦一个行为；只有建立同一场景所需的相关断言可以放在一起。
+- 数据驱动测试只合并执行路径和断言语义一致的输入组合。
+- 测试优先采用 Arrange、Act、Assert 的自然顺序；仅在较长测试中用空行或简短注释分隔阶段。
 
----
+## 断言边界
 
-## Unit Test Project Rules
+优先验证使用者可观察到的结果：
 
-新增或大幅改写的单元测试必须放入：
+- 依赖属性的默认值、校验、强制和变更行为；
+- 控件事件、命令、键盘与鼠标交互；
+- 控件模板契约、资源 Key 和主题切换；
+- 默认、悬停、按下、焦点、禁用、只读、验证错误及高对比度状态；
+- UI Automation 的控件类型、Pattern、名称和状态；
+- 转换器的输入、输出、反向转换及边界值；
+- 多目标框架下应保持一致的行为。
 
-src/tests/Hlk.UnitTests/
+避免验证：
 
-禁止：
+- 与公开契约无关的私有方法调用；
+- 可自由调整的内部执行顺序；
+- 仅为让测试通过而复制到测试中的生产逻辑；
+- 恒真断言或只验证测试辅助方法本身的断言。
 
-- 创建新的 UnitTest 项目
-- 创建 xxx.AppService.Tests
-- 创建 xxx.Service.Tests
-- 创建 xxx.FeatureTests 测试项目或测试分组
+模板测试可以定位 `PART_` 部件，因为它们属于 WPF 模板契约。非契约的视觉树内部元素只有在其结构本身就是回归风险时才应直接断言。
 
-测试目录按业务模块组织：
+## WPF 测试要求
 
-src/tests/Hlk.UnitTests/
-├── Pricing/
-├── Cart/
-├── Checkout/
-└── Membership/
+- 需要模板实例化时，将控件放入临时 `Window`，调用 `Show`、`ApplyTemplate` 或 `UpdateLayout` 后再断言。
+- 使用 `try/finally` 关闭测试创建的窗口，避免污染后续测试。
+- 等待布局或 Dispatcher 时使用确定性的同步方式，不依赖任意时长的休眠。
+- 测试不得依赖本机主题、DPI、区域设置、时区或执行顺序；确需依赖时应在测试中显式设置并恢复。
+- UI Automation 测试验证语义契约，不依赖显示文本、屏幕坐标或易变的视觉树层级定位控件。
 
-历史测试如果暂未完全符合本约定，可以在后续相关改动中逐步迁移；
-不要为了形式一致性单独大规模重命名或搬移旧测试。
+## 视觉回归
 
----
+- 快照覆盖 Light、Dark、HighContrast 主题以及仓库约定的 DPI 比例。
+- 输出只用于审查时，测试仍需包含能自动发现明显退化的断言。
+- 快照内容使用稳定、非业务化的示例数据，避免时间、随机数和机器相关信息。
+- 更新快照或阈值时说明视觉变化的原因，不以放宽断言掩盖回归。
 
-## Test Naming
+## 回归与验证
 
-测试类和测试方法必须基于业务行为命名，
-不能基于技术实现。
+修复缺陷时先添加能复现问题的回归测试；纯重构、测试基础设施修复或为已有行为补覆盖时，不要求刻意制造失败。
 
-测试是业务规则资产，
-而不是实现类附属物。
+提交前至少运行：
 
-测试文件名和测试类名应体现 Feature / Rule / 业务能力，例如：
+```powershell
+dotnet test tests/ZenUI.Wpf.Tests/ZenUI.Wpf.Tests.csproj -c Release
+```
 
-- `LowestPricePriorityTests`
-- `PromotionConflictTests`
-- `FullReductionTests`
-- `ManualPriceOverrideTests`
-- `QuantityChangeResetTests`
-
-测试方法命名应表达业务结果，例如：
-
-- `Should_Use_Lower_Price_When_MemberPrice_And_PromotionPrice_Both_Matched`
-- `Should_Clear_Manual_Item_Price_When_Line_Quantity_Changed`
-
-### 错误示例
-
-- PricingAppServiceFeatureTests
-- AmountModelFeatureTests
-- PricingServiceTests
-- PricingEngineTests
-- CalculateLineAmount_ShouldReturnExpected
-- BuildExecutionPlan_ShouldOrderRules
-
-禁止测试文件名和测试类名包含：
-
-- AppService
-- Service
-- Manager
-- Engine
-- Pipeline
-- Handler
-- Calculator
-- Repository
-
-当测试来源是 `docs/features/**/*.feature` 时，测试文件名和测试类名还禁止使用：
-
-- FeatureTest
-- FeatureTests
-
-错误示例：
-
-- `AmountModelFeatureTests.cs`
-- `RuleGraphFeatureTests`
-
-正确示例：
-
-- `PricingAmountModelLineAmountTests.cs`
-- `PricingRuleGraphMetadataTests`
-
----
-
-## Test Structure
-
-普通业务测试应围绕业务能力、业务规则或可观察行为组织。
-
-如果测试来源是 `docs/features/**/*.feature`，必须遵守
-`docs/prompts/feature-to-unit-tests.md` 的 Feature / Rule / Scenario 映射规则。
-
-推荐：
-
-- 一个业务能力或业务规则对应一组测试
-- 一个测试类聚焦一个清晰的业务主题
-- 测试方法表达一个可观察业务结果
-- 数据驱动测试只合并同一业务规则下的等价样例
-
-禁止：
-
-- 把多个 `.feature` 文件合并到同一个测试类
-- 把多个 `.feature` 文件合并到同一个测试文件
-- 把同一个 `.feature` 文件中的多个 Rule 合并到同一个测试类
-- 以业务主题相近为理由合并 Feature 测试类
-
-以上 `.feature` 相关禁止项只适用于从 `docs/features/**/*.feature`
-生成或维护的 Feature-based Unit Tests。
-
----
-
-## Assertions
-
-测试应验证：
-
-- 最终价格
-- 命中规则
-- 冲突结果
-- 清除规则
-- 叠加结果
-- 状态变化后的规则重算结果
-
-不要验证：
-
-- 内部方法调用
-- 私有实现
-- Pipeline 顺序细节
-- 具体类是否被调用
-
----
-
-## Framework
-
-使用项目现有测试框架。
-
-如果项目没有明确测试框架，默认使用：
-
-- MSTest
-- FluentAssertions
-
-MSTest 项目中：
-
-- 普通测试使用 `[TestMethod]`
-- 数据驱动测试使用 `[TestMethod]` + `[DataRow(...)]`
+影响打包、公共 API 或多目标框架配置时，还应按 `CONTRIBUTING.md` 运行完整构建与打包检查。

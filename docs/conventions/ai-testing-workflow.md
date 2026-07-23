@@ -1,76 +1,40 @@
-﻿# AI Testing Workflow
+# AI 测试工作流
 
-本文件是 AI 生成、修改、修复测试时的流程约束。
+AI 新增、修改或修复测试时，必须同时遵守 `docs/conventions/testing.md`。
 
-测试代码的目录、命名、断言和框架约定以 `docs/conventions/testing.md` 为准。
+## 工作顺序
 
-如果任务是从 `docs/features/**/*.feature` 生成普通单元测试，还必须先阅读并遵守：
+行为变更或缺陷修复采用：
 
-- `docs/prompts/feature-to-unit-tests.md`
+1. 从现有代码、公开文档或问题描述确认预期行为。
+2. 添加能复现缺失行为或缺陷的测试，并确认测试以预期原因失败。
+3. 用最小实现使测试通过。
+4. 在不降低断言强度的前提下重构。
+5. 运行受影响测试；改动范围较大时运行完整测试。
 
----
+如果文档、测试和实现互相矛盾，不擅自选择最容易通过的一方。先根据公共 API、兼容性承诺和现有行为判断；仍无法确定时明确指出冲突。
 
-## Core Flow
-
-新增业务规则测试、从 Feature / Spec 生成测试、或修复业务行为缺陷时，
-必须遵循：
-
-Feature / Spec -> Failing Tests -> Implementation -> Refactor
-
-也就是：
-
-1. 先从业务规范生成失败测试（Red）。
-2. 再实现或修正业务代码让测试通过（Green）。
-3. 最后在不改变业务断言的前提下重构（Refactor）。
+## 测试质量
 
 禁止：
 
-- Spec Drift
-- Fake Tests
-- Vacuous Assertions
-- 实现驱动测试
-- 先实现业务代码再反向补测试
-- 修改测试语义来适配当前实现
+- 修改预期结果来迎合当前实现；
+- 使用恒真、空断言或无法触达目标行为的测试；
+- 在测试中复制完整生产实现；
+- 过度 Mock，导致真实的 WPF 行为、资源、模板或绑定未被执行；
+- 只验证内部调用次数，而不验证可观察结果；
+- 为无关维护任务重写或搬移大量现有测试。
 
-以下维护性任务不强制要求先制造 Red 状态，但仍必须保持业务断言不降级：
+生产代码尚无可调用入口时，不在测试辅助代码中伪造一套会通过的实现。应让测试清楚暴露缺失的公共行为，或先确认是否确实需要扩展 API。
 
-- 重命名测试以符合约定
-- 拆分或搬移测试文件
-- 修复测试工程配置、引用或编译错误
-- 改善测试 helper 的可读性
-- 为已实现且缺少覆盖的历史行为补充回归测试
+## 例外
 
-如果任务不适用 Red First，输出中应简要说明原因。
+以下任务不要求先得到 Red 状态，但不得降低现有覆盖：
 
----
+- 重命名或整理测试；
+- 修复测试工程、目标框架或 CI 配置；
+- 改善测试辅助代码；
+- 为已有且稳定的行为补充覆盖；
+- 仅修改文档、格式或注释。
 
-## Feature-Based Unit Tests
-
-当任务是根据 `docs/features/**/*.feature` 生成普通单元测试时，必须先阅读：
-
-- `docs/prompts/feature-to-unit-tests.md`
-- `docs/conventions/testing.md`
-- 相关 `docs/specs/*.md`
-- 目标 `docs/features/**/*.feature`
-
-具体映射规则、BDD 禁止项、输出要求和 Spec Drift 处理规则以
-`docs/prompts/feature-to-unit-tests.md` 为准。
-
----
-
-## Red First Requirements
-
-生成失败测试时必须验证真实业务结果。
-可验证的业务结果类型以 `docs/conventions/testing.md` 的 Assertions 章节为准。
-
-禁止为了让测试通过而：
-
-- 在测试文件中实现完整业务规则
-- 写只验证测试 helper 自身逻辑的测试
-- 降低断言或移除关键断言
-- 使用 `Assert.True(true)` 或等价空断言
-- 使用 mock 掩盖真实业务行为
-
-如果生产代码尚未提供可调用 API，测试应保持 Red，并清楚暴露缺失的业务入口，而不是在测试中补一套会通过的实现。
-
-临时测试适配入口的边界以 `docs/prompts/feature-to-unit-tests.md` 的 Red First 章节为准。
+完成后简要报告执行过的验证；无法运行的检查应说明原因。
