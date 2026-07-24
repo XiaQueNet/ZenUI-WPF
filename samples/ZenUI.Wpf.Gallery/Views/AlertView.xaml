@@ -22,7 +22,7 @@
                     <zen:ZenAlert Variant="Success">
                         <StackPanel>
                             <TextBlock FontWeight="SemiBold" Text="发布已完成" />
-                            <TextBlock Margin="0,4,0,0" Foreground="{DynamicResource ZenTextSecondaryBrush}" Text="版本 0.1.0-preview.1 已发布预览。" />
+                            <TextBlock Margin="0,4,0,0" Foreground="{DynamicResource ZenTextSecondaryBrush}" Text="版本 0.1.0-preview.2 已发布预览。" />
                         </StackPanel>
                     </zen:ZenAlert>
                 </StackPanel>

@@ -10,6 +10,7 @@ using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Media;
+using System.Windows.Threading;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -294,6 +295,7 @@ namespace ZenUI.Wpf.Tests.Controls
             finally
             {
                 datePicker.IsDropDownOpen = false;
+                window.Dispatcher.Invoke(DispatcherPriority.ContextIdle, new Action(() => { }));
                 window.Close();
             }
         }
@@ -355,6 +357,7 @@ namespace ZenUI.Wpf.Tests.Controls
             finally
             {
                 datePicker.IsDropDownOpen = false;
+                window.Dispatcher.Invoke(DispatcherPriority.ContextIdle, new Action(() => { }));
                 window.Close();
             }
         }

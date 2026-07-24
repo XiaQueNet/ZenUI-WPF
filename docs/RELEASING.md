@@ -52,7 +52,7 @@ rc.1
 
 ```xml
 <VersionPrefix>0.1.0</VersionPrefix>
-<VersionSuffix>preview.1</VersionSuffix>
+<VersionSuffix>preview.2</VersionSuffix>
 <AssemblyVersion>0.1.0.0</AssemblyVersion>
 <FileVersion>0.1.0.0</FileVersion>
 ```
