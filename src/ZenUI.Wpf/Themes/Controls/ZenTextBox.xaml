@@ -15,11 +15,11 @@
 
     <Style x:Key="ZenTextBoxStyle" TargetType="{x:Type zen:ZenTextBox}">
         <Setter Property="MinHeight" Value="36" />
-        <Setter Property="Padding" Value="8,4" />
+        <Setter Property="Padding" Value="{DynamicResource ZenInputControlPadding}" />
         <Setter Property="Background" Value="{DynamicResource ZenSurfaceBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource ZenBorderBrush}" />
         <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="CornerRadius" Value="6" />
+        <Setter Property="CornerRadius" Value="{DynamicResource ZenInputControlCornerRadius}" />
         <Setter Property="Foreground" Value="{DynamicResource ZenTextPrimaryBrush}" />
         <Setter Property="CaretBrush" Value="{DynamicResource ZenTextPrimaryBrush}" />
         <Setter Property="FocusVisualStyle" Value="{StaticResource ZenTextBoxFocusVisualStyle}" />
@@ -46,7 +46,6 @@
                             <ContentPresenter
                                 x:Name="LeadingContentHost"
                                 Grid.Column="0"
-                                Margin="8,0,0,0"
                                 VerticalAlignment="Center"
                                 Content="{TemplateBinding LeadingContent}"
                                 ContentTemplate="{TemplateBinding LeadingContentTemplate}" />
@@ -61,7 +60,6 @@
                                     IsHitTestVisible="False">
                                     <TextBlock
                                         x:Name="WatermarkText"
-                                        Margin="2,0"
                                         HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
                                         VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                         FontFamily="{TemplateBinding FontFamily}"
@@ -78,7 +76,6 @@
                             <ContentPresenter
                                 x:Name="TrailingContentHost"
                                 Grid.Column="2"
-                                Margin="0,0,8,0"
                                 VerticalAlignment="Center"
                                 Content="{TemplateBinding TrailingContent}"
                                 ContentTemplate="{TemplateBinding TrailingContentTemplate}" />

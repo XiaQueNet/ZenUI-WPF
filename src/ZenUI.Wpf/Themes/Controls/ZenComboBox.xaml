@@ -9,7 +9,11 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ComboBoxItem}">
-                    <Border x:Name="ItemBorder" Padding="{TemplateBinding Padding}" Background="Transparent" CornerRadius="4">
+                    <Border
+                        x:Name="ItemBorder"
+                        Padding="{TemplateBinding Padding}"
+                        Background="Transparent"
+                        CornerRadius="4">
                         <ContentPresenter />
                     </Border>
                     <ControlTemplate.Triggers>
@@ -28,7 +32,8 @@
 
     <Style x:Key="ZenComboBoxStyle" TargetType="{x:Type zen:ZenComboBox}">
         <Setter Property="MinHeight" Value="36" />
-        <Setter Property="Padding" Value="12,0,34,0" />
+        <Setter Property="Padding" Value="{DynamicResource ZenInputControlPadding}" />
+        <Setter Property="CornerRadius" Value="{DynamicResource ZenInputControlCornerRadius}" />
         <Setter Property="Background" Value="{DynamicResource ZenSurfaceBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource ZenBorderBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource ZenTextPrimaryBrush}" />
@@ -38,8 +43,19 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type zen:ZenComboBox}">
                     <Grid>
-                        <Border x:Name="InputBorder" Background="{TemplateBinding Background}" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1" CornerRadius="{TemplateBinding CornerRadius}" />
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="34" />
+                        </Grid.ColumnDefinitions>
+                        <Border
+                            x:Name="InputBorder"
+                            Grid.ColumnSpan="2"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="1"
+                            CornerRadius="{TemplateBinding CornerRadius}" />
                         <ToggleButton
+                            Grid.ColumnSpan="2"
                             Background="Transparent"
                             BorderThickness="0"
                             ClickMode="Press"
@@ -53,15 +69,17 @@
                         </ToggleButton>
                         <ContentPresenter
                             x:Name="SelectionPresenter"
+                            Grid.Column="0"
                             Margin="{TemplateBinding Padding}"
                             VerticalAlignment="Center"
                             Content="{TemplateBinding SelectionBoxItem}"
+                            ContentStringFormat="{TemplateBinding SelectionBoxItemStringFormat}"
                             ContentTemplate="{TemplateBinding SelectionBoxItemTemplate}"
                             ContentTemplateSelector="{TemplateBinding ItemTemplateSelector}"
-                            ContentStringFormat="{TemplateBinding SelectionBoxItemStringFormat}"
                             IsHitTestVisible="False" />
                         <TextBox
                             x:Name="PART_EditableTextBox"
+                            Grid.Column="0"
                             Margin="{TemplateBinding Padding}"
                             Padding="0"
                             VerticalContentAlignment="Center"
@@ -73,6 +91,7 @@
                             Visibility="Hidden" />
                         <TextBlock
                             x:Name="WatermarkText"
+                            Grid.Column="0"
                             Margin="{TemplateBinding Padding}"
                             VerticalAlignment="Center"
                             Foreground="{DynamicResource ZenTextPlaceholderBrush}"
@@ -80,10 +99,11 @@
                             Text="{TemplateBinding Watermark}"
                             Visibility="Collapsed" />
                         <Path
+                            x:Name="DropDownArrow"
+                            Grid.Column="1"
                             Width="10"
                             Height="6"
-                            Margin="0,0,12,0"
-                            HorizontalAlignment="Right"
+                            HorizontalAlignment="Center"
                             VerticalAlignment="Center"
                             Data="M 1,1 L 5,5 L 9,1"
                             IsHitTestVisible="False"
@@ -92,6 +112,7 @@
                             StrokeThickness="1.5" />
                         <Popup
                             x:Name="PART_Popup"
+                            Grid.ColumnSpan="2"
                             AllowsTransparency="True"
                             IsOpen="{TemplateBinding IsDropDownOpen}"
                             Placement="Bottom"

@@ -9,7 +9,7 @@
         HorizontalContentAlignment="Stretch"
         VerticalScrollBarVisibility="Auto">
         <StackPanel>
-            <gallery:PageHeader Title="TextBox 输入框" Description="用于输入单行或多行文本，支持水印、前后置内容、自定义圆角和常用交互状态。" />
+            <gallery:PageHeader Title="TextBox 输入框" Description="用于输入单行或多行文本，支持水印、前后置内容和常用交互状态。" />
             <Border Style="{StaticResource GalleryCardStyle}">
                 <StackPanel>
                     <TextBlock Style="{StaticResource SectionTitleStyle}" Text="基本用法" />
@@ -19,11 +19,6 @@
                         HorizontalAlignment="Left"
                         AutomationProperties.Name="名称"
                         Watermark="请输入名称" />
-                    <TextBlock
-                        Width="320"
-                        HorizontalAlignment="Left"
-                        Style="{StaticResource GallerySupportingTextStyle}"
-                        Text="Watermark 仅在内容为空且输入框未获得焦点时显示。" />
                 </StackPanel>
             </Border>
 
@@ -48,6 +43,7 @@
                                     <Path
                                         Width="18"
                                         Height="18"
+                                        Margin="10,0,0,0"
                                         Data="M10,3 A7,7 0 1 0 10,17 A7,7 0 1 0 10,3 M15,15 L21,21"
                                         Stretch="Uniform"
                                         Stroke="{DynamicResource ZenTextSecondaryBrush}"
@@ -56,14 +52,12 @@
                                 </zen:ZenTextBox.LeadingContent>
                                 <zen:ZenTextBox.TrailingContent>
                                     <zen:ZenButton
-                                        Width="26"
-                                        Height="26"
-                                        Padding="0"
+                                        Margin="0,0,4,0"
                                         Appearance="Text"
                                         AutomationProperties.Name="清除搜索内容"
                                         Click="ClearSearchButton_Click"
                                         Content="×"
-                                        FontSize="18"
+                                        FontSize="22"
                                         ToolTip="清除" />
                                 </zen:ZenTextBox.TrailingContent>
                             </zen:ZenTextBox>
@@ -77,12 +71,14 @@
                                 Watermark="your-site">
                                 <zen:ZenTextBox.LeadingContent>
                                     <TextBlock
+                                        Margin="10,0,0,0"
                                         VerticalAlignment="Center"
                                         Foreground="{DynamicResource ZenTextSecondaryBrush}"
                                         Text="https://" />
                                 </zen:ZenTextBox.LeadingContent>
                                 <zen:ZenTextBox.TrailingContent>
                                     <TextBlock
+                                        Margin="0,0,10,0"
                                         VerticalAlignment="Center"
                                         Foreground="{DynamicResource ZenTextSecondaryBrush}"
                                         Text=".com" />
@@ -90,11 +86,6 @@
                             </zen:ZenTextBox>
                         </StackPanel>
                     </Grid>
-                    <TextBlock
-                        Margin="0,12,0,0"
-                        Foreground="{DynamicResource ZenTextSecondaryBrush}"
-                        Text="LeadingContent 与 TrailingContent 接受任意对象，也可以配合对应的 ContentTemplate 使用。"
-                        TextWrapping="Wrap" />
                 </StackPanel>
             </Border>
 
@@ -103,37 +94,17 @@
                     <TextBlock Style="{StaticResource SectionTitleStyle}" Text="尺寸" />
                     <UniformGrid Columns="3">
                         <StackPanel Margin="0,0,10,0">
-                            <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="紧凑 · Height=32" />
+                            <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="紧凑 · 32px" />
                             <zen:ZenTextBox Height="32" Watermark="紧凑输入框" />
                         </StackPanel>
                         <StackPanel Margin="5,0">
-                            <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="默认 · MinHeight=36" />
+                            <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="默认 · 36px" />
                             <zen:ZenTextBox Watermark="默认输入框" />
                         </StackPanel>
                         <StackPanel Margin="10,0,0,0">
-                            <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="宽松 · Height=48" />
+                            <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="宽松 · 48px" />
                             <zen:ZenTextBox Height="48" Watermark="宽松输入框" />
                         </StackPanel>
-                    </UniformGrid>
-                </StackPanel>
-            </Border>
-
-            <Border Style="{StaticResource GalleryCardStyle}">
-                <StackPanel>
-                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="圆角" />
-                    <UniformGrid Columns="3">
-                        <zen:ZenTextBox
-                            Margin="0,0,10,0"
-                            CornerRadius="0"
-                            Watermark="直角 · 0" />
-                        <zen:ZenTextBox
-                            Margin="5,0"
-                            CornerRadius="6"
-                            Watermark="默认 · 6" />
-                        <zen:ZenTextBox
-                            Margin="10,0,0,0"
-                            CornerRadius="18"
-                            Watermark="胶囊 · 18" />
                     </UniformGrid>
                 </StackPanel>
             </Border>
@@ -204,7 +175,7 @@
                         <TextBlock
                             FontFamily="Consolas"
                             Foreground="{DynamicResource ZenTextPrimaryBrush}"
-                            Text="&lt;zen:ZenTextBox&#x0a;    Watermark=&quot;请输入关键字&quot;&gt;&#x0a;    &lt;zen:ZenTextBox.LeadingContent&gt;&#x0a;        &lt;Path Data=&quot;{StaticResource SearchIcon}&quot; /&gt;&#x0a;    &lt;/zen:ZenTextBox.LeadingContent&gt;&#x0a;&lt;/zen:ZenTextBox&gt;"
+                            Text="&lt;zen:ZenTextBox Watermark=&quot;请输入关键字&quot;&gt;&#x0a;    &lt;zen:ZenTextBox.LeadingContent&gt;&#x0a;        &lt;Path Margin=&quot;8,0,0,0&quot;&#x0a;              Data=&quot;{StaticResource SearchIcon}&quot; /&gt;&#x0a;    &lt;/zen:ZenTextBox.LeadingContent&gt;&#x0a;&lt;/zen:ZenTextBox&gt;"
                             TextWrapping="Wrap" />
                     </Border>
                 </StackPanel>

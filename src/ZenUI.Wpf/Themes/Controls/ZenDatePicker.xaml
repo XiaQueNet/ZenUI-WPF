@@ -300,8 +300,9 @@
     </Style>
 
     <Style x:Key="ZenDatePickerStyle" TargetType="{x:Type zen:ZenDatePicker}">
-        <Setter Property="Padding" Value="5,0" />
+        <Setter Property="Padding" Value="{DynamicResource ZenInputControlPadding}" />
         <Setter Property="MinHeight" Value="36" />
+        <Setter Property="CornerRadius" Value="{DynamicResource ZenInputControlCornerRadius}" />
         <Setter Property="Background" Value="{DynamicResource ZenSurfaceBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource ZenBorderBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource ZenTextPrimaryBrush}" />

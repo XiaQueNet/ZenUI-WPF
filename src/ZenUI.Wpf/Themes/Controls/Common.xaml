@@ -2,6 +2,9 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
+    <Thickness x:Key="ZenInputControlPadding">8,4</Thickness>
+    <CornerRadius x:Key="ZenInputControlCornerRadius">6</CornerRadius>
+
     <Style x:Key="ZenFocusVisualBorderStyle" TargetType="{x:Type Border}">
         <Setter Property="Margin" Value="-2" />
         <Setter Property="BorderBrush" Value="{DynamicResource ZenFocusBrush}" />

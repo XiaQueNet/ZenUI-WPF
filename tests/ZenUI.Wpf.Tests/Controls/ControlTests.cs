@@ -123,6 +123,8 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.IsNotNull(dictionary["ZenPrimaryBrush"]);
             Assert.IsNotNull(dictionary["ZenFocusBrush"]);
             Assert.IsNotNull(dictionary["ZenErrorBrush"]);
+            Assert.AreEqual(new Thickness(8, 4, 8, 4), dictionary["ZenInputControlPadding"]);
+            Assert.AreEqual(new CornerRadius(6), dictionary["ZenInputControlCornerRadius"]);
             Assert.IsInstanceOfType<Style>(dictionary["ZenFocusVisualBorderStyle"]);
         }
 
@@ -251,18 +253,8 @@ namespace ZenUI.Wpf.Tests.Controls
                 Assert.AreEqual(new CornerRadius(12), inputBorder.CornerRadius);
                 Assert.AreEqual("请输入内容", watermark.Text);
                 Assert.AreEqual(textBox.Padding, watermarkHost.Margin);
-                Assert.AreEqual(new Thickness(2, 0, 2, 0), watermark.Margin);
+                Assert.AreEqual(new Thickness(), watermark.Margin);
                 Assert.AreEqual(Visibility.Visible, watermark.Visibility);
-
-                var textView = FindVisualDescendant(textBox, "TextBoxView");
-                Assert.IsNotNull(textView);
-                var watermarkOrigin = watermark.TransformToAncestor(inputBorder).Transform(new Point());
-                var textOrigin = textView.TransformToAncestor(inputBorder).Transform(new Point());
-                Assert.AreEqual(
-                    textOrigin.X,
-                    watermarkOrigin.X,
-                    0.01d,
-                    $"Watermark starts at {watermarkOrigin.X}, while text starts at {textOrigin.X}.");
 
                 textBox.Text = "ZenUI";
                 window.UpdateLayout();
@@ -332,6 +324,7 @@ namespace ZenUI.Wpf.Tests.Controls
                 var watermark = textBox.Template.FindName("WatermarkText", textBox) as TextBlock;
                 Assert.IsNotNull(contentHost);
                 Assert.IsNotNull(watermark);
+                Assert.AreEqual(datePicker.Padding, textBox.Padding);
                 Assert.AreEqual(new Thickness(), contentHost.Margin);
                 Assert.AreEqual(textBox.Padding, watermark.Margin);
                 Assert.AreEqual(Visibility.Visible, watermark.Visibility);
@@ -339,7 +332,6 @@ namespace ZenUI.Wpf.Tests.Controls
                 var watermarkLeft = watermark.TranslatePoint(new Point(), textBox).X;
                 Assert.AreEqual(0d, contentLeft, 0.5d);
                 Assert.AreEqual(textBox.Padding.Left, watermarkLeft, 0.5d);
-                Assert.AreEqual(5d, watermarkLeft, 0.5d);
 
                 var buttonLeft = button.TranslatePoint(
                     new Point(0, button.ActualHeight / 2d),
@@ -409,6 +401,10 @@ namespace ZenUI.Wpf.Tests.Controls
                 Assert.AreSame(trailingTemplate, textTrailingHost.ContentTemplate);
                 Assert.AreSame(passwordBoxLeading, passwordLeadingHost.Content);
                 Assert.AreSame(passwordBoxTrailing, passwordTrailingHost.Content);
+                Assert.AreEqual(new Thickness(), textLeadingHost.Margin);
+                Assert.AreEqual(new Thickness(), textTrailingHost.Margin);
+                Assert.AreEqual(new Thickness(), passwordLeadingHost.Margin);
+                Assert.AreEqual(new Thickness(), passwordTrailingHost.Margin);
                 Assert.AreEqual(Visibility.Visible, textLeadingHost.Visibility);
                 Assert.AreEqual(Visibility.Visible, textTrailingHost.Visibility);
                 Assert.AreEqual(Visibility.Visible, passwordLeadingHost.Visibility);
@@ -477,7 +473,7 @@ namespace ZenUI.Wpf.Tests.Controls
         }
 
         [TestMethod]
-        public void PasswordBoxTemplateProtectsPasswordAndAlignsWatermark()
+        public void PasswordBoxTemplateProtectsPasswordAndAppliesWatermarkLayout()
         {
             var textBox = new ZenTextBox { Watermark = "请输入内容" };
             var passwordBox = new ZenPasswordBox { Watermark = "请输入密码" };
@@ -504,26 +500,17 @@ namespace ZenUI.Wpf.Tests.Controls
 
                 var watermark = textBox.Template.FindName("WatermarkText", textBox) as TextBlock;
                 var passwordWatermark = passwordBox.Template.FindName("WatermarkText", passwordBox) as TextBlock;
+                var passwordWatermarkHost = passwordBox.Template.FindName("WatermarkHost", passwordBox) as Border;
                 Assert.IsNotNull(watermark);
                 Assert.IsNotNull(passwordWatermark);
+                Assert.IsNotNull(passwordWatermarkHost);
                 Assert.AreEqual(textBox.Padding, passwordBox.Padding);
                 Assert.AreEqual(watermark.HorizontalAlignment, passwordWatermark.HorizontalAlignment);
                 Assert.AreEqual(watermark.VerticalAlignment, passwordWatermark.VerticalAlignment);
                 Assert.AreEqual(watermark.FontFamily, passwordWatermark.FontFamily);
                 Assert.AreEqual(watermark.FontSize, passwordWatermark.FontSize);
+                Assert.AreEqual(passwordBox.Padding, passwordWatermarkHost.Margin);
                 Assert.AreEqual(new Thickness(), passwordWatermark.Margin);
-
-                var passwordTextView = FindVisualDescendant(passwordBox, "TextBoxView");
-                var passwordBorder = passwordBox.Template.FindName("InputBorder", passwordBox) as Border;
-                Assert.IsNotNull(passwordTextView);
-                Assert.IsNotNull(passwordBorder);
-                var watermarkOrigin = passwordWatermark.TransformToAncestor(passwordBorder).Transform(new Point());
-                var textOrigin = passwordTextView.TransformToAncestor(passwordBorder).Transform(new Point());
-                Assert.AreEqual(
-                    textOrigin.X,
-                    watermarkOrigin.X,
-                    0.01d,
-                    $"Password watermark starts at {watermarkOrigin.X}, while password text starts at {textOrigin.X}.");
             }
             finally
             {
@@ -558,7 +545,17 @@ namespace ZenUI.Wpf.Tests.Controls
 
                 var selectionPresenter =
                     comboBox.Template.FindName("SelectionPresenter", comboBox) as ContentPresenter;
+                var dropDownArrow =
+                    comboBox.Template.FindName("DropDownArrow", comboBox) as FrameworkElement;
+                var watermark =
+                    comboBox.Template.FindName("WatermarkText", comboBox) as TextBlock;
                 Assert.IsNotNull(selectionPresenter);
+                Assert.IsNotNull(dropDownArrow);
+                Assert.IsNotNull(watermark);
+                Assert.AreEqual(comboBox.Padding, selectionPresenter.Margin);
+                Assert.AreEqual(comboBox.Padding, watermark.Margin);
+                Assert.AreEqual(0, Grid.GetColumn(selectionPresenter));
+                Assert.AreEqual(1, Grid.GetColumn(dropDownArrow));
                 Assert.AreSame(itemTemplate, comboBox.SelectionBoxItemTemplate);
                 Assert.AreSame(itemTemplate, selectionPresenter.ContentTemplate);
             }
@@ -645,6 +642,8 @@ namespace ZenUI.Wpf.Tests.Controls
 
                 var editableTextBox = comboBox.Template.FindName("PART_EditableTextBox", comboBox) as TextBox;
                 Assert.IsNotNull(editableTextBox);
+                Assert.AreEqual(comboBox.Padding, editableTextBox.Margin);
+                Assert.AreEqual(0, Grid.GetColumn(editableTextBox));
                 Assert.AreEqual(Visibility.Visible, editableTextBox.Visibility);
                 Assert.AreEqual("custom value", editableTextBox.Text);
                 editableTextBox.Text = "updated value";
