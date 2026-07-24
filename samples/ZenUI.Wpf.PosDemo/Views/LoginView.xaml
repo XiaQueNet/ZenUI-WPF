@@ -4,10 +4,11 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:prism="http://prismlibrary.com/"
     xmlns:zen="http://zenui.mnorg.com/zenui-wpf"
+    prism:Dialog.WindowStartupLocation="CenterScreen"
     Background="{DynamicResource ZenSurfaceBrush}"
     FontFamily="Microsoft YaHei UI"
-    Foreground="{DynamicResource ZenTextPrimaryBrush}"
-    prism:Dialog.WindowStartupLocation="CenterScreen">
+    FontSize="22"
+    Foreground="{DynamicResource ZenTextPrimaryBrush}">
     <prism:Dialog.WindowStyle>
         <Style TargetType="{x:Type Window}">
             <Setter Property="Title" Value="ZenUI POS" />
@@ -291,14 +292,14 @@
                         Columns="2">
                         <zen:ZenButton
                             x:Name="AccountTabButton"
-                            Height="42"
+                            Height="50"
                             Margin="0,0,6,0"
                             Appearance="{Binding AccountTabAppearance}"
                             Command="{Binding UseAccountLoginCommand}"
                             Content="账号密码登录" />
                         <zen:ZenButton
                             x:Name="CodeTabButton"
-                            Height="42"
+                            Height="50"
                             Margin="6,0,0,0"
                             Appearance="{Binding CodeTabAppearance}"
                             Command="{Binding UseCodeLoginCommand}"
@@ -309,11 +310,12 @@
                         <StackPanel Visibility="{Binding AccountPanelVisibility}">
                             <zen:ZenTextBox
                                 x:Name="AccountTextBox"
-                                Height="50"
+                                Height="60"
                                 Text="{Binding Account, UpdateSourceTrigger=PropertyChanged}"
                                 Watermark="请输入账号">
                                 <zen:ZenTextBox.LeadingContent>
                                     <TextBlock
+                                        Margin="5"
                                         Foreground="{DynamicResource ZenTextSecondaryBrush}"
                                         Text="账号" />
                                 </zen:ZenTextBox.LeadingContent>
@@ -321,26 +323,42 @@
 
                             <zen:ZenPasswordBox
                                 x:Name="PasswordBox"
-                                Height="50"
+                                Height="60"
                                 Margin="0,14,0,0"
                                 IsPasswordRevealEnabled="True"
                                 Watermark="输入任意密码">
                                 <zen:ZenPasswordBox.LeadingContent>
                                     <TextBlock
+                                        Margin="5"
                                         Foreground="{DynamicResource ZenTextSecondaryBrush}"
                                         Text="密码" />
                                 </zen:ZenPasswordBox.LeadingContent>
                             </zen:ZenPasswordBox>
+
+                            <Grid Grid.Row="3" Margin="0,18,0,22">
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    FontSize="12"
+                                    Foreground="{DynamicResource ZenTextSecondaryBrush}"
+                                    Text="演示模式不会连接服务器或保存凭据" />
+                                <zen:ZenButton
+                                    HorizontalAlignment="Right"
+                                    Appearance="Text"
+                                    Command="{Binding ForgotPasswordCommand}"
+                                    Content="忘记密码？" />
+                            </Grid>
+
                         </StackPanel>
 
                         <StackPanel Visibility="{Binding CodePanelVisibility}">
                             <zen:ZenTextBox
                                 x:Name="PhoneTextBox"
-                                Height="50"
+                                Height="60"
                                 Text="{Binding Phone, UpdateSourceTrigger=PropertyChanged}"
                                 Watermark="请输入手机号">
                                 <zen:ZenTextBox.LeadingContent>
                                     <TextBlock
+                                        Margin="5"
                                         Foreground="{DynamicResource ZenTextSecondaryBrush}"
                                         Text="手机" />
                                 </zen:ZenTextBox.LeadingContent>
@@ -354,18 +372,19 @@
                                 </Grid.ColumnDefinitions>
                                 <zen:ZenTextBox
                                     x:Name="CaptchaTextBox"
-                                    Height="50"
+                                    Height="60"
                                     Text="{Binding CaptchaInput, UpdateSourceTrigger=PropertyChanged}"
                                     Watermark="请输入图形验证码">
                                     <zen:ZenTextBox.LeadingContent>
                                         <TextBlock
+                                            Margin="5"
                                             Foreground="{DynamicResource ZenTextSecondaryBrush}"
                                             Text="图形码" />
                                     </zen:ZenTextBox.LeadingContent>
                                 </zen:ZenTextBox>
                                 <zen:ZenButton
                                     Grid.Column="2"
-                                    Height="50"
+                                    Height="60"
                                     Appearance="Outlined"
                                     Command="{Binding RefreshCaptchaCommand}"
                                     Content="{Binding CaptchaText}"
@@ -374,7 +393,7 @@
                                     ToolTip="点击更换图形验证码" />
                             </Grid>
 
-                            <Grid Margin="0,14,0,0">
+                            <Grid Margin="0,14,0,22">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
                                     <ColumnDefinition Width="12" />
@@ -382,11 +401,12 @@
                                 </Grid.ColumnDefinitions>
                                 <zen:ZenTextBox
                                     x:Name="CodeTextBox"
-                                    Height="50"
+                                    Height="60"
                                     Text="{Binding VerificationCode, UpdateSourceTrigger=PropertyChanged}"
                                     Watermark="请输入短信验证码">
                                     <zen:ZenTextBox.LeadingContent>
                                         <TextBlock
+                                            Margin="5"
                                             Foreground="{DynamicResource ZenTextSecondaryBrush}"
                                             Text="短信码" />
                                     </zen:ZenTextBox.LeadingContent>
@@ -394,26 +414,13 @@
                                 <zen:ZenButton
                                     x:Name="SendCodeButton"
                                     Grid.Column="2"
-                                    Height="50"
+                                    Height="60"
                                     Appearance="Outlined"
                                     Command="{Binding SendCodeCommand}"
                                     Content="{Binding SendCodeText}"
                                     IsEnabled="{Binding CanSendCode}" />
                             </Grid>
                         </StackPanel>
-                    </Grid>
-
-                    <Grid Grid.Row="3" Margin="0,18,0,22">
-                        <TextBlock
-                            VerticalAlignment="Center"
-                            FontSize="12"
-                            Foreground="{DynamicResource ZenTextSecondaryBrush}"
-                            Text="演示模式不会连接服务器或保存凭据" />
-                        <zen:ZenButton
-                            HorizontalAlignment="Right"
-                            Appearance="Text"
-                            Command="{Binding ForgotPasswordCommand}"
-                            Content="忘记密码？" />
                     </Grid>
 
                     <StackPanel Grid.Row="4">
@@ -424,7 +431,7 @@
                             Visibility="{Binding StatusVisibility}" />
                         <zen:ZenButton
                             x:Name="LoginButton"
-                            Height="50"
+                            Height="60"
                             Command="{Binding LoginCommand}"
                             Content="登录"
                             FontSize="16"

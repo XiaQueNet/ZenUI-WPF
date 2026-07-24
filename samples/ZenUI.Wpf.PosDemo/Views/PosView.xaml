@@ -5,141 +5,251 @@
     xmlns:zen="http://zenui.mnorg.com/zenui-wpf"
     Background="{DynamicResource ZenSurfaceMutedBrush}"
     FontFamily="Microsoft YaHei UI"
+    FontSize="22"
     Foreground="{DynamicResource ZenTextPrimaryBrush}">
+    <UserControl.Resources>
+        <Style x:Key="SectionTitleStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="28" />
+            <Setter Property="FontWeight" Value="SemiBold" />
+        </Style>
+        <Style x:Key="CaptionStyle" TargetType="TextBlock">
+            <Setter Property="FontSize" Value="18" />
+            <Setter Property="Foreground" Value="{DynamicResource ZenTextSecondaryBrush}" />
+        </Style>
+        <Style x:Key="ProductCardButtonStyle" TargetType="Button">
+            <Setter Property="Padding" Value="8" />
+            <Setter Property="FontSize" Value="22" />
+            <Setter Property="Background" Value="{DynamicResource ZenSurfaceMutedBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ZenDividerBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="Cursor" Value="Hand" />
+            <Setter Property="Focusable" Value="False" />
+            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+            <Setter Property="VerticalContentAlignment" Value="Stretch" />
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border
+                            x:Name="CardBorder"
+                            Padding="{TemplateBinding Padding}"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="12">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="CardBorder" Property="Background" Value="{DynamicResource ZenSurfaceHoverBrush}" />
+                                <Setter TargetName="CardBorder" Property="BorderBrush" Value="{DynamicResource ZenPrimaryBrush}" />
+                            </Trigger>
+                            <Trigger Property="IsPressed" Value="True">
+                                <Setter TargetName="CardBorder" Property="Opacity" Value="0.78" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </UserControl.Resources>
+
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="216" />
-            <ColumnDefinition Width="*" />
-        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="94" />
+            <RowDefinition Height="*" />
+        </Grid.RowDefinitions>
 
-        <Border Background="{DynamicResource ZenSurfaceBrush}">
-            <Grid Margin="18,22">
-                <Grid.RowDefinitions>
-                    <RowDefinition Height="Auto" />
-                    <RowDefinition Height="*" />
-                    <RowDefinition Height="Auto" />
-                </Grid.RowDefinitions>
-
-                <StackPanel Margin="8,0,8,30" Orientation="Horizontal">
+        <Border
+            Background="{DynamicResource ZenSurfaceBrush}"
+            BorderBrush="{DynamicResource ZenDividerBrush}"
+            BorderThickness="0,0,0,1">
+            <Grid Margin="24,0">
+                <StackPanel
+                    HorizontalAlignment="Left"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
                     <Border
-                        Width="38"
-                        Height="38"
+                        Width="52"
+                        Height="52"
                         Background="{DynamicResource ZenPrimaryBrush}"
-                        CornerRadius="11">
+                        CornerRadius="13">
                         <TextBlock
                             HorizontalAlignment="Center"
                             VerticalAlignment="Center"
-                            FontSize="18"
+                            FontSize="26"
                             FontWeight="Bold"
                             Foreground="White"
                             Text="Z" />
                     </Border>
-                    <StackPanel Margin="11,0,0,0" VerticalAlignment="Center">
-                        <TextBlock FontSize="16" FontWeight="SemiBold" Text="ZenUI POS" />
+                    <StackPanel Margin="15,0,0,0" VerticalAlignment="Center">
                         <TextBlock
-                            Margin="0,2,0,0"
-                            FontSize="11"
-                            Foreground="{DynamicResource ZenTextSecondaryBrush}"
+                            FontSize="24"
+                            FontWeight="SemiBold"
+                            Text="ZenUI POS" />
+                        <TextBlock
+                            Margin="0,3,0,0"
+                            Style="{StaticResource CaptionStyle}"
                             Text="{Binding StoreName}" />
                     </StackPanel>
                 </StackPanel>
 
-                <StackPanel Grid.Row="1">
-                    <zen:ZenButton
-                        Height="42"
-                        Margin="0,0,0,8"
-                        Content="收银台" />
-                    <zen:ZenButton
-                        Height="42"
-                        Margin="0,0,0,8"
-                        Appearance="Text"
-                        Content="订单记录" />
-                    <zen:ZenButton
-                        Height="42"
-                        Margin="0,0,0,8"
-                        Appearance="Text"
-                        Content="商品管理" />
-                    <zen:ZenButton
-                        Height="42"
-                        Appearance="Text"
-                        Content="营业报表" />
-                </StackPanel>
-
-                <StackPanel Grid.Row="2">
+                <StackPanel
+                    HorizontalAlignment="Right"
+                    VerticalAlignment="Center"
+                    Orientation="Horizontal">
                     <Border
-                        Padding="14"
+                        Margin="0,0,16,0"
+                        Padding="14,9"
                         Background="{DynamicResource ZenSurfaceMutedBrush}"
-                        CornerRadius="10">
-                        <StackPanel>
-                            <TextBlock FontSize="12" Foreground="{DynamicResource ZenTextSecondaryBrush}" Text="当前收银员" />
-                            <TextBlock Margin="0,5,0,0" FontWeight="SemiBold" Text="{Binding CashierName}" />
-                            <TextBlock
-                                Margin="0,5,0,0"
-                                FontSize="11"
-                                Foreground="{DynamicResource ZenTextSecondaryBrush}"
-                                Text="{Binding ShiftLabel}" />
+                        CornerRadius="9">
+                        <StackPanel Orientation="Horizontal">
+                            <Border
+                                Width="36"
+                                Height="36"
+                                Background="{DynamicResource ZenInfoLightBrush}"
+                                CornerRadius="14">
+                                <TextBlock
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    FontSize="16"
+                                    FontWeight="SemiBold"
+                                    Foreground="{DynamicResource ZenPrimaryBrush}"
+                                    Text="收" />
+                            </Border>
+                            <StackPanel Margin="10,0,0,0">
+                                <TextBlock
+                                    FontSize="18"
+                                    FontWeight="SemiBold"
+                                    Text="{Binding CashierName}" />
+                                <TextBlock
+                                    Margin="0,2,0,0"
+                                    FontSize="16"
+                                    Foreground="{DynamicResource ZenTextSecondaryBrush}"
+                                    Text="{Binding ShiftLabel}" />
+                            </StackPanel>
                         </StackPanel>
                     </Border>
                     <zen:ZenButton
-                        x:Name="ExitButton"
-                        Height="40"
-                        Margin="0,12,0,0"
+                        Height="46"
+                        Margin="0,0,10,0"
+                        Padding="16,0"
+                        Appearance="Outlined"
+                        Command="{Binding NewOrderCommand}"
+                        Content="新建订单"
+                        FontSize="18" />
+                    <zen:ZenButton
+                        Height="46"
+                        Padding="16,0"
                         Appearance="Outlined"
                         Command="{Binding ExitCommand}"
                         Content="退出系统"
+                        FontSize="18"
                         Variant="Warning" />
                 </StackPanel>
             </Grid>
         </Border>
 
-        <Grid Grid.Column="1" Margin="28">
-            <Grid.RowDefinitions>
-                <RowDefinition Height="Auto" />
-                <RowDefinition Height="*" />
-            </Grid.RowDefinitions>
+        <Grid Grid.Row="1" Margin="20">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+                <ColumnDefinition Width="18" />
+                <ColumnDefinition Width="430" />
+            </Grid.ColumnDefinitions>
 
-            <Grid Margin="0,0,0,22">
-                <StackPanel>
-                    <TextBlock
-                        x:Name="PosWorkspaceTitle"
-                        FontSize="26"
-                        FontWeight="SemiBold"
-                        Text="收银台" />
-                    <TextBlock
-                        Margin="0,5,0,0"
-                        Foreground="{DynamicResource ZenTextSecondaryBrush}"
-                        Text="{Binding WelcomeText}" />
-                </StackPanel>
-                <zen:ZenTextBox
-                    Width="330"
-                    Height="42"
-                    HorizontalAlignment="Right"
-                    VerticalAlignment="Center"
-                    Watermark="搜索商品名称或扫描条码">
-                    <zen:ZenTextBox.LeadingContent>
-                        <TextBlock Foreground="{DynamicResource ZenTextSecondaryBrush}" Text="搜索" />
-                    </zen:ZenTextBox.LeadingContent>
-                </zen:ZenTextBox>
-            </Grid>
+            <Border
+                Padding="18"
+                Background="{DynamicResource ZenSurfaceBrush}"
+                CornerRadius="14">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                    </Grid.RowDefinitions>
 
-            <Grid Grid.Row="1">
-                <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*" />
-                    <ColumnDefinition Width="24" />
-                    <ColumnDefinition Width="380" />
-                </Grid.ColumnDefinitions>
-
-                <Border
-                    Padding="22"
-                    Background="{DynamicResource ZenSurfaceBrush}"
-                    CornerRadius="12">
                     <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="*" />
-                        </Grid.RowDefinitions>
+                        <zen:ZenTextBox
+                            Width="300"
+                            Height="50"
+                            HorizontalAlignment="Left"
+                            FontSize="20"
+                            Text="{Binding SearchText, UpdateSourceTrigger=PropertyChanged}"
+                            Watermark="搜索商品名称或分类">
+                            <zen:ZenTextBox.LeadingContent>
+                                <TextBlock
+                                    Margin="5,0,0,0"
+                                    FontSize="28"
+                                    Foreground="{DynamicResource ZenTextSecondaryBrush}"
+                                    Text="⌕" />
+                            </zen:ZenTextBox.LeadingContent>
+                        </zen:ZenTextBox>
 
-                        <ItemsControl ItemsSource="{Binding Categories}">
+                        <StackPanel
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Center"
+                            Orientation="Horizontal">
+                            <zen:ZenButton
+                                Width="76"
+                                Height="44"
+                                Padding="10,0"
+                                Appearance="Outlined"
+                                Command="{Binding PreviousProductPageCommand}"
+                                Content="上一页"
+                                FontSize="16" />
+                            <StackPanel
+                                Width="76"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Orientation="Horizontal"
+                                TextElement.FontSize="18">
+                                <TextBlock HorizontalAlignment="Center" Text="{Binding ProductPageNumber}" />
+                                <TextBlock Text=" / " />
+                                <TextBlock Text="{Binding ProductPageCount}" />
+                            </StackPanel>
+                            <zen:ZenButton
+                                Width="76"
+                                Height="44"
+                                Padding="10,0"
+                                Appearance="Outlined"
+                                Command="{Binding NextProductPageCommand}"
+                                Content="下一页"
+                                FontSize="16" />
+                        </StackPanel>
+                    </Grid>
+
+                    <ItemsControl
+                        Grid.Row="1"
+                        Margin="0,12,0,8"
+                        ItemsSource="{Binding Categories}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <StackPanel Orientation="Horizontal" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <zen:ZenButton
+                                    Height="44"
+                                    Margin="0,0,10,0"
+                                    Padding="18,0"
+                                    Appearance="{Binding Appearance}"
+                                    Command="{Binding DataContext.SelectCategoryCommand, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
+                                    CommandParameter="{Binding}"
+                                    Content="{Binding Name}"
+                                    FontSize="18" />
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                    <Border
+                        Grid.Row="2"
+                        Margin="0,0,0,8"
+                        Padding="8,6"
+                        Background="{DynamicResource ZenSurfaceMutedBrush}"
+                        CornerRadius="9">
+                        <ItemsControl ItemsSource="{Binding SecondaryCategories}">
                             <ItemsControl.ItemsPanel>
                                 <ItemsPanelTemplate>
                                     <StackPanel Orientation="Horizontal" />
@@ -148,178 +258,267 @@
                             <ItemsControl.ItemTemplate>
                                 <DataTemplate>
                                     <zen:ZenButton
-                                        Height="36"
-                                        Margin="0,0,10,0"
+                                        Height="38"
+                                        Margin="0,0,8,0"
+                                        Padding="14,0"
                                         Appearance="{Binding Appearance}"
-                                        Command="{Binding DataContext.SelectCategoryCommand, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
+                                        Command="{Binding DataContext.SelectSubcategoryCommand, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
                                         CommandParameter="{Binding}"
-                                        Content="{Binding Name}" />
+                                        Content="{Binding Name}"
+                                        FontSize="16" />
                                 </DataTemplate>
                             </ItemsControl.ItemTemplate>
                         </ItemsControl>
+                    </Border>
 
-                        <ScrollViewer
-                            Grid.Row="1"
-                            Margin="0,22,0,0"
-                            HorizontalScrollBarVisibility="Disabled"
-                            VerticalScrollBarVisibility="Auto">
-                            <ItemsControl ItemsSource="{Binding VisibleProducts}">
-                                <ItemsControl.ItemsPanel>
-                                    <ItemsPanelTemplate>
-                                        <WrapPanel />
-                                    </ItemsPanelTemplate>
-                                </ItemsControl.ItemsPanel>
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
+                    <ItemsControl
+                        Grid.Row="3"
+                        Margin="-5,-5,-5,0"
+                        ItemsSource="{Binding VisibleProducts}">
+                        <ItemsControl.ItemsPanel>
+                            <ItemsPanelTemplate>
+                                <UniformGrid Columns="5" Rows="3" />
+                            </ItemsPanelTemplate>
+                        </ItemsControl.ItemsPanel>
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Button
+                                    Margin="4"
+                                    Command="{Binding DataContext.AddProductCommand, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
+                                    CommandParameter="{Binding}"
+                                    Style="{StaticResource ProductCardButtonStyle}"
+                                    ToolTip="点击加入购物车">
+                                    <Grid>
+                                        <Grid.RowDefinitions>
+                                            <RowDefinition Height="*" />
+                                            <RowDefinition Height="Auto" />
+                                        </Grid.RowDefinitions>
                                         <Border
-                                            Width="190"
-                                            Height="178"
-                                            Margin="0,0,14,14"
-                                            Padding="16"
-                                            Background="{DynamicResource ZenSurfaceMutedBrush}"
-                                            CornerRadius="10">
-                                            <Grid>
-                                                <Grid.RowDefinitions>
-                                                    <RowDefinition Height="*" />
-                                                    <RowDefinition Height="Auto" />
-                                                </Grid.RowDefinitions>
-                                                <StackPanel>
-                                                    <Border
-                                                        Width="46"
-                                                        Height="46"
-                                                        HorizontalAlignment="Left"
-                                                        Background="{DynamicResource ZenInfoLightBrush}"
-                                                        CornerRadius="12">
-                                                        <TextBlock
-                                                            HorizontalAlignment="Center"
-                                                            VerticalAlignment="Center"
-                                                            Foreground="{DynamicResource ZenPrimaryBrush}"
-                                                            Text="{Binding ShortName}" />
-                                                    </Border>
-                                                    <TextBlock
-                                                        Margin="0,13,0,0"
-                                                        FontSize="15"
-                                                        FontWeight="SemiBold"
-                                                        Text="{Binding Name}" />
-                                                    <TextBlock
-                                                        Margin="0,4,0,0"
-                                                        FontSize="12"
-                                                        Foreground="{DynamicResource ZenTextSecondaryBrush}"
-                                                        Text="{Binding Category}" />
-                                                </StackPanel>
-                                                <Grid Grid.Row="1">
-                                                    <TextBlock
-                                                        VerticalAlignment="Center"
-                                                        FontSize="16"
-                                                        FontWeight="SemiBold"
-                                                        Text="{Binding Price, StringFormat=¥ {0:N2}}" />
-                                                    <zen:ZenButton
-                                                        Width="64"
-                                                        Height="30"
-                                                        HorizontalAlignment="Right"
-                                                        Command="{Binding DataContext.AddProductCommand, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
-                                                        CommandParameter="{Binding}"
-                                                        Content="添加" />
-                                                </Grid>
-                                            </Grid>
-                                        </Border>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-                        </ScrollViewer>
-                    </Grid>
-                </Border>
-
-                <Border
-                    Grid.Column="2"
-                    Padding="22"
-                    Background="{DynamicResource ZenSurfaceBrush}"
-                    CornerRadius="12">
-                    <Grid>
-                        <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="*" />
-                            <RowDefinition Height="Auto" />
-                        </Grid.RowDefinitions>
-
-                        <Grid Margin="0,0,0,18">
-                            <StackPanel>
-                                <TextBlock FontSize="18" FontWeight="SemiBold" Text="当前订单" />
-                                <TextBlock
-                                    Margin="0,4,0,0"
-                                    FontSize="12"
-                                    Foreground="{DynamicResource ZenTextSecondaryBrush}"
-                                    Text="{Binding OrderNumber}" />
-                            </StackPanel>
-                            <zen:ZenButton
-                                HorizontalAlignment="Right"
-                                Appearance="Text"
-                                Command="{Binding ClearOrderCommand}"
-                                Content="清空" />
-                        </Grid>
-
-                        <ScrollViewer
-                            Grid.Row="1"
-                            HorizontalScrollBarVisibility="Disabled"
-                            VerticalScrollBarVisibility="Auto">
-                            <ItemsControl ItemsSource="{Binding OrderItems}">
-                                <ItemsControl.ItemTemplate>
-                                    <DataTemplate>
-                                        <Border
-                                            Margin="0,0,0,10"
-                                            Padding="12"
-                                            Background="{DynamicResource ZenSurfaceMutedBrush}"
+                                            MinHeight="72"
                                             CornerRadius="9">
-                                            <Grid>
-                                                <StackPanel>
-                                                    <TextBlock FontWeight="SemiBold" Text="{Binding Name}" />
-                                                    <TextBlock
-                                                        Margin="0,4,0,0"
-                                                        FontSize="12"
-                                                        Foreground="{DynamicResource ZenTextSecondaryBrush}"
-                                                        Text="{Binding Quantity, StringFormat=数量 × {0}}" />
-                                                </StackPanel>
-                                                <TextBlock
-                                                    HorizontalAlignment="Right"
-                                                    VerticalAlignment="Center"
-                                                    FontWeight="SemiBold"
-                                                    Text="{Binding LineTotal, StringFormat=¥ {0:N2}}" />
-                                            </Grid>
+                                            <Border.Background>
+                                                <ImageBrush
+                                                    AlignmentX="Center"
+                                                    AlignmentY="Center"
+                                                    ImageSource="{Binding ImagePath}"
+                                                    Stretch="UniformToFill" />
+                                            </Border.Background>
                                         </Border>
-                                    </DataTemplate>
-                                </ItemsControl.ItemTemplate>
-                            </ItemsControl>
-                        </ScrollViewer>
+                                        <Grid Grid.Row="1" Margin="2,8,2,1">
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="Auto" />
+                                            </Grid.ColumnDefinitions>
+                                            <TextBlock
+                                                Margin="0,0,8,0"
+                                                VerticalAlignment="Center"
+                                                FontSize="17"
+                                                FontWeight="SemiBold"
+                                                Text="{Binding Name}"
+                                                TextTrimming="CharacterEllipsis"
+                                                ToolTip="{Binding Name}" />
+                                            <TextBlock
+                                                Grid.Column="1"
+                                                VerticalAlignment="Center"
+                                                FontSize="18"
+                                                FontWeight="SemiBold"
+                                                Foreground="{DynamicResource ZenPrimaryBrush}"
+                                                Text="{Binding Price, StringFormat=¥{0:N2}}" />
+                                        </Grid>
+                                    </Grid>
+                                </Button>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+                </Grid>
+            </Border>
 
-                        <StackPanel Grid.Row="2">
-                            <zen:ZenAlert
-                                Margin="0,0,0,14"
-                                Content="{Binding StatusMessage}"
-                                Variant="{Binding StatusVariant}"
-                                Visibility="{Binding StatusVisibility}" />
-                            <Border
-                                Margin="0,0,0,16"
-                                BorderBrush="{DynamicResource ZenDividerBrush}"
-                                BorderThickness="0,1,0,0" />
-                            <Grid Margin="0,0,0,15">
-                                <TextBlock VerticalAlignment="Bottom" Text="{Binding ItemCount, StringFormat=合计 {0} 件}" />
-                                <TextBlock
-                                    HorizontalAlignment="Right"
-                                    FontSize="26"
-                                    FontWeight="SemiBold"
-                                    Text="{Binding OrderTotal, StringFormat=¥ {0:N2}}" />
-                            </Grid>
-                            <zen:ZenButton
-                                Height="48"
-                                Command="{Binding CheckoutCommand}"
-                                Content="结账"
-                                FontSize="16"
-                                FontWeight="SemiBold" />
+            <Border
+                Grid.Column="2"
+                Padding="18"
+                Background="{DynamicResource ZenSurfaceBrush}"
+                CornerRadius="14">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="*" />
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+
+                    <Grid Margin="0,0,0,14">
+                        <StackPanel>
+                            <TextBlock Style="{StaticResource SectionTitleStyle}" Text="购物车" />
+                            <TextBlock
+                                Margin="0,5,0,0"
+                                Style="{StaticResource CaptionStyle}"
+                                Text="{Binding OrderNumber}" />
                         </StackPanel>
+                        <zen:ZenButton
+                            Height="40"
+                            Padding="12,0"
+                            HorizontalAlignment="Right"
+                            VerticalAlignment="Top"
+                            Appearance="Text"
+                            Command="{Binding ClearOrderCommand}"
+                            Content="清空"
+                            FontSize="18" />
                     </Grid>
-                </Border>
-            </Grid>
-        </Grid>
 
+                    <ItemsControl Grid.Row="1" ItemsSource="{Binding PagedOrderItems}">
+                        <ItemsControl.ItemTemplate>
+                            <DataTemplate>
+                                <Border
+                                    Margin="0,0,0,8"
+                                    Padding="12"
+                                    Background="{DynamicResource ZenSurfaceMutedBrush}"
+                                    CornerRadius="10">
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="*" />
+                                            <ColumnDefinition Width="Auto" />
+                                        </Grid.ColumnDefinitions>
+                                        <StackPanel>
+                                            <TextBlock
+                                                FontSize="20"
+                                                FontWeight="SemiBold"
+                                                Text="{Binding Name}" />
+                                            <TextBlock
+                                                Margin="0,3,0,0"
+                                                FontSize="16"
+                                                Style="{StaticResource CaptionStyle}"
+                                                Text="{Binding UnitPrice, StringFormat=¥ {0:N2} / 件}" />
+                                            <StackPanel Margin="0,8,0,0" Orientation="Horizontal">
+                                                <zen:ZenButton
+                                                    Width="36"
+                                                    Height="36"
+                                                    Appearance="Outlined"
+                                                    Command="{Binding DataContext.DecreaseItemCommand, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
+                                                    CommandParameter="{Binding}"
+                                                    Content="−"
+                                                    FontSize="20" />
+                                                <TextBlock
+                                                    Width="44"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center"
+                                                    FontSize="20"
+                                                    Text="{Binding Quantity}"
+                                                    TextAlignment="Center" />
+                                                <zen:ZenButton
+                                                    Width="36"
+                                                    Height="36"
+                                                    Appearance="Outlined"
+                                                    Command="{Binding DataContext.IncreaseItemCommand, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
+                                                    CommandParameter="{Binding}"
+                                                    Content="+"
+                                                    FontSize="20" />
+                                            </StackPanel>
+                                        </StackPanel>
+                                        <StackPanel Grid.Column="1" HorizontalAlignment="Right">
+                                            <TextBlock
+                                                HorizontalAlignment="Right"
+                                                FontSize="20"
+                                                FontWeight="SemiBold"
+                                                Text="{Binding LineTotal, StringFormat=¥ {0:N2}}" />
+                                            <zen:ZenButton
+                                                Height="36"
+                                                Margin="0,14,0,0"
+                                                Padding="10,0"
+                                                HorizontalAlignment="Right"
+                                                Appearance="Text"
+                                                Command="{Binding DataContext.RemoveItemCommand, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
+                                                CommandParameter="{Binding}"
+                                                Content="删除"
+                                                FontSize="16"
+                                                Variant="Warning" />
+                                        </StackPanel>
+                                    </Grid>
+                                </Border>
+                            </DataTemplate>
+                        </ItemsControl.ItemTemplate>
+                    </ItemsControl>
+
+                    <Grid Grid.Row="2" Margin="0,8,0,12">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <zen:ZenButton
+                            Width="90"
+                            Height="44"
+                            Padding="12,0"
+                            Appearance="Outlined"
+                            Command="{Binding PreviousCartPageCommand}"
+                            Content="上一页"
+                            FontSize="18" />
+                        <StackPanel
+                            Grid.Column="1"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            Orientation="Horizontal"
+                            TextElement.FontSize="18">
+                            <TextBlock Text="第 " />
+                            <TextBlock FontWeight="SemiBold" Text="{Binding CartPageNumber}" />
+                            <TextBlock Text=" / " />
+                            <TextBlock FontWeight="SemiBold" Text="{Binding CartPageCount}" />
+                            <TextBlock Text=" 页" />
+                        </StackPanel>
+                        <zen:ZenButton
+                            Grid.Column="2"
+                            Width="90"
+                            Height="44"
+                            Padding="12,0"
+                            Appearance="Outlined"
+                            Command="{Binding NextCartPageCommand}"
+                            Content="下一页"
+                            FontSize="18" />
+                    </Grid>
+
+                    <StackPanel Grid.Row="3">
+                        <zen:ZenAlert
+                            Margin="0,8,0,12"
+                            Content="{Binding StatusMessage}"
+                            FontSize="18"
+                            Variant="{Binding StatusVariant}"
+                            Visibility="{Binding StatusVisibility}" />
+                        <Border
+                            Margin="0,0,0,16"
+                            BorderBrush="{DynamicResource ZenDividerBrush}"
+                            BorderThickness="0,1,0,0" />
+                        <Grid Margin="0,0,0,10">
+                            <TextBlock
+                                FontSize="20"
+                                Foreground="{DynamicResource ZenTextSecondaryBrush}"
+                                Text="商品数量" />
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                FontSize="20"
+                                Text="{Binding ItemCount, StringFormat={}{0} 件}" />
+                        </Grid>
+                        <Grid Margin="0,0,0,17">
+                            <TextBlock
+                                VerticalAlignment="Center"
+                                FontSize="22"
+                                FontWeight="SemiBold"
+                                Text="应付合计" />
+                            <TextBlock
+                                HorizontalAlignment="Right"
+                                FontSize="30"
+                                FontWeight="SemiBold"
+                                Foreground="{DynamicResource ZenPrimaryBrush}"
+                                Text="{Binding OrderTotal, StringFormat=¥ {0:N2}}" />
+                        </Grid>
+                        <zen:ZenButton
+                            Height="58"
+                            Padding="22,0"
+                            Command="{Binding CheckoutCommand}"
+                            Content="结  账"
+                            FontSize="22"
+                            FontWeight="SemiBold" />
+                    </StackPanel>
+                </Grid>
+            </Border>
+        </Grid>
     </Grid>
 </UserControl>
