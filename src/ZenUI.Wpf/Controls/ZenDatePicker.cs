@@ -37,6 +37,26 @@ namespace ZenUI.Wpf.Controls
                 new FrameworkPropertyMetadata(string.Empty));
 
         /// <summary>
+        /// 获取或设置是否允许通过键盘直接输入日期。
+        /// </summary>
+        [Bindable(true)]
+        public bool IsTextInputEnabled
+        {
+            get { return (bool)GetValue(IsTextInputEnabledProperty); }
+            set { SetValue(IsTextInputEnabledProperty, value); }
+        }
+
+        /// <summary>
+        /// 标识 <see cref="IsTextInputEnabled"/> 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty IsTextInputEnabledProperty =
+            DependencyProperty.Register(
+                nameof(IsTextInputEnabled),
+                typeof(bool),
+                typeof(ZenDatePicker),
+                new FrameworkPropertyMetadata(true));
+
+        /// <summary>
         /// 获取或设置输入框的圆角。
         /// </summary>
         [Bindable(true)]

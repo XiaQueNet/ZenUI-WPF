@@ -14,23 +14,28 @@
             <Border Style="{StaticResource GalleryCardStyle}">
                 <StackPanel>
                     <TextBlock Style="{StaticResource SectionTitleStyle}" Text="基本用法与状态" />
-                    <StackPanel Orientation="Horizontal">
-                        <StackPanel Margin="0,0,18,0">
+                    <UniformGrid Columns="4">
+                        <StackPanel Margin="0,0,9,0">
                             <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="待选择" />
-                            <zen:ZenDatePicker Width="220" Watermark="请选择日期" />
+                            <zen:ZenDatePicker Watermark="请选择日期" />
                         </StackPanel>
-                        <StackPanel Margin="0,0,18,0">
+                        <StackPanel Margin="3,0,6,0">
                             <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="已选择" />
-                            <zen:ZenDatePicker x:Name="SelectedDatePicker" Width="220" />
+                            <zen:ZenDatePicker x:Name="SelectedDatePicker" />
                         </StackPanel>
-                        <StackPanel>
+                        <StackPanel Margin="6,0,3,0">
+                            <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="仅日历选择" />
+                            <zen:ZenDatePicker
+                                IsTextInputEnabled="False"
+                                Watermark="请从日历选择" />
+                        </StackPanel>
+                        <StackPanel Margin="9,0,0,0">
                             <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="禁用" />
                             <zen:ZenDatePicker
-                                Width="180"
                                 IsEnabled="False"
                                 Watermark="不可用" />
                         </StackPanel>
-                    </StackPanel>
+                    </UniformGrid>
                 </StackPanel>
             </Border>
 

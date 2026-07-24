@@ -299,6 +299,67 @@ namespace ZenUI.Wpf.Tests.Controls
         }
 
         [TestMethod]
+        public void DatePickerCalendarHeaderSwitchesDisplayModes()
+        {
+            var datePicker = new ZenDatePicker();
+            var window = CreateTestWindow(datePicker, 320, 360);
+
+            try
+            {
+                window.Show();
+                datePicker.IsDropDownOpen = true;
+                window.UpdateLayout();
+
+                var calendar = datePicker.Template.FindName("PART_Calendar", datePicker) as Calendar;
+                Assert.IsNotNull(calendar);
+                calendar.ApplyTemplate();
+                window.UpdateLayout();
+                var calendarItem = calendar.Template.FindName("PART_CalendarItem", calendar) as CalendarItem;
+                Assert.IsNotNull(calendarItem);
+                calendarItem.ApplyTemplate();
+
+                var headerButton = calendarItem.Template.FindName("PART_HeaderButton", calendarItem) as Button;
+                Assert.IsNotNull(headerButton);
+                Assert.AreEqual(CalendarMode.Month, calendar.DisplayMode);
+
+                headerButton.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                window.UpdateLayout();
+                Assert.AreEqual(CalendarMode.Year, calendar.DisplayMode);
+                Assert.IsTrue(datePicker.IsDropDownOpen);
+                Assert.AreEqual(CalendarMode.Year, calendarItem.Tag);
+                var yearView = calendarItem.Template.FindName("PART_YearView", calendarItem) as Grid;
+                Assert.IsNotNull(yearView);
+                Assert.AreEqual(Visibility.Visible, yearView.Visibility);
+                Assert.AreEqual(12, yearView.Children.Count);
+
+                var monthButton = yearView.Children.OfType<CalendarButton>()
+                    .FirstOrDefault(button => button.Visibility == Visibility.Visible && button.IsEnabled);
+                Assert.IsNotNull(monthButton);
+                monthButton.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                window.UpdateLayout();
+                Assert.AreEqual(CalendarMode.Month, calendar.DisplayMode);
+
+                headerButton.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                window.UpdateLayout();
+                headerButton.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                window.UpdateLayout();
+                Assert.AreEqual(CalendarMode.Decade, calendar.DisplayMode);
+
+                var yearButton = yearView.Children.OfType<CalendarButton>()
+                    .FirstOrDefault(button => button.Visibility == Visibility.Visible && button.IsEnabled);
+                Assert.IsNotNull(yearButton);
+                yearButton.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
+                window.UpdateLayout();
+                Assert.AreEqual(CalendarMode.Year, calendar.DisplayMode);
+            }
+            finally
+            {
+                datePicker.IsDropDownOpen = false;
+                window.Close();
+            }
+        }
+
+        [TestMethod]
         public void DatePickerPaddingIsAppliedOnceAndInputHasNoDeadZone()
         {
             var datePicker = new ZenDatePicker
@@ -345,6 +406,36 @@ namespace ZenUI.Wpf.Tests.Controls
                     datePicker.InputHitTest(inputPoint));
                 Assert.IsNotNull(textBox.InputHitTest(
                     new Point(textBox.ActualWidth - 2d, textBox.ActualHeight / 2d)));
+            }
+            finally
+            {
+                window.Close();
+            }
+        }
+
+        [TestMethod]
+        public void DatePickerCanDisableTextInputWithoutDisablingCalendarSelection()
+        {
+            var datePicker = new ZenDatePicker
+            {
+                IsTextInputEnabled = false
+            };
+            var window = CreateTestWindow(datePicker, 260, 120);
+
+            try
+            {
+                window.Show();
+                window.UpdateLayout();
+
+                var textBox = datePicker.Template.FindName("PART_TextBox", datePicker) as DatePickerTextBox;
+                var button = datePicker.Template.FindName("PART_Button", datePicker) as Button;
+                Assert.IsNotNull(textBox);
+                Assert.IsNotNull(button);
+                Assert.IsTrue(textBox.IsReadOnly);
+                Assert.IsTrue(button.IsEnabled);
+
+                datePicker.IsTextInputEnabled = true;
+                Assert.IsFalse(textBox.IsReadOnly);
             }
             finally
             {

@@ -267,6 +267,16 @@
                             </Grid.RowDefinitions>
                         </Grid>
                     </Grid>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="Tag" Value="{x:Static CalendarMode.Year}">
+                            <Setter TargetName="PART_MonthView" Property="Visibility" Value="Hidden" />
+                            <Setter TargetName="PART_YearView" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="Tag" Value="{x:Static CalendarMode.Decade}">
+                            <Setter TargetName="PART_MonthView" Property="Visibility" Value="Hidden" />
+                            <Setter TargetName="PART_YearView" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
@@ -292,7 +302,8 @@
                             x:Name="PART_CalendarItem"
                             Background="{TemplateBinding Background}"
                             BorderThickness="0"
-                            Style="{TemplateBinding CalendarItemStyle}" />
+                            Style="{TemplateBinding CalendarItemStyle}"
+                            Tag="{TemplateBinding DisplayMode}" />
                     </Border>
                 </ControlTemplate>
             </Setter.Value>
@@ -379,6 +390,9 @@
                         </Popup>
                     </Grid>
                     <ControlTemplate.Triggers>
+                        <Trigger Property="IsTextInputEnabled" Value="False">
+                            <Setter TargetName="PART_TextBox" Property="IsReadOnly" Value="True" />
+                        </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="InputBorder" Property="BorderBrush" Value="{DynamicResource ZenBorderHoverBrush}" />
                         </Trigger>
