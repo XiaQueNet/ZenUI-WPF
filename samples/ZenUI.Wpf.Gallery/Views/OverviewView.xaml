@@ -21,7 +21,7 @@
                     <StackPanel Grid.Column="1" Margin="30,0,0,0" Orientation="Horizontal">
                         <Border MinWidth="92" Padding="14,12" Background="{DynamicResource GalleryOnPrimaryMutedSurfaceBrush}" CornerRadius="8">
                             <StackPanel>
-                                <TextBlock HorizontalAlignment="Center" FontSize="22" FontWeight="SemiBold" Foreground="White" Text="12" />
+                                <TextBlock HorizontalAlignment="Center" FontSize="22" FontWeight="SemiBold" Foreground="White" Text="13" />
                                 <TextBlock Margin="0,4,0,0" HorizontalAlignment="Center" FontSize="12" Foreground="{DynamicResource GalleryOnPrimarySecondaryBrush}" Text="常用控件" />
                             </StackPanel>
                         </Border>
@@ -90,7 +90,7 @@
                             <StackPanel>
                                 <Border Width="34" Height="4" HorizontalAlignment="Left" Background="{DynamicResource ZenSuccessBrush}" CornerRadius="2" />
                                 <TextBlock Margin="0,14,0,0" FontSize="15" FontWeight="SemiBold" Text="选择控件" />
-                                <TextBlock Margin="0,7,0,0" Foreground="{DynamicResource ZenTextSecondaryBrush}" LineHeight="21" Text="CheckBox · RadioButton&#x0a;ComboBox&#x0a;Slider" TextWrapping="Wrap" />
+                                <TextBlock Margin="0,7,0,0" Foreground="{DynamicResource ZenTextSecondaryBrush}" LineHeight="21" Text="CheckBox · RadioButton&#x0a;ComboBox · DatePicker&#x0a;Slider" TextWrapping="Wrap" />
                             </StackPanel>
                         </Border>
                         <Border Margin="8,0,0,0" Padding="18" Background="{DynamicResource ZenSurfaceMutedBrush}" CornerRadius="8">

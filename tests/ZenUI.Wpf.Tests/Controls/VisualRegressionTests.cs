@@ -100,6 +100,11 @@ namespace ZenUI.Wpf.Tests.Controls
             comboBox.Items.Add("第二项");
             comboBox.SelectedIndex = 0;
             panel.Children.Add(comboBox);
+            panel.Children.Add(new ZenDatePicker
+            {
+                Margin = new Thickness(0, 10, 0, 0),
+                SelectedDate = new DateTime(2026, 7, 23)
+            });
             panel.Children.Add(new ZenProgressBar
             {
                 Margin = new Thickness(0, 14, 0, 0),

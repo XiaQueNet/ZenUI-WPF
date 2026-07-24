@@ -1,0 +1,107 @@
+<UserControl
+    x:Class="ZenUI.Wpf.Gallery.Views.DatePickerView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:gallery="clr-namespace:ZenUI.Wpf.Gallery.Controls"
+    xmlns:zen="http://zenui.mnorg.com/zenui-wpf">
+    <ScrollViewer
+        Padding="40"
+        HorizontalContentAlignment="Stretch"
+        VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+            <gallery:PageHeader Title="DatePicker 日期选择器" Description="支持键盘输入、日历选择、日期范围与不可选日期。" />
+
+            <Border Style="{StaticResource GalleryCardStyle}">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="基本用法与状态" />
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Margin="0,0,18,0">
+                            <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="待选择" />
+                            <zen:ZenDatePicker Width="220" Watermark="请选择日期" />
+                        </StackPanel>
+                        <StackPanel Margin="0,0,18,0">
+                            <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="已选择" />
+                            <zen:ZenDatePicker x:Name="SelectedDatePicker" Width="220" />
+                        </StackPanel>
+                        <StackPanel>
+                            <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="禁用" />
+                            <zen:ZenDatePicker
+                                Width="180"
+                                IsEnabled="False"
+                                Watermark="不可用" />
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <Border Style="{StaticResource GalleryCardStyle}">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="日期格式" />
+                    <StackPanel Orientation="Horizontal">
+                        <StackPanel Margin="0,0,18,0">
+                            <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="短日期" />
+                            <zen:ZenDatePicker
+                                x:Name="ShortDatePicker"
+                                Width="220"
+                                SelectedDateFormat="Short" />
+                        </StackPanel>
+                        <StackPanel>
+                            <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="长日期" />
+                            <zen:ZenDatePicker
+                                x:Name="LongDatePicker"
+                                Width="300"
+                                SelectedDateFormat="Long" />
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <Border Style="{StaticResource GalleryCardStyle}">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="日期约束" />
+                    <TextBlock
+                        Margin="0,0,0,12"
+                        Style="{StaticResource GallerySupportingTextStyle}"
+                        Text="仅可选择今天起 30 天内的工作日；周末日期在日历中不可选。" />
+                    <zen:ZenDatePicker
+                        x:Name="ConstrainedDatePicker"
+                        Width="260"
+                        HorizontalAlignment="Left"
+                        Watermark="选择未来工作日" />
+                </StackPanel>
+            </Border>
+
+            <Border Style="{StaticResource GalleryCardStyle}">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="圆角与尺寸" />
+                    <StackPanel VerticalAlignment="Bottom" Orientation="Horizontal">
+                        <StackPanel Margin="0,0,18,0">
+                            <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="紧凑 · 32px" />
+                            <zen:ZenDatePicker
+                                Width="200"
+                                Height="32"
+                                CornerRadius="0"
+                                Watermark="直角" />
+                        </StackPanel>
+                        <StackPanel Margin="0,0,18,0">
+                            <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="默认 · 36px" />
+                            <zen:ZenDatePicker
+                                Width="220"
+                                Height="36"
+                                CornerRadius="6"
+                                Watermark="默认圆角" />
+                        </StackPanel>
+                        <StackPanel>
+                            <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="宽松 · 44px" />
+                            <zen:ZenDatePicker
+                                Width="240"
+                                Height="44"
+                                CornerRadius="18"
+                                Watermark="大圆角" />
+                        </StackPanel>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

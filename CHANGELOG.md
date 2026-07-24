@@ -4,6 +4,10 @@
 
 ## Unreleased
 
+### Added
+
+- 增加 `ZenDatePicker` 日期选择控件及 Gallery 示例，支持水印、圆角、日期格式、范围和禁用日期。
+
 ## [0.1.0-preview.1] - 2026-07-23
 
 ### Added

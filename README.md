@@ -19,6 +19,7 @@
         <zen:ZenCheckBox Content="记住登录状态" />
         <zen:ZenRadioButton Content="选项 A" GroupName="Options" />
         <zen:ZenComboBox Watermark="请选择" />
+        <zen:ZenDatePicker Watermark="请选择日期" />
         <zen:ZenSlider Maximum="100" Value="60" />
         <zen:ZenProgressBar Maximum="100" Value="60" />
         <zen:ZenAlert Content="保存成功" Variant="Success" />
@@ -27,7 +28,7 @@
 </Window>
 ```
 
-目前提供 Button、TextBox、NumberBox、PasswordBox、Switch、CheckBox、RadioButton、ComboBox、DataGrid、Slider、ProgressBar 和 Alert 共 12 个常用控件。所有控件均自带默认主题，并覆盖悬停、焦点、选中和禁用等常见交互状态。
+目前提供 Button、TextBox、NumberBox、PasswordBox、Switch、CheckBox、RadioButton、ComboBox、DatePicker、DataGrid、Slider、ProgressBar 和 Alert 共 13 个常用控件。所有控件均自带默认主题，并覆盖悬停、焦点、选中和禁用等常见交互状态。
 
 控件的默认样式由 `Themes/Generic.xaml` 自动加载。应用需要直接使用 ZenUI 颜色资源或具名样式时，可以显式合并默认主题：
 

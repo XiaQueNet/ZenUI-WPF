@@ -29,6 +29,7 @@ namespace ZenUI.Wpf.Tests.Controls
             var checkBox = new TestZenCheckBox();
             var radioButton = new TestZenRadioButton();
             var comboBox = new TestZenComboBox();
+            var datePicker = new TestZenDatePicker();
             var dataGrid = new TestZenDataGrid();
             var passwordBox = new TestZenPasswordBox();
             var slider = new TestZenSlider();
@@ -41,6 +42,7 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.AreEqual(typeof(ZenCheckBox), checkBox.ExposedDefaultStyleKey);
             Assert.AreEqual(typeof(ZenRadioButton), radioButton.ExposedDefaultStyleKey);
             Assert.AreEqual(typeof(ZenComboBox), comboBox.ExposedDefaultStyleKey);
+            Assert.AreEqual(typeof(ZenDatePicker), datePicker.ExposedDefaultStyleKey);
             Assert.AreEqual(typeof(ZenDataGrid), dataGrid.ExposedDefaultStyleKey);
             Assert.AreEqual(typeof(ZenPasswordBox), passwordBox.ExposedDefaultStyleKey);
             Assert.AreEqual(typeof(ZenSlider), slider.ExposedDefaultStyleKey);
@@ -55,6 +57,8 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.IsNull(textBox.TrailingContent);
             Assert.IsNull(textBox.TrailingContentTemplate);
             Assert.AreEqual(string.Empty, comboBox.Watermark);
+            Assert.AreEqual(string.Empty, datePicker.Watermark);
+            Assert.AreEqual(new CornerRadius(6), datePicker.CornerRadius);
             Assert.AreEqual(new CornerRadius(8), dataGrid.CornerRadius);
             Assert.AreEqual("暂无数据", dataGrid.EmptyContent);
             Assert.IsFalse(passwordBox.IsPasswordRevealEnabled);
@@ -108,6 +112,7 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.IsInstanceOfType<Style>(dictionary[typeof(ZenCheckBox)]);
             Assert.IsInstanceOfType<Style>(dictionary[typeof(ZenRadioButton)]);
             Assert.IsInstanceOfType<Style>(dictionary[typeof(ZenComboBox)]);
+            Assert.IsInstanceOfType<Style>(dictionary[typeof(ZenDatePicker)]);
             Assert.IsInstanceOfType<Style>(dictionary[typeof(ZenDataGrid)]);
             Assert.IsInstanceOfType<Style>(dictionary[typeof(ZenPasswordBox)]);
             Assert.IsInstanceOfType<Style>(dictionary[typeof(ZenSlider)]);
@@ -169,6 +174,7 @@ namespace ZenUI.Wpf.Tests.Controls
             var radioButton = new ZenRadioButton { Content = "单选", IsChecked = true };
             var comboBox = new ZenComboBox { Watermark = "请选择" };
             comboBox.Items.Add("第一项");
+            var datePicker = new ZenDatePicker { Watermark = "请选择日期" };
             var slider = new ZenSlider { Value = 50 };
             var progressBar = new ZenProgressBar { Value = 60 };
             var alert = new ZenAlert { Content = "操作成功", Variant = AlertVariant.Success };
@@ -179,6 +185,7 @@ namespace ZenUI.Wpf.Tests.Controls
             panel.Children.Add(checkBox);
             panel.Children.Add(radioButton);
             panel.Children.Add(comboBox);
+            panel.Children.Add(datePicker);
             panel.Children.Add(slider);
             panel.Children.Add(progressBar);
             panel.Children.Add(alert);
@@ -208,6 +215,8 @@ namespace ZenUI.Wpf.Tests.Controls
                 Assert.IsNotNull(checkBox.Template.FindName("Box", checkBox));
                 Assert.IsNotNull(radioButton.Template.FindName("Ring", radioButton));
                 Assert.IsNotNull(comboBox.Template.FindName("InputBorder", comboBox));
+                Assert.IsNotNull(datePicker.Template.FindName("PART_TextBox", datePicker));
+                Assert.IsNotNull(datePicker.Template.FindName("PART_Button", datePicker));
                 Assert.IsNotNull(slider.Template.FindName("PART_Track", slider));
                 Assert.IsNotNull(progressBar.Template.FindName("PART_Indicator", progressBar));
                 Assert.IsNotNull(alert.Template.FindName("AlertBorder", alert));
@@ -258,6 +267,92 @@ namespace ZenUI.Wpf.Tests.Controls
                 textBox.Text = "ZenUI";
                 window.UpdateLayout();
                 Assert.AreEqual(Visibility.Collapsed, watermark.Visibility);
+            }
+            finally
+            {
+                window.Close();
+            }
+        }
+
+        [TestMethod]
+        public void DatePickerTemplateOpensThemedCalendar()
+        {
+            var datePicker = new ZenDatePicker
+            {
+                Watermark = "请选择日期",
+                SelectedDate = new DateTime(2026, 7, 23)
+            };
+            var window = CreateTestWindow(datePicker, 260, 320);
+
+            try
+            {
+                window.Show();
+                datePicker.IsDropDownOpen = true;
+                window.UpdateLayout();
+
+                var popup = datePicker.Template.FindName("PART_Popup", datePicker) as Popup;
+                Assert.IsNotNull(popup);
+                Assert.IsTrue(popup.IsOpen);
+                Assert.IsInstanceOfType<Calendar>(popup.Child);
+                var calendar = (Calendar)popup.Child;
+                Assert.IsNotNull(calendar.Style);
+                Assert.AreEqual(datePicker.SelectedDate, calendar.SelectedDate);
+                Assert.IsNotNull(calendar.Template.FindName("PART_CalendarItem", calendar));
+            }
+            finally
+            {
+                datePicker.IsDropDownOpen = false;
+                window.Close();
+            }
+        }
+
+        [TestMethod]
+        public void DatePickerPaddingIsAppliedOnceAndInputHasNoDeadZone()
+        {
+            var datePicker = new ZenDatePicker
+            {
+                Width = 240,
+                Height = 36,
+                Watermark = "请选择日期"
+            };
+            var window = CreateTestWindow(datePicker, 280, 100);
+
+            try
+            {
+                window.Show();
+                window.UpdateLayout();
+
+                var textBox = datePicker.Template.FindName("PART_TextBox", datePicker) as DatePickerTextBox;
+                var button = datePicker.Template.FindName("PART_Button", datePicker) as Button;
+                Assert.IsNotNull(textBox);
+                Assert.IsNotNull(button);
+                textBox.ApplyTemplate();
+
+                var contentHost = textBox.Template.FindName("PART_ContentHost", textBox) as FrameworkElement;
+                var watermark = textBox.Template.FindName("WatermarkText", textBox) as TextBlock;
+                Assert.IsNotNull(contentHost);
+                Assert.IsNotNull(watermark);
+                Assert.AreEqual(new Thickness(), contentHost.Margin);
+                Assert.AreEqual(textBox.Padding, watermark.Margin);
+                Assert.AreEqual(Visibility.Visible, watermark.Visibility);
+                var contentLeft = contentHost.TranslatePoint(new Point(), textBox).X;
+                var watermarkLeft = watermark.TranslatePoint(new Point(), textBox).X;
+                Assert.AreEqual(0d, contentLeft, 0.5d);
+                Assert.AreEqual(textBox.Padding.Left, watermarkLeft, 0.5d);
+                Assert.AreEqual(5d, watermarkLeft, 0.5d);
+
+                var buttonLeft = button.TranslatePoint(
+                    new Point(0, button.ActualHeight / 2d),
+                    datePicker).X;
+                Assert.AreEqual(datePicker.ActualWidth, textBox.ActualWidth, 0.5d);
+                Assert.AreEqual(28d, button.ActualWidth, 0.5d);
+
+                var inputPoint = new Point(buttonLeft - 2d, datePicker.ActualHeight / 2d);
+                Assert.AreSame(
+                    textBox.InputHitTest(inputPoint),
+                    datePicker.InputHitTest(inputPoint));
+                Assert.IsNotNull(textBox.InputHitTest(
+                    new Point(textBox.ActualWidth - 2d, textBox.ActualHeight / 2d)));
             }
             finally
             {
@@ -630,6 +725,7 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.AreEqual(AutomationControlType.CheckBox, new TestZenCheckBox().ExposedAutomationPeer.GetAutomationControlType());
             Assert.AreEqual(AutomationControlType.RadioButton, new TestZenRadioButton().ExposedAutomationPeer.GetAutomationControlType());
             Assert.AreEqual(AutomationControlType.ComboBox, new TestZenComboBox().ExposedAutomationPeer.GetAutomationControlType());
+            Assert.AreEqual(AutomationControlType.Custom, new TestZenDatePicker().ExposedAutomationPeer.GetAutomationControlType());
             Assert.AreEqual(AutomationControlType.DataGrid, new TestZenDataGrid().ExposedAutomationPeer.GetAutomationControlType());
             Assert.AreEqual(AutomationControlType.Slider, new TestZenSlider().ExposedAutomationPeer.GetAutomationControlType());
             Assert.AreEqual(AutomationControlType.ProgressBar, new TestZenProgressBar().ExposedAutomationPeer.GetAutomationControlType());
@@ -892,6 +988,11 @@ namespace ZenUI.Wpf.Tests.Controls
             public AutomationPeer ExposedAutomationPeer => OnCreateAutomationPeer();
         }
         private sealed class TestZenComboBox : ZenComboBox
+        {
+            public object ExposedDefaultStyleKey => DefaultStyleKey;
+            public AutomationPeer ExposedAutomationPeer => OnCreateAutomationPeer();
+        }
+        private sealed class TestZenDatePicker : ZenDatePicker
         {
             public object ExposedDefaultStyleKey => DefaultStyleKey;
             public AutomationPeer ExposedAutomationPeer => OnCreateAutomationPeer();
