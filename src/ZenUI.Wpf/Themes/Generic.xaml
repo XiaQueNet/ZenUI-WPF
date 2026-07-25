@@ -1,11 +1,22 @@
-﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation" xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <ResourceDictionary.MergedDictionaries>
+        <!--  主题颜色入口，包含语义颜色和组件颜色资源  -->
         <ResourceDictionary Source="/ZenUI.Wpf;component/Themes/Colors.xaml" />
+
+        <!--  全局排版 Token，包括字号、字重和行高  -->
         <ResourceDictionary Source="/ZenUI.Wpf;component/Themes/Tokens/Typography.xaml" />
+
+        <!--  控件共用的基础尺寸 Token，包括输入控件和焦点视觉尺寸  -->
         <ResourceDictionary Source="/ZenUI.Wpf;component/Themes/Tokens/Metrics.xaml" />
+
+        <!--  各类组件专用的间距、圆角和尺寸 Token  -->
         <ResourceDictionary Source="/ZenUI.Wpf;component/Themes/Tokens/ComponentMetrics.xaml" />
+
+        <!--  交互状态 Token，包括焦点和禁用状态的视觉透明度  -->
         <ResourceDictionary Source="/ZenUI.Wpf;component/Themes/Tokens/Interaction.xaml" />
+
+        <!--  控件共用的基础样式  -->
         <ResourceDictionary Source="/ZenUI.Wpf;component/Themes/Controls/Common.xaml" />
         <ResourceDictionary Source="/ZenUI.Wpf;component/Themes/Controls/ZenScrollBar.xaml" />
         <ResourceDictionary Source="/ZenUI.Wpf;component/Themes/Controls/ZenButton.xaml" />
