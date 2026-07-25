@@ -1,0 +1,448 @@
+:root {
+  --zenui-blue: #315bd9;
+  --zenui-blue-strong: #2448b8;
+  --zenui-blue-soft: #edf2ff;
+  --zenui-ink: #172033;
+  --zenui-muted: #5f6b7d;
+  --zenui-line: #dfe5ef;
+  --zenui-surface: #ffffff;
+  --zenui-surface-soft: #f6f8fc;
+}
+
+html[data-bs-theme="dark"] {
+  --zenui-blue: #7595ff;
+  --zenui-blue-strong: #91aaff;
+  --zenui-blue-soft: #1e2b50;
+  --zenui-ink: #f3f6ff;
+  --zenui-muted: #abb6ca;
+  --zenui-line: #303b50;
+  --zenui-surface: #151b27;
+  --zenui-surface-soft: #101620;
+}
+
+header.bg-body {
+  background-color: color-mix(in srgb, var(--zenui-surface) 92%, transparent) !important;
+  backdrop-filter: blur(16px);
+}
+
+.navbar-brand > img.svg {
+  width: 30px;
+  height: 30px;
+  object-fit: contain;
+}
+
+.navbar-brand {
+  font-weight: 700;
+  letter-spacing: -0.02em;
+}
+
+/* WPF controls inherit hundreds of framework members and interfaces.
+   Keep the useful inheritance chain while focusing API pages on ZenUI APIs. */
+.typelist.implements,
+.typelist.inheritedMembers {
+  display: none;
+}
+
+body[data-layout="landing"] main.container-xxl {
+  max-width: none;
+  padding: 0;
+}
+
+body[data-layout="landing"] main > .content {
+  width: 100%;
+  max-width: none;
+}
+
+body[data-layout="landing"] .actionbar,
+body[data-layout="landing"] .affix,
+body[data-layout="landing"] .contribution,
+body[data-layout="landing"] .next-article {
+  display: none !important;
+}
+
+body[data-layout="landing"] article {
+  max-width: none;
+  padding: 0;
+}
+
+.zenui-landing {
+  color: var(--zenui-ink);
+  overflow: hidden;
+}
+
+.zenui-hero {
+  position: relative;
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(380px, 0.82fr);
+  gap: clamp(3rem, 8vw, 8rem);
+  align-items: center;
+  min-height: min(760px, calc(100vh - 64px));
+  padding: clamp(5rem, 9vw, 8rem) max(5vw, calc((100vw - 1180px) / 2));
+  background:
+    radial-gradient(circle at 88% 22%, color-mix(in srgb, var(--zenui-blue) 18%, transparent), transparent 30%),
+    linear-gradient(145deg, var(--zenui-surface) 45%, var(--zenui-surface-soft));
+}
+
+.zenui-hero::before {
+  position: absolute;
+  top: 12%;
+  right: 5%;
+  width: 320px;
+  height: 320px;
+  border: 1px solid color-mix(in srgb, var(--zenui-blue) 22%, transparent);
+  border-radius: 50%;
+  content: "";
+}
+
+.zenui-eyebrow {
+  display: inline-block;
+  margin-bottom: 1.25rem;
+  color: var(--zenui-blue);
+  font-size: 0.76rem;
+  font-weight: 750;
+  letter-spacing: 0.16em;
+}
+
+.zenui-hero h1 {
+  margin: 0;
+  color: var(--zenui-ink);
+  font-size: clamp(3rem, 4.8vw, 4.6rem);
+  font-weight: 760;
+  letter-spacing: -0.055em;
+  line-height: 1.04;
+}
+
+.zenui-lead {
+  max-width: 620px;
+  margin: 1.75rem 0 0;
+  color: var(--zenui-muted);
+  font-size: clamp(1.05rem, 1.5vw, 1.28rem);
+  line-height: 1.8;
+}
+
+.zenui-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.8rem;
+  margin-top: 2.2rem;
+}
+
+.zenui-button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 46px;
+  padding: 0.7rem 1.35rem;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  font-weight: 650;
+  text-decoration: none;
+  transition: transform 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+}
+
+.zenui-button:hover {
+  transform: translateY(-1px);
+}
+
+.zenui-button-primary {
+  background: var(--zenui-blue);
+  box-shadow: 0 10px 28px color-mix(in srgb, var(--zenui-blue) 28%, transparent);
+  color: #ffffff;
+}
+
+.zenui-button-primary:hover {
+  background: var(--zenui-blue-strong);
+  color: #ffffff;
+}
+
+.zenui-button-secondary {
+  border-color: var(--zenui-line);
+  background: color-mix(in srgb, var(--zenui-surface) 82%, transparent);
+  color: var(--zenui-ink);
+}
+
+.zenui-button-secondary:hover {
+  border-color: color-mix(in srgb, var(--zenui-blue) 45%, var(--zenui-line));
+  color: var(--zenui-blue);
+}
+
+.zenui-platforms {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.65rem;
+  margin-top: 2rem;
+}
+
+.zenui-platforms span {
+  padding: 0.38rem 0.68rem;
+  border: 1px solid var(--zenui-line);
+  border-radius: 999px;
+  color: var(--zenui-muted);
+  font-size: 0.8rem;
+}
+
+.zenui-preview {
+  position: relative;
+  z-index: 1;
+  padding: 18px;
+  border: 1px solid color-mix(in srgb, var(--zenui-blue) 20%, var(--zenui-line));
+  border-radius: 28px;
+  background: color-mix(in srgb, var(--zenui-surface) 62%, transparent);
+  box-shadow: 0 34px 80px color-mix(in srgb, var(--zenui-blue) 18%, transparent);
+  backdrop-filter: blur(18px);
+}
+
+.zenui-preview-window {
+  overflow: hidden;
+  border: 1px solid var(--zenui-line);
+  border-radius: 18px;
+  background: var(--zenui-surface);
+}
+
+.zenui-preview-titlebar {
+  display: flex;
+  gap: 7px;
+  padding: 14px 16px;
+  border-bottom: 1px solid var(--zenui-line);
+  background: var(--zenui-surface-soft);
+}
+
+.zenui-preview-titlebar span {
+  width: 9px;
+  height: 9px;
+  border-radius: 50%;
+  background: #c5ccda;
+}
+
+.zenui-preview-titlebar span:first-child {
+  background: #ff6b69;
+}
+
+.zenui-preview-titlebar span:nth-child(2) {
+  background: #f5bd4f;
+}
+
+.zenui-preview-titlebar span:nth-child(3) {
+  background: #61c454;
+}
+
+.zenui-preview-body {
+  padding: clamp(1.6rem, 4vw, 2.8rem);
+}
+
+.zenui-preview-body > img {
+  display: block;
+  width: min(220px, 68%);
+  height: auto;
+  margin: 0 auto 2rem;
+}
+
+.zenui-preview-label {
+  display: block;
+  margin-bottom: 0.45rem;
+  color: var(--zenui-muted);
+  font-size: 0.82rem;
+  font-weight: 600;
+}
+
+.zenui-preview-input {
+  padding: 0.8rem 0.9rem;
+  border: 1px solid var(--zenui-line);
+  border-radius: 8px;
+  color: var(--zenui-ink);
+  font-size: 0.92rem;
+}
+
+.zenui-preview-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin: 1.25rem 0;
+  color: var(--zenui-muted);
+  font-size: 0.9rem;
+}
+
+.zenui-preview-switch {
+  display: inline-flex;
+  align-items: center;
+  justify-content: flex-end;
+  width: 40px;
+  height: 22px;
+  padding: 3px;
+  border-radius: 999px;
+  background: var(--zenui-blue);
+}
+
+.zenui-preview-switch i {
+  width: 16px;
+  height: 16px;
+  border-radius: 50%;
+  background: #ffffff;
+}
+
+.zenui-preview-body button {
+  width: 100%;
+  padding: 0.72rem 1rem;
+  border: 0;
+  border-radius: 8px;
+  background: var(--zenui-blue);
+  color: #ffffff;
+  font-weight: 650;
+}
+
+.zenui-value-section {
+  padding: clamp(5rem, 9vw, 8rem) max(5vw, calc((100vw - 1180px) / 2));
+  background: var(--zenui-surface);
+}
+
+.zenui-section-heading {
+  max-width: 680px;
+  margin-bottom: 3rem;
+}
+
+.zenui-section-heading h2,
+.zenui-install-section h2 {
+  margin: 0;
+  color: var(--zenui-ink);
+  font-size: clamp(2rem, 3.6vw, 3.2rem);
+  letter-spacing: -0.04em;
+}
+
+.zenui-value-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 1rem;
+}
+
+.zenui-value-grid article {
+  min-height: 260px;
+  padding: 2rem;
+  border: 1px solid var(--zenui-line);
+  border-radius: 16px;
+  background: var(--zenui-surface-soft);
+}
+
+.zenui-card-index {
+  color: var(--zenui-blue);
+  font-size: 0.76rem;
+  font-weight: 750;
+  letter-spacing: 0.12em;
+}
+
+.zenui-value-grid h3 {
+  margin: 3.6rem 0 0.8rem;
+  color: var(--zenui-ink);
+  font-size: 1.25rem;
+}
+
+.zenui-value-grid p,
+.zenui-install-section p {
+  margin: 0;
+  color: var(--zenui-muted);
+  line-height: 1.75;
+}
+
+.zenui-install-section {
+  display: grid;
+  grid-template-columns: minmax(280px, 0.8fr) minmax(360px, 1.2fr);
+  gap: 1.2rem 4rem;
+  align-items: center;
+  padding: clamp(4.5rem, 8vw, 7rem) max(5vw, calc((100vw - 1180px) / 2));
+  background: var(--zenui-surface-soft);
+}
+
+.zenui-install-section > div:first-child {
+  grid-row: span 2;
+}
+
+.zenui-install-section p {
+  margin-top: 1rem;
+}
+
+.zenui-install-command {
+  overflow-x: auto;
+  padding: 1.15rem 1.3rem;
+  border: 1px solid var(--zenui-line);
+  border-radius: 12px;
+  background: var(--zenui-ink);
+  color: var(--zenui-surface);
+}
+
+.zenui-install-command code {
+  color: inherit;
+  white-space: nowrap;
+}
+
+.zenui-text-link {
+  width: fit-content;
+  color: var(--zenui-blue);
+  font-weight: 650;
+  text-decoration: none;
+}
+
+.zenui-text-link:hover {
+  color: var(--zenui-blue-strong);
+}
+
+@media (max-width: 900px) {
+  .zenui-hero {
+    grid-template-columns: 1fr;
+    min-height: auto;
+  }
+
+  .zenui-preview {
+    max-width: 580px;
+  }
+
+  .zenui-value-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .zenui-value-grid article {
+    min-height: auto;
+  }
+
+  .zenui-value-grid h3 {
+    margin-top: 2rem;
+  }
+
+  .zenui-install-section {
+    grid-template-columns: 1fr;
+  }
+
+  .zenui-install-section > div:first-child {
+    grid-row: auto;
+  }
+}
+
+@media (max-width: 576px) {
+  .zenui-hero,
+  .zenui-value-section,
+  .zenui-install-section {
+    padding-right: 1.25rem;
+    padding-left: 1.25rem;
+  }
+
+  .zenui-hero h1 {
+    font-size: 2.85rem;
+  }
+
+  .zenui-actions {
+    flex-direction: column;
+  }
+
+  .zenui-button {
+    width: 100%;
+  }
+
+  .zenui-preview {
+    padding: 10px;
+    border-radius: 20px;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .zenui-button {
+    transition: none;
+  }
+}

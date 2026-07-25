@@ -363,3 +363,9 @@ MigrationBackup/
 # Fody - auto-generated XML schema
 FodyWeavers.xsd
 /src/tests/Hlk.UnitTests/Pricing/Fixtures/ShadowCarts
+
+# DocFX generated site and API metadata
+/docs/_site/
+/website/_site/
+/website/api/*.yml
+/website/api/.manifest
