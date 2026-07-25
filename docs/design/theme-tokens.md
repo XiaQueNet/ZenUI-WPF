@@ -27,6 +27,8 @@ Metrics 当前统一 TextBox、PasswordBox、ComboBox、DatePicker 和 NumberBox
 
 Component Metrics 只收录具有明确控件语义、且不依赖模板内部布局计算的尺寸。单次出现的图标坐标、路径尺寸和与相邻列宽耦合的数值继续作为模板实现细节，不因追求 Token 数量而公开。
 
+当前 Component Metrics 覆盖 Button、ListBox、ScrollBar 和 ComboBox 弹层。DatePicker 创建的 Calendar 位于独立 Popup 资源作用域，其外观应通过 WPF 原生 `CalendarStyle` 定制；日期网格、导航图标和控件路径仍属于模板实现细节。
+
 后续可在不改变现有 Token 的前提下增加：
 
 - `Typography.xaml`：字号、字重和行高。

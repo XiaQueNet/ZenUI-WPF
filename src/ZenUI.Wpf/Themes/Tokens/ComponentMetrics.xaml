@@ -1,6 +1,7 @@
 <ResourceDictionary
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
-    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
     <!-- Button -->
     <Thickness x:Key="ZenButtonPadding">5,0</Thickness>
@@ -13,4 +14,17 @@
     <Thickness x:Key="ZenListBoxItemPadding">12,9</Thickness>
     <Thickness x:Key="ZenListBoxItemMargin">0,1</Thickness>
     <CornerRadius x:Key="ZenListBoxItemCornerRadius">5</CornerRadius>
+
+    <!-- ScrollBar -->
+    <sys:Double x:Key="ZenScrollBarThickness">12</sys:Double>
+    <sys:Double x:Key="ZenScrollBarTrackThickness">6</sys:Double>
+    <sys:Double x:Key="ZenScrollBarThumbMinLength">32</sys:Double>
+    <Thickness x:Key="ZenVerticalScrollBarThumbMargin">3,0</Thickness>
+    <Thickness x:Key="ZenHorizontalScrollBarThumbMargin">0,3</Thickness>
+    <CornerRadius x:Key="ZenScrollBarCornerRadius">3</CornerRadius>
+
+    <!-- Popup surfaces -->
+    <Thickness x:Key="ZenComboBoxPopupMargin">0,4,0,0</Thickness>
+    <Thickness x:Key="ZenComboBoxPopupPadding">4</Thickness>
+    <CornerRadius x:Key="ZenComboBoxPopupCornerRadius">6</CornerRadius>
 </ResourceDictionary>

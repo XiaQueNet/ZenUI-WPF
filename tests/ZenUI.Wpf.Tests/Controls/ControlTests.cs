@@ -152,6 +152,15 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.AreEqual(new Thickness(12, 9, 12, 9), dictionary["ZenListBoxItemPadding"]);
             Assert.AreEqual(new Thickness(0, 1, 0, 1), dictionary["ZenListBoxItemMargin"]);
             Assert.AreEqual(new CornerRadius(5), dictionary["ZenListBoxItemCornerRadius"]);
+            Assert.AreEqual(12d, dictionary["ZenScrollBarThickness"]);
+            Assert.AreEqual(6d, dictionary["ZenScrollBarTrackThickness"]);
+            Assert.AreEqual(32d, dictionary["ZenScrollBarThumbMinLength"]);
+            Assert.AreEqual(new Thickness(3, 0, 3, 0), dictionary["ZenVerticalScrollBarThumbMargin"]);
+            Assert.AreEqual(new Thickness(0, 3, 0, 3), dictionary["ZenHorizontalScrollBarThumbMargin"]);
+            Assert.AreEqual(new CornerRadius(3), dictionary["ZenScrollBarCornerRadius"]);
+            Assert.AreEqual(new Thickness(0, 4, 0, 0), dictionary["ZenComboBoxPopupMargin"]);
+            Assert.AreEqual(new Thickness(4), dictionary["ZenComboBoxPopupPadding"]);
+            Assert.AreEqual(new CornerRadius(6), dictionary["ZenComboBoxPopupCornerRadius"]);
             Assert.IsInstanceOfType<Style>(dictionary["ZenFocusVisualBorderStyle"]);
         }
 
@@ -242,6 +251,107 @@ namespace ZenUI.Wpf.Tests.Controls
             }
             finally
             {
+                window.Close();
+            }
+        }
+
+        [TestMethod]
+        public void ScrollBarMetricTokensCanBeOverriddenInWindowResources()
+        {
+            var vertical = new ScrollBar
+            {
+                Height = 120,
+                Maximum = 100,
+                Orientation = Orientation.Vertical,
+                ViewportSize = 10
+            };
+            var horizontal = new ScrollBar
+            {
+                Maximum = 100,
+                Orientation = Orientation.Horizontal,
+                ViewportSize = 10,
+                Width = 120
+            };
+            var panel = new StackPanel();
+            panel.Children.Add(vertical);
+            panel.Children.Add(horizontal);
+            var window = CreateTestWindow(panel, 220, 220);
+            window.Resources.MergedDictionaries.Add(new ResourceDictionary
+            {
+                Source = new Uri(
+                    "/ZenUI.Wpf;component/Themes/Generic.xaml",
+                    UriKind.Relative)
+            });
+            window.Resources["ZenScrollBarThickness"] = 18d;
+            window.Resources["ZenScrollBarTrackThickness"] = 8d;
+            window.Resources["ZenScrollBarThumbMinLength"] = 40d;
+            window.Resources["ZenVerticalScrollBarThumbMargin"] = new Thickness(5, 0, 5, 0);
+            window.Resources["ZenHorizontalScrollBarThumbMargin"] = new Thickness(0, 5, 0, 5);
+            window.Resources["ZenScrollBarCornerRadius"] = new CornerRadius(4);
+
+            try
+            {
+                window.Show();
+                window.UpdateLayout();
+
+                Assert.AreEqual(18d, vertical.Width);
+                Assert.AreEqual(18d, horizontal.Height);
+                AssertScrollBarMetrics(
+                    vertical,
+                    8d,
+                    40d,
+                    new Thickness(5, 0, 5, 0),
+                    new CornerRadius(4));
+                AssertScrollBarMetrics(
+                    horizontal,
+                    8d,
+                    40d,
+                    new Thickness(0, 5, 0, 5),
+                    new CornerRadius(4));
+            }
+            finally
+            {
+                window.Close();
+            }
+        }
+
+        [TestMethod]
+        public void ComboBoxPopupMetricTokensCanBeOverriddenInWindowResources()
+        {
+            var comboBox = new ZenComboBox();
+            comboBox.Items.Add("Item");
+            var window = CreateTestWindow(comboBox, 320, 240);
+            window.Resources.MergedDictionaries.Add(new ResourceDictionary
+            {
+                Source = new Uri(
+                    "/ZenUI.Wpf;component/Themes/Generic.xaml",
+                    UriKind.Relative)
+            });
+            window.Resources["ZenControlBorderThickness"] = new Thickness(2);
+            window.Resources["ZenComboBoxPopupMargin"] = new Thickness(0, 6, 0, 0);
+            window.Resources["ZenComboBoxPopupPadding"] = new Thickness(7);
+            window.Resources["ZenComboBoxPopupCornerRadius"] = new CornerRadius(9);
+
+            try
+            {
+                window.Show();
+                comboBox.IsDropDownOpen = true;
+                window.UpdateLayout();
+
+                var comboPopup = comboBox.Template.FindName("PART_Popup", comboBox) as Popup;
+                Assert.IsNotNull(comboPopup);
+                Assert.IsTrue(comboPopup.IsOpen);
+                var popupBorder = comboPopup.Child as Border;
+                Assert.IsNotNull(popupBorder);
+                Assert.AreEqual(new Thickness(0, 6, 0, 0), popupBorder.Margin);
+                Assert.AreEqual(new Thickness(7), popupBorder.Padding);
+                Assert.AreEqual(new Thickness(2), popupBorder.BorderThickness);
+                Assert.AreEqual(new CornerRadius(9), popupBorder.CornerRadius);
+            }
+            finally
+            {
+                comboBox.IsDropDownOpen = false;
+                window.Dispatcher.Invoke(DispatcherPriority.ContextIdle, new Action(() => { }));
                 window.Close();
             }
         }
@@ -1433,6 +1543,39 @@ namespace ZenUI.Wpf.Tests.Controls
                 Height = height,
                 Content = content
             };
+        }
+
+        private static void AssertScrollBarMetrics(
+            ScrollBar scrollBar,
+            double expectedTrackThickness,
+            double expectedThumbMinLength,
+            Thickness expectedThumbMargin,
+            CornerRadius expectedCornerRadius)
+        {
+            scrollBar.ApplyTemplate();
+            var track = scrollBar.Template.FindName("PART_Track", scrollBar) as Track;
+            var trackBackground = scrollBar.Template.FindName("TrackBackground", scrollBar) as Border;
+            Assert.IsNotNull(track);
+            Assert.IsNotNull(trackBackground);
+            Assert.IsNotNull(track.Thumb);
+            track.Thumb.ApplyTemplate();
+            var thumbShape = track.Thumb.Template.FindName("ThumbShape", track.Thumb) as Border;
+            Assert.IsNotNull(thumbShape);
+
+            if (scrollBar.Orientation == Orientation.Vertical)
+            {
+                Assert.AreEqual(expectedTrackThickness, trackBackground.Width);
+                Assert.AreEqual(expectedThumbMinLength, track.Thumb.MinHeight);
+            }
+            else
+            {
+                Assert.AreEqual(expectedTrackThickness, trackBackground.Height);
+                Assert.AreEqual(expectedThumbMinLength, track.Thumb.MinWidth);
+            }
+
+            Assert.AreEqual(expectedCornerRadius, trackBackground.CornerRadius);
+            Assert.AreEqual(expectedThumbMargin, thumbShape.Margin);
+            Assert.AreEqual(expectedCornerRadius, thumbShape.CornerRadius);
         }
 
         private static FrameworkElement FindVisualDescendant(DependencyObject parent, string typeName)

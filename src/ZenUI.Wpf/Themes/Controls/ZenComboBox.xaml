@@ -130,14 +130,15 @@
                             Placement="Bottom"
                             PopupAnimation="Fade">
                             <Border
+                                x:Name="PopupBorder"
                                 MinWidth="{Binding ActualWidth, RelativeSource={RelativeSource TemplatedParent}}"
                                 MaxHeight="{TemplateBinding MaxDropDownHeight}"
-                                Margin="0,4,0,0"
-                                Padding="4"
+                                Margin="{DynamicResource ZenComboBoxPopupMargin}"
+                                Padding="{DynamicResource ZenComboBoxPopupPadding}"
                                 Background="{DynamicResource ZenSurfaceBrush}"
                                 BorderBrush="{DynamicResource ZenBorderBrush}"
-                                BorderThickness="1"
-                                CornerRadius="6">
+                                BorderThickness="{DynamicResource ZenControlBorderThickness}"
+                                CornerRadius="{DynamicResource ZenComboBoxPopupCornerRadius}">
                                 <ScrollViewer CanContentScroll="True">
                                     <ItemsPresenter KeyboardNavigation.DirectionalNavigation="Contained" />
                                 </ScrollViewer>
