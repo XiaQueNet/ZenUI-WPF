@@ -36,4 +36,5 @@
     <SolidColorBrush x:Key="ZenErrorLightBrush" Color="#4A2628" />
     <SolidColorBrush x:Key="ZenDataGridAlternatingRowBrush" Color="#232832" />
     <SolidColorBrush x:Key="ZenDataGridRowHoverBrush" Color="#30394B" />
+    <SolidColorBrush x:Key="ZenDataGridRowSelectedBrush" Color="#343B4A" />
 </ResourceDictionary>

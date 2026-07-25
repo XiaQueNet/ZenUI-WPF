@@ -22,7 +22,7 @@
         <Style x:Key="NavigationItemStyle" TargetType="{x:Type RadioButton}">
             <Setter Property="Height" Value="38" />
             <Setter Property="Margin" Value="0,2" />
-            <Setter Property="Foreground" Value="{DynamicResource GallerySidebarItemBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource ZenTextSecondaryBrush}" />
             <Setter Property="FontSize" Value="14" />
             <Setter Property="Cursor" Value="Hand" />
             <Setter Property="FocusVisualStyle" Value="{x:Null}" />
@@ -51,14 +51,14 @@
                         </Border>
                         <ControlTemplate.Triggers>
                             <Trigger Property="IsChecked" Value="True">
-                                <Setter TargetName="MenuItem" Property="Background" Value="{DynamicResource GallerySidebarItemSelectedBrush}" />
+                                <Setter TargetName="MenuItem" Property="Background" Value="{DynamicResource ZenInfoLightBrush}" />
                                 <Setter TargetName="ActiveIndicator" Property="Visibility" Value="Visible" />
-                                <Setter Property="Foreground" Value="{DynamicResource GalleryOnPrimarySecondaryBrush}" />
+                                <Setter Property="Foreground" Value="{DynamicResource ZenPrimaryBrush}" />
                                 <Setter Property="FontWeight" Value="SemiBold" />
                             </Trigger>
                             <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="MenuItem" Property="Background" Value="{DynamicResource GallerySidebarItemHoverBrush}" />
-                                <Setter Property="Foreground" Value="White" />
+                                <Setter TargetName="MenuItem" Property="Background" Value="{DynamicResource ZenSurfaceHoverBrush}" />
+                                <Setter Property="Foreground" Value="{DynamicResource ZenPrimaryBrush}" />
                             </Trigger>
                         </ControlTemplate.Triggers>
                     </ControlTemplate>
@@ -73,7 +73,7 @@
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
-        <Border Background="{DynamicResource GallerySidebarBrush}">
+        <Border Background="{DynamicResource ZenSurfaceMutedBrush}">
             <Grid Margin="16,0">
                 <Grid.RowDefinitions>
                     <RowDefinition Height="Auto" />
@@ -85,12 +85,12 @@
                     <TextBlock
                         FontSize="23"
                         FontWeight="SemiBold"
-                        Foreground="White"
+                        Foreground="{DynamicResource ZenTextPrimaryBrush}"
                         Text="ZenUI" />
                     <TextBlock
                         Margin="0,5,0,0"
                         FontSize="12"
-                        Foreground="{DynamicResource GallerySidebarSecondaryTextBrush}"
+                        Foreground="{DynamicResource ZenTextSecondaryBrush}"
                         Text="Controls Gallery" />
                 </StackPanel>
 
@@ -118,7 +118,7 @@
                     <TextBlock
                         Margin="0,0,0,8"
                         FontSize="12"
-                        Foreground="{DynamicResource GallerySidebarSecondaryTextBrush}"
+                        Foreground="{DynamicResource ZenTextSecondaryBrush}"
                         Text="界面主题" />
                     <zen:ZenComboBox
                         Height="34"
@@ -134,7 +134,7 @@
                     <TextBlock
                         Margin="0,12,0,0"
                         FontSize="11"
-                        Foreground="{DynamicResource GallerySidebarFooterTextBrush}"
+                        Foreground="{DynamicResource ZenTextPlaceholderBrush}"
                         Text="ZenUI.Wpf · Controls Gallery" />
                 </StackPanel>
             </Grid>

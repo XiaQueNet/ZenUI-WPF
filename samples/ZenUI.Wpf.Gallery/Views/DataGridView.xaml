@@ -24,6 +24,9 @@
                             <DataGridTextColumn Width="100" Binding="{Binding Status}" Header="状态" />
                         </DataGrid.Columns>
                     </zen:ZenDataGrid>
+                    <TextBlock
+                        Style="{StaticResource GallerySupportingTextStyle}"
+                        Text="默认仅显示 Hover 状态；可通过 IsRowSelectionHighlightEnabled 和 IsCellFocusVisualEnabled 按需开启选中反馈。" />
                 </StackPanel>
             </Border>
 
@@ -33,7 +36,6 @@
                     <zen:ZenDataGrid
                         Height="180"
                         AutoGenerateColumns="False"
-                        EmptyContent="还没有成员数据"
                         IsReadOnly="True">
                         <DataGrid.Columns>
                             <DataGridTextColumn Width="*" Header="名称" />

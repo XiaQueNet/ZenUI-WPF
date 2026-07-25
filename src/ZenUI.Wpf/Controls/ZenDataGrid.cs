@@ -55,5 +55,68 @@ namespace ZenUI.Wpf.Controls
                 typeof(object),
                 typeof(ZenDataGrid),
                 new FrameworkPropertyMetadata("暂无数据"));
+        /// <summary>
+        /// Gets or sets whether selected rows use the theme selection highlight.
+        /// </summary>
+        [Bindable(true)]
+        public bool IsRowSelectionHighlightEnabled
+        {
+            get { return (bool)GetValue(IsRowSelectionHighlightEnabledProperty); }
+            set { SetValue(IsRowSelectionHighlightEnabledProperty, value); }
+        }
+
+        /// <summary>
+        /// Identifies the <see cref="IsRowSelectionHighlightEnabled"/> dependency property.
+        /// </summary>
+        public static readonly DependencyProperty IsRowSelectionHighlightEnabledProperty =
+            DependencyProperty.RegisterAttached(
+                nameof(IsRowSelectionHighlightEnabled),
+                typeof(bool),
+                typeof(ZenDataGrid),
+                new FrameworkPropertyMetadata(
+                    false,
+                    FrameworkPropertyMetadataOptions.Inherits));
+
+        public static bool GetIsRowSelectionHighlightEnabled(DependencyObject element)
+        {
+            return (bool)element.GetValue(IsRowSelectionHighlightEnabledProperty);
+        }
+
+        public static void SetIsRowSelectionHighlightEnabled(DependencyObject element, bool value)
+        {
+            element.SetValue(IsRowSelectionHighlightEnabledProperty, value);
+        }
+
+        /// <summary>
+        /// Gets or sets whether the current cell displays a keyboard focus border.
+        /// </summary>
+        [Bindable(true)]
+        public bool IsCellFocusVisualEnabled
+        {
+            get { return (bool)GetValue(IsCellFocusVisualEnabledProperty); }
+            set { SetValue(IsCellFocusVisualEnabledProperty, value); }
+        }
+
+        /// <summary>
+        /// Identifies the <see cref="IsCellFocusVisualEnabled"/> dependency property.
+        /// </summary>
+        public static readonly DependencyProperty IsCellFocusVisualEnabledProperty =
+            DependencyProperty.RegisterAttached(
+                nameof(IsCellFocusVisualEnabled),
+                typeof(bool),
+                typeof(ZenDataGrid),
+                new FrameworkPropertyMetadata(
+                    false,
+                    FrameworkPropertyMetadataOptions.Inherits));
+
+        public static bool GetIsCellFocusVisualEnabled(DependencyObject element)
+        {
+            return (bool)element.GetValue(IsCellFocusVisualEnabledProperty);
+        }
+
+        public static void SetIsCellFocusVisualEnabled(DependencyObject element, bool value)
+        {
+            element.SetValue(IsCellFocusVisualEnabledProperty, value);
+        }
     }
 }

@@ -61,6 +61,8 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.AreEqual(string.Empty, datePicker.Watermark);
             Assert.AreEqual(new CornerRadius(6), datePicker.CornerRadius);
             Assert.AreEqual(new CornerRadius(8), dataGrid.CornerRadius);
+            Assert.IsFalse(dataGrid.IsRowSelectionHighlightEnabled);
+            Assert.IsFalse(dataGrid.IsCellFocusVisualEnabled);
             Assert.AreEqual("暂无数据", dataGrid.EmptyContent);
             Assert.IsFalse(passwordBox.IsPasswordRevealEnabled);
             Assert.IsFalse(passwordBox.IsPasswordRevealed);
@@ -902,6 +904,75 @@ namespace ZenUI.Wpf.Tests.Controls
                 var selectAllButton = scrollViewer.Template.FindName("PART_SelectAllButton", scrollViewer) as Button;
                 Assert.IsNotNull(selectAllButton);
                 Assert.AreEqual(Visibility.Visible, selectAllButton.Visibility);
+            }
+            finally
+            {
+                window.Close();
+            }
+        }
+
+        [TestMethod]
+        public void DataGridSelectionVisualsAreOptIn()
+        {
+            var rows = new[] { new EditableRow(1, "Member") };
+            var grid = CreateAdvancedDataGrid(rows, out var nameColumn);
+            var window = CreateTestWindow(grid, 680, 240);
+            window.Resources.MergedDictionaries.Add(new ResourceDictionary
+            {
+                Source = new Uri(
+                    "/ZenUI.Wpf;component/Themes/Generic.xaml",
+                    UriKind.Relative)
+            });
+
+            try
+            {
+                window.Show();
+                grid.SelectedItem = rows[0];
+                grid.ScrollIntoView(rows[0]);
+                window.UpdateLayout();
+
+                var row = grid.ItemContainerGenerator.ContainerFromIndex(0) as DataGridRow;
+                Assert.IsNotNull(row);
+                row.ApplyTemplate();
+                var rowBorder = row.Template.FindName("RowBorder", row) as Border;
+                var cellsPresenter = row.Template.FindName("PART_CellsPresenter", row) as DataGridCellsPresenter;
+                Assert.IsNotNull(rowBorder);
+                Assert.IsNotNull(cellsPresenter);
+
+                var cell = cellsPresenter.ItemContainerGenerator.ContainerFromIndex(0) as DataGridCell;
+                Assert.IsNotNull(cell);
+                cell.ApplyTemplate();
+                grid.CurrentCell = new DataGridCellInfo(rows[0], nameColumn);
+                cell.Focus();
+                window.UpdateLayout();
+
+                var cellBorder = cell.Template.FindName("CellBorder", cell) as Border;
+                var cellText = FindVisualDescendant<TextBlock>(cell);
+                Assert.IsNotNull(cellBorder);
+                Assert.IsNotNull(cellText);
+                Assert.AreNotEqual(
+                    Color.FromRgb(0xF1, 0xF4, 0xFA),
+                    ((SolidColorBrush)rowBorder.Background).Color);
+                Assert.AreEqual(new Thickness(0, 0, 0, 1), cellBorder.BorderThickness);
+                Assert.AreEqual(
+                    Color.FromRgb(0x1D, 0x21, 0x29),
+                    ((SolidColorBrush)cellText.Foreground).Color);
+
+                grid.IsRowSelectionHighlightEnabled = true;
+                grid.IsCellFocusVisualEnabled = true;
+                window.UpdateLayout();
+
+                Assert.IsTrue(row.IsSelected);
+                Assert.IsTrue(grid.IsRowSelectionHighlightEnabled);
+                Assert.IsTrue(ZenDataGrid.GetIsRowSelectionHighlightEnabled(row));
+                Assert.IsTrue(ZenDataGrid.GetIsCellFocusVisualEnabled(cell));
+                Assert.AreEqual(
+                    Color.FromRgb(0xF1, 0xF4, 0xFA),
+                    ((SolidColorBrush)rowBorder.Background).Color);
+                Assert.AreEqual(new Thickness(1), cellBorder.BorderThickness);
+                Assert.AreEqual(
+                    Color.FromRgb(0x1D, 0x21, 0x29),
+                    ((SolidColorBrush)cellText.Foreground).Color);
             }
             finally
             {

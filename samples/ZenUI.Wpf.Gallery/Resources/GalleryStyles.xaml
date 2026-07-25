@@ -3,12 +3,6 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:zen="http://zenui.mnorg.com/zenui-wpf">
 
-    <SolidColorBrush x:Key="GallerySidebarBrush" Color="#172033" />
-    <SolidColorBrush x:Key="GallerySidebarItemBrush" Color="#AEB8CA" />
-    <SolidColorBrush x:Key="GallerySidebarItemHoverBrush" Color="#202D45" />
-    <SolidColorBrush x:Key="GallerySidebarItemSelectedBrush" Color="#223657" />
-    <SolidColorBrush x:Key="GallerySidebarSecondaryTextBrush" Color="#8E9BB1" />
-    <SolidColorBrush x:Key="GallerySidebarFooterTextBrush" Color="#8491A8" />
     <SolidColorBrush x:Key="GalleryOnPrimarySecondaryBrush" Color="#DFE6FA" />
     <SolidColorBrush x:Key="GalleryOnPrimaryMutedSurfaceBrush" Color="#22FFFFFF" />
     <SolidColorBrush x:Key="GallerySuccessForegroundBrush" Color="#064E2C" />

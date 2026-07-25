@@ -36,4 +36,5 @@
     <SolidColorBrush x:Key="ZenErrorLightBrush" Color="{DynamicResource {x:Static SystemColors.WindowColorKey}}" />
     <SolidColorBrush x:Key="ZenDataGridAlternatingRowBrush" Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}" />
     <SolidColorBrush x:Key="ZenDataGridRowHoverBrush" Color="{DynamicResource {x:Static SystemColors.HighlightColorKey}}" />
+    <SolidColorBrush x:Key="ZenDataGridRowSelectedBrush" Color="{DynamicResource {x:Static SystemColors.HighlightColorKey}}" />
 </ResourceDictionary>
