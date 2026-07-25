@@ -6,7 +6,7 @@
     xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
     xmlns:navigation="clr-namespace:ZenUI.Wpf.Gallery.Navigation"
     xmlns:prism="http://prismlibrary.com/"
-    xmlns:zen="http://zenui.mnorg.com/zenui-wpf"
+    xmlns:zen="https://zenui.mnorg.cn/xaml/wpf"
     Title="ZenUI Controls Gallery"
     Width="1280"
     Height="800"
@@ -130,6 +130,22 @@
                         AutomationProperties.Name="界面主题"
                         ItemsSource="{Binding ThemeOptions}"
                         SelectedItem="{Binding SelectedThemeOption, Mode=TwoWay}">
+                        <zen:ZenComboBox.ItemTemplate>
+                            <DataTemplate>
+                                <TextBlock Text="{Binding DisplayName}" />
+                            </DataTemplate>
+                        </zen:ZenComboBox.ItemTemplate>
+                    </zen:ZenComboBox>
+                    <TextBlock
+                        Margin="0,12,0,8"
+                        FontSize="{DynamicResource ZenFontSizeCaption}"
+                        Foreground="{DynamicResource ZenTextSecondaryBrush}"
+                        Text="界面密度" />
+                    <zen:ZenComboBox
+                        Height="34"
+                        AutomationProperties.Name="界面密度"
+                        ItemsSource="{Binding DensityOptions}"
+                        SelectedItem="{Binding SelectedDensityOption, Mode=TwoWay}">
                         <zen:ZenComboBox.ItemTemplate>
                             <DataTemplate>
                                 <TextBlock Text="{Binding DisplayName}" />

@@ -14,6 +14,7 @@ namespace ZenUI.Wpf.Gallery.ViewModels
     public sealed class MainWindowViewModel : BindableBase
     {
         private readonly IRegionManager regionManager;
+        private DensityOption selectedDensityOption;
         private ThemeOption selectedThemeOption;
 
         public MainWindowViewModel(IRegionManager regionManager)
@@ -27,6 +28,14 @@ namespace ZenUI.Wpf.Gallery.ViewModels
                 new ThemeOption("高对比度", ZenTheme.HighContrast)
             };
             selectedThemeOption = ThemeOptions[0];
+
+            DensityOptions = new[]
+            {
+                new DensityOption("紧凑", ZenDensity.Compact),
+                new DensityOption("标准", ZenDensity.Standard),
+                new DensityOption("宽松", ZenDensity.Comfortable)
+            };
+            selectedDensityOption = DensityOptions[1];
 
             MenuItems = new ObservableCollection<MenuItemViewModel>
             {
@@ -52,7 +61,21 @@ namespace ZenUI.Wpf.Gallery.ViewModels
 
         public ObservableCollection<MenuItemViewModel> MenuItems { get; }
 
+        public IReadOnlyList<DensityOption> DensityOptions { get; }
+
         public IReadOnlyList<ThemeOption> ThemeOptions { get; }
+
+        public DensityOption SelectedDensityOption
+        {
+            get { return selectedDensityOption; }
+            set
+            {
+                if (value != null && SetProperty(ref selectedDensityOption, value))
+                {
+                    ZenDensityManager.ApplyDensity(Application.Current.Resources, value.Density);
+                }
+            }
+        }
 
         public ThemeOption SelectedThemeOption
         {
@@ -90,5 +113,18 @@ namespace ZenUI.Wpf.Gallery.ViewModels
         public string DisplayName { get; }
 
         public ZenTheme Theme { get; }
+    }
+
+    public sealed class DensityOption
+    {
+        public DensityOption(string displayName, ZenDensity density)
+        {
+            DisplayName = displayName;
+            Density = density;
+        }
+
+        public string DisplayName { get; }
+
+        public ZenDensity Density { get; }
     }
 }

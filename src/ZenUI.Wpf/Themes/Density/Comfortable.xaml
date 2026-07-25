@@ -1,0 +1,20 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <sys:Double x:Key="ZenInputControlMinHeight">40</sys:Double>
+    <Thickness x:Key="ZenInputControlPadding">10,6</Thickness>
+
+    <Thickness x:Key="ZenButtonPadding">8,3</Thickness>
+    <Thickness x:Key="ZenListBoxPadding">6</Thickness>
+    <Thickness x:Key="ZenListBoxItemPadding">14,11</Thickness>
+    <Thickness x:Key="ZenListBoxItemMargin">0,2</Thickness>
+
+    <sys:Double x:Key="ZenScrollBarThickness">14</sys:Double>
+    <sys:Double x:Key="ZenScrollBarTrackThickness">8</sys:Double>
+    <sys:Double x:Key="ZenScrollBarThumbMinLength">40</sys:Double>
+
+    <Thickness x:Key="ZenComboBoxPopupMargin">0,6,0,0</Thickness>
+    <Thickness x:Key="ZenComboBoxPopupPadding">6</Thickness>
+</ResourceDictionary>

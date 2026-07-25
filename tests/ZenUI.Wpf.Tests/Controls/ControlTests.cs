@@ -308,6 +308,67 @@ namespace ZenUI.Wpf.Tests.Controls
         }
 
         [TestMethod]
+        public void DensitySwitchUpdatesRealizedControlMetrics()
+        {
+            var textBox = new ZenTextBox();
+            var button = new ZenButton { Content = "Action" };
+            var listBox = new ZenListBox { Height = 100 };
+            listBox.Items.Add("Item");
+            var scrollBar = new ScrollBar
+            {
+                Height = 100,
+                Orientation = Orientation.Vertical
+            };
+
+            var panel = new StackPanel();
+            panel.Children.Add(textBox);
+            panel.Children.Add(button);
+            panel.Children.Add(listBox);
+            panel.Children.Add(scrollBar);
+
+            var window = CreateTestWindow(panel, 320, 320);
+            window.Resources.MergedDictionaries.Add(new ResourceDictionary
+            {
+                Source = new Uri(
+                    "/ZenUI.Wpf;component/Themes/Generic.xaml",
+                    UriKind.Relative)
+            });
+
+            try
+            {
+                window.Show();
+                window.UpdateLayout();
+
+                var item = listBox.ItemContainerGenerator.ContainerFromIndex(0) as ListBoxItem;
+                Assert.IsNotNull(item);
+                Assert.AreEqual(36d, textBox.MinHeight);
+                Assert.AreEqual(new Thickness(5, 0, 5, 0), button.Padding);
+                Assert.AreEqual(new Thickness(12, 9, 12, 9), item.Padding);
+                Assert.AreEqual(12d, scrollBar.Width);
+
+                ZenDensityManager.ApplyDensity(window.Resources, ZenDensity.Compact);
+                window.UpdateLayout();
+
+                Assert.AreEqual(32d, textBox.MinHeight);
+                Assert.AreEqual(new Thickness(4, 0, 4, 0), button.Padding);
+                Assert.AreEqual(new Thickness(10, 6, 10, 6), item.Padding);
+                Assert.AreEqual(10d, scrollBar.Width);
+
+                ZenDensityManager.ApplyDensity(window.Resources, ZenDensity.Comfortable);
+                window.UpdateLayout();
+
+                Assert.AreEqual(40d, textBox.MinHeight);
+                Assert.AreEqual(new Thickness(8, 3, 8, 3), button.Padding);
+                Assert.AreEqual(new Thickness(14, 11, 14, 11), item.Padding);
+                Assert.AreEqual(14d, scrollBar.Width);
+            }
+            finally
+            {
+                window.Close();
+            }
+        }
+
+        [TestMethod]
         public void InputMetricTokensCanBeOverriddenInWindowResources()
         {
             var textBox = new ZenTextBox();
