@@ -39,6 +39,8 @@ namespace ZenUI.Wpf.Tests.Theming
                 Assert.AreEqual(
                     SystemColors.WindowTextColor,
                     ((SolidColorBrush)resources["ZenControlThumbBorderBrush"]).Color);
+                Assert.AreEqual(1d, resources["ZenFocusVisualOpacity"]);
+                Assert.AreEqual(1d, resources["ZenDisabledActionOpacity"]);
                 Assert.AreEqual(2, resources.MergedDictionaries.Count);
             }
             finally
@@ -78,12 +80,49 @@ namespace ZenUI.Wpf.Tests.Theming
         [TestMethod]
         public void ColorThemesExposeTheSameTokenContract()
         {
-            var lightTokens = LoadTokenContract("Colors.xaml");
-            var darkTokens = LoadTokenContract("Dark.xaml");
-            var highContrastTokens = LoadTokenContract("HighContrast.xaml");
+            var lightTokens = LoadColorTokenContract("Colors.xaml");
+            var darkTokens = LoadColorTokenContract("Dark.xaml");
+            var highContrastTokens = LoadColorTokenContract("HighContrast.xaml");
 
             AssertTokenContract(lightTokens, darkTokens, "Dark");
             AssertTokenContract(lightTokens, highContrastTokens, "HighContrast");
+        }
+
+        [TestMethod]
+        public void HighContrastDefinesFullOpacityForInteractionTokens()
+        {
+            var interactionTokens = new ResourceDictionary
+            {
+                Source = new Uri(
+                    "/ZenUI.Wpf;component/Themes/Tokens/Interaction.xaml",
+                    UriKind.Relative)
+            };
+            var highContrast = new ResourceDictionary
+            {
+                Source = new Uri(
+                    "/ZenUI.Wpf;component/Themes/HighContrast.xaml",
+                    UriKind.Relative)
+            };
+
+            foreach (var key in interactionTokens.Keys.Cast<object>())
+            {
+                Assert.IsTrue(highContrast.Contains(key), $"HighContrast token missing: {key}");
+                Assert.AreEqual(
+                    interactionTokens[key].GetType(),
+                    highContrast[key].GetType(),
+                    $"HighContrast token type mismatch: {key}");
+                Assert.AreEqual(
+                    1d,
+                    highContrast[key],
+                    $"HighContrast interaction token should be fully opaque: {key}");
+            }
+        }
+
+        private static Dictionary<object, Type> LoadColorTokenContract(string fileName)
+        {
+            return LoadTokenContract(fileName)
+                .Where(pair => pair.Value == typeof(SolidColorBrush))
+                .ToDictionary(pair => pair.Key, pair => pair.Value);
         }
 
         private static Dictionary<object, Type> LoadTokenContract(string fileName)

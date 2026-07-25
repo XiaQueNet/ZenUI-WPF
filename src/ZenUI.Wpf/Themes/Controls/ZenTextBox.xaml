@@ -110,7 +110,7 @@
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter TargetName="InputBorder" Property="Background" Value="{DynamicResource ZenSurfaceDisabledBrush}" />
-                            <Setter Property="Opacity" Value="0.6" />
+                            <Setter Property="Opacity" Value="{DynamicResource ZenDisabledFieldOpacity}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

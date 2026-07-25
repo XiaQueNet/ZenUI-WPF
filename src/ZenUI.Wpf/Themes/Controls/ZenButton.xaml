@@ -164,7 +164,7 @@
                 <Setter Property="Foreground" Value="{Binding PressedForeground, RelativeSource={RelativeSource Self}}" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Opacity" Value="0.4" />
+                <Setter Property="Opacity" Value="{DynamicResource ZenDisabledActionOpacity}" />
                 <Setter Property="Cursor" Value="Arrow" />
             </Trigger>
         </Style.Triggers>

@@ -38,7 +38,7 @@
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Cursor" Value="Arrow" />
-                            <Setter Property="Opacity" Value="0.35" />
+                            <Setter Property="Opacity" Value="{DynamicResource ZenDisabledAuxiliaryActionOpacity}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -203,7 +203,7 @@
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter TargetName="InputBorder" Property="Background" Value="{DynamicResource ZenSurfaceDisabledBrush}" />
-                            <Setter Property="Opacity" Value="0.6" />
+                            <Setter Property="Opacity" Value="{DynamicResource ZenDisabledFieldOpacity}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

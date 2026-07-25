@@ -6,7 +6,7 @@
         <Setter Property="Margin" Value="{DynamicResource ZenFocusVisualMargin}" />
         <Setter Property="BorderBrush" Value="{DynamicResource ZenFocusBrush}" />
         <Setter Property="BorderThickness" Value="{DynamicResource ZenFocusVisualBorderThickness}" />
-        <Setter Property="Opacity" Value="0.35" />
+        <Setter Property="Opacity" Value="{DynamicResource ZenFocusVisualOpacity}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
     </Style>
 

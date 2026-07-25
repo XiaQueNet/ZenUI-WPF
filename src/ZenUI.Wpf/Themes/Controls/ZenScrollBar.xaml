@@ -134,7 +134,7 @@
                 <Setter Property="Template" Value="{StaticResource ZenHorizontalScrollBarTemplate}" />
             </Trigger>
             <Trigger Property="IsEnabled" Value="False">
-                <Setter Property="Opacity" Value="0.45" />
+                <Setter Property="Opacity" Value="{DynamicResource ZenDisabledItemOpacity}" />
             </Trigger>
         </Style.Triggers>
     </Style>

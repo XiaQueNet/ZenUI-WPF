@@ -1,0 +1,16 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <!-- Keyboard focus -->
+    <sys:Double x:Key="ZenFocusVisualOpacity">0.35</sys:Double>
+
+    <!-- Disabled-state emphasis levels -->
+    <sys:Double x:Key="ZenDisabledAuxiliaryActionOpacity">0.35</sys:Double>
+    <sys:Double x:Key="ZenDisabledActionOpacity">0.4</sys:Double>
+    <sys:Double x:Key="ZenDisabledItemOpacity">0.45</sys:Double>
+    <sys:Double x:Key="ZenDisabledInputOpacity">0.55</sys:Double>
+    <sys:Double x:Key="ZenDisabledFieldOpacity">0.6</sys:Double>
+    <sys:Double x:Key="ZenDisabledContainerOpacity">0.65</sys:Double>
+</ResourceDictionary>

@@ -16,6 +16,7 @@ using System.Windows.Threading;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using ZenUI.Wpf.Controls;
+using ZenUI.Wpf.Theming;
 
 namespace ZenUI.Wpf.Tests.Controls
 {
@@ -161,7 +162,93 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.AreEqual(new Thickness(0, 4, 0, 0), dictionary["ZenComboBoxPopupMargin"]);
             Assert.AreEqual(new Thickness(4), dictionary["ZenComboBoxPopupPadding"]);
             Assert.AreEqual(new CornerRadius(6), dictionary["ZenComboBoxPopupCornerRadius"]);
+            Assert.AreEqual(0.35d, dictionary["ZenFocusVisualOpacity"]);
+            Assert.AreEqual(0.35d, dictionary["ZenDisabledAuxiliaryActionOpacity"]);
+            Assert.AreEqual(0.4d, dictionary["ZenDisabledActionOpacity"]);
+            Assert.AreEqual(0.45d, dictionary["ZenDisabledItemOpacity"]);
+            Assert.AreEqual(0.55d, dictionary["ZenDisabledInputOpacity"]);
+            Assert.AreEqual(0.6d, dictionary["ZenDisabledFieldOpacity"]);
+            Assert.AreEqual(0.65d, dictionary["ZenDisabledContainerOpacity"]);
             Assert.IsInstanceOfType<Style>(dictionary["ZenFocusVisualBorderStyle"]);
+        }
+
+        [TestMethod]
+        public void HighContrastKeepsDisabledControlsAtFullOpacity()
+        {
+            var button = new ZenButton { IsEnabled = false };
+            var toggleSwitch = new ZenSwitch { IsEnabled = false };
+            var textBox = new ZenTextBox { IsEnabled = false };
+            var passwordBox = new ZenPasswordBox { IsEnabled = false };
+            var numberBox = new ZenNumberBox { IsEnabled = false };
+            var comboBox = new ZenComboBox { IsEnabled = false };
+            var checkBox = new ZenCheckBox { IsEnabled = false };
+            var radioButton = new ZenRadioButton { IsEnabled = false };
+            var listBox = new ZenListBox { IsEnabled = false, Height = 80 };
+            var slider = new ZenSlider { IsEnabled = false };
+            var scrollBar = new ScrollBar { IsEnabled = false, Height = 80 };
+            var datePicker = new ZenDatePicker { IsEnabled = false };
+            listBox.Items.Add("Disabled item");
+
+            var panel = new StackPanel();
+            panel.Children.Add(button);
+            panel.Children.Add(toggleSwitch);
+            panel.Children.Add(textBox);
+            panel.Children.Add(passwordBox);
+            panel.Children.Add(numberBox);
+            panel.Children.Add(comboBox);
+            panel.Children.Add(checkBox);
+            panel.Children.Add(radioButton);
+            panel.Children.Add(listBox);
+            panel.Children.Add(slider);
+            panel.Children.Add(scrollBar);
+            panel.Children.Add(datePicker);
+
+            var window = CreateTestWindow(panel, 420, 720);
+            window.Resources.MergedDictionaries.Add(new ResourceDictionary
+            {
+                Source = new Uri(
+                    "/ZenUI.Wpf;component/Themes/Generic.xaml",
+                    UriKind.Relative)
+            });
+
+            try
+            {
+                window.Show();
+                window.UpdateLayout();
+
+                Assert.AreEqual(0.4d, button.Opacity);
+                Assert.AreEqual(0.4d, toggleSwitch.Opacity);
+                Assert.AreEqual(0.6d, textBox.Opacity);
+                Assert.AreEqual(0.55d, passwordBox.Opacity);
+                Assert.AreEqual(0.6d, numberBox.Opacity);
+                Assert.AreEqual(0.55d, comboBox.Opacity);
+                Assert.AreEqual(0.45d, checkBox.Opacity);
+                Assert.AreEqual(0.45d, radioButton.Opacity);
+                Assert.AreEqual(0.65d, listBox.Opacity);
+                Assert.AreEqual(0.4d, slider.Opacity);
+                Assert.AreEqual(0.45d, scrollBar.Opacity);
+                Assert.AreEqual(0.55d, datePicker.Opacity);
+
+                ZenThemeManager.ApplyTheme(window.Resources, ZenTheme.HighContrast, false);
+                window.UpdateLayout();
+
+                Assert.AreEqual(1d, button.Opacity);
+                Assert.AreEqual(1d, toggleSwitch.Opacity);
+                Assert.AreEqual(1d, textBox.Opacity);
+                Assert.AreEqual(1d, passwordBox.Opacity);
+                Assert.AreEqual(1d, numberBox.Opacity);
+                Assert.AreEqual(1d, comboBox.Opacity);
+                Assert.AreEqual(1d, checkBox.Opacity);
+                Assert.AreEqual(1d, radioButton.Opacity);
+                Assert.AreEqual(1d, listBox.Opacity);
+                Assert.AreEqual(1d, slider.Opacity);
+                Assert.AreEqual(1d, scrollBar.Opacity);
+                Assert.AreEqual(1d, datePicker.Opacity);
+            }
+            finally
+            {
+                window.Close();
+            }
         }
 
         [TestMethod]

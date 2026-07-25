@@ -6,7 +6,7 @@
 
 - 使用 WPF `ResourceDictionary` 和 `DynamicResource` 支持运行时主题切换。
 - 让应用能够覆盖单个 Token，而不必复制完整控件模板。
-- 保持 Light、Dark 和 HighContrast 的资源键与资源类型一致。
+- 保持 Light、Dark 和 HighContrast 的颜色资源键与资源类型一致，并验证其他主题覆盖不改变 Token 类型。
 - 将全局设计语义与控件特有状态分开，避免所有资源长期堆积在同一个字典中。
 - 保持已经发布的字符串资源键和 `Themes/Colors.xaml` 入口兼容。
 
@@ -20,6 +20,7 @@
 | `Tokens/ComponentColors.xaml` | 控件或控件部件特有的颜色状态 | `ZenScrollBarThumbBrush`、`ZenListBoxItemSelectedBrush` |
 | `Tokens/Metrics.xaml` | 跨控件共享的尺寸与边框指标 | `ZenInputControlMinHeight`、`ZenInputControlPadding` |
 | `Tokens/ComponentMetrics.xaml` | 控件特有但允许应用统一覆盖的尺寸 | `ZenButtonCornerRadius`、`ZenListBoxItemPadding` |
+| `Tokens/Interaction.xaml` | 焦点和禁用状态的透明度语义 | `ZenFocusVisualOpacity`、`ZenDisabledActionOpacity` |
 
 `Dark.xaml` 和 `HighContrast.xaml` 覆盖相同的公开颜色 Token。高对比度资源应优先使用 WPF `SystemColors`，而不是复制普通主题的固定色值。
 
@@ -28,6 +29,10 @@ Metrics 当前统一 TextBox、PasswordBox、ComboBox、DatePicker 和 NumberBox
 Component Metrics 只收录具有明确控件语义、且不依赖模板内部布局计算的尺寸。单次出现的图标坐标、路径尺寸和与相邻列宽耦合的数值继续作为模板实现细节，不因追求 Token 数量而公开。
 
 当前 Component Metrics 覆盖 Button、ListBox、ScrollBar 和 ComboBox 弹层。DatePicker 创建的 Calendar 位于独立 Popup 资源作用域，其外观应通过 WPF 原生 `CalendarStyle` 定制；日期网格、导航图标和控件路径仍属于模板实现细节。
+
+Interaction Token 按控件角色区分禁用后的视觉强调程度，而不是按具体控件命名。Light 和 Dark 使用原有透明度层级；HighContrast 将这些可靠的状态 Token 覆盖为完全不透明，让系统色承担禁用语义，避免透明度进一步削弱可读性。
+
+Calendar 弹层和部分 DataGrid 模板内部状态暂不纳入 Interaction Token：前者位于独立 Popup 资源边界，后者包含通过 `TargetName` 修改模板内部元素的触发器。此类状态应优先通过 `CalendarStyle` 或控件依赖属性显式传递，避免产生看似可覆盖、实际无法可靠解析的 Token。
 
 后续可在不改变现有 Token 的前提下增加：
 
@@ -79,10 +84,10 @@ Focus
 
 新增主题相关 Token 时，必须同时：
 
-1. 在默认 Light 主题中定义资源。
-2. 在 Dark 主题中提供相同键和相同类型。
-3. 在 HighContrast 主题中提供相同键和相同类型。
+1. 在对应的 `Tokens/*.xaml` 中定义默认值。
+2. 只有需要不同取值的主题才覆盖同名 Token，并保持资源类型一致。
+3. Light、Dark、HighContrast 的颜色 Token 必须保持相同的键和类型契约。
 4. 在控件模板中通过语义化 `DynamicResource` 使用。
-5. 运行主题契约测试和相关视觉回归测试。
+5. 运行主题契约、控件行为和相关视觉回归测试。
 
 移动 Token 的物理文件不应改变公开资源键、资源类型、默认值或 `Colors.xaml`、`Generic.xaml` 的加载入口。
