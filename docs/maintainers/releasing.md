@@ -1,6 +1,6 @@
 # 版本与发布规范
 
-本文档规定 ZenUI.Wpf 的版本号、分支、Tag、NuGet 和 GitHub Release 操作。后续发布应以本文档为准。
+本文档规定 `ZenUI.Wpf` 与 `ZenUI.Wpf.Converters` 的版本号、分支、Tag、NuGet 和 GitHub Release 操作。后续发布应以本文档为准。
 
 ## 核心原则
 
@@ -41,7 +41,12 @@ rc.1
 
 ## 项目中的版本来源
 
-版本配置位于 `src/ZenUI.Wpf/ZenUI.Wpf.csproj`：
+版本配置分别位于：
+
+- `src/ZenUI.Wpf/ZenUI.Wpf.csproj`
+- `src/ZenUI.Wpf.Converters/ZenUI.Wpf.Converters.csproj`
+
+当前两个包采用同步版本和同步发布策略：
 
 - `VersionPrefix`：下一目标版本的 `MAJOR.MINOR.PATCH`。
 - `VersionSuffix`：预发布后缀；稳定版本应删除或清空。
@@ -59,7 +64,7 @@ rc.1
 
 进入 `1.x` 后，整个兼容发布线原则上保持 `AssemblyVersion=1.0.0.0`；只有进入新的破坏性主版本时才改为 `2.0.0.0`。
 
-CI 在 `.github/workflows/ci.yml` 中生成 `0.1.0-ci.<run_number>` 包。调整目标发布线时，必须同步修改项目版本、CI 包版本和 `CHANGELOG.md`。
+CI 在 `.github/workflows/ci.yml` 中为两个包生成相同版本的 `0.1.0-ci.<run_number>` 构件。调整目标发布线时，必须同步修改两个项目版本、CI 包版本和 `CHANGELOG.md`。
 
 ## 分支策略
 
@@ -146,7 +151,7 @@ git push origin v0.1.0-preview.2
 ```powershell
 dotnet restore ZenUI.Wpf.slnx
 dotnet build ZenUI.Wpf.slnx -c Release --no-restore
-dotnet test tests/ZenUI.Wpf.Tests/ZenUI.Wpf.Tests.csproj -c Release --no-build --no-restore
+dotnet test ZenUI.Wpf.slnx -c Release --no-build --no-restore
 dotnet list ZenUI.Wpf.slnx package --vulnerable --include-transitive
 ```
 
@@ -182,13 +187,14 @@ git push origin v<version>
 Tag 创建后，在该提交上重新构建和打包。不要复用提交前生成的旧包，否则 Source Link 可能记录错误提交。
 
 ```powershell
-dotnet build src/ZenUI.Wpf/ZenUI.Wpf.csproj -c Release --no-restore
+dotnet build ZenUI.Wpf.slnx -c Release --no-restore
 dotnet pack src/ZenUI.Wpf/ZenUI.Wpf.csproj -c Release --no-build -o artifacts/packages
+dotnet pack src/ZenUI.Wpf.Converters/ZenUI.Wpf.Converters.csproj -c Release --no-build -o artifacts/packages
 ```
 
 发布前检查 `.nupkg`：
 
-- 包 ID 和版本正确。
+- 两个包的包 ID 和版本正确。
 - MIT License、README、Logo、目标框架和 XML 文档存在。
 - `.snupkg` 已生成。
 - Repository URL 指向 `XiaQueNet/ZenUI-WPF`。
@@ -199,7 +205,7 @@ dotnet pack src/ZenUI.Wpf/ZenUI.Wpf.csproj -c Release --no-build -o artifacts/pa
 
 API Key 必须：
 
-- 仅授予 `ZenUI.Wpf` 所需的 Push 权限。
+- 仅授予 `ZenUI.Wpf` 与 `ZenUI.Wpf.Converters` 所需的 Push 权限。
 - 设置合理的有效期。
 - 不写入源码、脚本、日志、Issue 或聊天。
 - 泄露后立即撤销或刷新。
@@ -214,6 +220,10 @@ dotnet nuget push "artifacts/packages/ZenUI.Wpf.<version>.nupkg" `
   --api-key $env:NUGET_API_KEY `
   --source "https://api.nuget.org/v3/index.json"
 
+dotnet nuget push "artifacts/packages/ZenUI.Wpf.Converters.<version>.nupkg" `
+  --api-key $env:NUGET_API_KEY `
+  --source "https://api.nuget.org/v3/index.json"
+
 Remove-Item Env:\NUGET_API_KEY
 ```
 
@@ -222,7 +232,7 @@ Remove-Item Env:\NUGET_API_KEY
 ### 7. 创建 GitHub Release
 
 - Tag：`v<version>`。
-- 标题：`ZenUI.Wpf <version>`。
+- 标题：`ZenUI WPF <version>`。
 - 预发布版本必须勾选 **Set as a pre-release**。
 - 发布说明使用中文，包含主要变更、安装命令、兼容性提示和破坏性修改。
 - 上传对应的 `.nupkg` 与 `.snupkg`。
@@ -231,6 +241,7 @@ Remove-Item Env:\NUGET_API_KEY
 
 ```powershell
 dotnet add package ZenUI.Wpf --version <version>
+dotnet add package ZenUI.Wpf.Converters --version <version>
 ```
 
 ### 8. 发布后验证

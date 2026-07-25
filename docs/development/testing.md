@@ -1,11 +1,12 @@
 # 测试规范
 
-本文约定 ZenUI.Wpf 的自动化测试写法。测试应保护公开行为、WPF 契约和跨目标框架兼容性，避免绑定到无关的实现细节。
+本文约定 ZenUI.Wpf 组件与转换器的自动化测试写法。测试应保护公开行为、WPF 契约和跨目标框架兼容性，避免绑定到无关的实现细节。
 
 ## 工程与框架
 
-- 测试统一放在 `tests/ZenUI.Wpf.Tests/`，目录与被测能力对应，例如 `Controls/`、`Converters/`、`Theming/`。
-- 使用项目现有的 MSTest，不为单个控件或功能新建测试工程。
+- 控件和主题测试放在 `tests/ZenUI.Wpf.Tests/`，目录与被测能力对应，例如 `Controls/`、`Theming/`。
+- 转换器测试放在 `tests/ZenUI.Wpf.Converters.Tests/`，保证转换器包不通过测试项目间接依赖控件包。
+- 使用项目现有的 MSTest；除独立 NuGet 包边界外，不为单个控件或功能新建测试工程。
 - 普通测试使用 `[TestClass]` 和 `[TestMethod]`。
 - 创建或操作 WPF 控件、窗口、模板、Dispatcher 或 UI Automation Peer 的测试使用 `[STATestClass]`。
 - 测试必须同时兼容项目当前目标框架 `net472` 和 `net8.0-windows`；不要使用仅在其中一个目标可用的测试 API。
@@ -61,7 +62,7 @@
 提交前至少运行：
 
 ```powershell
-dotnet test tests/ZenUI.Wpf.Tests/ZenUI.Wpf.Tests.csproj -c Release
+dotnet test ZenUI.Wpf.slnx -c Release
 ```
 
 影响打包、公共 API 或多目标框架配置时，还应按 `CONTRIBUTING.md` 运行完整构建与打包检查。

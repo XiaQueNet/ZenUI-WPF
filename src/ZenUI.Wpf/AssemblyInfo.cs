@@ -6,6 +6,5 @@ using System.Windows.Markup;
     ResourceDictionaryLocation.SourceAssembly)]
 
 [assembly: XmlnsDefinition("http://zenui.mnorg.com/zenui-wpf", "ZenUI.Wpf.Controls")]
-[assembly: XmlnsDefinition("http://zenui.mnorg.com/zenui-wpf", "ZenUI.Wpf.Converters")]
 [assembly: XmlnsDefinition("http://zenui.mnorg.com/zenui-wpf", "ZenUI.Wpf.Theming")]
 [assembly: XmlnsPrefix("http://zenui.mnorg.com/zenui-wpf", "zen")]

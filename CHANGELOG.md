@@ -7,6 +7,11 @@
 ### Added
 
 - 增加 `ZenListBox` 列表选择控件及 Gallery 示例，支持单选、多选、键盘导航、虚拟化和主题化交互状态。
+- 增加独立的 `ZenUI.Wpf.Converters` NuGet 包，提供可在任意 WPF 项目中使用的常用值转换器。
+
+### Changed
+
+- 将转换器及其测试从控件包迁移到独立项目，并使用专属 XAML 命名空间。
 
 ## [0.1.0-preview.2] - 2026-07-24
 

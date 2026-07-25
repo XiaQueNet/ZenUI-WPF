@@ -7,7 +7,7 @@ using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using ZenUI.Wpf.Converters;
 
-namespace ZenUI.Wpf.Tests.Converters
+namespace ZenUI.Wpf.Converters.Tests
 {
     [TestClass]
     public class VisibilityConverterTests

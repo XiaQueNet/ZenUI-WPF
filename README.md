@@ -2,7 +2,16 @@
   <img src="https://raw.githubusercontent.com/XiaQueNet/ZenUI-WPF/main/assets/brand/zenui-logo.png" alt="ZenUI for WPF" width="570" />
 </p>
 
-面向 .NET Framework 4.7.2 与现代 .NET 8 WPF 的控件库。
+面向 .NET Framework 4.7.2 与现代 .NET 8 WPF 的控件库和通用转换器。
+
+## NuGet 包
+
+| 包 | 用途 |
+| --- | --- |
+| `ZenUI.Wpf` | 控件、主题与设计令牌 |
+| `ZenUI.Wpf.Converters` | 可独立使用的通用 WPF 值转换器 |
+
+两个包互不依赖，可以按需单独安装。
 
 ## 设计原则
 
@@ -53,6 +62,19 @@ ZenUI 的目标是优化 WPF 控件的默认体验，而不是缩减 WPF 已有�
 
 目前提供 Button、TextBox、NumberBox、PasswordBox、Switch、CheckBox、RadioButton、ComboBox、ListBox、DatePicker、DataGrid、Slider、ProgressBar 和 Alert 共 14 个常用控件。所有控件均自带默认主题，并覆盖悬停、焦点、选中和禁用等常见交互状态。
 
+转换器包使用独立的 XAML 命名空间，无需在应用资源中注册实例：
+
+```xaml
+<Window
+    xmlns:zc="http://zenui.mnorg.com/wpf/converters">
+    <ProgressBar
+        Visibility="{Binding IsLoading,
+            Converter={zc:BoolToVisibilityConverter}}" />
+</Window>
+```
+
+当前提供布尔值、空值、集合内容和数值比较到 `Visibility` 的转换，并统一支持结果反转以及 `Collapsed`/`Hidden` 配置。
+
 控件的默认样式由 `Themes/Generic.xaml` 自动加载。应用需要直接使用 ZenUI 颜色资源或具名样式时，可以显式合并默认主题：
 
 ```xaml
@@ -91,9 +113,10 @@ private void PasswordBox_OnPasswordChanged(object sender, RoutedEventArgs e)
 ## 构建
 
 - 控件库（`net472` 与 `net8.0-windows`）：`dotnet build src/ZenUI.Wpf/ZenUI.Wpf.csproj -c Release`
+- 转换器库（`net472` 与 `net8.0-windows`）：`dotnet build src/ZenUI.Wpf.Converters/ZenUI.Wpf.Converters.csproj -c Release`
 - 控件 Gallery：`dotnet build samples/ZenUI.Wpf.Gallery/ZenUI.Wpf.Gallery.csproj -c Release`
-- 自动化测试：`dotnet test tests/ZenUI.Wpf.Tests/ZenUI.Wpf.Tests.csproj -c Release`
-- NuGet 包：`dotnet pack src/ZenUI.Wpf/ZenUI.Wpf.csproj -c Release`
+- 自动化测试：`dotnet test ZenUI.Wpf.slnx -c Release`
+- NuGet 包：分别对 `src/ZenUI.Wpf/ZenUI.Wpf.csproj` 和 `src/ZenUI.Wpf.Converters/ZenUI.Wpf.Converters.csproj` 执行 `dotnet pack`
 
 `samples/ZenUI.Wpf.Gallery` 是 ZenUI 控件目录，使用 Prism Region Navigation 和 MVVM：`MainWindow` 只负责 Shell 布局，菜单由 `MainWindowViewModel` 驱动，每个组件位于独立的 `Views/*View.xaml` 页面。Gallery 仍以 .NET Framework 4.7.2 为目标框架，Prism 依赖不会传递到 `ZenUI.Wpf` 控件库。`samples/ZenUI.Wpf.PosDemo` 则负责展示完整的业务应用场景。
 
