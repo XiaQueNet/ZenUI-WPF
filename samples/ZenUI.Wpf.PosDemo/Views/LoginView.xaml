@@ -3,7 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:prism="http://prismlibrary.com/"
-    xmlns:zen="http://zenui.mnorg.com/zenui-wpf"
+    xmlns:zen="https://zenui.mnorg.cn/xaml/wpf"
     prism:Dialog.WindowStartupLocation="CenterScreen"
     Background="{DynamicResource ZenSurfaceBrush}"
     FontFamily="Microsoft YaHei UI"

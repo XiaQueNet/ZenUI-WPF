@@ -1,8 +1,8 @@
 using System.Windows.Markup;
 
 [assembly: XmlnsDefinition(
-    "http://zenui.mnorg.com/wpf/converters",
+    "https://zenui.mnorg.cn/xaml/wpf/converters",
     "ZenUI.Wpf.Converters")]
 [assembly: XmlnsPrefix(
-    "http://zenui.mnorg.com/wpf/converters",
+    "https://zenui.mnorg.cn/xaml/wpf/converters",
     "zenConverters")]

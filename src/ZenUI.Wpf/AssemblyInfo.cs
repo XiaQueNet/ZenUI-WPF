@@ -5,6 +5,6 @@ using System.Windows.Markup;
     ResourceDictionaryLocation.None,
     ResourceDictionaryLocation.SourceAssembly)]
 
-[assembly: XmlnsDefinition("http://zenui.mnorg.com/zenui-wpf", "ZenUI.Wpf.Controls")]
-[assembly: XmlnsDefinition("http://zenui.mnorg.com/zenui-wpf", "ZenUI.Wpf.Theming")]
-[assembly: XmlnsPrefix("http://zenui.mnorg.com/zenui-wpf", "zen")]
+[assembly: XmlnsDefinition("https://zenui.mnorg.cn/xaml/wpf", "ZenUI.Wpf.Controls")]
+[assembly: XmlnsDefinition("https://zenui.mnorg.cn/xaml/wpf", "ZenUI.Wpf.Theming")]
+[assembly: XmlnsPrefix("https://zenui.mnorg.cn/xaml/wpf", "zen")]

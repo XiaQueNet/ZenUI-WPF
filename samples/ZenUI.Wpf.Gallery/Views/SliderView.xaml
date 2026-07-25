@@ -4,7 +4,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:gallery="clr-namespace:ZenUI.Wpf.Gallery.Controls"
     xmlns:prism="http://prismlibrary.com/"
-    xmlns:zen="http://zenui.mnorg.com/zenui-wpf"
+    xmlns:zen="https://zenui.mnorg.cn/xaml/wpf"
     prism:ViewModelLocator.AutoWireViewModel="True">
     <ScrollViewer Padding="40" HorizontalContentAlignment="Stretch" VerticalScrollBarVisibility="Auto">
         <StackPanel>

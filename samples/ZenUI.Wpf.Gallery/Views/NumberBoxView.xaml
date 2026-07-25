@@ -3,7 +3,7 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:gallery="clr-namespace:ZenUI.Wpf.Gallery.Controls"
-    xmlns:zen="http://zenui.mnorg.com/zenui-wpf">
+    xmlns:zen="https://zenui.mnorg.cn/xaml/wpf">
     <ScrollViewer Padding="40" HorizontalContentAlignment="Stretch" VerticalScrollBarVisibility="Auto">
         <StackPanel>
             <gallery:PageHeader Description="支持范围约束、可配置步长和两种按钮布局。" Title="NumberBox 数字输入框" />

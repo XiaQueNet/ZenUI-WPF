@@ -38,7 +38,7 @@ ZenUI 的目标是优化 WPF 控件的默认体验，而不是缩减 WPF 已有�
 
 ```xaml
 <Window
-    xmlns:zen="http://zenui.mnorg.com/zenui-wpf">
+    xmlns:zen="https://zenui.mnorg.cn/xaml/wpf">
     <StackPanel>
         <zen:ZenButton Content="保存" Variant="Primary" />
         <zen:ZenSwitch IsChecked="True" />
@@ -66,7 +66,7 @@ ZenUI 的目标是优化 WPF 控件的默认体验，而不是缩减 WPF 已有�
 
 ```xaml
 <Window
-    xmlns:zc="http://zenui.mnorg.com/wpf/converters">
+    xmlns:zc="https://zenui.mnorg.cn/xaml/wpf/converters">
     <ProgressBar
         Visibility="{Binding IsLoading,
             Converter={zc:BoolToVisibilityConverter}}" />

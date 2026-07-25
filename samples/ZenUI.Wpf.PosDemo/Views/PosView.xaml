@@ -2,7 +2,7 @@
     x:Class="ZenUI.Wpf.PosDemo.Views.PosView"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-    xmlns:zen="http://zenui.mnorg.com/zenui-wpf"
+    xmlns:zen="https://zenui.mnorg.cn/xaml/wpf"
     Background="{DynamicResource ZenSurfaceMutedBrush}"
     FontFamily="Microsoft YaHei UI"
     FontSize="22"
