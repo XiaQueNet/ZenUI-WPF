@@ -106,6 +106,7 @@ namespace ZenUI.Wpf.Tests.Controls
         [TestMethod]
         public void GenericThemeContainsControlStylesAndTokens()
         {
+            _ = new ZenButton();
             var dictionary = new ResourceDictionary
             {
                 Source = new Uri(
@@ -143,6 +144,14 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.AreEqual(new Thickness(1), dictionary["ZenControlBorderThickness"]);
             Assert.AreEqual(new Thickness(-2), dictionary["ZenFocusVisualMargin"]);
             Assert.AreEqual(new Thickness(1), dictionary["ZenFocusVisualBorderThickness"]);
+            Assert.AreEqual(new Thickness(5, 0, 5, 0), dictionary["ZenButtonPadding"]);
+            Assert.AreEqual(new CornerRadius(10), dictionary["ZenButtonCornerRadius"]);
+            Assert.AreEqual(new CornerRadius(13), dictionary["ZenButtonFocusVisualCornerRadius"]);
+            Assert.AreEqual(new Thickness(4), dictionary["ZenListBoxPadding"]);
+            Assert.AreEqual(new CornerRadius(8), dictionary["ZenListBoxCornerRadius"]);
+            Assert.AreEqual(new Thickness(12, 9, 12, 9), dictionary["ZenListBoxItemPadding"]);
+            Assert.AreEqual(new Thickness(0, 1, 0, 1), dictionary["ZenListBoxItemMargin"]);
+            Assert.AreEqual(new CornerRadius(5), dictionary["ZenListBoxItemCornerRadius"]);
             Assert.IsInstanceOfType<Style>(dictionary["ZenFocusVisualBorderStyle"]);
         }
 
@@ -171,6 +180,65 @@ namespace ZenUI.Wpf.Tests.Controls
                 Assert.AreEqual(new Thickness(12, 6, 12, 6), textBox.Padding);
                 Assert.AreEqual(new CornerRadius(8), textBox.CornerRadius);
                 Assert.AreEqual(new Thickness(2), textBox.BorderThickness);
+            }
+            finally
+            {
+                window.Close();
+            }
+        }
+
+        [TestMethod]
+        public void ComponentMetricTokensCanBeOverriddenInWindowResources()
+        {
+            var button = new ZenButton
+            {
+                Appearance = ButtonAppearance.Outlined,
+                Content = "Action"
+            };
+            var listBox = new ZenListBox
+            {
+                Height = 80
+            };
+            listBox.Items.Add("Item");
+            var panel = new StackPanel();
+            panel.Children.Add(button);
+            panel.Children.Add(listBox);
+            var window = CreateTestWindow(panel, 260, 160);
+            window.Resources.MergedDictionaries.Add(new ResourceDictionary
+            {
+                Source = new Uri(
+                    "/ZenUI.Wpf;component/Themes/Generic.xaml",
+                    UriKind.Relative)
+            });
+            window.Resources["ZenControlBorderThickness"] = new Thickness(2);
+            window.Resources["ZenButtonPadding"] = new Thickness(14, 6, 14, 6);
+            window.Resources["ZenButtonCornerRadius"] = new CornerRadius(12);
+            window.Resources["ZenListBoxPadding"] = new Thickness(6);
+            window.Resources["ZenListBoxCornerRadius"] = new CornerRadius(10);
+            window.Resources["ZenListBoxItemPadding"] = new Thickness(16, 10, 16, 10);
+            window.Resources["ZenListBoxItemMargin"] = new Thickness(0, 2, 0, 2);
+            window.Resources["ZenListBoxItemCornerRadius"] = new CornerRadius(7);
+
+            try
+            {
+                window.Show();
+                window.UpdateLayout();
+
+                Assert.AreEqual(new Thickness(14, 6, 14, 6), button.Padding);
+                Assert.AreEqual(new CornerRadius(12), button.CornerRadius);
+                Assert.AreEqual(new Thickness(2), button.BorderThickness);
+                Assert.AreEqual(new Thickness(6), listBox.Padding);
+                Assert.AreEqual(new CornerRadius(10), listBox.CornerRadius);
+                Assert.AreEqual(new Thickness(2), listBox.BorderThickness);
+
+                var item = listBox.ItemContainerGenerator.ContainerFromIndex(0) as ListBoxItem;
+                Assert.IsNotNull(item);
+                item.ApplyTemplate();
+                Assert.AreEqual(new Thickness(16, 10, 16, 10), item.Padding);
+                Assert.AreEqual(new Thickness(0, 2, 0, 2), item.Margin);
+                var itemBorder = item.Template.FindName("ItemBorder", item) as Border;
+                Assert.IsNotNull(itemBorder);
+                Assert.AreEqual(new CornerRadius(7), itemBorder.CornerRadius);
             }
             finally
             {

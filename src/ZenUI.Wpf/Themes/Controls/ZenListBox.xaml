@@ -7,15 +7,15 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Control}">
-                    <Border CornerRadius="5" Style="{DynamicResource ZenFocusVisualBorderStyle}" />
+                    <Border CornerRadius="{DynamicResource ZenListBoxItemCornerRadius}" Style="{DynamicResource ZenFocusVisualBorderStyle}" />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
 
     <Style x:Key="ZenListBoxItemStyle" TargetType="{x:Type ListBoxItem}">
-        <Setter Property="Padding" Value="12,9" />
-        <Setter Property="Margin" Value="0,1" />
+        <Setter Property="Padding" Value="{DynamicResource ZenListBoxItemPadding}" />
+        <Setter Property="Margin" Value="{DynamicResource ZenListBoxItemMargin}" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{DynamicResource ZenTextPrimaryBrush}" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -28,7 +28,7 @@
                         x:Name="ItemBorder"
                         Padding="{TemplateBinding Padding}"
                         Background="{TemplateBinding Background}"
-                        CornerRadius="5"
+                        CornerRadius="{DynamicResource ZenListBoxItemCornerRadius}"
                         SnapsToDevicePixels="True">
                         <ContentPresenter
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -73,10 +73,10 @@
     <Style x:Key="ZenListBoxStyle" TargetType="{x:Type zen:ZenListBox}">
         <Setter Property="Background" Value="{DynamicResource ZenSurfaceBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource ZenBorderBrush}" />
-        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderThickness" Value="{DynamicResource ZenControlBorderThickness}" />
         <Setter Property="Foreground" Value="{DynamicResource ZenTextPrimaryBrush}" />
-        <Setter Property="Padding" Value="4" />
-        <Setter Property="CornerRadius" Value="8" />
+        <Setter Property="Padding" Value="{DynamicResource ZenListBoxPadding}" />
+        <Setter Property="CornerRadius" Value="{DynamicResource ZenListBoxCornerRadius}" />
         <Setter Property="ItemContainerStyle" Value="{StaticResource ZenListBoxItemStyle}" />
         <Setter Property="ScrollViewer.CanContentScroll" Value="True" />
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />

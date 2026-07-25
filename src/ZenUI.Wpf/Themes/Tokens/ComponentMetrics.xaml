@@ -1,0 +1,16 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
+
+    <!-- Button -->
+    <Thickness x:Key="ZenButtonPadding">5,0</Thickness>
+    <CornerRadius x:Key="ZenButtonCornerRadius">10</CornerRadius>
+    <CornerRadius x:Key="ZenButtonFocusVisualCornerRadius">13</CornerRadius>
+
+    <!-- ListBox -->
+    <Thickness x:Key="ZenListBoxPadding">4</Thickness>
+    <CornerRadius x:Key="ZenListBoxCornerRadius">8</CornerRadius>
+    <Thickness x:Key="ZenListBoxItemPadding">12,9</Thickness>
+    <Thickness x:Key="ZenListBoxItemMargin">0,1</Thickness>
+    <CornerRadius x:Key="ZenListBoxItemCornerRadius">5</CornerRadius>
+</ResourceDictionary>
