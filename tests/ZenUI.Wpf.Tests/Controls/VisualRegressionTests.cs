@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.IO;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Threading;
@@ -25,7 +26,7 @@ namespace ZenUI.Wpf.Tests.Controls
             };
 
         [TestMethod]
-        public void ThemesAndDpiScalesProduceReviewableVisualSnapshots()
+        public void ThemesDensitiesAndDpiScalesProduceReviewableVisualSnapshots()
         {
             var framework = Environment.Version.Major >= 8 ? "net8" : "net472";
             var outputDirectory = Path.Combine(AppContext.BaseDirectory, "visual-regression", framework);
@@ -34,32 +35,43 @@ namespace ZenUI.Wpf.Tests.Controls
 
             foreach (var theme in new[] { ZenTheme.Light, ZenTheme.Dark, ZenTheme.HighContrast })
             {
-                foreach (var scale in new[] { 1d, 1.5d, 2d })
+                foreach (var density in new[] { ZenDensity.Compact, ZenDensity.Standard, ZenDensity.Comfortable })
                 {
-                    var root = CreateControlGallery(theme);
-                    var bitmap = Render(root, scale);
-                    var gallery = (StackPanel)root.Child;
-                    var dataGrid = (ZenDataGrid)gallery.Children[gallery.Children.Count - 1];
-                    Assert.IsGreaterThan(
-                        50d,
-                        dataGrid.Columns[0].ActualWidth,
-                        $"Grid={dataGrid.ActualWidth}, second={dataGrid.Columns[1].ActualWidth}, desired={dataGrid.DesiredSize.Width}");
-                    Assert.IsGreaterThan(20, CountDistinctSampledColors(bitmap));
-                    if (LuminanceBaselines.TryGetValue(theme, out var encodedBaseline))
+                    foreach (var scale in new[] { 1.25d, 1.5d, 2d })
                     {
-                        var difference = CalculateMeanAbsoluteDifference(
-                            Convert.FromBase64String(encodedBaseline),
-                            CalculateNormalizedLuminanceFingerprint(bitmap));
-                        Assert.IsLessThan(
-                            12d,
-                            difference,
-                            $"{theme} at {scale:0.0}x differs materially from its approved visual baseline.");
-                    }
+                        var root = CreateControlGallery(theme, density);
+                        var bitmap = Render(root, scale);
+                        var gallery = (StackPanel)root.Child;
+                        var dataGrid = (ZenDataGrid)gallery.Children[gallery.Children.Count - 1];
+                        var row = dataGrid.ItemContainerGenerator.ContainerFromIndex(0) as DataGridRow;
+                        Assert.IsNotNull(row);
+                        Assert.AreEqual(
+                            (double)root.Resources["ZenDataGridRowMinHeight"],
+                            row.MinHeight);
+                        Assert.IsGreaterThan(
+                            50d,
+                            dataGrid.Columns[0].ActualWidth,
+                            $"Grid={dataGrid.ActualWidth}, second={dataGrid.Columns[1].ActualWidth}, desired={dataGrid.DesiredSize.Width}");
+                        Assert.IsGreaterThan(20, CountDistinctSampledColors(bitmap));
+                        if (density == ZenDensity.Standard &&
+                            LuminanceBaselines.TryGetValue(theme, out var encodedBaseline))
+                        {
+                            var difference = CalculateMeanAbsoluteDifference(
+                                Convert.FromBase64String(encodedBaseline),
+                                CalculateNormalizedLuminanceFingerprint(bitmap));
+                            Assert.IsLessThan(
+                                12d,
+                                difference,
+                                $"{theme} at {scale:0.00}x differs materially from its approved visual baseline.");
+                        }
 
-                    SavePng(bitmap, Path.Combine(outputDirectory, $"{theme}-{scale:0.0}x.png"));
-                    if (Math.Abs(scale - 1d) < 0.01d)
-                    {
-                        luminance[theme] = CalculateMeanLuminance(bitmap);
+                        SavePng(
+                            bitmap,
+                            Path.Combine(outputDirectory, $"{theme}-{density}-{scale:0.00}x.png"));
+                        if (density == ZenDensity.Standard && Math.Abs(scale - 1.5d) < 0.01d)
+                        {
+                            luminance[theme] = CalculateMeanLuminance(bitmap);
+                        }
                     }
                 }
             }
@@ -70,7 +82,92 @@ namespace ZenUI.Wpf.Tests.Controls
                 "The light theme should remain perceptually brighter than the dark theme.");
         }
 
-        private static Border CreateControlGallery(ZenTheme theme)
+        [TestMethod]
+        public void CalendarPopupThemesAndDensitiesProduceReviewableVisualSnapshots()
+        {
+            var framework = Environment.Version.Major >= 8 ? "net8" : "net472";
+            var outputDirectory = Path.Combine(
+                AppContext.BaseDirectory,
+                "visual-regression",
+                framework,
+                "calendar");
+            Directory.CreateDirectory(outputDirectory);
+
+            foreach (var theme in new[] { ZenTheme.Light, ZenTheme.Dark, ZenTheme.HighContrast })
+            {
+                foreach (var density in new[] { ZenDensity.Compact, ZenDensity.Standard, ZenDensity.Comfortable })
+                {
+                    var datePicker = new ZenDatePicker
+                    {
+                        FlowDirection = theme == ZenTheme.HighContrast
+                            ? FlowDirection.RightToLeft
+                            : FlowDirection.LeftToRight,
+                        SelectedDate = new DateTime(2026, 7, 23)
+                    };
+                    var window = new Window
+                    {
+                        ShowInTaskbar = false,
+                        WindowStyle = WindowStyle.None,
+                        ResizeMode = ResizeMode.NoResize,
+                        Width = 360,
+                        Height = 420,
+                        Content = datePicker
+                    };
+                    window.Resources.MergedDictionaries.Add(new ResourceDictionary
+                    {
+                        Source = new Uri(
+                            "/ZenUI.Wpf;component/Themes/Generic.xaml",
+                            UriKind.Relative)
+                    });
+                    ZenThemeManager.ApplyTheme(window.Resources, theme, false);
+                    ZenDensityManager.ApplyDensity(window.Resources, density);
+
+                    try
+                    {
+                        window.Show();
+                        datePicker.IsDropDownOpen = true;
+                        window.Dispatcher.Invoke(DispatcherPriority.ContextIdle, new Action(() => { }));
+                        window.UpdateLayout();
+
+                        var calendar = datePicker.Template.FindName("PART_Calendar", datePicker) as Calendar;
+                        Assert.IsNotNull(calendar);
+                        calendar.ApplyTemplate();
+                        var calendarItem =
+                            calendar.Template.FindName("PART_CalendarItem", calendar) as CalendarItem;
+                        Assert.IsNotNull(calendarItem);
+                        calendarItem.ApplyTemplate();
+                        window.Dispatcher.Invoke(DispatcherPriority.ContextIdle, new Action(() => { }));
+                        window.UpdateLayout();
+
+                        var monthView =
+                            calendarItem.Template.FindName("PART_MonthView", calendarItem) as Grid;
+                        Assert.IsNotNull(monthView);
+                        var dayButton = FindCalendarDayButton(monthView, calendar.CalendarDayButtonStyle);
+                        Assert.IsNotNull(dayButton);
+                        Assert.AreEqual(
+                            (double)window.Resources["ZenCalendarDayButtonWidth"],
+                            dayButton.Width);
+                        Assert.AreEqual(
+                            (double)window.Resources["ZenCalendarDayButtonHeight"],
+                            dayButton.Height);
+
+                        var bitmap = RenderRealizedElement(calendar, 1.25d);
+                        Assert.IsGreaterThan(12, CountDistinctSampledColors(bitmap));
+                        SavePng(
+                            bitmap,
+                            Path.Combine(outputDirectory, $"{theme}-{density}-1.25x.png"));
+                    }
+                    finally
+                    {
+                        datePicker.IsDropDownOpen = false;
+                        window.Dispatcher.Invoke(DispatcherPriority.ContextIdle, new Action(() => { }));
+                        window.Close();
+                    }
+                }
+            }
+        }
+
+        private static Border CreateControlGallery(ZenTheme theme, ZenDensity density)
         {
             var root = new Border
             {
@@ -84,6 +181,7 @@ namespace ZenUI.Wpf.Tests.Controls
                 Source = new Uri("/ZenUI.Wpf;component/Themes/Generic.xaml", UriKind.Relative)
             });
             ZenThemeManager.ApplyTheme(root.Resources, theme, false);
+            ZenDensityManager.ApplyDensity(root.Resources, density);
             root.SetResourceReference(Border.BackgroundProperty, "ZenSurfaceBrush");
 
             var panel = new StackPanel();
@@ -178,6 +276,21 @@ namespace ZenUI.Wpf.Tests.Controls
             return root;
         }
 
+        private static CalendarDayButton FindCalendarDayButton(Grid monthView, Style dayButtonStyle)
+        {
+            foreach (var child in monthView.Children)
+            {
+                if (child is CalendarDayButton button &&
+                    button.Visibility == Visibility.Visible &&
+                    ReferenceEquals(button.Style, dayButtonStyle))
+                {
+                    return button;
+                }
+            }
+
+            return null;
+        }
+
         private static RenderTargetBitmap Render(FrameworkElement root, double scale)
         {
             var window = new Window
@@ -209,6 +322,33 @@ namespace ZenUI.Wpf.Tests.Controls
             {
                 window.Close();
             }
+        }
+
+        private static RenderTargetBitmap RenderRealizedElement(FrameworkElement element, double scale)
+        {
+            element.UpdateLayout();
+            var width = Math.Max(element.ActualWidth, element.DesiredSize.Width);
+            var height = Math.Max(element.ActualHeight, element.DesiredSize.Height);
+            if (width <= 0d || height <= 0d)
+            {
+                element.Measure(new Size(double.PositiveInfinity, double.PositiveInfinity));
+                width = element.DesiredSize.Width;
+                height = element.DesiredSize.Height;
+                element.Arrange(new Rect(0d, 0d, width, height));
+                element.UpdateLayout();
+            }
+
+            Assert.IsGreaterThan(0d, width);
+            Assert.IsGreaterThan(0d, height);
+            var bitmap = new RenderTargetBitmap(
+                (int)Math.Ceiling(width * scale),
+                (int)Math.Ceiling(height * scale),
+                96d * scale,
+                96d * scale,
+                PixelFormats.Pbgra32);
+            bitmap.Render(element);
+            bitmap.Freeze();
+            return bitmap;
         }
 
         private static int CountDistinctSampledColors(BitmapSource bitmap)
