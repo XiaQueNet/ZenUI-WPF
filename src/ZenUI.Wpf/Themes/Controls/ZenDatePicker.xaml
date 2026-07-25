@@ -396,6 +396,7 @@
                                 DayButtonWidth="{Binding CalendarDayButtonWidth, RelativeSource={RelativeSource TemplatedParent}}"
                                 DisplayDateEnd="{TemplateBinding DisplayDateEnd}"
                                 DisplayDateStart="{TemplateBinding DisplayDateStart}"
+                                FirstDayOfWeek="{TemplateBinding FirstDayOfWeek}"
                                 FlowDirection="{TemplateBinding FlowDirection}"
                                 IsTodayHighlighted="{TemplateBinding IsTodayHighlighted}"
                                 NavigationButtonSize="{Binding CalendarNavigationButtonSize, RelativeSource={RelativeSource TemplatedParent}}"
