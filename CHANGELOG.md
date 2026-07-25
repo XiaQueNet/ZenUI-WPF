@@ -4,14 +4,35 @@
 
 ## Unreleased
 
+## [0.1.0-preview.3] - 2026-07-25
+
 ### Added
 
 - 增加 `ZenListBox` 列表选择控件及 Gallery 示例，支持单选、多选、键盘导航、虚拟化和主题化交互状态。
 - 增加独立的 `ZenUI.Wpf.Converters` NuGet 包，提供可在任意 WPF 项目中使用的常用值转换器。
+- 增加语义颜色、组件颜色、Typography、Interaction、Metrics 与 Component Metrics 分层 Token。
+- 增加 Compact、Standard、Comfortable 三档 Density 及运行时切换 API。
+- 增加 DataGrid、Calendar、Switch、Slider、ProgressBar 与 Alert 的 Density Token。
+- 增加主题 × 密度 × DPI 组合视觉回归及 Calendar Popup 快照。
+- 增加 Gallery 的完整 Token 目录与 Density 实时预览。
+- 增加中文主题定制、迁移、测试、文档和控件设计规范。
+- 增加 DocFX 文档站与 POS 示例商品、购物车交互。
 
 ### Changed
 
 - 将转换器及其测试从控件包迁移到独立项目，并使用专属 XAML 命名空间。
+- 统一公开 XAML 命名空间 URI，并重构主题颜色与组件尺寸资源分层。
+- 统一输入控件、Button、ListBox、ScrollBar 和 ComboBox Popup 的尺寸规格。
+- 完善 Calendar Popup 的显式尺寸传递以及 DataGrid 焦点、校验和选择状态模板。
+- 高对比度主题使用完整不透明度状态 Token，并在系统状态变化时自动重应用。
+- 按控件拆分 WPF 控件测试，保持 `net472` 与 `net8.0-windows` 双目标覆盖。
+- 优化 Gallery 侧边栏、主题与密度入口以及各控件示例。
+
+### Fixed
+
+- 修复动态尺寸资源跨 Calendar Popup 边界无法可靠解析的问题。
+- 修复系统高对比度仅在首次应用主题时生效、后续状态变化不自动更新的问题。
+- 修复 DataGrid 单元格焦点和校验状态改变内容布局的问题。
 
 ## [0.1.0-preview.2] - 2026-07-24
 
@@ -62,6 +83,7 @@
 - Password 明文绑定默认关闭，并标记为过时兼容 API。
 - DataGrid 恢复行虚拟化、行头、行详情、全选、冻结列偏移和高级编辑契约。
 
-[Unreleased]: https://github.com/XiaQueNet/ZenUI-WPF/compare/v0.1.0-preview.2...HEAD
+[Unreleased]: https://github.com/XiaQueNet/ZenUI-WPF/compare/v0.1.0-preview.3...HEAD
+[0.1.0-preview.3]: https://github.com/XiaQueNet/ZenUI-WPF/compare/v0.1.0-preview.2...v0.1.0-preview.3
 [0.1.0-preview.2]: https://github.com/XiaQueNet/ZenUI-WPF/compare/v0.1.0-preview.1...v0.1.0-preview.2
 [0.1.0-preview.1]: https://github.com/XiaQueNet/ZenUI-WPF/releases/tag/v0.1.0-preview.1

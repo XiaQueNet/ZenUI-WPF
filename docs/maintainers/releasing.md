@@ -57,7 +57,7 @@ rc.1
 
 ```xml
 <VersionPrefix>0.1.0</VersionPrefix>
-<VersionSuffix>preview.2</VersionSuffix>
+<VersionSuffix>preview.3</VersionSuffix>
 <AssemblyVersion>0.1.0.0</AssemblyVersion>
 <FileVersion>0.1.0.0</FileVersion>
 ```
@@ -273,6 +273,7 @@ NuGet 索引通常需要几分钟。在索引完成前页面可能暂时返回 4
 
 | 版本 | Tag | 提交 | 类型 |
 | --- | --- | --- | --- |
+| [`0.1.0-preview.2`](https://www.nuget.org/packages/ZenUI.Wpf/0.1.0-preview.2) | [`v0.1.0-preview.2`](https://github.com/XiaQueNet/ZenUI-WPF/releases/tag/v0.1.0-preview.2) | `5c3663f` | Preview |
 | [`0.1.0-preview.1`](https://www.nuget.org/packages/ZenUI.Wpf/0.1.0-preview.1) | [`v0.1.0-preview.1`](https://github.com/XiaQueNet/ZenUI-WPF/releases/tag/v0.1.0-preview.1) | `f2cfe71` | Preview |
 
 当前版本不创建单独 Release 分支；后续开发继续在 `main`，每次公开发布创建新 Tag。
