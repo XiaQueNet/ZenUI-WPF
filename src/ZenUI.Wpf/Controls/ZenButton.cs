@@ -201,5 +201,158 @@ namespace ZenUI.Wpf.Controls
                 typeof(Brush),
                 SelfType,
                 new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsRender));
+
+        /// <summary>
+        /// 获取或设置由按钮语义外观提供的默认背景画刷。
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public Brush ThemeBackground
+        {
+            get { return (Brush)GetValue(ThemeBackgroundProperty); }
+            set { SetValue(ThemeBackgroundProperty, value); }
+        }
+
+        /// <summary>
+        /// 标识 <see cref="ThemeBackground"/> 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty ThemeBackgroundProperty =
+            RegisterThemeBrush(nameof(ThemeBackground));
+
+        /// <summary>
+        /// 获取或设置由按钮语义外观提供的默认前景画刷。
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public Brush ThemeForeground
+        {
+            get { return (Brush)GetValue(ThemeForegroundProperty); }
+            set { SetValue(ThemeForegroundProperty, value); }
+        }
+
+        /// <summary>
+        /// 标识 <see cref="ThemeForeground"/> 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty ThemeForegroundProperty =
+            RegisterThemeBrush(nameof(ThemeForeground));
+
+        /// <summary>
+        /// 获取或设置由按钮语义外观提供的默认边框画刷。
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public Brush ThemeBorderBrush
+        {
+            get { return (Brush)GetValue(ThemeBorderBrushProperty); }
+            set { SetValue(ThemeBorderBrushProperty, value); }
+        }
+
+        /// <summary>
+        /// 标识 <see cref="ThemeBorderBrush"/> 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty ThemeBorderBrushProperty =
+            RegisterThemeBrush(nameof(ThemeBorderBrush));
+
+        /// <summary>
+        /// 获取或设置由按钮语义外观提供的默认悬浮背景画刷。
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public Brush ThemeHoverBackground
+        {
+            get { return (Brush)GetValue(ThemeHoverBackgroundProperty); }
+            set { SetValue(ThemeHoverBackgroundProperty, value); }
+        }
+
+        /// <summary>
+        /// 标识 <see cref="ThemeHoverBackground"/> 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty ThemeHoverBackgroundProperty =
+            RegisterThemeBrush(nameof(ThemeHoverBackground));
+
+        /// <summary>
+        /// 获取或设置由按钮语义外观提供的默认悬浮前景画刷。
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public Brush ThemeHoverForeground
+        {
+            get { return (Brush)GetValue(ThemeHoverForegroundProperty); }
+            set { SetValue(ThemeHoverForegroundProperty, value); }
+        }
+
+        /// <summary>
+        /// 标识 <see cref="ThemeHoverForeground"/> 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty ThemeHoverForegroundProperty =
+            RegisterThemeBrush(nameof(ThemeHoverForeground));
+
+        /// <summary>
+        /// 获取或设置由按钮语义外观提供的默认悬浮边框画刷。
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public Brush ThemeHoverBorderBrush
+        {
+            get { return (Brush)GetValue(ThemeHoverBorderBrushProperty); }
+            set { SetValue(ThemeHoverBorderBrushProperty, value); }
+        }
+
+        /// <summary>
+        /// 标识 <see cref="ThemeHoverBorderBrush"/> 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty ThemeHoverBorderBrushProperty =
+            RegisterThemeBrush(nameof(ThemeHoverBorderBrush));
+
+        /// <summary>
+        /// 获取或设置由按钮语义外观提供的默认按下背景画刷。
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public Brush ThemePressedBackground
+        {
+            get { return (Brush)GetValue(ThemePressedBackgroundProperty); }
+            set { SetValue(ThemePressedBackgroundProperty, value); }
+        }
+
+        /// <summary>
+        /// 标识 <see cref="ThemePressedBackground"/> 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty ThemePressedBackgroundProperty =
+            RegisterThemeBrush(nameof(ThemePressedBackground));
+
+        /// <summary>
+        /// 获取或设置由按钮语义外观提供的默认按下前景画刷。
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public Brush ThemePressedForeground
+        {
+            get { return (Brush)GetValue(ThemePressedForegroundProperty); }
+            set { SetValue(ThemePressedForegroundProperty, value); }
+        }
+
+        /// <summary>
+        /// 标识 <see cref="ThemePressedForeground"/> 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty ThemePressedForegroundProperty =
+            RegisterThemeBrush(nameof(ThemePressedForeground));
+
+        /// <summary>
+        /// 获取或设置由按钮语义外观提供的默认按下边框画刷。
+        /// </summary>
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public Brush ThemePressedBorderBrush
+        {
+            get { return (Brush)GetValue(ThemePressedBorderBrushProperty); }
+            set { SetValue(ThemePressedBorderBrushProperty, value); }
+        }
+
+        /// <summary>
+        /// 标识 <see cref="ThemePressedBorderBrush"/> 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty ThemePressedBorderBrushProperty =
+            RegisterThemeBrush(nameof(ThemePressedBorderBrush));
+
+        private static DependencyProperty RegisterThemeBrush(string name)
+        {
+            return DependencyProperty.Register(
+                name,
+                typeof(Brush),
+                SelfType,
+                new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsRender));
+        }
     }
 }

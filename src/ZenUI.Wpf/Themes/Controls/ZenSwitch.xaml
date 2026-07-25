@@ -27,13 +27,17 @@
         <Setter Property="MinHeight" Value="{DynamicResource ZenSwitchHeight}" />
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="FocusVisualStyle" Value="{StaticResource ZenSwitchFocusVisualStyle}" />
+        <Setter Property="ThemeBackground" Value="{DynamicResource ZenTextPlaceholderBrush}" />
+        <Setter Property="Background" Value="{Binding ThemeBackground, RelativeSource={RelativeSource Self}}" />
+        <Setter Property="Foreground" Value="{DynamicResource ZenControlThumbBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ZenControlThumbBorderBrush}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type zen:ZenSwitch}">
                     <Border
                         x:Name="Track"
-                        Background="{DynamicResource ZenTextPlaceholderBrush}"
-                        CornerRadius="1000"
+                        Background="{TemplateBinding Background}"
+                        CornerRadius="{TemplateBinding CapsuleCornerRadius}"
                         SnapsToDevicePixels="True">
                         <Grid
                             x:Name="ThumbHost"
@@ -41,14 +45,14 @@
                             HorizontalAlignment="Left">
                             <Ellipse
                                 Margin="{DynamicResource ZenSwitchThumbMargin}"
-                                Fill="{DynamicResource ZenControlThumbBrush}"
-                                Stroke="{DynamicResource ZenControlThumbBorderBrush}"
+                                Fill="{TemplateBinding Foreground}"
+                                Stroke="{TemplateBinding BorderBrush}"
                                 StrokeThickness="1" />
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="True">
-                            <Setter TargetName="Track" Property="Background" Value="{DynamicResource ZenPrimaryBrush}" />
+                            <Setter Property="ThemeBackground" Value="{DynamicResource ZenPrimaryBrush}" />
                             <Setter TargetName="ThumbHost" Property="HorizontalAlignment" Value="Right" />
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">

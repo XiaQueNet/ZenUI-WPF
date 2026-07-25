@@ -51,5 +51,128 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.AreSame(hoverBorderBrush, button.HoverBorderBrush);
             Assert.AreSame(pressedBorderBrush, button.PressedBorderBrush);
         }
+
+        [TestMethod]
+        public void DerivedStyleBrushBindingsOverrideSemanticThemeDefaults()
+        {
+            var resources = new ResourceDictionary
+            {
+                Source = new Uri(
+                    "/ZenUI.Wpf;component/Themes/Generic.xaml",
+                    UriKind.Relative)
+            };
+            var palette = new ButtonBrushPalette();
+            var style = new Style(typeof(ZenButton), (Style)resources["ZenButtonStyle"]);
+            style.Setters.Add(CreateBrushBindingSetter(
+                Control.BackgroundProperty,
+                nameof(ButtonBrushPalette.Background),
+                palette));
+            style.Setters.Add(CreateBrushBindingSetter(
+                Control.ForegroundProperty,
+                nameof(ButtonBrushPalette.Foreground),
+                palette));
+            style.Setters.Add(CreateBrushBindingSetter(
+                Control.BorderBrushProperty,
+                nameof(ButtonBrushPalette.BorderBrush),
+                palette));
+            style.Setters.Add(CreateBrushBindingSetter(
+                ZenButton.HoverBackgroundProperty,
+                nameof(ButtonBrushPalette.HoverBackground),
+                palette));
+            style.Setters.Add(CreateBrushBindingSetter(
+                ZenButton.HoverForegroundProperty,
+                nameof(ButtonBrushPalette.HoverForeground),
+                palette));
+            style.Setters.Add(CreateBrushBindingSetter(
+                ZenButton.HoverBorderBrushProperty,
+                nameof(ButtonBrushPalette.HoverBorderBrush),
+                palette));
+            style.Setters.Add(CreateBrushBindingSetter(
+                ZenButton.PressedBackgroundProperty,
+                nameof(ButtonBrushPalette.PressedBackground),
+                palette));
+            style.Setters.Add(CreateBrushBindingSetter(
+                ZenButton.PressedForegroundProperty,
+                nameof(ButtonBrushPalette.PressedForeground),
+                palette));
+            style.Setters.Add(CreateBrushBindingSetter(
+                ZenButton.PressedBorderBrushProperty,
+                nameof(ButtonBrushPalette.PressedBorderBrush),
+                palette));
+
+            var button = new ZenButton
+            {
+                Appearance = ButtonAppearance.Outlined,
+                Style = style,
+                Variant = ButtonVariant.Warning
+            };
+            var window = CreateTestWindow(button, 240, 100);
+            window.Resources.MergedDictionaries.Add(resources);
+
+            try
+            {
+                window.Show();
+                window.UpdateLayout();
+
+                Assert.AreSame(palette.Background, button.Background);
+                Assert.AreSame(palette.Foreground, button.Foreground);
+                Assert.AreSame(palette.BorderBrush, button.BorderBrush);
+                Assert.AreSame(palette.HoverBackground, button.HoverBackground);
+                Assert.AreSame(palette.HoverForeground, button.HoverForeground);
+                Assert.AreSame(palette.HoverBorderBrush, button.HoverBorderBrush);
+                Assert.AreSame(palette.PressedBackground, button.PressedBackground);
+                Assert.AreSame(palette.PressedForeground, button.PressedForeground);
+                Assert.AreSame(palette.PressedBorderBrush, button.PressedBorderBrush);
+
+                var updatedBackground = new SolidColorBrush(Colors.CadetBlue);
+                palette.Background = updatedBackground;
+                Assert.AreSame(updatedBackground, button.Background);
+            }
+            finally
+            {
+                window.Close();
+            }
+        }
+
+        private static Setter CreateBrushBindingSetter(
+            DependencyProperty property,
+            string path,
+            object source)
+        {
+            return new Setter(
+                property,
+                new Binding(path)
+                {
+                    Source = source
+                });
+        }
+
+        private sealed class ButtonBrushPalette : INotifyPropertyChanged
+        {
+            private Brush background = new SolidColorBrush(Colors.MediumPurple);
+
+            public event PropertyChangedEventHandler PropertyChanged;
+
+            public Brush Background
+            {
+                get { return background; }
+                set
+                {
+                    background = value;
+                    PropertyChanged?.Invoke(
+                        this,
+                        new PropertyChangedEventArgs(nameof(Background)));
+                }
+            }
+
+            public Brush Foreground { get; } = new SolidColorBrush(Colors.WhiteSmoke);
+            public Brush BorderBrush { get; } = new SolidColorBrush(Colors.Indigo);
+            public Brush HoverBackground { get; } = new SolidColorBrush(Colors.Plum);
+            public Brush HoverForeground { get; } = new SolidColorBrush(Colors.MidnightBlue);
+            public Brush HoverBorderBrush { get; } = new SolidColorBrush(Colors.DarkOrchid);
+            public Brush PressedBackground { get; } = new SolidColorBrush(Colors.Thistle);
+            public Brush PressedForeground { get; } = new SolidColorBrush(Colors.DarkSlateBlue);
+            public Brush PressedBorderBrush { get; } = new SolidColorBrush(Colors.BlueViolet);
+        }
     }
 }
