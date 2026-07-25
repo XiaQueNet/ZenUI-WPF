@@ -28,7 +28,16 @@
     <Thickness x:Key="ZenComboBoxPopupPadding">4</Thickness>
     <CornerRadius x:Key="ZenComboBoxPopupCornerRadius">6</CornerRadius>
 
-    <!-- 数据网格单元格状态覆盖层 -->
+    <!-- 数据网格 -->
+    <sys:Double x:Key="ZenDataGridColumnHeaderHeight">44</sys:Double>
+    <sys:Double x:Key="ZenDataGridRowMinHeight">44</sys:Double>
+    <Thickness x:Key="ZenDataGridCellPadding">14,0</Thickness>
     <Thickness x:Key="ZenDataGridCellFocusVisualBorderThickness">1</Thickness>
     <Thickness x:Key="ZenDataGridCellValidationBorderThickness">2</Thickness>
+
+    <!-- 日历 -->
+    <sys:Double x:Key="ZenCalendarDayButtonWidth">34</sys:Double>
+    <sys:Double x:Key="ZenCalendarDayButtonHeight">32</sys:Double>
+    <Thickness x:Key="ZenCalendarButtonPadding">8,10</Thickness>
+    <sys:Double x:Key="ZenCalendarNavigationButtonSize">30</sys:Double>
 </ResourceDictionary>

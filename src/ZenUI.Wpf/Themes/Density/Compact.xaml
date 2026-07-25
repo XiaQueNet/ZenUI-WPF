@@ -17,4 +17,13 @@
 
     <Thickness x:Key="ZenComboBoxPopupMargin">0,2,0,0</Thickness>
     <Thickness x:Key="ZenComboBoxPopupPadding">3</Thickness>
+
+    <sys:Double x:Key="ZenDataGridColumnHeaderHeight">36</sys:Double>
+    <sys:Double x:Key="ZenDataGridRowMinHeight">36</sys:Double>
+    <Thickness x:Key="ZenDataGridCellPadding">10,0</Thickness>
+
+    <sys:Double x:Key="ZenCalendarDayButtonWidth">30</sys:Double>
+    <sys:Double x:Key="ZenCalendarDayButtonHeight">28</sys:Double>
+    <Thickness x:Key="ZenCalendarButtonPadding">6,8</Thickness>
+    <sys:Double x:Key="ZenCalendarNavigationButtonSize">26</sys:Double>
 </ResourceDictionary>

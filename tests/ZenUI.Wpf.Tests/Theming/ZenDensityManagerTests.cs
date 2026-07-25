@@ -21,18 +21,24 @@ namespace ZenUI.Wpf.Tests.Theming
 
             Assert.AreEqual(32d, resources["ZenInputControlMinHeight"]);
             Assert.AreEqual(new Thickness(10, 6, 10, 6), resources["ZenListBoxItemPadding"]);
+            Assert.AreEqual(36d, resources["ZenDataGridRowMinHeight"]);
+            Assert.AreEqual(28d, resources["ZenCalendarDayButtonHeight"]);
             Assert.AreEqual(2, resources.MergedDictionaries.Count);
 
             ZenDensityManager.ApplyDensity(resources, ZenDensity.Comfortable);
 
             Assert.AreEqual(40d, resources["ZenInputControlMinHeight"]);
             Assert.AreEqual(new Thickness(14, 11, 14, 11), resources["ZenListBoxItemPadding"]);
+            Assert.AreEqual(52d, resources["ZenDataGridRowMinHeight"]);
+            Assert.AreEqual(36d, resources["ZenCalendarDayButtonHeight"]);
             Assert.AreEqual(2, resources.MergedDictionaries.Count);
 
             ZenDensityManager.ApplyDensity(resources, ZenDensity.Standard);
 
             Assert.AreEqual(36d, resources["ZenInputControlMinHeight"]);
             Assert.AreEqual(new Thickness(12, 9, 12, 9), resources["ZenListBoxItemPadding"]);
+            Assert.AreEqual(44d, resources["ZenDataGridRowMinHeight"]);
+            Assert.AreEqual(32d, resources["ZenCalendarDayButtonHeight"]);
             Assert.AreEqual(1, resources.MergedDictionaries.Count);
         }
 

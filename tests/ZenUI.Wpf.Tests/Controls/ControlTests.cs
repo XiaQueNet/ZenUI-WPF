@@ -164,8 +164,15 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.AreEqual(new Thickness(0, 4, 0, 0), dictionary["ZenComboBoxPopupMargin"]);
             Assert.AreEqual(new Thickness(4), dictionary["ZenComboBoxPopupPadding"]);
             Assert.AreEqual(new CornerRadius(6), dictionary["ZenComboBoxPopupCornerRadius"]);
+            Assert.AreEqual(44d, dictionary["ZenDataGridColumnHeaderHeight"]);
+            Assert.AreEqual(44d, dictionary["ZenDataGridRowMinHeight"]);
+            Assert.AreEqual(new Thickness(14, 0, 14, 0), dictionary["ZenDataGridCellPadding"]);
             Assert.AreEqual(new Thickness(1), dictionary["ZenDataGridCellFocusVisualBorderThickness"]);
             Assert.AreEqual(new Thickness(2), dictionary["ZenDataGridCellValidationBorderThickness"]);
+            Assert.AreEqual(34d, dictionary["ZenCalendarDayButtonWidth"]);
+            Assert.AreEqual(32d, dictionary["ZenCalendarDayButtonHeight"]);
+            Assert.AreEqual(new Thickness(8, 10, 8, 10), dictionary["ZenCalendarButtonPadding"]);
+            Assert.AreEqual(30d, dictionary["ZenCalendarNavigationButtonSize"]);
             Assert.AreEqual(0.35d, dictionary["ZenFocusVisualOpacity"]);
             Assert.AreEqual(0.35d, dictionary["ZenDisabledAuxiliaryActionOpacity"]);
             Assert.AreEqual(0.4d, dictionary["ZenDisabledActionOpacity"]);
@@ -372,6 +379,117 @@ namespace ZenUI.Wpf.Tests.Controls
             }
             finally
             {
+                window.Close();
+            }
+        }
+
+        [TestMethod]
+        public void DensitySwitchUpdatesDataGridAndCalendarMetrics()
+        {
+            var dataGrid = new ZenDataGrid
+            {
+                Height = 120,
+                AutoGenerateColumns = false,
+                ItemsSource = new[] { new EditableRow(1, "Member") }
+            };
+            dataGrid.Columns.Add(new DataGridTextColumn
+            {
+                Header = "Name",
+                Binding = new Binding(nameof(EditableRow.Name))
+            });
+            var datePicker = new ZenDatePicker
+            {
+                SelectedDate = new DateTime(2026, 7, 23)
+            };
+            var panel = new StackPanel();
+            panel.Children.Add(dataGrid);
+            panel.Children.Add(datePicker);
+
+            var window = CreateTestWindow(panel, 420, 520);
+            window.Resources.MergedDictionaries.Add(new ResourceDictionary
+            {
+                Source = new Uri(
+                    "/ZenUI.Wpf;component/Themes/Generic.xaml",
+                    UriKind.Relative)
+            });
+
+            try
+            {
+                window.Show();
+                datePicker.IsDropDownOpen = true;
+                window.Dispatcher.Invoke(DispatcherPriority.ContextIdle, new Action(() => { }));
+                window.UpdateLayout();
+
+                var columnHeader = FindVisualDescendants<DataGridColumnHeader>(dataGrid)
+                    .FirstOrDefault(header => header.Column != null);
+                var row = dataGrid.ItemContainerGenerator.ContainerFromIndex(0) as DataGridRow;
+                var cell = FindVisualDescendant<DataGridCell>(row);
+                var calendar = datePicker.Template.FindName("PART_Calendar", datePicker) as Calendar;
+                Assert.IsNotNull(columnHeader);
+                Assert.IsNotNull(row);
+                Assert.IsNotNull(cell);
+                Assert.IsNotNull(calendar);
+                calendar.ApplyTemplate();
+                var calendarItem = calendar.Template.FindName("PART_CalendarItem", calendar) as CalendarItem;
+                Assert.IsNotNull(calendarItem);
+                calendarItem.ApplyTemplate();
+                window.Dispatcher.Invoke(DispatcherPriority.ContextIdle, new Action(() => { }));
+                window.UpdateLayout();
+                var monthView = calendarItem.Template.FindName("PART_MonthView", calendarItem) as Grid;
+                var yearView = calendarItem.Template.FindName("PART_YearView", calendarItem) as Grid;
+                var navigationButton = calendarItem.Template.FindName("PART_PreviousButton", calendarItem) as Button;
+                var dayButton = monthView?.Children.OfType<CalendarDayButton>()
+                    .FirstOrDefault(button =>
+                        button.Visibility == Visibility.Visible &&
+                        ReferenceEquals(button.Style, calendar.CalendarDayButtonStyle));
+                var monthButton = yearView?.Children.OfType<CalendarButton>().FirstOrDefault();
+                Assert.IsNotNull(dayButton);
+                Assert.IsNotNull(monthButton);
+                Assert.IsNotNull(navigationButton);
+                var dayButtonWidthBinding =
+                    BindingOperations.GetBindingExpression(dayButton, FrameworkElement.WidthProperty);
+                Assert.IsNotNull(dayButtonWidthBinding, "日期按钮尺寸绑定缺失。");
+                Assert.AreEqual(
+                    BindingStatus.Active,
+                    dayButtonWidthBinding.Status,
+                    $"日期按钮尺寸绑定状态异常，数据项为 {dayButtonWidthBinding.DataItem ?? "null"}。");
+
+                Assert.AreEqual(44d, columnHeader.Height);
+                Assert.AreEqual(44d, row.MinHeight);
+                Assert.AreEqual(new Thickness(14, 0, 14, 0), cell.Padding);
+                Assert.AreEqual(34d, dayButton.Width);
+                Assert.AreEqual(32d, dayButton.Height);
+                Assert.AreEqual(new Thickness(8, 10, 8, 10), monthButton.Padding);
+                Assert.AreEqual(30d, navigationButton.Width);
+
+                ZenDensityManager.ApplyDensity(window.Resources, ZenDensity.Compact);
+                window.Dispatcher.Invoke(DispatcherPriority.ContextIdle, new Action(() => { }));
+                window.UpdateLayout();
+
+                Assert.AreEqual(36d, columnHeader.Height);
+                Assert.AreEqual(36d, row.MinHeight);
+                Assert.AreEqual(new Thickness(10, 0, 10, 0), cell.Padding);
+                Assert.AreEqual(30d, dayButton.Width);
+                Assert.AreEqual(28d, dayButton.Height);
+                Assert.AreEqual(new Thickness(6, 8, 6, 8), monthButton.Padding);
+                Assert.AreEqual(26d, navigationButton.Width);
+
+                ZenDensityManager.ApplyDensity(window.Resources, ZenDensity.Comfortable);
+                window.Dispatcher.Invoke(DispatcherPriority.ContextIdle, new Action(() => { }));
+                window.UpdateLayout();
+
+                Assert.AreEqual(52d, columnHeader.Height);
+                Assert.AreEqual(52d, row.MinHeight);
+                Assert.AreEqual(new Thickness(18, 0, 18, 0), cell.Padding);
+                Assert.AreEqual(38d, dayButton.Width);
+                Assert.AreEqual(36d, dayButton.Height);
+                Assert.AreEqual(new Thickness(10, 12, 10, 12), monthButton.Padding);
+                Assert.AreEqual(34d, navigationButton.Width);
+            }
+            finally
+            {
+                datePicker.IsDropDownOpen = false;
+                window.Dispatcher.Invoke(DispatcherPriority.ContextIdle, new Action(() => { }));
                 window.Close();
             }
         }

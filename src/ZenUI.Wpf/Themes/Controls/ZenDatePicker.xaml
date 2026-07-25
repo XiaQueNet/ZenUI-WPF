@@ -46,8 +46,8 @@
     </Style>
 
     <Style x:Key="ZenCalendarNavigationButtonStyle" TargetType="{x:Type Button}">
-        <Setter Property="Width" Value="30" />
-        <Setter Property="Height" Value="30" />
+        <Setter Property="Width" Value="{Binding NavigationButtonSize, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenCalendar}}}" />
+        <Setter Property="Height" Value="{Binding NavigationButtonSize, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenCalendar}}}" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{DynamicResource ZenTextSecondaryBrush}" />
@@ -91,8 +91,8 @@
     </Style>
 
     <Style x:Key="ZenCalendarDayButtonStyle" TargetType="{x:Type CalendarDayButton}">
-        <Setter Property="Width" Value="34" />
-        <Setter Property="Height" Value="32" />
+        <Setter Property="Width" Value="{Binding DayButtonWidth, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenCalendar}}}" />
+        <Setter Property="Height" Value="{Binding DayButtonHeight, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenCalendar}}}" />
         <Setter Property="Margin" Value="1" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -148,7 +148,7 @@
 
     <Style x:Key="ZenCalendarButtonStyle" TargetType="{x:Type CalendarButton}">
         <Setter Property="Margin" Value="2" />
-        <Setter Property="Padding" Value="8,10" />
+        <Setter Property="Padding" Value="{Binding ButtonPadding, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenCalendar}}}" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Background" Value="Transparent" />
@@ -314,6 +314,10 @@
         <Setter Property="Padding" Value="{DynamicResource ZenInputControlPadding}" />
         <Setter Property="MinHeight" Value="{DynamicResource ZenInputControlMinHeight}" />
         <Setter Property="CornerRadius" Value="{DynamicResource ZenInputControlCornerRadius}" />
+        <Setter Property="CalendarDayButtonWidth" Value="{DynamicResource ZenCalendarDayButtonWidth}" />
+        <Setter Property="CalendarDayButtonHeight" Value="{DynamicResource ZenCalendarDayButtonHeight}" />
+        <Setter Property="CalendarButtonPadding" Value="{DynamicResource ZenCalendarButtonPadding}" />
+        <Setter Property="CalendarNavigationButtonSize" Value="{DynamicResource ZenCalendarNavigationButtonSize}" />
         <Setter Property="Background" Value="{DynamicResource ZenSurfaceBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource ZenBorderBrush}" />
         <Setter Property="BorderThickness" Value="{DynamicResource ZenControlBorderThickness}" />
@@ -384,13 +388,17 @@
                             Placement="Bottom"
                             PopupAnimation="Fade"
                             StaysOpen="False">
-                            <Calendar
+                            <zen:ZenCalendar
                                 x:Name="PART_Calendar"
                                 Margin="0,4,0,0"
+                                ButtonPadding="{Binding CalendarButtonPadding, RelativeSource={RelativeSource TemplatedParent}}"
+                                DayButtonHeight="{Binding CalendarDayButtonHeight, RelativeSource={RelativeSource TemplatedParent}}"
+                                DayButtonWidth="{Binding CalendarDayButtonWidth, RelativeSource={RelativeSource TemplatedParent}}"
                                 DisplayDateEnd="{TemplateBinding DisplayDateEnd}"
                                 DisplayDateStart="{TemplateBinding DisplayDateStart}"
                                 FlowDirection="{TemplateBinding FlowDirection}"
                                 IsTodayHighlighted="{TemplateBinding IsTodayHighlighted}"
+                                NavigationButtonSize="{Binding CalendarNavigationButtonSize, RelativeSource={RelativeSource TemplatedParent}}"
                                 SelectedDate="{Binding SelectedDate, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
                                 Style="{TemplateBinding CalendarStyle}" />
                         </Popup>
