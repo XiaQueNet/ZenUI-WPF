@@ -1,6 +1,6 @@
 # AI 测试工作流
 
-AI 新增、修改或修复测试时，必须同时遵守 `docs/conventions/testing.md`。
+AI 新增、修改或修复测试时，必须同时遵守[测试规范](testing.md)。
 
 ## 工作顺序
 

@@ -13,6 +13,8 @@ ZenUI 的目标是优化 WPF 控件的默认体验，而不是缩减 WPF 已有�
 - 某项原生能力即使不适合作为默认视觉，也不应被删除；应保留行为，并提供依赖属性、资源 Token 或样式入口供使用者显式开启和定制。
 - 默认体验与可选能力都应有自动化测试，避免外观调整意外破坏原生功能。
 
+组件状态、公共 API、模板契约、主题资源、可访问性与评审清单参见[控件设计规范](docs/design/component-design.md)。
+
 例如，`ZenDataGrid` 默认只显示行 Hover 反馈，但选择行为仍然存在；需要时可分别开启行选中高亮和当前单元格焦点框：
 
 ```xaml
@@ -97,7 +99,13 @@ CI 还会生成 Light、Dark、HighContrast 在 100%、150%、200% DPI 下的 PN
 
 ## 维护文档
 
-- [版本与发布规范](docs/RELEASING.md)
+- [文档索引](docs/README.md)
+- [控件设计规范](docs/design/component-design.md)
+- [测试规范](docs/development/testing.md)
+- [AI 测试工作流](docs/development/ai-testing-workflow.md)
+- [C# 注释规范](docs/development/commenting.md)
+- [文档编写规范](docs/development/documentation.md)
+- [版本与发布规范](docs/maintainers/releasing.md)
 - [贡献指南](CONTRIBUTING.md)
 - [变更记录](CHANGELOG.md)
 
