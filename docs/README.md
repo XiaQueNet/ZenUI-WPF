@@ -7,6 +7,7 @@
 面向控件设计、实现和评审：
 
 - [控件设计规范](design/component-design.md)：公共 API、模板契约、交互状态、主题资源、可访问性与评审清单。
+- [主题 Token 规范](design/theme-tokens.md)：主题资源分层、命名、WPF 使用方式与兼容性契约。
 
 ## 开发
 
