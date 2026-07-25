@@ -98,5 +98,6 @@
 - [ ] 颜色使用语义化 `DynamicResource`，并验证 Light、Dark 和 HighContrast。
 - [ ] 键盘、鼠标、UI Automation 和可访问性契约得到保留。
 - [ ] 默认呈现、可选能力和关键原生行为都有 STA 回归测试。
+- [ ] Gallery 普通示例保留组件默认字号；专项定制遵循[文档编写规范](../development/documentation.md#gallery-控件示例)并明确限制作用域。
 - [ ] 视觉变化已在 100%、150% 和 200% DPI 下审查。
 - [ ] 不兼容变更已记录兼容性影响，并更新 `CHANGELOG.md` 和版本号。
