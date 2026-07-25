@@ -71,6 +71,45 @@ namespace ZenUI.Wpf.Tests.Theming
         }
 
         [TestMethod]
+        public void SystemHighContrastChangesReapplyTrackedTheme()
+        {
+            var window = CreateTestWindow();
+
+            try
+            {
+                window.Show();
+                var resources = AddGenericTheme(window);
+                ZenThemeManager.ApplyTheme(resources, ZenTheme.Dark);
+
+                ZenThemeManager.ApplySystemHighContrastState(false);
+                Assert.AreEqual(
+                    Color.FromRgb(0x1D, 0x21, 0x29),
+                    ((SolidColorBrush)resources["ZenSurfaceBrush"]).Color);
+
+                ZenThemeManager.ApplySystemHighContrastState(true);
+                Assert.AreEqual(
+                    SystemColors.WindowColor,
+                    ((SolidColorBrush)resources["ZenSurfaceBrush"]).Color);
+                Assert.AreEqual(
+                    SystemColors.HighlightTextColor,
+                    ((SolidColorBrush)resources["ZenOnAccentBrush"]).Color);
+
+                ZenThemeManager.ApplySystemHighContrastState(false);
+                Assert.AreEqual(
+                    Color.FromRgb(0x1D, 0x21, 0x29),
+                    ((SolidColorBrush)resources["ZenSurfaceBrush"]).Color);
+
+                ZenThemeManager.ApplyTheme(resources, ZenTheme.Light, false);
+                ZenThemeManager.ApplySystemHighContrastState(true);
+                Assert.AreEqual(1, resources.MergedDictionaries.Count);
+            }
+            finally
+            {
+                window.Close();
+            }
+        }
+
+        [TestMethod]
         public void NullResourcesAreRejected()
         {
             Assert.ThrowsExactly<ArgumentNullException>(

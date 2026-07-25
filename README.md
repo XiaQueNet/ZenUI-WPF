@@ -91,7 +91,7 @@ using ZenUI.Wpf.Theming;
 ZenThemeManager.ApplyTheme(Application.Current.Resources, ZenTheme.Dark);
 ```
 
-`ApplyTheme` 默认尊重 Windows 高对比度设置；如需预览指定主题，可以将第三个参数设为 `false`。也可以在应用资源中把 `Themes/Dark.xaml` 或 `Themes/HighContrast.xaml` 合并到 `Generic.xaml` 之后。所有控件颜色均通过语义化 `DynamicResource` 获取，应用仍可覆盖单个 Token。
+`ApplyTheme` 默认尊重并持续监听 Windows 高对比度设置，系统状态变化时会在原资源字典所属的 UI 线程自动重应用主题；如需预览指定主题，可以将第三个参数设为 `false`，同时停止该资源字典的系统高对比度跟随。也可以在应用资源中把 `Themes/Dark.xaml` 或 `Themes/HighContrast.xaml` 合并到 `Generic.xaml` 之后。所有控件颜色均通过语义化 `DynamicResource` 获取，应用仍可覆盖单个 Token。
 
 TextBox、PasswordBox、ComboBox 和 DataGrid 单元格支持 WPF `Validation.HasError` 错误状态。Slider 支持水平与垂直方向，ProgressBar 支持垂直方向与 `IsIndeterminate`，ComboBox 支持 `IsEditable`。
 

@@ -84,7 +84,7 @@ namespace ZenUI.Wpf.Gallery.ViewModels
             {
                 if (value != null && SetProperty(ref selectedThemeOption, value))
                 {
-                    ZenThemeManager.ApplyTheme(Application.Current.Resources, value.Theme, false);
+                    ZenThemeManager.ApplyTheme(Application.Current.Resources, value.Theme);
                 }
             }
         }

@@ -68,6 +68,78 @@ namespace ZenUI.Wpf.Tests.Controls
         }
 
         [TestMethod]
+        public void ComboBoxPopupFlipsInsideWorkAreaNearBottomRightEdge()
+        {
+            var workArea = SystemParameters.WorkArea;
+            var comboBox = new ZenComboBox
+            {
+                Width = 200,
+                Height = 36,
+                HorizontalAlignment = HorizontalAlignment.Right,
+                VerticalAlignment = VerticalAlignment.Bottom,
+                MaxDropDownHeight = 160
+            };
+            for (var index = 1; index <= 8; index++)
+            {
+                comboBox.Items.Add("项目 " + index);
+            }
+
+            var window = new Window
+            {
+                ShowInTaskbar = false,
+                WindowStyle = WindowStyle.None,
+                ResizeMode = ResizeMode.NoResize,
+                WindowStartupLocation = WindowStartupLocation.Manual,
+                Left = workArea.Right - 240,
+                Top = workArea.Bottom - 60,
+                Width = 240,
+                Height = 60,
+                Content = comboBox
+            };
+
+            try
+            {
+                window.Show();
+                comboBox.IsDropDownOpen = true;
+                window.Dispatcher.Invoke(DispatcherPriority.ContextIdle, new Action(() => { }));
+                window.UpdateLayout();
+
+                var popup = comboBox.Template.FindName("PART_Popup", comboBox) as Popup;
+                Assert.IsNotNull(popup);
+                Assert.IsTrue(popup.IsOpen);
+                var popupBorder = popup.Child as Border;
+                Assert.IsNotNull(popupBorder);
+                Assert.IsGreaterThan(0d, popupBorder.ActualWidth);
+                Assert.IsGreaterThan(0d, popupBorder.ActualHeight);
+
+                var targetTopLeft = ToDeviceIndependentPoint(
+                    comboBox,
+                    comboBox.PointToScreen(new Point()));
+                var popupTopLeft = ToDeviceIndependentPoint(
+                    popupBorder,
+                    popupBorder.PointToScreen(new Point()));
+                var popupBottomRight = ToDeviceIndependentPoint(
+                    popupBorder,
+                    popupBorder.PointToScreen(
+                        new Point(popupBorder.ActualWidth, popupBorder.ActualHeight)));
+
+                Assert.IsTrue(
+                    popupTopLeft.Y < targetTopLeft.Y,
+                    "靠近工作区底边时，下拉弹层应翻转到控件上方。");
+                Assert.IsGreaterThanOrEqualTo(workArea.Left - 1d, popupTopLeft.X);
+                Assert.IsGreaterThanOrEqualTo(workArea.Top - 1d, popupTopLeft.Y);
+                Assert.IsLessThanOrEqualTo(workArea.Right + 1d, popupBottomRight.X);
+                Assert.IsLessThanOrEqualTo(workArea.Bottom + 1d, popupBottomRight.Y);
+            }
+            finally
+            {
+                comboBox.IsDropDownOpen = false;
+                window.Dispatcher.Invoke(DispatcherPriority.ContextIdle, new Action(() => { }));
+                window.Close();
+            }
+        }
+
+        [TestMethod]
         public void ComboBoxHonorsItemTemplateForSelectedItem()
         {
             var text = new FrameworkElementFactory(typeof(TextBlock));
@@ -243,6 +315,14 @@ namespace ZenUI.Wpf.Tests.Controls
             {
                 window.Close();
             }
+        }
+
+        private static Point ToDeviceIndependentPoint(Visual visual, Point devicePoint)
+        {
+            var source = PresentationSource.FromVisual(visual);
+            return source?.CompositionTarget == null
+                ? devicePoint
+                : source.CompositionTarget.TransformFromDevice.Transform(devicePoint);
         }
     }
 }
