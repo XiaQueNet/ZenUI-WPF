@@ -52,8 +52,8 @@
                             HorizontalAlignment="Left">
                             <Ellipse
                                 Margin="4"
-                                Fill="White"
-                                Stroke="#18000000"
+                                Fill="{DynamicResource ZenControlThumbBrush}"
+                                Stroke="{DynamicResource ZenControlThumbBorderBrush}"
                                 StrokeThickness="1" />
                         </Grid>
                     </Grid>

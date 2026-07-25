@@ -29,6 +29,9 @@
     <SolidColorBrush x:Key="ZenTextPrimaryBrush" Color="{DynamicResource {x:Static SystemColors.WindowTextColorKey}}" />
     <SolidColorBrush x:Key="ZenTextSecondaryBrush" Color="{DynamicResource {x:Static SystemColors.WindowTextColorKey}}" />
     <SolidColorBrush x:Key="ZenTextPlaceholderBrush" Color="{DynamicResource {x:Static SystemColors.GrayTextColorKey}}" />
+    <SolidColorBrush x:Key="ZenOnAccentBrush" Color="{DynamicResource {x:Static SystemColors.HighlightTextColorKey}}" />
+    <SolidColorBrush x:Key="ZenControlThumbBrush" Color="{DynamicResource {x:Static SystemColors.WindowColorKey}}" />
+    <SolidColorBrush x:Key="ZenControlThumbBorderBrush" Color="{DynamicResource {x:Static SystemColors.WindowTextColorKey}}" />
     <SolidColorBrush x:Key="ZenFocusBrush" Color="{DynamicResource {x:Static SystemColors.HotTrackColorKey}}" />
     <SolidColorBrush x:Key="ZenInfoLightBrush" Color="{DynamicResource {x:Static SystemColors.WindowColorKey}}" />
     <SolidColorBrush x:Key="ZenSuccessLightBrush" Color="{DynamicResource {x:Static SystemColors.WindowColorKey}}" />

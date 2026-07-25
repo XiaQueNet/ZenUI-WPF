@@ -131,6 +131,9 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.IsNotNull(dictionary["ZenPrimaryBrush"]);
             Assert.IsNotNull(dictionary["ZenFocusBrush"]);
             Assert.IsNotNull(dictionary["ZenErrorBrush"]);
+            Assert.IsNotNull(dictionary["ZenOnAccentBrush"]);
+            Assert.IsNotNull(dictionary["ZenControlThumbBrush"]);
+            Assert.IsNotNull(dictionary["ZenControlThumbBorderBrush"]);
             Assert.IsNotNull(dictionary["ZenListBoxItemSelectedBrush"]);
             Assert.IsInstanceOfType<Style>(dictionary["ZenListBoxStyle"]);
             Assert.IsInstanceOfType<Style>(dictionary["ZenListBoxItemStyle"]);
@@ -308,6 +311,48 @@ namespace ZenUI.Wpf.Tests.Controls
                 Assert.IsNotNull(calendar.Style);
                 Assert.AreEqual(datePicker.SelectedDate, calendar.SelectedDate);
                 Assert.IsNotNull(calendar.Template.FindName("PART_CalendarItem", calendar));
+            }
+            finally
+            {
+                datePicker.IsDropDownOpen = false;
+                window.Dispatcher.Invoke(DispatcherPriority.ContextIdle, new Action(() => { }));
+                window.Close();
+            }
+        }
+
+        [TestMethod]
+        public void DatePickerCalendarPreservesOwnerDateConstraints()
+        {
+            var start = new DateTime(2026, 1, 1);
+            var end = new DateTime(2026, 12, 31);
+            var selected = new DateTime(2026, 7, 23);
+            var datePicker = new ZenDatePicker
+            {
+                DisplayDateStart = start,
+                DisplayDateEnd = end,
+                FirstDayOfWeek = DayOfWeek.Monday,
+                IsTodayHighlighted = false,
+                SelectedDate = selected
+            };
+            var window = CreateTestWindow(datePicker, 260, 320);
+
+            try
+            {
+                window.Show();
+                datePicker.IsDropDownOpen = true;
+                window.UpdateLayout();
+
+                var calendar = datePicker.Template.FindName("PART_Calendar", datePicker) as Calendar;
+                Assert.IsNotNull(calendar);
+                Assert.AreEqual(start, calendar.DisplayDateStart);
+                Assert.AreEqual(end, calendar.DisplayDateEnd);
+                Assert.AreEqual(DayOfWeek.Monday, calendar.FirstDayOfWeek);
+                Assert.IsFalse(calendar.IsTodayHighlighted);
+                Assert.AreEqual(selected, calendar.SelectedDate);
+
+                var changed = new DateTime(2026, 8, 8);
+                calendar.SelectedDate = changed;
+                Assert.AreEqual(changed, datePicker.SelectedDate);
             }
             finally
             {
@@ -669,6 +714,141 @@ namespace ZenUI.Wpf.Tests.Controls
                 Assert.AreEqual(1, Grid.GetColumn(dropDownArrow));
                 Assert.AreSame(itemTemplate, comboBox.SelectionBoxItemTemplate);
                 Assert.AreSame(itemTemplate, selectionPresenter.ContentTemplate);
+            }
+            finally
+            {
+                window.Close();
+            }
+        }
+
+        [TestMethod]
+        public void EditableComboBoxHidesWatermarkAfterTextIsEntered()
+        {
+            var comboBox = new ZenComboBox
+            {
+                IsEditable = true,
+                Watermark = "请输入",
+                Width = 180
+            };
+            var window = CreateTestWindow(comboBox, 220, 100);
+
+            try
+            {
+                window.Show();
+                window.UpdateLayout();
+
+                var editableTextBox =
+                    comboBox.Template.FindName("PART_EditableTextBox", comboBox) as TextBox;
+                var watermark =
+                    comboBox.Template.FindName("WatermarkText", comboBox) as TextBlock;
+                Assert.IsNotNull(editableTextBox);
+                Assert.IsNotNull(watermark);
+                Assert.AreEqual(Visibility.Visible, watermark.Visibility);
+
+                editableTextBox.Text = "自定义值";
+                window.UpdateLayout();
+
+                Assert.AreEqual("自定义值", comboBox.Text);
+                Assert.AreEqual(-1, comboBox.SelectedIndex);
+                Assert.AreEqual(Visibility.Collapsed, watermark.Visibility);
+            }
+            finally
+            {
+                window.Close();
+            }
+        }
+
+        [TestMethod]
+        public void ComboBoxItemsUseListSelectionStateTokens()
+        {
+            var comboBox = new ZenComboBox { Width = 180 };
+            comboBox.Items.Add("第一项");
+            comboBox.Items.Add("第二项");
+            var window = CreateTestWindow(comboBox, 220, 180);
+            window.Resources.MergedDictionaries.Add(new ResourceDictionary
+            {
+                Source = new Uri(
+                    "/ZenUI.Wpf;component/Themes/Generic.xaml",
+                    UriKind.Relative)
+            });
+
+            try
+            {
+                window.Show();
+                comboBox.IsDropDownOpen = true;
+                window.UpdateLayout();
+
+                var item = comboBox.ItemContainerGenerator.ContainerFromIndex(0) as ComboBoxItem;
+                Assert.IsNotNull(item);
+                item.ApplyTemplate();
+                var itemBorder = item.Template.FindName("ItemBorder", item) as Border;
+                Assert.IsNotNull(itemBorder);
+                Assert.AreEqual(new Thickness(0, 1, 0, 1), item.Margin);
+
+                Keyboard.Focus(comboBox);
+                comboBox.RaiseEvent(new KeyEventArgs(
+                    Keyboard.PrimaryDevice,
+                    PresentationSource.FromVisual(comboBox),
+                    0,
+                    Key.Down)
+                {
+                    RoutedEvent = Keyboard.KeyDownEvent
+                });
+                window.UpdateLayout();
+
+                Assert.IsTrue(item.IsHighlighted);
+                Assert.AreEqual(
+                    ((SolidColorBrush)comboBox.FindResource("ZenListBoxItemHoverBrush")).Color,
+                    ((SolidColorBrush)itemBorder.Background).Color);
+
+                comboBox.SelectedIndex = 0;
+                window.UpdateLayout();
+                Assert.IsTrue(item.IsSelected);
+                Assert.AreEqual(
+                    ((SolidColorBrush)comboBox.FindResource("ZenListBoxItemSelectedHoverBrush")).Color,
+                    ((SolidColorBrush)itemBorder.Background).Color);
+                Assert.AreEqual(
+                    ((SolidColorBrush)comboBox.FindResource("ZenListBoxItemSelectedForegroundBrush")).Color,
+                    ((SolidColorBrush)item.Foreground).Color);
+
+                item.IsEnabled = false;
+                Assert.AreEqual(0.45d, item.Opacity);
+            }
+            finally
+            {
+                comboBox.IsDropDownOpen = false;
+                window.Dispatcher.Invoke(DispatcherPriority.ContextIdle, new Action(() => { }));
+                window.Close();
+            }
+        }
+
+        [TestMethod]
+        public void InputTemplatesHonorBorderThickness()
+        {
+            var thickness = new Thickness(3, 4, 5, 6);
+            var comboBox = new ZenComboBox { BorderThickness = thickness };
+            var datePicker = new ZenDatePicker { BorderThickness = thickness };
+            var passwordBox = new ZenPasswordBox { BorderThickness = thickness };
+            var panel = new StackPanel();
+            panel.Children.Add(comboBox);
+            panel.Children.Add(datePicker);
+            panel.Children.Add(passwordBox);
+            var window = CreateTestWindow(panel, 260, 180);
+
+            try
+            {
+                window.Show();
+                window.UpdateLayout();
+
+                Assert.AreEqual(
+                    thickness,
+                    ((Border)comboBox.Template.FindName("InputBorder", comboBox)).BorderThickness);
+                Assert.AreEqual(
+                    thickness,
+                    ((Border)datePicker.Template.FindName("InputBorder", datePicker)).BorderThickness);
+                Assert.AreEqual(
+                    thickness,
+                    ((Border)passwordBox.Template.FindName("InputBorder", passwordBox)).BorderThickness);
             }
             finally
             {

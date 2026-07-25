@@ -125,7 +125,7 @@
                         <Trigger Property="IsSelected" Value="True">
                             <Setter TargetName="DayBorder" Property="Background" Value="{DynamicResource ZenPrimaryBrush}" />
                             <Setter TargetName="DayBorder" Property="BorderBrush" Value="{DynamicResource ZenPrimaryBrush}" />
-                            <Setter Property="Foreground" Value="White" />
+                            <Setter Property="Foreground" Value="{DynamicResource ZenOnAccentBrush}" />
                         </Trigger>
                         <Trigger Property="IsInactive" Value="True">
                             <Setter Property="Opacity" Value="0.42" />
@@ -316,6 +316,7 @@
         <Setter Property="CornerRadius" Value="{DynamicResource ZenInputControlCornerRadius}" />
         <Setter Property="Background" Value="{DynamicResource ZenSurfaceBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource ZenBorderBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Foreground" Value="{DynamicResource ZenTextPrimaryBrush}" />
         <Setter Property="CalendarStyle" Value="{StaticResource ZenCalendarStyle}" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
@@ -327,7 +328,7 @@
                             x:Name="InputBorder"
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="1"
+                            BorderThickness="{TemplateBinding BorderThickness}"
                             CornerRadius="{TemplateBinding CornerRadius}" />
                         <DatePickerTextBox
                             x:Name="PART_TextBox"
@@ -386,6 +387,11 @@
                             <Calendar
                                 x:Name="PART_Calendar"
                                 Margin="0,4,0,0"
+                                DisplayDateEnd="{TemplateBinding DisplayDateEnd}"
+                                DisplayDateStart="{TemplateBinding DisplayDateStart}"
+                                FlowDirection="{TemplateBinding FlowDirection}"
+                                IsTodayHighlighted="{TemplateBinding IsTodayHighlighted}"
+                                SelectedDate="{Binding SelectedDate, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
                                 Style="{TemplateBinding CalendarStyle}" />
                         </Popup>
                     </Grid>

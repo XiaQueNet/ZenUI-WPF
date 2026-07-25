@@ -17,6 +17,13 @@ namespace ZenUI.Wpf.Tests.Controls
     [STATestClass]
     public class VisualRegressionTests
     {
+        private static readonly Dictionary<ZenTheme, string> LuminanceBaselines =
+            new Dictionary<ZenTheme, string>
+            {
+                [ZenTheme.Light] = "9Onr4+rr6OX2/////////+a53+bCzvDw+f/////////mweLxv9T//////////////uHm/f39/f39/f39/f39/vny/v7+/v7+/v7+/v7+/P7+8/b+/v7+/v7+/v7+/vn+8+Hg5OTk5OTk5Pj6+vr1/Pjp7OHo6Ozv7+/5+vr6+v386ePi4tjz+fn5+fn5+fn8/OHg8/Pz8/Pz8/Pz8/P18vzj3fX19fX19fX19fX19/X+/f39/f39/f39/f39/f7+/Of4+Pj4+Pj4+Pjy6vj5//7r+/39/f39/f399+/9/vb/+/3///////////z4///5/+P4///////////57v///g==",
+                [ZenTheme.Dark] = "LjM0OTIzNjkpISEhISEhITpjQTZSZjAuJSEhISEhISE7aT4wU2khISEhISEhISEhIj45IyMjIyMjIyMjIyMjIictIiIiIiIiIiIiIiIiJCIiLSojIyMjIyMjIyMjIyciKjk7Nzc3Nzc3NykoKCgtJSk8NTI0NDU1NTUuLi4uLiYoQCwrKykvMDAwMDAwMDAoJ0pLOjo6Ojo6Ojo6Ojo1LidITTg4ODg4ODg4ODg4MiwiJSUlJSUlJSUlJSUlJSQjJTwrKysrKysrKysxOSspISI0JiMjIyMjIyMjKTEjIyshJSIhISEhISEhISMnISEoITsnISEhISEhISEmMSEhIw=="
+            };
+
         [TestMethod]
         public void ThemesAndDpiScalesProduceReviewableVisualSnapshots()
         {
@@ -38,6 +45,17 @@ namespace ZenUI.Wpf.Tests.Controls
                         dataGrid.Columns[0].ActualWidth,
                         $"Grid={dataGrid.ActualWidth}, second={dataGrid.Columns[1].ActualWidth}, desired={dataGrid.DesiredSize.Width}");
                     Assert.IsGreaterThan(20, CountDistinctSampledColors(bitmap));
+                    if (LuminanceBaselines.TryGetValue(theme, out var encodedBaseline))
+                    {
+                        var difference = CalculateMeanAbsoluteDifference(
+                            Convert.FromBase64String(encodedBaseline),
+                            CalculateNormalizedLuminanceFingerprint(bitmap));
+                        Assert.IsLessThan(
+                            12d,
+                            difference,
+                            $"{theme} at {scale:0.0}x differs materially from its approved visual baseline.");
+                    }
+
                     SavePng(bitmap, Path.Combine(outputDirectory, $"{theme}-{scale:0.0}x.png"));
                     if (Math.Abs(scale - 1d) < 0.01d)
                     {
@@ -217,6 +235,57 @@ namespace ZenUI.Wpf.Tests.Controls
             }
 
             return total / count;
+        }
+
+        private static byte[] CalculateNormalizedLuminanceFingerprint(RenderTargetBitmap bitmap)
+        {
+            const int gridSize = 16;
+            var pixels = CopyPixels(bitmap);
+            var stride = bitmap.PixelWidth * 4;
+            var fingerprint = new byte[gridSize * gridSize];
+            var fingerprintIndex = 0;
+
+            for (var gridY = 0; gridY < gridSize; gridY++)
+            {
+                var top = gridY * bitmap.PixelHeight / gridSize;
+                var bottom = Math.Max(top + 1, (gridY + 1) * bitmap.PixelHeight / gridSize);
+                for (var gridX = 0; gridX < gridSize; gridX++)
+                {
+                    var left = gridX * bitmap.PixelWidth / gridSize;
+                    var right = Math.Max(left + 1, (gridX + 1) * bitmap.PixelWidth / gridSize);
+                    double total = 0d;
+                    var count = 0;
+
+                    for (var y = top; y < bottom; y += 3)
+                    {
+                        for (var x = left; x < right; x += 3)
+                        {
+                            var pixelIndex = y * stride + x * 4;
+                            total +=
+                                0.0722d * pixels[pixelIndex] +
+                                0.7152d * pixels[pixelIndex + 1] +
+                                0.2126d * pixels[pixelIndex + 2];
+                            count++;
+                        }
+                    }
+
+                    fingerprint[fingerprintIndex++] = (byte)Math.Round(total / count);
+                }
+            }
+
+            return fingerprint;
+        }
+
+        private static double CalculateMeanAbsoluteDifference(byte[] expected, byte[] actual)
+        {
+            Assert.AreEqual(expected.Length, actual.Length);
+            double difference = 0d;
+            for (var index = 0; index < expected.Length; index++)
+            {
+                difference += Math.Abs(expected[index] - actual[index]);
+            }
+
+            return difference / expected.Length;
         }
 
         private static byte[] CopyPixels(BitmapSource bitmap)

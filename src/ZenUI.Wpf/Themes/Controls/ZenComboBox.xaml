@@ -5,6 +5,7 @@
 
     <Style x:Key="ZenComboBoxItemStyle" TargetType="{x:Type ComboBoxItem}">
         <Setter Property="Padding" Value="12,8" />
+        <Setter Property="Margin" Value="0,1" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="Template">
             <Setter.Value>
@@ -18,11 +19,21 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsHighlighted" Value="True">
-                            <Setter TargetName="ItemBorder" Property="Background" Value="{DynamicResource ZenInfoLightBrush}" />
+                            <Setter TargetName="ItemBorder" Property="Background" Value="{DynamicResource ZenListBoxItemHoverBrush}" />
                         </Trigger>
                         <Trigger Property="IsSelected" Value="True">
-                            <Setter TargetName="ItemBorder" Property="Background" Value="{DynamicResource ZenInfoLightBrush}" />
-                            <Setter Property="Foreground" Value="{DynamicResource ZenPrimaryBrush}" />
+                            <Setter TargetName="ItemBorder" Property="Background" Value="{DynamicResource ZenListBoxItemSelectedBrush}" />
+                            <Setter Property="Foreground" Value="{DynamicResource ZenListBoxItemSelectedForegroundBrush}" />
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsHighlighted" Value="True" />
+                                <Condition Property="IsSelected" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="ItemBorder" Property="Background" Value="{DynamicResource ZenListBoxItemSelectedHoverBrush}" />
+                        </MultiTrigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="0.45" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -36,6 +47,7 @@
         <Setter Property="CornerRadius" Value="{DynamicResource ZenInputControlCornerRadius}" />
         <Setter Property="Background" Value="{DynamicResource ZenSurfaceBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource ZenBorderBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
         <Setter Property="Foreground" Value="{DynamicResource ZenTextPrimaryBrush}" />
         <Setter Property="ItemContainerStyle" Value="{StaticResource ZenComboBoxItemStyle}" />
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Auto" />
@@ -52,7 +64,7 @@
                             Grid.ColumnSpan="2"
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="1"
+                            BorderThickness="{TemplateBinding BorderThickness}"
                             CornerRadius="{TemplateBinding CornerRadius}" />
                         <ToggleButton
                             Grid.ColumnSpan="2"
@@ -136,9 +148,20 @@
                         <Trigger Property="HasItems" Value="False">
                             <Setter TargetName="PART_Popup" Property="MinHeight" Value="0" />
                         </Trigger>
-                        <Trigger Property="SelectedIndex" Value="-1">
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsEditable" Value="False" />
+                                <Condition Property="SelectedIndex" Value="-1" />
+                            </MultiTrigger.Conditions>
                             <Setter TargetName="WatermarkText" Property="Visibility" Value="Visible" />
-                        </Trigger>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsEditable" Value="True" />
+                                <Condition Property="Text" Value="" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="WatermarkText" Property="Visibility" Value="Visible" />
+                        </MultiTrigger>
                         <Trigger Property="IsEditable" Value="True">
                             <Setter TargetName="SelectionPresenter" Property="Visibility" Value="Hidden" />
                             <Setter TargetName="PART_EditableTextBox" Property="Visibility" Value="Visible" />

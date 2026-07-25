@@ -14,7 +14,7 @@
                         <Grid>
                             <Grid.ColumnDefinitions><ColumnDefinition Width="Auto" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
                             <Border x:Name="Icon" Width="18" Height="18" VerticalAlignment="Top" Background="{DynamicResource ZenInfoBrush}" CornerRadius="9">
-                                <TextBlock x:Name="IconText" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12" FontWeight="Bold" Foreground="White" Text="i" />
+                                <TextBlock x:Name="IconText" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="12" FontWeight="Bold" Foreground="{DynamicResource ZenOnAccentBrush}" Text="i" />
                             </Border>
                             <ContentPresenter Grid.Column="1" Margin="10,0,0,0" VerticalAlignment="Center" />
                         </Grid>

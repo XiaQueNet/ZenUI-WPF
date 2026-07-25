@@ -28,6 +28,15 @@ namespace ZenUI.Wpf.Tests.Theming
 
                 ZenThemeManager.ApplyTheme(resources, ZenTheme.HighContrast, false);
                 Assert.IsNotNull(resources["ZenFocusBrush"]);
+                Assert.AreEqual(
+                    SystemColors.HighlightTextColor,
+                    ((SolidColorBrush)resources["ZenOnAccentBrush"]).Color);
+                Assert.AreEqual(
+                    SystemColors.WindowColor,
+                    ((SolidColorBrush)resources["ZenControlThumbBrush"]).Color);
+                Assert.AreEqual(
+                    SystemColors.WindowTextColor,
+                    ((SolidColorBrush)resources["ZenControlThumbBorderBrush"]).Color);
                 Assert.AreEqual(2, resources.MergedDictionaries.Count);
             }
             finally

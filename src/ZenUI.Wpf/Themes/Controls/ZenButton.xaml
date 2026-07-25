@@ -50,24 +50,24 @@
             <Trigger Property="Variant" Value="Primary">
                 <Setter Property="Background" Value="{DynamicResource ZenPrimaryBrush}" />
                 <Setter Property="BorderBrush" Value="{DynamicResource ZenPrimaryBrush}" />
-                <Setter Property="Foreground" Value="White" />
+                <Setter Property="Foreground" Value="{DynamicResource ZenOnAccentBrush}" />
                 <Setter Property="HoverBackground" Value="{DynamicResource ZenPrimaryHoverBrush}" />
                 <Setter Property="HoverBorderBrush" Value="{DynamicResource ZenPrimaryHoverBrush}" />
-                <Setter Property="HoverForeground" Value="White" />
+                <Setter Property="HoverForeground" Value="{DynamicResource ZenOnAccentBrush}" />
                 <Setter Property="PressedBackground" Value="{DynamicResource ZenPrimaryPressedBrush}" />
                 <Setter Property="PressedBorderBrush" Value="{DynamicResource ZenPrimaryPressedBrush}" />
-                <Setter Property="PressedForeground" Value="White" />
+                <Setter Property="PressedForeground" Value="{DynamicResource ZenOnAccentBrush}" />
             </Trigger>
             <Trigger Property="Variant" Value="Success">
                 <Setter Property="Background" Value="{DynamicResource ZenSuccessActionBrush}" />
                 <Setter Property="BorderBrush" Value="{DynamicResource ZenSuccessActionBrush}" />
-                <Setter Property="Foreground" Value="White" />
+                <Setter Property="Foreground" Value="{DynamicResource ZenOnAccentBrush}" />
                 <Setter Property="HoverBackground" Value="{DynamicResource ZenSuccessActionHoverBrush}" />
                 <Setter Property="HoverBorderBrush" Value="{DynamicResource ZenSuccessActionHoverBrush}" />
-                <Setter Property="HoverForeground" Value="White" />
+                <Setter Property="HoverForeground" Value="{DynamicResource ZenOnAccentBrush}" />
                 <Setter Property="PressedBackground" Value="{DynamicResource ZenSuccessActionPressedBrush}" />
                 <Setter Property="PressedBorderBrush" Value="{DynamicResource ZenSuccessActionPressedBrush}" />
-                <Setter Property="PressedForeground" Value="White" />
+                <Setter Property="PressedForeground" Value="{DynamicResource ZenOnAccentBrush}" />
             </Trigger>
             <Trigger Property="Variant" Value="Warning">
                 <Setter Property="Background" Value="{DynamicResource ZenWarningBrush}" />

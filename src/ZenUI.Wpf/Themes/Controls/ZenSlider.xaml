@@ -9,7 +9,7 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Thumb}">
-                    <Ellipse x:Name="ThumbShape" Fill="White" Stroke="{DynamicResource ZenPrimaryBrush}" StrokeThickness="2" />
+                    <Ellipse x:Name="ThumbShape" Fill="{DynamicResource ZenControlThumbBrush}" Stroke="{DynamicResource ZenPrimaryBrush}" StrokeThickness="2" />
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="ThumbShape" Property="Fill" Value="{DynamicResource ZenInfoLightBrush}" />

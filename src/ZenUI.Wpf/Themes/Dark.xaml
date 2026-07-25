@@ -29,6 +29,9 @@
     <SolidColorBrush x:Key="ZenTextPrimaryBrush" Color="#F2F3F5" />
     <SolidColorBrush x:Key="ZenTextSecondaryBrush" Color="#C4C9D1" />
     <SolidColorBrush x:Key="ZenTextPlaceholderBrush" Color="#929AA8" />
+    <SolidColorBrush x:Key="ZenOnAccentBrush" Color="#FFFFFF" />
+    <SolidColorBrush x:Key="ZenControlThumbBrush" Color="#FFFFFF" />
+    <SolidColorBrush x:Key="ZenControlThumbBorderBrush" Color="#18000000" />
     <SolidColorBrush x:Key="ZenFocusBrush" Color="#A8BBFF" />
     <SolidColorBrush x:Key="ZenInfoLightBrush" Color="#263557" />
     <SolidColorBrush x:Key="ZenSuccessLightBrush" Color="#1E3D2B" />
