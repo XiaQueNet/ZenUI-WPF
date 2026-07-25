@@ -93,6 +93,8 @@ ZenThemeManager.ApplyTheme(Application.Current.Resources, ZenTheme.Dark);
 
 `ApplyTheme` 默认尊重并持续监听 Windows 高对比度设置，系统状态变化时会在原资源字典所属的 UI 线程自动重应用主题；如需预览指定主题，可以将第三个参数设为 `false`，同时停止该资源字典的系统高对比度跟随。也可以在应用资源中把 `Themes/Dark.xaml` 或 `Themes/HighContrast.xaml` 合并到 `Generic.xaml` 之后。所有控件颜色均通过语义化 `DynamicResource` 获取，应用仍可覆盖单个 Token。
 
+主题、Density、应用级 Token 覆盖和旧样式迁移的完整示例参见[主题、Density 定制与迁移指南](docs/guides/theme-customization.md)。
+
 TextBox、PasswordBox、ComboBox 和 DataGrid 单元格支持 WPF `Validation.HasError` 错误状态。Slider 支持水平与垂直方向，ProgressBar 支持垂直方向与 `IsIndeterminate`，ComboBox 支持 `IsEditable`。
 
 ## 密码安全
@@ -122,12 +124,13 @@ private void PasswordBox_OnPasswordChanged(object sender, RoutedEventArgs e)
 
 仓库在 Windows CI 中将编译器与 .NET 分析器警告视为错误，并同时运行 `net472`、`net8.0-windows` 测试及 NuGet/Symbol 包验证。
 
-CI 还会生成 Light、Dark、HighContrast 在 100%、150%、200% DPI 下的 PNG 快照，作为 `visual-regression-snapshots` 构件供界面审查。自动化测试同时覆盖 DataGrid 的虚拟化、编辑、排序、行头、行详情、冻结列、多选与 RTL 布局，以及各控件的基础 UI Automation 类型。
+CI 还会生成 Light、Dark、HighContrast × Compact、Standard、Comfortable 在 125%、150%、200% DPI 下的 PNG 快照，并单独生成 Calendar Popup 的主题与密度快照，作为 `visual-regression-snapshots` 构件供界面审查。自动化测试同时覆盖 DataGrid 的虚拟化、编辑、排序、行头、行详情、冻结列、多选与 RTL 布局，以及各控件的基础 UI Automation 类型。
 
 ## 维护文档
 
 - [文档索引](docs/README.md)
 - [控件设计规范](docs/design/component-design.md)
+- [主题、Density 定制与迁移指南](docs/guides/theme-customization.md)
 - [测试规范](docs/development/testing.md)
 - [AI 测试工作流](docs/development/ai-testing-workflow.md)
 - [C# 注释规范](docs/development/commenting.md)

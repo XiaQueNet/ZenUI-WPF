@@ -29,17 +29,17 @@ Metrics 当前统一 TextBox、PasswordBox、ComboBox、DatePicker 和 NumberBox
 
 Component Metrics 只收录具有明确控件语义、且不依赖模板内部布局计算的尺寸。单次出现的图标坐标、路径尺寸和与相邻列宽耦合的数值继续作为模板实现细节，不因追求 Token 数量而公开。
 
-当前 Component Metrics 覆盖 Button、ListBox、ScrollBar 和 ComboBox 弹层。DatePicker 创建的 Calendar 位于独立 Popup 资源作用域，其外观应通过 WPF 原生 `CalendarStyle` 定制；日期网格、导航图标和控件路径仍属于模板实现细节。
+当前 Component Metrics 覆盖 Button、ListBox、ScrollBar、ComboBox 弹层、DataGrid、Calendar、Switch、Slider、ProgressBar 和 Alert。DatePicker 创建的 Calendar 位于独立 Popup 资源作用域，日期格、月份按钮和导航按钮尺寸通过 `ZenDatePicker` 依赖属性显式传递；更复杂的外观仍应通过 WPF 原生 `CalendarStyle` 定制。图标路径和只服务于单个模板结构的坐标仍属于实现细节。
 
 Interaction Token 按控件角色区分禁用后的视觉强调程度，而不是按具体控件命名。Light 和 Dark 使用原有透明度层级；HighContrast 将这些可靠的状态 Token 覆盖为完全不透明，让系统色承担禁用语义，避免透明度进一步削弱可读性。
 
 Calendar 弹层和部分 DataGrid 模板内部状态暂不纳入 Interaction Token：前者位于独立 Popup 资源边界，后者包含通过 `TargetName` 修改模板内部元素的触发器。此类状态应优先通过 `CalendarStyle` 或控件依赖属性显式传递，避免产生看似可覆盖、实际无法可靠解析的 Token。
 
-DatePicker 的 Calendar 位于独立 Popup 中，窗口级定制应通过 `ZenDatePicker.CalendarStyle` 传入；可基于公开的 `ZenCalendarStyle`、`ZenCalendarDayButtonStyle` 等 Style 扩展。DataGrid 单元格的焦点与校验边框使用独立覆盖层，厚度分别经 `CellFocusVisualBorderThickness` 和 `CellValidationBorderThickness` 传递，避免状态切换改变内容 Padding 和布局。
+DatePicker 的 Calendar 位于独立 Popup 中，窗口级定制应通过 `ZenDatePicker.CalendarStyle` 传入；可基于公开的 `ZenCalendarStyle`、`ZenCalendarDayButtonStyle` 等 Style 扩展。日期格和导航尺寸经 `CalendarDayButtonWidth`、`CalendarDayButtonHeight`、`CalendarButtonPadding` 与 `CalendarNavigationButtonSize` 传递。DataGrid 单元格的焦点与校验边框使用独立覆盖层，厚度分别经 `CellFocusVisualBorderThickness` 和 `CellValidationBorderThickness` 传递，避免状态切换改变内容 Padding 和布局。
 
 Typography Token 提供 Caption、Body、Subtitle、Title、Display 等语义层级。ZenUI 不在控件默认 Style 中强制设置全局 `FontFamily` 或正文 `FontSize`，以保留 WPF 字体属性继承、系统字体和应用级本地化选择；组件明确需要的文字强调和 Gallery 公共排版才引用这些 Token。绝对行高仅用于 `TextBlock` 排版，不应直接套用到固定高度的输入控件。
 
-Density 与颜色主题相互独立。`ZenDensityManager` 通过 `Themes/Density/Compact.xaml` 和 `Comfortable.xaml` 覆盖可安全动态更新的 Metrics；Standard 直接使用默认 Token。首轮密度覆盖输入控件、Button、ListBox、ScrollBar 和 ComboBox 弹层，且不改变颜色、字体或圆角。应用直接定义在自身资源字典中的同名 Token 仍具有更高优先级。
+Density 与颜色主题相互独立。`ZenDensityManager` 通过 `Themes/Density/Compact.xaml` 和 `Comfortable.xaml` 覆盖可安全动态更新的 Metrics；Standard 直接使用默认 Token。当前密度覆盖输入控件、Button、ListBox、ScrollBar、ComboBox 弹层、DataGrid、Calendar、Switch、Slider、ProgressBar 和 Alert，且不改变颜色、字体或圆角。应用直接定义在自身资源字典中的同名 Token 仍具有更高优先级。
 
 ## 命名规则
 

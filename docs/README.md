@@ -9,6 +9,10 @@
 - [控件设计规范](design/component-design.md)：公共 API、模板契约、交互状态、主题资源、可访问性与评审清单。
 - [主题 Token 规范](design/theme-tokens.md)：主题资源分层、命名、WPF 使用方式与兼容性契约。
 
+## 使用指南
+
+- [主题、Density 定制与迁移指南](guides/theme-customization.md)：运行时切换、应用级 Token 覆盖、Calendar Popup 定制和硬编码样式迁移。
+
 ## 开发
 
 面向日常编码、测试和自动化协作：
