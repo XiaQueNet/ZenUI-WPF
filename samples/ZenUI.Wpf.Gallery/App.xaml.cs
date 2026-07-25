@@ -27,6 +27,7 @@ namespace ZenUI.Wpf.Gallery
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
             containerRegistry.RegisterForNavigation<OverviewView>(NavigationKeys.Overview);
+            containerRegistry.RegisterForNavigation<TokenView>(NavigationKeys.Token);
             containerRegistry.RegisterForNavigation<ButtonView>(NavigationKeys.Button);
             containerRegistry.RegisterForNavigation<TextBoxView>(NavigationKeys.TextBox);
             containerRegistry.RegisterForNavigation<NumberBoxView>(NavigationKeys.NumberBox);

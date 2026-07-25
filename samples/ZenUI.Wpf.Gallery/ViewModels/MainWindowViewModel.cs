@@ -40,6 +40,7 @@ namespace ZenUI.Wpf.Gallery.ViewModels
             MenuItems = new ObservableCollection<MenuItemViewModel>
             {
                 new MenuItemViewModel("概览", NavigationKeys.Overview, true),
+                new MenuItemViewModel("设计 Token", NavigationKeys.Token),
                 new MenuItemViewModel("按钮  Button", NavigationKeys.Button),
                 new MenuItemViewModel("输入框  TextBox", NavigationKeys.TextBox),
                 new MenuItemViewModel("数字输入框  NumberBox", NavigationKeys.NumberBox),

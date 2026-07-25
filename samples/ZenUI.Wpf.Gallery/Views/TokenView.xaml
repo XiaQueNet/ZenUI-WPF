@@ -1,0 +1,61 @@
+<UserControl
+    x:Class="ZenUI.Wpf.Gallery.Views.TokenView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:gallery="clr-namespace:ZenUI.Wpf.Gallery.Controls"
+    xmlns:zen="https://zenui.mnorg.cn/xaml/wpf">
+    <ScrollViewer Padding="40" HorizontalContentAlignment="Stretch" VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+            <gallery:PageHeader
+                Description="查看当前主题与密度下解析后的公开 Token，并实时检查常用控件尺寸。"
+                Title="设计 Token 与 Density" />
+
+            <Border Style="{StaticResource GalleryCardStyle}">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="当前密度预览" />
+                    <TextBlock
+                        Margin="0,0,0,18"
+                        Style="{StaticResource GallerySupportingTextStyle}"
+                        Text="使用窗口左下角切换紧凑、标准和宽松密度；下面的控件及 Token 值会立即更新。" />
+                    <UniformGrid Columns="2">
+                        <StackPanel Margin="0,0,14,0">
+                            <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="输入与操作" />
+                            <zen:ZenTextBox Margin="0,0,0,10" Watermark="输入控件高度与内边距" />
+                            <zen:ZenComboBox Margin="0,0,0,10" SelectedIndex="0">
+                                <ComboBoxItem Content="下拉弹层尺寸" />
+                                <ComboBoxItem Content="第二项" />
+                            </zen:ZenComboBox>
+                            <StackPanel Orientation="Horizontal">
+                                <zen:ZenButton Content="按钮" />
+                                <zen:ZenSwitch Margin="16,0,0,0" IsChecked="True" />
+                            </StackPanel>
+                        </StackPanel>
+                        <StackPanel Margin="14,0,0,0">
+                            <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="反馈与选择" />
+                            <zen:ZenDatePicker Margin="0,0,0,10" SelectedDate="2026-07-23" />
+                            <zen:ZenSlider Margin="0,0,0,10" Value="62" />
+                            <zen:ZenProgressBar Margin="0,0,0,10" Value="62" />
+                            <zen:ZenAlert Content="Alert 内边距随密度更新" Variant="Success" />
+                        </StackPanel>
+                    </UniformGrid>
+                    <TextBlock
+                        Margin="0,22,0,10"
+                        Style="{StaticResource GalleryFieldLabelStyle}"
+                        Text="DataGrid 表头、行高与单元格内边距" />
+                    <zen:ZenDataGrid
+                        x:Name="DensityDataGrid"
+                        Height="150"
+                        AutoGenerateColumns="False"
+                        IsReadOnly="True">
+                        <DataGrid.Columns>
+                            <DataGridTextColumn Width="*" Binding="{Binding Name}" Header="Token 范围" />
+                            <DataGridTextColumn Width="180" Binding="{Binding Description}" Header="当前行为" />
+                        </DataGrid.Columns>
+                    </zen:ZenDataGrid>
+                </StackPanel>
+            </Border>
+
+            <StackPanel x:Name="TokenSections" />
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>
