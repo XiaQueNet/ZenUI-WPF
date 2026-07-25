@@ -9,10 +9,10 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Thumb}">
-                    <Ellipse x:Name="ThumbShape" Fill="{DynamicResource ZenControlThumbBrush}" Stroke="{DynamicResource ZenPrimaryBrush}" StrokeThickness="2" />
+                    <Ellipse x:Name="ThumbShape" Fill="{TemplateBinding Background}" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="2" />
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="ThumbShape" Property="Fill" Value="{DynamicResource ZenInfoLightBrush}" />
+                            <Setter TargetName="ThumbShape" Property="Fill" Value="{Binding Tag, RelativeSource={RelativeSource TemplatedParent}}" />
                         </Trigger>
                         <Trigger Property="IsDragging" Value="True">
                             <Setter TargetName="ThumbShape" Property="StrokeThickness" Value="3" />
@@ -27,6 +27,11 @@
         <Setter Property="MinWidth" Value="120" />
         <Setter Property="MinHeight" Value="{DynamicResource ZenSliderCrossAxisMinSize}" />
         <Setter Property="TrackThickness" Value="{DynamicResource ZenSliderTrackThickness}" />
+        <Setter Property="Background" Value="{DynamicResource ZenDividerBrush}" />
+        <Setter Property="Foreground" Value="{DynamicResource ZenPrimaryBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ZenPrimaryBrush}" />
+        <Setter Property="ThumbBrush" Value="{DynamicResource ZenControlThumbBrush}" />
+        <Setter Property="ThumbHoverBrush" Value="{DynamicResource ZenInfoLightBrush}" />
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Template">
             <Setter.Value>
@@ -37,20 +42,26 @@
                             IsDirectionReversed="{TemplateBinding IsDirectionReversed}"
                             Orientation="{TemplateBinding Orientation}">
                             <Track.DecreaseRepeatButton>
-                                <RepeatButton x:Name="DecreaseButton" Height="{Binding TrackThickness, RelativeSource={RelativeSource TemplatedParent}}" VerticalAlignment="Center" Background="{DynamicResource ZenPrimaryBrush}" BorderThickness="0" Command="{x:Static Slider.DecreaseLarge}" IsTabStop="False">
+                                <RepeatButton x:Name="DecreaseButton" Height="{Binding TrackThickness, RelativeSource={RelativeSource TemplatedParent}}" VerticalAlignment="Center" Background="{TemplateBinding Foreground}" BorderThickness="0" Command="{x:Static Slider.DecreaseLarge}" IsTabStop="False">
                                     <RepeatButton.Template>
                                         <ControlTemplate TargetType="RepeatButton"><Border Background="{TemplateBinding Background}" CornerRadius="2" /></ControlTemplate>
                                     </RepeatButton.Template>
                                 </RepeatButton>
                             </Track.DecreaseRepeatButton>
                             <Track.IncreaseRepeatButton>
-                                <RepeatButton x:Name="IncreaseButton" Height="{Binding TrackThickness, RelativeSource={RelativeSource TemplatedParent}}" VerticalAlignment="Center" Background="{DynamicResource ZenDividerBrush}" BorderThickness="0" Command="{x:Static Slider.IncreaseLarge}" IsTabStop="False">
+                                <RepeatButton x:Name="IncreaseButton" Height="{Binding TrackThickness, RelativeSource={RelativeSource TemplatedParent}}" VerticalAlignment="Center" Background="{TemplateBinding Background}" BorderThickness="0" Command="{x:Static Slider.IncreaseLarge}" IsTabStop="False">
                                     <RepeatButton.Template>
                                         <ControlTemplate TargetType="RepeatButton"><Border Background="{TemplateBinding Background}" CornerRadius="2" /></ControlTemplate>
                                     </RepeatButton.Template>
                                 </RepeatButton>
                             </Track.IncreaseRepeatButton>
-                            <Track.Thumb><Thumb Style="{StaticResource ZenSliderThumbStyle}" /></Track.Thumb>
+                            <Track.Thumb>
+                                <Thumb
+                                    Background="{TemplateBinding ThumbBrush}"
+                                    BorderBrush="{TemplateBinding BorderBrush}"
+                                    Style="{StaticResource ZenSliderThumbStyle}"
+                                    Tag="{TemplateBinding ThumbHoverBrush}" />
+                            </Track.Thumb>
                         </Track>
                     </Grid>
                     <ControlTemplate.Triggers>

@@ -3,6 +3,7 @@ using System.Windows;
 using System.Windows.Automation;
 using System.Windows.Automation.Peers;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace ZenUI.Wpf.Controls
 {
@@ -11,15 +12,73 @@ namespace ZenUI.Wpf.Controls
     /// </summary>
     public class ZenAlert : ContentControl
     {
+        private static readonly System.Type SelfType = typeof(ZenAlert);
+
         static ZenAlert()
         {
             DefaultStyleKeyProperty.OverrideMetadata(
-                typeof(ZenAlert),
-                new FrameworkPropertyMetadata(typeof(ZenAlert)));
+                SelfType,
+                new FrameworkPropertyMetadata(SelfType));
             AutomationProperties.LiveSettingProperty.OverrideMetadata(
-                typeof(ZenAlert),
+                SelfType,
                 new FrameworkPropertyMetadata(AutomationLiveSetting.Polite));
         }
+
+        /// <summary>
+        /// 获取或设置提示图标的强调画刷。
+        /// </summary>
+        [Bindable(true)]
+        public Brush AccentBrush
+        {
+            get { return (Brush)GetValue(AccentBrushProperty); }
+            set { SetValue(AccentBrushProperty, value); }
+        }
+
+        public static readonly DependencyProperty AccentBrushProperty =
+            RegisterBrush(nameof(AccentBrush));
+
+        /// <summary>
+        /// 获取或设置提示图标的前景画刷。
+        /// </summary>
+        [Bindable(true)]
+        public Brush IconForeground
+        {
+            get { return (Brush)GetValue(IconForegroundProperty); }
+            set { SetValue(IconForegroundProperty, value); }
+        }
+
+        public static readonly DependencyProperty IconForegroundProperty =
+            RegisterBrush(nameof(IconForeground));
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public Brush ThemeBackground
+        {
+            get { return (Brush)GetValue(ThemeBackgroundProperty); }
+            set { SetValue(ThemeBackgroundProperty, value); }
+        }
+
+        public static readonly DependencyProperty ThemeBackgroundProperty =
+            RegisterBrush(nameof(ThemeBackground));
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public Brush ThemeBorderBrush
+        {
+            get { return (Brush)GetValue(ThemeBorderBrushProperty); }
+            set { SetValue(ThemeBorderBrushProperty, value); }
+        }
+
+        public static readonly DependencyProperty ThemeBorderBrushProperty =
+            RegisterBrush(nameof(ThemeBorderBrush));
+
+        [EditorBrowsable(EditorBrowsableState.Never)]
+        public Brush ThemeAccentBrush
+        {
+            get { return (Brush)GetValue(ThemeAccentBrushProperty); }
+            set { SetValue(ThemeAccentBrushProperty, value); }
+        }
+
+        public static readonly DependencyProperty ThemeAccentBrushProperty =
+            RegisterBrush(nameof(ThemeAccentBrush));
 
         /// <summary>
         /// 获取或设置提示条的语义外观。
@@ -38,8 +97,19 @@ namespace ZenUI.Wpf.Controls
             DependencyProperty.Register(
                 nameof(Variant),
                 typeof(AlertVariant),
-                typeof(ZenAlert),
+                SelfType,
                 new FrameworkPropertyMetadata(AlertVariant.Info));
+
+        private static DependencyProperty RegisterBrush(string name)
+        {
+            return DependencyProperty.Register(
+                name,
+                typeof(Brush),
+                SelfType,
+                new FrameworkPropertyMetadata(
+                    null,
+                    FrameworkPropertyMetadataOptions.AffectsRender));
+        }
 
         /// <inheritdoc/>
         protected override AutomationPeer OnCreateAutomationPeer()

@@ -7,35 +7,50 @@
         <Setter Property="Padding" Value="{DynamicResource ZenAlertPadding}" />
         <Setter Property="AutomationProperties.LiveSetting" Value="Polite" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="Foreground" Value="{DynamicResource ZenTextPrimaryBrush}" />
+        <Setter Property="IconForeground" Value="{DynamicResource ZenOnAccentBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="ThemeBackground" Value="{DynamicResource ZenInfoLightBrush}" />
+        <Setter Property="ThemeBorderBrush" Value="{DynamicResource ZenInfoBrush}" />
+        <Setter Property="ThemeAccentBrush" Value="{DynamicResource ZenInfoBrush}" />
+        <Setter Property="Background" Value="{Binding ThemeBackground, RelativeSource={RelativeSource Self}}" />
+        <Setter Property="BorderBrush" Value="{Binding ThemeBorderBrush, RelativeSource={RelativeSource Self}}" />
+        <Setter Property="AccentBrush" Value="{Binding ThemeAccentBrush, RelativeSource={RelativeSource Self}}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type zen:ZenAlert}">
-                    <Border x:Name="AlertBorder" Padding="{TemplateBinding Padding}" Background="{DynamicResource ZenInfoLightBrush}" BorderBrush="{DynamicResource ZenInfoBrush}" BorderThickness="1" CornerRadius="6">
+                    <Border
+                        x:Name="AlertBorder"
+                        Padding="{TemplateBinding Padding}"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="6">
                         <Grid>
                             <Grid.ColumnDefinitions><ColumnDefinition Width="Auto" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
-                            <Border x:Name="Icon" Width="18" Height="18" VerticalAlignment="Top" Background="{DynamicResource ZenInfoBrush}" CornerRadius="9">
-                                <TextBlock x:Name="IconText" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="{DynamicResource ZenFontSizeCaption}" FontWeight="{DynamicResource ZenFontWeightBold}" Foreground="{DynamicResource ZenOnAccentBrush}" Text="i" />
+                            <Border x:Name="Icon" Width="18" Height="18" VerticalAlignment="Top" Background="{TemplateBinding AccentBrush}" CornerRadius="9">
+                                <TextBlock x:Name="IconText" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="{DynamicResource ZenFontSizeCaption}" FontWeight="{DynamicResource ZenFontWeightBold}" Foreground="{TemplateBinding IconForeground}" Text="i" />
                             </Border>
-                            <ContentPresenter Grid.Column="1" Margin="10,0,0,0" VerticalAlignment="Center" />
+                            <ContentPresenter Grid.Column="1" Margin="10,0,0,0" VerticalAlignment="Center" TextElement.Foreground="{TemplateBinding Foreground}" />
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="Variant" Value="Success">
-                            <Setter TargetName="AlertBorder" Property="Background" Value="{DynamicResource ZenSuccessLightBrush}" />
-                            <Setter TargetName="AlertBorder" Property="BorderBrush" Value="{DynamicResource ZenSuccessBrush}" />
-                            <Setter TargetName="Icon" Property="Background" Value="{DynamicResource ZenSuccessBrush}" />
+                            <Setter Property="ThemeBackground" Value="{DynamicResource ZenSuccessLightBrush}" />
+                            <Setter Property="ThemeBorderBrush" Value="{DynamicResource ZenSuccessBrush}" />
+                            <Setter Property="ThemeAccentBrush" Value="{DynamicResource ZenSuccessBrush}" />
                             <Setter TargetName="IconText" Property="Text" Value="✓" />
                         </Trigger>
                         <Trigger Property="Variant" Value="Warning">
-                            <Setter TargetName="AlertBorder" Property="Background" Value="{DynamicResource ZenWarningLightBrush}" />
-                            <Setter TargetName="AlertBorder" Property="BorderBrush" Value="{DynamicResource ZenWarningBrush}" />
-                            <Setter TargetName="Icon" Property="Background" Value="{DynamicResource ZenWarningBrush}" />
+                            <Setter Property="ThemeBackground" Value="{DynamicResource ZenWarningLightBrush}" />
+                            <Setter Property="ThemeBorderBrush" Value="{DynamicResource ZenWarningBrush}" />
+                            <Setter Property="ThemeAccentBrush" Value="{DynamicResource ZenWarningBrush}" />
                             <Setter TargetName="IconText" Property="Text" Value="!" />
                         </Trigger>
                         <Trigger Property="Variant" Value="Error">
-                            <Setter TargetName="AlertBorder" Property="Background" Value="{DynamicResource ZenErrorLightBrush}" />
-                            <Setter TargetName="AlertBorder" Property="BorderBrush" Value="{DynamicResource ZenErrorBrush}" />
-                            <Setter TargetName="Icon" Property="Background" Value="{DynamicResource ZenErrorBrush}" />
+                            <Setter Property="ThemeBackground" Value="{DynamicResource ZenErrorLightBrush}" />
+                            <Setter Property="ThemeBorderBrush" Value="{DynamicResource ZenErrorBrush}" />
+                            <Setter Property="ThemeAccentBrush" Value="{DynamicResource ZenErrorBrush}" />
                             <Setter TargetName="IconText" Property="Text" Value="×" />
                         </Trigger>
                     </ControlTemplate.Triggers>
