@@ -38,6 +38,10 @@ ZenUI 的目标是优化 WPF 控件的默认体验，而不是缩减 WPF 已有�
         <zen:ZenCheckBox Content="记住登录状态" />
         <zen:ZenRadioButton Content="选项 A" GroupName="Options" />
         <zen:ZenComboBox Watermark="请选择" />
+        <zen:ZenListBox SelectedIndex="0">
+            <ListBoxItem Content="选项 A" />
+            <ListBoxItem Content="选项 B" />
+        </zen:ZenListBox>
         <zen:ZenDatePicker Watermark="请选择日期" />
         <zen:ZenSlider Maximum="100" Value="60" />
         <zen:ZenProgressBar Maximum="100" Value="60" />
@@ -47,7 +51,7 @@ ZenUI 的目标是优化 WPF 控件的默认体验，而不是缩减 WPF 已有�
 </Window>
 ```
 
-目前提供 Button、TextBox、NumberBox、PasswordBox、Switch、CheckBox、RadioButton、ComboBox、DatePicker、DataGrid、Slider、ProgressBar 和 Alert 共 13 个常用控件。所有控件均自带默认主题，并覆盖悬停、焦点、选中和禁用等常见交互状态。
+目前提供 Button、TextBox、NumberBox、PasswordBox、Switch、CheckBox、RadioButton、ComboBox、ListBox、DatePicker、DataGrid、Slider、ProgressBar 和 Alert 共 14 个常用控件。所有控件均自带默认主题，并覆盖悬停、焦点、选中和禁用等常见交互状态。
 
 控件的默认样式由 `Themes/Generic.xaml` 自动加载。应用需要直接使用 ZenUI 颜色资源或具名样式时，可以显式合并默认主题：
 

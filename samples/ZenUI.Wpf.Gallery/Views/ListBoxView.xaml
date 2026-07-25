@@ -1,0 +1,126 @@
+<UserControl
+    x:Class="ZenUI.Wpf.Gallery.Views.ListBoxView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:gallery="clr-namespace:ZenUI.Wpf.Gallery.Controls"
+    xmlns:zen="http://zenui.mnorg.com/zenui-wpf">
+    <ScrollViewer Padding="40" HorizontalContentAlignment="Stretch" VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+            <gallery:PageHeader Description="用于持续展示一组项目，并支持单选或多选。" Title="ListBox 列表框" />
+
+            <Border Style="{StaticResource GalleryCardStyle}">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="基本用法与状态" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="18" />
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="18" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel>
+                            <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="默认" />
+                            <zen:ZenListBox Height="190" SelectedIndex="1">
+                                <ListBoxItem Content="设计规范" />
+                                <ListBoxItem Content="组件开发" />
+                                <ListBoxItem Content="质量验证" />
+                                <ListBoxItem Content="发布准备" />
+                            </zen:ZenListBox>
+                        </StackPanel>
+                        <StackPanel Grid.Column="2">
+                            <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="包含禁用项" />
+                            <zen:ZenListBox Height="190" SelectedIndex="0">
+                                <ListBoxItem Content="接收产品更新" />
+                                <ListBoxItem Content="接收安全通知" />
+                                <ListBoxItem Content="此选项不可用" IsEnabled="False" />
+                                <ListBoxItem Content="加入体验计划" />
+                            </zen:ZenListBox>
+                        </StackPanel>
+                        <StackPanel Grid.Column="4">
+                            <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="禁用列表" />
+                            <zen:ZenListBox Height="190" IsEnabled="False" SelectedIndex="1">
+                                <ListBoxItem Content="浅色主题" />
+                                <ListBoxItem Content="深色主题" />
+                                <ListBoxItem Content="高对比度主题" />
+                            </zen:ZenListBox>
+                        </StackPanel>
+                    </Grid>
+                </StackPanel>
+            </Border>
+
+            <Border Style="{StaticResource GalleryCardStyle}">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="多选" />
+                    <TextBlock Margin="0,0,0,12" Style="{StaticResource GallerySupportingTextStyle}" Text="SelectionMode=&quot;Extended&quot; 保留 WPF 原生的 Ctrl 与 Shift 范围选择。" />
+                    <zen:ZenListBox Height="180" SelectionMode="Extended">
+                        <ListBoxItem Content="北京" IsSelected="True" />
+                        <ListBoxItem Content="上海" IsSelected="True" />
+                        <ListBoxItem Content="深圳" />
+                        <ListBoxItem Content="成都" />
+                        <ListBoxItem Content="杭州" />
+                    </zen:ZenListBox>
+                </StackPanel>
+            </Border>
+
+            <Border Style="{StaticResource GalleryCardStyle}">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="自定义项目模板" />
+                    <zen:ZenListBox SelectedIndex="0">
+                        <ListBoxItem>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel>
+                                    <TextBlock FontWeight="SemiBold" Text="ZenUI.Wpf" />
+                                    <TextBlock Margin="0,4,0,0" Style="{StaticResource GallerySupportingTextStyle}" Text="核心控件库 · net472 / net8.0-windows" />
+                                </StackPanel>
+                                <Border Grid.Column="1" Padding="9,4" VerticalAlignment="Center" Background="{DynamicResource ZenSuccessLightBrush}" CornerRadius="10">
+                                    <TextBlock Foreground="{DynamicResource ZenSuccessBrush}" Text="正常" />
+                                </Border>
+                            </Grid>
+                        </ListBoxItem>
+                        <ListBoxItem>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel>
+                                    <TextBlock FontWeight="SemiBold" Text="ZenUI.Wpf.Gallery" />
+                                    <TextBlock Margin="0,4,0,0" Style="{StaticResource GallerySupportingTextStyle}" Text="组件与交互状态目录" />
+                                </StackPanel>
+                                <Border Grid.Column="1" Padding="9,4" VerticalAlignment="Center" Background="{DynamicResource ZenInfoLightBrush}" CornerRadius="10">
+                                    <TextBlock Foreground="{DynamicResource ZenInfoBrush}" Text="示例" />
+                                </Border>
+                            </Grid>
+                        </ListBoxItem>
+                    </zen:ZenListBox>
+                </StackPanel>
+            </Border>
+
+            <Border Style="{StaticResource GalleryCardStyle}">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="长列表与圆角" />
+                    <TextBlock Margin="0,0,0,12" Style="{StaticResource GallerySupportingTextStyle}" Text="默认启用 UI 虚拟化与容器回收；固定高度后，超出内容使用主题滚动条。" />
+                    <zen:ZenListBox Height="210" CornerRadius="14" SelectedIndex="7">
+                        <ListBoxItem Content="项目 01" />
+                        <ListBoxItem Content="项目 02" />
+                        <ListBoxItem Content="项目 03" />
+                        <ListBoxItem Content="项目 04" />
+                        <ListBoxItem Content="项目 05" />
+                        <ListBoxItem Content="项目 06" />
+                        <ListBoxItem Content="项目 07" />
+                        <ListBoxItem Content="项目 08" />
+                        <ListBoxItem Content="项目 09" />
+                        <ListBoxItem Content="项目 10" />
+                        <ListBoxItem Content="项目 11" />
+                        <ListBoxItem Content="项目 12" />
+                    </zen:ZenListBox>
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

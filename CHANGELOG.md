@@ -4,6 +4,10 @@
 
 ## Unreleased
 
+### Added
+
+- 增加 `ZenListBox` 列表选择控件及 Gallery 示例，支持单选、多选、键盘导航、虚拟化和主题化交互状态。
+
 ## [0.1.0-preview.2] - 2026-07-24
 
 ### Added

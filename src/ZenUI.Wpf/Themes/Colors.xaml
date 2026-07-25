@@ -53,6 +53,14 @@
     <SolidColorBrush x:Key="ZenWarningLightBrush" Color="#FFF7E8" />
     <SolidColorBrush x:Key="ZenErrorLightBrush" Color="#FFECE8" />
 
+    <!--  列表框  -->
+    <SolidColorBrush x:Key="ZenListBoxItemHoverBrush" Color="#EEF3FA" />
+    <SolidColorBrush x:Key="ZenListBoxItemSelectedBrush" Color="#EEF2FF" />
+    <SolidColorBrush x:Key="ZenListBoxItemSelectedHoverBrush" Color="#E3E9FB" />
+    <SolidColorBrush x:Key="ZenListBoxItemSelectedForegroundBrush" Color="#3D63D2" />
+    <SolidColorBrush x:Key="ZenListBoxItemSelectedInactiveBrush" Color="#F1F4FA" />
+    <SolidColorBrush x:Key="ZenListBoxItemSelectedInactiveForegroundBrush" Color="#4E5969" />
+
     <!--  表格  -->
     <SolidColorBrush x:Key="ZenDataGridAlternatingRowBrush" Color="#FBFCFD" />
     <SolidColorBrush x:Key="ZenDataGridRowHoverBrush" Color="#F4F6FD" />

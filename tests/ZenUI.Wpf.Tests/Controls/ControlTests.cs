@@ -9,6 +9,7 @@ using System.Windows.Automation.Peers;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
+using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Threading;
 
@@ -30,6 +31,7 @@ namespace ZenUI.Wpf.Tests.Controls
             var checkBox = new TestZenCheckBox();
             var radioButton = new TestZenRadioButton();
             var comboBox = new TestZenComboBox();
+            var listBox = new TestZenListBox();
             var datePicker = new TestZenDatePicker();
             var dataGrid = new TestZenDataGrid();
             var passwordBox = new TestZenPasswordBox();
@@ -43,6 +45,7 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.AreEqual(typeof(ZenCheckBox), checkBox.ExposedDefaultStyleKey);
             Assert.AreEqual(typeof(ZenRadioButton), radioButton.ExposedDefaultStyleKey);
             Assert.AreEqual(typeof(ZenComboBox), comboBox.ExposedDefaultStyleKey);
+            Assert.AreEqual(typeof(ZenListBox), listBox.ExposedDefaultStyleKey);
             Assert.AreEqual(typeof(ZenDatePicker), datePicker.ExposedDefaultStyleKey);
             Assert.AreEqual(typeof(ZenDataGrid), dataGrid.ExposedDefaultStyleKey);
             Assert.AreEqual(typeof(ZenPasswordBox), passwordBox.ExposedDefaultStyleKey);
@@ -58,6 +61,7 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.IsNull(textBox.TrailingContent);
             Assert.IsNull(textBox.TrailingContentTemplate);
             Assert.AreEqual(string.Empty, comboBox.Watermark);
+            Assert.AreEqual(new CornerRadius(8), listBox.CornerRadius);
             Assert.AreEqual(string.Empty, datePicker.Watermark);
             Assert.AreEqual(new CornerRadius(6), datePicker.CornerRadius);
             Assert.AreEqual(new CornerRadius(8), dataGrid.CornerRadius);
@@ -115,6 +119,7 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.IsInstanceOfType<Style>(dictionary[typeof(ZenCheckBox)]);
             Assert.IsInstanceOfType<Style>(dictionary[typeof(ZenRadioButton)]);
             Assert.IsInstanceOfType<Style>(dictionary[typeof(ZenComboBox)]);
+            Assert.IsInstanceOfType<Style>(dictionary[typeof(ZenListBox)]);
             Assert.IsInstanceOfType<Style>(dictionary[typeof(ZenDatePicker)]);
             Assert.IsInstanceOfType<Style>(dictionary[typeof(ZenDataGrid)]);
             Assert.IsInstanceOfType<Style>(dictionary[typeof(ZenPasswordBox)]);
@@ -126,6 +131,9 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.IsNotNull(dictionary["ZenPrimaryBrush"]);
             Assert.IsNotNull(dictionary["ZenFocusBrush"]);
             Assert.IsNotNull(dictionary["ZenErrorBrush"]);
+            Assert.IsNotNull(dictionary["ZenListBoxItemSelectedBrush"]);
+            Assert.IsInstanceOfType<Style>(dictionary["ZenListBoxStyle"]);
+            Assert.IsInstanceOfType<Style>(dictionary["ZenListBoxItemStyle"]);
             Assert.AreEqual(new Thickness(8, 4, 8, 4), dictionary["ZenInputControlPadding"]);
             Assert.AreEqual(new CornerRadius(6), dictionary["ZenInputControlCornerRadius"]);
             Assert.IsInstanceOfType<Style>(dictionary["ZenFocusVisualBorderStyle"]);
@@ -146,7 +154,8 @@ namespace ZenUI.Wpf.Tests.Controls
                 "ZenButtonFocusVisualStyle",
                 "ZenSwitchFocusVisualStyle",
                 "ZenTextBoxFocusVisualStyle",
-                "ZenSelectionFocusVisualStyle"
+                "ZenSelectionFocusVisualStyle",
+                "ZenListBoxItemFocusVisualStyle"
             };
 
             foreach (var styleKey in styleKeys)
@@ -179,6 +188,10 @@ namespace ZenUI.Wpf.Tests.Controls
             var radioButton = new ZenRadioButton { Content = "单选", IsChecked = true };
             var comboBox = new ZenComboBox { Watermark = "请选择" };
             comboBox.Items.Add("第一项");
+            var listBox = new ZenListBox { Height = 80 };
+            listBox.Items.Add("第一项");
+            listBox.Items.Add("第二项");
+            listBox.SelectedIndex = 0;
             var datePicker = new ZenDatePicker { Watermark = "请选择日期" };
             var slider = new ZenSlider { Value = 50 };
             var progressBar = new ZenProgressBar { Value = 60 };
@@ -190,6 +203,7 @@ namespace ZenUI.Wpf.Tests.Controls
             panel.Children.Add(checkBox);
             panel.Children.Add(radioButton);
             panel.Children.Add(comboBox);
+            panel.Children.Add(listBox);
             panel.Children.Add(datePicker);
             panel.Children.Add(slider);
             panel.Children.Add(progressBar);
@@ -220,6 +234,7 @@ namespace ZenUI.Wpf.Tests.Controls
                 Assert.IsNotNull(checkBox.Template.FindName("Box", checkBox));
                 Assert.IsNotNull(radioButton.Template.FindName("Ring", radioButton));
                 Assert.IsNotNull(comboBox.Template.FindName("InputBorder", comboBox));
+                Assert.IsNotNull(FindVisualDescendant<ScrollViewer>(listBox));
                 Assert.IsNotNull(datePicker.Template.FindName("PART_TextBox", datePicker));
                 Assert.IsNotNull(datePicker.Template.FindName("PART_Button", datePicker));
                 Assert.IsNotNull(slider.Template.FindName("PART_Track", slider));
@@ -820,10 +835,67 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.AreEqual(AutomationControlType.CheckBox, new TestZenCheckBox().ExposedAutomationPeer.GetAutomationControlType());
             Assert.AreEqual(AutomationControlType.RadioButton, new TestZenRadioButton().ExposedAutomationPeer.GetAutomationControlType());
             Assert.AreEqual(AutomationControlType.ComboBox, new TestZenComboBox().ExposedAutomationPeer.GetAutomationControlType());
+            Assert.AreEqual(AutomationControlType.List, new TestZenListBox().ExposedAutomationPeer.GetAutomationControlType());
             Assert.AreEqual(AutomationControlType.Custom, new TestZenDatePicker().ExposedAutomationPeer.GetAutomationControlType());
             Assert.AreEqual(AutomationControlType.DataGrid, new TestZenDataGrid().ExposedAutomationPeer.GetAutomationControlType());
             Assert.AreEqual(AutomationControlType.Slider, new TestZenSlider().ExposedAutomationPeer.GetAutomationControlType());
             Assert.AreEqual(AutomationControlType.ProgressBar, new TestZenProgressBar().ExposedAutomationPeer.GetAutomationControlType());
+        }
+
+        [TestMethod]
+        public void ListBoxPreservesSelectionModesAndVirtualization()
+        {
+            var listBox = new ZenListBox
+            {
+                Width = 260,
+                Height = 120,
+                SelectionMode = SelectionMode.Extended
+            };
+            listBox.Items.Add("第一项");
+            listBox.Items.Add("第二项");
+            listBox.Items.Add("第三项");
+            var window = CreateTestWindow(listBox, 320, 180);
+
+            try
+            {
+                window.Show();
+                window.UpdateLayout();
+
+                var first = listBox.ItemContainerGenerator.ContainerFromIndex(0) as ListBoxItem;
+                var second = listBox.ItemContainerGenerator.ContainerFromIndex(1) as ListBoxItem;
+                Assert.IsNotNull(first);
+                Assert.IsNotNull(second);
+
+                first.IsSelected = true;
+                second.IsSelected = true;
+                Assert.HasCount(2, listBox.SelectedItems);
+                Assert.AreEqual(SelectionMode.Extended, listBox.SelectionMode);
+                Assert.IsTrue(VirtualizingPanel.GetIsVirtualizing(listBox));
+                Assert.AreEqual(
+                    VirtualizationMode.Recycling,
+                    VirtualizingPanel.GetVirtualizationMode(listBox));
+                Assert.IsTrue(ScrollViewer.GetCanContentScroll(listBox));
+                Assert.IsInstanceOfType<VirtualizingStackPanel>(
+                    FindVisualDescendant<VirtualizingStackPanel>(listBox));
+
+                listBox.SelectionMode = SelectionMode.Single;
+                listBox.SelectedIndex = 0;
+                first.Focus();
+                var keyEvent = new KeyEventArgs(
+                    Keyboard.PrimaryDevice,
+                    PresentationSource.FromVisual(window),
+                    Environment.TickCount,
+                    Key.Down)
+                {
+                    RoutedEvent = Keyboard.KeyDownEvent
+                };
+                listBox.RaiseEvent(keyEvent);
+                Assert.AreEqual(1, listBox.SelectedIndex);
+            }
+            finally
+            {
+                window.Close();
+            }
         }
 
         [TestMethod]
@@ -1152,6 +1224,11 @@ namespace ZenUI.Wpf.Tests.Controls
             public AutomationPeer ExposedAutomationPeer => OnCreateAutomationPeer();
         }
         private sealed class TestZenComboBox : ZenComboBox
+        {
+            public object ExposedDefaultStyleKey => DefaultStyleKey;
+            public AutomationPeer ExposedAutomationPeer => OnCreateAutomationPeer();
+        }
+        private sealed class TestZenListBox : ZenListBox
         {
             public object ExposedDefaultStyleKey => DefaultStyleKey;
             public AutomationPeer ExposedAutomationPeer => OnCreateAutomationPeer();

@@ -57,7 +57,7 @@ namespace ZenUI.Wpf.Tests.Controls
             var root = new Border
             {
                 Width = 540,
-                Height = 450,
+                Height = 570,
                 Padding = new Thickness(20),
                 FlowDirection = theme == ZenTheme.HighContrast ? FlowDirection.RightToLeft : FlowDirection.LeftToRight
             };
@@ -117,6 +117,19 @@ namespace ZenUI.Wpf.Tests.Controls
                 Content = "主题、焦点和语义颜色快照",
                 Variant = AlertVariant.Success
             });
+
+            var listBox = new ZenListBox
+            {
+                Height = 92,
+                Margin = new Thickness(0, 14, 0, 0),
+                SelectionMode = SelectionMode.Extended
+            };
+            listBox.Items.Add("列表项目一");
+            listBox.Items.Add("列表项目二");
+            listBox.Items.Add("列表项目三");
+            listBox.SelectedItems.Add(listBox.Items[0]);
+            listBox.SelectedItems.Add(listBox.Items[1]);
+            panel.Children.Add(listBox);
 
             var dataGrid = new ZenDataGrid
             {
