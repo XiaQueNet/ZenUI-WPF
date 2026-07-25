@@ -137,9 +137,45 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.IsNotNull(dictionary["ZenListBoxItemSelectedBrush"]);
             Assert.IsInstanceOfType<Style>(dictionary["ZenListBoxStyle"]);
             Assert.IsInstanceOfType<Style>(dictionary["ZenListBoxItemStyle"]);
+            Assert.AreEqual(36d, dictionary["ZenInputControlMinHeight"]);
             Assert.AreEqual(new Thickness(8, 4, 8, 4), dictionary["ZenInputControlPadding"]);
             Assert.AreEqual(new CornerRadius(6), dictionary["ZenInputControlCornerRadius"]);
+            Assert.AreEqual(new Thickness(1), dictionary["ZenControlBorderThickness"]);
+            Assert.AreEqual(new Thickness(-2), dictionary["ZenFocusVisualMargin"]);
+            Assert.AreEqual(new Thickness(1), dictionary["ZenFocusVisualBorderThickness"]);
             Assert.IsInstanceOfType<Style>(dictionary["ZenFocusVisualBorderStyle"]);
+        }
+
+        [TestMethod]
+        public void InputMetricTokensCanBeOverriddenInWindowResources()
+        {
+            var textBox = new ZenTextBox();
+            var window = CreateTestWindow(textBox, 240, 100);
+            window.Resources.MergedDictionaries.Add(new ResourceDictionary
+            {
+                Source = new Uri(
+                    "/ZenUI.Wpf;component/Themes/Generic.xaml",
+                    UriKind.Relative)
+            });
+            window.Resources["ZenInputControlMinHeight"] = 44d;
+            window.Resources["ZenInputControlPadding"] = new Thickness(12, 6, 12, 6);
+            window.Resources["ZenInputControlCornerRadius"] = new CornerRadius(8);
+            window.Resources["ZenControlBorderThickness"] = new Thickness(2);
+
+            try
+            {
+                window.Show();
+                window.UpdateLayout();
+
+                Assert.AreEqual(44d, textBox.MinHeight);
+                Assert.AreEqual(new Thickness(12, 6, 12, 6), textBox.Padding);
+                Assert.AreEqual(new CornerRadius(8), textBox.CornerRadius);
+                Assert.AreEqual(new Thickness(2), textBox.BorderThickness);
+            }
+            finally
+            {
+                window.Close();
+            }
         }
 
         [TestMethod]

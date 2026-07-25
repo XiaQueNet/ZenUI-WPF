@@ -59,10 +59,10 @@
 
     <Style x:Key="ZenNumberBoxStyle" TargetType="{x:Type zen:ZenNumberBox}">
         <Setter Property="MinWidth" Value="112" />
-        <Setter Property="MinHeight" Value="36" />
+        <Setter Property="MinHeight" Value="{DynamicResource ZenInputControlMinHeight}" />
         <Setter Property="Background" Value="{DynamicResource ZenSurfaceBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource ZenBorderBrush}" />
-        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderThickness" Value="{DynamicResource ZenControlBorderThickness}" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="SnapsToDevicePixels" Value="True" />
         <Setter Property="UseLayoutRounding" Value="True" />

@@ -18,12 +18,14 @@
 | --- | --- | --- |
 | `Tokens/SemanticColors.xaml` | 跨控件共享的颜色语义 | `ZenPrimaryBrush`、`ZenTextSecondaryBrush`、`ZenSurfaceBrush` |
 | `Tokens/ComponentColors.xaml` | 控件或控件部件特有的颜色状态 | `ZenScrollBarThumbBrush`、`ZenListBoxItemSelectedBrush` |
+| `Tokens/Metrics.xaml` | 跨控件共享的尺寸与边框指标 | `ZenInputControlMinHeight`、`ZenInputControlPadding` |
 
 `Dark.xaml` 和 `HighContrast.xaml` 覆盖相同的公开颜色 Token。高对比度资源应优先使用 WPF `SystemColors`，而不是复制普通主题的固定色值。
 
-后续可在不改变现有颜色 Token 的前提下增加：
+Metrics 当前统一 TextBox、PasswordBox、ComboBox、DatePicker 和 NumberBox 的默认输入高度、Padding、圆角及边框宽度，也定义共享焦点边框指标。默认 Metrics 不随颜色主题变化，应用仍可在自身资源中覆盖。
 
-- `Metrics.xaml`：间距、控件高度、Padding、圆角和边框宽度。
+后续可在不改变现有 Token 的前提下增加：
+
 - `Typography.xaml`：字号、字重和行高。
 - Density 字典：Compact、Standard、Comfortable 等桌面密度。
 
@@ -61,8 +63,10 @@ Focus
 ## WPF 使用约定
 
 - 主题切换后需要更新的颜色、Brush 和其他值使用 `DynamicResource`。
+- 允许应用或 Density 在运行时覆盖的 Metrics 使用 `DynamicResource`。
 - 不随主题或 Density 变化的 Style、模板结构和常量优先使用 `StaticResource`。
 - 默认视觉由 Style Setter 引用 Token；依赖属性继续允许单个控件实例覆盖默认值。
+- `ControlTemplate.Triggers` 直接设置模板内部元素时，不应假设所有动态 Metrics 都能可靠解析；需要开放覆盖的值应优先经由控件依赖属性和 `TemplateBinding` 传递，并补充实例化测试。
 - 应用级资源覆盖优先于 ZenUI 默认主题，主题管理器不得在切换时破坏应用的自定义资源。
 - Token 的值类型属于资源契约。已有 `SolidColorBrush` Token 不得在另一个主题中改为 `Color`、字符串或其他类型。
 

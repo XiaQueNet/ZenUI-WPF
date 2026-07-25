@@ -312,11 +312,11 @@
 
     <Style x:Key="ZenDatePickerStyle" TargetType="{x:Type zen:ZenDatePicker}">
         <Setter Property="Padding" Value="{DynamicResource ZenInputControlPadding}" />
-        <Setter Property="MinHeight" Value="36" />
+        <Setter Property="MinHeight" Value="{DynamicResource ZenInputControlMinHeight}" />
         <Setter Property="CornerRadius" Value="{DynamicResource ZenInputControlCornerRadius}" />
         <Setter Property="Background" Value="{DynamicResource ZenSurfaceBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource ZenBorderBrush}" />
-        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="BorderThickness" Value="{DynamicResource ZenControlBorderThickness}" />
         <Setter Property="Foreground" Value="{DynamicResource ZenTextPrimaryBrush}" />
         <Setter Property="CalendarStyle" Value="{StaticResource ZenCalendarStyle}" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
