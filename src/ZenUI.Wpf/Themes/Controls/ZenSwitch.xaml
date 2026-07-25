@@ -21,47 +21,34 @@
     </Style>
 
     <Style x:Key="ZenSwitchStyle" TargetType="{x:Type zen:ZenSwitch}">
-        <Setter Property="Width" Value="64" />
-        <Setter Property="Height" Value="30" />
+        <Setter Property="Width" Value="{DynamicResource ZenSwitchWidth}" />
+        <Setter Property="Height" Value="{DynamicResource ZenSwitchHeight}" />
         <Setter Property="MinWidth" Value="48" />
-        <Setter Property="MinHeight" Value="30" />
+        <Setter Property="MinHeight" Value="{DynamicResource ZenSwitchHeight}" />
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="FocusVisualStyle" Value="{StaticResource ZenSwitchFocusVisualStyle}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type zen:ZenSwitch}">
-                    <Grid x:Name="Track" SnapsToDevicePixels="True">
-                        <!-- 两个直径 30 像素的圆与中间矩形拼接成标准胶囊形。 -->
-                        <Rectangle
-                            x:Name="TrackMiddle"
-                            Margin="15,0"
-                            Fill="{DynamicResource ZenTextPlaceholderBrush}" />
-                        <Ellipse
-                            x:Name="TrackLeft"
-                            Width="30"
-                            HorizontalAlignment="Left"
-                            Fill="{DynamicResource ZenTextPlaceholderBrush}" />
-                        <Ellipse
-                            x:Name="TrackRight"
-                            Width="30"
-                            HorizontalAlignment="Right"
-                            Fill="{DynamicResource ZenTextPlaceholderBrush}" />
+                    <Border
+                        x:Name="Track"
+                        Background="{DynamicResource ZenTextPlaceholderBrush}"
+                        CornerRadius="1000"
+                        SnapsToDevicePixels="True">
                         <Grid
                             x:Name="ThumbHost"
                             Width="{Binding ActualHeight, RelativeSource={RelativeSource TemplatedParent}}"
                             HorizontalAlignment="Left">
                             <Ellipse
-                                Margin="4"
+                                Margin="{DynamicResource ZenSwitchThumbMargin}"
                                 Fill="{DynamicResource ZenControlThumbBrush}"
                                 Stroke="{DynamicResource ZenControlThumbBorderBrush}"
                                 StrokeThickness="1" />
                         </Grid>
-                    </Grid>
+                    </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="True">
-                            <Setter TargetName="TrackMiddle" Property="Fill" Value="{DynamicResource ZenPrimaryBrush}" />
-                            <Setter TargetName="TrackLeft" Property="Fill" Value="{DynamicResource ZenPrimaryBrush}" />
-                            <Setter TargetName="TrackRight" Property="Fill" Value="{DynamicResource ZenPrimaryBrush}" />
+                            <Setter TargetName="Track" Property="Background" Value="{DynamicResource ZenPrimaryBrush}" />
                             <Setter TargetName="ThumbHost" Property="HorizontalAlignment" Value="Right" />
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">

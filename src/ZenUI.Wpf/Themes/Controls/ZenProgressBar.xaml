@@ -4,7 +4,7 @@
     xmlns:zen="clr-namespace:ZenUI.Wpf.Controls">
 
     <Style x:Key="ZenProgressBarStyle" TargetType="{x:Type zen:ZenProgressBar}">
-        <Setter Property="Height" Value="8" />
+        <Setter Property="Height" Value="{DynamicResource ZenProgressBarThickness}" />
         <Setter Property="Background" Value="{DynamicResource ZenDividerBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource ZenPrimaryBrush}" />
         <Setter Property="Template">
@@ -28,7 +28,7 @@
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="Orientation" Value="Vertical">
-                            <Setter Property="Width" Value="8" />
+                            <Setter Property="Width" Value="{DynamicResource ZenProgressBarThickness}" />
                             <Setter Property="Height" Value="Auto" />
                             <Setter TargetName="PART_Indicator" Property="HorizontalAlignment" Value="Stretch" />
                             <Setter TargetName="PART_Indicator" Property="VerticalAlignment" Value="Bottom" />

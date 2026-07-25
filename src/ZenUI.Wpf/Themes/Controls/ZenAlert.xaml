@@ -4,7 +4,7 @@
     xmlns:zen="clr-namespace:ZenUI.Wpf.Controls">
 
     <Style x:Key="ZenAlertStyle" TargetType="{x:Type zen:ZenAlert}">
-        <Setter Property="Padding" Value="14,11" />
+        <Setter Property="Padding" Value="{DynamicResource ZenAlertPadding}" />
         <Setter Property="AutomationProperties.LiveSetting" Value="Polite" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="Template">

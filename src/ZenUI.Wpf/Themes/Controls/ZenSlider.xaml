@@ -4,8 +4,8 @@
     xmlns:zen="clr-namespace:ZenUI.Wpf.Controls">
 
     <Style x:Key="ZenSliderThumbStyle" TargetType="{x:Type Thumb}">
-        <Setter Property="Width" Value="18" />
-        <Setter Property="Height" Value="18" />
+        <Setter Property="Width" Value="{DynamicResource ZenSliderThumbSize}" />
+        <Setter Property="Height" Value="{DynamicResource ZenSliderThumbSize}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Thumb}">
@@ -25,7 +25,8 @@
 
     <Style x:Key="ZenSliderStyle" TargetType="{x:Type zen:ZenSlider}">
         <Setter Property="MinWidth" Value="120" />
-        <Setter Property="MinHeight" Value="24" />
+        <Setter Property="MinHeight" Value="{DynamicResource ZenSliderCrossAxisMinSize}" />
+        <Setter Property="TrackThickness" Value="{DynamicResource ZenSliderTrackThickness}" />
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Template">
             <Setter.Value>
@@ -36,14 +37,14 @@
                             IsDirectionReversed="{TemplateBinding IsDirectionReversed}"
                             Orientation="{TemplateBinding Orientation}">
                             <Track.DecreaseRepeatButton>
-                                <RepeatButton x:Name="DecreaseButton" Height="4" VerticalAlignment="Center" Background="{DynamicResource ZenPrimaryBrush}" BorderThickness="0" Command="{x:Static Slider.DecreaseLarge}" IsTabStop="False">
+                                <RepeatButton x:Name="DecreaseButton" Height="{Binding TrackThickness, RelativeSource={RelativeSource TemplatedParent}}" VerticalAlignment="Center" Background="{DynamicResource ZenPrimaryBrush}" BorderThickness="0" Command="{x:Static Slider.DecreaseLarge}" IsTabStop="False">
                                     <RepeatButton.Template>
                                         <ControlTemplate TargetType="RepeatButton"><Border Background="{TemplateBinding Background}" CornerRadius="2" /></ControlTemplate>
                                     </RepeatButton.Template>
                                 </RepeatButton>
                             </Track.DecreaseRepeatButton>
                             <Track.IncreaseRepeatButton>
-                                <RepeatButton x:Name="IncreaseButton" Height="4" VerticalAlignment="Center" Background="{DynamicResource ZenDividerBrush}" BorderThickness="0" Command="{x:Static Slider.IncreaseLarge}" IsTabStop="False">
+                                <RepeatButton x:Name="IncreaseButton" Height="{Binding TrackThickness, RelativeSource={RelativeSource TemplatedParent}}" VerticalAlignment="Center" Background="{DynamicResource ZenDividerBrush}" BorderThickness="0" Command="{x:Static Slider.IncreaseLarge}" IsTabStop="False">
                                     <RepeatButton.Template>
                                         <ControlTemplate TargetType="RepeatButton"><Border Background="{TemplateBinding Background}" CornerRadius="2" /></ControlTemplate>
                                     </RepeatButton.Template>
@@ -54,15 +55,15 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="Orientation" Value="Vertical">
-                            <Setter Property="MinWidth" Value="24" />
+                            <Setter Property="MinWidth" Value="{DynamicResource ZenSliderCrossAxisMinSize}" />
                             <Setter Property="MinHeight" Value="120" />
                             <Setter TargetName="HorizontalRoot" Property="HorizontalAlignment" Value="Center" />
                             <Setter TargetName="HorizontalRoot" Property="VerticalAlignment" Value="Stretch" />
-                            <Setter TargetName="DecreaseButton" Property="Width" Value="4" />
+                            <Setter TargetName="DecreaseButton" Property="Width" Value="{Binding TrackThickness, RelativeSource={RelativeSource TemplatedParent}}" />
                             <Setter TargetName="DecreaseButton" Property="Height" Value="Auto" />
                             <Setter TargetName="DecreaseButton" Property="HorizontalAlignment" Value="Center" />
                             <Setter TargetName="DecreaseButton" Property="VerticalAlignment" Value="Stretch" />
-                            <Setter TargetName="IncreaseButton" Property="Width" Value="4" />
+                            <Setter TargetName="IncreaseButton" Property="Width" Value="{Binding TrackThickness, RelativeSource={RelativeSource TemplatedParent}}" />
                             <Setter TargetName="IncreaseButton" Property="Height" Value="Auto" />
                             <Setter TargetName="IncreaseButton" Property="HorizontalAlignment" Value="Center" />
                             <Setter TargetName="IncreaseButton" Property="VerticalAlignment" Value="Stretch" />

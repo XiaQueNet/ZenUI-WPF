@@ -1,3 +1,4 @@
+using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
 
@@ -14,5 +15,25 @@ namespace ZenUI.Wpf.Controls
                 typeof(ZenSlider),
                 new FrameworkPropertyMetadata(typeof(ZenSlider)));
         }
+
+        /// <summary>
+        /// 获取或设置滑块轨道的厚度。
+        /// </summary>
+        [Bindable(true)]
+        public double TrackThickness
+        {
+            get { return (double)GetValue(TrackThicknessProperty); }
+            set { SetValue(TrackThicknessProperty, value); }
+        }
+
+        /// <summary>
+        /// 标识 <see cref="TrackThickness"/> 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty TrackThicknessProperty =
+            DependencyProperty.Register(
+                nameof(TrackThickness),
+                typeof(double),
+                typeof(ZenSlider),
+                new FrameworkPropertyMetadata(4d));
     }
 }

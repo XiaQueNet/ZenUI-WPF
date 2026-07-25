@@ -40,4 +40,20 @@
     <sys:Double x:Key="ZenCalendarDayButtonHeight">32</sys:Double>
     <Thickness x:Key="ZenCalendarButtonPadding">8,10</Thickness>
     <sys:Double x:Key="ZenCalendarNavigationButtonSize">30</sys:Double>
+
+    <!-- 开关 -->
+    <sys:Double x:Key="ZenSwitchWidth">64</sys:Double>
+    <sys:Double x:Key="ZenSwitchHeight">30</sys:Double>
+    <Thickness x:Key="ZenSwitchThumbMargin">4</Thickness>
+
+    <!-- 滑块 -->
+    <sys:Double x:Key="ZenSliderThumbSize">18</sys:Double>
+    <sys:Double x:Key="ZenSliderTrackThickness">4</sys:Double>
+    <sys:Double x:Key="ZenSliderCrossAxisMinSize">24</sys:Double>
+
+    <!-- 进度条 -->
+    <sys:Double x:Key="ZenProgressBarThickness">8</sys:Double>
+
+    <!-- 提示条 -->
+    <Thickness x:Key="ZenAlertPadding">14,11</Thickness>
 </ResourceDictionary>

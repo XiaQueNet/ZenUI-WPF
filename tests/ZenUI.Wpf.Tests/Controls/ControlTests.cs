@@ -11,6 +11,7 @@ using System.Windows.Controls.Primitives;
 using System.Windows.Data;
 using System.Windows.Input;
 using System.Windows.Media;
+using System.Windows.Shapes;
 using System.Windows.Threading;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -173,6 +174,14 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.AreEqual(32d, dictionary["ZenCalendarDayButtonHeight"]);
             Assert.AreEqual(new Thickness(8, 10, 8, 10), dictionary["ZenCalendarButtonPadding"]);
             Assert.AreEqual(30d, dictionary["ZenCalendarNavigationButtonSize"]);
+            Assert.AreEqual(64d, dictionary["ZenSwitchWidth"]);
+            Assert.AreEqual(30d, dictionary["ZenSwitchHeight"]);
+            Assert.AreEqual(new Thickness(4), dictionary["ZenSwitchThumbMargin"]);
+            Assert.AreEqual(18d, dictionary["ZenSliderThumbSize"]);
+            Assert.AreEqual(4d, dictionary["ZenSliderTrackThickness"]);
+            Assert.AreEqual(24d, dictionary["ZenSliderCrossAxisMinSize"]);
+            Assert.AreEqual(8d, dictionary["ZenProgressBarThickness"]);
+            Assert.AreEqual(new Thickness(14, 11, 14, 11), dictionary["ZenAlertPadding"]);
             Assert.AreEqual(0.35d, dictionary["ZenFocusVisualOpacity"]);
             Assert.AreEqual(0.35d, dictionary["ZenDisabledAuxiliaryActionOpacity"]);
             Assert.AreEqual(0.4d, dictionary["ZenDisabledActionOpacity"]);
@@ -334,14 +343,22 @@ namespace ZenUI.Wpf.Tests.Controls
                 Height = 100,
                 Orientation = Orientation.Vertical
             };
+            var @switch = new ZenSwitch();
+            var slider = new ZenSlider();
+            var progressBar = new ZenProgressBar();
+            var alert = new ZenAlert { Content = "Status" };
 
             var panel = new StackPanel();
             panel.Children.Add(textBox);
             panel.Children.Add(button);
             panel.Children.Add(listBox);
             panel.Children.Add(scrollBar);
+            panel.Children.Add(@switch);
+            panel.Children.Add(slider);
+            panel.Children.Add(progressBar);
+            panel.Children.Add(alert);
 
-            var window = CreateTestWindow(panel, 320, 320);
+            var window = CreateTestWindow(panel, 320, 520);
             window.Resources.MergedDictionaries.Add(new ResourceDictionary
             {
                 Source = new Uri(
@@ -355,11 +372,26 @@ namespace ZenUI.Wpf.Tests.Controls
                 window.UpdateLayout();
 
                 var item = listBox.ItemContainerGenerator.ContainerFromIndex(0) as ListBoxItem;
+                var sliderTrack = slider.Template.FindName("PART_Track", slider) as Track;
+                var switchThumb = FindVisualDescendant<Ellipse>(@switch);
                 Assert.IsNotNull(item);
+                Assert.IsNotNull(sliderTrack);
+                Assert.IsNotNull(sliderTrack.Thumb);
+                Assert.IsNotNull(sliderTrack.DecreaseRepeatButton);
+                Assert.IsNotNull(switchThumb);
                 Assert.AreEqual(36d, textBox.MinHeight);
                 Assert.AreEqual(new Thickness(5, 0, 5, 0), button.Padding);
                 Assert.AreEqual(new Thickness(12, 9, 12, 9), item.Padding);
                 Assert.AreEqual(12d, scrollBar.Width);
+                Assert.AreEqual(64d, @switch.Width);
+                Assert.AreEqual(30d, @switch.Height);
+                Assert.AreEqual(new Thickness(4), switchThumb.Margin);
+                Assert.AreEqual(24d, slider.MinHeight);
+                Assert.AreEqual(4d, slider.TrackThickness);
+                Assert.AreEqual(18d, sliderTrack.Thumb.Width);
+                Assert.AreEqual(4d, sliderTrack.DecreaseRepeatButton.Height);
+                Assert.AreEqual(8d, progressBar.Height);
+                Assert.AreEqual(new Thickness(14, 11, 14, 11), alert.Padding);
 
                 ZenDensityManager.ApplyDensity(window.Resources, ZenDensity.Compact);
                 window.UpdateLayout();
@@ -368,6 +400,15 @@ namespace ZenUI.Wpf.Tests.Controls
                 Assert.AreEqual(new Thickness(4, 0, 4, 0), button.Padding);
                 Assert.AreEqual(new Thickness(10, 6, 10, 6), item.Padding);
                 Assert.AreEqual(10d, scrollBar.Width);
+                Assert.AreEqual(56d, @switch.Width);
+                Assert.AreEqual(26d, @switch.Height);
+                Assert.AreEqual(new Thickness(3), switchThumb.Margin);
+                Assert.AreEqual(20d, slider.MinHeight);
+                Assert.AreEqual(3d, slider.TrackThickness);
+                Assert.AreEqual(16d, sliderTrack.Thumb.Width);
+                Assert.AreEqual(3d, sliderTrack.DecreaseRepeatButton.Height);
+                Assert.AreEqual(6d, progressBar.Height);
+                Assert.AreEqual(new Thickness(12, 8, 12, 8), alert.Padding);
 
                 ZenDensityManager.ApplyDensity(window.Resources, ZenDensity.Comfortable);
                 window.UpdateLayout();
@@ -376,6 +417,15 @@ namespace ZenUI.Wpf.Tests.Controls
                 Assert.AreEqual(new Thickness(8, 3, 8, 3), button.Padding);
                 Assert.AreEqual(new Thickness(14, 11, 14, 11), item.Padding);
                 Assert.AreEqual(14d, scrollBar.Width);
+                Assert.AreEqual(72d, @switch.Width);
+                Assert.AreEqual(34d, @switch.Height);
+                Assert.AreEqual(new Thickness(4), switchThumb.Margin);
+                Assert.AreEqual(28d, slider.MinHeight);
+                Assert.AreEqual(6d, slider.TrackThickness);
+                Assert.AreEqual(22d, sliderTrack.Thumb.Width);
+                Assert.AreEqual(6d, sliderTrack.DecreaseRepeatButton.Height);
+                Assert.AreEqual(10d, progressBar.Height);
+                Assert.AreEqual(new Thickness(16, 14, 16, 14), alert.Padding);
             }
             finally
             {
@@ -1465,6 +1515,12 @@ namespace ZenUI.Wpf.Tests.Controls
                 Value = 40
             };
             var window = CreateTestWindow(slider, 100, 220);
+            window.Resources.MergedDictionaries.Add(new ResourceDictionary
+            {
+                Source = new Uri(
+                    "/ZenUI.Wpf;component/Themes/Generic.xaml",
+                    UriKind.Relative)
+            });
 
             try
             {
@@ -1473,7 +1529,17 @@ namespace ZenUI.Wpf.Tests.Controls
 
                 var track = slider.Template.FindName("PART_Track", slider) as Track;
                 Assert.IsNotNull(track);
+                Assert.IsNotNull(track.DecreaseRepeatButton);
                 Assert.AreEqual(Orientation.Vertical, track.Orientation);
+                Assert.AreEqual(4d, track.DecreaseRepeatButton.Width);
+
+                ZenDensityManager.ApplyDensity(window.Resources, ZenDensity.Compact);
+                window.UpdateLayout();
+                Assert.AreEqual(3d, track.DecreaseRepeatButton.Width);
+
+                ZenDensityManager.ApplyDensity(window.Resources, ZenDensity.Comfortable);
+                window.UpdateLayout();
+                Assert.AreEqual(6d, track.DecreaseRepeatButton.Width);
             }
             finally
             {
@@ -1491,6 +1557,12 @@ namespace ZenUI.Wpf.Tests.Controls
                 Value = 60
             };
             var window = CreateTestWindow(progressBar, 100, 220);
+            window.Resources.MergedDictionaries.Add(new ResourceDictionary
+            {
+                Source = new Uri(
+                    "/ZenUI.Wpf;component/Themes/Generic.xaml",
+                    UriKind.Relative)
+            });
 
             try
             {
@@ -1502,6 +1574,15 @@ namespace ZenUI.Wpf.Tests.Controls
                 Assert.AreEqual(HorizontalAlignment.Stretch, indicator.HorizontalAlignment);
                 Assert.AreEqual(VerticalAlignment.Bottom, indicator.VerticalAlignment);
                 Assert.AreEqual(progressBar.ActualHeight * 0.6d, indicator.ActualHeight, 1d);
+                Assert.AreEqual(8d, progressBar.Width);
+
+                ZenDensityManager.ApplyDensity(window.Resources, ZenDensity.Compact);
+                window.UpdateLayout();
+                Assert.AreEqual(6d, progressBar.Width);
+
+                ZenDensityManager.ApplyDensity(window.Resources, ZenDensity.Comfortable);
+                window.UpdateLayout();
+                Assert.AreEqual(10d, progressBar.Width);
 
                 progressBar.IsIndeterminate = true;
                 window.UpdateLayout();
