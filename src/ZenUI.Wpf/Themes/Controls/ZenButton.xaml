@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:zen="clr-namespace:ZenUI.Wpf.Controls">
 
-    <!--  WPF shows this adorner only when focus is initiated from the keyboard.  -->
+    <!-- 仅当焦点由键盘操作触发时，WPF 才显示此装饰器。 -->
     <Style x:Key="ZenButtonFocusVisualStyle" TargetType="{x:Type Control}">
         <Setter Property="Template">
             <Setter.Value>

@@ -1,17 +1,17 @@
 namespace ZenUI.Wpf.Theming
 {
     /// <summary>
-    /// Specifies the spatial density used by ZenUI controls.
+    /// 指定 ZenUI 控件的界面密度。
     /// </summary>
     public enum ZenDensity
     {
-        /// <summary>Uses reduced control heights and spacing.</summary>
+        /// <summary>使用较小的控件高度和间距。</summary>
         Compact,
 
-        /// <summary>Uses the default ZenUI control metrics.</summary>
+        /// <summary>使用 ZenUI 默认控件尺寸。</summary>
         Standard,
 
-        /// <summary>Uses increased control heights and spacing.</summary>
+        /// <summary>使用较大的控件高度和间距。</summary>
         Comfortable
     }
 }

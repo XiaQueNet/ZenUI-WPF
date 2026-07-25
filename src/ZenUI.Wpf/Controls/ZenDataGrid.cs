@@ -56,7 +56,7 @@ namespace ZenUI.Wpf.Controls
                 typeof(ZenDataGrid),
                 new FrameworkPropertyMetadata("暂无数据"));
         /// <summary>
-        /// Gets or sets whether selected rows use the theme selection highlight.
+        /// 获取或设置选中行是否使用主题选择高亮。
         /// </summary>
         [Bindable(true)]
         public bool IsRowSelectionHighlightEnabled
@@ -66,7 +66,7 @@ namespace ZenUI.Wpf.Controls
         }
 
         /// <summary>
-        /// Identifies the <see cref="IsRowSelectionHighlightEnabled"/> dependency property.
+        /// 标识 <see cref="IsRowSelectionHighlightEnabled"/> 依赖属性。
         /// </summary>
         public static readonly DependencyProperty IsRowSelectionHighlightEnabledProperty =
             DependencyProperty.RegisterAttached(
@@ -88,7 +88,7 @@ namespace ZenUI.Wpf.Controls
         }
 
         /// <summary>
-        /// Gets or sets whether the current cell displays a keyboard focus border.
+        /// 获取或设置当前单元格是否显示键盘焦点边框。
         /// </summary>
         [Bindable(true)]
         public bool IsCellFocusVisualEnabled
@@ -98,7 +98,7 @@ namespace ZenUI.Wpf.Controls
         }
 
         /// <summary>
-        /// Identifies the <see cref="IsCellFocusVisualEnabled"/> dependency property.
+        /// 标识 <see cref="IsCellFocusVisualEnabled"/> 依赖属性。
         /// </summary>
         public static readonly DependencyProperty IsCellFocusVisualEnabledProperty =
             DependencyProperty.RegisterAttached(
@@ -117,6 +117,70 @@ namespace ZenUI.Wpf.Controls
         public static void SetIsCellFocusVisualEnabled(DependencyObject element, bool value)
         {
             element.SetValue(IsCellFocusVisualEnabledProperty, value);
+        }
+
+        /// <summary>
+        /// 获取或设置当前单元格焦点视觉的边框宽度。
+        /// </summary>
+        [Bindable(true)]
+        public Thickness CellFocusVisualBorderThickness
+        {
+            get { return (Thickness)GetValue(CellFocusVisualBorderThicknessProperty); }
+            set { SetValue(CellFocusVisualBorderThicknessProperty, value); }
+        }
+
+        /// <summary>
+        /// 标识 <see cref="CellFocusVisualBorderThickness"/> 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty CellFocusVisualBorderThicknessProperty =
+            DependencyProperty.RegisterAttached(
+                nameof(CellFocusVisualBorderThickness),
+                typeof(Thickness),
+                typeof(ZenDataGrid),
+                new FrameworkPropertyMetadata(
+                    new Thickness(1),
+                    FrameworkPropertyMetadataOptions.Inherits));
+
+        public static Thickness GetCellFocusVisualBorderThickness(DependencyObject element)
+        {
+            return (Thickness)element.GetValue(CellFocusVisualBorderThicknessProperty);
+        }
+
+        public static void SetCellFocusVisualBorderThickness(DependencyObject element, Thickness value)
+        {
+            element.SetValue(CellFocusVisualBorderThicknessProperty, value);
+        }
+
+        /// <summary>
+        /// 获取或设置单元格校验错误的边框宽度。
+        /// </summary>
+        [Bindable(true)]
+        public Thickness CellValidationBorderThickness
+        {
+            get { return (Thickness)GetValue(CellValidationBorderThicknessProperty); }
+            set { SetValue(CellValidationBorderThicknessProperty, value); }
+        }
+
+        /// <summary>
+        /// 标识 <see cref="CellValidationBorderThickness"/> 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty CellValidationBorderThicknessProperty =
+            DependencyProperty.RegisterAttached(
+                nameof(CellValidationBorderThickness),
+                typeof(Thickness),
+                typeof(ZenDataGrid),
+                new FrameworkPropertyMetadata(
+                    new Thickness(2),
+                    FrameworkPropertyMetadataOptions.Inherits));
+
+        public static Thickness GetCellValidationBorderThickness(DependencyObject element)
+        {
+            return (Thickness)element.GetValue(CellValidationBorderThicknessProperty);
+        }
+
+        public static void SetCellValidationBorderThickness(DependencyObject element, Thickness value)
+        {
+            element.SetValue(CellValidationBorderThicknessProperty, value);
         }
     }
 }

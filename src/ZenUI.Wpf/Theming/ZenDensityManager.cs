@@ -5,24 +5,24 @@ using System.Windows;
 namespace ZenUI.Wpf.Theming
 {
     /// <summary>
-    /// Provides runtime density switching without changing the active color theme.
+    /// 提供不影响当前颜色主题的运行时界面密度切换能力。
     /// </summary>
     public static class ZenDensityManager
     {
         private const string DensityPathPrefix = "/ZenUI.Wpf;component/Themes/Density/";
 
         /// <summary>
-        /// Applies a density profile to the specified resource dictionary.
+        /// 将界面密度配置应用到指定资源字典。
         /// </summary>
-        /// <param name="resources">The resource dictionary that receives the density override.</param>
-        /// <param name="density">The density profile to apply.</param>
+        /// <param name="resources">接收界面密度覆盖的资源字典。</param>
+        /// <param name="density">要应用的界面密度。</param>
         /// <exception cref="ArgumentNullException">
-        /// <paramref name="resources"/> is <see langword="null"/>.
+        /// <paramref name="resources"/> 为 <see langword="null"/>。
         /// </exception>
         /// <exception cref="ArgumentOutOfRangeException">
-        /// <paramref name="density"/> is not a defined <see cref="ZenDensity"/> value.
+        /// <paramref name="density"/> 不是已定义的 <see cref="ZenDensity"/> 值。
         /// </exception>
-        /// <remarks>Call this method on the UI thread that owns the resource dictionary.</remarks>
+        /// <remarks>必须在拥有该资源字典的 UI 线程上调用。</remarks>
         public static void ApplyDensity(ResourceDictionary resources, ZenDensity density)
         {
 #if NET8_0_OR_GREATER

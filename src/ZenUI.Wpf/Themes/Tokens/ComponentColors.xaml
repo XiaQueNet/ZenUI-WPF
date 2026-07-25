@@ -2,17 +2,17 @@
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
-    <!-- Shared control parts -->
+    <!-- 共享控件部件 -->
     <SolidColorBrush x:Key="ZenControlThumbBrush" Color="#FFFFFF" />
     <SolidColorBrush x:Key="ZenControlThumbBorderBrush" Color="#18000000" />
 
-    <!-- ScrollBar -->
+    <!-- 滚动条 -->
     <SolidColorBrush x:Key="ZenScrollBarTrackBrush" Color="#EEF1F5" />
     <SolidColorBrush x:Key="ZenScrollBarThumbBrush" Color="#AAB2C0" />
     <SolidColorBrush x:Key="ZenScrollBarThumbHoverBrush" Color="#7892E5" />
     <SolidColorBrush x:Key="ZenScrollBarThumbPressedBrush" Color="#3D63D2" />
 
-    <!-- ListBox and selection containers -->
+    <!-- 列表框与选择容器 -->
     <SolidColorBrush x:Key="ZenListBoxItemHoverBrush" Color="#EEF3FA" />
     <SolidColorBrush x:Key="ZenListBoxItemSelectedBrush" Color="#EEF2FF" />
     <SolidColorBrush x:Key="ZenListBoxItemSelectedHoverBrush" Color="#E3E9FB" />
@@ -20,7 +20,7 @@
     <SolidColorBrush x:Key="ZenListBoxItemSelectedInactiveBrush" Color="#F1F4FA" />
     <SolidColorBrush x:Key="ZenListBoxItemSelectedInactiveForegroundBrush" Color="#4E5969" />
 
-    <!-- DataGrid -->
+    <!-- 数据网格 -->
     <SolidColorBrush x:Key="ZenDataGridAlternatingRowBrush" Color="#FBFCFD" />
     <SolidColorBrush x:Key="ZenDataGridRowHoverBrush" Color="#F4F6FD" />
     <SolidColorBrush x:Key="ZenDataGridRowSelectedBrush" Color="#F1F4FA" />

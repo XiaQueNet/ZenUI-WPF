@@ -68,6 +68,8 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.AreEqual(new CornerRadius(8), dataGrid.CornerRadius);
             Assert.IsFalse(dataGrid.IsRowSelectionHighlightEnabled);
             Assert.IsFalse(dataGrid.IsCellFocusVisualEnabled);
+            Assert.AreEqual(new Thickness(1), dataGrid.CellFocusVisualBorderThickness);
+            Assert.AreEqual(new Thickness(2), dataGrid.CellValidationBorderThickness);
             Assert.AreEqual("暂无数据", dataGrid.EmptyContent);
             Assert.IsFalse(passwordBox.IsPasswordRevealEnabled);
             Assert.IsFalse(passwordBox.IsPasswordRevealed);
@@ -162,6 +164,8 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.AreEqual(new Thickness(0, 4, 0, 0), dictionary["ZenComboBoxPopupMargin"]);
             Assert.AreEqual(new Thickness(4), dictionary["ZenComboBoxPopupPadding"]);
             Assert.AreEqual(new CornerRadius(6), dictionary["ZenComboBoxPopupCornerRadius"]);
+            Assert.AreEqual(new Thickness(1), dictionary["ZenDataGridCellFocusVisualBorderThickness"]);
+            Assert.AreEqual(new Thickness(2), dictionary["ZenDataGridCellValidationBorderThickness"]);
             Assert.AreEqual(0.35d, dictionary["ZenFocusVisualOpacity"]);
             Assert.AreEqual(0.35d, dictionary["ZenDisabledAuxiliaryActionOpacity"]);
             Assert.AreEqual(0.4d, dictionary["ZenDisabledActionOpacity"]);
@@ -200,6 +204,7 @@ namespace ZenUI.Wpf.Tests.Controls
             var slider = new ZenSlider { IsEnabled = false };
             var scrollBar = new ScrollBar { IsEnabled = false, Height = 80 };
             var datePicker = new ZenDatePicker { IsEnabled = false };
+            var dataGrid = new ZenDataGrid { IsEnabled = false, Height = 80 };
             listBox.Items.Add("Disabled item");
 
             var panel = new StackPanel();
@@ -215,8 +220,9 @@ namespace ZenUI.Wpf.Tests.Controls
             panel.Children.Add(slider);
             panel.Children.Add(scrollBar);
             panel.Children.Add(datePicker);
+            panel.Children.Add(dataGrid);
 
-            var window = CreateTestWindow(panel, 420, 720);
+            var window = CreateTestWindow(panel, 420, 800);
             window.Resources.MergedDictionaries.Add(new ResourceDictionary
             {
                 Source = new Uri(
@@ -241,6 +247,7 @@ namespace ZenUI.Wpf.Tests.Controls
                 Assert.AreEqual(0.4d, slider.Opacity);
                 Assert.AreEqual(0.45d, scrollBar.Opacity);
                 Assert.AreEqual(0.55d, datePicker.Opacity);
+                Assert.AreEqual(0.55d, dataGrid.Opacity);
 
                 ZenThemeManager.ApplyTheme(window.Resources, ZenTheme.HighContrast, false);
                 window.UpdateLayout();
@@ -257,6 +264,7 @@ namespace ZenUI.Wpf.Tests.Controls
                 Assert.AreEqual(1d, slider.Opacity);
                 Assert.AreEqual(1d, scrollBar.Opacity);
                 Assert.AreEqual(1d, datePicker.Opacity);
+                Assert.AreEqual(1d, dataGrid.Opacity);
             }
             finally
             {
@@ -729,6 +737,61 @@ namespace ZenUI.Wpf.Tests.Controls
                 Assert.IsNotNull(calendar.Style);
                 Assert.AreEqual(datePicker.SelectedDate, calendar.SelectedDate);
                 Assert.IsNotNull(calendar.Template.FindName("PART_CalendarItem", calendar));
+            }
+            finally
+            {
+                datePicker.IsDropDownOpen = false;
+                window.Dispatcher.Invoke(DispatcherPriority.ContextIdle, new Action(() => { }));
+                window.Close();
+            }
+        }
+
+        [TestMethod]
+        public void DatePickerCalendarStyleOverrideCrossesPopupBoundary()
+        {
+            var datePicker = new ZenDatePicker();
+            var window = CreateTestWindow(datePicker, 320, 360);
+            window.Resources.MergedDictionaries.Add(new ResourceDictionary
+            {
+                Source = new Uri(
+                    "/ZenUI.Wpf;component/Themes/Generic.xaml",
+                    UriKind.Relative)
+            });
+
+            var calendarBackground = new SolidColorBrush(Colors.MistyRose);
+            var dayPadding = new Thickness(7);
+            var dayStyle = new Style(
+                typeof(CalendarDayButton),
+                (Style)window.Resources["ZenCalendarDayButtonStyle"]);
+            dayStyle.Setters.Add(new Setter(Control.PaddingProperty, dayPadding));
+            var calendarStyle = new Style(
+                typeof(Calendar),
+                (Style)window.Resources["ZenCalendarStyle"]);
+            calendarStyle.Setters.Add(new Setter(Control.BackgroundProperty, calendarBackground));
+            calendarStyle.Setters.Add(new Setter(Calendar.CalendarDayButtonStyleProperty, dayStyle));
+            datePicker.CalendarStyle = calendarStyle;
+
+            try
+            {
+                window.Show();
+                datePicker.IsDropDownOpen = true;
+                window.UpdateLayout();
+
+                var calendar = datePicker.Template.FindName("PART_Calendar", datePicker) as Calendar;
+                Assert.IsNotNull(calendar);
+                Assert.AreSame(calendarStyle, calendar.Style);
+                Assert.AreSame(calendarBackground, calendar.Background);
+
+                calendar.ApplyTemplate();
+                var calendarItem = calendar.Template.FindName("PART_CalendarItem", calendar) as CalendarItem;
+                Assert.IsNotNull(calendarItem);
+                calendarItem.ApplyTemplate();
+                var monthView = calendarItem.Template.FindName("PART_MonthView", calendarItem) as Grid;
+                Assert.IsNotNull(monthView);
+                var dayButton = monthView.Children.OfType<CalendarDayButton>()
+                    .FirstOrDefault(button => button.Visibility == Visibility.Visible);
+                Assert.IsNotNull(dayButton);
+                Assert.AreEqual(dayPadding, dayButton.Padding);
             }
             finally
             {
@@ -1593,6 +1656,8 @@ namespace ZenUI.Wpf.Tests.Controls
                     "/ZenUI.Wpf;component/Themes/Generic.xaml",
                     UriKind.Relative)
             });
+            window.Resources["ZenDataGridCellFocusVisualBorderThickness"] = new Thickness(3);
+            window.Resources["ZenDataGridCellValidationBorderThickness"] = new Thickness(4);
 
             try
             {
@@ -1617,13 +1682,16 @@ namespace ZenUI.Wpf.Tests.Controls
                 window.UpdateLayout();
 
                 var cellBorder = cell.Template.FindName("CellBorder", cell) as Border;
+                var stateBorder = cell.Template.FindName("StateBorder", cell) as Border;
                 var cellText = FindVisualDescendant<TextBlock>(cell);
                 Assert.IsNotNull(cellBorder);
+                Assert.IsNotNull(stateBorder);
                 Assert.IsNotNull(cellText);
                 Assert.AreNotEqual(
                     Color.FromRgb(0xF1, 0xF4, 0xFA),
                     ((SolidColorBrush)rowBorder.Background).Color);
                 Assert.AreEqual(new Thickness(0, 0, 0, 1), cellBorder.BorderThickness);
+                Assert.AreEqual(new Thickness(), stateBorder.BorderThickness);
                 Assert.AreEqual(
                     Color.FromRgb(0x1D, 0x21, 0x29),
                     ((SolidColorBrush)cellText.Foreground).Color);
@@ -1636,10 +1704,16 @@ namespace ZenUI.Wpf.Tests.Controls
                 Assert.IsTrue(grid.IsRowSelectionHighlightEnabled);
                 Assert.IsTrue(ZenDataGrid.GetIsRowSelectionHighlightEnabled(row));
                 Assert.IsTrue(ZenDataGrid.GetIsCellFocusVisualEnabled(cell));
+                Assert.AreEqual(new Thickness(3), grid.CellFocusVisualBorderThickness);
+                Assert.AreEqual(
+                    new Thickness(4),
+                    ZenDataGrid.GetCellValidationBorderThickness(cell));
                 Assert.AreEqual(
                     Color.FromRgb(0xF1, 0xF4, 0xFA),
                     ((SolidColorBrush)rowBorder.Background).Color);
-                Assert.AreEqual(new Thickness(1), cellBorder.BorderThickness);
+                Assert.AreEqual(new Thickness(0, 0, 0, 1), cellBorder.BorderThickness);
+                Assert.AreEqual(new Thickness(3), stateBorder.BorderThickness);
+                Assert.AreEqual(new Thickness(14, 0, 14, 0), cellBorder.Padding);
                 Assert.AreEqual(
                     Color.FromRgb(0x1D, 0x21, 0x29),
                     ((SolidColorBrush)cellText.Foreground).Color);

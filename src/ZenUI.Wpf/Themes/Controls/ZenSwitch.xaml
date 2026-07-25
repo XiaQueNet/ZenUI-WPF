@@ -4,9 +4,9 @@
     xmlns:zen="clr-namespace:ZenUI.Wpf.Controls">
 
     <!--
-        Let WPF display this adorner only for keyboard-initiated focus.  A
-        template trigger on IsKeyboardFocused also fires after a mouse click,
-        which makes the switch look as though it has a permanent blue outline.
+        仅让 WPF 在键盘触发焦点时显示此装饰器。
+        IsKeyboardFocused 模板触发器在鼠标点击后也会触发，
+        会让开关看起来始终带有蓝色轮廓。
     -->
     <Style x:Key="ZenSwitchFocusVisualStyle" TargetType="{x:Type Control}">
         <Setter Property="Template">
@@ -31,7 +31,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type zen:ZenSwitch}">
                     <Grid x:Name="Track" SnapsToDevicePixels="True">
-                        <!--  Two 30px circles joined by a rectangular center form a true capsule.  -->
+                        <!-- 两个直径 30 像素的圆与中间矩形拼接成标准胶囊形。 -->
                         <Rectangle
                             x:Name="TrackMiddle"
                             Margin="15,0"

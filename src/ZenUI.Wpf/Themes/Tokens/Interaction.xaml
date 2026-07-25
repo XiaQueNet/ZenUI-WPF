@@ -3,10 +3,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
-    <!-- Keyboard focus -->
+    <!-- 键盘焦点 -->
     <sys:Double x:Key="ZenFocusVisualOpacity">0.35</sys:Double>
 
-    <!-- Disabled-state emphasis levels -->
+    <!-- 禁用状态的视觉强调层级 -->
     <sys:Double x:Key="ZenDisabledAuxiliaryActionOpacity">0.35</sys:Double>
     <sys:Double x:Key="ZenDisabledActionOpacity">0.4</sys:Double>
     <sys:Double x:Key="ZenDisabledItemOpacity">0.45</sys:Double>

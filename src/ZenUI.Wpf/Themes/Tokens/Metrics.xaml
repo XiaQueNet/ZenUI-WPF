@@ -3,13 +3,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
-    <!-- Shared input control metrics -->
+    <!-- 共享输入控件尺寸 -->
     <sys:Double x:Key="ZenInputControlMinHeight">36</sys:Double>
     <Thickness x:Key="ZenInputControlPadding">8,4</Thickness>
     <CornerRadius x:Key="ZenInputControlCornerRadius">6</CornerRadius>
     <Thickness x:Key="ZenControlBorderThickness">1</Thickness>
 
-    <!-- Shared keyboard focus metrics -->
+    <!-- 共享键盘焦点尺寸 -->
     <Thickness x:Key="ZenFocusVisualMargin">-2</Thickness>
     <Thickness x:Key="ZenFocusVisualBorderThickness">1</Thickness>
 </ResourceDictionary>

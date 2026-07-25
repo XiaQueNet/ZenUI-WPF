@@ -3,19 +3,19 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
-    <!-- Button -->
+    <!-- 按钮 -->
     <Thickness x:Key="ZenButtonPadding">5,0</Thickness>
     <CornerRadius x:Key="ZenButtonCornerRadius">10</CornerRadius>
     <CornerRadius x:Key="ZenButtonFocusVisualCornerRadius">13</CornerRadius>
 
-    <!-- ListBox -->
+    <!-- 列表框 -->
     <Thickness x:Key="ZenListBoxPadding">4</Thickness>
     <CornerRadius x:Key="ZenListBoxCornerRadius">8</CornerRadius>
     <Thickness x:Key="ZenListBoxItemPadding">12,9</Thickness>
     <Thickness x:Key="ZenListBoxItemMargin">0,1</Thickness>
     <CornerRadius x:Key="ZenListBoxItemCornerRadius">5</CornerRadius>
 
-    <!-- ScrollBar -->
+    <!-- 滚动条 -->
     <sys:Double x:Key="ZenScrollBarThickness">12</sys:Double>
     <sys:Double x:Key="ZenScrollBarTrackThickness">6</sys:Double>
     <sys:Double x:Key="ZenScrollBarThumbMinLength">32</sys:Double>
@@ -23,8 +23,12 @@
     <Thickness x:Key="ZenHorizontalScrollBarThumbMargin">0,3</Thickness>
     <CornerRadius x:Key="ZenScrollBarCornerRadius">3</CornerRadius>
 
-    <!-- Popup surfaces -->
+    <!-- 弹层表面 -->
     <Thickness x:Key="ZenComboBoxPopupMargin">0,4,0,0</Thickness>
     <Thickness x:Key="ZenComboBoxPopupPadding">4</Thickness>
     <CornerRadius x:Key="ZenComboBoxPopupCornerRadius">6</CornerRadius>
+
+    <!-- 数据网格单元格状态覆盖层 -->
+    <Thickness x:Key="ZenDataGridCellFocusVisualBorderThickness">1</Thickness>
+    <Thickness x:Key="ZenDataGridCellValidationBorderThickness">2</Thickness>
 </ResourceDictionary>

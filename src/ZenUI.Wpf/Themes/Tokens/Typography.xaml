@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
-    <!-- Type scale -->
+    <!-- 字号层级 -->
     <sys:Double x:Key="ZenFontSizeCaption">12</sys:Double>
     <sys:Double x:Key="ZenFontSizeBodySmall">13</sys:Double>
     <sys:Double x:Key="ZenFontSizeBody">14</sys:Double>
@@ -11,12 +11,12 @@
     <sys:Double x:Key="ZenFontSizeTitle">20</sys:Double>
     <sys:Double x:Key="ZenFontSizeDisplay">28</sys:Double>
 
-    <!-- Text emphasis -->
+    <!-- 文字强调 -->
     <FontWeight x:Key="ZenFontWeightRegular">Normal</FontWeight>
     <FontWeight x:Key="ZenFontWeightSemibold">SemiBold</FontWeight>
     <FontWeight x:Key="ZenFontWeightBold">Bold</FontWeight>
 
-    <!-- Absolute line heights for TextBlock content -->
+    <!-- TextBlock 内容使用的绝对行高 -->
     <sys:Double x:Key="ZenLineHeightCaption">18</sys:Double>
     <sys:Double x:Key="ZenLineHeightBody">21</sys:Double>
     <sys:Double x:Key="ZenLineHeightTitle">28</sys:Double>

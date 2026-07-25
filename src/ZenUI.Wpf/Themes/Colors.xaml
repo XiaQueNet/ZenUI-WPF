@@ -3,8 +3,8 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <!--
-        Compatibility entry point for the default light-theme color tokens.
-        Applications may continue to merge Colors.xaml or Generic.xaml directly.
+        默认浅色主题颜色 Token 的兼容入口。
+        应用可以继续直接合并 Colors.xaml 或 Generic.xaml。
     -->
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/ZenUI.Wpf;component/Themes/Tokens/SemanticColors.xaml" />

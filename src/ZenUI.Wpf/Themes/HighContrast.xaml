@@ -3,7 +3,7 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
-    <!-- Preserve state legibility; system colors communicate disabled semantics. -->
+    <!-- 保持状态可读性，由系统颜色表达禁用语义。 -->
     <sys:Double x:Key="ZenFocusVisualOpacity">1</sys:Double>
     <sys:Double x:Key="ZenDisabledAuxiliaryActionOpacity">1</sys:Double>
     <sys:Double x:Key="ZenDisabledActionOpacity">1</sys:Double>
