@@ -242,7 +242,10 @@
         </Setter>
     </Style>
 
-    <Style x:Key="ZenDataGridStyle" TargetType="{x:Type zen:ZenDataGrid}">
+    <Style
+        x:Key="ZenDataGridStyle"
+        TargetType="{x:Type zen:ZenDataGrid}">
+        <Setter Property="FontSize" Value="{DynamicResource ZenFontSizeBody}" />
         <Setter Property="Background" Value="{DynamicResource ZenSurfaceBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource ZenBorderBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource ZenTextPrimaryBrush}" />

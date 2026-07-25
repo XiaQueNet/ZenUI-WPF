@@ -22,10 +22,10 @@
     <sys:Double x:Key="ZenDataGridRowMinHeight">52</sys:Double>
     <Thickness x:Key="ZenDataGridCellPadding">18,0</Thickness>
 
-    <sys:Double x:Key="ZenCalendarDayButtonWidth">38</sys:Double>
-    <sys:Double x:Key="ZenCalendarDayButtonHeight">36</sys:Double>
-    <Thickness x:Key="ZenCalendarButtonPadding">10,12</Thickness>
-    <sys:Double x:Key="ZenCalendarNavigationButtonSize">34</sys:Double>
+    <sys:Double x:Key="ZenCalendarDayButtonWidth">54</sys:Double>
+    <sys:Double x:Key="ZenCalendarDayButtonHeight">50</sys:Double>
+    <Thickness x:Key="ZenCalendarButtonPadding">14,18</Thickness>
+    <sys:Double x:Key="ZenCalendarNavigationButtonSize">44</sys:Double>
 
     <sys:Double x:Key="ZenSwitchWidth">72</sys:Double>
     <sys:Double x:Key="ZenSwitchHeight">34</sys:Double>

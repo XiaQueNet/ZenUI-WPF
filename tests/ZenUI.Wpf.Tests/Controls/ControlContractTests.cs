@@ -146,10 +146,10 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.AreEqual(new Thickness(14, 0, 14, 0), dictionary["ZenDataGridCellPadding"]);
             Assert.AreEqual(new Thickness(1), dictionary["ZenDataGridCellFocusVisualBorderThickness"]);
             Assert.AreEqual(new Thickness(2), dictionary["ZenDataGridCellValidationBorderThickness"]);
-            Assert.AreEqual(34d, dictionary["ZenCalendarDayButtonWidth"]);
-            Assert.AreEqual(32d, dictionary["ZenCalendarDayButtonHeight"]);
-            Assert.AreEqual(new Thickness(8, 10, 8, 10), dictionary["ZenCalendarButtonPadding"]);
-            Assert.AreEqual(30d, dictionary["ZenCalendarNavigationButtonSize"]);
+            Assert.AreEqual(48d, dictionary["ZenCalendarDayButtonWidth"]);
+            Assert.AreEqual(44d, dictionary["ZenCalendarDayButtonHeight"]);
+            Assert.AreEqual(new Thickness(12, 16, 12, 16), dictionary["ZenCalendarButtonPadding"]);
+            Assert.AreEqual(40d, dictionary["ZenCalendarNavigationButtonSize"]);
             Assert.AreEqual(64d, dictionary["ZenSwitchWidth"]);
             Assert.AreEqual(30d, dictionary["ZenSwitchHeight"]);
             Assert.AreEqual(new Thickness(4), dictionary["ZenSwitchThumbMargin"]);
@@ -179,6 +179,68 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.AreEqual(28d, dictionary["ZenLineHeightTitle"]);
             Assert.AreEqual(36d, dictionary["ZenLineHeightDisplay"]);
             Assert.IsInstanceOfType<Style>(dictionary["ZenFocusVisualBorderStyle"]);
+        }
+
+        [TestMethod]
+        public void ZenControlsUseBodyFontSizeByDefaultAndAllowOverrides()
+        {
+            var button = new ZenButton { Content = "Button" };
+            var controls = new Control[]
+            {
+                button,
+                new ZenSwitch(),
+                new ZenTextBox(),
+                new ZenNumberBox(),
+                new ZenPasswordBox(),
+                new ZenCheckBox { Content = "CheckBox" },
+                new ZenRadioButton { Content = "RadioButton" },
+                new ZenComboBox(),
+                new ZenListBox(),
+                new ZenDatePicker(),
+                new ZenDataGrid(),
+                new ZenSlider(),
+                new ZenProgressBar(),
+                new ZenAlert()
+            };
+            var panel = new StackPanel();
+            foreach (var control in controls)
+            {
+                panel.Children.Add(control);
+            }
+
+            var window = CreateTestWindow(panel, 420, 800);
+            window.Resources.MergedDictionaries.Add(new ResourceDictionary
+            {
+                Source = new Uri(
+                    "/ZenUI.Wpf;component/Themes/Generic.xaml",
+                    UriKind.Relative)
+            });
+
+            try
+            {
+                window.Show();
+                window.UpdateLayout();
+
+                foreach (var control in controls)
+                {
+                    Assert.AreEqual(14d, control.FontSize, $"{control.GetType().Name} 未使用正文默认字号。");
+                }
+
+                button.FontSize = 18d;
+                window.Resources["ZenFontSizeBody"] = 15d;
+                window.Dispatcher.Invoke(DispatcherPriority.ContextIdle, new Action(() => { }));
+                window.UpdateLayout();
+
+                Assert.AreEqual(18d, button.FontSize);
+                foreach (var control in controls.Where(control => !ReferenceEquals(control, button)))
+                {
+                    Assert.AreEqual(15d, control.FontSize, $"{control.GetType().Name} 未响应正文字号覆盖。");
+                }
+            }
+            finally
+            {
+                window.Close();
+            }
         }
 
         [TestMethod]

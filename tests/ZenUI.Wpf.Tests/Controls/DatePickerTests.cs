@@ -94,6 +94,8 @@ namespace ZenUI.Wpf.Tests.Controls
                 Assert.IsNotNull(calendar);
                 Assert.AreSame(calendarStyle, calendar.Style);
                 Assert.AreSame(calendarBackground, calendar.Background);
+                Assert.AreEqual(14d, datePicker.FontSize);
+                Assert.AreEqual(datePicker.FontSize, calendar.FontSize);
 
                 calendar.ApplyTemplate();
                 var calendarItem = calendar.Template.FindName("PART_CalendarItem", calendar) as CalendarItem;

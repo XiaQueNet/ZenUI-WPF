@@ -57,7 +57,10 @@
         <Setter Property="TextAlignment" Value="Center" />
     </Style>
 
-    <Style x:Key="ZenNumberBoxStyle" TargetType="{x:Type zen:ZenNumberBox}">
+    <Style
+        x:Key="ZenNumberBoxStyle"
+        TargetType="{x:Type zen:ZenNumberBox}">
+        <Setter Property="FontSize" Value="{DynamicResource ZenFontSizeBody}" />
         <Setter Property="MinWidth" Value="112" />
         <Setter Property="MinHeight" Value="{DynamicResource ZenInputControlMinHeight}" />
         <Setter Property="Background" Value="{DynamicResource ZenSurfaceBrush}" />

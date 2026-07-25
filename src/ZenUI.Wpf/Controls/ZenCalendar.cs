@@ -19,7 +19,7 @@ namespace ZenUI.Wpf.Controls
                 nameof(DayButtonWidth),
                 typeof(double),
                 typeof(ZenCalendar),
-                new FrameworkPropertyMetadata(34d));
+                new FrameworkPropertyMetadata(48d));
 
         public double DayButtonHeight
         {
@@ -32,7 +32,7 @@ namespace ZenUI.Wpf.Controls
                 nameof(DayButtonHeight),
                 typeof(double),
                 typeof(ZenCalendar),
-                new FrameworkPropertyMetadata(32d));
+                new FrameworkPropertyMetadata(44d));
 
         public Thickness ButtonPadding
         {
@@ -45,7 +45,7 @@ namespace ZenUI.Wpf.Controls
                 nameof(ButtonPadding),
                 typeof(Thickness),
                 typeof(ZenCalendar),
-                new FrameworkPropertyMetadata(new Thickness(8, 10, 8, 10)));
+                new FrameworkPropertyMetadata(new Thickness(12, 16, 12, 16)));
 
         public double NavigationButtonSize
         {
@@ -58,6 +58,6 @@ namespace ZenUI.Wpf.Controls
                 nameof(NavigationButtonSize),
                 typeof(double),
                 typeof(ZenCalendar),
-                new FrameworkPropertyMetadata(30d));
+                new FrameworkPropertyMetadata(40d));
     }
 }

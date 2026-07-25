@@ -94,7 +94,7 @@ namespace ZenUI.Wpf.Controls
                 nameof(CalendarDayButtonWidth),
                 typeof(double),
                 typeof(ZenDatePicker),
-                new FrameworkPropertyMetadata(34d));
+                new FrameworkPropertyMetadata(48d));
 
         /// <summary>
         /// 获取或设置日历日期按钮的高度。
@@ -114,7 +114,7 @@ namespace ZenUI.Wpf.Controls
                 nameof(CalendarDayButtonHeight),
                 typeof(double),
                 typeof(ZenDatePicker),
-                new FrameworkPropertyMetadata(32d));
+                new FrameworkPropertyMetadata(44d));
 
         /// <summary>
         /// 获取或设置日历月份和年份按钮的内边距。
@@ -134,7 +134,7 @@ namespace ZenUI.Wpf.Controls
                 nameof(CalendarButtonPadding),
                 typeof(Thickness),
                 typeof(ZenDatePicker),
-                new FrameworkPropertyMetadata(new Thickness(8, 10, 8, 10)));
+                new FrameworkPropertyMetadata(new Thickness(12, 16, 12, 16)));
 
         /// <summary>
         /// 获取或设置日历导航按钮的边长。
@@ -154,6 +154,6 @@ namespace ZenUI.Wpf.Controls
                 nameof(CalendarNavigationButtonSize),
                 typeof(double),
                 typeof(ZenDatePicker),
-                new FrameworkPropertyMetadata(30d));
+                new FrameworkPropertyMetadata(40d));
     }
 }

@@ -36,10 +36,10 @@
     <Thickness x:Key="ZenDataGridCellValidationBorderThickness">2</Thickness>
 
     <!-- 日历 -->
-    <sys:Double x:Key="ZenCalendarDayButtonWidth">34</sys:Double>
-    <sys:Double x:Key="ZenCalendarDayButtonHeight">32</sys:Double>
-    <Thickness x:Key="ZenCalendarButtonPadding">8,10</Thickness>
-    <sys:Double x:Key="ZenCalendarNavigationButtonSize">30</sys:Double>
+    <sys:Double x:Key="ZenCalendarDayButtonWidth">48</sys:Double>
+    <sys:Double x:Key="ZenCalendarDayButtonHeight">44</sys:Double>
+    <Thickness x:Key="ZenCalendarButtonPadding">12,16</Thickness>
+    <sys:Double x:Key="ZenCalendarNavigationButtonSize">40</sys:Double>
 
     <!-- 开关 -->
     <sys:Double x:Key="ZenSwitchWidth">64</sys:Double>

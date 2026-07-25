@@ -3,7 +3,10 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:zen="clr-namespace:ZenUI.Wpf.Controls">
 
-    <Style x:Key="ZenAlertStyle" TargetType="{x:Type zen:ZenAlert}">
+    <Style
+        x:Key="ZenAlertStyle"
+        TargetType="{x:Type zen:ZenAlert}">
+        <Setter Property="FontSize" Value="{DynamicResource ZenFontSizeBody}" />
         <Setter Property="Padding" Value="{DynamicResource ZenAlertPadding}" />
         <Setter Property="AutomationProperties.LiveSetting" Value="Polite" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />

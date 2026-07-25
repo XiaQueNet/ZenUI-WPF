@@ -70,7 +70,10 @@
         </Setter>
     </Style>
 
-    <Style x:Key="ZenListBoxStyle" TargetType="{x:Type zen:ZenListBox}">
+    <Style
+        x:Key="ZenListBoxStyle"
+        TargetType="{x:Type zen:ZenListBox}">
+        <Setter Property="FontSize" Value="{DynamicResource ZenFontSizeBody}" />
         <Setter Property="Background" Value="{DynamicResource ZenSurfaceBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource ZenBorderBrush}" />
         <Setter Property="BorderThickness" Value="{DynamicResource ZenControlBorderThickness}" />

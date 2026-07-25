@@ -13,7 +13,10 @@
         </Setter>
     </Style>
 
-    <Style x:Key="ZenTextBoxStyle" TargetType="{x:Type zen:ZenTextBox}">
+    <Style
+        x:Key="ZenTextBoxStyle"
+        TargetType="{x:Type zen:ZenTextBox}">
+        <Setter Property="FontSize" Value="{DynamicResource ZenFontSizeBody}" />
         <Setter Property="MinHeight" Value="{DynamicResource ZenInputControlMinHeight}" />
         <Setter Property="Padding" Value="{DynamicResource ZenInputControlPadding}" />
         <Setter Property="Background" Value="{DynamicResource ZenSurfaceBrush}" />

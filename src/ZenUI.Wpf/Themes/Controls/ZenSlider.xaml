@@ -23,7 +23,10 @@
         </Setter>
     </Style>
 
-    <Style x:Key="ZenSliderStyle" TargetType="{x:Type zen:ZenSlider}">
+    <Style
+        x:Key="ZenSliderStyle"
+        TargetType="{x:Type zen:ZenSlider}">
+        <Setter Property="FontSize" Value="{DynamicResource ZenFontSizeBody}" />
         <Setter Property="MinWidth" Value="120" />
         <Setter Property="MinHeight" Value="{DynamicResource ZenSliderCrossAxisMinSize}" />
         <Setter Property="TrackThickness" Value="{DynamicResource ZenSliderTrackThickness}" />

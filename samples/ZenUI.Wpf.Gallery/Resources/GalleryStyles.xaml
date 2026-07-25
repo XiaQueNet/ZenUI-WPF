@@ -53,7 +53,10 @@
         <Setter Property="CornerRadius" Value="10" />
     </Style>
 
-    <Style x:Key="GalleryButtonStyle" BasedOn="{StaticResource ZenButtonStyle}" TargetType="{x:Type zen:ZenButton}">
+    <Style
+        x:Key="GalleryButtonStyle"
+        BasedOn="{StaticResource ZenButtonStyle}"
+        TargetType="{x:Type zen:ZenButton}">
         <Setter Property="MinWidth" Value="92" />
         <Setter Property="Height" Value="36" />
         <Setter Property="Margin" Value="0,0,12,0" />

@@ -13,7 +13,10 @@
         </Setter>
     </Style>
 
-    <Style x:Key="ZenCheckBoxStyle" TargetType="{x:Type zen:ZenCheckBox}">
+    <Style
+        x:Key="ZenCheckBoxStyle"
+        TargetType="{x:Type zen:ZenCheckBox}">
+        <Setter Property="FontSize" Value="{DynamicResource ZenFontSizeBody}" />
         <Setter Property="Foreground" Value="{DynamicResource ZenTextPrimaryBrush}" />
         <Setter Property="AccentBrush" Value="{DynamicResource ZenPrimaryBrush}" />
         <Setter Property="GlyphBrush" Value="{DynamicResource ZenOnAccentBrush}" />
@@ -86,7 +89,10 @@
     </Style>
     <Style BasedOn="{StaticResource ZenCheckBoxStyle}" TargetType="{x:Type zen:ZenCheckBox}" />
 
-    <Style x:Key="ZenRadioButtonStyle" TargetType="{x:Type zen:ZenRadioButton}">
+    <Style
+        x:Key="ZenRadioButtonStyle"
+        TargetType="{x:Type zen:ZenRadioButton}">
+        <Setter Property="FontSize" Value="{DynamicResource ZenFontSizeBody}" />
         <Setter Property="Foreground" Value="{DynamicResource ZenTextPrimaryBrush}" />
         <Setter Property="AccentBrush" Value="{DynamicResource ZenPrimaryBrush}" />
         <Setter Property="ThemeBackground" Value="{DynamicResource ZenSurfaceBrush}" />

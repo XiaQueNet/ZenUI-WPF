@@ -4,6 +4,10 @@
 
 ## Unreleased
 
+### Changed
+
+- 统一所有 Zen 控件默认正文字号为 `ZenFontSizeBody`（14），并保留 Token 与控件属性覆盖能力。
+
 ## [0.1.0-preview.3] - 2026-07-25
 
 ### Added

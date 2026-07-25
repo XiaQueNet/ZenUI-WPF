@@ -41,7 +41,10 @@
         </Setter>
     </Style>
 
-    <Style x:Key="ZenComboBoxStyle" TargetType="{x:Type zen:ZenComboBox}">
+    <Style
+        x:Key="ZenComboBoxStyle"
+        TargetType="{x:Type zen:ZenComboBox}">
+        <Setter Property="FontSize" Value="{DynamicResource ZenFontSizeBody}" />
         <Setter Property="MinHeight" Value="{DynamicResource ZenInputControlMinHeight}" />
         <Setter Property="Padding" Value="{DynamicResource ZenInputControlPadding}" />
         <Setter Property="CornerRadius" Value="{DynamicResource ZenInputControlCornerRadius}" />

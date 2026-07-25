@@ -16,7 +16,10 @@
         </Setter>
     </Style>
 
-    <Style x:Key="ZenButtonStyle" TargetType="{x:Type zen:ZenButton}">
+    <Style
+        x:Key="ZenButtonStyle"
+        TargetType="{x:Type zen:ZenButton}">
+        <Setter Property="FontSize" Value="{DynamicResource ZenFontSizeBody}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="CornerRadius" Value="{DynamicResource ZenButtonCornerRadius}" />

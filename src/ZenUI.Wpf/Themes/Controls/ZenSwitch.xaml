@@ -20,7 +20,10 @@
         </Setter>
     </Style>
 
-    <Style x:Key="ZenSwitchStyle" TargetType="{x:Type zen:ZenSwitch}">
+    <Style
+        x:Key="ZenSwitchStyle"
+        TargetType="{x:Type zen:ZenSwitch}">
+        <Setter Property="FontSize" Value="{DynamicResource ZenFontSizeBody}" />
         <Setter Property="Width" Value="{DynamicResource ZenSwitchWidth}" />
         <Setter Property="Height" Value="{DynamicResource ZenSwitchHeight}" />
         <Setter Property="MinWidth" Value="48" />

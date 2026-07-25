@@ -202,10 +202,10 @@ namespace ZenUI.Wpf.Tests.Controls
                 Assert.AreEqual(44d, columnHeader.Height);
                 Assert.AreEqual(44d, row.MinHeight);
                 Assert.AreEqual(new Thickness(14, 0, 14, 0), cell.Padding);
-                Assert.AreEqual(34d, dayButton.Width);
-                Assert.AreEqual(32d, dayButton.Height);
-                Assert.AreEqual(new Thickness(8, 10, 8, 10), monthButton.Padding);
-                Assert.AreEqual(30d, navigationButton.Width);
+                Assert.AreEqual(48d, dayButton.Width);
+                Assert.AreEqual(44d, dayButton.Height);
+                Assert.AreEqual(new Thickness(12, 16, 12, 16), monthButton.Padding);
+                Assert.AreEqual(40d, navigationButton.Width);
 
                 ZenDensityManager.ApplyDensity(window.Resources, ZenDensity.Compact);
                 window.Dispatcher.Invoke(DispatcherPriority.ContextIdle, new Action(() => { }));
@@ -214,10 +214,10 @@ namespace ZenUI.Wpf.Tests.Controls
                 Assert.AreEqual(36d, columnHeader.Height);
                 Assert.AreEqual(36d, row.MinHeight);
                 Assert.AreEqual(new Thickness(10, 0, 10, 0), cell.Padding);
-                Assert.AreEqual(30d, dayButton.Width);
-                Assert.AreEqual(28d, dayButton.Height);
-                Assert.AreEqual(new Thickness(6, 8, 6, 8), monthButton.Padding);
-                Assert.AreEqual(26d, navigationButton.Width);
+                Assert.AreEqual(42d, dayButton.Width);
+                Assert.AreEqual(40d, dayButton.Height);
+                Assert.AreEqual(new Thickness(10, 13, 10, 13), monthButton.Padding);
+                Assert.AreEqual(36d, navigationButton.Width);
 
                 ZenDensityManager.ApplyDensity(window.Resources, ZenDensity.Comfortable);
                 window.Dispatcher.Invoke(DispatcherPriority.ContextIdle, new Action(() => { }));
@@ -226,10 +226,10 @@ namespace ZenUI.Wpf.Tests.Controls
                 Assert.AreEqual(52d, columnHeader.Height);
                 Assert.AreEqual(52d, row.MinHeight);
                 Assert.AreEqual(new Thickness(18, 0, 18, 0), cell.Padding);
-                Assert.AreEqual(38d, dayButton.Width);
-                Assert.AreEqual(36d, dayButton.Height);
-                Assert.AreEqual(new Thickness(10, 12, 10, 12), monthButton.Padding);
-                Assert.AreEqual(34d, navigationButton.Width);
+                Assert.AreEqual(54d, dayButton.Width);
+                Assert.AreEqual(50d, dayButton.Height);
+                Assert.AreEqual(new Thickness(14, 18, 14, 18), monthButton.Padding);
+                Assert.AreEqual(44d, navigationButton.Width);
             }
             finally
             {
