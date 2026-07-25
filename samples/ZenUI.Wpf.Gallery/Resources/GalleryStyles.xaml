@@ -10,34 +10,37 @@
 
     <Style x:Key="PageTitleStyle" TargetType="{x:Type TextBlock}">
         <Setter Property="Foreground" Value="{DynamicResource ZenTextPrimaryBrush}" />
-        <Setter Property="FontSize" Value="28" />
-        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="FontSize" Value="{DynamicResource ZenFontSizeDisplay}" />
+        <Setter Property="FontWeight" Value="{DynamicResource ZenFontWeightSemibold}" />
+        <Setter Property="LineHeight" Value="{DynamicResource ZenLineHeightDisplay}" />
     </Style>
 
     <Style x:Key="PageDescriptionStyle" TargetType="{x:Type TextBlock}">
         <Setter Property="Margin" Value="0,8,0,28" />
         <Setter Property="Foreground" Value="{DynamicResource ZenTextSecondaryBrush}" />
-        <Setter Property="FontSize" Value="14" />
+        <Setter Property="FontSize" Value="{DynamicResource ZenFontSizeBody}" />
+        <Setter Property="LineHeight" Value="{DynamicResource ZenLineHeightBody}" />
         <Setter Property="TextWrapping" Value="Wrap" />
     </Style>
 
     <Style x:Key="SectionTitleStyle" TargetType="{x:Type TextBlock}">
         <Setter Property="Margin" Value="0,0,0,18" />
         <Setter Property="Foreground" Value="{DynamicResource ZenTextPrimaryBrush}" />
-        <Setter Property="FontSize" Value="16" />
-        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="FontSize" Value="{DynamicResource ZenFontSizeSubtitle}" />
+        <Setter Property="FontWeight" Value="{DynamicResource ZenFontWeightSemibold}" />
     </Style>
 
     <Style x:Key="GalleryFieldLabelStyle" TargetType="{x:Type TextBlock}">
         <Setter Property="Margin" Value="0,0,0,8" />
         <Setter Property="Foreground" Value="{DynamicResource ZenTextSecondaryBrush}" />
-        <Setter Property="FontSize" Value="13" />
+        <Setter Property="FontSize" Value="{DynamicResource ZenFontSizeBodySmall}" />
     </Style>
 
     <Style x:Key="GallerySupportingTextStyle" TargetType="{x:Type TextBlock}">
         <Setter Property="Margin" Value="0,4,0,0" />
         <Setter Property="Foreground" Value="{DynamicResource ZenTextSecondaryBrush}" />
-        <Setter Property="FontSize" Value="12" />
+        <Setter Property="FontSize" Value="{DynamicResource ZenFontSizeCaption}" />
+        <Setter Property="LineHeight" Value="{DynamicResource ZenLineHeightCaption}" />
         <Setter Property="TextWrapping" Value="Wrap" />
     </Style>
 

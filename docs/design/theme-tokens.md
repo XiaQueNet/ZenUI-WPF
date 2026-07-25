@@ -18,6 +18,7 @@
 | --- | --- | --- |
 | `Tokens/SemanticColors.xaml` | 跨控件共享的颜色语义 | `ZenPrimaryBrush`、`ZenTextSecondaryBrush`、`ZenSurfaceBrush` |
 | `Tokens/ComponentColors.xaml` | 控件或控件部件特有的颜色状态 | `ZenScrollBarThumbBrush`、`ZenListBoxItemSelectedBrush` |
+| `Tokens/Typography.xaml` | 语义字号、字重和绝对行高 | `ZenFontSizeBody`、`ZenFontWeightSemibold`、`ZenLineHeightBody` |
 | `Tokens/Metrics.xaml` | 跨控件共享的尺寸与边框指标 | `ZenInputControlMinHeight`、`ZenInputControlPadding` |
 | `Tokens/ComponentMetrics.xaml` | 控件特有但允许应用统一覆盖的尺寸 | `ZenButtonCornerRadius`、`ZenListBoxItemPadding` |
 | `Tokens/Interaction.xaml` | 焦点和禁用状态的透明度语义 | `ZenFocusVisualOpacity`、`ZenDisabledActionOpacity` |
@@ -34,9 +35,10 @@ Interaction Token 按控件角色区分禁用后的视觉强调程度，而不�
 
 Calendar 弹层和部分 DataGrid 模板内部状态暂不纳入 Interaction Token：前者位于独立 Popup 资源边界，后者包含通过 `TargetName` 修改模板内部元素的触发器。此类状态应优先通过 `CalendarStyle` 或控件依赖属性显式传递，避免产生看似可覆盖、实际无法可靠解析的 Token。
 
+Typography Token 提供 Caption、Body、Subtitle、Title、Display 等语义层级。ZenUI 不在控件默认 Style 中强制设置全局 `FontFamily` 或正文 `FontSize`，以保留 WPF 字体属性继承、系统字体和应用级本地化选择；组件明确需要的文字强调和 Gallery 公共排版才引用这些 Token。绝对行高仅用于 `TextBlock` 排版，不应直接套用到固定高度的输入控件。
+
 后续可在不改变现有 Token 的前提下增加：
 
-- `Typography.xaml`：字号、字重和行高。
 - Density 字典：Compact、Standard、Comfortable 等桌面密度。
 
 ## 命名规则

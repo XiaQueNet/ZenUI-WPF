@@ -87,7 +87,7 @@
         <Setter Property="Width" Value="Auto" />
         <Setter Property="Padding" Value="12,0" />
         <Setter Property="Foreground" Value="{DynamicResource ZenTextPrimaryBrush}" />
-        <Setter Property="FontWeight" Value="SemiBold" />
+        <Setter Property="FontWeight" Value="{DynamicResource ZenFontWeightSemibold}" />
     </Style>
 
     <Style x:Key="ZenCalendarDayButtonStyle" TargetType="{x:Type CalendarDayButton}">
@@ -117,7 +117,7 @@
                             <Setter TargetName="DayBorder" Property="BorderBrush" Value="{DynamicResource ZenPrimaryBrush}" />
                             <Setter TargetName="DayBorder" Property="BorderThickness" Value="1" />
                             <Setter Property="Foreground" Value="{DynamicResource ZenPrimaryBrush}" />
-                            <Setter Property="FontWeight" Value="SemiBold" />
+                            <Setter Property="FontWeight" Value="{DynamicResource ZenFontWeightSemibold}" />
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="DayBorder" Property="Background" Value="{DynamicResource ZenSurfaceHoverBrush}" />

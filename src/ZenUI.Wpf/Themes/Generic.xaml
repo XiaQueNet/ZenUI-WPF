@@ -2,6 +2,7 @@
 
     <ResourceDictionary.MergedDictionaries>
         <ResourceDictionary Source="/ZenUI.Wpf;component/Themes/Colors.xaml" />
+        <ResourceDictionary Source="/ZenUI.Wpf;component/Themes/Tokens/Typography.xaml" />
         <ResourceDictionary Source="/ZenUI.Wpf;component/Themes/Tokens/Metrics.xaml" />
         <ResourceDictionary Source="/ZenUI.Wpf;component/Themes/Tokens/ComponentMetrics.xaml" />
         <ResourceDictionary Source="/ZenUI.Wpf;component/Themes/Tokens/Interaction.xaml" />

@@ -169,6 +169,19 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.AreEqual(0.55d, dictionary["ZenDisabledInputOpacity"]);
             Assert.AreEqual(0.6d, dictionary["ZenDisabledFieldOpacity"]);
             Assert.AreEqual(0.65d, dictionary["ZenDisabledContainerOpacity"]);
+            Assert.AreEqual(12d, dictionary["ZenFontSizeCaption"]);
+            Assert.AreEqual(13d, dictionary["ZenFontSizeBodySmall"]);
+            Assert.AreEqual(14d, dictionary["ZenFontSizeBody"]);
+            Assert.AreEqual(16d, dictionary["ZenFontSizeSubtitle"]);
+            Assert.AreEqual(20d, dictionary["ZenFontSizeTitle"]);
+            Assert.AreEqual(28d, dictionary["ZenFontSizeDisplay"]);
+            Assert.AreEqual(FontWeights.Regular, dictionary["ZenFontWeightRegular"]);
+            Assert.AreEqual(FontWeights.SemiBold, dictionary["ZenFontWeightSemibold"]);
+            Assert.AreEqual(FontWeights.Bold, dictionary["ZenFontWeightBold"]);
+            Assert.AreEqual(18d, dictionary["ZenLineHeightCaption"]);
+            Assert.AreEqual(21d, dictionary["ZenLineHeightBody"]);
+            Assert.AreEqual(28d, dictionary["ZenLineHeightTitle"]);
+            Assert.AreEqual(36d, dictionary["ZenLineHeightDisplay"]);
             Assert.IsInstanceOfType<Style>(dictionary["ZenFocusVisualBorderStyle"]);
         }
 
@@ -244,6 +257,49 @@ namespace ZenUI.Wpf.Tests.Controls
                 Assert.AreEqual(1d, slider.Opacity);
                 Assert.AreEqual(1d, scrollBar.Opacity);
                 Assert.AreEqual(1d, datePicker.Opacity);
+            }
+            finally
+            {
+                window.Close();
+            }
+        }
+
+        [TestMethod]
+        public void TypographyTokensCanBeOverriddenInWindowResources()
+        {
+            var alert = new ZenAlert { Content = "Saved" };
+            var dataGrid = new ZenDataGrid { Height = 100 };
+            dataGrid.Columns.Add(new DataGridTextColumn { Header = "Name" });
+
+            var panel = new StackPanel();
+            panel.Children.Add(alert);
+            panel.Children.Add(dataGrid);
+
+            var window = CreateTestWindow(panel, 320, 180);
+            window.Resources.MergedDictionaries.Add(new ResourceDictionary
+            {
+                Source = new Uri(
+                    "/ZenUI.Wpf;component/Themes/Generic.xaml",
+                    UriKind.Relative)
+            });
+            window.Resources["ZenFontSizeCaption"] = 18d;
+            window.Resources["ZenFontWeightBold"] = FontWeights.Regular;
+            window.Resources["ZenFontWeightSemibold"] = FontWeights.Bold;
+
+            try
+            {
+                window.Show();
+                window.UpdateLayout();
+
+                var iconText = alert.Template.FindName("IconText", alert) as TextBlock;
+                var columnHeader = FindVisualDescendants<DataGridColumnHeader>(dataGrid)
+                    .FirstOrDefault(header => header.Column != null);
+
+                Assert.IsNotNull(iconText);
+                Assert.IsNotNull(columnHeader);
+                Assert.AreEqual(18d, iconText.FontSize);
+                Assert.AreEqual(FontWeights.Regular, iconText.FontWeight);
+                Assert.AreEqual(FontWeights.Bold, columnHeader.FontWeight);
             }
             finally
             {

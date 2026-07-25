@@ -1,0 +1,24 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib">
+
+    <!-- Type scale -->
+    <sys:Double x:Key="ZenFontSizeCaption">12</sys:Double>
+    <sys:Double x:Key="ZenFontSizeBodySmall">13</sys:Double>
+    <sys:Double x:Key="ZenFontSizeBody">14</sys:Double>
+    <sys:Double x:Key="ZenFontSizeSubtitle">16</sys:Double>
+    <sys:Double x:Key="ZenFontSizeTitle">20</sys:Double>
+    <sys:Double x:Key="ZenFontSizeDisplay">28</sys:Double>
+
+    <!-- Text emphasis -->
+    <FontWeight x:Key="ZenFontWeightRegular">Normal</FontWeight>
+    <FontWeight x:Key="ZenFontWeightSemibold">SemiBold</FontWeight>
+    <FontWeight x:Key="ZenFontWeightBold">Bold</FontWeight>
+
+    <!-- Absolute line heights for TextBlock content -->
+    <sys:Double x:Key="ZenLineHeightCaption">18</sys:Double>
+    <sys:Double x:Key="ZenLineHeightBody">21</sys:Double>
+    <sys:Double x:Key="ZenLineHeightTitle">28</sys:Double>
+    <sys:Double x:Key="ZenLineHeightDisplay">36</sys:Double>
+</ResourceDictionary>
