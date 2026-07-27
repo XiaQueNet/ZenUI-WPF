@@ -6,6 +6,11 @@ namespace ZenUI.Wpf.Controls
     public enum ButtonVariant
     {
         /// <summary>
+        /// 中性操作。
+        /// </summary>
+        Neutral,
+
+        /// <summary>
         /// 主要操作。
         /// </summary>
         Primary,

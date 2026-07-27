@@ -15,6 +15,10 @@
     <SolidColorBrush x:Key="ZenPrimaryBrush" Color="{DynamicResource {x:Static SystemColors.HighlightColorKey}}" />
     <SolidColorBrush x:Key="ZenPrimaryHoverBrush" Color="{DynamicResource {x:Static SystemColors.HighlightColorKey}}" />
     <SolidColorBrush x:Key="ZenPrimaryPressedBrush" Color="{DynamicResource {x:Static SystemColors.HotTrackColorKey}}" />
+    <SolidColorBrush x:Key="ZenNeutralActionBrush" Color="{DynamicResource {x:Static SystemColors.WindowTextColorKey}}" />
+    <SolidColorBrush x:Key="ZenNeutralActionHoverBrush" Color="{DynamicResource {x:Static SystemColors.ControlTextColorKey}}" />
+    <SolidColorBrush x:Key="ZenNeutralActionPressedBrush" Color="{DynamicResource {x:Static SystemColors.WindowTextColorKey}}" />
+    <SolidColorBrush x:Key="ZenOnNeutralActionBrush" Color="{DynamicResource {x:Static SystemColors.WindowColorKey}}" />
     <SolidColorBrush x:Key="ZenSuccessBrush" Color="{DynamicResource {x:Static SystemColors.HighlightColorKey}}" />
     <SolidColorBrush x:Key="ZenSuccessActionBrush" Color="{DynamicResource {x:Static SystemColors.HighlightColorKey}}" />
     <SolidColorBrush x:Key="ZenSuccessActionHoverBrush" Color="{DynamicResource {x:Static SystemColors.HotTrackColorKey}}" />

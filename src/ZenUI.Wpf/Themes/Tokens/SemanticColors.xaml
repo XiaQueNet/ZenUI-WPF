@@ -7,6 +7,11 @@
     <SolidColorBrush x:Key="ZenPrimaryHoverBrush" Color="#3457BE" />
     <SolidColorBrush x:Key="ZenPrimaryPressedBrush" Color="#2C4AA5" />
 
+    <SolidColorBrush x:Key="ZenNeutralActionBrush" Color="#1D2129" />
+    <SolidColorBrush x:Key="ZenNeutralActionHoverBrush" Color="#333840" />
+    <SolidColorBrush x:Key="ZenNeutralActionPressedBrush" Color="#0F1115" />
+    <SolidColorBrush x:Key="ZenOnNeutralActionBrush" Color="#FFFFFF" />
+
     <SolidColorBrush x:Key="ZenSuccessBrush" Color="#19BE6B" />
     <SolidColorBrush x:Key="ZenSuccessActionBrush" Color="#07883F" />
     <SolidColorBrush x:Key="ZenSuccessActionHoverBrush" Color="#067537" />

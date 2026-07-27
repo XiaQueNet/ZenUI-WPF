@@ -27,6 +27,61 @@ namespace ZenUI.Wpf.Tests.Controls
     public class ButtonTests
     {
         [TestMethod]
+        public void NeutralVariantUsesNeutralThemeBrushesForEveryAppearance()
+        {
+            var resources = new ResourceDictionary
+            {
+                Source = new Uri(
+                    "/ZenUI.Wpf;component/Themes/Generic.xaml",
+                    UriKind.Relative)
+            };
+            var filled = new ZenButton { Variant = ButtonVariant.Neutral };
+            var outlined = new ZenButton
+            {
+                Appearance = ButtonAppearance.Outlined,
+                Variant = ButtonVariant.Neutral
+            };
+            var text = new ZenButton
+            {
+                Appearance = ButtonAppearance.Text,
+                Variant = ButtonVariant.Neutral
+            };
+            var panel = new StackPanel();
+            panel.Children.Add(filled);
+            panel.Children.Add(outlined);
+            panel.Children.Add(text);
+            var window = CreateTestWindow(panel, 320, 180);
+            window.Resources.MergedDictionaries.Add(resources);
+
+            try
+            {
+                window.Show();
+                window.UpdateLayout();
+
+                Assert.AreEqual(ButtonVariant.Neutral, filled.Variant);
+                Assert.AreSame(resources["ZenNeutralActionBrush"], filled.ThemeBackground);
+                Assert.AreSame(resources["ZenOnNeutralActionBrush"], filled.ThemeForeground);
+                Assert.AreSame(resources["ZenNeutralActionHoverBrush"], filled.ThemeHoverBackground);
+                Assert.AreSame(resources["ZenNeutralActionPressedBrush"], filled.ThemePressedBackground);
+
+                Assert.AreEqual(Brushes.Transparent, outlined.ThemeBackground);
+                Assert.AreSame(resources["ZenNeutralActionBrush"], outlined.ThemeBorderBrush);
+                Assert.AreSame(resources["ZenNeutralActionBrush"], outlined.ThemeForeground);
+                Assert.AreSame(resources["ZenNeutralActionHoverBrush"], outlined.ThemeHoverBorderBrush);
+                Assert.AreSame(resources["ZenNeutralActionPressedBrush"], outlined.ThemePressedBorderBrush);
+
+                Assert.AreEqual(Brushes.Transparent, text.ThemeBackground);
+                Assert.AreSame(resources["ZenNeutralActionBrush"], text.ThemeForeground);
+                Assert.AreSame(resources["ZenNeutralActionHoverBrush"], text.ThemeHoverForeground);
+                Assert.AreSame(resources["ZenNeutralActionPressedBrush"], text.ThemePressedForeground);
+            }
+            finally
+            {
+                window.Close();
+            }
+        }
+
+        [TestMethod]
         public void ButtonInteractionBrushesAreCustomizable()
         {
             var button = new ZenButton();
