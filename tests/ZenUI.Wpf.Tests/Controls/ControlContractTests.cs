@@ -147,7 +147,7 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.AreEqual(new Thickness(1), dictionary["ZenDataGridCellFocusVisualBorderThickness"]);
             Assert.AreEqual(new Thickness(2), dictionary["ZenDataGridCellValidationBorderThickness"]);
             Assert.AreEqual(368d, dictionary["ZenCalendarPopupWidth"]);
-            Assert.AreEqual(372d, dictionary["ZenCalendarPopupHeight"]);
+            Assert.AreEqual(376d, dictionary["ZenCalendarPopupHeight"]);
             Assert.AreEqual(48d, dictionary["ZenCalendarDayButtonWidth"]);
             Assert.AreEqual(44d, dictionary["ZenCalendarDayButtonHeight"]);
             Assert.AreEqual(new Thickness(12, 16, 12, 16), dictionary["ZenCalendarButtonPadding"]);

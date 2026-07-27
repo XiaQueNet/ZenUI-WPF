@@ -59,6 +59,7 @@
                 <ControlTemplate TargetType="{x:Type Button}">
                     <Border
                         x:Name="ButtonBorder"
+                        Padding="{TemplateBinding Padding}"
                         Background="{TemplateBinding Background}"
                         CornerRadius="4">
                         <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
@@ -86,7 +87,7 @@
         BasedOn="{StaticResource ZenCalendarNavigationButtonStyle}"
         TargetType="{x:Type Button}">
         <Setter Property="Width" Value="Auto" />
-        <Setter Property="Padding" Value="12,0" />
+        <Setter Property="Padding" Value="{DynamicResource ZenButtonPadding}" />
         <Setter Property="Foreground" Value="{DynamicResource ZenTextPrimaryBrush}" />
         <Setter Property="FontWeight" Value="{DynamicResource ZenFontWeightSemibold}" />
     </Style>
@@ -205,17 +206,17 @@
                             <TextBlock
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
-                                FontSize="13"
+                                FontSize="{Binding FontSize, RelativeSource={RelativeSource AncestorType={x:Type Calendar}}}"
                                 Foreground="{DynamicResource ZenTextSecondaryBrush}"
                                 Text="{Binding}" />
                         </DataTemplate>
                     </ControlTemplate.Resources>
                     <Grid x:Name="PART_Root">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="44" />
+                            <RowDefinition Height="Auto" />
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
-                        <Grid>
+                        <Grid x:Name="HeaderPanel" Margin="0,4">
                             <Button
                                 x:Name="PART_PreviousButton"
                                 Margin="4,0,0,0"
@@ -251,6 +252,14 @@
                                     StrokeThickness="1.5" />
                             </Button>
                         </Grid>
+                        <Border
+                            x:Name="HeaderDivider"
+                            Height="1"
+                            Margin="8,0"
+                            VerticalAlignment="Bottom"
+                            Background="{DynamicResource ZenBorderBrush}"
+                            IsHitTestVisible="False"
+                            SnapsToDevicePixels="True" />
                         <Grid
                             x:Name="PART_MonthView"
                             Grid.Row="1"

@@ -350,7 +350,7 @@ namespace ZenUI.Wpf.Controls
                 nameof(CalendarPopupHeight),
                 typeof(double),
                 typeof(ZenDatePicker),
-                new FrameworkPropertyMetadata(372d));
+                new FrameworkPropertyMetadata(376d));
 
         /// <summary>
         /// 获取或设置日历弹层内容的字号。

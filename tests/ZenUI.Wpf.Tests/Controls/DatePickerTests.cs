@@ -53,7 +53,7 @@ namespace ZenUI.Wpf.Tests.Controls
                 Assert.AreEqual(368d, datePicker.CalendarPopupWidth);
                 Assert.AreEqual(368d, popupContainer.Width);
                 Assert.AreEqual(368d, popupContainer.ActualWidth);
-                Assert.AreEqual(372d, popupContainer.ActualHeight);
+                Assert.AreEqual(376d, popupContainer.ActualHeight);
                 window.Dispatcher.Invoke(DispatcherPriority.ContextIdle, new Action(() => { }));
                 window.UpdateLayout();
                 Assert.AreEqual(16d, calendar.FontSize);
@@ -69,7 +69,9 @@ namespace ZenUI.Wpf.Tests.Controls
                     calendarItem.Template.FindName("PART_MonthView", calendarItem) as Grid;
                 Assert.IsNotNull(root);
                 Assert.IsNotNull(monthView);
-                Assert.AreEqual(44d, root.RowDefinitions[0].Height.Value);
+                Assert.AreEqual(
+                    GridUnitType.Auto,
+                    root.RowDefinitions[0].Height.GridUnitType);
                 Assert.AreEqual(28d, monthView.RowDefinitions[0].Height.Value);
                 Assert.AreEqual(
                     7,

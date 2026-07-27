@@ -206,7 +206,7 @@ namespace ZenUI.Wpf.Tests.Controls
                 Assert.AreEqual(44d, row.MinHeight);
                 Assert.AreEqual(new Thickness(14, 0, 14, 0), cell.Padding);
                 Assert.AreEqual(368d, popupContainer.ActualWidth);
-                Assert.AreEqual(372d, popupContainer.ActualHeight);
+                Assert.AreEqual(376d, popupContainer.ActualHeight);
                 Assert.AreEqual(16d, calendar.FontSize);
                 Assert.AreEqual(48d, dayButton.Width);
                 Assert.AreEqual(44d, dayButton.Height);
@@ -237,7 +237,7 @@ namespace ZenUI.Wpf.Tests.Controls
                 Assert.AreEqual(52d, row.MinHeight);
                 Assert.AreEqual(new Thickness(18, 0, 18, 0), cell.Padding);
                 Assert.AreEqual(412d, popupContainer.ActualWidth);
-                Assert.AreEqual(408d, popupContainer.ActualHeight);
+                Assert.AreEqual(416d, popupContainer.ActualHeight);
                 Assert.AreEqual(54d, dayButton.Width);
                 Assert.AreEqual(50d, dayButton.Height);
                 Assert.AreEqual(new Thickness(14, 18, 14, 18), monthButton.Padding);
