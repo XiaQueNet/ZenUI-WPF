@@ -383,6 +383,34 @@ namespace ZenUI.Wpf.Tests.Controls
         }
 
         [TestMethod]
+        public void DatePickerToggleButtonDoesNotRequireCalendarAncestor()
+        {
+            var datePicker = new ZenDatePicker
+            {
+                FontSize = 19
+            };
+            var window = CreateTestWindow(datePicker, 260, 120);
+
+            try
+            {
+                window.Show();
+                window.UpdateLayout();
+
+                var button = datePicker.Template.FindName("PART_Button", datePicker) as Button;
+                Assert.IsNotNull(button);
+                Assert.AreEqual(datePicker.FontSize, button.FontSize);
+                Assert.IsNull(
+                    BindingOperations.GetBindingExpression(
+                        button,
+                        Control.FontSizeProperty));
+            }
+            finally
+            {
+                window.Close();
+            }
+        }
+
+        [TestMethod]
         public void DatePickerCanDisableTextInputWithoutDisablingCalendarSelection()
         {
             var datePicker = new ZenDatePicker
