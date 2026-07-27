@@ -4,6 +4,10 @@
 
 ## Unreleased
 
+### Added
+
+- 增加可独立使用的 `ZenCalendar` 日历控件及 Gallery 示例，支持单日、单范围、多范围选择和 Density 动态尺寸。
+
 ### Changed
 
 - 统一所有 Zen 控件默认正文字号为 `ZenFontSizeBody`（14），并保留 Token 与控件属性覆盖能力。

@@ -37,6 +37,7 @@ namespace ZenUI.Wpf.Gallery
             containerRegistry.RegisterForNavigation<RadioButtonView>(NavigationKeys.RadioButton);
             containerRegistry.RegisterForNavigation<ComboBoxView>(NavigationKeys.ComboBox);
             containerRegistry.RegisterForNavigation<ListBoxView>(NavigationKeys.ListBox);
+            containerRegistry.RegisterForNavigation<CalendarView>(NavigationKeys.Calendar);
             containerRegistry.RegisterForNavigation<DatePickerView>(NavigationKeys.DatePicker);
             containerRegistry.RegisterForNavigation<DataGridView>(NavigationKeys.DataGrid);
             containerRegistry.RegisterForNavigation<SliderView>(NavigationKeys.Slider);

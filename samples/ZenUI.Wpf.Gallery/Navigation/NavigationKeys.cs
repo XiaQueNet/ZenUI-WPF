@@ -13,6 +13,7 @@ namespace ZenUI.Wpf.Gallery.Navigation
         public const string RadioButton = nameof(RadioButton);
         public const string ComboBox = nameof(ComboBox);
         public const string ListBox = nameof(ListBox);
+        public const string Calendar = nameof(Calendar);
         public const string DatePicker = nameof(DatePicker);
         public const string DataGrid = nameof(DataGrid);
         public const string Slider = nameof(Slider);

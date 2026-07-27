@@ -1,0 +1,66 @@
+<UserControl
+    x:Class="ZenUI.Wpf.Gallery.Views.CalendarView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:gallery="clr-namespace:ZenUI.Wpf.Gallery.Controls"
+    xmlns:zen="https://zenui.mnorg.cn/xaml/wpf">
+    <ScrollViewer
+        Padding="40"
+        HorizontalContentAlignment="Stretch"
+        VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+            <gallery:PageHeader Title="Calendar 日历" Description="支持单日、多日和日期范围选择，并自动适配主题与界面密度。" />
+
+            <Border Style="{StaticResource GalleryCardStyle}">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="基本用法" />
+                    <zen:ZenCalendar
+                        HorizontalAlignment="Left"
+                        DisplayDate="2026-07-01"
+                        SelectedDate="2026-07-27" />
+                </StackPanel>
+            </Border>
+
+            <Border Style="{StaticResource GalleryCardStyle}">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="选择模式" />
+                    <UniformGrid Columns="2">
+                        <StackPanel Margin="0,0,12,0">
+                            <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="单个范围" />
+                            <zen:ZenCalendar
+                                HorizontalAlignment="Left"
+                                DisplayDate="2026-07-01"
+                                SelectionMode="SingleRange" />
+                        </StackPanel>
+                        <StackPanel Margin="12,0,0,0">
+                            <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="多个范围" />
+                            <zen:ZenCalendar
+                                HorizontalAlignment="Left"
+                                DisplayDate="2026-07-01"
+                                SelectionMode="MultipleRange" />
+                        </StackPanel>
+                    </UniformGrid>
+                </StackPanel>
+            </Border>
+
+            <Border Style="{StaticResource GalleryCardStyle}">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="自定义尺寸" />
+                    <TextBlock
+                        Margin="0,0,0,12"
+                        Style="{StaticResource GallerySupportingTextStyle}"
+                        Text="尺寸属性可单独覆盖，未指定时会跟随当前 Density Token。" />
+                    <zen:ZenCalendar
+                        Width="326"
+                        Height="340"
+                        HorizontalAlignment="Left"
+                        ButtonPadding="8,12"
+                        DayButtonHeight="38"
+                        DayButtonWidth="42"
+                        DisplayDate="2026-07-01"
+                        NavigationButtonSize="34" />
+                </StackPanel>
+            </Border>
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>
