@@ -12,8 +12,9 @@
 dotnet restore ZenUI.Wpf.slnx
 dotnet build ZenUI.Wpf.slnx -c Release --no-restore
 dotnet test ZenUI.Wpf.slnx -c Release --no-build
-dotnet pack src/ZenUI.Wpf/ZenUI.Wpf.csproj -c Release --no-build -o artifacts/packages
-dotnet pack src/ZenUI.Wpf.Converters/ZenUI.Wpf.Converters.csproj -c Release --no-build -o artifacts/packages
+$packageOutput = Join-Path ([System.IO.Path]::GetTempPath()) "ZenUI-WPF-packages"
+dotnet pack src/ZenUI.Wpf/ZenUI.Wpf.csproj -c Release --no-build -o $packageOutput
+dotnet pack src/ZenUI.Wpf.Converters/ZenUI.Wpf.Converters.csproj -c Release --no-build -o $packageOutput
 ```
 
 新增或修改控件时，需要覆盖默认、悬停、按下、键盘焦点、禁用、只读、验证错误和高对比度状态。继承 WPF 控件时，应保留其公开属性对应的模板契约，并为关键行为添加 STA 回归测试。完整要求参见[控件设计规范](docs/design/component-design.md)。
@@ -34,5 +35,6 @@ ZenUI 只改变 WPF 控件的默认值和默认呈现，不覆盖或移除基类
 - 不为每个版本创建分支；只有并行维护旧发布线时才创建 `release/<line>`。
 - 每个公开 NuGet 版本必须创建对应的 `v<version>` Tag 和 GitHub Release。
 - 发布前必须确认本地验证与远程 CI 全部成功。
+- 正式发布包统一通过 `scripts/pack-release.ps1` 生成到 `artifacts/releases/<version>`；不要手工指定其他仓库内目录。
 
 完整流程参见 [版本与发布规范](docs/maintainers/releasing.md)。

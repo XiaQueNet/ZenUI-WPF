@@ -184,13 +184,13 @@ git push origin v<version>
 
 ### 5. 从最终提交打包
 
-Tag 创建后，在该提交上重新构建和打包。不要复用提交前生成的旧包，否则 Source Link 可能记录错误提交。
+Tag 创建后，使用唯一发布脚本从该 Tag 的临时 Git Worktree 重新还原、构建、测试、检查依赖并打包。不要复用提交前生成的旧包，否则 Source Link 可能记录错误提交。
 
 ```powershell
-dotnet build ZenUI.Wpf.slnx -c Release --no-restore
-dotnet pack src/ZenUI.Wpf/ZenUI.Wpf.csproj -c Release --no-build -o artifacts/packages
-dotnet pack src/ZenUI.Wpf.Converters/ZenUI.Wpf.Converters.csproj -c Release --no-build -o artifacts/packages
+.\scripts\pack-release.ps1 -Version <version>
 ```
+
+正式产物固定生成到 `artifacts/releases/<version>`。脚本会验证两个项目版本、Tag 提交、包 ID、包版本、License、README、Changelog、Logo、目标框架、XML 文档、符号包和 Repository Commit，并生成 `SHA256SUMS.txt`。预检包不得写入该目录；需要重新生成尚未公开的同一版本时，显式传入 `-Force`。
 
 发布前检查 `.nupkg`：
 
@@ -216,11 +216,11 @@ API Key 必须：
 $secureKey = Read-Host "NuGet API Key" -AsSecureString
 $env:NUGET_API_KEY = [Net.NetworkCredential]::new("", $secureKey).Password
 
-dotnet nuget push "artifacts/packages/ZenUI.Wpf.<version>.nupkg" `
+dotnet nuget push "artifacts/releases/<version>/ZenUI.Wpf.<version>.nupkg" `
   --api-key $env:NUGET_API_KEY `
   --source "https://api.nuget.org/v3/index.json"
 
-dotnet nuget push "artifacts/packages/ZenUI.Wpf.Converters.<version>.nupkg" `
+dotnet nuget push "artifacts/releases/<version>/ZenUI.Wpf.Converters.<version>.nupkg" `
   --api-key $env:NUGET_API_KEY `
   --source "https://api.nuget.org/v3/index.json"
 

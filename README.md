@@ -119,7 +119,8 @@ private void PasswordBox_OnPasswordChanged(object sender, RoutedEventArgs e)
 - 转换器库（`net472` 与 `net8.0-windows`）：`dotnet build src/ZenUI.Wpf.Converters/ZenUI.Wpf.Converters.csproj -c Release`
 - 控件 Gallery：`dotnet build samples/ZenUI.Wpf.Gallery/ZenUI.Wpf.Gallery.csproj -c Release`
 - 自动化测试：`dotnet test ZenUI.Wpf.slnx -c Release`
-- NuGet 包：分别对 `src/ZenUI.Wpf/ZenUI.Wpf.csproj` 和 `src/ZenUI.Wpf.Converters/ZenUI.Wpf.Converters.csproj` 执行 `dotnet pack`
+- 开发用 NuGet 包：分别对 `src/ZenUI.Wpf/ZenUI.Wpf.csproj` 和 `src/ZenUI.Wpf.Converters/ZenUI.Wpf.Converters.csproj` 执行 `dotnet pack`
+- 正式发布包：执行 `.\scripts\pack-release.ps1 -Version <version>`，产物固定生成到 `artifacts/releases/<version>`
 
 `samples/ZenUI.Wpf.Gallery` 是 ZenUI 控件目录，使用 Prism Region Navigation 和 MVVM：`MainWindow` 只负责 Shell 布局，菜单由 `MainWindowViewModel` 驱动，每个组件位于独立的 `Views/*View.xaml` 页面。Gallery 仍以 .NET Framework 4.7.2 为目标框架，Prism 依赖不会传递到 `ZenUI.Wpf` 控件库。`samples/ZenUI.Wpf.PosDemo` 则负责展示完整的业务应用场景。
 
