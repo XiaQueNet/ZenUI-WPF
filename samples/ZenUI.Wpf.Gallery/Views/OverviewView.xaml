@@ -6,7 +6,7 @@
     xmlns:zen="https://zenui.mnorg.cn/xaml/wpf">
     <ScrollViewer Padding="40" HorizontalContentAlignment="Stretch" VerticalScrollBarVisibility="Auto">
         <StackPanel>
-            <gallery:PageHeader Description="浏览 ZenUI 的控件、交互状态与主题能力。" Title="ZenUI Controls Gallery" />
+            <gallery:PageHeader Description="浏览 ZenUI 的 15 个控件、完整交互状态，以及可实时切换的主题与界面密度。" Title="ZenUI Controls Gallery" />
 
             <Border Margin="0,0,0,18" Padding="26" Background="{DynamicResource ZenPrimaryBrush}" CornerRadius="12">
                 <Grid>
@@ -16,19 +16,25 @@
                     </Grid.ColumnDefinitions>
                     <StackPanel MaxWidth="470" VerticalAlignment="Center">
                         <TextBlock FontSize="20" FontWeight="SemiBold" Foreground="White" Text="专注于一致、清晰的桌面体验" />
-                        <TextBlock Margin="0,10,0,0" FontSize="13" Foreground="{DynamicResource GalleryOnPrimarySecondaryBrush}" LineHeight="21" Text="开箱即用的 WPF 控件样式，覆盖常用交互状态，并保留灵活的主题和外观定制能力。" TextWrapping="Wrap" />
+                        <TextBlock Margin="0,10,0,0" FontSize="13" Foreground="{DynamicResource GalleryOnPrimarySecondaryBrush}" LineHeight="21" Text="面向 .NET Framework 4.7.2 与现代 .NET 8 WPF，提供开箱即用的控件、语义化 Token 与运行时主题能力。" TextWrapping="Wrap" />
                     </StackPanel>
                     <StackPanel Grid.Column="1" Margin="30,0,0,0" Orientation="Horizontal">
-                        <Border MinWidth="92" Padding="14,12" Background="{DynamicResource GalleryOnPrimaryMutedSurfaceBrush}" CornerRadius="8">
+                        <Border MinWidth="82" Padding="12" Background="{DynamicResource GalleryOnPrimaryMutedSurfaceBrush}" CornerRadius="8">
                             <StackPanel>
-                                <TextBlock HorizontalAlignment="Center" FontSize="22" FontWeight="SemiBold" Foreground="White" Text="14" />
+                                <TextBlock HorizontalAlignment="Center" FontSize="22" FontWeight="SemiBold" Foreground="White" Text="15" />
                                 <TextBlock Margin="0,4,0,0" HorizontalAlignment="Center" FontSize="12" Foreground="{DynamicResource GalleryOnPrimarySecondaryBrush}" Text="常用控件" />
                             </StackPanel>
                         </Border>
-                        <Border MinWidth="92" Margin="10,0,0,0" Padding="14,12" Background="{DynamicResource GalleryOnPrimaryMutedSurfaceBrush}" CornerRadius="8">
+                        <Border MinWidth="82" Margin="10,0,0,0" Padding="12" Background="{DynamicResource GalleryOnPrimaryMutedSurfaceBrush}" CornerRadius="8">
                             <StackPanel>
-                                <TextBlock HorizontalAlignment="Center" FontSize="22" FontWeight="SemiBold" Foreground="White" Text="4" />
-                                <TextBlock Margin="0,4,0,0" HorizontalAlignment="Center" FontSize="12" Foreground="{DynamicResource GalleryOnPrimarySecondaryBrush}" Text="语义色" />
+                                <TextBlock HorizontalAlignment="Center" FontSize="22" FontWeight="SemiBold" Foreground="White" Text="3" />
+                                <TextBlock Margin="0,4,0,0" HorizontalAlignment="Center" FontSize="12" Foreground="{DynamicResource GalleryOnPrimarySecondaryBrush}" Text="界面主题" />
+                            </StackPanel>
+                        </Border>
+                        <Border MinWidth="82" Margin="10,0,0,0" Padding="12" Background="{DynamicResource GalleryOnPrimaryMutedSurfaceBrush}" CornerRadius="8">
+                            <StackPanel>
+                                <TextBlock HorizontalAlignment="Center" FontSize="22" FontWeight="SemiBold" Foreground="White" Text="3" />
+                                <TextBlock Margin="0,4,0,0" HorizontalAlignment="Center" FontSize="12" Foreground="{DynamicResource GalleryOnPrimarySecondaryBrush}" Text="密度等级" />
                             </StackPanel>
                         </Border>
                     </StackPanel>
@@ -48,6 +54,7 @@
                         <StackPanel>
                             <TextBlock Margin="0,0,0,12" FontWeight="SemiBold" Text="输入与选择" />
                             <zen:ZenTextBox Margin="0,0,0,12" Watermark="请输入项目名称" />
+                            <zen:ZenNumberBox Margin="0,0,0,12" Maximum="100" Minimum="1" Step="1" Value="3" />
                             <zen:ZenComboBox Margin="0,0,0,12" Watermark="请选择项目类型">
                                 <ComboBoxItem Content="桌面应用" />
                                 <ComboBoxItem Content="管理工具" />
@@ -83,14 +90,14 @@
                             <StackPanel>
                                 <Border Width="34" Height="4" HorizontalAlignment="Left" Background="{DynamicResource ZenPrimaryBrush}" CornerRadius="2" />
                                 <TextBlock Margin="0,14,0,0" FontSize="15" FontWeight="SemiBold" Text="输入与操作" />
-                                <TextBlock Margin="0,7,0,0" Foreground="{DynamicResource ZenTextSecondaryBrush}" LineHeight="21" Text="Button&#x0a;TextBox · PasswordBox&#x0a;Switch" TextWrapping="Wrap" />
+                                <TextBlock Margin="0,7,0,0" Foreground="{DynamicResource ZenTextSecondaryBrush}" LineHeight="21" Text="Button · Switch&#x0a;TextBox · NumberBox&#x0a;PasswordBox" TextWrapping="Wrap" />
                             </StackPanel>
                         </Border>
                         <Border Margin="8,0" Padding="18" Background="{DynamicResource ZenSurfaceMutedBrush}" CornerRadius="8">
                             <StackPanel>
                                 <Border Width="34" Height="4" HorizontalAlignment="Left" Background="{DynamicResource ZenSuccessBrush}" CornerRadius="2" />
-                                <TextBlock Margin="0,14,0,0" FontSize="15" FontWeight="SemiBold" Text="选择控件" />
-                                <TextBlock Margin="0,7,0,0" Foreground="{DynamicResource ZenTextSecondaryBrush}" LineHeight="21" Text="CheckBox · RadioButton&#x0a;ComboBox · ListBox&#x0a;DatePicker · Slider" TextWrapping="Wrap" />
+                                <TextBlock Margin="0,14,0,0" FontSize="15" FontWeight="SemiBold" Text="选择与日期" />
+                                <TextBlock Margin="0,7,0,0" Foreground="{DynamicResource ZenTextSecondaryBrush}" LineHeight="21" Text="CheckBox · RadioButton&#x0a;ComboBox · ListBox · Slider&#x0a;Calendar · DatePicker" TextWrapping="Wrap" />
                             </StackPanel>
                         </Border>
                         <Border Margin="8,0,0,0" Padding="18" Background="{DynamicResource ZenSurfaceMutedBrush}" CornerRadius="8">
@@ -122,8 +129,8 @@
                         </Border>
                         <Border Margin="7,0" Padding="16" BorderBrush="{DynamicResource ZenDividerBrush}" BorderThickness="1" CornerRadius="8">
                             <StackPanel>
-                                <TextBlock FontSize="15" FontWeight="SemiBold" Text="灵活定制" />
-                                <TextBlock Margin="0,7,0,0" Foreground="{DynamicResource ZenTextSecondaryBrush}" Text="支持颜色、尺寸与圆角配置" TextWrapping="Wrap" />
+                                <TextBlock FontSize="15" FontWeight="SemiBold" Text="主题与密度" />
+                                <TextBlock Margin="0,7,0,0" Foreground="{DynamicResource ZenTextSecondaryBrush}" Text="三套主题、三档密度实时切换" TextWrapping="Wrap" />
                             </StackPanel>
                         </Border>
                         <Border Margin="7,0,0,0" Padding="16" BorderBrush="{DynamicResource ZenDividerBrush}" BorderThickness="1" CornerRadius="8">

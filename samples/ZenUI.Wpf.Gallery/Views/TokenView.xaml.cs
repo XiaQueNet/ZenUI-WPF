@@ -24,8 +24,10 @@ namespace ZenUI.Wpf.Gallery.Views
             InitializeComponent();
             DensityDataGrid.ItemsSource = new[]
             {
+                new DensityPreviewRow("输入控件", "最小高度与内边距"),
+                new DensityPreviewRow("列表与弹层", "项目及容器间距"),
                 new DensityPreviewRow("DataGrid", "表头、行高、单元格内边距"),
-                new DensityPreviewRow("Calendar", "展开上方日期选择器查看日期格")
+                new DensityPreviewRow("Calendar", "日期格、导航与整体尺寸")
             };
             BuildTokenSections();
         }

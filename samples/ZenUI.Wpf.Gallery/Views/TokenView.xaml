@@ -7,7 +7,7 @@
     <ScrollViewer Padding="40" HorizontalContentAlignment="Stretch" VerticalScrollBarVisibility="Auto">
         <StackPanel>
             <gallery:PageHeader
-                Description="查看当前主题与密度下解析后的公开 Token，并实时检查常用控件尺寸。"
+                Description="查看六层公开 Token 在当前主题与密度下的解析值，并实时检查控件的颜色、尺寸与间距。"
                 Title="设计 Token 与 Density" />
 
             <Border Style="{StaticResource GalleryCardStyle}">
@@ -16,11 +16,17 @@
                     <TextBlock
                         Margin="0,0,0,18"
                         Style="{StaticResource GallerySupportingTextStyle}"
-                        Text="使用窗口左下角切换紧凑、标准和宽松密度；下面的控件及 Token 值会立即更新。" />
+                        Text="使用窗口左下角切换浅色、深色、高对比度主题，或紧凑、标准、宽松密度；下面的控件及 Token 值会立即更新。" />
                     <UniformGrid Columns="2">
                         <StackPanel Margin="0,0,14,0">
                             <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="输入与操作" />
                             <zen:ZenTextBox Margin="0,0,0,10" Watermark="输入控件高度与内边距" />
+                            <zen:ZenNumberBox
+                                Margin="0,0,0,10"
+                                Maximum="10"
+                                Minimum="0"
+                                Step="0.5"
+                                Value="2.5" />
                             <zen:ZenComboBox Margin="0,0,0,10" SelectedIndex="0">
                                 <ComboBoxItem Content="下拉弹层尺寸" />
                                 <ComboBoxItem Content="第二项" />
@@ -41,20 +47,47 @@
                     <TextBlock
                         Margin="0,22,0,10"
                         Style="{StaticResource GalleryFieldLabelStyle}"
-                        Text="DataGrid 表头、行高与单元格内边距" />
-                    <zen:ZenDataGrid
-                        x:Name="DensityDataGrid"
-                        Height="150"
-                        AutoGenerateColumns="False"
-                        IsReadOnly="True">
-                        <DataGrid.Columns>
-                            <DataGridTextColumn Width="*" Binding="{Binding Name}" Header="Token 范围" />
-                            <DataGridTextColumn Width="180" Binding="{Binding Description}" Header="当前行为" />
-                        </DataGrid.Columns>
-                    </zen:ZenDataGrid>
+                        Text="复合控件" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="28" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel>
+                            <TextBlock
+                                Margin="0,0,0,10"
+                                Style="{StaticResource GallerySupportingTextStyle}"
+                                Text="DataGrid 的表头、行高与单元格内边距会随 Density 更新。" />
+                            <zen:ZenDataGrid
+                                x:Name="DensityDataGrid"
+                                Height="220"
+                                AutoGenerateColumns="False"
+                                IsReadOnly="True">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Width="*" Binding="{Binding Name}" Header="Token 范围" />
+                                    <DataGridTextColumn Width="210" Binding="{Binding Description}" Header="当前行为" />
+                                </DataGrid.Columns>
+                            </zen:ZenDataGrid>
+                        </StackPanel>
+                        <StackPanel Grid.Column="2">
+                            <TextBlock
+                                Margin="0,0,0,10"
+                                Style="{StaticResource GallerySupportingTextStyle}"
+                                Text="Calendar 的整体、日期格与导航按钮尺寸会同步变化。" />
+                            <zen:ZenCalendar
+                                HorizontalAlignment="Left"
+                                DisplayDate="2026-07-01"
+                                SelectedDate="2026-07-27" />
+                        </StackPanel>
+                    </Grid>
                 </StackPanel>
             </Border>
 
+            <TextBlock
+                Margin="0,4,0,18"
+                Style="{StaticResource GallerySupportingTextStyle}"
+                Text="以下目录按语义颜色、组件颜色、排版、基础尺寸、组件尺寸和交互状态分层列出；显示的是当前资源树最终解析后的值。" />
             <StackPanel x:Name="TokenSections" />
         </StackPanel>
     </ScrollViewer>
