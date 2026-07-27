@@ -64,6 +64,8 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.IsNull(textBox.LeadingContentTemplate);
             Assert.IsNull(textBox.TrailingContent);
             Assert.IsNull(textBox.TrailingContentTemplate);
+            Assert.AreEqual(18d, checkBox.IndicatorSize);
+            Assert.AreEqual(18d, radioButton.IndicatorSize);
             Assert.AreEqual(string.Empty, comboBox.Watermark);
             Assert.AreEqual(new CornerRadius(8), listBox.CornerRadius);
             Assert.AreEqual(string.Empty, datePicker.Watermark);
@@ -238,6 +240,53 @@ namespace ZenUI.Wpf.Tests.Controls
                 {
                     Assert.AreEqual(15d, control.FontSize, $"{control.GetType().Name} 未响应正文字号覆盖。");
                 }
+            }
+            finally
+            {
+                window.Close();
+            }
+        }
+
+        [TestMethod]
+        public void SelectionControlsApplyCustomIndicatorSize()
+        {
+            var checkBox = new ZenCheckBox
+            {
+                Content = "CheckBox",
+                IndicatorSize = 28d
+            };
+            var radioButton = new ZenRadioButton
+            {
+                Content = "RadioButton",
+                IndicatorSize = 30d
+            };
+            var panel = new StackPanel();
+            panel.Children.Add(checkBox);
+            panel.Children.Add(radioButton);
+            var window = CreateTestWindow(panel, 300, 120);
+            window.Resources.MergedDictionaries.Add(new ResourceDictionary
+            {
+                Source = new Uri(
+                    "/ZenUI.Wpf;component/Themes/Generic.xaml",
+                    UriKind.Relative)
+            });
+
+            try
+            {
+                window.Show();
+                window.UpdateLayout();
+
+                var checkBoxIndicator =
+                    checkBox.Template.FindName("IndicatorHost", checkBox) as FrameworkElement;
+                var radioButtonIndicator =
+                    radioButton.Template.FindName("IndicatorHost", radioButton) as FrameworkElement;
+
+                Assert.IsNotNull(checkBoxIndicator);
+                Assert.IsNotNull(radioButtonIndicator);
+                Assert.AreEqual(28d, checkBoxIndicator.ActualWidth, 0.1d);
+                Assert.AreEqual(28d, checkBoxIndicator.ActualHeight, 0.1d);
+                Assert.AreEqual(30d, radioButtonIndicator.ActualWidth, 0.1d);
+                Assert.AreEqual(30d, radioButtonIndicator.ActualHeight, 0.1d);
             }
             finally
             {

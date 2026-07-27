@@ -35,27 +35,33 @@
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <Border
-                            x:Name="Box"
-                            Width="18"
-                            Height="18"
-                            VerticalAlignment="Center"
-                            Background="{TemplateBinding Background}"
-                            BorderBrush="{TemplateBinding BorderBrush}"
-                            BorderThickness="{TemplateBinding BorderThickness}"
-                            CornerRadius="4">
-                            <Path
-                                x:Name="CheckMark"
-                                Width="10"
-                                Height="7"
-                                Data="M 1,3.5 L 4,6 L 9,1"
-                                Stroke="{TemplateBinding GlyphBrush}"
-                                StrokeEndLineCap="Round"
-                                StrokeLineJoin="Round"
-                                StrokeStartLineCap="Round"
-                                StrokeThickness="2"
-                                Visibility="Collapsed" />
-                        </Border>
+                        <Grid
+                            x:Name="IndicatorHost"
+                            Width="{TemplateBinding IndicatorSize}"
+                            Height="{TemplateBinding IndicatorSize}"
+                            VerticalAlignment="Center">
+                            <Border
+                                x:Name="Box"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="4" />
+                            <Viewbox Stretch="Uniform">
+                                <Grid Width="18" Height="18">
+                                    <Path
+                                        x:Name="CheckMark"
+                                        Width="10"
+                                        Height="7"
+                                        Data="M 1,3.5 L 4,6 L 9,1"
+                                        Stroke="{TemplateBinding GlyphBrush}"
+                                        StrokeEndLineCap="Round"
+                                        StrokeLineJoin="Round"
+                                        StrokeStartLineCap="Round"
+                                        StrokeThickness="2"
+                                        Visibility="Collapsed" />
+                                </Grid>
+                            </Viewbox>
+                        </Grid>
                         <ContentPresenter
                             Grid.Column="1"
                             Margin="8,0,0,0"
@@ -109,9 +115,22 @@
                             <ColumnDefinition Width="Auto" />
                             <ColumnDefinition Width="*" />
                         </Grid.ColumnDefinitions>
-                        <Grid Width="18" Height="18" VerticalAlignment="Center">
+                        <Grid
+                            x:Name="IndicatorHost"
+                            Width="{TemplateBinding IndicatorSize}"
+                            Height="{TemplateBinding IndicatorSize}"
+                            VerticalAlignment="Center">
                             <Ellipse x:Name="Ring" Fill="{TemplateBinding Background}" Stroke="{TemplateBinding BorderBrush}" StrokeThickness="1" />
-                            <Ellipse x:Name="Dot" Margin="5" Fill="{TemplateBinding AccentBrush}" Visibility="Collapsed" />
+                            <Viewbox Stretch="Uniform">
+                                <Grid Width="18" Height="18">
+                                    <Ellipse
+                                        x:Name="Dot"
+                                        Width="8"
+                                        Height="8"
+                                        Fill="{TemplateBinding AccentBrush}"
+                                        Visibility="Collapsed" />
+                                </Grid>
+                            </Viewbox>
                         </Grid>
                         <ContentPresenter Grid.Column="1" Margin="8,0,0,0" VerticalAlignment="Center" ContentSource="Content" RecognizesAccessKey="True" />
                     </Grid>
