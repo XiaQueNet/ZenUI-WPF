@@ -81,12 +81,13 @@
                         <Grid>
                             <Grid x:Name="HorizontalLayout">
                                 <Grid.ColumnDefinitions>
-                                    <ColumnDefinition Width="34" />
+                                    <ColumnDefinition Width="Auto" />
                                     <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="34" />
+                                    <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <RepeatButton
                                     x:Name="PART_DecreaseButton"
+                                    Width="{TemplateBinding SpinButtonWidth}"
                                     AutomationProperties.Name="减少"
                                     Style="{StaticResource ZenNumberBoxRepeatButtonStyle}"
                                     Tag="{StaticResource ZenNumberBoxLeftButtonCornerRadius}">
@@ -115,6 +116,7 @@
                                 <RepeatButton
                                     x:Name="PART_IncreaseButton"
                                     Grid.Column="2"
+                                    Width="{TemplateBinding SpinButtonWidth}"
                                     AutomationProperties.Name="增加"
                                     Style="{StaticResource ZenNumberBoxRepeatButtonStyle}"
                                     Tag="{StaticResource ZenNumberBoxRightButtonCornerRadius}">
@@ -135,7 +137,7 @@
                             <Grid x:Name="VerticalLayout" Visibility="Collapsed">
                                 <Grid.ColumnDefinitions>
                                     <ColumnDefinition Width="*" />
-                                    <ColumnDefinition Width="28" />
+                                    <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <TextBox
                                     x:Name="PART_VerticalTextBox"
@@ -149,7 +151,7 @@
                                         </Grid.RowDefinitions>
                                         <RepeatButton
                                             x:Name="PART_VerticalIncreaseButton"
-                                            Width="Auto"
+                                            Width="{TemplateBinding SpinButtonWidth}"
                                             AutomationProperties.Name="增加"
                                             Style="{StaticResource ZenNumberBoxRepeatButtonStyle}"
                                             Tag="{StaticResource ZenNumberBoxTopRightButtonCornerRadius}">
@@ -166,7 +168,7 @@
                                         <RepeatButton
                                             x:Name="PART_VerticalDecreaseButton"
                                             Grid.Row="1"
-                                            Width="Auto"
+                                            Width="{TemplateBinding SpinButtonWidth}"
                                             AutomationProperties.Name="减少"
                                             Style="{StaticResource ZenNumberBoxRepeatButtonStyle}"
                                             Tag="{StaticResource ZenNumberBoxBottomRightButtonCornerRadius}">

@@ -160,6 +160,29 @@ namespace ZenUI.Wpf.Controls
                 new FrameworkPropertyMetadata(NumberBoxButtonMode.Horizontal));
 
         /// <summary>
+        /// 获取或设置增减按钮的宽度。
+        /// </summary>
+        [Bindable(true)]
+        public double SpinButtonWidth
+        {
+            get { return (double)GetValue(SpinButtonWidthProperty); }
+            set { SetValue(SpinButtonWidthProperty, value); }
+        }
+
+        /// <summary>
+        /// 标识 <see cref="SpinButtonWidth"/> 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty SpinButtonWidthProperty =
+            DependencyProperty.Register(
+                nameof(SpinButtonWidth),
+                typeof(double),
+                SelfType,
+                new FrameworkPropertyMetadata(
+                    34d,
+                    FrameworkPropertyMetadataOptions.AffectsMeasure),
+                IsValidSpinButtonWidth);
+
+        /// <summary>
         /// 获取或设置控件是否禁止直接编辑文本。增减按钮仍然可用。
         /// </summary>
         [Bindable(true)]
@@ -197,6 +220,14 @@ namespace ZenUI.Wpf.Controls
                 RoutingStrategy.Bubble,
                 typeof(RoutedPropertyChangedEventHandler<decimal>),
                 SelfType);
+
+        private static bool IsValidSpinButtonWidth(object value)
+        {
+            var width = (double)value;
+            return !double.IsNaN(width) &&
+                !double.IsInfinity(width) &&
+                width >= 0d;
+        }
 
         /// <inheritdoc />
         public override void OnApplyTemplate()

@@ -20,6 +20,7 @@
                         HorizontalAlignment="Left"
                         Maximum="20"
                         Minimum="0"
+                        SpinButtonWidth="42"
                         Step="1"
                         Value="5" />
                 </StackPanel>
@@ -38,6 +39,7 @@
                         ButtonMode="Vertical"
                         Maximum="10"
                         Minimum="0"
+                        SpinButtonWidth="32"
                         Step="0.5"
                         Value="2.5" />
                 </StackPanel>

@@ -4,6 +4,10 @@
 
 ## Unreleased
 
+### Added
+
+- `ZenNumberBox` 增加 `SpinButtonWidth` 属性，用于统一设置增减按钮宽度。
+
 ## [0.1.0-preview.4] - 2026-07-27
 
 ### Added

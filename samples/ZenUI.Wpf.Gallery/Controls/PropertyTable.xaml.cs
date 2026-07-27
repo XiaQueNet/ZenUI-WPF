@@ -58,6 +58,7 @@ namespace ZenUI.Wpf.Gallery.Controls
                 ["ZenNumberBox.Maximum"] = "允许输入的最大值。",
                 ["ZenNumberBox.Step"] = "单次增加或减少的步长，必须大于零。",
                 ["ZenNumberBox.ButtonMode"] = "增减按钮的布局方式。",
+                ["ZenNumberBox.SpinButtonWidth"] = "增减按钮的宽度。",
                 ["ZenNumberBox.IsReadOnly"] = "是否禁止直接编辑文本；增减按钮仍然可用。",
                 ["ZenPasswordBox.IsPasswordRevealEnabled"] = "是否显示密码明文切换按钮。",
                 ["ZenPasswordBox.IsPasswordRevealed"] = "当前是否以明文显示密码。",

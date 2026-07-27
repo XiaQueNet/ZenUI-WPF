@@ -25,6 +25,7 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.AreEqual(0m, numberBox.Value);
             Assert.AreEqual(1m, numberBox.Step);
             Assert.AreEqual(NumberBoxButtonMode.Horizontal, numberBox.ButtonMode);
+            Assert.AreEqual(34d, numberBox.SpinButtonWidth);
         }
 
         [TestMethod]
@@ -71,6 +72,8 @@ namespace ZenUI.Wpf.Tests.Controls
                 var decrease = numberBox.Template.FindName("PART_DecreaseButton", numberBox) as RepeatButton;
                 Assert.IsNotNull(increase);
                 Assert.IsNotNull(decrease);
+                Assert.AreEqual(34d, increase.Width);
+                Assert.AreEqual(34d, decrease.Width);
                 increase.ApplyTemplate();
                 decrease.ApplyTemplate();
                 var increaseBackground = increase.Template.FindName("ButtonBackground", increase) as Border;
@@ -101,6 +104,7 @@ namespace ZenUI.Wpf.Tests.Controls
             var numberBox = new ZenNumberBox
             {
                 ButtonMode = NumberBoxButtonMode.Vertical,
+                SpinButtonWidth = 40d,
                 Step = 2m,
                 Value = 4m
             };
@@ -119,6 +123,8 @@ namespace ZenUI.Wpf.Tests.Controls
                 Assert.AreEqual(Visibility.Visible, verticalLayout.Visibility);
                 Assert.IsNotNull(increase);
                 Assert.IsNotNull(decrease);
+                Assert.AreEqual(40d, increase.Width);
+                Assert.AreEqual(40d, decrease.Width);
                 Assert.IsNotNull(divider);
                 Assert.AreEqual(1d, divider.Height);
                 Assert.IsInstanceOfType<Path>(((Viewbox)increase.Content).Child);
@@ -147,6 +153,15 @@ namespace ZenUI.Wpf.Tests.Controls
         public void InvalidStepIsRejected()
         {
             Assert.ThrowsExactly<ArgumentException>(() => new ZenNumberBox { Step = 0m });
+        }
+
+        [TestMethod]
+        public void InvalidSpinButtonWidthIsRejected()
+        {
+            Assert.ThrowsExactly<ArgumentException>(
+                () => new ZenNumberBox { SpinButtonWidth = double.NaN });
+            Assert.ThrowsExactly<ArgumentException>(
+                () => new ZenNumberBox { SpinButtonWidth = -1d });
         }
 
         private static Window CreateWindow(UIElement content)
