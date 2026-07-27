@@ -46,10 +46,10 @@
     </Style>
 
     <Style x:Key="ZenCalendarNavigationButtonStyle" TargetType="{x:Type Button}">
-        <Setter Property="Width" Value="{Binding NavigationButtonSize, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenCalendar}}}" />
-        <Setter Property="Height" Value="{Binding NavigationButtonSize, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenCalendar}}}" />
+        <Setter Property="Width" Value="{Binding Path=(zen:ZenCalendar.NavigationButtonSize), RelativeSource={RelativeSource AncestorType={x:Type Calendar}}}" />
+        <Setter Property="Height" Value="{Binding Path=(zen:ZenCalendar.NavigationButtonSize), RelativeSource={RelativeSource AncestorType={x:Type Calendar}}}" />
         <Setter Property="Padding" Value="0" />
-        <Setter Property="FontSize" Value="{Binding FontSize, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenCalendar}}}" />
+        <Setter Property="FontSize" Value="{Binding FontSize, RelativeSource={RelativeSource AncestorType={x:Type Calendar}}}" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{DynamicResource ZenTextSecondaryBrush}" />
         <Setter Property="BorderThickness" Value="0" />
@@ -92,11 +92,11 @@
     </Style>
 
     <Style x:Key="ZenCalendarDayButtonStyle" TargetType="{x:Type CalendarDayButton}">
-        <Setter Property="Width" Value="{Binding DayButtonWidth, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenCalendar}}}" />
-        <Setter Property="Height" Value="{Binding DayButtonHeight, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenCalendar}}}" />
+        <Setter Property="Width" Value="{Binding Path=(zen:ZenCalendar.DayButtonWidth), RelativeSource={RelativeSource AncestorType={x:Type Calendar}}}" />
+        <Setter Property="Height" Value="{Binding Path=(zen:ZenCalendar.DayButtonHeight), RelativeSource={RelativeSource AncestorType={x:Type Calendar}}}" />
         <Setter Property="Margin" Value="1" />
         <Setter Property="Padding" Value="0" />
-        <Setter Property="FontSize" Value="{Binding FontSize, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenCalendar}}}" />
+        <Setter Property="FontSize" Value="{Binding FontSize, RelativeSource={RelativeSource AncestorType={x:Type Calendar}}}" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Background" Value="Transparent" />
@@ -106,14 +106,21 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type CalendarDayButton}">
-                    <Border
-                        x:Name="DayBorder"
-                        Background="{TemplateBinding Background}"
-                        BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="{TemplateBinding BorderThickness}"
-                        CornerRadius="5">
-                        <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
-                    </Border>
+                    <Grid>
+                        <Border
+                            x:Name="BlackoutBackground"
+                            Background="{DynamicResource ZenSurfaceDisabledBrush}"
+                            CornerRadius="5"
+                            Opacity="0" />
+                        <Border
+                            x:Name="DayBorder"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="5">
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                        </Border>
+                    </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsToday" Value="True">
                             <Setter TargetName="DayBorder" Property="BorderBrush" Value="{DynamicResource ZenPrimaryBrush}" />
@@ -130,10 +137,15 @@
                             <Setter Property="Foreground" Value="{DynamicResource ZenOnAccentBrush}" />
                         </Trigger>
                         <Trigger Property="IsInactive" Value="True">
-                            <Setter Property="Opacity" Value="0.42" />
+                            <Setter Property="Foreground" Value="{DynamicResource ZenTextPlaceholderBrush}" />
+                            <Setter Property="Opacity" Value="0.72" />
                         </Trigger>
                         <Trigger Property="IsBlackedOut" Value="True">
-                            <Setter Property="Opacity" Value="0.3" />
+                            <Setter TargetName="BlackoutBackground" Property="Opacity" Value="1" />
+                            <Setter Property="Foreground" Value="{DynamicResource ZenTextPlaceholderBrush}" />
+                            <Setter Property="Focusable" Value="False" />
+                            <Setter Property="IsHitTestVisible" Value="False" />
+                            <Setter Property="Opacity" Value="1" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Opacity" Value="0.3" />
@@ -150,8 +162,8 @@
 
     <Style x:Key="ZenCalendarButtonStyle" TargetType="{x:Type CalendarButton}">
         <Setter Property="Margin" Value="2" />
-        <Setter Property="Padding" Value="{Binding ButtonPadding, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenCalendar}}}" />
-        <Setter Property="FontSize" Value="{Binding FontSize, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenCalendar}}}" />
+        <Setter Property="Padding" Value="{Binding Path=(zen:ZenCalendar.ButtonPadding), RelativeSource={RelativeSource AncestorType={x:Type Calendar}}}" />
+        <Setter Property="FontSize" Value="{Binding FontSize, RelativeSource={RelativeSource AncestorType={x:Type Calendar}}}" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
         <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="Background" Value="Transparent" />
@@ -188,9 +200,19 @@
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type CalendarItem}">
+                    <ControlTemplate.Resources>
+                        <DataTemplate x:Key="{x:Static CalendarItem.DayTitleTemplateResourceKey}">
+                            <TextBlock
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                FontSize="13"
+                                Foreground="{DynamicResource ZenTextSecondaryBrush}"
+                                Text="{Binding}" />
+                        </DataTemplate>
+                    </ControlTemplate.Resources>
                     <Grid x:Name="PART_Root">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="48" />
+                            <RowDefinition Height="44" />
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
                         <Grid>
@@ -243,7 +265,7 @@
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="32" />
+                                <RowDefinition Height="28" />
                                 <RowDefinition />
                                 <RowDefinition />
                                 <RowDefinition />
@@ -321,6 +343,9 @@
         <Setter Property="MinHeight" Value="{DynamicResource ZenInputControlMinHeight}" />
         <Setter Property="FontSize" Value="{DynamicResource ZenFontSizeBody}" />
         <Setter Property="CornerRadius" Value="{DynamicResource ZenInputControlCornerRadius}" />
+        <Setter Property="CalendarPopupWidth" Value="{DynamicResource ZenCalendarPopupWidth}" />
+        <Setter Property="CalendarPopupHeight" Value="{DynamicResource ZenCalendarPopupHeight}" />
+        <Setter Property="CalendarFontSize" Value="{DynamicResource ZenFontSizeSubtitle}" />
         <Setter Property="CalendarDayButtonWidth" Value="{DynamicResource ZenCalendarDayButtonWidth}" />
         <Setter Property="CalendarDayButtonHeight" Value="{DynamicResource ZenCalendarDayButtonHeight}" />
         <Setter Property="CalendarButtonPadding" Value="{DynamicResource ZenCalendarButtonPadding}" />
@@ -394,23 +419,7 @@
                             IsOpen="{TemplateBinding IsDropDownOpen}"
                             Placement="Bottom"
                             PopupAnimation="Fade"
-                            StaysOpen="False">
-                            <zen:ZenCalendar
-                                x:Name="PART_Calendar"
-                                Margin="0,4,0,0"
-                                ButtonPadding="{Binding CalendarButtonPadding, RelativeSource={RelativeSource TemplatedParent}}"
-                                DayButtonHeight="{Binding CalendarDayButtonHeight, RelativeSource={RelativeSource TemplatedParent}}"
-                                DayButtonWidth="{Binding CalendarDayButtonWidth, RelativeSource={RelativeSource TemplatedParent}}"
-                                DisplayDateEnd="{TemplateBinding DisplayDateEnd}"
-                                DisplayDateStart="{TemplateBinding DisplayDateStart}"
-                                FirstDayOfWeek="{TemplateBinding FirstDayOfWeek}"
-                                FlowDirection="{TemplateBinding FlowDirection}"
-                                FontSize="{Binding FontSize, RelativeSource={RelativeSource TemplatedParent}}"
-                                IsTodayHighlighted="{TemplateBinding IsTodayHighlighted}"
-                                NavigationButtonSize="{Binding CalendarNavigationButtonSize, RelativeSource={RelativeSource TemplatedParent}}"
-                                SelectedDate="{Binding SelectedDate, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
-                                Style="{TemplateBinding CalendarStyle}" />
-                        </Popup>
+                            StaysOpen="False" />
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsTextInputEnabled" Value="False">

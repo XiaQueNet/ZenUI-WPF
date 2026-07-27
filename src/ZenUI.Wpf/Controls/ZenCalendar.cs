@@ -4,58 +4,74 @@ using System.Windows.Controls;
 namespace ZenUI.Wpf.Controls
 {
     /// <summary>
-    /// 在日期选择器弹层内传递日历尺寸，避免依赖跨 Popup 的资源查找。
+    /// 在日期选择器创建的原生 Calendar 上传递尺寸，避免依赖跨 Popup 的资源查找。
     /// </summary>
-    internal sealed class ZenCalendar : Calendar
+    internal static class ZenCalendar
     {
-        public double DayButtonWidth
+        public static double GetDayButtonWidth(DependencyObject element)
         {
-            get { return (double)GetValue(DayButtonWidthProperty); }
-            set { SetValue(DayButtonWidthProperty, value); }
+            return (double)element.GetValue(DayButtonWidthProperty);
+        }
+
+        public static void SetDayButtonWidth(DependencyObject element, double value)
+        {
+            element.SetValue(DayButtonWidthProperty, value);
         }
 
         public static readonly DependencyProperty DayButtonWidthProperty =
-            DependencyProperty.Register(
-                nameof(DayButtonWidth),
+            DependencyProperty.RegisterAttached(
+                "DayButtonWidth",
                 typeof(double),
                 typeof(ZenCalendar),
                 new FrameworkPropertyMetadata(48d));
 
-        public double DayButtonHeight
+        public static double GetDayButtonHeight(DependencyObject element)
         {
-            get { return (double)GetValue(DayButtonHeightProperty); }
-            set { SetValue(DayButtonHeightProperty, value); }
+            return (double)element.GetValue(DayButtonHeightProperty);
+        }
+
+        public static void SetDayButtonHeight(DependencyObject element, double value)
+        {
+            element.SetValue(DayButtonHeightProperty, value);
         }
 
         public static readonly DependencyProperty DayButtonHeightProperty =
-            DependencyProperty.Register(
-                nameof(DayButtonHeight),
+            DependencyProperty.RegisterAttached(
+                "DayButtonHeight",
                 typeof(double),
                 typeof(ZenCalendar),
                 new FrameworkPropertyMetadata(44d));
 
-        public Thickness ButtonPadding
+        public static Thickness GetButtonPadding(DependencyObject element)
         {
-            get { return (Thickness)GetValue(ButtonPaddingProperty); }
-            set { SetValue(ButtonPaddingProperty, value); }
+            return (Thickness)element.GetValue(ButtonPaddingProperty);
+        }
+
+        public static void SetButtonPadding(DependencyObject element, Thickness value)
+        {
+            element.SetValue(ButtonPaddingProperty, value);
         }
 
         public static readonly DependencyProperty ButtonPaddingProperty =
-            DependencyProperty.Register(
-                nameof(ButtonPadding),
+            DependencyProperty.RegisterAttached(
+                "ButtonPadding",
                 typeof(Thickness),
                 typeof(ZenCalendar),
                 new FrameworkPropertyMetadata(new Thickness(12, 16, 12, 16)));
 
-        public double NavigationButtonSize
+        public static double GetNavigationButtonSize(DependencyObject element)
         {
-            get { return (double)GetValue(NavigationButtonSizeProperty); }
-            set { SetValue(NavigationButtonSizeProperty, value); }
+            return (double)element.GetValue(NavigationButtonSizeProperty);
+        }
+
+        public static void SetNavigationButtonSize(DependencyObject element, double value)
+        {
+            element.SetValue(NavigationButtonSizeProperty, value);
         }
 
         public static readonly DependencyProperty NavigationButtonSizeProperty =
-            DependencyProperty.Register(
-                nameof(NavigationButtonSize),
+            DependencyProperty.RegisterAttached(
+                "NavigationButtonSize",
                 typeof(double),
                 typeof(ZenCalendar),
                 new FrameworkPropertyMetadata(40d));

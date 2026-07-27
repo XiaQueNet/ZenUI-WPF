@@ -36,6 +36,8 @@
     <Thickness x:Key="ZenDataGridCellValidationBorderThickness">2</Thickness>
 
     <!-- 日历 -->
+    <sys:Double x:Key="ZenCalendarPopupWidth">368</sys:Double>
+    <sys:Double x:Key="ZenCalendarPopupHeight">372</sys:Double>
     <sys:Double x:Key="ZenCalendarDayButtonWidth">48</sys:Double>
     <sys:Double x:Key="ZenCalendarDayButtonHeight">44</sys:Double>
     <Thickness x:Key="ZenCalendarButtonPadding">12,16</Thickness>

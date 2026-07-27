@@ -45,11 +45,39 @@ namespace ZenUI.Wpf.Tests.Controls
                 var popup = datePicker.Template.FindName("PART_Popup", datePicker) as Popup;
                 Assert.IsNotNull(popup);
                 Assert.IsTrue(popup.IsOpen);
-                Assert.IsInstanceOfType<Calendar>(popup.Child);
-                var calendar = (Calendar)popup.Child;
+                var popupContainer = popup.Child as FrameworkElement;
+                Assert.IsNotNull(popupContainer);
+                var calendar = GetDatePickerCalendar(datePicker);
+                Assert.IsNotNull(calendar);
                 Assert.IsNotNull(calendar.Style);
+                Assert.AreEqual(368d, datePicker.CalendarPopupWidth);
+                Assert.AreEqual(368d, popupContainer.Width);
+                Assert.AreEqual(368d, popupContainer.ActualWidth);
+                Assert.AreEqual(372d, popupContainer.ActualHeight);
+                window.Dispatcher.Invoke(DispatcherPriority.ContextIdle, new Action(() => { }));
+                window.UpdateLayout();
+                Assert.AreEqual(16d, calendar.FontSize);
                 Assert.AreEqual(datePicker.SelectedDate, calendar.SelectedDate);
-                Assert.IsNotNull(calendar.Template.FindName("PART_CalendarItem", calendar));
+                calendar.ApplyTemplate();
+                var calendarItem =
+                    calendar.Template.FindName("PART_CalendarItem", calendar) as CalendarItem;
+                Assert.IsNotNull(calendarItem);
+                calendarItem.ApplyTemplate();
+                window.UpdateLayout();
+                var root = calendarItem.Template.FindName("PART_Root", calendarItem) as Grid;
+                var monthView =
+                    calendarItem.Template.FindName("PART_MonthView", calendarItem) as Grid;
+                Assert.IsNotNull(root);
+                Assert.IsNotNull(monthView);
+                Assert.AreEqual(44d, root.RowDefinitions[0].Height.Value);
+                Assert.AreEqual(28d, monthView.RowDefinitions[0].Height.Value);
+                Assert.AreEqual(
+                    7,
+                    monthView.Children
+                        .OfType<FrameworkElement>()
+                        .Count(element =>
+                            Grid.GetRow(element) == 0 &&
+                            element.Visibility == Visibility.Visible));
             }
             finally
             {
@@ -90,12 +118,12 @@ namespace ZenUI.Wpf.Tests.Controls
                 datePicker.IsDropDownOpen = true;
                 window.UpdateLayout();
 
-                var calendar = datePicker.Template.FindName("PART_Calendar", datePicker) as Calendar;
+                var calendar = GetDatePickerCalendar(datePicker);
                 Assert.IsNotNull(calendar);
                 Assert.AreSame(calendarStyle, calendar.Style);
                 Assert.AreSame(calendarBackground, calendar.Background);
                 Assert.AreEqual(14d, datePicker.FontSize);
-                Assert.AreEqual(datePicker.FontSize, calendar.FontSize);
+                Assert.AreEqual(datePicker.CalendarFontSize, calendar.FontSize);
 
                 calendar.ApplyTemplate();
                 var calendarItem = calendar.Template.FindName("PART_CalendarItem", calendar) as CalendarItem;
@@ -138,10 +166,10 @@ namespace ZenUI.Wpf.Tests.Controls
                 datePicker.IsDropDownOpen = true;
                 window.UpdateLayout();
 
-                var calendar = datePicker.Template.FindName("PART_Calendar", datePicker) as Calendar;
+                var calendar = GetDatePickerCalendar(datePicker);
                 Assert.IsNotNull(calendar);
-                Assert.AreEqual(start, calendar.DisplayDateStart);
-                Assert.AreEqual(end, calendar.DisplayDateEnd);
+                Assert.AreEqual(new DateTime(2026, 1, 1), calendar.DisplayDateStart);
+                Assert.AreEqual(new DateTime(2026, 12, 31), calendar.DisplayDateEnd);
                 Assert.AreEqual(DayOfWeek.Monday, calendar.FirstDayOfWeek);
                 Assert.IsFalse(calendar.IsTodayHighlighted);
                 Assert.AreEqual(selected, calendar.SelectedDate);
@@ -149,6 +177,84 @@ namespace ZenUI.Wpf.Tests.Controls
                 var changed = new DateTime(2026, 8, 8);
                 calendar.SelectedDate = changed;
                 Assert.AreEqual(changed, datePicker.SelectedDate);
+            }
+            finally
+            {
+                datePicker.IsDropDownOpen = false;
+                window.Dispatcher.Invoke(DispatcherPriority.ContextIdle, new Action(() => { }));
+                window.Close();
+            }
+        }
+
+        [TestMethod]
+        public void DatePickerCalendarShowsConstrainedDatesAsDisabled()
+        {
+            var datePicker = new ZenDatePicker
+            {
+                DisplayDate = new DateTime(2026, 7, 15),
+                DisplayDateStart = new DateTime(2026, 7, 10),
+                DisplayDateEnd = new DateTime(2026, 8, 20)
+            };
+            var window = CreateTestWindow(datePicker, 420, 440);
+
+            try
+            {
+                window.Show();
+                datePicker.IsDropDownOpen = true;
+                window.UpdateLayout();
+
+                var calendar = GetDatePickerCalendar(datePicker);
+                Assert.IsNotNull(calendar);
+                calendar.ApplyTemplate();
+                var calendarItem = calendar.Template.FindName("PART_CalendarItem", calendar) as CalendarItem;
+                Assert.IsNotNull(calendarItem);
+                calendarItem.ApplyTemplate();
+                window.UpdateLayout();
+
+                var monthView = calendarItem.Template.FindName("PART_MonthView", calendarItem) as Grid;
+                Assert.IsNotNull(monthView);
+                var buttons = monthView.Children.OfType<CalendarDayButton>().ToList();
+                var beforeStart = buttons.Single(
+                    button => button.DataContext is DateTime date && date == new DateTime(2026, 7, 9));
+                var nextMonth = buttons.Single(
+                    button => button.DataContext is DateTime date && date == new DateTime(2026, 8, 1));
+                var selectable = buttons.Single(
+                    button => button.DataContext is DateTime date && date == new DateTime(2026, 7, 15));
+
+                beforeStart.ApplyTemplate();
+                nextMonth.ApplyTemplate();
+                var disabledBorder = beforeStart.Template.FindName("DayBorder", beforeStart) as Border;
+                var nextMonthBorder = nextMonth.Template.FindName("DayBorder", nextMonth) as Border;
+                var disabledBackground =
+                    beforeStart.Template.FindName("BlackoutBackground", beforeStart) as Border;
+                var nextMonthBackground =
+                    nextMonth.Template.FindName("BlackoutBackground", nextMonth) as Border;
+                Assert.IsNotNull(disabledBorder);
+                Assert.IsNotNull(nextMonthBorder);
+                Assert.IsNotNull(disabledBackground);
+                Assert.IsNotNull(nextMonthBackground);
+                Assert.AreEqual(Visibility.Visible, beforeStart.Visibility);
+                Assert.IsTrue(beforeStart.IsBlackedOut);
+                Assert.IsFalse(beforeStart.Focusable);
+                Assert.IsFalse(beforeStart.IsHitTestVisible);
+                Assert.AreEqual(Visibility.Visible, nextMonth.Visibility);
+                Assert.IsTrue(nextMonth.IsInactive);
+                Assert.IsFalse(nextMonth.IsBlackedOut);
+                Assert.IsTrue(nextMonth.IsHitTestVisible);
+                Assert.AreEqual(1d, disabledBackground.Opacity);
+                Assert.AreEqual(0d, nextMonthBackground.Opacity);
+                Assert.AreEqual(1d, beforeStart.Opacity);
+                Assert.AreEqual(0.72d, nextMonth.Opacity);
+                Assert.IsFalse(selectable.IsBlackedOut);
+                Assert.IsTrue(selectable.IsHitTestVisible);
+
+                calendar.DisplayDate = new DateTime(2026, 8, 15);
+                window.UpdateLayout();
+                var afterEnd = monthView.Children.OfType<CalendarDayButton>().Single(
+                    button => button.DataContext is DateTime date && date == new DateTime(2026, 8, 21));
+                Assert.AreEqual(Visibility.Visible, afterEnd.Visibility);
+                Assert.IsTrue(afterEnd.IsBlackedOut);
+                Assert.IsFalse(afterEnd.IsHitTestVisible);
             }
             finally
             {
@@ -170,7 +276,7 @@ namespace ZenUI.Wpf.Tests.Controls
                 datePicker.IsDropDownOpen = true;
                 window.UpdateLayout();
 
-                var calendar = datePicker.Template.FindName("PART_Calendar", datePicker) as Calendar;
+                var calendar = GetDatePickerCalendar(datePicker);
                 Assert.IsNotNull(calendar);
                 calendar.ApplyTemplate();
                 window.UpdateLayout();

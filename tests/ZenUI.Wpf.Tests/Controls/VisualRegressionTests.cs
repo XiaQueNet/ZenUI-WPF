@@ -129,7 +129,7 @@ namespace ZenUI.Wpf.Tests.Controls
                         window.Dispatcher.Invoke(DispatcherPriority.ContextIdle, new Action(() => { }));
                         window.UpdateLayout();
 
-                        var calendar = datePicker.Template.FindName("PART_Calendar", datePicker) as Calendar;
+                        var calendar = ControlTestHelper.GetDatePickerCalendar(datePicker);
                         Assert.IsNotNull(calendar);
                         calendar.ApplyTemplate();
                         var calendarItem =

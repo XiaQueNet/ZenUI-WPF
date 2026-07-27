@@ -98,7 +98,7 @@ Density 会更新输入控件、Button、ListBox、ScrollBar、ComboBox Popup、
 | 主色与交互色 | `ZenPrimaryBrush`、`ZenPrimaryHoverBrush`、`ZenPrimaryPressedBrush` |
 | 输入控件高度与内边距 | `ZenInputControlMinHeight`、`ZenInputControlPadding` |
 | DataGrid 表头、行和单元格 | `ZenDataGridColumnHeaderHeight`、`ZenDataGridRowMinHeight`、`ZenDataGridCellPadding` |
-| Calendar 日期格与导航 | `ZenCalendarDayButtonWidth`、`ZenCalendarDayButtonHeight`、`ZenCalendarNavigationButtonSize` |
+| Calendar 弹层、日期格与导航 | `ZenCalendarPopupWidth`、`ZenCalendarPopupHeight`、`ZenCalendarDayButtonWidth`、`ZenCalendarDayButtonHeight`、`ZenCalendarNavigationButtonSize` |
 | Switch 与 Slider | `ZenSwitchWidth`、`ZenSwitchHeight`、`ZenSliderThumbSize`、`ZenSliderTrackThickness` |
 | Alert 内边距 | `ZenAlertPadding` |
 
@@ -128,7 +128,7 @@ DatePicker 的 Calendar 位于独立 Popup 中。颜色与 Density 尺寸由 `Ze
 <zen:ZenDatePicker CalendarStyle="{StaticResource AppCalendarStyle}" />
 ```
 
-单个 DatePicker 也可以通过 `CalendarDayButtonWidth`、`CalendarDayButtonHeight`、`CalendarButtonPadding` 和 `CalendarNavigationButtonSize` 覆盖默认 Density 结果。
+单个 DatePicker 也可以通过 `CalendarPopupWidth`、`CalendarPopupHeight`、`CalendarFontSize`、`CalendarDayButtonWidth`、`CalendarDayButtonHeight`、`CalendarButtonPadding` 和 `CalendarNavigationButtonSize` 覆盖默认结果。
 
 ## 从硬编码样式迁移
 

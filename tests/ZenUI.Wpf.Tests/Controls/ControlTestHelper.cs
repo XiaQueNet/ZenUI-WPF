@@ -74,6 +74,12 @@ namespace ZenUI.Wpf.Tests.Controls
             };
         }
 
+        internal static Calendar GetDatePickerCalendar(ZenDatePicker datePicker)
+        {
+            var popup = datePicker.Template.FindName("PART_Popup", datePicker) as Popup;
+            return popup?.Child as Calendar;
+        }
+
         internal static void AssertScrollBarMetrics(
             ScrollBar scrollBar,
             double expectedTrackThickness,

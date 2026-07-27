@@ -169,10 +169,13 @@ namespace ZenUI.Wpf.Tests.Controls
                     .FirstOrDefault(header => header.Column != null);
                 var row = dataGrid.ItemContainerGenerator.ContainerFromIndex(0) as DataGridRow;
                 var cell = FindVisualDescendant<DataGridCell>(row);
-                var calendar = datePicker.Template.FindName("PART_Calendar", datePicker) as Calendar;
+                var popup = datePicker.Template.FindName("PART_Popup", datePicker) as Popup;
+                var popupContainer = popup?.Child as FrameworkElement;
+                var calendar = GetDatePickerCalendar(datePicker);
                 Assert.IsNotNull(columnHeader);
                 Assert.IsNotNull(row);
                 Assert.IsNotNull(cell);
+                Assert.IsNotNull(popupContainer);
                 Assert.IsNotNull(calendar);
                 calendar.ApplyTemplate();
                 var calendarItem = calendar.Template.FindName("PART_CalendarItem", calendar) as CalendarItem;
@@ -202,10 +205,14 @@ namespace ZenUI.Wpf.Tests.Controls
                 Assert.AreEqual(44d, columnHeader.Height);
                 Assert.AreEqual(44d, row.MinHeight);
                 Assert.AreEqual(new Thickness(14, 0, 14, 0), cell.Padding);
+                Assert.AreEqual(368d, popupContainer.ActualWidth);
+                Assert.AreEqual(372d, popupContainer.ActualHeight);
+                Assert.AreEqual(16d, calendar.FontSize);
                 Assert.AreEqual(48d, dayButton.Width);
                 Assert.AreEqual(44d, dayButton.Height);
                 Assert.AreEqual(new Thickness(12, 16, 12, 16), monthButton.Padding);
                 Assert.AreEqual(40d, navigationButton.Width);
+                AssertCalendarDayButtonsFit(monthView);
 
                 ZenDensityManager.ApplyDensity(window.Resources, ZenDensity.Compact);
                 window.Dispatcher.Invoke(DispatcherPriority.ContextIdle, new Action(() => { }));
@@ -214,10 +221,13 @@ namespace ZenUI.Wpf.Tests.Controls
                 Assert.AreEqual(36d, columnHeader.Height);
                 Assert.AreEqual(36d, row.MinHeight);
                 Assert.AreEqual(new Thickness(10, 0, 10, 0), cell.Padding);
+                Assert.AreEqual(328d, popupContainer.ActualWidth);
+                Assert.AreEqual(348d, popupContainer.ActualHeight);
                 Assert.AreEqual(42d, dayButton.Width);
                 Assert.AreEqual(40d, dayButton.Height);
                 Assert.AreEqual(new Thickness(10, 13, 10, 13), monthButton.Padding);
                 Assert.AreEqual(36d, navigationButton.Width);
+                AssertCalendarDayButtonsFit(monthView);
 
                 ZenDensityManager.ApplyDensity(window.Resources, ZenDensity.Comfortable);
                 window.Dispatcher.Invoke(DispatcherPriority.ContextIdle, new Action(() => { }));
@@ -226,16 +236,39 @@ namespace ZenUI.Wpf.Tests.Controls
                 Assert.AreEqual(52d, columnHeader.Height);
                 Assert.AreEqual(52d, row.MinHeight);
                 Assert.AreEqual(new Thickness(18, 0, 18, 0), cell.Padding);
+                Assert.AreEqual(412d, popupContainer.ActualWidth);
+                Assert.AreEqual(408d, popupContainer.ActualHeight);
                 Assert.AreEqual(54d, dayButton.Width);
                 Assert.AreEqual(50d, dayButton.Height);
                 Assert.AreEqual(new Thickness(14, 18, 14, 18), monthButton.Padding);
                 Assert.AreEqual(44d, navigationButton.Width);
+                AssertCalendarDayButtonsFit(monthView);
             }
             finally
             {
                 datePicker.IsDropDownOpen = false;
                 window.Dispatcher.Invoke(DispatcherPriority.ContextIdle, new Action(() => { }));
                 window.Close();
+            }
+        }
+
+        private static void AssertCalendarDayButtonsFit(Grid monthView)
+        {
+            const double tolerance = 0.01d;
+
+            foreach (var button in monthView.Children
+                .OfType<CalendarDayButton>()
+                .Where(button => button.Visibility == Visibility.Visible))
+            {
+                var position = button.TranslatePoint(new Point(0, 0), monthView);
+                Assert.IsTrue(position.X >= -tolerance, "日期按钮超出月份视图左边界。");
+                Assert.IsTrue(position.Y >= -tolerance, "日期按钮超出月份视图上边界。");
+                Assert.IsTrue(
+                    position.X + button.ActualWidth <= monthView.ActualWidth + tolerance,
+                    "日期按钮超出月份视图右边界。");
+                Assert.IsTrue(
+                    position.Y + button.ActualHeight <= monthView.ActualHeight + tolerance,
+                    "日期按钮超出月份视图下边界。");
             }
         }
     }
