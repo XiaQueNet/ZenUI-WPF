@@ -1,0 +1,168 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:zen="https://zenui.mnorg.cn/xaml/wpf">
+
+    <ResourceDictionary.MergedDictionaries>
+        <ResourceDictionary Source="/ZenUI.Wpf;component/Themes/Generic.xaml" />
+    </ResourceDictionary.MergedDictionaries>
+
+    <FontFamily x:Key="DefaultFontFamily">Consolas</FontFamily>
+    <sys:Double x:Key="DefaultFontSize">24</sys:Double>
+    <CornerRadius x:Key="DefaultCornerRadius">12</CornerRadius>
+
+    <!--  按钮：提供可继承的命名基础样式，并作为 ZenButton 的全局默认样式  -->
+    <Style
+        x:Key="XqZenButtonStyle"
+        BasedOn="{StaticResource ZenButtonStyle}"
+        TargetType="zen:ZenButton">
+        <Setter Property="FontFamily" Value="{StaticResource DefaultFontFamily}" />
+        <Setter Property="FontSize" Value="{StaticResource DefaultFontSize}" />
+        <Setter Property="CornerRadius" Value="{StaticResource DefaultCornerRadius}" />
+    </Style>
+    <Style BasedOn="{StaticResource XqZenButtonStyle}" TargetType="zen:ZenButton" />
+
+    <Style
+        x:Key="XqZenTextBoxStyle"
+        BasedOn="{StaticResource ZenTextBoxStyle}"
+        TargetType="zen:ZenTextBox">
+        <Setter Property="FontFamily" Value="{StaticResource DefaultFontFamily}" />
+        <Setter Property="FontSize" Value="{StaticResource DefaultFontSize}" />
+        <Setter Property="CornerRadius" Value="{StaticResource DefaultCornerRadius}" />
+    </Style>
+    <Style BasedOn="{StaticResource XqZenTextBoxStyle}" TargetType="zen:ZenTextBox" />
+
+    <Style
+        x:Key="XqZenPasswordBoxStyle"
+        BasedOn="{StaticResource ZenPasswordBoxStyle}"
+        TargetType="zen:ZenPasswordBox">
+        <Setter Property="FontFamily" Value="{StaticResource DefaultFontFamily}" />
+        <Setter Property="FontSize" Value="{StaticResource DefaultFontSize}" />
+        <Setter Property="CornerRadius" Value="{StaticResource DefaultCornerRadius}" />
+    </Style>
+    <Style BasedOn="{StaticResource XqZenPasswordBoxStyle}" TargetType="zen:ZenPasswordBox" />
+
+    <Style
+        x:Key="XqZenComboBoxStyle"
+        BasedOn="{StaticResource ZenComboBoxStyle}"
+        TargetType="zen:ZenComboBox">
+        <Setter Property="FontFamily" Value="{StaticResource DefaultFontFamily}" />
+        <Setter Property="FontSize" Value="{StaticResource DefaultFontSize}" />
+        <Setter Property="CornerRadius" Value="{StaticResource DefaultCornerRadius}" />
+    </Style>
+    <Style BasedOn="{StaticResource XqZenComboBoxStyle}" TargetType="zen:ZenComboBox" />
+
+    <Style
+        x:Key="XqZenListBoxStyle"
+        BasedOn="{StaticResource ZenListBoxStyle}"
+        TargetType="zen:ZenListBox">
+        <Setter Property="FontFamily" Value="{StaticResource DefaultFontFamily}" />
+        <Setter Property="FontSize" Value="{StaticResource DefaultFontSize}" />
+        <Setter Property="CornerRadius" Value="{StaticResource DefaultCornerRadius}" />
+    </Style>
+    <Style BasedOn="{StaticResource XqZenListBoxStyle}" TargetType="zen:ZenListBox" />
+
+    <Style
+        x:Key="XqZenDatePickerStyle"
+        BasedOn="{StaticResource ZenDatePickerStyle}"
+        TargetType="zen:ZenDatePicker">
+        <Setter Property="FontFamily" Value="{StaticResource DefaultFontFamily}" />
+        <Setter Property="FontSize" Value="{StaticResource DefaultFontSize}" />
+        <Setter Property="CornerRadius" Value="{StaticResource DefaultCornerRadius}" />
+    </Style>
+    <Style BasedOn="{StaticResource XqZenDatePickerStyle}" TargetType="zen:ZenDatePicker" />
+
+    <Style
+        x:Key="XqZenProgressBarStyle"
+        BasedOn="{StaticResource ZenProgressBarStyle}"
+        TargetType="zen:ZenProgressBar">
+        <Setter Property="FontFamily" Value="{StaticResource DefaultFontFamily}" />
+        <Setter Property="FontSize" Value="{StaticResource DefaultFontSize}" />
+        <Setter Property="CornerRadius" Value="{StaticResource DefaultCornerRadius}" />
+    </Style>
+    <Style BasedOn="{StaticResource XqZenProgressBarStyle}" TargetType="zen:ZenProgressBar" />
+
+    <Style
+        x:Key="XqZenDataGridStyle"
+        BasedOn="{StaticResource ZenDataGridStyle}"
+        TargetType="zen:ZenDataGrid">
+        <Setter Property="FontFamily" Value="{StaticResource DefaultFontFamily}" />
+        <Setter Property="FontSize" Value="{StaticResource DefaultFontSize}" />
+        <Setter Property="CornerRadius" Value="{StaticResource DefaultCornerRadius}" />
+    </Style>
+    <Style BasedOn="{StaticResource XqZenDataGridStyle}" TargetType="zen:ZenDataGrid" />
+
+    <Style
+        x:Key="XqZenSwitchStyle"
+        BasedOn="{StaticResource ZenSwitchStyle}"
+        TargetType="zen:ZenSwitch">
+        <Setter Property="FontFamily" Value="{StaticResource DefaultFontFamily}" />
+        <Setter Property="FontSize" Value="{StaticResource DefaultFontSize}" />
+    </Style>
+    <Style BasedOn="{StaticResource XqZenSwitchStyle}" TargetType="zen:ZenSwitch" />
+
+    <Style
+        x:Key="XqZenCheckBoxStyle"
+        BasedOn="{StaticResource ZenCheckBoxStyle}"
+        TargetType="zen:ZenCheckBox">
+        <Setter Property="FontFamily" Value="{StaticResource DefaultFontFamily}" />
+        <Setter Property="FontSize" Value="{StaticResource DefaultFontSize}" />
+    </Style>
+    <Style BasedOn="{StaticResource XqZenCheckBoxStyle}" TargetType="zen:ZenCheckBox" />
+
+    <Style
+        x:Key="XqZenRadioButtonStyle"
+        BasedOn="{StaticResource ZenRadioButtonStyle}"
+        TargetType="zen:ZenRadioButton">
+        <Setter Property="FontFamily" Value="{StaticResource DefaultFontFamily}" />
+        <Setter Property="FontSize" Value="{StaticResource DefaultFontSize}" />
+    </Style>
+    <Style BasedOn="{StaticResource XqZenRadioButtonStyle}" TargetType="zen:ZenRadioButton" />
+
+    <Style
+        x:Key="XqZenNumberBoxStyle"
+        BasedOn="{StaticResource ZenNumberBoxStyle}"
+        TargetType="zen:ZenNumberBox">
+        <Setter Property="FontFamily" Value="{StaticResource DefaultFontFamily}" />
+        <Setter Property="FontSize" Value="{StaticResource DefaultFontSize}" />
+    </Style>
+    <Style BasedOn="{StaticResource XqZenNumberBoxStyle}" TargetType="zen:ZenNumberBox" />
+
+    <Style
+        x:Key="XqZenSliderStyle"
+        BasedOn="{StaticResource ZenSliderStyle}"
+        TargetType="zen:ZenSlider">
+        <Setter Property="FontFamily" Value="{StaticResource DefaultFontFamily}" />
+        <Setter Property="FontSize" Value="{StaticResource DefaultFontSize}" />
+    </Style>
+    <Style BasedOn="{StaticResource XqZenSliderStyle}" TargetType="zen:ZenSlider" />
+
+    <Style
+        x:Key="XqZenAlertStyle"
+        BasedOn="{StaticResource ZenAlertStyle}"
+        TargetType="zen:ZenAlert">
+        <Setter Property="FontFamily" Value="{StaticResource DefaultFontFamily}" />
+        <Setter Property="FontSize" Value="{StaticResource DefaultFontSize}" />
+    </Style>
+    <Style BasedOn="{StaticResource XqZenAlertStyle}" TargetType="zen:ZenAlert" />
+
+    <Style
+        x:Key="XqZenCalendarStyle"
+        BasedOn="{StaticResource ZenCalendarDefaultStyle}"
+        TargetType="zen:ZenCalendar">
+        <Setter Property="FontFamily" Value="{StaticResource DefaultFontFamily}" />
+        <Setter Property="FontSize" Value="{StaticResource DefaultFontSize}" />
+    </Style>
+    <Style BasedOn="{StaticResource XqZenCalendarStyle}" TargetType="zen:ZenCalendar" />
+
+    <Style
+        x:Key="XqZenScrollBarStyle"
+        BasedOn="{StaticResource ZenScrollBarStyle}"
+        TargetType="ScrollBar">
+        <Setter Property="FontFamily" Value="{StaticResource DefaultFontFamily}" />
+        <Setter Property="FontSize" Value="{StaticResource DefaultFontSize}" />
+    </Style>
+    <Style BasedOn="{StaticResource XqZenScrollBarStyle}" TargetType="ScrollBar" />
+
+</ResourceDictionary>
