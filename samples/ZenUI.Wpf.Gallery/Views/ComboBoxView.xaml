@@ -101,6 +101,7 @@
                     </zen:ZenComboBox>
                 </StackPanel>
             </Border>
+            <gallery:PropertyTable ControlType="{x:Type zen:ZenComboBox}" />
         </StackPanel>
     </ScrollViewer>
 </UserControl>

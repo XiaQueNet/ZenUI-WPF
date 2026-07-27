@@ -121,6 +121,7 @@
                     </zen:ZenListBox>
                 </StackPanel>
             </Border>
+            <gallery:PropertyTable ControlType="{x:Type zen:ZenListBox}" />
         </StackPanel>
     </ScrollViewer>
 </UserControl>

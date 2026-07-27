@@ -180,6 +180,7 @@
                     </Border>
                 </StackPanel>
             </Border>
+            <gallery:PropertyTable ControlType="{x:Type zen:ZenTextBox}" />
         </StackPanel>
     </ScrollViewer>
 </UserControl>

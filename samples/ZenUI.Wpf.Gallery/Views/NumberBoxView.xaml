@@ -65,6 +65,7 @@
                         Text="左：只读文本（按钮可用）　右：禁用" />
                 </StackPanel>
             </Border>
+            <gallery:PropertyTable ControlType="{x:Type zen:ZenNumberBox}" />
         </StackPanel>
     </ScrollViewer>
 </UserControl>

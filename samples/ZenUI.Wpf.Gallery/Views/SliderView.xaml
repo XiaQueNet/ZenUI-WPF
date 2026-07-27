@@ -44,6 +44,7 @@
                     <zen:ZenSlider IsEnabled="False" Maximum="100" Value="35" />
                 </StackPanel>
             </Border>
+            <gallery:PropertyTable ControlType="{x:Type zen:ZenSlider}" />
         </StackPanel>
     </ScrollViewer>
 </UserControl>

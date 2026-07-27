@@ -27,6 +27,7 @@
                     </zen:ZenAlert>
                 </StackPanel>
             </Border>
+            <gallery:PropertyTable ControlType="{x:Type zen:ZenAlert}" />
         </StackPanel>
     </ScrollViewer>
 </UserControl>

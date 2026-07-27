@@ -51,6 +51,7 @@
                     </zen:ZenRadioButton>
                 </StackPanel>
             </Border>
+            <gallery:PropertyTable ControlType="{x:Type zen:ZenRadioButton}" />
         </StackPanel>
     </ScrollViewer>
 </UserControl>

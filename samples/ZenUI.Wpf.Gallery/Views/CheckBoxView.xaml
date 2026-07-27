@@ -71,6 +71,7 @@
                     </zen:ZenCheckBox>
                 </StackPanel>
             </Border>
+            <gallery:PropertyTable ControlType="{x:Type zen:ZenCheckBox}" />
         </StackPanel>
     </ScrollViewer>
 </UserControl>

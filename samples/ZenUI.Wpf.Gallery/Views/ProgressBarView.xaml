@@ -34,6 +34,7 @@
                         Style="{StaticResource GalleryButtonStyle}" />
                 </StackPanel>
             </Border>
+            <gallery:PropertyTable ControlType="{x:Type zen:ZenProgressBar}" />
         </StackPanel>
     </ScrollViewer>
 </UserControl>

@@ -61,6 +61,7 @@
                         NavigationButtonSize="34" />
                 </StackPanel>
             </Border>
+            <gallery:PropertyTable ControlType="{x:Type zen:ZenCalendar}" />
         </StackPanel>
     </ScrollViewer>
 </UserControl>

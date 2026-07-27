@@ -78,6 +78,7 @@
                     </Grid>
                 </StackPanel>
             </Border>
+            <gallery:PropertyTable ControlType="{x:Type zen:ZenSwitch}" />
         </StackPanel>
     </ScrollViewer>
 </UserControl>
