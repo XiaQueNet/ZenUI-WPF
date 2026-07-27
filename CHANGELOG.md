@@ -4,13 +4,17 @@
 
 ## Unreleased
 
-### Changed
-
-- 标准化公开控件 API 命名：`ZenAlert.Variant` 更名为 `Severity`，`ZenNumberBox.ButtonMode` 更名为 `SpinButtonLayout`，`ZenPasswordBox.IsPasswordRevealEnabled` 更名为 `IsPasswordRevealButtonEnabled`。
+## [0.1.0-preview.5] - 2026-07-27
 
 ### Added
 
+- `ButtonVariant` 增加 `Neutral` 中性操作样式。
+- `ZenCheckBox` 与 `ZenRadioButton` 增加 `IndicatorSize` 属性，用于自定义选择标识尺寸。
 - `ZenNumberBox` 增加 `SpinButtonWidth` 属性，用于统一设置增减按钮宽度。
+
+### Changed
+
+- 标准化公开控件 API 命名：`ZenAlert.Variant` 更名为 `Severity`，`ZenNumberBox.ButtonMode` 更名为 `SpinButtonLayout`，`ZenPasswordBox.IsPasswordRevealEnabled` 更名为 `IsPasswordRevealButtonEnabled`。
 
 ## [0.1.0-preview.4] - 2026-07-27
 
@@ -102,7 +106,8 @@
 - Password 明文绑定默认关闭，并标记为过时兼容 API。
 - DataGrid 恢复行虚拟化、行头、行详情、全选、冻结列偏移和高级编辑契约。
 
-[Unreleased]: https://github.com/XiaQueNet/ZenUI-WPF/compare/v0.1.0-preview.4...HEAD
+[Unreleased]: https://github.com/XiaQueNet/ZenUI-WPF/compare/v0.1.0-preview.5...HEAD
+[0.1.0-preview.5]: https://github.com/XiaQueNet/ZenUI-WPF/compare/v0.1.0-preview.4...v0.1.0-preview.5
 [0.1.0-preview.4]: https://github.com/XiaQueNet/ZenUI-WPF/compare/v0.1.0-preview.3...v0.1.0-preview.4
 [0.1.0-preview.3]: https://github.com/XiaQueNet/ZenUI-WPF/compare/v0.1.0-preview.2...v0.1.0-preview.3
 [0.1.0-preview.2]: https://github.com/XiaQueNet/ZenUI-WPF/compare/v0.1.0-preview.1...v0.1.0-preview.2
