@@ -6,7 +6,7 @@
     xmlns:zen="https://zenui.mnorg.cn/xaml/wpf">
     <ScrollViewer Padding="40" HorizontalContentAlignment="Stretch" VerticalScrollBarVisibility="Auto">
         <StackPanel>
-            <gallery:PageHeader Description="用于触发操作，可组合填充、描边和文本外观，以及中性、主要、成功和警告语义。" Title="Button 按钮" />
+            <gallery:PageHeader Description="用于触发操作，可组合填充、描边和文本外观，以及主要、成功和警告语义。" Title="Button 按钮" />
             <Border Style="{StaticResource GalleryCardStyle}">
                 <StackPanel>
                     <TextBlock Style="{StaticResource SectionTitleStyle}" Text="外观与语义" />
@@ -31,8 +31,7 @@
                             Foreground="{DynamicResource ZenTextSecondaryBrush}"
                             Text="Filled" />
                         <WrapPanel Grid.Row="0" Grid.Column="1" Margin="0,0,0,12">
-                            <zen:ZenButton Content="中性按钮" Style="{StaticResource GalleryButtonStyle}" Variant="Neutral" />
-                            <zen:ZenButton Content="主要按钮" Style="{StaticResource GalleryButtonStyle}" Variant="Primary" />
+                            <zen:ZenButton Content="主要按钮" Style="{StaticResource GalleryButtonStyle}" />
                             <zen:ZenButton Content="成功按钮" Style="{StaticResource GalleryButtonStyle}" Variant="Success" />
                             <zen:ZenButton Content="警告按钮" Style="{StaticResource GalleryButtonStyle}" Variant="Warning" />
                         </WrapPanel>
@@ -42,8 +41,7 @@
                             Foreground="{DynamicResource ZenTextSecondaryBrush}"
                             Text="Outlined" />
                         <WrapPanel Grid.Row="1" Grid.Column="1" Margin="0,0,0,12">
-                            <zen:ZenButton Appearance="Outlined" Content="中性按钮" Style="{StaticResource GalleryButtonStyle}" Variant="Neutral" />
-                            <zen:ZenButton Appearance="Outlined" Content="主要按钮" Style="{StaticResource GalleryButtonStyle}" Variant="Primary" />
+                            <zen:ZenButton Appearance="Outlined" Content="主要按钮" Style="{StaticResource GalleryButtonStyle}" />
                             <zen:ZenButton Appearance="Outlined" Content="成功按钮" Style="{StaticResource GalleryButtonStyle}" Variant="Success" />
                             <zen:ZenButton Appearance="Outlined" Content="警告按钮" Style="{StaticResource GalleryButtonStyle}" Variant="Warning" />
                         </WrapPanel>
@@ -53,8 +51,7 @@
                             Foreground="{DynamicResource ZenTextSecondaryBrush}"
                             Text="Text" />
                         <WrapPanel Grid.Row="2" Grid.Column="1">
-                            <zen:ZenButton Appearance="Text" Content="中性按钮" Style="{StaticResource GalleryButtonStyle}" Variant="Neutral" />
-                            <zen:ZenButton Appearance="Text" Content="主要按钮" Style="{StaticResource GalleryButtonStyle}" Variant="Primary" />
+                            <zen:ZenButton Appearance="Text" Content="主要按钮" Style="{StaticResource GalleryButtonStyle}" />
                             <zen:ZenButton Appearance="Text" Content="成功按钮" Style="{StaticResource GalleryButtonStyle}" Variant="Success" />
                             <zen:ZenButton Appearance="Text" Content="警告按钮" Style="{StaticResource GalleryButtonStyle}" Variant="Warning" />
                         </WrapPanel>
@@ -70,16 +67,16 @@
                         Text="将鼠标移到可用按钮上并按下，可以查看 Hover 和 Pressed 状态。"
                         TextWrapping="Wrap" />
                     <WrapPanel Margin="0,0,0,12">
-                        <zen:ZenButton Content="填充状态" Style="{StaticResource GalleryButtonStyle}" Variant="Primary" />
-                        <zen:ZenButton Content="填充禁用" IsEnabled="False" Style="{StaticResource GalleryButtonStyle}" Variant="Primary" />
+                        <zen:ZenButton Content="填充状态" Style="{StaticResource GalleryButtonStyle}" />
+                        <zen:ZenButton Content="填充禁用" IsEnabled="False" Style="{StaticResource GalleryButtonStyle}" />
                     </WrapPanel>
                     <WrapPanel Margin="0,0,0,12">
-                        <zen:ZenButton Appearance="Outlined" Content="描边状态" Style="{StaticResource GalleryButtonStyle}" Variant="Primary" />
-                        <zen:ZenButton Appearance="Outlined" Content="描边禁用" IsEnabled="False" Style="{StaticResource GalleryButtonStyle}" Variant="Primary" />
+                        <zen:ZenButton Appearance="Outlined" Content="描边状态" Style="{StaticResource GalleryButtonStyle}" />
+                        <zen:ZenButton Appearance="Outlined" Content="描边禁用" IsEnabled="False" Style="{StaticResource GalleryButtonStyle}" />
                     </WrapPanel>
                     <WrapPanel>
-                        <zen:ZenButton Appearance="Text" Content="文本状态" Style="{StaticResource GalleryButtonStyle}" Variant="Primary" />
-                        <zen:ZenButton Appearance="Text" Content="文本禁用" IsEnabled="False" Style="{StaticResource GalleryButtonStyle}" Variant="Primary" />
+                        <zen:ZenButton Appearance="Text" Content="文本状态" Style="{StaticResource GalleryButtonStyle}" />
+                        <zen:ZenButton Appearance="Text" Content="文本禁用" IsEnabled="False" Style="{StaticResource GalleryButtonStyle}" />
                     </WrapPanel>
                     <Border
                         Margin="0,20,0,16"
@@ -104,8 +101,7 @@
                         HoverForeground="#6D28D9"
                         PressedBackground="#E9D5FF"
                         PressedBorderBrush="#5B21B6"
-                        PressedForeground="#5B21B6"
-                        Variant="Primary" />
+                        PressedForeground="#5B21B6" />
                 </StackPanel>
             </Border>
             <Border Style="{StaticResource GalleryCardStyle}">
@@ -132,11 +128,11 @@
                             Foreground="{DynamicResource ZenTextSecondaryBrush}"
                             Text="Filled" />
                         <WrapPanel Grid.Row="0" Grid.Column="1" Margin="0,0,0,12">
-                            <zen:ZenButton Content="直角 0" CornerRadius="0" Style="{StaticResource GalleryButtonStyle}" Variant="Primary" />
-                            <zen:ZenButton Content="小圆角 4" CornerRadius="4" Style="{StaticResource GalleryButtonStyle}" Variant="Primary" />
-                            <zen:ZenButton Content="默认 10" CornerRadius="10" Style="{StaticResource GalleryButtonStyle}" Variant="Primary" />
-                            <zen:ZenButton Content="大圆角 14" CornerRadius="14" Style="{StaticResource GalleryButtonStyle}" Variant="Primary" />
-                            <zen:ZenButton Content="胶囊 18" CornerRadius="18" Style="{StaticResource GalleryButtonStyle}" Variant="Primary" />
+                            <zen:ZenButton Content="直角 0" CornerRadius="0" Style="{StaticResource GalleryButtonStyle}" />
+                            <zen:ZenButton Content="小圆角 4" CornerRadius="4" Style="{StaticResource GalleryButtonStyle}" />
+                            <zen:ZenButton Content="默认 10" CornerRadius="10" Style="{StaticResource GalleryButtonStyle}" />
+                            <zen:ZenButton Content="大圆角 14" CornerRadius="14" Style="{StaticResource GalleryButtonStyle}" />
+                            <zen:ZenButton Content="胶囊 18" CornerRadius="18" Style="{StaticResource GalleryButtonStyle}" />
                         </WrapPanel>
                         <TextBlock
                             Grid.Row="1"
@@ -144,11 +140,11 @@
                             Foreground="{DynamicResource ZenTextSecondaryBrush}"
                             Text="Outlined" />
                         <WrapPanel Grid.Row="1" Grid.Column="1" Margin="0,0,0,12">
-                            <zen:ZenButton Appearance="Outlined" Content="直角 0" CornerRadius="0" Style="{StaticResource GalleryButtonStyle}" Variant="Primary" />
-                            <zen:ZenButton Appearance="Outlined" Content="小圆角 4" CornerRadius="4" Style="{StaticResource GalleryButtonStyle}" Variant="Primary" />
-                            <zen:ZenButton Appearance="Outlined" Content="默认 10" CornerRadius="10" Style="{StaticResource GalleryButtonStyle}" Variant="Primary" />
-                            <zen:ZenButton Appearance="Outlined" Content="大圆角 14" CornerRadius="14" Style="{StaticResource GalleryButtonStyle}" Variant="Primary" />
-                            <zen:ZenButton Appearance="Outlined" Content="胶囊 18" CornerRadius="18" Style="{StaticResource GalleryButtonStyle}" Variant="Primary" />
+                            <zen:ZenButton Appearance="Outlined" Content="直角 0" CornerRadius="0" Style="{StaticResource GalleryButtonStyle}" />
+                            <zen:ZenButton Appearance="Outlined" Content="小圆角 4" CornerRadius="4" Style="{StaticResource GalleryButtonStyle}" />
+                            <zen:ZenButton Appearance="Outlined" Content="默认 10" CornerRadius="10" Style="{StaticResource GalleryButtonStyle}" />
+                            <zen:ZenButton Appearance="Outlined" Content="大圆角 14" CornerRadius="14" Style="{StaticResource GalleryButtonStyle}" />
+                            <zen:ZenButton Appearance="Outlined" Content="胶囊 18" CornerRadius="18" Style="{StaticResource GalleryButtonStyle}" />
                         </WrapPanel>
                         <TextBlock
                             Grid.Row="2"
@@ -156,9 +152,9 @@
                             Foreground="{DynamicResource ZenTextSecondaryBrush}"
                             Text="独立四角" />
                         <WrapPanel Grid.Row="2" Grid.Column="1">
-                            <zen:ZenButton Appearance="Outlined" Content="左侧圆角" CornerRadius="18,0,0,18" Style="{StaticResource GalleryButtonStyle}" Variant="Primary" />
-                            <zen:ZenButton Appearance="Outlined" Content="右侧圆角" CornerRadius="0,18,18,0" Style="{StaticResource GalleryButtonStyle}" Variant="Primary" />
-                            <zen:ZenButton Appearance="Outlined" Content="对角圆角" CornerRadius="18,0,18,0" Style="{StaticResource GalleryButtonStyle}" Variant="Primary" />
+                            <zen:ZenButton Appearance="Outlined" Content="左侧圆角" CornerRadius="18,0,0,18" Style="{StaticResource GalleryButtonStyle}" />
+                            <zen:ZenButton Appearance="Outlined" Content="右侧圆角" CornerRadius="0,18,18,0" Style="{StaticResource GalleryButtonStyle}" />
+                            <zen:ZenButton Appearance="Outlined" Content="对角圆角" CornerRadius="18,0,18,0" Style="{StaticResource GalleryButtonStyle}" />
                         </WrapPanel>
                     </Grid>
                 </StackPanel>

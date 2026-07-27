@@ -4,16 +4,25 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:gallery="clr-namespace:ZenUI.Wpf.Gallery.Controls"
     xmlns:zen="https://zenui.mnorg.cn/xaml/wpf">
-    <ScrollViewer Padding="40" HorizontalContentAlignment="Stretch" VerticalScrollBarVisibility="Auto">
+    <ScrollViewer
+        Padding="40"
+        HorizontalContentAlignment="Stretch"
+        VerticalScrollBarVisibility="Auto">
         <StackPanel>
-            <gallery:PageHeader Description="用于在一组独立选项中选择零项、一项或多项。" Title="CheckBox 复选框" />
+            <gallery:PageHeader Title="CheckBox 复选框" Description="用于在一组独立选项中选择零项、一项或多项。" />
             <Border Style="{StaticResource GalleryCardStyle}">
                 <StackPanel>
                     <TextBlock Style="{StaticResource SectionTitleStyle}" Text="选择状态" />
                     <StackPanel Orientation="Horizontal">
                         <zen:ZenCheckBox Margin="0,0,28,0" Content="未选中" />
-                        <zen:ZenCheckBox Margin="0,0,28,0" Content="已选中" IsChecked="True" />
-                        <zen:ZenCheckBox Content="不确定" IsChecked="{x:Null}" IsThreeState="True" />
+                        <zen:ZenCheckBox
+                            Margin="0,0,28,0"
+                            Content="已选中"
+                            IsChecked="True" />
+                        <zen:ZenCheckBox
+                            Content="不确定"
+                            IsChecked="{x:Null}"
+                            IsThreeState="True" />
                     </StackPanel>
                 </StackPanel>
             </Border>
@@ -21,9 +30,20 @@
                 <StackPanel>
                     <TextBlock Style="{StaticResource SectionTitleStyle}" Text="禁用状态" />
                     <StackPanel Orientation="Horizontal">
-                        <zen:ZenCheckBox Margin="0,0,28,0" Content="未选中禁用" IsEnabled="False" />
-                        <zen:ZenCheckBox Margin="0,0,28,0" Content="选中禁用" IsChecked="True" IsEnabled="False" />
-                        <zen:ZenCheckBox Content="不确定禁用" IsChecked="{x:Null}" IsEnabled="False" IsThreeState="True" />
+                        <zen:ZenCheckBox
+                            Margin="0,0,28,0"
+                            Content="未选中禁用"
+                            IsEnabled="False" />
+                        <zen:ZenCheckBox
+                            Margin="0,0,28,0"
+                            Content="选中禁用"
+                            IsChecked="True"
+                            IsEnabled="False" />
+                        <zen:ZenCheckBox
+                            Content="不确定禁用"
+                            IsChecked="{x:Null}"
+                            IsEnabled="False"
+                            IsThreeState="True" />
                     </StackPanel>
                 </StackPanel>
             </Border>
