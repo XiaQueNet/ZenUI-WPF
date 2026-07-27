@@ -76,13 +76,13 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.AreEqual(new Thickness(1), dataGrid.CellFocusVisualBorderThickness);
             Assert.AreEqual(new Thickness(2), dataGrid.CellValidationBorderThickness);
             Assert.AreEqual("暂无数据", dataGrid.EmptyContent);
-            Assert.IsFalse(passwordBox.IsPasswordRevealEnabled);
+            Assert.IsFalse(passwordBox.IsPasswordRevealButtonEnabled);
             Assert.IsFalse(passwordBox.IsPasswordRevealed);
             Assert.IsNull(passwordBox.LeadingContent);
             Assert.IsNull(passwordBox.LeadingContentTemplate);
             Assert.IsNull(passwordBox.TrailingContent);
             Assert.IsNull(passwordBox.TrailingContentTemplate);
-            Assert.AreEqual(AlertVariant.Info, alert.Variant);
+            Assert.AreEqual(AlertSeverity.Info, alert.Severity);
         }
 
         [TestMethod]
@@ -433,7 +433,7 @@ namespace ZenUI.Wpf.Tests.Controls
             var datePicker = new ZenDatePicker { Watermark = "请选择日期" };
             var slider = new ZenSlider { Value = 50 };
             var progressBar = new ZenProgressBar { Value = 60 };
-            var alert = new ZenAlert { Content = "操作成功", Variant = AlertVariant.Success };
+            var alert = new ZenAlert { Content = "操作成功", Severity = AlertSeverity.Success };
 
             var panel = new StackPanel();
             panel.Children.Add(button);
@@ -505,7 +505,7 @@ namespace ZenUI.Wpf.Tests.Controls
             {
                 LeadingContent = passwordBoxLeading,
                 TrailingContent = passwordBoxTrailing,
-                IsPasswordRevealEnabled = true
+                IsPasswordRevealButtonEnabled = true
             };
             var panel = new StackPanel();
             panel.Children.Add(textBox);

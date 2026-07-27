@@ -24,7 +24,7 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.AreEqual(typeof(ZenNumberBox), numberBox.ExposedDefaultStyleKey);
             Assert.AreEqual(0m, numberBox.Value);
             Assert.AreEqual(1m, numberBox.Step);
-            Assert.AreEqual(NumberBoxButtonMode.Horizontal, numberBox.ButtonMode);
+            Assert.AreEqual(SpinButtonLayout.Horizontal, numberBox.SpinButtonLayout);
             Assert.AreEqual(34d, numberBox.SpinButtonWidth);
         }
 
@@ -103,7 +103,7 @@ namespace ZenUI.Wpf.Tests.Controls
         {
             var numberBox = new ZenNumberBox
             {
-                ButtonMode = NumberBoxButtonMode.Vertical,
+                SpinButtonLayout = SpinButtonLayout.Vertical,
                 SpinButtonWidth = 40d,
                 Step = 2m,
                 Value = 4m

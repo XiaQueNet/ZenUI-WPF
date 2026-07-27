@@ -196,7 +196,7 @@
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="ButtonMode" Value="Vertical">
+                        <Trigger Property="SpinButtonLayout" Value="Vertical">
                             <Setter TargetName="HorizontalLayout" Property="Visibility" Value="Collapsed" />
                             <Setter TargetName="VerticalLayout" Property="Visibility" Value="Visible" />
                         </Trigger>

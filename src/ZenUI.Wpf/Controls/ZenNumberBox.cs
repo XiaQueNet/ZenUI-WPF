@@ -143,21 +143,21 @@ namespace ZenUI.Wpf.Controls
         /// 获取或设置增减按钮的布局方式。
         /// </summary>
         [Bindable(true)]
-        public NumberBoxButtonMode ButtonMode
+        public SpinButtonLayout SpinButtonLayout
         {
-            get { return (NumberBoxButtonMode)GetValue(ButtonModeProperty); }
-            set { SetValue(ButtonModeProperty, value); }
+            get { return (SpinButtonLayout)GetValue(SpinButtonLayoutProperty); }
+            set { SetValue(SpinButtonLayoutProperty, value); }
         }
 
         /// <summary>
-        /// 标识 <see cref="ButtonMode"/> 依赖属性。
+        /// 标识 <see cref="SpinButtonLayout"/> 依赖属性。
         /// </summary>
-        public static readonly DependencyProperty ButtonModeProperty =
+        public static readonly DependencyProperty SpinButtonLayoutProperty =
             DependencyProperty.Register(
-                nameof(ButtonMode),
-                typeof(NumberBoxButtonMode),
+                nameof(SpinButtonLayout),
+                typeof(SpinButtonLayout),
                 SelfType,
-                new FrameworkPropertyMetadata(NumberBoxButtonMode.Horizontal));
+                new FrameworkPropertyMetadata(SpinButtonLayout.Horizontal));
 
         /// <summary>
         /// 获取或设置增减按钮的宽度。
@@ -377,7 +377,7 @@ namespace ZenUI.Wpf.Controls
 
         private void CommitInput()
         {
-            var activeTextBox = ButtonMode == NumberBoxButtonMode.Vertical
+            var activeTextBox = SpinButtonLayout == SpinButtonLayout.Vertical
                 ? verticalTextBox
                 : textBox;
             if (activeTextBox == null || isUpdatingText || IsReadOnly)

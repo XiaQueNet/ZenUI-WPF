@@ -81,24 +81,24 @@ namespace ZenUI.Wpf.Controls
             RegisterBrush(nameof(ThemeAccentBrush));
 
         /// <summary>
-        /// 获取或设置提示条的语义外观。
+        /// 获取或设置提示条所传达信息的严重级别。
         /// </summary>
         [Bindable(true)]
-        public AlertVariant Variant
+        public AlertSeverity Severity
         {
-            get { return (AlertVariant)GetValue(VariantProperty); }
-            set { SetValue(VariantProperty, value); }
+            get { return (AlertSeverity)GetValue(SeverityProperty); }
+            set { SetValue(SeverityProperty, value); }
         }
 
         /// <summary>
-        /// 标识 <see cref="Variant"/> 依赖属性。
+        /// 标识 <see cref="Severity"/> 依赖属性。
         /// </summary>
-        public static readonly DependencyProperty VariantProperty =
+        public static readonly DependencyProperty SeverityProperty =
             DependencyProperty.Register(
-                nameof(Variant),
-                typeof(AlertVariant),
+                nameof(Severity),
+                typeof(AlertSeverity),
                 SelfType,
-                new FrameworkPropertyMetadata(AlertVariant.Info));
+                new FrameworkPropertyMetadata(AlertSeverity.Info));
 
         private static DependencyProperty RegisterBrush(string name)
         {

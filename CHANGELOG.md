@@ -4,6 +4,10 @@
 
 ## Unreleased
 
+### Changed
+
+- 标准化公开控件 API 命名：`ZenAlert.Variant` 更名为 `Severity`，`ZenNumberBox.ButtonMode` 更名为 `SpinButtonLayout`，`ZenPasswordBox.IsPasswordRevealEnabled` 更名为 `IsPasswordRevealButtonEnabled`。
+
 ### Added
 
 - `ZenNumberBox` 增加 `SpinButtonWidth` 属性，用于统一设置增减按钮宽度。

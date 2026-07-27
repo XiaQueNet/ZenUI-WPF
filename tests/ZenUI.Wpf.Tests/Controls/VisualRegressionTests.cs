@@ -231,7 +231,7 @@ namespace ZenUI.Wpf.Tests.Controls
             {
                 Margin = new Thickness(0, 14, 0, 0),
                 Content = "主题、焦点和语义颜色快照",
-                Variant = AlertVariant.Success
+                Severity = AlertSeverity.Success
             });
 
             var listBox = new ZenListBox

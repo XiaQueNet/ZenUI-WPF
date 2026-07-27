@@ -77,7 +77,7 @@ namespace ZenUI.Wpf.Tests.Controls
         {
             var passwordBox = new ZenPasswordBox
             {
-                IsPasswordRevealEnabled = true,
+                IsPasswordRevealButtonEnabled = true,
                 Width = 240
             };
             var window = new Window

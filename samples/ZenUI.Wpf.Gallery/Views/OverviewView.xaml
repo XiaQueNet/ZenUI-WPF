@@ -74,7 +74,7 @@
                             </StackPanel>
                             <TextBlock Margin="0,0,0,8" Foreground="{DynamicResource ZenTextSecondaryBrush}" Text="准备进度 · 68%" />
                             <zen:ZenProgressBar Margin="0,0,0,16" Maximum="100" Value="68" />
-                            <zen:ZenAlert Variant="Success">
+                            <zen:ZenAlert Severity="Success">
                                 <TextBlock Text="组件状态正常，可以开始构建应用。" TextWrapping="Wrap" />
                             </zen:ZenAlert>
                         </StackPanel>

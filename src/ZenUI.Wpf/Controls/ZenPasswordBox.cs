@@ -102,21 +102,21 @@ namespace ZenUI.Wpf.Controls
         /// 获取或设置是否显示密码明文切换按钮。按钮的可见性不依赖密码是否为空。
         /// </summary>
         [Bindable(true)]
-        public bool IsPasswordRevealEnabled
+        public bool IsPasswordRevealButtonEnabled
         {
-            get { return (bool)GetValue(IsPasswordRevealEnabledProperty); }
-            set { SetValue(IsPasswordRevealEnabledProperty, value); }
+            get { return (bool)GetValue(IsPasswordRevealButtonEnabledProperty); }
+            set { SetValue(IsPasswordRevealButtonEnabledProperty, value); }
         }
 
         /// <summary>
-        /// 标识 <see cref="IsPasswordRevealEnabled"/> 依赖属性。
+        /// 标识 <see cref="IsPasswordRevealButtonEnabled"/> 依赖属性。
         /// </summary>
-        public static readonly DependencyProperty IsPasswordRevealEnabledProperty =
+        public static readonly DependencyProperty IsPasswordRevealButtonEnabledProperty =
             DependencyProperty.Register(
-                nameof(IsPasswordRevealEnabled),
+                nameof(IsPasswordRevealButtonEnabled),
                 typeof(bool),
                 typeof(ZenPasswordBox),
-                new FrameworkPropertyMetadata(false, OnIsPasswordRevealEnabledChanged));
+                new FrameworkPropertyMetadata(false, OnIsPasswordRevealButtonEnabledChanged));
 
         /// <summary>
         /// 获取或设置当前是否以明文显示密码。
@@ -261,7 +261,7 @@ namespace ZenUI.Wpf.Controls
 
         internal static readonly DependencyProperty HasPasswordProperty = HasPasswordPropertyKey.DependencyProperty;
 
-        private static void OnIsPasswordRevealEnabledChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
+        private static void OnIsPasswordRevealButtonEnabledChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)
         {
             var control = (ZenPasswordBox)d;
             control.CoerceValue(IsPasswordRevealedProperty);
@@ -270,7 +270,7 @@ namespace ZenUI.Wpf.Controls
         private static object CoerceIsPasswordRevealed(DependencyObject d, object baseValue)
         {
             var control = (ZenPasswordBox)d;
-            return control.IsPasswordRevealEnabled && (bool)baseValue;
+            return control.IsPasswordRevealButtonEnabled && (bool)baseValue;
         }
 
         private static void OnIsPasswordRevealedChanged(DependencyObject d, DependencyPropertyChangedEventArgs e)

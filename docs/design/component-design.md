@@ -31,6 +31,66 @@
 - 公共文档描述稳定契约，不承诺可替换的内部实现细节。
 - 公共 API 的不兼容修改必须记录在 `CHANGELOG.md`，并按语义化版本调整主版本号。
 
+### 命名原则
+
+公共 API 应描述使用者能够理解和配置的控件语义，模板、触发器和代码应负责把这些语义映射到具体的 WPF 实现机制。不能仅因为模板使用 `IsMouseOver` 或名为 `MouseOver` 的 VisualState，就把触发机制直接暴露为公共属性名称。
+
+选择名称时按以下顺序判断：
+
+1. 相同语义是否已有 WPF 基类 API；有则直接复用。
+2. WPF 控件生态是否已经形成稳定且没有歧义的常用名称；有则优先沿用。
+3. 候选名称是否准确描述使用者可观察的状态、行为或内容，而不是当前模板的实现方式。
+4. 名称是否会与 WPF 中已有的强语义产生错误预期。
+5. 在语义完整的前提下，删除由所属控件、属性或命名空间已经提供的重复上下文。
+
+WinUI、Web 或其他 UI 框架的名称只能作为参考。除非其语义与 ZenUI 属性完全一致，并且不会破坏 WPF 使用者的既有认知，否则不为了跨框架一致或表面上的“现代化”而改名。例如，输入控件继续使用 WPF 控件库中常见的 `Watermark`，数值步长可以使用清晰的 `Step`，不机械替换为其他框架的 `PlaceholderText` 或 `SmallChange`。
+
+### 状态属性
+
+状态属性采用“状态 + 被设置的视觉属性”结构。默认状态直接复用控件已有属性，不增加 `Normal` 前缀：
+
+| 状态 | 背景属性 | 说明 |
+| --- | --- | --- |
+| 默认 | `Background` | 复用基类属性 |
+| 悬停 | `HoverBackground` | 描述用户体验状态，不暴露 `IsMouseOver` 触发机制 |
+| 按下 | `PressedBackground` | 用于按钮或其他可按压控件 |
+| 禁用 | `DisabledBackground` | 对应不可操作状态 |
+| 焦点 | `FocusedBackground` | 对应键盘或逻辑焦点反馈 |
+| 选中 | `SelectedBackground` | 用于列表项、行、单元格等选择控件 |
+| 勾选或开启 | `CheckedBackground` | 用于 CheckBox、RadioButton、ToggleButton 或 Switch |
+
+前景和边框使用相同结构，例如 `HoverForeground`、`PressedBorderBrush` 和 `SelectedForeground`。控件只公开确有定制需求的状态属性，不为追求表格完整而增加未使用的 API。
+
+`Hover` 是公共体验语义；`IsMouseOver`、`MouseOver` VisualState 和具体指针事件是模板实现。模板可以使用 WPF 原生机制实现 Hover，但公共 API 不应因此改名为 `MouseOverBackground`。组合状态通常由模板和 Token 处理，除非存在明确且稳定的独立定制需求，不增加 `SelectedHoverBackground` 一类组合属性。
+
+### 名称精确度
+
+- 避免单独使用 `Mode`、`Type`、`Option`、`State` 等不能说明作用对象的宽泛名称。名称应指出被控制的对象和维度，例如使用 `SpinButtonLayout`，而不是 `ButtonMode`。
+- 不滥用 WPF 中已有强默认语义的名称。例如，`Orientation` 通常表示整个控件或内容的排列轴；若属性只控制 NumberBox 增减按钮的布局，应使用 `SpinButtonLayout`，不能让使用者误以为它会旋转或重排整个控件。
+- 布尔属性使用 `Is`、`Has`、`Can` 等前缀，并让名称准确说明 `true` 的效果。若属性控制的是密码显示按钮，应使用 `IsPasswordRevealButtonEnabled`，而不是可能被理解为控制整个明文显示能力的 `IsPasswordRevealEnabled`。
+- 枚举属性名称应表达枚举值共同描述的维度。Info、Success、Warning、Error 表达严重级别时，使用 `Severity` 和 `AlertSeverity`，不使用含义宽泛的 `Variant`。
+- 只有在名称可能冲突或离开所属类型后语义不完整时，才给类型增加控件名前缀。`SpinButtonLayout` 已经能够独立表达含义，不扩展为 `NumberBoxSpinButtonLayout`。
+- 属性名与枚举类型同名是允许的，例如 `SpinButtonLayout SpinButtonLayout`。不应仅为避免同名而引入 `Mode`、`Kind` 等无额外语义的后缀。
+- 表示尺寸时优先使用 WPF 已有后缀和类型，例如 `Width`、`Height`、`Size`、`Thickness`、`Padding` 和 `CornerRadius`；名称应说明尺寸属于哪个部件。
+
+### WPF 成员配对
+
+依赖属性、附加属性和路由事件必须遵循 WPF 的标准配对命名：
+
+```csharp
+public AlertSeverity Severity
+{
+    get { return (AlertSeverity)GetValue(SeverityProperty); }
+    set { SetValue(SeverityProperty, value); }
+}
+
+public static readonly DependencyProperty SeverityProperty;
+```
+
+依赖属性标识符使用 `<属性名>Property`，注册名、CLR 包装器和标识符必须一致。附加属性使用 `Get<PropertyName>`、`Set<PropertyName>` 和 `<PropertyName>Property`；路由事件使用 `<EventName>` 和 `<EventName>Event`。
+
+标记为 `EditorBrowsableState.Never` 的成员仍然是公共 API，仍会被 XAML、反射和已编译代码访问。不能把该标记当成内部可见性边界；模板基础设施成员一旦公开，也必须按兼容性规则管理。
+
 ## 模板契约
 
 - 模板修改不得破坏 WPF 规定或控件公开声明的 `PART_*`、VisualState、绑定和布局契约。
@@ -92,6 +152,11 @@
 
 - [ ] 没有删除或屏蔽基类已有的公开能力。
 - [ ] 新增 API 复用了 WPF 语义，并具有完整的 XML 文档注释。
+- [ ] 公共属性描述控件语义，没有泄漏触发器、VisualState 或模板部件等实现细节。
+- [ ] 状态属性使用一致的 `Hover`、`Pressed`、`Disabled`、`Focused`、`Selected` 或 `Checked` 前缀。
+- [ ] 没有为了跨框架一致而替换 WPF 使用者已经熟悉且语义准确的名称。
+- [ ] `Mode`、`Orientation`、`Variant` 等宽泛或具有强既定语义的名称经过了作用域和歧义检查。
+- [ ] CLR 属性、依赖属性标识符、附加属性访问器和路由事件标识符正确配对。
 - [ ] `PART_*`、VisualState、绑定和布局契约保持有效。
 - [ ] 默认、Hover、Pressed、键盘焦点、Disabled、只读、验证错误和高对比度状态已按适用范围覆盖。
 - [ ] 状态组合不会造成内容不可读、焦点不可见或布局跳动。

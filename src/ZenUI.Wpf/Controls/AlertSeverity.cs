@@ -1,9 +1,9 @@
 namespace ZenUI.Wpf.Controls
 {
     /// <summary>
-    /// 指定提示条的语义外观。
+    /// 指定提示条所传达信息的严重级别。
     /// </summary>
-    public enum AlertVariant
+    public enum AlertSeverity
     {
         /// <summary>
         /// 信息提示。

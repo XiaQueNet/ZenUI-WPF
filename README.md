@@ -55,7 +55,7 @@ ZenUI 的目标是优化 WPF 控件的默认体验，而不是缩减 WPF 已有�
         <zen:ZenDatePicker Watermark="请选择日期" />
         <zen:ZenSlider Maximum="100" Value="60" />
         <zen:ZenProgressBar Maximum="100" Value="60" />
-        <zen:ZenAlert Content="保存成功" Variant="Success" />
+        <zen:ZenAlert Content="保存成功" Severity="Success" />
         <zen:ZenDataGrid ItemsSource="{Binding Items}" />
     </StackPanel>
 </Window>

@@ -18,7 +18,7 @@ namespace ZenUI.Wpf.PosDemo.ViewModels
         private string sendCodeText = "发送验证码";
         private bool canSendCode = true;
         private string statusMessage;
-        private AlertVariant statusVariant;
+        private AlertSeverity statusSeverity;
         private Visibility statusVisibility = Visibility.Collapsed;
         private Visibility accountPanelVisibility = Visibility.Visible;
         private Visibility codePanelVisibility = Visibility.Collapsed;
@@ -104,10 +104,10 @@ namespace ZenUI.Wpf.PosDemo.ViewModels
             private set { SetProperty(ref statusMessage, value); }
         }
 
-        public AlertVariant StatusVariant
+        public AlertSeverity StatusSeverity
         {
-            get { return statusVariant; }
-            private set { SetProperty(ref statusVariant, value); }
+            get { return statusSeverity; }
+            private set { SetProperty(ref statusSeverity, value); }
         }
 
         public Visibility StatusVisibility
@@ -187,7 +187,7 @@ namespace ZenUI.Wpf.PosDemo.ViewModels
             VerificationCode = "888888";
             SendCodeText = "验证码已填入";
             CanSendCode = false;
-            ShowStatus("演示验证码 888888 已自动填入。", AlertVariant.Info);
+            ShowStatus("演示验证码 888888 已自动填入。", AlertSeverity.Info);
         }
 
         private void RefreshCaptcha()
@@ -196,12 +196,12 @@ namespace ZenUI.Wpf.PosDemo.ViewModels
             captchaIndex = (captchaIndex + 1) % captchaValues.Length;
             CaptchaText = captchaValues[captchaIndex];
             CaptchaInput = string.Empty;
-            ShowStatus("图形验证码已刷新（模拟）。", AlertVariant.Info);
+            ShowStatus("图形验证码已刷新（模拟）。", AlertSeverity.Info);
         }
 
         private void ForgotPassword()
         {
-            ShowStatus("已打开模拟找回流程；演示模式不会发送任何请求。", AlertVariant.Info);
+            ShowStatus("已打开模拟找回流程；演示模式不会发送任何请求。", AlertSeverity.Info);
         }
 
         private static void CopySerial()
@@ -209,10 +209,10 @@ namespace ZenUI.Wpf.PosDemo.ViewModels
             Clipboard.SetText("ZEN-POS-001");
         }
 
-        private void ShowStatus(string message, AlertVariant variant)
+        private void ShowStatus(string message, AlertSeverity severity)
         {
             StatusMessage = message;
-            StatusVariant = variant;
+            StatusSeverity = severity;
             StatusVisibility = Visibility.Visible;
         }
 

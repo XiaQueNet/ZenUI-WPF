@@ -24,7 +24,7 @@ namespace ZenUI.Wpf.PosDemo.ViewModels
         private string searchText;
         private string orderNumber;
         private string statusMessage;
-        private AlertVariant statusVariant;
+        private AlertSeverity statusSeverity;
         private Visibility statusVisibility = Visibility.Collapsed;
 
         public PosViewModel()
@@ -204,10 +204,10 @@ namespace ZenUI.Wpf.PosDemo.ViewModels
             private set { SetProperty(ref statusMessage, value); }
         }
 
-        public AlertVariant StatusVariant
+        public AlertSeverity StatusSeverity
         {
-            get { return statusVariant; }
-            private set { SetProperty(ref statusVariant, value); }
+            get { return statusSeverity; }
+            private set { SetProperty(ref statusSeverity, value); }
         }
 
         public Visibility StatusVisibility
@@ -231,7 +231,7 @@ namespace ZenUI.Wpf.PosDemo.ViewModels
             var itemIndex = OrderItems.IndexOf(existingItem ?? OrderItems[OrderItems.Count - 1]);
             cartPageIndex = itemIndex / CartPageSize;
             RefreshOrderSummary();
-            ShowStatus(product.Name + " 已加入购物车。", AlertVariant.Success);
+            ShowStatus(product.Name + " 已加入购物车。", AlertSeverity.Success);
         }
 
         private void SelectCategory(CategoryViewModel category)
@@ -419,7 +419,7 @@ namespace ZenUI.Wpf.PosDemo.ViewModels
             OrderItems.Clear();
             cartPageIndex = 0;
             RefreshOrderSummary();
-            ShowStatus("购物车已清空。", AlertVariant.Info);
+            ShowStatus("购物车已清空。", AlertSeverity.Info);
         }
 
         private void NewOrder()
@@ -435,13 +435,13 @@ namespace ZenUI.Wpf.PosDemo.ViewModels
         {
             if (OrderItems.Count == 0)
             {
-                ShowStatus("请先添加商品。", AlertVariant.Warning);
+                ShowStatus("请先添加商品。", AlertSeverity.Warning);
                 return;
             }
 
             ShowStatus(
                 string.Format(CultureInfo.CurrentCulture, "模拟支付成功，共收款 ¥ {0:N2}。", OrderTotal),
-                AlertVariant.Success);
+                AlertSeverity.Success);
         }
 
         private static void Exit()
@@ -474,10 +474,10 @@ namespace ZenUI.Wpf.PosDemo.ViewModels
             NextCartPageCommand.RaiseCanExecuteChanged();
         }
 
-        private void ShowStatus(string message, AlertVariant variant)
+        private void ShowStatus(string message, AlertSeverity severity)
         {
             StatusMessage = message;
-            StatusVariant = variant;
+            StatusSeverity = severity;
             StatusVisibility = Visibility.Visible;
         }
     }

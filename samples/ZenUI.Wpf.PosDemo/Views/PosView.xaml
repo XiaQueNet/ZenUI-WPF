@@ -480,7 +480,7 @@
                             Margin="0,8,0,12"
                             Content="{Binding StatusMessage}"
                             FontSize="18"
-                            Variant="{Binding StatusVariant}"
+                            Severity="{Binding StatusSeverity}"
                             Visibility="{Binding StatusVisibility}" />
                         <Border
                             Margin="0,0,0,16"

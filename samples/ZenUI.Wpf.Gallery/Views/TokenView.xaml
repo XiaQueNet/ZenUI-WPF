@@ -41,7 +41,7 @@
                             <zen:ZenDatePicker Margin="0,0,0,10" SelectedDate="2026-07-23" />
                             <zen:ZenSlider Margin="0,0,0,10" Value="62" />
                             <zen:ZenProgressBar Margin="0,0,0,10" Value="62" />
-                            <zen:ZenAlert Content="Alert 内边距随密度更新" Variant="Success" />
+                            <zen:ZenAlert Content="Alert 内边距随密度更新" Severity="Success" />
                         </StackPanel>
                     </UniformGrid>
                     <TextBlock

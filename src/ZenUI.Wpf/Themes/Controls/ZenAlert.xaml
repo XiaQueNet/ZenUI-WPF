@@ -38,19 +38,19 @@
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="Variant" Value="Success">
+                        <Trigger Property="Severity" Value="Success">
                             <Setter Property="ThemeBackground" Value="{DynamicResource ZenSuccessLightBrush}" />
                             <Setter Property="ThemeBorderBrush" Value="{DynamicResource ZenSuccessBrush}" />
                             <Setter Property="ThemeAccentBrush" Value="{DynamicResource ZenSuccessBrush}" />
                             <Setter TargetName="IconText" Property="Text" Value="✓" />
                         </Trigger>
-                        <Trigger Property="Variant" Value="Warning">
+                        <Trigger Property="Severity" Value="Warning">
                             <Setter Property="ThemeBackground" Value="{DynamicResource ZenWarningLightBrush}" />
                             <Setter Property="ThemeBorderBrush" Value="{DynamicResource ZenWarningBrush}" />
                             <Setter Property="ThemeAccentBrush" Value="{DynamicResource ZenWarningBrush}" />
                             <Setter TargetName="IconText" Property="Text" Value="!" />
                         </Trigger>
-                        <Trigger Property="Variant" Value="Error">
+                        <Trigger Property="Severity" Value="Error">
                             <Setter Property="ThemeBackground" Value="{DynamicResource ZenErrorLightBrush}" />
                             <Setter Property="ThemeBorderBrush" Value="{DynamicResource ZenErrorBrush}" />
                             <Setter Property="ThemeAccentBrush" Value="{DynamicResource ZenErrorBrush}" />

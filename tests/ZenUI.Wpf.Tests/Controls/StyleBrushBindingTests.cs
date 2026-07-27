@@ -94,7 +94,7 @@ namespace ZenUI.Wpf.Tests.Controls
             {
                 Content = "提示",
                 Style = style,
-                Variant = AlertVariant.Error
+                Severity = AlertSeverity.Error
             };
         }
 

@@ -17,7 +17,7 @@ namespace ZenUI.Wpf.Gallery.Controls
             {
                 ["ZenAlert.AccentBrush"] = "提示图标的强调色画刷。",
                 ["ZenAlert.IconForeground"] = "提示图标的前景画刷。",
-                ["ZenAlert.Variant"] = "提示条的语义类型。",
+                ["ZenAlert.Severity"] = "提示条的严重级别。",
                 ["ZenButton.CornerRadius"] = "按钮的圆角半径。",
                 ["ZenButton.Variant"] = "按钮的语义类型。",
                 ["ZenButton.Appearance"] = "按钮的视觉呈现形式。",
@@ -57,10 +57,10 @@ namespace ZenUI.Wpf.Gallery.Controls
                 ["ZenNumberBox.Minimum"] = "允许输入的最小值。",
                 ["ZenNumberBox.Maximum"] = "允许输入的最大值。",
                 ["ZenNumberBox.Step"] = "单次增加或减少的步长，必须大于零。",
-                ["ZenNumberBox.ButtonMode"] = "增减按钮的布局方式。",
+                ["ZenNumberBox.SpinButtonLayout"] = "增减按钮的布局方式。",
                 ["ZenNumberBox.SpinButtonWidth"] = "增减按钮的宽度。",
                 ["ZenNumberBox.IsReadOnly"] = "是否禁止直接编辑文本；增减按钮仍然可用。",
-                ["ZenPasswordBox.IsPasswordRevealEnabled"] = "是否显示密码明文切换按钮。",
+                ["ZenPasswordBox.IsPasswordRevealButtonEnabled"] = "是否显示密码明文切换按钮。",
                 ["ZenPasswordBox.IsPasswordRevealed"] = "当前是否以明文显示密码。",
                 ["ZenPasswordBox.Watermark"] = "密码为空时显示的水印。",
                 ["ZenPasswordBox.LeadingContent"] = "显示在密码输入区域之前的内容。",
@@ -104,7 +104,7 @@ namespace ZenUI.Wpf.Gallery.Controls
         private static readonly Dictionary<string, string> PropertyVersionOverrides =
             new Dictionary<string, string>(StringComparer.Ordinal)
             {
-                ["ZenAlert.Variant"] = "0.1.0-preview.1",
+                ["ZenAlert.Severity"] = "0.1.0-preview.1",
                 ["ZenButton.CornerRadius"] = "0.1.0-preview.1",
                 ["ZenButton.Variant"] = "0.1.0-preview.1",
                 ["ZenDataGrid.IsRowSelectionHighlightEnabled"] = "0.1.0-preview.3",

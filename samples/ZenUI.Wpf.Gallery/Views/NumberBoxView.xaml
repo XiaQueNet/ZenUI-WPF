@@ -36,7 +36,7 @@
                     <zen:ZenNumberBox
                         Width="180"
                         HorizontalAlignment="Left"
-                        ButtonMode="Vertical"
+                        SpinButtonLayout="Vertical"
                         Maximum="10"
                         Minimum="0"
                         SpinButtonWidth="32"
@@ -57,7 +57,7 @@
                         <zen:ZenNumberBox
                             Width="180"
                             Margin="16,0,0,0"
-                            ButtonMode="Vertical"
+                            SpinButtonLayout="Vertical"
                             IsEnabled="False"
                             Value="12" />
                     </StackPanel>

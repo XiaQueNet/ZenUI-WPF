@@ -325,7 +325,7 @@
                                 x:Name="PasswordBox"
                                 Height="60"
                                 Margin="0,14,0,0"
-                                IsPasswordRevealEnabled="True"
+                                IsPasswordRevealButtonEnabled="True"
                                 Watermark="输入任意密码">
                                 <zen:ZenPasswordBox.LeadingContent>
                                     <TextBlock
@@ -427,7 +427,7 @@
                         <zen:ZenAlert
                             Margin="0,0,0,16"
                             Content="{Binding StatusMessage}"
-                            Variant="{Binding StatusVariant}"
+                            Severity="{Binding StatusSeverity}"
                             Visibility="{Binding StatusVisibility}" />
                         <zen:ZenButton
                             x:Name="LoginButton"
