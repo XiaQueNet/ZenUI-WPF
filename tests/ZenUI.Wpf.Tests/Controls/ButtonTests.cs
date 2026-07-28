@@ -72,8 +72,55 @@ namespace ZenUI.Wpf.Tests.Controls
 
                 Assert.AreEqual(Brushes.Transparent, text.ThemeBackground);
                 Assert.AreSame(resources["ZenNeutralActionBrush"], text.ThemeForeground);
+                Assert.AreSame(resources["ZenSurfaceMutedBrush"], text.ThemeHoverBackground);
                 Assert.AreSame(resources["ZenNeutralActionHoverBrush"], text.ThemeHoverForeground);
+                Assert.AreSame(resources["ZenSurfaceDisabledBrush"], text.ThemePressedBackground);
                 Assert.AreSame(resources["ZenNeutralActionPressedBrush"], text.ThemePressedForeground);
+            }
+            finally
+            {
+                window.Close();
+            }
+        }
+
+        [TestMethod]
+        public void TextAppearanceUsesVariantInteractionBackgrounds()
+        {
+            var resources = new ResourceDictionary
+            {
+                Source = new Uri(
+                    "/ZenUI.Wpf;component/Themes/Generic.xaml",
+                    UriKind.Relative)
+            };
+            var primary = new ZenButton { Appearance = ButtonAppearance.Text };
+            var success = new ZenButton
+            {
+                Appearance = ButtonAppearance.Text,
+                Variant = ButtonVariant.Success
+            };
+            var warning = new ZenButton
+            {
+                Appearance = ButtonAppearance.Text,
+                Variant = ButtonVariant.Warning
+            };
+            var panel = new StackPanel();
+            panel.Children.Add(primary);
+            panel.Children.Add(success);
+            panel.Children.Add(warning);
+            var window = CreateTestWindow(panel, 320, 180);
+            window.Resources.MergedDictionaries.Add(resources);
+
+            try
+            {
+                window.Show();
+                window.UpdateLayout();
+
+                Assert.AreSame(resources["ZenInfoLightBrush"], primary.ThemeHoverBackground);
+                Assert.AreSame(resources["ZenInfoLightBrush"], primary.ThemePressedBackground);
+                Assert.AreSame(resources["ZenSuccessLightBrush"], success.ThemeHoverBackground);
+                Assert.AreSame(resources["ZenSuccessLightBrush"], success.ThemePressedBackground);
+                Assert.AreSame(resources["ZenWarningLightBrush"], warning.ThemeHoverBackground);
+                Assert.AreSame(resources["ZenWarningLightBrush"], warning.ThemePressedBackground);
             }
             finally
             {
