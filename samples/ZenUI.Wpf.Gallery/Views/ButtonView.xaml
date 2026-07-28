@@ -13,9 +13,7 @@
             <Setter Property="Margin" Value="0" />
             <Setter Property="VerticalAlignment" Value="Center" />
         </Style>
-        <Style
-            x:Key="ButtonPageIconStyle"
-            TargetType="{x:Type Path}">
+        <Style x:Key="ButtonPageIconStyle" TargetType="{x:Type Path}">
             <Setter Property="Width" Value="14" />
             <Setter Property="Height" Value="14" />
             <Setter Property="Stretch" Value="Uniform" />
@@ -97,9 +95,12 @@
             <Setter Property="PressedForeground" Value="{StaticResource RainbowButtonPressedForegroundBrush}" />
         </Style>
     </UserControl.Resources>
-    <ScrollViewer Padding="40" HorizontalContentAlignment="Stretch" VerticalScrollBarVisibility="Auto">
+    <ScrollViewer
+        Padding="40"
+        HorizontalContentAlignment="Stretch"
+        VerticalScrollBarVisibility="Auto">
         <StackPanel>
-            <gallery:PageHeader Description="用于触发即时操作，支持三种外观、四种语义、丰富内容和完整交互状态。" Title="Button 按钮" />
+            <gallery:PageHeader Title="Button 按钮" Description="用于触发即时操作，支持三种外观、四种语义、丰富内容和完整交互状态。" />
 
             <Border Style="{StaticResource GalleryCardStyle}">
                 <StackPanel>
@@ -111,30 +112,78 @@
                         TextWrapping="Wrap" />
                     <StackPanel>
                         <DockPanel Margin="0,0,0,12">
-                            <TextBlock DockPanel.Dock="Left" Style="{StaticResource ButtonPageRowLabelStyle}" Text="Filled" />
+                            <TextBlock
+                                DockPanel.Dock="Left"
+                                Style="{StaticResource ButtonPageRowLabelStyle}"
+                                Text="Filled" />
                             <WrapPanel>
-                                <zen:ZenButton Content="中性按钮" Style="{StaticResource GalleryButtonStyle}" Variant="Neutral" />
+                                <zen:ZenButton
+                                    Content="中性按钮"
+                                    Style="{StaticResource GalleryButtonStyle}"
+                                    Variant="Neutral" />
                                 <zen:ZenButton Content="主要按钮" Style="{StaticResource GalleryButtonStyle}" />
-                                <zen:ZenButton Content="成功按钮" Style="{StaticResource GalleryButtonStyle}" Variant="Success" />
-                                <zen:ZenButton Content="警告按钮" Style="{StaticResource GalleryButtonStyle}" Variant="Warning" />
+                                <zen:ZenButton
+                                    Content="成功按钮"
+                                    Style="{StaticResource GalleryButtonStyle}"
+                                    Variant="Success" />
+                                <zen:ZenButton
+                                    Content="警告按钮"
+                                    Style="{StaticResource GalleryButtonStyle}"
+                                    Variant="Warning" />
                             </WrapPanel>
                         </DockPanel>
                         <DockPanel Margin="0,0,0,12">
-                            <TextBlock DockPanel.Dock="Left" Style="{StaticResource ButtonPageRowLabelStyle}" Text="Outlined" />
+                            <TextBlock
+                                DockPanel.Dock="Left"
+                                Style="{StaticResource ButtonPageRowLabelStyle}"
+                                Text="Outlined" />
                             <WrapPanel>
-                                <zen:ZenButton Appearance="Outlined" Content="中性按钮" Style="{StaticResource GalleryButtonStyle}" Variant="Neutral" />
-                                <zen:ZenButton Appearance="Outlined" Content="主要按钮" Style="{StaticResource GalleryButtonStyle}" />
-                                <zen:ZenButton Appearance="Outlined" Content="成功按钮" Style="{StaticResource GalleryButtonStyle}" Variant="Success" />
-                                <zen:ZenButton Appearance="Outlined" Content="警告按钮" Style="{StaticResource GalleryButtonStyle}" Variant="Warning" />
+                                <zen:ZenButton
+                                    Appearance="Outlined"
+                                    Content="中性按钮"
+                                    Style="{StaticResource GalleryButtonStyle}"
+                                    Variant="Neutral" />
+                                <zen:ZenButton
+                                    Appearance="Outlined"
+                                    Content="主要按钮"
+                                    Style="{StaticResource GalleryButtonStyle}" />
+                                <zen:ZenButton
+                                    Appearance="Outlined"
+                                    Content="成功按钮"
+                                    Style="{StaticResource GalleryButtonStyle}"
+                                    Variant="Success" />
+                                <zen:ZenButton
+                                    Appearance="Outlined"
+                                    Content="警告按钮"
+                                    Style="{StaticResource GalleryButtonStyle}"
+                                    Variant="Warning" />
                             </WrapPanel>
                         </DockPanel>
                         <DockPanel>
-                            <TextBlock DockPanel.Dock="Left" Style="{StaticResource ButtonPageRowLabelStyle}" Text="Text" />
+                            <TextBlock
+                                DockPanel.Dock="Left"
+                                Style="{StaticResource ButtonPageRowLabelStyle}"
+                                Text="Text" />
                             <WrapPanel>
-                                <zen:ZenButton Appearance="Text" Content="中性按钮" Style="{StaticResource GalleryButtonStyle}" Variant="Neutral" />
-                                <zen:ZenButton Appearance="Text" Content="主要按钮" Style="{StaticResource GalleryButtonStyle}" />
-                                <zen:ZenButton Appearance="Text" Content="成功按钮" Style="{StaticResource GalleryButtonStyle}" Variant="Success" />
-                                <zen:ZenButton Appearance="Text" Content="警告按钮" Style="{StaticResource GalleryButtonStyle}" Variant="Warning" />
+                                <zen:ZenButton
+                                    Appearance="Text"
+                                    Content="中性按钮"
+                                    Style="{StaticResource GalleryButtonStyle}"
+                                    Variant="Neutral" />
+                                <zen:ZenButton
+                                    Appearance="Text"
+                                    Content="主要按钮"
+                                    Style="{StaticResource GalleryButtonStyle}" />
+                                <zen:ZenButton
+                                    Appearance="Text"
+                                    Content="成功按钮"
+                                    Style="{StaticResource GalleryButtonStyle}"
+                                    Variant="Success" />
+                                <zen:ZenButton
+                                    Appearance="Text"
+                                    Content="警告按钮"
+                                    Style="{StaticResource GalleryButtonStyle}"
+                                    Variant="Warning" />
                             </WrapPanel>
                         </DockPanel>
                     </StackPanel>
@@ -149,7 +198,10 @@
                         Style="{StaticResource GallerySupportingTextStyle}"
                         Text="通过 Height、Padding 和 FontSize 组合尺寸；Content 可承载文字、图标或任意 WPF 内容。" />
                     <DockPanel Margin="0,0,0,18">
-                        <TextBlock DockPanel.Dock="Left" Style="{StaticResource ButtonPageRowLabelStyle}" Text="尺寸" />
+                        <TextBlock
+                            DockPanel.Dock="Left"
+                            Style="{StaticResource ButtonPageRowLabelStyle}"
+                            Text="尺寸" />
                         <WrapPanel VerticalAlignment="Center">
                             <zen:ZenButton
                                 Height="30"
@@ -169,7 +221,10 @@
                         </WrapPanel>
                     </DockPanel>
                     <DockPanel>
-                        <TextBlock DockPanel.Dock="Left" Style="{StaticResource ButtonPageRowLabelStyle}" Text="丰富内容" />
+                        <TextBlock
+                            DockPanel.Dock="Left"
+                            Style="{StaticResource ButtonPageRowLabelStyle}"
+                            Text="丰富内容" />
                         <WrapPanel>
                             <zen:ZenButton Style="{StaticResource GalleryButtonStyle}">
                                 <StackPanel Orientation="Horizontal">
@@ -207,19 +262,42 @@
                         Text="将鼠标移到可用按钮上并按下，可以查看 Hover 和 Pressed 状态。"
                         TextWrapping="Wrap" />
                     <DockPanel Margin="0,0,0,12">
-                        <TextBlock DockPanel.Dock="Left" Style="{StaticResource ButtonPageRowLabelStyle}" Text="可用" />
+                        <TextBlock
+                            DockPanel.Dock="Left"
+                            Style="{StaticResource ButtonPageRowLabelStyle}"
+                            Text="可用" />
                         <WrapPanel>
                             <zen:ZenButton Content="填充按钮" Style="{StaticResource GalleryButtonStyle}" />
-                            <zen:ZenButton Appearance="Outlined" Content="描边按钮" Style="{StaticResource GalleryButtonStyle}" />
-                            <zen:ZenButton Appearance="Text" Content="文本按钮" Style="{StaticResource GalleryButtonStyle}" />
+                            <zen:ZenButton
+                                Appearance="Outlined"
+                                Content="描边按钮"
+                                Style="{StaticResource GalleryButtonStyle}" />
+                            <zen:ZenButton
+                                Appearance="Text"
+                                Content="文本按钮"
+                                Style="{StaticResource GalleryButtonStyle}" />
                         </WrapPanel>
                     </DockPanel>
                     <DockPanel>
-                        <TextBlock DockPanel.Dock="Left" Style="{StaticResource ButtonPageRowLabelStyle}" Text="禁用" />
+                        <TextBlock
+                            DockPanel.Dock="Left"
+                            Style="{StaticResource ButtonPageRowLabelStyle}"
+                            Text="禁用" />
                         <WrapPanel>
-                            <zen:ZenButton Content="填充按钮" IsEnabled="False" Style="{StaticResource GalleryButtonStyle}" />
-                            <zen:ZenButton Appearance="Outlined" Content="描边按钮" IsEnabled="False" Style="{StaticResource GalleryButtonStyle}" />
-                            <zen:ZenButton Appearance="Text" Content="文本按钮" IsEnabled="False" Style="{StaticResource GalleryButtonStyle}" />
+                            <zen:ZenButton
+                                Content="填充按钮"
+                                IsEnabled="False"
+                                Style="{StaticResource GalleryButtonStyle}" />
+                            <zen:ZenButton
+                                Appearance="Outlined"
+                                Content="描边按钮"
+                                IsEnabled="False"
+                                Style="{StaticResource GalleryButtonStyle}" />
+                            <zen:ZenButton
+                                Appearance="Text"
+                                Content="文本按钮"
+                                IsEnabled="False"
+                                Style="{StaticResource GalleryButtonStyle}" />
                         </WrapPanel>
                     </DockPanel>
                 </StackPanel>
@@ -248,9 +326,20 @@
                                     Style="{StaticResource GallerySupportingTextStyle}"
                                     Text="发布后，所有使用者都能立即获得最新内容。" />
                             </StackPanel>
-                            <StackPanel Grid.Column="1" VerticalAlignment="Center" Orientation="Horizontal">
-                                <zen:ZenButton Appearance="Text" Content="取消" Style="{StaticResource GalleryButtonStyle}" Variant="Neutral" />
-                                <zen:ZenButton Appearance="Outlined" Content="保存草稿" Style="{StaticResource GalleryButtonStyle}" Variant="Neutral" />
+                            <StackPanel
+                                Grid.Column="1"
+                                VerticalAlignment="Center"
+                                Orientation="Horizontal">
+                                <zen:ZenButton
+                                    Appearance="Text"
+                                    Content="取消"
+                                    Style="{StaticResource GalleryButtonStyle}"
+                                    Variant="Neutral" />
+                                <zen:ZenButton
+                                    Appearance="Outlined"
+                                    Content="保存草稿"
+                                    Style="{StaticResource GalleryButtonStyle}"
+                                    Variant="Neutral" />
                                 <zen:ZenButton Content="立即发布" Style="{StaticResource GalleryButtonStyle}" />
                             </StackPanel>
                         </Grid>
@@ -272,20 +361,50 @@
                         Text="CornerRadius 支持统一圆角和四角独立设置；胶囊按钮的圆角等于按钮高度的一半。"
                         TextWrapping="Wrap" />
                     <DockPanel Margin="0,0,0,12">
-                        <TextBlock DockPanel.Dock="Left" Style="{StaticResource ButtonPageRowLabelStyle}" Text="统一圆角" />
+                        <TextBlock
+                            DockPanel.Dock="Left"
+                            Style="{StaticResource ButtonPageRowLabelStyle}"
+                            Text="统一圆角" />
                         <WrapPanel>
-                            <zen:ZenButton Content="直角 0" CornerRadius="0" Style="{StaticResource GalleryButtonStyle}" />
-                            <zen:ZenButton Content="小圆角 4" CornerRadius="4" Style="{StaticResource GalleryButtonStyle}" />
-                            <zen:ZenButton Content="默认 10" CornerRadius="10" Style="{StaticResource GalleryButtonStyle}" />
-                            <zen:ZenButton Content="胶囊 18" CornerRadius="18" Style="{StaticResource GalleryButtonStyle}" />
+                            <zen:ZenButton
+                                Content="直角 0"
+                                CornerRadius="0"
+                                Style="{StaticResource GalleryButtonStyle}" />
+                            <zen:ZenButton
+                                Content="小圆角 4"
+                                CornerRadius="4"
+                                Style="{StaticResource GalleryButtonStyle}" />
+                            <zen:ZenButton
+                                Content="默认 10"
+                                CornerRadius="10"
+                                Style="{StaticResource GalleryButtonStyle}" />
+                            <zen:ZenButton
+                                Content="胶囊 18"
+                                CornerRadius="18"
+                                Style="{StaticResource GalleryButtonStyle}" />
                         </WrapPanel>
                     </DockPanel>
                     <DockPanel>
-                        <TextBlock DockPanel.Dock="Left" Style="{StaticResource ButtonPageRowLabelStyle}" Text="独立四角" />
+                        <TextBlock
+                            DockPanel.Dock="Left"
+                            Style="{StaticResource ButtonPageRowLabelStyle}"
+                            Text="独立四角" />
                         <WrapPanel>
-                            <zen:ZenButton Appearance="Outlined" Content="左侧圆角" CornerRadius="18,0,0,18" Style="{StaticResource GalleryButtonStyle}" />
-                            <zen:ZenButton Appearance="Outlined" Content="右侧圆角" CornerRadius="0,18,18,0" Style="{StaticResource GalleryButtonStyle}" />
-                            <zen:ZenButton Appearance="Outlined" Content="对角圆角" CornerRadius="18,0,18,0" Style="{StaticResource GalleryButtonStyle}" />
+                            <zen:ZenButton
+                                Appearance="Outlined"
+                                Content="左侧圆角"
+                                CornerRadius="18,0,0,18"
+                                Style="{StaticResource GalleryButtonStyle}" />
+                            <zen:ZenButton
+                                Appearance="Outlined"
+                                Content="右侧圆角"
+                                CornerRadius="0,18,18,0"
+                                Style="{StaticResource GalleryButtonStyle}" />
+                            <zen:ZenButton
+                                Appearance="Outlined"
+                                Content="对角圆角"
+                                CornerRadius="18,0,18,0"
+                                Style="{StaticResource GalleryButtonStyle}" />
                         </WrapPanel>
                     </DockPanel>
                 </StackPanel>
