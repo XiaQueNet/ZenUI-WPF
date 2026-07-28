@@ -50,6 +50,30 @@ namespace ZenUI.Wpf.Controls
         public static readonly DependencyProperty IconForegroundProperty =
             RegisterBrush(nameof(IconForeground));
 
+        /// <summary>
+        /// 获取或设置提示图标的边长。
+        /// </summary>
+        [Bindable(true)]
+        public double IconSize
+        {
+            get { return (double)GetValue(IconSizeProperty); }
+            set { SetValue(IconSizeProperty, value); }
+        }
+
+        /// <summary>
+        /// 标识 <see cref="IconSize"/> 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty IconSizeProperty =
+            DependencyProperty.Register(
+                nameof(IconSize),
+                typeof(double),
+                SelfType,
+                new FrameworkPropertyMetadata(
+                    18d,
+                    FrameworkPropertyMetadataOptions.AffectsMeasure |
+                    FrameworkPropertyMetadataOptions.AffectsRender),
+                IsValidIconSize);
+
         [EditorBrowsable(EditorBrowsableState.Never)]
         public Brush ThemeBackground
         {
@@ -109,6 +133,14 @@ namespace ZenUI.Wpf.Controls
                 new FrameworkPropertyMetadata(
                     null,
                     FrameworkPropertyMetadataOptions.AffectsRender));
+        }
+
+        private static bool IsValidIconSize(object value)
+        {
+            var size = (double)value;
+            return !double.IsNaN(size) &&
+                !double.IsInfinity(size) &&
+                size >= 0d;
         }
 
         /// <inheritdoc/>

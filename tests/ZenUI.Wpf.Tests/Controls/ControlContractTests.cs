@@ -82,6 +82,7 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.IsNull(passwordBox.LeadingContentTemplate);
             Assert.IsNull(passwordBox.TrailingContent);
             Assert.IsNull(passwordBox.TrailingContentTemplate);
+            Assert.AreEqual(18d, alert.IconSize);
             Assert.AreEqual(AlertSeverity.Info, alert.Severity);
         }
 
@@ -287,6 +288,46 @@ namespace ZenUI.Wpf.Tests.Controls
                 Assert.AreEqual(28d, checkBoxIndicator.ActualHeight, 0.1d);
                 Assert.AreEqual(30d, radioButtonIndicator.ActualWidth, 0.1d);
                 Assert.AreEqual(30d, radioButtonIndicator.ActualHeight, 0.1d);
+            }
+            finally
+            {
+                window.Close();
+            }
+        }
+
+        [TestMethod]
+        public void AlertAppliesCustomIconSize()
+        {
+            var alert = new ZenAlert
+            {
+                Content = "Saved",
+                IconSize = 28d
+            };
+            var window = CreateTestWindow(alert, 300, 100);
+            window.Resources.MergedDictionaries.Add(new ResourceDictionary
+            {
+                Source = new Uri(
+                    "/ZenUI.Wpf;component/Themes/Generic.xaml",
+                    UriKind.Relative)
+            });
+
+            try
+            {
+                window.Show();
+                window.UpdateLayout();
+
+                var iconHost = alert.Template.FindName("IconHost", alert) as FrameworkElement;
+                var iconText = alert.Template.FindName("IconText", alert) as FrameworkElement;
+
+                Assert.IsNotNull(iconHost);
+                Assert.IsNotNull(iconText);
+                Assert.AreEqual(28d, iconHost.ActualWidth, 0.1d);
+                Assert.AreEqual(28d, iconHost.ActualHeight, 0.1d);
+
+                var renderedTextBounds = iconText
+                    .TransformToAncestor(iconHost)
+                    .TransformBounds(new Rect(iconText.RenderSize));
+                Assert.IsGreaterThan(iconText.ActualHeight, renderedTextBounds.Height);
             }
             finally
             {

@@ -31,9 +31,20 @@
                         CornerRadius="6">
                         <Grid>
                             <Grid.ColumnDefinitions><ColumnDefinition Width="Auto" /><ColumnDefinition Width="*" /></Grid.ColumnDefinitions>
-                            <Border x:Name="Icon" Width="18" Height="18" VerticalAlignment="Top" Background="{TemplateBinding AccentBrush}" CornerRadius="9">
-                                <TextBlock x:Name="IconText" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="{DynamicResource ZenFontSizeCaption}" FontWeight="{DynamicResource ZenFontWeightBold}" Foreground="{TemplateBinding IconForeground}" Text="i" />
-                            </Border>
+                            <Grid
+                                x:Name="IconHost"
+                                Width="{TemplateBinding IconSize}"
+                                Height="{TemplateBinding IconSize}"
+                                VerticalAlignment="Top">
+                                <Viewbox Stretch="Uniform">
+                                    <Grid Width="18" Height="18">
+                                        <Ellipse
+                                            x:Name="Icon"
+                                            Fill="{TemplateBinding AccentBrush}" />
+                                        <TextBlock x:Name="IconText" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="{DynamicResource ZenFontSizeCaption}" FontWeight="{DynamicResource ZenFontWeightBold}" Foreground="{TemplateBinding IconForeground}" Text="i" />
+                                    </Grid>
+                                </Viewbox>
+                            </Grid>
                             <ContentPresenter Grid.Column="1" Margin="10,0,0,0" VerticalAlignment="Center" TextElement.Foreground="{TemplateBinding Foreground}" />
                         </Grid>
                     </Border>

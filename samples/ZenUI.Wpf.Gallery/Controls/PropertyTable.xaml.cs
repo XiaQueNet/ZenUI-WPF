@@ -17,6 +17,7 @@ namespace ZenUI.Wpf.Gallery.Controls
             {
                 ["ZenAlert.AccentBrush"] = "提示图标的强调色画刷。",
                 ["ZenAlert.IconForeground"] = "提示图标的前景画刷。",
+                ["ZenAlert.IconSize"] = "提示图标的边长。",
                 ["ZenAlert.Severity"] = "提示条的严重级别。",
                 ["ZenButton.CornerRadius"] = "按钮的圆角半径。",
                 ["ZenButton.Variant"] = "按钮的语义类型。",

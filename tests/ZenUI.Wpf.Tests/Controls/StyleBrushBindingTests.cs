@@ -179,11 +179,11 @@ namespace ZenUI.Wpf.Tests.Controls
             ControlBrushPalette palette)
         {
             var border = (Border)alert.Template.FindName("AlertBorder", alert);
-            var icon = (Border)alert.Template.FindName("Icon", alert);
+            var icon = (Ellipse)alert.Template.FindName("Icon", alert);
             var iconText = (TextBlock)alert.Template.FindName("IconText", alert);
             Assert.AreSame(palette.Surface, border.Background);
             Assert.AreSame(palette.Border, border.BorderBrush);
-            Assert.AreSame(palette.Accent, icon.Background);
+            Assert.AreSame(palette.Accent, icon.Fill);
             Assert.AreSame(palette.Glyph, iconText.Foreground);
             Assert.AreSame(palette.Foreground, alert.Foreground);
         }

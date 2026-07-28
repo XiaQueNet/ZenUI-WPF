@@ -4,6 +4,10 @@
 
 ## Unreleased
 
+### Added
+
+- `ZenAlert` 增加 `IconSize` 属性，用于自定义提示图标尺寸。
+
 ## [0.1.0-preview.5] - 2026-07-27
 
 ### Added
