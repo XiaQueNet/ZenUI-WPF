@@ -18,24 +18,29 @@
                 CanUserAddRows="False"
                 CanUserDeleteRows="False"
                 CanUserReorderColumns="False"
+                CanUserResizeColumns="False"
                 CanUserResizeRows="False"
                 CanUserSortColumns="False"
-                IsHitTestVisible="False"
                 IsReadOnly="True"
                 IsTabStop="False"
                 ItemsSource="{Binding Rows, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}">
                 <DataGrid.Columns>
-                    <DataGridTextColumn
-                        Width="1.15*"
-                        Binding="{Binding Name}"
-                        Header="属性名">
-                        <DataGridTextColumn.ElementStyle>
-                            <Style TargetType="{x:Type TextBlock}">
-                                <Setter Property="FontFamily" Value="Consolas" />
-                                <Setter Property="TextWrapping" Value="Wrap" />
-                            </Style>
-                        </DataGridTextColumn.ElementStyle>
-                    </DataGridTextColumn>
+                    <DataGridTemplateColumn Width="1.55*" Header="属性名">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <zen:ZenButton
+                                    Padding="4,2"
+                                    HorizontalContentAlignment="Left"
+                                    Appearance="Text"
+                                    AutomationProperties.Name="{Binding Name, StringFormat=复制属性 {0}}"
+                                    Click="CopyPropertyName_OnClick"
+                                    Content="{Binding Name}"
+                                    FontFamily="Consolas"
+                                    ToolTip="单击复制属性名"
+                                    Variant="Neutral" />
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                     <DataGridTextColumn
                         Width="2.5*"
                         Binding="{Binding Description}"

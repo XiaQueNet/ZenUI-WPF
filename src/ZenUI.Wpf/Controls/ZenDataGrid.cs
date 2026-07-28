@@ -1,6 +1,7 @@
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Media;
 
 namespace ZenUI.Wpf.Controls
 {
@@ -55,6 +56,47 @@ namespace ZenUI.Wpf.Controls
                 typeof(object),
                 typeof(ZenDataGrid),
                 new FrameworkPropertyMetadata("暂无数据"));
+
+        /// <summary>
+        /// 获取或设置列标题区域的背景画刷。
+        /// </summary>
+        [Bindable(true)]
+        public Brush ColumnHeaderBackground
+        {
+            get { return (Brush)GetValue(ColumnHeaderBackgroundProperty); }
+            set { SetValue(ColumnHeaderBackgroundProperty, value); }
+        }
+
+        /// <summary>
+        /// 标识 <see cref="ColumnHeaderBackground"/> 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty ColumnHeaderBackgroundProperty =
+            DependencyProperty.Register(
+                nameof(ColumnHeaderBackground),
+                typeof(Brush),
+                typeof(ZenDataGrid),
+                new FrameworkPropertyMetadata(null));
+
+        /// <summary>
+        /// 获取或设置列标题内容的前景画刷。
+        /// </summary>
+        [Bindable(true)]
+        public Brush ColumnHeaderForeground
+        {
+            get { return (Brush)GetValue(ColumnHeaderForegroundProperty); }
+            set { SetValue(ColumnHeaderForegroundProperty, value); }
+        }
+
+        /// <summary>
+        /// 标识 <see cref="ColumnHeaderForeground"/> 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty ColumnHeaderForegroundProperty =
+            DependencyProperty.Register(
+                nameof(ColumnHeaderForeground),
+                typeof(Brush),
+                typeof(ZenDataGrid),
+                new FrameworkPropertyMetadata(null));
+
         /// <summary>
         /// 获取或设置选中行是否使用主题选择高亮。
         /// </summary>

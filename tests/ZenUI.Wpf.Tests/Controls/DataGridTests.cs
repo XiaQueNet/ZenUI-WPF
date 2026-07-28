@@ -68,6 +68,73 @@ namespace ZenUI.Wpf.Tests.Controls
         }
 
         [TestMethod]
+        public void DataGridAppliesColumnHeaderBrushes()
+        {
+            var headerBackground = new SolidColorBrush(Color.FromRgb(0x12, 0x34, 0x56));
+            var headerForeground = new SolidColorBrush(Color.FromRgb(0xFE, 0xDC, 0xBA));
+            var dataGrid = new ZenDataGrid
+            {
+                AutoGenerateColumns = false,
+                ColumnHeaderBackground = headerBackground,
+                ColumnHeaderForeground = headerForeground,
+                HeadersVisibility = DataGridHeadersVisibility.All,
+                Height = 120,
+                ItemsSource = new[] { new { Name = "成员" } },
+                RowHeaderWidth = 32
+            };
+            var column = new ZenDataGridTextColumn
+            {
+                Binding = new Binding("Name"),
+                CellHorizontalContentAlignment = HorizontalAlignment.Right,
+                CellVerticalContentAlignment = VerticalAlignment.Bottom,
+                Header = "名称",
+                HeaderHorizontalContentAlignment = HorizontalAlignment.Center,
+                HeaderVerticalContentAlignment = VerticalAlignment.Bottom
+            };
+            dataGrid.Columns.Add(column);
+            var window = CreateTestWindow(dataGrid, 240, 180);
+
+            try
+            {
+                window.Show();
+                window.UpdateLayout();
+
+                var header = FindVisualDescendants<DataGridColumnHeader>(dataGrid)
+                    .FirstOrDefault(candidate => candidate.Column == dataGrid.Columns[0]);
+                Assert.IsNotNull(header);
+                Assert.AreSame(headerBackground, header.Background);
+                Assert.AreSame(headerForeground, header.Foreground);
+                Assert.AreEqual(HorizontalAlignment.Center, header.HorizontalContentAlignment);
+                Assert.AreEqual(VerticalAlignment.Bottom, header.VerticalContentAlignment);
+
+                var cell = FindVisualDescendants<DataGridCell>(dataGrid)
+                    .FirstOrDefault(candidate => candidate.Column == column);
+                Assert.IsNotNull(cell);
+                Assert.AreEqual(HorizontalAlignment.Right, cell.HorizontalContentAlignment);
+                Assert.AreEqual(VerticalAlignment.Bottom, cell.VerticalContentAlignment);
+                cell.ApplyTemplate();
+                var contentPresenter = FindVisualDescendant<ContentPresenter>(cell);
+                Assert.IsNotNull(contentPresenter);
+                Assert.AreEqual(HorizontalAlignment.Right, contentPresenter.HorizontalAlignment);
+                Assert.AreEqual(VerticalAlignment.Bottom, contentPresenter.VerticalAlignment);
+
+                var scrollViewer = dataGrid.Template.FindName("DG_ScrollViewer", dataGrid) as ScrollViewer;
+                Assert.IsNotNull(scrollViewer);
+                scrollViewer.ApplyTemplate();
+                var selectAllButton = scrollViewer.Template.FindName(
+                    "PART_SelectAllButton",
+                    scrollViewer) as Button;
+                Assert.IsNotNull(selectAllButton);
+                Assert.AreSame(headerBackground, selectAllButton.Background);
+                Assert.AreSame(headerForeground, selectAllButton.Foreground);
+            }
+            finally
+            {
+                window.Close();
+            }
+        }
+
+        [TestMethod]
         public void DataGridPreservesSelectionLayoutAndVirtualizationContracts()
         {
             var rows = Enumerable.Range(0, 1000)

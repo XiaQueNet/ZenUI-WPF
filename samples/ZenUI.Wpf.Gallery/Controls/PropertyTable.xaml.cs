@@ -4,6 +4,7 @@ using System.ComponentModel;
 using System.Globalization;
 using System.Linq;
 using System.Reflection;
+using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
@@ -39,10 +40,16 @@ namespace ZenUI.Wpf.Gallery.Controls
                 ["ZenComboBox.CornerRadius"] = "下拉框的圆角半径。",
                 ["ZenDataGrid.CornerRadius"] = "数据网格的圆角半径。",
                 ["ZenDataGrid.EmptyContent"] = "没有数据时显示的内容。",
+                ["ZenDataGrid.ColumnHeaderBackground"] = "列标题区域的背景画刷。",
+                ["ZenDataGrid.ColumnHeaderForeground"] = "列标题内容的前景画刷。",
                 ["ZenDataGrid.IsRowSelectionHighlightEnabled"] = "选中行是否使用主题选择高亮。",
                 ["ZenDataGrid.IsCellFocusVisualEnabled"] = "当前单元格是否显示键盘焦点边框。",
                 ["ZenDataGrid.CellFocusVisualBorderThickness"] = "当前单元格焦点视觉的边框宽度。",
                 ["ZenDataGrid.CellValidationBorderThickness"] = "单元格校验错误的边框宽度。",
+                ["ZenDataGridTextColumn.HeaderHorizontalContentAlignment"] = "列标题内容的水平对齐方式。",
+                ["ZenDataGridTextColumn.HeaderVerticalContentAlignment"] = "列标题内容的垂直对齐方式。",
+                ["ZenDataGridTextColumn.CellHorizontalContentAlignment"] = "单元格内容的水平对齐方式。",
+                ["ZenDataGridTextColumn.CellVerticalContentAlignment"] = "单元格内容的垂直对齐方式。",
                 ["ZenDatePicker.Watermark"] = "尚未选择日期时显示的水印。",
                 ["ZenDatePicker.IsTextInputEnabled"] = "是否允许通过键盘直接输入日期。",
                 ["ZenDatePicker.CornerRadius"] = "日期输入框的圆角半径。",
@@ -92,6 +99,7 @@ namespace ZenUI.Wpf.Gallery.Controls
                 ["ZenCheckBox"] = "0.1.0-preview.4",
                 ["ZenComboBox"] = "0.1.0-preview.1",
                 ["ZenDataGrid"] = "0.1.0-preview.1",
+                ["ZenDataGridTextColumn"] = "0.1.0-preview.5",
                 ["ZenDatePicker"] = "0.1.0-preview.2",
                 ["ZenListBox"] = "0.1.0-preview.3",
                 ["ZenNumberBox"] = "0.1.0-preview.2",
@@ -112,6 +120,8 @@ namespace ZenUI.Wpf.Gallery.Controls
                 ["ZenDataGrid.IsCellFocusVisualEnabled"] = "0.1.0-preview.3",
                 ["ZenDataGrid.CellFocusVisualBorderThickness"] = "0.1.0-preview.3",
                 ["ZenDataGrid.CellValidationBorderThickness"] = "0.1.0-preview.3",
+                ["ZenDataGrid.ColumnHeaderBackground"] = "0.1.0-preview.5",
+                ["ZenDataGrid.ColumnHeaderForeground"] = "0.1.0-preview.5",
                 ["ZenDatePicker.CalendarDayButtonWidth"] = "0.1.0-preview.3",
                 ["ZenDatePicker.CalendarDayButtonHeight"] = "0.1.0-preview.3",
                 ["ZenDatePicker.CalendarButtonPadding"] = "0.1.0-preview.3",
@@ -167,6 +177,26 @@ namespace ZenUI.Wpf.Gallery.Controls
             PropertiesGrid.ItemsSource = Rows;
             PropertiesGrid.Visibility = Rows.Length == 0 ? Visibility.Collapsed : Visibility.Visible;
             EmptyState.Visibility = Rows.Length == 0 ? Visibility.Visible : Visibility.Collapsed;
+        }
+
+        private void CopyPropertyName_OnClick(object sender, RoutedEventArgs e)
+        {
+            if (!(sender is Button button)
+                || !(button.DataContext is PropertyRow row)
+                || string.IsNullOrEmpty(row.Name))
+            {
+                return;
+            }
+
+            try
+            {
+                Clipboard.SetText(row.Name);
+                button.ToolTip = "已复制：" + row.Name;
+            }
+            catch (ExternalException)
+            {
+                button.ToolTip = "复制失败，请重试";
+            }
         }
 
         private static PropertyRow[] CreateRows(Type controlType)

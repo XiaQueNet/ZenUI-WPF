@@ -4,9 +4,12 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:gallery="clr-namespace:ZenUI.Wpf.Gallery.Controls"
     xmlns:zen="https://zenui.mnorg.cn/xaml/wpf">
-    <ScrollViewer Padding="40" HorizontalContentAlignment="Stretch" VerticalScrollBarVisibility="Auto">
+    <ScrollViewer
+        Padding="40"
+        HorizontalContentAlignment="Stretch"
+        VerticalScrollBarVisibility="Auto">
         <StackPanel>
-            <gallery:PageHeader Description="用于展示和操作结构化数据，支持列排序、列宽调整、行选择与滚动。" Title="DataGrid 数据表格" />
+            <gallery:PageHeader Title="DataGrid 数据表格" Description="用于展示和操作结构化数据，支持列排序、列宽调整、行选择与滚动。" />
 
             <Border Style="{StaticResource GalleryCardStyle}">
                 <StackPanel>
@@ -17,16 +20,66 @@
                         IsReadOnly="True"
                         ItemsSource="{Binding Users}">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Width="80" Binding="{Binding Id}" Header="编号" />
-                            <DataGridTextColumn Width="*" MinWidth="130" Binding="{Binding Name}" Header="姓名" />
-                            <DataGridTextColumn Width="1.3*" MinWidth="170" Binding="{Binding Email}" Header="邮箱" />
-                            <DataGridTextColumn Width="120" Binding="{Binding Role}" Header="角色" />
-                            <DataGridTextColumn Width="100" Binding="{Binding Status}" Header="状态" />
+                            <DataGridTemplateColumn Width="48" CanUserSort="False">
+                                <DataGridTemplateColumn.HeaderTemplate>
+                                    <DataTemplate>
+                                        <zen:ZenCheckBox
+                                            HorizontalAlignment="Center"
+                                            IsChecked="{Binding DataContext.AreAllUsersSelected, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenDataGrid}}, Mode=TwoWay}"
+                                            IsThreeState="False"
+                                            ToolTip="全选或取消全选" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.HeaderTemplate>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <zen:ZenCheckBox
+                                            HorizontalAlignment="Center"
+                                            IsChecked="{Binding IsSelected, Mode=TwoWay, UpdateSourceTrigger=PropertyChanged}"
+                                            ToolTip="选择此行" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTextColumn
+                                Width="64"
+                                Binding="{Binding Sequence}"
+                                Header="序号">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="HorizontalAlignment" Value="Center" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn
+                                Width="80"
+                                Binding="{Binding Id}"
+                                Header="编号" />
+                            <DataGridTextColumn
+                                Width="*"
+                                MinWidth="130"
+                                Binding="{Binding Name}"
+                                Header="姓名" />
+                            <DataGridTextColumn
+                                Width="1.3*"
+                                MinWidth="170"
+                                Binding="{Binding Email}"
+                                Header="邮箱" />
+                            <DataGridTextColumn
+                                Width="120"
+                                Binding="{Binding Role}"
+                                Header="角色" />
+                            <zen:ZenDataGridTextColumn
+                                Width="110"
+                                Binding="{Binding MonthlyHours, StringFormat={}{0:N1}}"
+                                CellHorizontalContentAlignment="Right"
+                                Header="本月工时"
+                                HeaderHorizontalContentAlignment="Right" />
+                            <DataGridTextColumn
+                                Width="100"
+                                Binding="{Binding Status}"
+                                Header="状态" />
                         </DataGrid.Columns>
                     </zen:ZenDataGrid>
-                    <TextBlock
-                        Style="{StaticResource GallerySupportingTextStyle}"
-                        Text="默认仅显示 Hover 状态；可通过 IsRowSelectionHighlightEnabled 和 IsCellFocusVisualEnabled 按需开启选中反馈。" />
+                    <TextBlock Style="{StaticResource GallerySupportingTextStyle}" Text="表头复选框支持全选、取消全选和部分选中的三态反馈；本月工时作为数值列，列头和内容均右对齐。" />
                 </StackPanel>
             </Border>
 
@@ -36,15 +89,63 @@
                     <zen:ZenDataGrid
                         Height="180"
                         AutoGenerateColumns="False"
+                        CanUserResizeColumns="False"
+                        CanUserSortColumns="False"
                         IsReadOnly="True">
                         <DataGrid.Columns>
-                            <DataGridTextColumn Width="*" Header="名称" />
-                            <DataGridTextColumn Width="180" Header="状态" />
+                            <DataGridTemplateColumn Width="48" CanUserSort="False">
+                                <DataGridTemplateColumn.HeaderTemplate>
+                                    <DataTemplate>
+                                        <zen:ZenCheckBox
+                                            HorizontalAlignment="Center"
+                                            IsThreeState="False"
+                                            ToolTip="全选或取消全选" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.HeaderTemplate>
+                                <DataGridTemplateColumn.CellTemplate>
+                                    <DataTemplate>
+                                        <zen:ZenCheckBox HorizontalAlignment="Center" ToolTip="选择此行" />
+                                    </DataTemplate>
+                                </DataGridTemplateColumn.CellTemplate>
+                            </DataGridTemplateColumn>
+                            <DataGridTextColumn
+                                Width="64"
+                                Binding="{Binding Sequence}"
+                                Header="序号">
+                                <DataGridTextColumn.ElementStyle>
+                                    <Style TargetType="TextBlock">
+                                        <Setter Property="HorizontalAlignment" Value="Center" />
+                                    </Style>
+                                </DataGridTextColumn.ElementStyle>
+                            </DataGridTextColumn>
+                            <DataGridTextColumn
+                                Width="80"
+                                Binding="{Binding Id}"
+                                Header="编号" />
+                            <DataGridTextColumn
+                                Width="*"
+                                MinWidth="130"
+                                Binding="{Binding Name}"
+                                Header="姓名" />
+                            <DataGridTextColumn
+                                Width="1.3*"
+                                MinWidth="170"
+                                Binding="{Binding Email}"
+                                Header="邮箱" />
+                            <DataGridTextColumn
+                                Width="120"
+                                Binding="{Binding Role}"
+                                Header="角色" />
+                            <DataGridTextColumn
+                                Width="100"
+                                Binding="{Binding Status}"
+                                Header="状态" />
                         </DataGrid.Columns>
                     </zen:ZenDataGrid>
                 </StackPanel>
             </Border>
             <gallery:PropertyTable ControlType="{x:Type zen:ZenDataGrid}" />
+            <gallery:PropertyTable ControlType="{x:Type zen:ZenDataGridTextColumn}" />
         </StackPanel>
     </ScrollViewer>
 </UserControl>

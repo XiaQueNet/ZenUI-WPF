@@ -64,11 +64,11 @@
     <Style x:Key="ZenDataGridColumnHeaderStyle" TargetType="{x:Type DataGridColumnHeader}">
         <Setter Property="Height" Value="{DynamicResource ZenDataGridColumnHeaderHeight}" />
         <Setter Property="Padding" Value="14,0" />
-        <Setter Property="Background" Value="{DynamicResource ZenSurfaceMutedBrush}" />
-        <Setter Property="Foreground" Value="{DynamicResource ZenTextSecondaryBrush}" />
+        <Setter Property="Background" Value="{Binding ColumnHeaderBackground, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenDataGrid}}}" />
+        <Setter Property="Foreground" Value="{Binding ColumnHeaderForeground, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenDataGrid}}}" />
         <Setter Property="FontWeight" Value="{DynamicResource ZenFontWeightSemibold}" />
-        <Setter Property="HorizontalContentAlignment" Value="Left" />
-        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="{Binding Column.HeaderHorizontalContentAlignment, FallbackValue=Left, RelativeSource={RelativeSource Self}}" />
+        <Setter Property="VerticalContentAlignment" Value="{Binding Column.HeaderVerticalContentAlignment, FallbackValue=Center, RelativeSource={RelativeSource Self}}" />
         <Setter Property="BorderBrush" Value="{DynamicResource ZenDividerBrush}" />
         <Setter Property="BorderThickness" Value="0,0,1,1" />
         <Setter Property="Template">
@@ -87,8 +87,8 @@
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <ContentPresenter
-                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                     HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                     RecognizesAccessKey="True"
                                     SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
                                 <Path
@@ -136,7 +136,8 @@
         <Setter Property="Foreground" Value="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenDataGrid}}}" />
         <Setter Property="BorderBrush" Value="{DynamicResource ZenBorderBrush}" />
         <Setter Property="BorderThickness" Value="0,0,0,1" />
-        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="HorizontalContentAlignment" Value="{Binding Column.CellHorizontalContentAlignment, FallbackValue=Stretch, RelativeSource={RelativeSource Self}}" />
+        <Setter Property="VerticalContentAlignment" Value="{Binding Column.CellVerticalContentAlignment, FallbackValue=Center, RelativeSource={RelativeSource Self}}" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="Template">
             <Setter.Value>
@@ -149,7 +150,7 @@
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             SnapsToDevicePixels="True">
-                            <ContentPresenter VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+                            <ContentPresenter HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
                         </Border>
                         <Border
                             x:Name="StateBorder"
@@ -168,17 +169,11 @@
                                 <Condition Property="zen:ZenDataGrid.IsCellFocusVisualEnabled" Value="True" />
                             </MultiTrigger.Conditions>
                             <Setter TargetName="StateBorder" Property="BorderBrush" Value="{DynamicResource ZenPrimaryBrush}" />
-                            <Setter
-                                TargetName="StateBorder"
-                                Property="BorderThickness"
-                                Value="{Binding CellFocusVisualBorderThickness, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenDataGrid}}}" />
+                            <Setter TargetName="StateBorder" Property="BorderThickness" Value="{Binding CellFocusVisualBorderThickness, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenDataGrid}}}" />
                         </MultiTrigger>
                         <Trigger Property="Validation.HasError" Value="True">
                             <Setter TargetName="StateBorder" Property="BorderBrush" Value="{DynamicResource ZenErrorBrush}" />
-                            <Setter
-                                TargetName="StateBorder"
-                                Property="BorderThickness"
-                                Value="{Binding CellValidationBorderThickness, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenDataGrid}}}" />
+                            <Setter TargetName="StateBorder" Property="BorderThickness" Value="{Binding CellValidationBorderThickness, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenDataGrid}}}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -242,13 +237,13 @@
         </Setter>
     </Style>
 
-    <Style
-        x:Key="ZenDataGridStyle"
-        TargetType="{x:Type zen:ZenDataGrid}">
+    <Style x:Key="ZenDataGridStyle" TargetType="{x:Type zen:ZenDataGrid}">
         <Setter Property="FontSize" Value="{DynamicResource ZenFontSizeBody}" />
         <Setter Property="Background" Value="{DynamicResource ZenSurfaceBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource ZenBorderBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource ZenTextPrimaryBrush}" />
+        <Setter Property="ColumnHeaderBackground" Value="{DynamicResource ZenSurfaceMutedBrush}" />
+        <Setter Property="ColumnHeaderForeground" Value="{DynamicResource ZenTextSecondaryBrush}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="RowBackground" Value="{DynamicResource ZenSurfaceBrush}" />
         <Setter Property="AlternatingRowBackground" Value="{DynamicResource ZenDataGridAlternatingRowBrush}" />
@@ -308,12 +303,13 @@
                                                 x:Name="PART_SelectAllButton"
                                                 Width="{Binding CellsPanelHorizontalOffset, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
                                                 Height="{Binding ColumnHeaderHeight, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
-                                                Background="{DynamicResource ZenSurfaceMutedBrush}"
+                                                Background="{Binding ColumnHeaderBackground, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenDataGrid}}}"
                                                 BorderBrush="{DynamicResource ZenDividerBrush}"
                                                 BorderThickness="0,0,1,1"
                                                 Command="{x:Static DataGrid.SelectAllCommand}"
                                                 CommandTarget="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
                                                 Focusable="False"
+                                                Foreground="{Binding ColumnHeaderForeground, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenDataGrid}}}"
                                                 Visibility="{Binding HeadersVisibility, ConverterParameter={x:Static DataGridHeadersVisibility.All}, Converter={x:Static DataGrid.HeadersVisibilityConverter}, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
                                             <DataGridColumnHeadersPresenter
                                                 x:Name="PART_ColumnHeadersPresenter"
@@ -331,8 +327,8 @@
                                                 Maximum="{TemplateBinding ScrollableHeight}"
                                                 Orientation="Vertical"
                                                 ViewportSize="{TemplateBinding ViewportHeight}"
-                                                Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"
-                                                Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}" />
+                                                Visibility="{TemplateBinding ComputedVerticalScrollBarVisibility}"
+                                                Value="{Binding VerticalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" />
                                             <Grid Grid.Row="2" Grid.Column="1">
                                                 <Grid.ColumnDefinitions>
                                                     <ColumnDefinition Width="{Binding NonFrozenColumnsViewportHorizontalOffset, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}" />
@@ -344,8 +340,8 @@
                                                     Maximum="{TemplateBinding ScrollableWidth}"
                                                     Orientation="Horizontal"
                                                     ViewportSize="{TemplateBinding ViewportWidth}"
-                                                    Value="{Binding HorizontalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}"
-                                                    Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}" />
+                                                    Visibility="{TemplateBinding ComputedHorizontalScrollBarVisibility}"
+                                                    Value="{Binding HorizontalOffset, Mode=OneWay, RelativeSource={RelativeSource TemplatedParent}}" />
                                             </Grid>
                                         </Grid>
                                     </ControlTemplate>
