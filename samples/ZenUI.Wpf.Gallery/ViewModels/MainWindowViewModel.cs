@@ -57,6 +57,7 @@ namespace ZenUI.Wpf.Gallery.ViewModels
                 new MenuItemViewModel("滑块  Slider", NavigationKeys.Slider),
                 new MenuItemViewModel("进度条  ProgressBar", NavigationKeys.ProgressBar),
                 new MenuItemViewModel("状态提示  Alert", NavigationKeys.Alert),
+                new MenuItemViewModel("折叠面板  Expander", NavigationKeys.Expander),
                 new MenuItemViewModel("气泡提示  Popover", NavigationKeys.Popover),
                 new MenuItemViewModel("右键菜单  ContextMenu", NavigationKeys.ContextMenu)
             };

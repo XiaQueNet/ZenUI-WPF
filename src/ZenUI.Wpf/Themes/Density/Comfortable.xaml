@@ -46,6 +46,8 @@
 
     <sys:Double x:Key="ZenProgressBarThickness">10</sys:Double>
     <Thickness x:Key="ZenAlertPadding">16,14</Thickness>
+    <Thickness x:Key="ZenExpanderHeaderPadding">16,14</Thickness>
+    <Thickness x:Key="ZenExpanderContentPadding">16,13,16,16</Thickness>
 
     <sys:Double x:Key="ZenRadioItemMinHeight">44</sys:Double>
     <Thickness x:Key="ZenRadioItemPadding">18,0</Thickness>

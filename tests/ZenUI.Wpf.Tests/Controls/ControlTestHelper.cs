@@ -225,6 +225,11 @@ namespace ZenUI.Wpf.Tests.Controls
             public object ExposedDefaultStyleKey => DefaultStyleKey;
             public AutomationPeer ExposedAutomationPeer => OnCreateAutomationPeer();
         }
+        internal sealed class TestZenExpander : ZenExpander
+        {
+            public object ExposedDefaultStyleKey => DefaultStyleKey;
+            public AutomationPeer ExposedAutomationPeer => OnCreateAutomationPeer();
+        }
 
         internal sealed class InvalidModel : IDataErrorInfo
         {

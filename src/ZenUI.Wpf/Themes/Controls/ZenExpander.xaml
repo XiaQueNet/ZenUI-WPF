@@ -1,0 +1,160 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:zen="clr-namespace:ZenUI.Wpf.Controls">
+
+    <Style x:Key="ZenExpanderHeaderFocusVisualStyle" TargetType="{x:Type Control}">
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Control}">
+                    <Border
+                        CornerRadius="{DynamicResource ZenExpanderCornerRadius}"
+                        Style="{DynamicResource ZenFocusVisualBorderStyle}" />
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style
+        x:Key="ZenExpanderStyle"
+        TargetType="{x:Type zen:ZenExpander}">
+        <Setter Property="FontSize" Value="{DynamicResource ZenFontSizeBody}" />
+        <Setter Property="Foreground" Value="{DynamicResource ZenTextPrimaryBrush}" />
+        <Setter Property="Background" Value="{DynamicResource ZenSurfaceBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ZenBorderBrush}" />
+        <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="CornerRadius" Value="{DynamicResource ZenExpanderCornerRadius}" />
+        <Setter Property="HeaderPadding" Value="{DynamicResource ZenExpanderHeaderPadding}" />
+        <Setter Property="Padding" Value="{DynamicResource ZenExpanderContentPadding}" />
+        <Setter Property="GlyphSize" Value="{DynamicResource ZenExpanderGlyphSize}" />
+        <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+        <Setter Property="VerticalContentAlignment" Value="Top" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type zen:ZenExpander}">
+                    <Border
+                        x:Name="OuterBorder"
+                        Background="{TemplateBinding Background}"
+                        BorderBrush="{TemplateBinding BorderBrush}"
+                        BorderThickness="{TemplateBinding BorderThickness}"
+                        CornerRadius="{TemplateBinding CornerRadius}"
+                        SnapsToDevicePixels="True">
+                        <DockPanel LastChildFill="True">
+                            <ToggleButton
+                                x:Name="HeaderSite"
+                                DockPanel.Dock="Top"
+                                Padding="{TemplateBinding HeaderPadding}"
+                                HorizontalContentAlignment="Stretch"
+                                Background="Transparent"
+                                BorderThickness="0"
+                                Content="{TemplateBinding Header}"
+                                ContentStringFormat="{TemplateBinding HeaderStringFormat}"
+                                ContentTemplate="{TemplateBinding HeaderTemplate}"
+                                ContentTemplateSelector="{TemplateBinding HeaderTemplateSelector}"
+                                Cursor="Hand"
+                                FocusVisualStyle="{StaticResource ZenExpanderHeaderFocusVisualStyle}"
+                                FontWeight="{DynamicResource ZenFontWeightSemibold}"
+                                Foreground="{TemplateBinding Foreground}"
+                                IsChecked="{Binding IsExpanded, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}">
+                                <ToggleButton.Template>
+                                    <ControlTemplate TargetType="{x:Type ToggleButton}">
+                                        <Border
+                                            x:Name="HeaderBackground"
+                                            Padding="{TemplateBinding Padding}"
+                                            Background="Transparent"
+                                            CornerRadius="{Binding CornerRadius, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenExpander}}}">
+                                            <Grid>
+                                                <Grid.ColumnDefinitions>
+                                                    <ColumnDefinition Width="*" />
+                                                    <ColumnDefinition Width="Auto" />
+                                                </Grid.ColumnDefinitions>
+                                                <ContentPresenter
+                                                    VerticalAlignment="Center"
+                                                    ContentSource="Content"
+                                                    RecognizesAccessKey="True"
+                                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                                                <Viewbox
+                                                    Grid.Column="1"
+                                                    Width="{Binding GlyphSize, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenExpander}}}"
+                                                    Height="{Binding GlyphSize, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenExpander}}}"
+                                                    Margin="12,0,0,0">
+                                                    <Path
+                                                        x:Name="Chevron"
+                                                        Width="12"
+                                                        Height="12"
+                                                        Data="M 1.5,3 L 6,8 L 10.5,3"
+                                                        RenderTransformOrigin="0.5,0.5"
+                                                        Stroke="{DynamicResource ZenTextSecondaryBrush}"
+                                                        StrokeEndLineCap="Round"
+                                                        StrokeLineJoin="Round"
+                                                        StrokeStartLineCap="Round"
+                                                        StrokeThickness="1.75">
+                                                        <Path.RenderTransform>
+                                                            <RotateTransform Angle="0" />
+                                                        </Path.RenderTransform>
+                                                    </Path>
+                                                </Viewbox>
+                                            </Grid>
+                                        </Border>
+                                        <ControlTemplate.Triggers>
+                                            <Trigger Property="IsMouseOver" Value="True">
+                                                <Setter TargetName="HeaderBackground" Property="Background" Value="{DynamicResource ZenSurfaceHoverBrush}" />
+                                                <Setter TargetName="Chevron" Property="Stroke" Value="{DynamicResource ZenPrimaryBrush}" />
+                                            </Trigger>
+                                            <Trigger Property="IsPressed" Value="True">
+                                                <Setter TargetName="HeaderBackground" Property="Opacity" Value="0.78" />
+                                            </Trigger>
+                                            <Trigger Property="IsChecked" Value="True">
+                                                <Setter TargetName="Chevron" Property="RenderTransform">
+                                                    <Setter.Value>
+                                                        <RotateTransform Angle="180" />
+                                                    </Setter.Value>
+                                                </Setter>
+                                            </Trigger>
+                                            <Trigger Property="IsEnabled" Value="False">
+                                                <Setter Property="Cursor" Value="Arrow" />
+                                            </Trigger>
+                                        </ControlTemplate.Triggers>
+                                    </ControlTemplate>
+                                </ToggleButton.Template>
+                            </ToggleButton>
+                            <Border
+                                x:Name="ContentBorder"
+                                Padding="{TemplateBinding Padding}"
+                                Visibility="Collapsed">
+                                <ContentPresenter
+                                    HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                    VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                    ContentSource="Content"
+                                    SnapsToDevicePixels="{TemplateBinding SnapsToDevicePixels}" />
+                            </Border>
+                        </DockPanel>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsExpanded" Value="True">
+                            <Setter TargetName="ContentBorder" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="ExpandDirection" Value="Up">
+                            <Setter TargetName="HeaderSite" Property="DockPanel.Dock" Value="Bottom" />
+                        </Trigger>
+                        <Trigger Property="ExpandDirection" Value="Left">
+                            <Setter TargetName="HeaderSite" Property="DockPanel.Dock" Value="Right" />
+                        </Trigger>
+                        <Trigger Property="ExpandDirection" Value="Right">
+                            <Setter TargetName="HeaderSite" Property="DockPanel.Dock" Value="Left" />
+                        </Trigger>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="OuterBorder" Property="BorderBrush" Value="{DynamicResource ZenBorderHoverBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="{DynamicResource ZenDisabledContainerOpacity}" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style BasedOn="{StaticResource ZenExpanderStyle}" TargetType="{x:Type zen:ZenExpander}" />
+
+</ResourceDictionary>

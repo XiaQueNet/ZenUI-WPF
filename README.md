@@ -56,12 +56,15 @@ ZenUI 的目标是优化 WPF 控件的默认体验，而不是缩减 WPF 已有�
         <zen:ZenSlider Maximum="100" Value="60" />
         <zen:ZenProgressBar Maximum="100" Value="60" />
         <zen:ZenAlert Content="保存成功" Severity="Success" />
+        <zen:ZenExpander Header="更多设置">
+            <TextBlock Text="按需显示的补充内容" />
+        </zen:ZenExpander>
         <zen:ZenDataGrid ItemsSource="{Binding Items}" />
     </StackPanel>
 </Window>
 ```
 
-目前提供 Button、TextBox、NumberBox、PasswordBox、Switch、CheckBox、RadioButton、RadioGroup、ComboBox、ListBox、Calendar、DatePicker、DataGrid、Slider、ProgressBar、Alert、Popover、ContextMenu 等常用控件。所有控件均自带默认主题，并覆盖悬停、焦点、选中和禁用等常见交互状态。
+目前提供 Button、TextBox、NumberBox、PasswordBox、Switch、CheckBox、RadioButton、RadioGroup、ComboBox、ListBox、Calendar、DatePicker、DataGrid、Slider、ProgressBar、Alert、Expander、Popover、ContextMenu 等常用控件。所有控件均自带默认主题，并覆盖悬停、焦点、选中和禁用等常见交互状态。
 
 转换器包使用独立的 XAML 命名空间，无需在应用资源中注册实例：
 

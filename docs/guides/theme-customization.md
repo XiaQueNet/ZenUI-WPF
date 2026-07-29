@@ -101,6 +101,7 @@ Density 会更新输入控件、Button、ListBox、ScrollBar、ComboBox Popup、
 | Calendar 弹层、日期格与导航 | `ZenCalendarPopupWidth`、`ZenCalendarPopupHeight`、`ZenCalendarDayButtonWidth`、`ZenCalendarDayButtonHeight`、`ZenCalendarNavigationButtonSize` |
 | Switch 与 Slider | `ZenSwitchWidth`、`ZenSwitchHeight`、`ZenSliderThumbSize`、`ZenSliderTrackThickness` |
 | Alert 内边距 | `ZenAlertPadding` |
+| Expander 布局 | `ZenExpanderHeaderPadding`、`ZenExpanderContentPadding`、`ZenExpanderCornerRadius`、`ZenExpanderGlyphSize` |
 | ContextMenu 表面与菜单项 | `ZenContextMenuPadding`、`ZenContextMenuItemMinHeight`、`ZenContextMenuItemPadding` |
 
 完整 Key 和当前解析值可在 Gallery 的“设计 Token”页面查看。
