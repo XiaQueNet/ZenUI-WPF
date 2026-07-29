@@ -147,7 +147,9 @@
                                 BorderBrush="{DynamicResource ZenBorderBrush}"
                                 BorderThickness="{DynamicResource ZenControlBorderThickness}"
                                 CornerRadius="{DynamicResource ZenComboBoxPopupCornerRadius}">
-                                <ScrollViewer CanContentScroll="True">
+                                <ScrollViewer
+                                    zen:ScrollViewerAssist.IsMouseWheelChainingEnabled="True"
+                                    CanContentScroll="True">
                                     <ItemsPresenter KeyboardNavigation.DirectionalNavigation="Contained" />
                                 </ScrollViewer>
                             </Border>

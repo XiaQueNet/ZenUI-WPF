@@ -309,5 +309,56 @@ namespace ZenUI.Wpf.Tests.Controls
                 window.Close();
             }
         }
+
+        [TestMethod]
+        public void DataGridForwardsMouseWheelToOuterScrollerWhenItCannotScroll()
+        {
+            var dataGrid = new ZenDataGrid
+            {
+                Height = 120,
+                ItemsSource = new[] { new EditableRow(1, "成员") }
+            };
+            var content = new StackPanel();
+            content.Children.Add(dataGrid);
+            content.Children.Add(new Border { Height = 600 });
+            var outerScroller = new ScrollViewer
+            {
+                Height = 180,
+                Content = content,
+                VerticalScrollBarVisibility = ScrollBarVisibility.Auto
+            };
+            var window = CreateTestWindow(outerScroller, 320, 240);
+
+            try
+            {
+                window.Show();
+                window.UpdateLayout();
+
+                var forwardedDelta = 0;
+                outerScroller.AddHandler(
+                    UIElement.MouseWheelEvent,
+                    new MouseWheelEventHandler(
+                        (sender, args) => forwardedDelta = args.Delta),
+                    true);
+
+                var firstRow =
+                    (DataGridRow)dataGrid.ItemContainerGenerator.ContainerFromIndex(0);
+                var wheelEvent = new MouseWheelEventArgs(
+                    Mouse.PrimaryDevice,
+                    Environment.TickCount,
+                    -120)
+                {
+                    RoutedEvent = UIElement.PreviewMouseWheelEvent
+                };
+                firstRow.RaiseEvent(wheelEvent);
+
+                Assert.IsTrue(wheelEvent.Handled);
+                Assert.AreEqual(-120, forwardedDelta);
+            }
+            finally
+            {
+                window.Close();
+            }
+        }
     }
 }

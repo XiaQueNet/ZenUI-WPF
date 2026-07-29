@@ -282,6 +282,7 @@
                         <Grid>
                             <ScrollViewer
                                 x:Name="DG_ScrollViewer"
+                                zen:ScrollViewerAssist.IsMouseWheelChainingEnabled="True"
                                 CanContentScroll="{TemplateBinding ScrollViewer.CanContentScroll}"
                                 Focusable="False"
                                 HorizontalScrollBarVisibility="{TemplateBinding HorizontalScrollBarVisibility}"

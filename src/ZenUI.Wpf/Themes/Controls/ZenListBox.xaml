@@ -105,6 +105,7 @@
                         SnapsToDevicePixels="True">
                         <ScrollViewer
                             x:Name="PART_ScrollViewer"
+                            zen:ScrollViewerAssist.IsMouseWheelChainingEnabled="True"
                             Padding="{TemplateBinding Padding}"
                             HorizontalScrollBarVisibility="{TemplateBinding ScrollViewer.HorizontalScrollBarVisibility}"
                             VerticalScrollBarVisibility="{TemplateBinding ScrollViewer.VerticalScrollBarVisibility}"

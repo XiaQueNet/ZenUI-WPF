@@ -178,6 +178,57 @@ namespace ZenUI.Wpf.Tests.Controls
             }
         }
 
+        [TestMethod]
+        public void RadioGroupForwardsMouseWheelToOuterScrollerWhenItCannotScroll()
+        {
+            var group = new ZenRadioGroup
+            {
+                ItemsSource = new[] { "第一项", "第二项" },
+                Orientation = Orientation.Vertical
+            };
+            var content = new StackPanel();
+            content.Children.Add(group);
+            content.Children.Add(new Border { Height = 600 });
+            var outerScroller = new ScrollViewer
+            {
+                Height = 120,
+                Content = content,
+                VerticalScrollBarVisibility = ScrollBarVisibility.Auto
+            };
+            var window = CreateTestWindow(outerScroller, 320, 180);
+
+            try
+            {
+                window.Show();
+                window.UpdateLayout();
+
+                var forwardedDelta = 0;
+                outerScroller.AddHandler(
+                    UIElement.MouseWheelEvent,
+                    new MouseWheelEventHandler(
+                        (sender, args) => forwardedDelta = args.Delta),
+                    true);
+
+                var firstItem =
+                    (ZenRadioItem)group.ItemContainerGenerator.ContainerFromIndex(0);
+                var wheelEvent = new MouseWheelEventArgs(
+                    Mouse.PrimaryDevice,
+                    System.Environment.TickCount,
+                    -120)
+                {
+                    RoutedEvent = UIElement.PreviewMouseWheelEvent
+                };
+                firstItem.RaiseEvent(wheelEvent);
+
+                Assert.IsTrue(wheelEvent.Handled);
+                Assert.AreEqual(-120, forwardedDelta);
+            }
+            finally
+            {
+                window.Close();
+            }
+        }
+
         private sealed class TestZenRadioGroup : ZenRadioGroup
         {
             public AutomationPeer ExposedAutomationPeer =>

@@ -81,5 +81,62 @@ namespace ZenUI.Wpf.Tests.Controls
                 window.Close();
             }
         }
+
+        [TestMethod]
+        public void ListBoxForwardsMouseWheelToOuterScrollerWhenItCannotScroll()
+        {
+            var listBox = new ZenListBox
+            {
+                Height = 120,
+                ItemsSource = new[] { "第一项" }
+            };
+            var content = new StackPanel();
+            content.Children.Add(listBox);
+            content.Children.Add(new Border { Height = 600 });
+            var outerScroller = new ScrollViewer
+            {
+                Height = 180,
+                Content = content,
+                VerticalScrollBarVisibility = ScrollBarVisibility.Auto
+            };
+            var window = CreateTestWindow(outerScroller, 320, 240);
+
+            try
+            {
+                window.Show();
+                window.UpdateLayout();
+
+                var innerScroller =
+                    listBox.Template.FindName("PART_ScrollViewer", listBox) as ScrollViewer;
+                Assert.IsNotNull(innerScroller);
+                Assert.IsTrue(
+                    ScrollViewerAssist.GetIsMouseWheelChainingEnabled(innerScroller));
+
+                var forwardedDelta = 0;
+                outerScroller.AddHandler(
+                    UIElement.MouseWheelEvent,
+                    new MouseWheelEventHandler(
+                        (sender, args) => forwardedDelta = args.Delta),
+                    true);
+
+                var firstItem =
+                    (ListBoxItem)listBox.ItemContainerGenerator.ContainerFromIndex(0);
+                var wheelEvent = new MouseWheelEventArgs(
+                    Mouse.PrimaryDevice,
+                    Environment.TickCount,
+                    -120)
+                {
+                    RoutedEvent = UIElement.PreviewMouseWheelEvent
+                };
+                firstItem.RaiseEvent(wheelEvent);
+
+                Assert.IsTrue(wheelEvent.Handled);
+                Assert.AreEqual(-120, forwardedDelta);
+            }
+            finally
+            {
+                window.Close();
+            }
+        }
     }
 }

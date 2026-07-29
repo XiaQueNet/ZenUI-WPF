@@ -55,6 +55,7 @@
                             <Grid Grid.Column="1">
                                 <ScrollViewer
                                     x:Name="PART_ContentHost"
+                                    zen:ScrollViewerAssist.IsMouseWheelChainingEnabled="True"
                                     HorizontalAlignment="Stretch"
                                     VerticalAlignment="Stretch" />
                                 <Border

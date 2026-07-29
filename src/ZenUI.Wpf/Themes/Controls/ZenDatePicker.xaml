@@ -16,6 +16,7 @@
                         <Grid>
                             <ScrollViewer
                                 x:Name="PART_ContentHost"
+                                zen:ScrollViewerAssist.IsMouseWheelChainingEnabled="True"
                                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                                 Background="Transparent"
                                 Focusable="False"
