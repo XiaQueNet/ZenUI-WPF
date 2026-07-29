@@ -4,51 +4,421 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:gallery="clr-namespace:ZenUI.Wpf.Gallery.Controls"
     xmlns:zen="https://zenui.mnorg.cn/xaml/wpf">
+    <UserControl.Resources>
+        <Style x:Key="TokenSupportingTextStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="Foreground" Value="{DynamicResource ZenTextSecondaryBrush}" />
+            <Setter Property="FontSize" Value="{DynamicResource ZenFontSizeBodySmall}" />
+            <Setter Property="LineHeight" Value="21" />
+            <Setter Property="TextWrapping" Value="Wrap" />
+        </Style>
+
+        <Style x:Key="TokenInsetCardStyle" TargetType="{x:Type Border}">
+            <Setter Property="Padding" Value="18" />
+            <Setter Property="Background" Value="{DynamicResource ZenSurfaceMutedBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ZenDividerBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="9" />
+        </Style>
+
+        <Style x:Key="TokenHeroCaptionStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="Foreground" Value="{DynamicResource GalleryOnPrimarySecondaryBrush}" />
+            <Setter Property="FontSize" Value="12" />
+        </Style>
+
+        <Style x:Key="TokenCodeStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="Foreground" Value="{DynamicResource ZenTextSecondaryBrush}" />
+            <Setter Property="FontFamily" Value="Consolas" />
+            <Setter Property="FontSize" Value="11" />
+            <Setter Property="TextTrimming" Value="CharacterEllipsis" />
+        </Style>
+    </UserControl.Resources>
+
     <ScrollViewer
         Padding="40"
         HorizontalContentAlignment="Stretch"
+        HorizontalScrollBarVisibility="Disabled"
         VerticalScrollBarVisibility="Auto">
         <StackPanel>
-            <gallery:PageHeader Title="设计 Token 与 Density" Description="查看六层公开 Token 在当前主题与密度下的解析值，并实时检查控件的颜色、尺寸与间距。" />
+            <gallery:PageHeader Title="设计 Token 与 Density" Description="理解六层公开 Token 如何从设计语义解析到组件外观，并实时检查主题、尺寸、间距与交互状态。" />
 
+            <!--  Token system hero  -->
+            <Border
+                Margin="0,0,0,18"
+                Padding="28"
+                Background="{DynamicResource ZenPrimaryBrush}"
+                CornerRadius="12">
+                <Grid>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="Auto" />
+                        <RowDefinition Height="24" />
+                        <RowDefinition Height="Auto" />
+                    </Grid.RowDefinitions>
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="5*" />
+                            <ColumnDefinition Width="36" />
+                            <ColumnDefinition Width="4*" />
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel VerticalAlignment="Center">
+                            <Border
+                                Padding="10,5"
+                                HorizontalAlignment="Left"
+                                Background="{DynamicResource GalleryOnPrimaryMutedSurfaceBrush}"
+                                CornerRadius="12">
+                                <TextBlock
+                                    FontSize="11"
+                                    FontWeight="SemiBold"
+                                    Foreground="White"
+                                    Text="DESIGN TOKEN SYSTEM" />
+                            </Border>
+                            <TextBlock
+                                Margin="0,16,0,0"
+                                FontSize="24"
+                                FontWeight="SemiBold"
+                                Foreground="White"
+                                LineHeight="32"
+                                Text="一个资源入口，&#x0a;驱动完整组件体验" />
+                            <TextBlock
+                                MaxWidth="470"
+                                Margin="0,12,0,0"
+                                HorizontalAlignment="Left"
+                                FontSize="13"
+                                Foreground="{DynamicResource GalleryOnPrimarySecondaryBrush}"
+                                LineHeight="21"
+                                Text="语义资源将主题与组件解耦；Density Token 则让输入、列表、表格和日历在三档密度间保持协调。"
+                                TextWrapping="Wrap" />
+                        </StackPanel>
+
+                        <Border
+                            Grid.Column="2"
+                            Padding="18"
+                            Background="{DynamicResource GalleryOnPrimaryMutedSurfaceBrush}"
+                            CornerRadius="10">
+                            <StackPanel>
+                                <DockPanel Margin="0,0,0,14">
+                                    <TextBlock
+                                        DockPanel.Dock="Left"
+                                        FontSize="13"
+                                        FontWeight="SemiBold"
+                                        Foreground="White"
+                                        Text="运行时解析链路" />
+                                    <Border
+                                        Width="8"
+                                        Height="8"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Center"
+                                        Background="{DynamicResource ZenSuccessBrush}"
+                                        CornerRadius="4" />
+                                </DockPanel>
+
+                                <Border
+                                    Padding="11,9"
+                                    Background="{DynamicResource GalleryOnPrimaryMutedSurfaceBrush}"
+                                    CornerRadius="6">
+                                    <DockPanel>
+                                        <TextBlock
+                                            DockPanel.Dock="Left"
+                                            FontSize="12"
+                                            FontWeight="SemiBold"
+                                            Foreground="White"
+                                            Text="01  基础值" />
+                                        <TextBlock
+                                            HorizontalAlignment="Right"
+                                            Style="{StaticResource TokenHeroCaptionStyle}"
+                                            Text="Metrics" />
+                                    </DockPanel>
+                                </Border>
+                                <TextBlock
+                                    HorizontalAlignment="Center"
+                                    FontSize="13"
+                                    Foreground="{DynamicResource GalleryOnPrimarySecondaryBrush}"
+                                    Text="↓" />
+                                <Border
+                                    Padding="11,9"
+                                    Background="{DynamicResource GalleryOnPrimaryMutedSurfaceBrush}"
+                                    CornerRadius="6">
+                                    <DockPanel>
+                                        <TextBlock
+                                            DockPanel.Dock="Left"
+                                            FontSize="12"
+                                            FontWeight="SemiBold"
+                                            Foreground="White"
+                                            Text="02  语义映射" />
+                                        <TextBlock
+                                            HorizontalAlignment="Right"
+                                            Style="{StaticResource TokenHeroCaptionStyle}"
+                                            Text="Semantic" />
+                                    </DockPanel>
+                                </Border>
+                                <TextBlock
+                                    HorizontalAlignment="Center"
+                                    FontSize="13"
+                                    Foreground="{DynamicResource GalleryOnPrimarySecondaryBrush}"
+                                    Text="↓" />
+                                <Border
+                                    Padding="11,9"
+                                    Background="White"
+                                    CornerRadius="6">
+                                    <DockPanel>
+                                        <TextBlock
+                                            DockPanel.Dock="Left"
+                                            FontSize="12"
+                                            FontWeight="SemiBold"
+                                            Foreground="{DynamicResource ZenPrimaryBrush}"
+                                            Text="03  组件资源" />
+                                        <TextBlock
+                                            HorizontalAlignment="Right"
+                                            FontSize="11"
+                                            Foreground="{DynamicResource ZenPrimaryBrush}"
+                                            Text="Resolved" />
+                                    </DockPanel>
+                                </Border>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+
+                    <UniformGrid Grid.Row="2" Columns="4">
+                        <Border
+                            Margin="0,0,6,0"
+                            Padding="12,10"
+                            Background="{DynamicResource GalleryOnPrimaryMutedSurfaceBrush}"
+                            CornerRadius="7">
+                            <StackPanel>
+                                <TextBlock
+                                    FontSize="18"
+                                    FontWeight="SemiBold"
+                                    Foreground="White"
+                                    Text="6" />
+                                <TextBlock
+                                    Margin="0,3,0,0"
+                                    Style="{StaticResource TokenHeroCaptionStyle}"
+                                    Text="资源层级" />
+                            </StackPanel>
+                        </Border>
+                        <Border
+                            Margin="6,0"
+                            Padding="12,10"
+                            Background="{DynamicResource GalleryOnPrimaryMutedSurfaceBrush}"
+                            CornerRadius="7">
+                            <StackPanel>
+                                <TextBlock
+                                    FontSize="18"
+                                    FontWeight="SemiBold"
+                                    Foreground="White"
+                                    Text="3" />
+                                <TextBlock
+                                    Margin="0,3,0,0"
+                                    Style="{StaticResource TokenHeroCaptionStyle}"
+                                    Text="界面主题" />
+                            </StackPanel>
+                        </Border>
+                        <Border
+                            Margin="6,0"
+                            Padding="12,10"
+                            Background="{DynamicResource GalleryOnPrimaryMutedSurfaceBrush}"
+                            CornerRadius="7">
+                            <StackPanel>
+                                <TextBlock
+                                    FontSize="18"
+                                    FontWeight="SemiBold"
+                                    Foreground="White"
+                                    Text="3" />
+                                <TextBlock
+                                    Margin="0,3,0,0"
+                                    Style="{StaticResource TokenHeroCaptionStyle}"
+                                    Text="密度等级" />
+                            </StackPanel>
+                        </Border>
+                        <Border
+                            Margin="6,0,0,0"
+                            Padding="12,10"
+                            Background="{DynamicResource GalleryOnPrimaryMutedSurfaceBrush}"
+                            CornerRadius="7">
+                            <StackPanel>
+                                <TextBlock
+                                    FontSize="18"
+                                    FontWeight="SemiBold"
+                                    Foreground="White"
+                                    Text="Live" />
+                                <TextBlock
+                                    Margin="0,3,0,0"
+                                    Style="{StaticResource TokenHeroCaptionStyle}"
+                                    Text="动态解析" />
+                            </StackPanel>
+                        </Border>
+                    </UniformGrid>
+                </Grid>
+            </Border>
+
+            <!--  Live token lab  -->
             <Border Style="{StaticResource GalleryCardStyle}">
                 <StackPanel>
-                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="当前密度预览" />
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="实时 Token 实验台" />
                     <TextBlock
                         Margin="0,0,0,18"
-                        Style="{StaticResource GallerySupportingTextStyle}"
-                        Text="使用窗口左下角切换浅色、深色、高对比度主题，或紧凑、标准、宽松密度；下面的控件及 Token 值会立即更新。" />
-                    <UniformGrid Columns="2">
-                        <StackPanel Margin="0,0,14,0">
-                            <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="输入与操作" />
-                            <zen:ZenTextBox Margin="0,0,0,10" Watermark="输入控件高度与内边距" />
-                            <zen:ZenNumberBox
+                        Style="{StaticResource TokenSupportingTextStyle}"
+                        Text="使用窗口左下角切换浅色、深色、高对比度主题，或紧凑、标准、宽松密度；控件与右侧资源样本会同步更新。" />
+
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="28" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+
+                        <StackPanel>
+                            <DockPanel Margin="0,0,0,14">
+                                <Border
+                                    Width="28"
+                                    Height="28"
+                                    Background="{DynamicResource ZenInfoLightBrush}"
+                                    CornerRadius="14"
+                                    DockPanel.Dock="Left">
+                                    <TextBlock
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        FontSize="12"
+                                        FontWeight="SemiBold"
+                                        Foreground="{DynamicResource ZenPrimaryBrush}"
+                                        Text="A" />
+                                </Border>
+                                <StackPanel Margin="10,0,0,0">
+                                    <TextBlock FontWeight="SemiBold" Text="组件预览" />
+                                    <TextBlock
+                                        Margin="0,3,0,0"
+                                        Style="{StaticResource TokenSupportingTextStyle}"
+                                        Text="观察控件高度、内边距与圆角" />
+                                </StackPanel>
+                            </DockPanel>
+
+                            <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="输入与选择" />
+                            <zen:ZenTextBox
                                 Margin="0,0,0,10"
-                                Maximum="10"
-                                Minimum="0"
-                                Step="0.5"
-                                Value="2.5" />
-                            <zen:ZenComboBox Margin="0,0,0,10" SelectedIndex="0">
-                                <ComboBoxItem Content="下拉弹层尺寸" />
-                                <ComboBoxItem Content="第二项" />
-                            </zen:ZenComboBox>
-                            <StackPanel Orientation="Horizontal">
-                                <zen:ZenButton Width="80" Content="按钮" />
-                                <zen:ZenSwitch Margin="16,0,0,0" IsChecked="True" />
-                            </StackPanel>
+                                AutomationProperties.Name="Token 输入预览"
+                                Watermark="输入控件高度与内边距" />
+                            <Grid Margin="0,0,0,10">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <zen:ZenNumberBox
+                                    Maximum="10"
+                                    Minimum="0"
+                                    Step="0.5"
+                                    Value="2.5" />
+                                <zen:ZenComboBox Grid.Column="2" SelectedIndex="0">
+                                    <ComboBoxItem Content="标准尺寸" />
+                                    <ComboBoxItem Content="紧凑尺寸" />
+                                    <ComboBoxItem Content="宽松尺寸" />
+                                </zen:ZenComboBox>
+                            </Grid>
+                            <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="连续数值与操作" />
+                            <zen:ZenSlider
+                                Margin="0,0,0,10"
+                                AutomationProperties.Name="Token 滑块预览"
+                                Value="62" />
+                            <WrapPanel>
+                                <zen:ZenButton Content="主要操作" Style="{StaticResource GalleryButtonStyle}" />
+                                <zen:ZenButton
+                                    Appearance="Outlined"
+                                    Content="次要操作"
+                                    Style="{StaticResource GalleryButtonStyle}" />
+                                <zen:ZenSwitch
+                                    Margin="2,0,0,0"
+                                    VerticalAlignment="Center"
+                                    AutomationProperties.Name="Token 开关预览"
+                                    IsChecked="True" />
+                            </WrapPanel>
                         </StackPanel>
-                        <StackPanel Margin="14,0,0,0">
-                            <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="反馈与选择" />
-                            <zen:ZenDatePicker Margin="0,0,0,10" SelectedDate="2026-07-23" />
-                            <zen:ZenSlider Margin="0,0,0,10" Value="62" />
-                            <zen:ZenProgressBar Margin="0,0,0,10" Value="62" />
-                            <zen:ZenAlert Content="Alert 内边距随密度更新" Severity="Success" />
+
+                        <StackPanel Grid.Column="2">
+                            <DockPanel Margin="0,0,0,14">
+                                <Border
+                                    Width="28"
+                                    Height="28"
+                                    Background="{DynamicResource ZenInfoLightBrush}"
+                                    CornerRadius="14"
+                                    DockPanel.Dock="Left">
+                                    <TextBlock
+                                        HorizontalAlignment="Center"
+                                        VerticalAlignment="Center"
+                                        FontSize="12"
+                                        FontWeight="SemiBold"
+                                        Foreground="{DynamicResource ZenInfoBrush}"
+                                        Text="B" />
+                                </Border>
+                                <StackPanel Margin="10,0,0,0">
+                                    <TextBlock FontWeight="SemiBold" Text="资源检查器" />
+                                    <TextBlock
+                                        Margin="0,3,0,0"
+                                        Style="{StaticResource TokenSupportingTextStyle}"
+                                        Text="查看语义资源的当前视觉结果" />
+                                </StackPanel>
+                            </DockPanel>
+
+                            <Border Style="{StaticResource TokenInsetCardStyle}">
+                                <StackPanel>
+                                    <DockPanel Margin="0,0,0,12">
+                                        <Border
+                                            Width="34"
+                                            Height="34"
+                                            Margin="0,0,12,0"
+                                            Background="{DynamicResource ZenPrimaryBrush}"
+                                            CornerRadius="6"
+                                            DockPanel.Dock="Left" />
+                                        <StackPanel>
+                                            <TextBlock FontWeight="SemiBold" Text="Primary" />
+                                            <TextBlock Style="{StaticResource TokenCodeStyle}" Text="ZenPrimaryBrush" />
+                                        </StackPanel>
+                                    </DockPanel>
+                                    <DockPanel Margin="0,0,0,12">
+                                        <Border
+                                            Width="34"
+                                            Height="34"
+                                            Margin="0,0,12,0"
+                                            Background="{DynamicResource ZenSurfaceBrush}"
+                                            BorderBrush="{DynamicResource ZenDividerBrush}"
+                                            BorderThickness="1"
+                                            CornerRadius="6"
+                                            DockPanel.Dock="Left" />
+                                        <StackPanel>
+                                            <TextBlock FontWeight="SemiBold" Text="Surface" />
+                                            <TextBlock Style="{StaticResource TokenCodeStyle}" Text="ZenSurfaceBrush" />
+                                        </StackPanel>
+                                    </DockPanel>
+                                    <DockPanel>
+                                        <Border
+                                            Width="34"
+                                            Height="34"
+                                            Margin="0,0,12,0"
+                                            Background="{DynamicResource ZenTextPrimaryBrush}"
+                                            CornerRadius="6"
+                                            DockPanel.Dock="Left" />
+                                        <StackPanel>
+                                            <TextBlock FontWeight="SemiBold" Text="Text Primary" />
+                                            <TextBlock Style="{StaticResource TokenCodeStyle}" Text="ZenTextPrimaryBrush" />
+                                        </StackPanel>
+                                    </DockPanel>
+                                </StackPanel>
+                            </Border>
+                            <zen:ZenAlert Margin="0,12,0,0" Severity="Success">
+                                <TextBlock Text="资源树已解析，当前控件状态正常。" TextWrapping="Wrap" />
+                            </zen:ZenAlert>
                         </StackPanel>
-                    </UniformGrid>
+                    </Grid>
+                </StackPanel>
+            </Border>
+
+            <!--  Density and complex controls  -->
+            <Border Style="{StaticResource GalleryCardStyle}">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="Density 如何影响复合控件" />
                     <TextBlock
-                        Margin="0,22,0,10"
-                        Style="{StaticResource GalleryFieldLabelStyle}"
-                        Text="复合控件" />
+                        Margin="0,0,0,18"
+                        Style="{StaticResource TokenSupportingTextStyle}"
+                        Text="Density 不只是改变控件高度，还会同步调整列表项目、弹层容器、表格单元格与日期网格，使信息密度保持一致。" />
                     <Grid>
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition Width="*" />
@@ -56,13 +426,29 @@
                             <ColumnDefinition Width="Auto" />
                         </Grid.ColumnDefinitions>
                         <StackPanel>
-                            <TextBlock
-                                Margin="0,0,0,10"
-                                Style="{StaticResource GallerySupportingTextStyle}"
-                                Text="DataGrid 的表头、行高与单元格内边距会随 Density 更新。" />
+                            <DockPanel Margin="0,0,0,12">
+                                <StackPanel DockPanel.Dock="Left">
+                                    <TextBlock FontWeight="SemiBold" Text="影响范围" />
+                                    <TextBlock
+                                        Margin="0,4,0,0"
+                                        Style="{StaticResource TokenSupportingTextStyle}"
+                                        Text="表头、行高与单元格内边距会实时更新" />
+                                </StackPanel>
+                                <Border
+                                    Padding="9,4"
+                                    HorizontalAlignment="Right"
+                                    VerticalAlignment="Top"
+                                    Background="{DynamicResource ZenInfoLightBrush}"
+                                    CornerRadius="10">
+                                    <TextBlock
+                                        FontSize="11"
+                                        Foreground="{DynamicResource ZenPrimaryBrush}"
+                                        Text="LIVE" />
+                                </Border>
+                            </DockPanel>
                             <zen:ZenDataGrid
                                 x:Name="DensityDataGrid"
-                                Height="220"
+                                Height="226"
                                 AutoGenerateColumns="False"
                                 IsReadOnly="True">
                                 <DataGrid.Columns>
@@ -71,30 +457,282 @@
                                         Binding="{Binding Name}"
                                         Header="Token 范围" />
                                     <DataGridTextColumn
-                                        Width="210"
+                                        Width="190"
                                         Binding="{Binding Description}"
                                         Header="当前行为" />
                                 </DataGrid.Columns>
                             </zen:ZenDataGrid>
                         </StackPanel>
+
                         <StackPanel Grid.Column="2">
+                            <TextBlock FontWeight="SemiBold" Text="Calendar 尺寸预览" />
                             <TextBlock
-                                Margin="0,0,0,10"
-                                Style="{StaticResource GallerySupportingTextStyle}"
-                                Text="Calendar 的整体、日期格与导航按钮尺寸会同步变化。" />
+                                Margin="0,4,0,12"
+                                Style="{StaticResource TokenSupportingTextStyle}"
+                                Text="日期格、导航按钮与整体尺寸同步变化" />
                             <zen:ZenCalendar
                                 HorizontalAlignment="Left"
                                 DisplayDate="2026-07-01"
-                                SelectedDate="2026-07-27" />
+                                SelectedDate="2026-07-29" />
                         </StackPanel>
                     </Grid>
                 </StackPanel>
             </Border>
 
-            <TextBlock
+            <!--  Architecture map  -->
+            <Border Style="{StaticResource GalleryCardStyle}">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="六层 Token 架构" />
+                    <TextBlock
+                        Margin="0,0,0,10"
+                        Style="{StaticResource TokenSupportingTextStyle}"
+                        Text="从面向设计的语义资源到面向实现的组件资源，每一层职责清晰，并可通过 DynamicResource 在运行时重新解析。" />
+                    <UniformGrid
+                        Margin="-7"
+                        Columns="3"
+                        Rows="2">
+                        <Border Margin="7" Style="{StaticResource TokenInsetCardStyle}">
+                            <StackPanel>
+                                <DockPanel>
+                                    <Border
+                                        Width="28"
+                                        Height="28"
+                                        Background="{DynamicResource ZenInfoLightBrush}"
+                                        CornerRadius="14"
+                                        DockPanel.Dock="Left">
+                                        <TextBlock
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            FontSize="11"
+                                            FontWeight="SemiBold"
+                                            Foreground="{DynamicResource ZenPrimaryBrush}"
+                                            Text="01" />
+                                    </Border>
+                                    <TextBlock
+                                        Margin="10,0,0,0"
+                                        VerticalAlignment="Center"
+                                        FontWeight="SemiBold"
+                                        Text="语义颜色" />
+                                </DockPanel>
+                                <TextBlock
+                                    Margin="0,12,0,0"
+                                    Style="{StaticResource TokenSupportingTextStyle}"
+                                    Text="品牌、表面、文本与状态语义" />
+                                <TextBlock
+                                    Margin="0,10,0,0"
+                                    Style="{StaticResource TokenCodeStyle}"
+                                    Text="SemanticColors.xaml" />
+                            </StackPanel>
+                        </Border>
+                        <Border Margin="7" Style="{StaticResource TokenInsetCardStyle}">
+                            <StackPanel>
+                                <DockPanel>
+                                    <Border
+                                        Width="28"
+                                        Height="28"
+                                        Background="{DynamicResource ZenSuccessLightBrush}"
+                                        CornerRadius="14"
+                                        DockPanel.Dock="Left">
+                                        <TextBlock
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            FontSize="11"
+                                            FontWeight="SemiBold"
+                                            Foreground="{DynamicResource ZenSuccessBrush}"
+                                            Text="02" />
+                                    </Border>
+                                    <TextBlock
+                                        Margin="10,0,0,0"
+                                        VerticalAlignment="Center"
+                                        FontWeight="SemiBold"
+                                        Text="组件颜色" />
+                                </DockPanel>
+                                <TextBlock
+                                    Margin="0,12,0,0"
+                                    Style="{StaticResource TokenSupportingTextStyle}"
+                                    Text="控件背景、边框与前景映射" />
+                                <TextBlock
+                                    Margin="0,10,0,0"
+                                    Style="{StaticResource TokenCodeStyle}"
+                                    Text="ComponentColors.xaml" />
+                            </StackPanel>
+                        </Border>
+                        <Border Margin="7" Style="{StaticResource TokenInsetCardStyle}">
+                            <StackPanel>
+                                <DockPanel>
+                                    <Border
+                                        Width="28"
+                                        Height="28"
+                                        Background="{DynamicResource ZenInfoLightBrush}"
+                                        CornerRadius="14"
+                                        DockPanel.Dock="Left">
+                                        <TextBlock
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            FontSize="11"
+                                            FontWeight="SemiBold"
+                                            Foreground="{DynamicResource ZenInfoBrush}"
+                                            Text="03" />
+                                    </Border>
+                                    <TextBlock
+                                        Margin="10,0,0,0"
+                                        VerticalAlignment="Center"
+                                        FontWeight="SemiBold"
+                                        Text="排版" />
+                                </DockPanel>
+                                <TextBlock
+                                    Margin="0,12,0,0"
+                                    Style="{StaticResource TokenSupportingTextStyle}"
+                                    Text="字号、字重与行高层级" />
+                                <TextBlock
+                                    Margin="0,10,0,0"
+                                    Style="{StaticResource TokenCodeStyle}"
+                                    Text="Typography.xaml" />
+                            </StackPanel>
+                        </Border>
+                        <Border Margin="7" Style="{StaticResource TokenInsetCardStyle}">
+                            <StackPanel>
+                                <DockPanel>
+                                    <Border
+                                        Width="28"
+                                        Height="28"
+                                        Background="{DynamicResource ZenWarningLightBrush}"
+                                        CornerRadius="14"
+                                        DockPanel.Dock="Left">
+                                        <TextBlock
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            FontSize="11"
+                                            FontWeight="SemiBold"
+                                            Foreground="{DynamicResource ZenWarningForegroundBrush}"
+                                            Text="04" />
+                                    </Border>
+                                    <TextBlock
+                                        Margin="10,0,0,0"
+                                        VerticalAlignment="Center"
+                                        FontWeight="SemiBold"
+                                        Text="基础尺寸" />
+                                </DockPanel>
+                                <TextBlock
+                                    Margin="0,12,0,0"
+                                    Style="{StaticResource TokenSupportingTextStyle}"
+                                    Text="间距、圆角、边框与通用尺寸" />
+                                <TextBlock
+                                    Margin="0,10,0,0"
+                                    Style="{StaticResource TokenCodeStyle}"
+                                    Text="Metrics.xaml" />
+                            </StackPanel>
+                        </Border>
+                        <Border Margin="7" Style="{StaticResource TokenInsetCardStyle}">
+                            <StackPanel>
+                                <DockPanel>
+                                    <Border
+                                        Width="28"
+                                        Height="28"
+                                        Background="{DynamicResource ZenInfoLightBrush}"
+                                        CornerRadius="14"
+                                        DockPanel.Dock="Left">
+                                        <TextBlock
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            FontSize="11"
+                                            FontWeight="SemiBold"
+                                            Foreground="{DynamicResource ZenPrimaryBrush}"
+                                            Text="05" />
+                                    </Border>
+                                    <TextBlock
+                                        Margin="10,0,0,0"
+                                        VerticalAlignment="Center"
+                                        FontWeight="SemiBold"
+                                        Text="组件尺寸" />
+                                </DockPanel>
+                                <TextBlock
+                                    Margin="0,12,0,0"
+                                    Style="{StaticResource TokenSupportingTextStyle}"
+                                    Text="各密度下的组件高度与内边距" />
+                                <TextBlock
+                                    Margin="0,10,0,0"
+                                    Style="{StaticResource TokenCodeStyle}"
+                                    Text="ComponentMetrics.xaml" />
+                            </StackPanel>
+                        </Border>
+                        <Border Margin="7" Style="{StaticResource TokenInsetCardStyle}">
+                            <StackPanel>
+                                <DockPanel>
+                                    <Border
+                                        Width="28"
+                                        Height="28"
+                                        Background="{DynamicResource ZenErrorLightBrush}"
+                                        CornerRadius="14"
+                                        DockPanel.Dock="Left">
+                                        <TextBlock
+                                            HorizontalAlignment="Center"
+                                            VerticalAlignment="Center"
+                                            FontSize="11"
+                                            FontWeight="SemiBold"
+                                            Foreground="{DynamicResource ZenErrorBrush}"
+                                            Text="06" />
+                                    </Border>
+                                    <TextBlock
+                                        Margin="10,0,0,0"
+                                        VerticalAlignment="Center"
+                                        FontWeight="SemiBold"
+                                        Text="交互状态" />
+                                </DockPanel>
+                                <TextBlock
+                                    Margin="0,12,0,0"
+                                    Style="{StaticResource TokenSupportingTextStyle}"
+                                    Text="悬停、按下、焦点与禁用反馈" />
+                                <TextBlock
+                                    Margin="0,10,0,0"
+                                    Style="{StaticResource TokenCodeStyle}"
+                                    Text="Interaction.xaml" />
+                            </StackPanel>
+                        </Border>
+                    </UniformGrid>
+                </StackPanel>
+            </Border>
+
+            <!--  Dynamically generated token directory  -->
+            <Border
                 Margin="0,4,0,18"
-                Style="{StaticResource GallerySupportingTextStyle}"
-                Text="以下目录按语义颜色、组件颜色、排版、基础尺寸、组件尺寸和交互状态分层列出；显示的是当前资源树最终解析后的值。" />
+                Padding="20"
+                Background="{DynamicResource ZenInfoLightBrush}"
+                BorderBrush="{DynamicResource ZenPrimaryBrush}"
+                BorderThickness="0,0,0,0"
+                CornerRadius="9">
+                <Grid>
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="Auto" />
+                        <ColumnDefinition Width="16" />
+                        <ColumnDefinition Width="*" />
+                    </Grid.ColumnDefinitions>
+                    <Border
+                        Width="38"
+                        Height="38"
+                        Background="{DynamicResource ZenPrimaryBrush}"
+                        CornerRadius="19">
+                        <TextBlock
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center"
+                            FontSize="16"
+                            FontWeight="SemiBold"
+                            Foreground="White"
+                            Text="#" />
+                    </Border>
+                    <StackPanel Grid.Column="2">
+                        <TextBlock
+                            FontSize="16"
+                            FontWeight="SemiBold"
+                            Foreground="{DynamicResource ZenTextPrimaryBrush}"
+                            Text="当前资源解析目录" />
+                        <TextBlock
+                            Margin="0,5,0,0"
+                            Style="{StaticResource TokenSupportingTextStyle}"
+                            Text="以下内容按六个源文件分组，展示当前资源树最终解析后的 Key、值与颜色样本。" />
+                    </StackPanel>
+                </Grid>
+            </Border>
             <StackPanel x:Name="TokenSections" />
         </StackPanel>
     </ScrollViewer>
