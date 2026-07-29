@@ -187,6 +187,44 @@ namespace ZenUI.Wpf.Tests.Controls
         }
 
         [TestMethod]
+        public void ComboBoxArrowRotatesWithDropDownState()
+        {
+            var comboBox = new ZenComboBox { Width = 160 };
+            comboBox.Items.Add("Item");
+            var window = CreateTestWindow(comboBox, 220, 120);
+            window.Resources.MergedDictionaries.Add(new ResourceDictionary
+            {
+                Source = new Uri(
+                    "/ZenUI.Wpf;component/Themes/Generic.xaml",
+                    UriKind.Relative)
+            });
+
+            try
+            {
+                window.Show();
+                window.UpdateLayout();
+
+                var arrow = comboBox.Template.FindName("DropDownArrow", comboBox) as Path;
+                Assert.IsNotNull(arrow);
+                Assert.AreEqual(0d, ((RotateTransform)arrow.RenderTransform).Angle);
+
+                comboBox.IsDropDownOpen = true;
+                window.UpdateLayout();
+                Assert.AreEqual(180d, ((RotateTransform)arrow.RenderTransform).Angle);
+
+                comboBox.IsDropDownOpen = false;
+                window.UpdateLayout();
+                Assert.AreEqual(0d, ((RotateTransform)arrow.RenderTransform).Angle);
+            }
+            finally
+            {
+                comboBox.IsDropDownOpen = false;
+                window.Dispatcher.Invoke(DispatcherPriority.ContextIdle, new Action(() => { }));
+                window.Close();
+            }
+        }
+
+        [TestMethod]
         public void EditableComboBoxHidesWatermarkAfterTextIsEntered()
         {
             var comboBox = new ZenComboBox
