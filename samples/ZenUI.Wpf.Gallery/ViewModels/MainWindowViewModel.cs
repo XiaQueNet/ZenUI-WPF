@@ -1,8 +1,6 @@
 using System.Collections.Generic;
-using System.Collections.ObjectModel;
 using System.Windows;
 
-using Prism.Commands;
 using Prism.Mvvm;
 using Prism.Navigation.Regions;
 
@@ -15,6 +13,7 @@ namespace ZenUI.Wpf.Gallery.ViewModels
     {
         private readonly IRegionManager regionManager;
         private DensityOption selectedDensityOption;
+        private MenuItemViewModel selectedMenuItem;
         private ThemeOption selectedThemeOption;
 
         public MainWindowViewModel(IRegionManager regionManager)
@@ -37,39 +36,73 @@ namespace ZenUI.Wpf.Gallery.ViewModels
             };
             selectedDensityOption = DensityOptions[1];
 
-            MenuItems = new ObservableCollection<MenuItemViewModel>
+            NavigationGroups = new[]
             {
-                new MenuItemViewModel("概览", NavigationKeys.Overview, true),
-                new MenuItemViewModel("设计 Token", NavigationKeys.Token),
-                new MenuItemViewModel("按钮  Button", NavigationKeys.Button),
-                new MenuItemViewModel("输入框  TextBox", NavigationKeys.TextBox),
-                new MenuItemViewModel("数字输入框  NumberBox", NavigationKeys.NumberBox),
-                new MenuItemViewModel("密码框  PasswordBox", NavigationKeys.PasswordBox),
-                new MenuItemViewModel("开关  Switch", NavigationKeys.Switch),
-                new MenuItemViewModel("复选框  CheckBox", NavigationKeys.CheckBox),
-                new MenuItemViewModel("单选框  RadioButton", NavigationKeys.RadioButton),
-                new MenuItemViewModel("单选组  RadioGroup", NavigationKeys.RadioGroup),
-                new MenuItemViewModel("下拉框  ComboBox", NavigationKeys.ComboBox),
-                new MenuItemViewModel("列表框  ListBox", NavigationKeys.ListBox),
-                new MenuItemViewModel("日历  Calendar", NavigationKeys.Calendar),
-                new MenuItemViewModel("日期选择器  DatePicker", NavigationKeys.DatePicker),
-                new MenuItemViewModel("数据表格  DataGrid", NavigationKeys.DataGrid),
-                new MenuItemViewModel("滑块  Slider", NavigationKeys.Slider),
-                new MenuItemViewModel("进度条  ProgressBar", NavigationKeys.ProgressBar),
-                new MenuItemViewModel("状态提示  Alert", NavigationKeys.Alert),
-                new MenuItemViewModel("折叠面板  Expander", NavigationKeys.Expander),
-                new MenuItemViewModel("气泡提示  Popover", NavigationKeys.Popover),
-                new MenuItemViewModel("右键菜单  ContextMenu", NavigationKeys.ContextMenu)
+                new NavigationGroupViewModel(
+                    "指南",
+                    SelectMenuItem,
+                    new MenuItemViewModel("概览", NavigationKeys.Overview),
+                    new MenuItemViewModel("设计 Token", NavigationKeys.Token)),
+                new NavigationGroupViewModel(
+                    "基础交互",
+                    SelectMenuItem,
+                    new MenuItemViewModel("按钮  Button", NavigationKeys.Button),
+                    new MenuItemViewModel("复选框  CheckBox", NavigationKeys.CheckBox),
+                    new MenuItemViewModel("单选框  RadioButton", NavigationKeys.RadioButton),
+                    new MenuItemViewModel("单选组  RadioGroup", NavigationKeys.RadioGroup),
+                    new MenuItemViewModel("开关  Switch", NavigationKeys.Switch)),
+                new NavigationGroupViewModel(
+                    "数据输入",
+                    SelectMenuItem,
+                    new MenuItemViewModel("输入框  TextBox", NavigationKeys.TextBox),
+                    new MenuItemViewModel("密码框  PasswordBox", NavigationKeys.PasswordBox),
+                    new MenuItemViewModel("数字输入框  NumberBox", NavigationKeys.NumberBox),
+                    new MenuItemViewModel("下拉框  ComboBox", NavigationKeys.ComboBox),
+                    new MenuItemViewModel("滑块  Slider", NavigationKeys.Slider),
+                    new MenuItemViewModel("日期选择器  DatePicker", NavigationKeys.DatePicker)),
+                new NavigationGroupViewModel(
+                    "数据展示",
+                    SelectMenuItem,
+                    new MenuItemViewModel("列表框  ListBox", NavigationKeys.ListBox),
+                    new MenuItemViewModel("数据表格  DataGrid", NavigationKeys.DataGrid),
+                    new MenuItemViewModel("日历  Calendar", NavigationKeys.Calendar),
+                    new MenuItemViewModel("折叠面板  Expander", NavigationKeys.Expander)),
+                new NavigationGroupViewModel(
+                    "反馈",
+                    SelectMenuItem,
+                    new MenuItemViewModel("状态提示  Alert", NavigationKeys.Alert),
+                    new MenuItemViewModel("进度条  ProgressBar", NavigationKeys.ProgressBar)),
+                new NavigationGroupViewModel(
+                    "浮层与菜单",
+                    SelectMenuItem,
+                    new MenuItemViewModel("气泡提示  Popover", NavigationKeys.Popover),
+                    new MenuItemViewModel("右键菜单  ContextMenu", NavigationKeys.ContextMenu))
             };
-
-            NavigateCommand = new DelegateCommand<MenuItemViewModel>(Navigate, item => item != null);
+            selectedMenuItem = NavigationGroups[0].Items[0];
+            SynchronizeGroupSelection(selectedMenuItem);
         }
 
-        public ObservableCollection<MenuItemViewModel> MenuItems { get; }
+        public IReadOnlyList<NavigationGroupViewModel> NavigationGroups { get; }
 
         public IReadOnlyList<DensityOption> DensityOptions { get; }
 
         public IReadOnlyList<ThemeOption> ThemeOptions { get; }
+
+        public MenuItemViewModel SelectedMenuItem
+        {
+            get { return selectedMenuItem; }
+            set
+            {
+                if (value != null && SetProperty(ref selectedMenuItem, value))
+                {
+                    SynchronizeGroupSelection(value);
+                    ExpandContainingGroup(value);
+                    regionManager.RequestNavigate(
+                        RegionNames.ContentRegion,
+                        value.NavigationTarget);
+                }
+            }
+        }
 
         public DensityOption SelectedDensityOption
         {
@@ -95,16 +128,49 @@ namespace ZenUI.Wpf.Gallery.ViewModels
             }
         }
 
-        public DelegateCommand<MenuItemViewModel> NavigateCommand { get; }
-
-        private void Navigate(MenuItemViewModel menuItem)
+        private void ExpandContainingGroup(MenuItemViewModel menuItem)
         {
-            foreach (var item in MenuItems)
+            foreach (var group in NavigationGroups)
             {
-                item.IsSelected = ReferenceEquals(item, menuItem);
+                foreach (var item in group.Items)
+                {
+                    if (ReferenceEquals(item, menuItem))
+                    {
+                        group.IsExpanded = true;
+                        return;
+                    }
+                }
+            }
+        }
+
+        private void SelectMenuItem(MenuItemViewModel menuItem)
+        {
+            SelectedMenuItem = menuItem;
+        }
+
+        private void SynchronizeGroupSelection(MenuItemViewModel menuItem)
+        {
+            foreach (var group in NavigationGroups)
+            {
+                group.SelectedItem = Contains(group, menuItem)
+                    ? menuItem
+                    : null;
+            }
+        }
+
+        private static bool Contains(
+            NavigationGroupViewModel group,
+            MenuItemViewModel menuItem)
+        {
+            foreach (var item in group.Items)
+            {
+                if (ReferenceEquals(item, menuItem))
+                {
+                    return true;
+                }
             }
 
-            regionManager.RequestNavigate(RegionNames.ContentRegion, menuItem.NavigationTarget);
+            return false;
         }
     }
 

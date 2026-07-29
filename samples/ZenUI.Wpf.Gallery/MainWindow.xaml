@@ -19,57 +19,39 @@
     WindowStartupLocation="CenterScreen"
     mc:Ignorable="d">
     <Window.Resources>
-        <Style x:Key="NavigationItemStyle" TargetType="{x:Type RadioButton}">
-            <Setter Property="Height" Value="38" />
-            <Setter Property="Margin" Value="0,2" />
+        <Style
+            x:Key="NavigationGroupExpanderStyle"
+            BasedOn="{StaticResource ZenExpanderStyle}"
+            TargetType="{x:Type zen:ZenExpander}">
+            <Setter Property="Margin" Value="0,0,0,6" />
+            <Setter Property="HeaderPadding" Value="12,8" />
+            <Setter Property="GlyphSize" Value="12" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
+            <Setter Property="CornerRadius" Value="8" />
+            <Setter Property="FontSize" Value="{DynamicResource ZenFontSizeBodySmall}" />
+            <Setter Property="Foreground" Value="{DynamicResource ZenTextSecondaryBrush}" />
+        </Style>
+
+        <Style
+            x:Key="NavigationRadioItemStyle"
+            BasedOn="{StaticResource ZenRadioItemStyle}"
+            TargetType="{x:Type zen:ZenRadioItem}">
+            <Setter Property="Height" Value="36" />
+            <Setter Property="Padding" Value="14,0,12,0" />
+            <Setter Property="Background" Value="Transparent" />
+            <Setter Property="BorderBrush" Value="Transparent" />
+            <Setter Property="BorderThickness" Value="0" />
             <Setter Property="Foreground" Value="{DynamicResource ZenTextSecondaryBrush}" />
             <Setter Property="FontSize" Value="{DynamicResource ZenFontSizeBody}" />
-            <Setter Property="Cursor" Value="Hand" />
-            <Setter Property="FocusVisualStyle" Value="{x:Null}" />
-            <Setter Property="Template">
-                <Setter.Value>
-                    <ControlTemplate TargetType="{x:Type RadioButton}">
-                        <Border
-                            x:Name="MenuItem"
-                            Background="Transparent"
-                            CornerRadius="8">
-                            <Grid>
-                                <Border
-                                    x:Name="ActiveIndicator"
-                                    Width="3"
-                                    Margin="0,7"
-                                    HorizontalAlignment="Left"
-                                    Background="{DynamicResource ZenPrimaryBrush}"
-                                    CornerRadius="0,2,2,0"
-                                    Visibility="Collapsed" />
-                                <ContentPresenter
-                                    Margin="16,0"
-                                    HorizontalAlignment="Left"
-                                    VerticalAlignment="Center"
-                                    ContentSource="Content" />
-                            </Grid>
-                        </Border>
-                        <ControlTemplate.Triggers>
-                            <Trigger Property="IsChecked" Value="True">
-                                <Setter TargetName="MenuItem" Property="Background" Value="{DynamicResource ZenInfoLightBrush}" />
-                                <Setter TargetName="ActiveIndicator" Property="Visibility" Value="Visible" />
-                                <Setter Property="Foreground" Value="{DynamicResource ZenPrimaryBrush}" />
-                                <Setter Property="FontWeight" Value="{DynamicResource ZenFontWeightSemibold}" />
-                            </Trigger>
-                            <Trigger Property="IsMouseOver" Value="True">
-                                <Setter TargetName="MenuItem" Property="Background" Value="{DynamicResource ZenSurfaceHoverBrush}" />
-                                <Setter Property="Foreground" Value="{DynamicResource ZenPrimaryBrush}" />
-                            </Trigger>
-                        </ControlTemplate.Triggers>
-                    </ControlTemplate>
-                </Setter.Value>
-            </Setter>
+            <Setter Property="HorizontalContentAlignment" Value="Left" />
+            <Setter Property="VerticalContentAlignment" Value="Center" />
         </Style>
     </Window.Resources>
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="248" />
+            <ColumnDefinition Width="272" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
@@ -99,21 +81,27 @@
 
                 <ScrollViewer
                     Grid.Row="1"
-                    Margin="0,18,0,8"
+                    Margin="0,12,0,8"
                     HorizontalScrollBarVisibility="Disabled"
                     VerticalScrollBarVisibility="Auto">
-                    <ItemsControl
-                        Margin="16,0"
-                        ItemsSource="{Binding MenuItems}">
+                    <ItemsControl Margin="16,0,12,0" ItemsSource="{Binding NavigationGroups}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
-                                <RadioButton
-                                    Command="{Binding DataContext.NavigateCommand, RelativeSource={RelativeSource AncestorType={x:Type ItemsControl}}}"
-                                    CommandParameter="{Binding}"
-                                    Content="{Binding DisplayName}"
-                                    GroupName="GalleryNavigation"
-                                    IsChecked="{Binding IsSelected, Mode=TwoWay}"
-                                    Style="{StaticResource NavigationItemStyle}" />
+                                <zen:ZenExpander
+                                    Header="{Binding Title}"
+                                    IsExpanded="{Binding IsExpanded, Mode=TwoWay}"
+                                    Style="{StaticResource NavigationGroupExpanderStyle}">
+                                    <zen:ZenRadioGroup
+                                        Margin="0,0,0,6"
+                                        AutomationProperties.Name="{Binding Title}"
+                                        DisplayMemberPath="DisplayName"
+                                        IsItemWidthUniform="False"
+                                        ItemContainerStyle="{StaticResource NavigationRadioItemStyle}"
+                                        ItemsSource="{Binding Items}"
+                                        Orientation="Vertical"
+                                        SelectedItem="{Binding SelectedItem, Mode=TwoWay}"
+                                        Spacing="2" />
+                                </zen:ZenExpander>
                             </DataTemplate>
                         </ItemsControl.ItemTemplate>
                     </ItemsControl>

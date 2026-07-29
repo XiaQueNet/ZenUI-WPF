@@ -1,26 +1,15 @@
-using Prism.Mvvm;
-
 namespace ZenUI.Wpf.Gallery.ViewModels
 {
-    public sealed class MenuItemViewModel : BindableBase
+    public sealed class MenuItemViewModel
     {
-        private bool isSelected;
-
-        public MenuItemViewModel(string displayName, string navigationTarget, bool isSelected = false)
+        public MenuItemViewModel(string displayName, string navigationTarget)
         {
             DisplayName = displayName;
             NavigationTarget = navigationTarget;
-            this.isSelected = isSelected;
         }
 
         public string DisplayName { get; }
 
         public string NavigationTarget { get; }
-
-        public bool IsSelected
-        {
-            get { return isSelected; }
-            set { SetProperty(ref isSelected, value); }
-        }
     }
 }

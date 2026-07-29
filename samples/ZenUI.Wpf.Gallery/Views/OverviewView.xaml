@@ -4,37 +4,101 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:gallery="clr-namespace:ZenUI.Wpf.Gallery.Controls"
     xmlns:zen="https://zenui.mnorg.cn/xaml/wpf">
-    <ScrollViewer Padding="40" HorizontalContentAlignment="Stretch" VerticalScrollBarVisibility="Auto">
+    <ScrollViewer
+        Padding="40"
+        HorizontalContentAlignment="Stretch"
+        VerticalScrollBarVisibility="Auto">
         <StackPanel>
-            <gallery:PageHeader Description="浏览 ZenUI 的 15 个控件、完整交互状态，以及可实时切换的主题与界面密度。" Title="ZenUI Controls Gallery" />
+            <gallery:PageHeader Title="ZenUI Controls Gallery" Description="浏览 ZenUI 的 19 个控件、五类使用场景、完整交互状态，以及可实时切换的主题与界面密度。" />
 
-            <Border Margin="0,0,0,18" Padding="26" Background="{DynamicResource ZenPrimaryBrush}" CornerRadius="12">
+            <Border
+                Margin="0,0,0,18"
+                Padding="26"
+                Background="{DynamicResource ZenPrimaryBrush}"
+                CornerRadius="12">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="*" />
                         <ColumnDefinition Width="Auto" />
                     </Grid.ColumnDefinitions>
                     <StackPanel MaxWidth="470" VerticalAlignment="Center">
-                        <TextBlock FontSize="20" FontWeight="SemiBold" Foreground="White" Text="专注于一致、清晰的桌面体验" />
-                        <TextBlock Margin="0,10,0,0" FontSize="13" Foreground="{DynamicResource GalleryOnPrimarySecondaryBrush}" LineHeight="21" Text="面向 .NET Framework 4.7.2 与现代 .NET 8 WPF，提供开箱即用的控件、语义化 Token 与运行时主题能力。" TextWrapping="Wrap" />
+                        <TextBlock
+                            FontSize="20"
+                            FontWeight="SemiBold"
+                            Foreground="White"
+                            Text="专注于一致、清晰的桌面体验" />
+                        <TextBlock
+                            Margin="0,10,0,0"
+                            FontSize="13"
+                            Foreground="{DynamicResource GalleryOnPrimarySecondaryBrush}"
+                            LineHeight="21"
+                            Text="面向 .NET Framework 4.7.2 与现代 .NET 8 WPF，提供开箱即用的控件、语义化 Token 与运行时主题能力。"
+                            TextWrapping="Wrap" />
                     </StackPanel>
-                    <StackPanel Grid.Column="1" Margin="30,0,0,0" Orientation="Horizontal">
-                        <Border MinWidth="82" Padding="12" Background="{DynamicResource GalleryOnPrimaryMutedSurfaceBrush}" CornerRadius="8">
+                    <StackPanel
+                        Grid.Column="1"
+                        Margin="30,0,0,0"
+                        Orientation="Horizontal">
+                        <Border
+                            MinWidth="82"
+                            Padding="12"
+                            Background="{DynamicResource GalleryOnPrimaryMutedSurfaceBrush}"
+                            CornerRadius="8">
                             <StackPanel>
-                                <TextBlock HorizontalAlignment="Center" FontSize="22" FontWeight="SemiBold" Foreground="White" Text="15" />
-                                <TextBlock Margin="0,4,0,0" HorizontalAlignment="Center" FontSize="12" Foreground="{DynamicResource GalleryOnPrimarySecondaryBrush}" Text="常用控件" />
+                                <TextBlock
+                                    HorizontalAlignment="Center"
+                                    FontSize="22"
+                                    FontWeight="SemiBold"
+                                    Foreground="White"
+                                    Text="19" />
+                                <TextBlock
+                                    Margin="0,4,0,0"
+                                    HorizontalAlignment="Center"
+                                    FontSize="12"
+                                    Foreground="{DynamicResource GalleryOnPrimarySecondaryBrush}"
+                                    Text="常用控件" />
                             </StackPanel>
                         </Border>
-                        <Border MinWidth="82" Margin="10,0,0,0" Padding="12" Background="{DynamicResource GalleryOnPrimaryMutedSurfaceBrush}" CornerRadius="8">
+                        <Border
+                            MinWidth="82"
+                            Margin="10,0,0,0"
+                            Padding="12"
+                            Background="{DynamicResource GalleryOnPrimaryMutedSurfaceBrush}"
+                            CornerRadius="8">
                             <StackPanel>
-                                <TextBlock HorizontalAlignment="Center" FontSize="22" FontWeight="SemiBold" Foreground="White" Text="3" />
-                                <TextBlock Margin="0,4,0,0" HorizontalAlignment="Center" FontSize="12" Foreground="{DynamicResource GalleryOnPrimarySecondaryBrush}" Text="界面主题" />
+                                <TextBlock
+                                    HorizontalAlignment="Center"
+                                    FontSize="22"
+                                    FontWeight="SemiBold"
+                                    Foreground="White"
+                                    Text="3" />
+                                <TextBlock
+                                    Margin="0,4,0,0"
+                                    HorizontalAlignment="Center"
+                                    FontSize="12"
+                                    Foreground="{DynamicResource GalleryOnPrimarySecondaryBrush}"
+                                    Text="界面主题" />
                             </StackPanel>
                         </Border>
-                        <Border MinWidth="82" Margin="10,0,0,0" Padding="12" Background="{DynamicResource GalleryOnPrimaryMutedSurfaceBrush}" CornerRadius="8">
+                        <Border
+                            MinWidth="82"
+                            Margin="10,0,0,0"
+                            Padding="12"
+                            Background="{DynamicResource GalleryOnPrimaryMutedSurfaceBrush}"
+                            CornerRadius="8">
                             <StackPanel>
-                                <TextBlock HorizontalAlignment="Center" FontSize="22" FontWeight="SemiBold" Foreground="White" Text="3" />
-                                <TextBlock Margin="0,4,0,0" HorizontalAlignment="Center" FontSize="12" Foreground="{DynamicResource GalleryOnPrimarySecondaryBrush}" Text="密度等级" />
+                                <TextBlock
+                                    HorizontalAlignment="Center"
+                                    FontSize="22"
+                                    FontWeight="SemiBold"
+                                    Foreground="White"
+                                    Text="3" />
+                                <TextBlock
+                                    Margin="0,4,0,0"
+                                    HorizontalAlignment="Center"
+                                    FontSize="12"
+                                    Foreground="{DynamicResource GalleryOnPrimarySecondaryBrush}"
+                                    Text="密度等级" />
                             </StackPanel>
                         </Border>
                     </StackPanel>
@@ -52,28 +116,51 @@
                         </Grid.ColumnDefinitions>
 
                         <StackPanel>
-                            <TextBlock Margin="0,0,0,12" FontWeight="SemiBold" Text="输入与选择" />
+                            <TextBlock
+                                Margin="0,0,0,12"
+                                FontWeight="SemiBold"
+                                Text="输入与选择" />
                             <zen:ZenTextBox Margin="0,0,0,12" Watermark="请输入项目名称" />
-                            <zen:ZenNumberBox Margin="0,0,0,12" Maximum="100" Minimum="1" Step="1" Value="3" />
+                            <zen:ZenNumberBox
+                                Margin="0,0,0,12"
+                                Maximum="100"
+                                Minimum="1"
+                                Step="1"
+                                Value="3" />
                             <zen:ZenComboBox Margin="0,0,0,12" Watermark="请选择项目类型">
                                 <ComboBoxItem Content="桌面应用" />
                                 <ComboBoxItem Content="管理工具" />
                                 <ComboBoxItem Content="数据看板" />
                             </zen:ZenComboBox>
                             <Grid>
-                                <TextBlock VerticalAlignment="Center" Foreground="{DynamicResource ZenTextSecondaryBrush}" Text="启用消息通知" />
+                                <TextBlock
+                                    VerticalAlignment="Center"
+                                    Foreground="{DynamicResource ZenTextSecondaryBrush}"
+                                    Text="启用消息通知" />
                                 <zen:ZenSwitch HorizontalAlignment="Right" IsChecked="True" />
                             </Grid>
                         </StackPanel>
 
                         <StackPanel Grid.Column="2">
-                            <TextBlock Margin="0,0,0,12" FontWeight="SemiBold" Text="操作与反馈" />
+                            <TextBlock
+                                Margin="0,0,0,12"
+                                FontWeight="SemiBold"
+                                Text="操作与反馈" />
                             <StackPanel Margin="0,0,0,16" Orientation="Horizontal">
                                 <zen:ZenButton Content="确认创建" Style="{StaticResource GalleryButtonStyle}" />
-                                <zen:ZenButton Content="稍后处理" Style="{StaticResource GalleryButtonStyle}" Variant="Success" />
+                                <zen:ZenButton
+                                    Content="稍后处理"
+                                    Style="{StaticResource GalleryButtonStyle}"
+                                    Variant="Success" />
                             </StackPanel>
-                            <TextBlock Margin="0,0,0,8" Foreground="{DynamicResource ZenTextSecondaryBrush}" Text="准备进度 · 68%" />
-                            <zen:ZenProgressBar Margin="0,0,0,16" Maximum="100" Value="68" />
+                            <TextBlock
+                                Margin="0,0,0,8"
+                                Foreground="{DynamicResource ZenTextSecondaryBrush}"
+                                Text="准备进度 · 68%" />
+                            <zen:ZenProgressBar
+                                Margin="0,0,0,16"
+                                Maximum="100"
+                                Value="68" />
                             <zen:ZenAlert Severity="Success">
                                 <TextBlock Text="组件状态正常，可以开始构建应用。" TextWrapping="Wrap" />
                             </zen:ZenAlert>
@@ -85,26 +172,133 @@
             <Border Style="{StaticResource GalleryCardStyle}">
                 <StackPanel>
                     <TextBlock Style="{StaticResource SectionTitleStyle}" Text="组件概览" />
-                    <UniformGrid Columns="3">
-                        <Border Margin="0,0,8,0" Padding="18" Background="{DynamicResource ZenSurfaceMutedBrush}" CornerRadius="8">
+                    <UniformGrid
+                        Margin="-8"
+                        Columns="3"
+                        Rows="2">
+                        <Border
+                            Margin="8"
+                            Padding="18"
+                            Background="{DynamicResource ZenSurfaceMutedBrush}"
+                            CornerRadius="8">
                             <StackPanel>
-                                <Border Width="34" Height="4" HorizontalAlignment="Left" Background="{DynamicResource ZenPrimaryBrush}" CornerRadius="2" />
-                                <TextBlock Margin="0,14,0,0" FontSize="15" FontWeight="SemiBold" Text="输入与操作" />
-                                <TextBlock Margin="0,7,0,0" Foreground="{DynamicResource ZenTextSecondaryBrush}" LineHeight="21" Text="Button · Switch&#x0a;TextBox · NumberBox&#x0a;PasswordBox" TextWrapping="Wrap" />
+                                <Border
+                                    Width="34"
+                                    Height="4"
+                                    HorizontalAlignment="Left"
+                                    Background="{DynamicResource ZenPrimaryBrush}"
+                                    CornerRadius="2" />
+                                <TextBlock
+                                    Margin="0,14,0,0"
+                                    FontSize="15"
+                                    FontWeight="SemiBold"
+                                    Text="基础交互" />
+                                <TextBlock
+                                    Margin="0,7,0,0"
+                                    Foreground="{DynamicResource ZenTextSecondaryBrush}"
+                                    LineHeight="21"
+                                    Text="Button · CheckBox&#x0a;RadioButton · RadioGroup&#x0a;Switch"
+                                    TextWrapping="Wrap" />
                             </StackPanel>
                         </Border>
-                        <Border Margin="8,0" Padding="18" Background="{DynamicResource ZenSurfaceMutedBrush}" CornerRadius="8">
+                        <Border
+                            Margin="8"
+                            Padding="18"
+                            Background="{DynamicResource ZenSurfaceMutedBrush}"
+                            CornerRadius="8">
                             <StackPanel>
-                                <Border Width="34" Height="4" HorizontalAlignment="Left" Background="{DynamicResource ZenSuccessBrush}" CornerRadius="2" />
-                                <TextBlock Margin="0,14,0,0" FontSize="15" FontWeight="SemiBold" Text="选择与日期" />
-                                <TextBlock Margin="0,7,0,0" Foreground="{DynamicResource ZenTextSecondaryBrush}" LineHeight="21" Text="CheckBox · RadioButton&#x0a;ComboBox · ListBox · Slider&#x0a;Calendar · DatePicker" TextWrapping="Wrap" />
+                                <Border
+                                    Width="34"
+                                    Height="4"
+                                    HorizontalAlignment="Left"
+                                    Background="{DynamicResource ZenSuccessBrush}"
+                                    CornerRadius="2" />
+                                <TextBlock
+                                    Margin="0,14,0,0"
+                                    FontSize="15"
+                                    FontWeight="SemiBold"
+                                    Text="数据输入" />
+                                <TextBlock
+                                    Margin="0,7,0,0"
+                                    Foreground="{DynamicResource ZenTextSecondaryBrush}"
+                                    LineHeight="21"
+                                    Text="TextBox · PasswordBox&#x0a;NumberBox · ComboBox&#x0a;Slider · DatePicker"
+                                    TextWrapping="Wrap" />
                             </StackPanel>
                         </Border>
-                        <Border Margin="8,0,0,0" Padding="18" Background="{DynamicResource ZenSurfaceMutedBrush}" CornerRadius="8">
+                        <Border
+                            Margin="8"
+                            Padding="18"
+                            Background="{DynamicResource ZenSurfaceMutedBrush}"
+                            CornerRadius="8">
                             <StackPanel>
-                                <Border Width="34" Height="4" HorizontalAlignment="Left" Background="{DynamicResource ZenWarningBrush}" CornerRadius="2" />
-                                <TextBlock Margin="0,14,0,0" FontSize="15" FontWeight="SemiBold" Text="数据与反馈" />
-                                <TextBlock Margin="0,7,0,0" Foreground="{DynamicResource ZenTextSecondaryBrush}" LineHeight="21" Text="DataGrid&#x0a;ProgressBar&#x0a;Alert" TextWrapping="Wrap" />
+                                <Border
+                                    Width="34"
+                                    Height="4"
+                                    HorizontalAlignment="Left"
+                                    Background="{DynamicResource ZenWarningBrush}"
+                                    CornerRadius="2" />
+                                <TextBlock
+                                    Margin="0,14,0,0"
+                                    FontSize="15"
+                                    FontWeight="SemiBold"
+                                    Text="数据展示" />
+                                <TextBlock
+                                    Margin="0,7,0,0"
+                                    Foreground="{DynamicResource ZenTextSecondaryBrush}"
+                                    LineHeight="21"
+                                    Text="ListBox · DataGrid&#x0a;Calendar · Expander"
+                                    TextWrapping="Wrap" />
+                            </StackPanel>
+                        </Border>
+                        <Border
+                            Margin="8"
+                            Padding="18"
+                            Background="{DynamicResource ZenSurfaceMutedBrush}"
+                            CornerRadius="8">
+                            <StackPanel>
+                                <Border
+                                    Width="34"
+                                    Height="4"
+                                    HorizontalAlignment="Left"
+                                    Background="{DynamicResource ZenErrorBrush}"
+                                    CornerRadius="2" />
+                                <TextBlock
+                                    Margin="0,14,0,0"
+                                    FontSize="15"
+                                    FontWeight="SemiBold"
+                                    Text="反馈" />
+                                <TextBlock
+                                    Margin="0,7,0,0"
+                                    Foreground="{DynamicResource ZenTextSecondaryBrush}"
+                                    LineHeight="21"
+                                    Text="Alert · ProgressBar"
+                                    TextWrapping="Wrap" />
+                            </StackPanel>
+                        </Border>
+                        <Border
+                            Margin="8"
+                            Padding="18"
+                            Background="{DynamicResource ZenSurfaceMutedBrush}"
+                            CornerRadius="8">
+                            <StackPanel>
+                                <Border
+                                    Width="34"
+                                    Height="4"
+                                    HorizontalAlignment="Left"
+                                    Background="{DynamicResource ZenInfoBrush}"
+                                    CornerRadius="2" />
+                                <TextBlock
+                                    Margin="0,14,0,0"
+                                    FontSize="15"
+                                    FontWeight="SemiBold"
+                                    Text="浮层与菜单" />
+                                <TextBlock
+                                    Margin="0,7,0,0"
+                                    Foreground="{DynamicResource ZenTextSecondaryBrush}"
+                                    LineHeight="21"
+                                    Text="Popover · ContextMenu"
+                                    TextWrapping="Wrap" />
                             </StackPanel>
                         </Border>
                     </UniformGrid>
@@ -115,28 +309,76 @@
                 <StackPanel>
                     <TextBlock Style="{StaticResource SectionTitleStyle}" Text="设计特性" />
                     <UniformGrid Columns="4">
-                        <Border Margin="0,0,7,0" Padding="16" BorderBrush="{DynamicResource ZenDividerBrush}" BorderThickness="1" CornerRadius="8">
+                        <Border
+                            Margin="0,0,7,0"
+                            Padding="16"
+                            BorderBrush="{DynamicResource ZenDividerBrush}"
+                            BorderThickness="1"
+                            CornerRadius="8">
                             <StackPanel>
-                                <TextBlock FontSize="15" FontWeight="SemiBold" Text="统一外观" />
-                                <TextBlock Margin="0,7,0,0" Foreground="{DynamicResource ZenTextSecondaryBrush}" Text="一致的间距、圆角与视觉层级" TextWrapping="Wrap" />
+                                <TextBlock
+                                    FontSize="15"
+                                    FontWeight="SemiBold"
+                                    Text="统一外观" />
+                                <TextBlock
+                                    Margin="0,7,0,0"
+                                    Foreground="{DynamicResource ZenTextSecondaryBrush}"
+                                    Text="一致的间距、圆角与视觉层级"
+                                    TextWrapping="Wrap" />
                             </StackPanel>
                         </Border>
-                        <Border Margin="7,0" Padding="16" BorderBrush="{DynamicResource ZenDividerBrush}" BorderThickness="1" CornerRadius="8">
+                        <Border
+                            Margin="7,0"
+                            Padding="16"
+                            BorderBrush="{DynamicResource ZenDividerBrush}"
+                            BorderThickness="1"
+                            CornerRadius="8">
                             <StackPanel>
-                                <TextBlock FontSize="15" FontWeight="SemiBold" Text="完整状态" />
-                                <TextBlock Margin="0,7,0,0" Foreground="{DynamicResource ZenTextSecondaryBrush}" Text="悬停、焦点、选中与禁用反馈" TextWrapping="Wrap" />
+                                <TextBlock
+                                    FontSize="15"
+                                    FontWeight="SemiBold"
+                                    Text="完整状态" />
+                                <TextBlock
+                                    Margin="0,7,0,0"
+                                    Foreground="{DynamicResource ZenTextSecondaryBrush}"
+                                    Text="悬停、焦点、选中与禁用反馈"
+                                    TextWrapping="Wrap" />
                             </StackPanel>
                         </Border>
-                        <Border Margin="7,0" Padding="16" BorderBrush="{DynamicResource ZenDividerBrush}" BorderThickness="1" CornerRadius="8">
+                        <Border
+                            Margin="7,0"
+                            Padding="16"
+                            BorderBrush="{DynamicResource ZenDividerBrush}"
+                            BorderThickness="1"
+                            CornerRadius="8">
                             <StackPanel>
-                                <TextBlock FontSize="15" FontWeight="SemiBold" Text="主题与密度" />
-                                <TextBlock Margin="0,7,0,0" Foreground="{DynamicResource ZenTextSecondaryBrush}" Text="三套主题、三档密度实时切换" TextWrapping="Wrap" />
+                                <TextBlock
+                                    FontSize="15"
+                                    FontWeight="SemiBold"
+                                    Text="主题与密度" />
+                                <TextBlock
+                                    Margin="0,7,0,0"
+                                    Foreground="{DynamicResource ZenTextSecondaryBrush}"
+                                    Text="三套主题、三档密度实时切换"
+                                    TextWrapping="Wrap" />
                             </StackPanel>
                         </Border>
-                        <Border Margin="7,0,0,0" Padding="16" BorderBrush="{DynamicResource ZenDividerBrush}" BorderThickness="1" CornerRadius="8">
+                        <Border
+                            Margin="7,0,0,0"
+                            Padding="16"
+                            BorderBrush="{DynamicResource ZenDividerBrush}"
+                            BorderThickness="1"
+                            CornerRadius="8">
                             <StackPanel>
-                                <TextBlock FontSize="15" FontWeight="SemiBold" Text="MVVM 友好" />
-                                <TextBlock Margin="0,7,0,0" Foreground="{DynamicResource ZenTextSecondaryBrush}" Text="适配绑定、命令与 Prism 导航" TextWrapping="Wrap" />
+                                <TextBlock
+                                    FontSize="15"
+                                    FontWeight="SemiBold"
+                                    Text="MVVM 友好" />
+                                <TextBlock
+                                    Margin="0,7,0,0"
+                                    Foreground="{DynamicResource ZenTextSecondaryBrush}"
+                                    Text="适配绑定、命令与 Prism 导航"
+                                    TextWrapping="Wrap" />
                             </StackPanel>
                         </Border>
                     </UniformGrid>
@@ -147,17 +389,53 @@
                 <StackPanel>
                     <TextBlock Style="{StaticResource SectionTitleStyle}" Text="主题色" />
                     <UniformGrid Columns="4">
-                        <Border Height="76" Margin="0,0,8,0" Background="{DynamicResource ZenPrimaryBrush}" CornerRadius="8">
-                            <TextBlock Margin="14" VerticalAlignment="Bottom" FontWeight="SemiBold" Foreground="White" Text="Primary" />
+                        <Border
+                            Height="76"
+                            Margin="0,0,8,0"
+                            Background="{DynamicResource ZenPrimaryBrush}"
+                            CornerRadius="8">
+                            <TextBlock
+                                Margin="14"
+                                VerticalAlignment="Bottom"
+                                FontWeight="SemiBold"
+                                Foreground="White"
+                                Text="Primary" />
                         </Border>
-                        <Border Height="76" Margin="8,0" Background="{DynamicResource ZenSuccessBrush}" CornerRadius="8">
-                            <TextBlock Margin="14" VerticalAlignment="Bottom" FontWeight="SemiBold" Foreground="{DynamicResource GallerySuccessForegroundBrush}" Text="Success" />
+                        <Border
+                            Height="76"
+                            Margin="8,0"
+                            Background="{DynamicResource ZenSuccessBrush}"
+                            CornerRadius="8">
+                            <TextBlock
+                                Margin="14"
+                                VerticalAlignment="Bottom"
+                                FontWeight="SemiBold"
+                                Foreground="{DynamicResource GallerySuccessForegroundBrush}"
+                                Text="Success" />
                         </Border>
-                        <Border Height="76" Margin="8,0" Background="{DynamicResource ZenWarningBrush}" CornerRadius="8">
-                            <TextBlock Margin="14" VerticalAlignment="Bottom" FontWeight="SemiBold" Foreground="{DynamicResource ZenWarningForegroundBrush}" Text="Warning" />
+                        <Border
+                            Height="76"
+                            Margin="8,0"
+                            Background="{DynamicResource ZenWarningBrush}"
+                            CornerRadius="8">
+                            <TextBlock
+                                Margin="14"
+                                VerticalAlignment="Bottom"
+                                FontWeight="SemiBold"
+                                Foreground="{DynamicResource ZenWarningForegroundBrush}"
+                                Text="Warning" />
                         </Border>
-                        <Border Height="76" Margin="8,0,0,0" Background="{DynamicResource ZenErrorBrush}" CornerRadius="8">
-                            <TextBlock Margin="14" VerticalAlignment="Bottom" FontWeight="SemiBold" Foreground="{DynamicResource GalleryErrorForegroundBrush}" Text="Error" />
+                        <Border
+                            Height="76"
+                            Margin="8,0,0,0"
+                            Background="{DynamicResource ZenErrorBrush}"
+                            CornerRadius="8">
+                            <TextBlock
+                                Margin="14"
+                                VerticalAlignment="Bottom"
+                                FontWeight="SemiBold"
+                                Foreground="{DynamicResource GalleryErrorForegroundBrush}"
+                                Text="Error" />
                         </Border>
                     </UniformGrid>
                 </StackPanel>
