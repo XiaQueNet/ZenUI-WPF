@@ -49,14 +49,12 @@
                     <TextBlock
                         Margin="0,0,0,12"
                         Style="{StaticResource GallerySupportingTextStyle}"
-                        Text="尺寸属性可单独覆盖，未指定时会跟随当前 Density Token。" />
+                        Text="整体尺寸、月份按钮内边距和导航按钮尺寸可单独覆盖。" />
                     <zen:ZenCalendar
                         Width="326"
                         Height="340"
                         HorizontalAlignment="Left"
                         ButtonPadding="8,12"
-                        DayButtonHeight="38"
-                        DayButtonWidth="42"
                         DisplayDate="2026-07-01"
                         NavigationButtonSize="34" />
                 </StackPanel>

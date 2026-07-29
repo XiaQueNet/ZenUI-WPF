@@ -138,23 +138,23 @@ public static readonly DependencyProperty CornerRadiusProperty = /* ... */;
 
 ```csharp
 /// <summary>
-/// 获取指定元素的日期按钮宽度。
+/// 获取指定元素的导航按钮边长。
 /// </summary>
 /// <param name="element">要从中读取属性值的元素。</param>
-/// <returns>指定元素的日期按钮宽度。</returns>
-public static double GetDayButtonWidth(DependencyObject element)
+/// <returns>指定元素的导航按钮边长。</returns>
+public static double GetNavigationButtonSize(DependencyObject element)
 {
-    return (double)element.GetValue(DayButtonWidthProperty);
+    return (double)element.GetValue(NavigationButtonSizeProperty);
 }
 
 /// <summary>
-/// 设置指定元素的日期按钮宽度。
+/// 设置指定元素的导航按钮边长。
 /// </summary>
 /// <param name="element">要在其上设置属性值的元素。</param>
-/// <param name="value">要设置的宽度。</param>
-public static void SetDayButtonWidth(DependencyObject element, double value)
+/// <param name="value">要设置的边长。</param>
+public static void SetNavigationButtonSize(DependencyObject element, double value)
 {
-    element.SetValue(DayButtonWidthProperty, value);
+    element.SetValue(NavigationButtonSizeProperty, value);
 }
 ```
 

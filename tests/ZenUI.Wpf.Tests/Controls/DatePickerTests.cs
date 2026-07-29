@@ -72,7 +72,9 @@ namespace ZenUI.Wpf.Tests.Controls
                 Assert.AreEqual(
                     GridUnitType.Auto,
                     root.RowDefinitions[0].Height.GridUnitType);
-                Assert.AreEqual(28d, monthView.RowDefinitions[0].Height.Value);
+                Assert.AreEqual(
+                    GridUnitType.Star,
+                    monthView.RowDefinitions[0].Height.GridUnitType);
                 Assert.AreEqual(
                     7,
                     monthView.Children

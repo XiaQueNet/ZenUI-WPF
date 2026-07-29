@@ -194,22 +194,16 @@ namespace ZenUI.Wpf.Tests.Controls
                 Assert.IsNotNull(dayButton);
                 Assert.IsNotNull(monthButton);
                 Assert.IsNotNull(navigationButton);
-                var dayButtonWidthBinding =
-                    BindingOperations.GetBindingExpression(dayButton, FrameworkElement.WidthProperty);
-                Assert.IsNotNull(dayButtonWidthBinding, "日期按钮尺寸绑定缺失。");
-                Assert.AreEqual(
-                    BindingStatus.Active,
-                    dayButtonWidthBinding.Status,
-                    $"日期按钮尺寸绑定状态异常，数据项为 {dayButtonWidthBinding.DataItem ?? "null"}。");
-
                 Assert.AreEqual(44d, columnHeader.Height);
                 Assert.AreEqual(44d, row.MinHeight);
                 Assert.AreEqual(new Thickness(14, 0, 14, 0), cell.Padding);
                 Assert.AreEqual(368d, popupContainer.ActualWidth);
                 Assert.AreEqual(376d, popupContainer.ActualHeight);
                 Assert.AreEqual(16d, calendar.FontSize);
-                Assert.AreEqual(48d, dayButton.Width);
-                Assert.AreEqual(44d, dayButton.Height);
+                Assert.IsTrue(double.IsNaN(dayButton.Width));
+                Assert.IsTrue(double.IsNaN(dayButton.Height));
+                Assert.IsGreaterThan(0d, dayButton.ActualWidth);
+                Assert.IsGreaterThan(0d, dayButton.ActualHeight);
                 Assert.AreEqual(new Thickness(12, 16, 12, 16), monthButton.Padding);
                 Assert.AreEqual(40d, navigationButton.Width);
                 AssertCalendarDayButtonsFit(monthView);
@@ -223,8 +217,8 @@ namespace ZenUI.Wpf.Tests.Controls
                 Assert.AreEqual(new Thickness(10, 0, 10, 0), cell.Padding);
                 Assert.AreEqual(328d, popupContainer.ActualWidth);
                 Assert.AreEqual(348d, popupContainer.ActualHeight);
-                Assert.AreEqual(42d, dayButton.Width);
-                Assert.AreEqual(40d, dayButton.Height);
+                Assert.IsTrue(double.IsNaN(dayButton.Width));
+                Assert.IsTrue(double.IsNaN(dayButton.Height));
                 Assert.AreEqual(new Thickness(10, 13, 10, 13), monthButton.Padding);
                 Assert.AreEqual(36d, navigationButton.Width);
                 AssertCalendarDayButtonsFit(monthView);
@@ -238,8 +232,8 @@ namespace ZenUI.Wpf.Tests.Controls
                 Assert.AreEqual(new Thickness(18, 0, 18, 0), cell.Padding);
                 Assert.AreEqual(412d, popupContainer.ActualWidth);
                 Assert.AreEqual(416d, popupContainer.ActualHeight);
-                Assert.AreEqual(54d, dayButton.Width);
-                Assert.AreEqual(50d, dayButton.Height);
+                Assert.IsTrue(double.IsNaN(dayButton.Width));
+                Assert.IsTrue(double.IsNaN(dayButton.Height));
                 Assert.AreEqual(new Thickness(14, 18, 14, 18), monthButton.Padding);
                 Assert.AreEqual(44d, navigationButton.Width);
                 AssertCalendarDayButtonsFit(monthView);

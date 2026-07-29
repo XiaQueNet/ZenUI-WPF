@@ -144,12 +144,10 @@ namespace ZenUI.Wpf.Tests.Controls
                         Assert.IsNotNull(monthView);
                         var dayButton = FindCalendarDayButton(monthView, calendar.CalendarDayButtonStyle);
                         Assert.IsNotNull(dayButton);
-                        Assert.AreEqual(
-                            (double)window.Resources["ZenCalendarDayButtonWidth"],
-                            dayButton.Width);
-                        Assert.AreEqual(
-                            (double)window.Resources["ZenCalendarDayButtonHeight"],
-                            dayButton.Height);
+                        Assert.IsTrue(double.IsNaN(dayButton.Width));
+                        Assert.IsTrue(double.IsNaN(dayButton.Height));
+                        Assert.IsGreaterThan(0d, dayButton.ActualWidth);
+                        Assert.IsGreaterThan(0d, dayButton.ActualHeight);
 
                         var bitmap = RenderRealizedElement(calendar, 1.25d);
                         Assert.IsGreaterThan(12, CountDistinctSampledColors(bitmap));

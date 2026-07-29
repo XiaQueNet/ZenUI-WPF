@@ -16,8 +16,8 @@
                         <Grid>
                             <ScrollViewer
                                 x:Name="PART_ContentHost"
-                                zen:ScrollViewerAssist.IsMouseWheelChainingEnabled="True"
                                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                zen:ScrollViewerAssist.IsMouseWheelChainingEnabled="True"
                                 Background="Transparent"
                                 Focusable="False"
                                 HorizontalScrollBarVisibility="Hidden"
@@ -100,8 +100,6 @@
     </Style>
 
     <Style x:Key="ZenCalendarDayButtonStyle" TargetType="{x:Type CalendarDayButton}">
-        <Setter Property="Width" Value="{Binding Path=(zen:ZenCalendar.DayButtonWidth), RelativeSource={RelativeSource AncestorType={x:Type Calendar}}}" />
-        <Setter Property="Height" Value="{Binding Path=(zen:ZenCalendar.DayButtonHeight), RelativeSource={RelativeSource AncestorType={x:Type Calendar}}}" />
         <Setter Property="Margin" Value="1" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="FontSize" Value="{Binding FontSize, RelativeSource={RelativeSource AncestorType={x:Type Calendar}}}" />
@@ -221,12 +219,12 @@
                     <Grid x:Name="PART_Root">
                         <Grid.RowDefinitions>
                             <RowDefinition Height="Auto" />
+                            <RowDefinition Height="Auto" />
                             <RowDefinition Height="*" />
                         </Grid.RowDefinitions>
-                        <Grid x:Name="HeaderPanel" Margin="0,4">
+                        <Grid x:Name="HeaderPanel">
                             <Button
                                 x:Name="PART_PreviousButton"
-                                Margin="4,0,0,0"
                                 HorizontalAlignment="Left"
                                 Style="{StaticResource ZenCalendarNavigationButtonStyle}">
                                 <Path
@@ -245,7 +243,6 @@
                                 Style="{StaticResource ZenCalendarHeaderButtonStyle}" />
                             <Button
                                 x:Name="PART_NextButton"
-                                Margin="0,0,4,0"
                                 HorizontalAlignment="Right"
                                 Style="{StaticResource ZenCalendarNavigationButtonStyle}">
                                 <Path
@@ -261,16 +258,14 @@
                         </Grid>
                         <Border
                             x:Name="HeaderDivider"
+                            Grid.Row="1"
                             Height="1"
-                            Margin="8,0"
+                            Margin="0,8"
                             VerticalAlignment="Bottom"
                             Background="{DynamicResource ZenBorderBrush}"
                             IsHitTestVisible="False"
                             SnapsToDevicePixels="True" />
-                        <Grid
-                            x:Name="PART_MonthView"
-                            Grid.Row="1"
-                            Margin="8,0,8,8">
+                        <Grid x:Name="PART_MonthView" Grid.Row="2">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition />
                                 <ColumnDefinition />
@@ -281,7 +276,7 @@
                                 <ColumnDefinition />
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
-                                <RowDefinition Height="28" />
+                                <RowDefinition />
                                 <RowDefinition />
                                 <RowDefinition />
                                 <RowDefinition />
@@ -292,8 +287,7 @@
                         </Grid>
                         <Grid
                             x:Name="PART_YearView"
-                            Grid.Row="1"
-                            Margin="8,0,8,8"
+                            Grid.Row="2"
                             Visibility="Hidden">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition />
@@ -342,6 +336,7 @@
                         CornerRadius="8">
                         <CalendarItem
                             x:Name="PART_CalendarItem"
+                            Margin="8"
                             Background="{TemplateBinding Background}"
                             BorderThickness="0"
                             Style="{TemplateBinding CalendarItemStyle}"
@@ -359,19 +354,13 @@
         <Setter Property="Width" Value="{DynamicResource ZenCalendarPopupWidth}" />
         <Setter Property="Height" Value="{DynamicResource ZenCalendarPopupHeight}" />
         <Setter Property="FontSize" Value="{DynamicResource ZenFontSizeSubtitle}" />
-        <Setter Property="DayButtonWidth" Value="{DynamicResource ZenCalendarDayButtonWidth}" />
-        <Setter Property="DayButtonHeight" Value="{DynamicResource ZenCalendarDayButtonHeight}" />
         <Setter Property="ButtonPadding" Value="{DynamicResource ZenCalendarButtonPadding}" />
         <Setter Property="NavigationButtonSize" Value="{DynamicResource ZenCalendarNavigationButtonSize}" />
     </Style>
 
-    <Style
-        BasedOn="{StaticResource ZenCalendarDefaultStyle}"
-        TargetType="{x:Type zen:ZenCalendar}" />
+    <Style BasedOn="{StaticResource ZenCalendarDefaultStyle}" TargetType="{x:Type zen:ZenCalendar}" />
 
-    <Style
-        x:Key="ZenDatePickerStyle"
-        TargetType="{x:Type zen:ZenDatePicker}">
+    <Style x:Key="ZenDatePickerStyle" TargetType="{x:Type zen:ZenDatePicker}">
         <Setter Property="Padding" Value="{DynamicResource ZenInputControlPadding}" />
         <Setter Property="MinHeight" Value="{DynamicResource ZenInputControlMinHeight}" />
         <Setter Property="FontSize" Value="{DynamicResource ZenFontSizeBody}" />
@@ -379,8 +368,6 @@
         <Setter Property="CalendarPopupWidth" Value="{DynamicResource ZenCalendarPopupWidth}" />
         <Setter Property="CalendarPopupHeight" Value="{DynamicResource ZenCalendarPopupHeight}" />
         <Setter Property="CalendarFontSize" Value="{DynamicResource ZenFontSizeSubtitle}" />
-        <Setter Property="CalendarDayButtonWidth" Value="{DynamicResource ZenCalendarDayButtonWidth}" />
-        <Setter Property="CalendarDayButtonHeight" Value="{DynamicResource ZenCalendarDayButtonHeight}" />
         <Setter Property="CalendarButtonPadding" Value="{DynamicResource ZenCalendarButtonPadding}" />
         <Setter Property="CalendarNavigationButtonSize" Value="{DynamicResource ZenCalendarNavigationButtonSize}" />
         <Setter Property="Background" Value="{DynamicResource ZenSurfaceBrush}" />

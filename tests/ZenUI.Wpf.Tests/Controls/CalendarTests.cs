@@ -35,25 +35,25 @@ namespace ZenUI.Wpf.Tests.Controls
 
                 Assert.AreEqual(368d, calendar.Width);
                 Assert.AreEqual(376d, calendar.Height);
-                Assert.AreEqual(48d, calendar.DayButtonWidth);
-                Assert.AreEqual(44d, calendar.DayButtonHeight);
                 Assert.AreEqual(new Thickness(12, 16, 12, 16), calendar.ButtonPadding);
                 Assert.AreEqual(40d, calendar.NavigationButtonSize);
                 Assert.AreEqual(new DateTime(2026, 7, 27), calendar.SelectedDate);
                 var calendarItem =
                     calendar.Template.FindName("PART_CalendarItem", calendar) as CalendarItem;
                 Assert.IsNotNull(calendarItem);
+                Assert.AreEqual(new Thickness(8), calendarItem.Margin);
                 calendarItem.ApplyTemplate();
                 var headerDivider =
                     calendarItem.Template.FindName("HeaderDivider", calendarItem) as Border;
                 Assert.IsNotNull(headerDivider);
                 Assert.AreEqual(1d, headerDivider.Height);
-                Assert.AreEqual(new Thickness(8, 0, 8, 0), headerDivider.Margin);
+                Assert.AreEqual(1, Grid.GetRow(headerDivider));
+                Assert.AreEqual(new Thickness(0, 8, 0, 8), headerDivider.Margin);
                 Assert.AreSame(window.Resources["ZenBorderBrush"], headerDivider.Background);
                 var headerPanel =
                     calendarItem.Template.FindName("HeaderPanel", calendarItem) as Grid;
                 Assert.IsNotNull(headerPanel);
-                Assert.AreEqual(new Thickness(0, 4, 0, 4), headerPanel.Margin);
+                Assert.AreEqual(new Thickness(0), headerPanel.Margin);
                 var headerButton =
                     calendarItem.Template.FindName("PART_HeaderButton", calendarItem) as Button;
                 Assert.IsNotNull(headerButton);
@@ -66,6 +66,7 @@ namespace ZenUI.Wpf.Tests.Controls
                 var monthView =
                     calendarItem.Template.FindName("PART_MonthView", calendarItem) as Grid;
                 Assert.IsNotNull(monthView);
+                Assert.AreEqual(new Thickness(0), monthView.Margin);
                 var dayTitle = monthView.Children.OfType<TextBlock>().FirstOrDefault();
                 Assert.IsNotNull(dayTitle);
                 Assert.AreEqual(calendar.FontSize, dayTitle.FontSize);
@@ -91,8 +92,6 @@ namespace ZenUI.Wpf.Tests.Controls
                 window.UpdateLayout();
                 Assert.AreEqual(328d, calendar.Width);
                 Assert.AreEqual(348d, calendar.Height);
-                Assert.AreEqual(42d, calendar.DayButtonWidth);
-                Assert.AreEqual(40d, calendar.DayButtonHeight);
                 Assert.AreEqual(
                     new Thickness(4, 0, 4, 0),
                     GetCalendarHeaderButton(calendar).Padding);
@@ -101,8 +100,6 @@ namespace ZenUI.Wpf.Tests.Controls
                 window.UpdateLayout();
                 Assert.AreEqual(412d, calendar.Width);
                 Assert.AreEqual(416d, calendar.Height);
-                Assert.AreEqual(54d, calendar.DayButtonWidth);
-                Assert.AreEqual(50d, calendar.DayButtonHeight);
                 Assert.AreEqual(
                     new Thickness(8, 3, 8, 3),
                     GetCalendarHeaderButton(calendar).Padding);
@@ -118,14 +115,10 @@ namespace ZenUI.Wpf.Tests.Controls
         {
             var calendar = new ZenCalendar
             {
-                DayButtonWidth = 40d,
-                DayButtonHeight = 36d,
                 ButtonPadding = new Thickness(8),
                 NavigationButtonSize = 32d
             };
 
-            Assert.AreEqual(40d, calendar.DayButtonWidth);
-            Assert.AreEqual(36d, calendar.DayButtonHeight);
             Assert.AreEqual(new Thickness(8), calendar.ButtonPadding);
             Assert.AreEqual(32d, calendar.NavigationButtonSize);
         }

@@ -75,8 +75,6 @@ namespace ZenUI.Wpf.Controls
             BindPopupProperty(calendar, FrameworkElement.WidthProperty, nameof(CalendarPopupWidth));
             BindPopupProperty(calendar, FrameworkElement.HeightProperty, nameof(CalendarPopupHeight));
             BindPopupProperty(calendar, ZenCalendar.ButtonPaddingProperty, nameof(CalendarButtonPadding));
-            BindPopupProperty(calendar, ZenCalendar.DayButtonHeightProperty, nameof(CalendarDayButtonHeight));
-            BindPopupProperty(calendar, ZenCalendar.DayButtonWidthProperty, nameof(CalendarDayButtonWidth));
             BindPopupProperty(calendar, Calendar.FirstDayOfWeekProperty, nameof(FirstDayOfWeek));
             BindPopupProperty(calendar, FrameworkElement.FlowDirectionProperty, nameof(FlowDirection));
             BindPopupProperty(calendar, Control.FontSizeProperty, nameof(CalendarFontSize));
@@ -231,46 +229,6 @@ namespace ZenUI.Wpf.Controls
                 typeof(CornerRadius),
                 typeof(ZenDatePicker),
                 new FrameworkPropertyMetadata(new CornerRadius(6)));
-
-        /// <summary>
-        /// 获取或设置日历日期按钮的宽度。
-        /// </summary>
-        [Bindable(true)]
-        public double CalendarDayButtonWidth
-        {
-            get { return (double)GetValue(CalendarDayButtonWidthProperty); }
-            set { SetValue(CalendarDayButtonWidthProperty, value); }
-        }
-
-        /// <summary>
-        /// 标识 <see cref="CalendarDayButtonWidth"/> 依赖属性。
-        /// </summary>
-        public static readonly DependencyProperty CalendarDayButtonWidthProperty =
-            DependencyProperty.Register(
-                nameof(CalendarDayButtonWidth),
-                typeof(double),
-                typeof(ZenDatePicker),
-                new FrameworkPropertyMetadata(48d));
-
-        /// <summary>
-        /// 获取或设置日历日期按钮的高度。
-        /// </summary>
-        [Bindable(true)]
-        public double CalendarDayButtonHeight
-        {
-            get { return (double)GetValue(CalendarDayButtonHeightProperty); }
-            set { SetValue(CalendarDayButtonHeightProperty, value); }
-        }
-
-        /// <summary>
-        /// 标识 <see cref="CalendarDayButtonHeight"/> 依赖属性。
-        /// </summary>
-        public static readonly DependencyProperty CalendarDayButtonHeightProperty =
-            DependencyProperty.Register(
-                nameof(CalendarDayButtonHeight),
-                typeof(double),
-                typeof(ZenDatePicker),
-                new FrameworkPropertyMetadata(44d));
 
         /// <summary>
         /// 获取或设置日历月份和年份按钮的内边距。
