@@ -34,5 +34,6 @@
         <ResourceDictionary Source="/ZenUI.Wpf;component/Themes/Controls/ZenAlert.xaml" />
         <ResourceDictionary Source="/ZenUI.Wpf;component/Themes/Controls/ZenPopover.xaml" />
         <ResourceDictionary Source="/ZenUI.Wpf;component/Themes/Controls/ZenDataGrid.xaml" />
+        <ResourceDictionary Source="/ZenUI.Wpf;component/Themes/Controls/ZenContextMenu.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

@@ -20,6 +20,9 @@
     <SolidColorBrush x:Key="ZenListBoxItemSelectedInactiveBrush" Color="#F1F4FA" />
     <SolidColorBrush x:Key="ZenListBoxItemSelectedInactiveForegroundBrush" Color="#4E5969" />
 
+    <!-- 右键菜单 -->
+    <SolidColorBrush x:Key="ZenContextMenuItemHoverForegroundBrush" Color="#1D2129" />
+
     <!-- 数据网格 -->
     <SolidColorBrush x:Key="ZenDataGridAlternatingRowBrush" Color="#FBFCFD" />
     <SolidColorBrush x:Key="ZenDataGridRowHoverBrush" Color="#F4F6FD" />

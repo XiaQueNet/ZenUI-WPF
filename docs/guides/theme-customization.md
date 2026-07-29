@@ -64,7 +64,7 @@ ZenDensityManager.ApplyDensity(
 | `Standard` | 默认规格，保持 ZenUI 的标准视觉 |
 | `Comfortable` | 需要更大间距和命中区域的界面 |
 
-Density 会更新输入控件、Button、ListBox、ScrollBar、ComboBox Popup、DataGrid、Calendar、Switch、Slider、ProgressBar 和 Alert 的相关尺寸，不改变颜色、字体或圆角语义。
+Density 会更新输入控件、Button、ListBox、ScrollBar、ComboBox Popup、ContextMenu、DataGrid、Calendar、Switch、Slider、ProgressBar 和 Alert 的相关尺寸，不改变颜色、字体或圆角语义。
 
 ## 覆盖公开 Token
 
@@ -101,6 +101,7 @@ Density 会更新输入控件、Button、ListBox、ScrollBar、ComboBox Popup、
 | Calendar 弹层、日期格与导航 | `ZenCalendarPopupWidth`、`ZenCalendarPopupHeight`、`ZenCalendarDayButtonWidth`、`ZenCalendarDayButtonHeight`、`ZenCalendarNavigationButtonSize` |
 | Switch 与 Slider | `ZenSwitchWidth`、`ZenSwitchHeight`、`ZenSliderThumbSize`、`ZenSliderTrackThickness` |
 | Alert 内边距 | `ZenAlertPadding` |
+| ContextMenu 表面与菜单项 | `ZenContextMenuPadding`、`ZenContextMenuItemMinHeight`、`ZenContextMenuItemPadding` |
 
 完整 Key 和当前解析值可在 Gallery 的“设计 Token”页面查看。
 

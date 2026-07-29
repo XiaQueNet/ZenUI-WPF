@@ -28,6 +28,16 @@
     <Thickness x:Key="ZenComboBoxPopupPadding">4</Thickness>
     <CornerRadius x:Key="ZenComboBoxPopupCornerRadius">6</CornerRadius>
 
+    <!-- 右键菜单 -->
+    <sys:Double x:Key="ZenContextMenuMinWidth">184</sys:Double>
+    <Thickness x:Key="ZenContextMenuPadding">5</Thickness>
+    <CornerRadius x:Key="ZenContextMenuCornerRadius">8</CornerRadius>
+    <sys:Double x:Key="ZenContextMenuItemMinHeight">36</sys:Double>
+    <Thickness x:Key="ZenContextMenuItemPadding">8,4</Thickness>
+    <CornerRadius x:Key="ZenContextMenuItemCornerRadius">5</CornerRadius>
+    <Thickness x:Key="ZenContextMenuGestureMargin">28,0,6,0</Thickness>
+    <Thickness x:Key="ZenContextMenuSeparatorMargin">8,5</Thickness>
+
     <!-- 气泡提示 -->
     <Thickness x:Key="ZenCalloutPadding">14,10</Thickness>
     <CornerRadius x:Key="ZenCalloutCornerRadius">6</CornerRadius>

@@ -45,6 +45,7 @@ namespace ZenUI.Wpf.Gallery
             containerRegistry.RegisterForNavigation<ProgressBarView>(NavigationKeys.ProgressBar);
             containerRegistry.RegisterForNavigation<AlertView>(NavigationKeys.Alert);
             containerRegistry.RegisterForNavigation<PopoverView>(NavigationKeys.Popover);
+            containerRegistry.RegisterForNavigation<ContextMenuView>(NavigationKeys.ContextMenu);
         }
 
         protected override void OnInitialized()

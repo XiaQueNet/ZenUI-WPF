@@ -47,6 +47,7 @@
     <SolidColorBrush x:Key="ZenListBoxItemSelectedForegroundBrush" Color="#A8BBFF" />
     <SolidColorBrush x:Key="ZenListBoxItemSelectedInactiveBrush" Color="#343B4A" />
     <SolidColorBrush x:Key="ZenListBoxItemSelectedInactiveForegroundBrush" Color="#C4C9D1" />
+    <SolidColorBrush x:Key="ZenContextMenuItemHoverForegroundBrush" Color="#F2F3F5" />
     <SolidColorBrush x:Key="ZenDataGridAlternatingRowBrush" Color="#232832" />
     <SolidColorBrush x:Key="ZenDataGridRowHoverBrush" Color="#30394B" />
     <SolidColorBrush x:Key="ZenDataGridRowSelectedBrush" Color="#343B4A" />

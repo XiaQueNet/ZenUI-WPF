@@ -61,7 +61,7 @@ ZenUI 的目标是优化 WPF 控件的默认体验，而不是缩减 WPF 已有�
 </Window>
 ```
 
-目前提供 Button、TextBox、NumberBox、PasswordBox、Switch、CheckBox、RadioButton、ComboBox、ListBox、Calendar、DatePicker、DataGrid、Slider、ProgressBar 和 Alert 共 15 个常用控件。所有控件均自带默认主题，并覆盖悬停、焦点、选中和禁用等常见交互状态。
+目前提供 Button、TextBox、NumberBox、PasswordBox、Switch、CheckBox、RadioButton、RadioGroup、ComboBox、ListBox、Calendar、DatePicker、DataGrid、Slider、ProgressBar、Alert、Popover、ContextMenu 等常用控件。所有控件均自带默认主题，并覆盖悬停、焦点、选中和禁用等常见交互状态。
 
 转换器包使用独立的 XAML 命名空间，无需在应用资源中注册实例：
 
