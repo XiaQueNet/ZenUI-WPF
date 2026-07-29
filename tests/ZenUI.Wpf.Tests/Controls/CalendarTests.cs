@@ -35,6 +35,7 @@ namespace ZenUI.Wpf.Tests.Controls
 
                 Assert.AreEqual(368d, calendar.Width);
                 Assert.AreEqual(376d, calendar.Height);
+                Assert.AreEqual(new CornerRadius(8), calendar.CornerRadius);
                 Assert.AreEqual(new Thickness(12, 16, 12, 16), calendar.ButtonPadding);
                 Assert.AreEqual(40d, calendar.NavigationButtonSize);
                 Assert.AreEqual(new DateTime(2026, 7, 27), calendar.SelectedDate);
@@ -42,6 +43,10 @@ namespace ZenUI.Wpf.Tests.Controls
                     calendar.Template.FindName("PART_CalendarItem", calendar) as CalendarItem;
                 Assert.IsNotNull(calendarItem);
                 Assert.AreEqual(new Thickness(8), calendarItem.Margin);
+                var calendarBorder =
+                    calendar.Template.FindName("CalendarBorder", calendar) as Border;
+                Assert.IsNotNull(calendarBorder);
+                Assert.AreEqual(calendar.CornerRadius, calendarBorder.CornerRadius);
                 calendarItem.ApplyTemplate();
                 var headerDivider =
                     calendarItem.Template.FindName("HeaderDivider", calendarItem) as Border;
@@ -115,10 +120,12 @@ namespace ZenUI.Wpf.Tests.Controls
         {
             var calendar = new ZenCalendar
             {
+                CornerRadius = new CornerRadius(14),
                 ButtonPadding = new Thickness(8),
                 NavigationButtonSize = 32d
             };
 
+            Assert.AreEqual(new CornerRadius(14), calendar.CornerRadius);
             Assert.AreEqual(new Thickness(8), calendar.ButtonPadding);
             Assert.AreEqual(32d, calendar.NavigationButtonSize);
         }

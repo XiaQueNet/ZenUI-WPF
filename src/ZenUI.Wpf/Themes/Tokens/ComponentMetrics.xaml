@@ -55,6 +55,7 @@
     <!-- 日历 -->
     <sys:Double x:Key="ZenCalendarPopupWidth">368</sys:Double>
     <sys:Double x:Key="ZenCalendarPopupHeight">376</sys:Double>
+    <CornerRadius x:Key="ZenCalendarCornerRadius">8</CornerRadius>
     <Thickness x:Key="ZenCalendarButtonPadding">12,16</Thickness>
     <sys:Double x:Key="ZenCalendarNavigationButtonSize">40</sys:Double>
 

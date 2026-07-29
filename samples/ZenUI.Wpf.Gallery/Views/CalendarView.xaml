@@ -45,16 +45,17 @@
 
             <Border Style="{StaticResource GalleryCardStyle}">
                 <StackPanel>
-                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="自定义尺寸" />
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="自定义外观与尺寸" />
                     <TextBlock
                         Margin="0,0,0,12"
                         Style="{StaticResource GallerySupportingTextStyle}"
-                        Text="整体尺寸、月份按钮内边距和导航按钮尺寸可单独覆盖。" />
+                        Text="圆角、整体尺寸、月份按钮内边距和导航按钮尺寸可单独覆盖。" />
                     <zen:ZenCalendar
                         Width="326"
                         Height="340"
                         HorizontalAlignment="Left"
                         ButtonPadding="8,12"
+                        CornerRadius="16"
                         DisplayDate="2026-07-01"
                         NavigationButtonSize="34" />
                 </StackPanel>
