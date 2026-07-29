@@ -48,6 +48,7 @@ namespace ZenUI.Wpf.Gallery.ViewModels
                 new MenuItemViewModel("开关  Switch", NavigationKeys.Switch),
                 new MenuItemViewModel("复选框  CheckBox", NavigationKeys.CheckBox),
                 new MenuItemViewModel("单选框  RadioButton", NavigationKeys.RadioButton),
+                new MenuItemViewModel("单选组  RadioGroup", NavigationKeys.RadioGroup),
                 new MenuItemViewModel("下拉框  ComboBox", NavigationKeys.ComboBox),
                 new MenuItemViewModel("列表框  ListBox", NavigationKeys.ListBox),
                 new MenuItemViewModel("日历  Calendar", NavigationKeys.Calendar),

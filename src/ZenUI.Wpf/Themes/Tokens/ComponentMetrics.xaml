@@ -58,4 +58,10 @@
 
     <!-- 提示条 -->
     <Thickness x:Key="ZenAlertPadding">14,11</Thickness>
+
+    <!-- 按钮式单选组 -->
+    <sys:Double x:Key="ZenRadioItemMinHeight">36</sys:Double>
+    <Thickness x:Key="ZenRadioItemPadding">14,0</Thickness>
+    <CornerRadius x:Key="ZenRadioItemCornerRadius">10</CornerRadius>
+    <CornerRadius x:Key="ZenRadioItemFocusVisualCornerRadius">13</CornerRadius>
 </ResourceDictionary>

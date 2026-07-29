@@ -11,6 +11,7 @@ namespace ZenUI.Wpf.Gallery.Navigation
         public const string Switch = nameof(Switch);
         public const string CheckBox = nameof(CheckBox);
         public const string RadioButton = nameof(RadioButton);
+        public const string RadioGroup = nameof(RadioGroup);
         public const string ComboBox = nameof(ComboBox);
         public const string ListBox = nameof(ListBox);
         public const string Calendar = nameof(Calendar);
