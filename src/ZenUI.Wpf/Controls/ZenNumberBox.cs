@@ -45,6 +45,9 @@ namespace ZenUI.Wpf.Controls
                 new FrameworkPropertyMetadata(SelfType));
         }
 
+        /// <summary>
+        /// 初始化 <see cref="ZenNumberBox"/> 类的新实例。
+        /// </summary>
         public ZenNumberBox()
         {
             IsKeyboardFocusWithinChanged += OnIsKeyboardFocusWithinChanged;
@@ -160,7 +163,7 @@ namespace ZenUI.Wpf.Controls
                 new FrameworkPropertyMetadata(SpinButtonLayout.Horizontal));
 
         /// <summary>
-        /// 获取或设置增减按钮的宽度。
+        /// 获取或设置增减按钮的宽度。该值必须为大于或等于零的有限值。
         /// </summary>
         [Bindable(true)]
         public double SpinButtonWidth
@@ -183,7 +186,7 @@ namespace ZenUI.Wpf.Controls
                 IsValidSpinButtonWidth);
 
         /// <summary>
-        /// 获取或设置控件是否禁止直接编辑文本。增减按钮仍然可用。
+        /// 获取或设置一个值，该值指示是否禁止直接编辑文本。增减按钮仍然可用。
         /// </summary>
         [Bindable(true)]
         public bool IsReadOnly
@@ -254,6 +257,7 @@ namespace ZenUI.Wpf.Controls
             UpdateButtonStates();
         }
 
+        /// <inheritdoc />
         protected override void OnPreviewKeyDown(KeyEventArgs e)
         {
             base.OnPreviewKeyDown(e);
@@ -274,6 +278,7 @@ namespace ZenUI.Wpf.Controls
             }
         }
 
+        /// <inheritdoc />
         protected override AutomationPeer OnCreateAutomationPeer()
         {
             return new ZenNumberBoxAutomationPeer(this);

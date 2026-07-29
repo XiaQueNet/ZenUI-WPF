@@ -27,6 +27,8 @@ namespace ZenUI.Wpf.Controls
         /// <summary>
         /// 获取指定元素的日期按钮宽度。
         /// </summary>
+        /// <param name="element">要从中读取属性值的元素。</param>
+        /// <returns>指定元素的日期按钮宽度。</returns>
         public static double GetDayButtonWidth(DependencyObject element)
         {
             return (double)element.GetValue(DayButtonWidthProperty);
@@ -35,6 +37,8 @@ namespace ZenUI.Wpf.Controls
         /// <summary>
         /// 设置指定元素的日期按钮宽度。
         /// </summary>
+        /// <param name="element">要在其上设置属性值的元素。</param>
+        /// <param name="value">要设置的宽度。</param>
         public static void SetDayButtonWidth(DependencyObject element, double value)
         {
             element.SetValue(DayButtonWidthProperty, value);
@@ -62,6 +66,8 @@ namespace ZenUI.Wpf.Controls
         /// <summary>
         /// 获取指定元素的日期按钮高度。
         /// </summary>
+        /// <param name="element">要从中读取属性值的元素。</param>
+        /// <returns>指定元素的日期按钮高度。</returns>
         public static double GetDayButtonHeight(DependencyObject element)
         {
             return (double)element.GetValue(DayButtonHeightProperty);
@@ -70,6 +76,8 @@ namespace ZenUI.Wpf.Controls
         /// <summary>
         /// 设置指定元素的日期按钮高度。
         /// </summary>
+        /// <param name="element">要在其上设置属性值的元素。</param>
+        /// <param name="value">要设置的高度。</param>
         public static void SetDayButtonHeight(DependencyObject element, double value)
         {
             element.SetValue(DayButtonHeightProperty, value);
@@ -97,6 +105,8 @@ namespace ZenUI.Wpf.Controls
         /// <summary>
         /// 获取指定元素的月份和年份按钮内边距。
         /// </summary>
+        /// <param name="element">要从中读取属性值的元素。</param>
+        /// <returns>指定元素的月份和年份按钮内边距。</returns>
         public static Thickness GetButtonPadding(DependencyObject element)
         {
             return (Thickness)element.GetValue(ButtonPaddingProperty);
@@ -105,6 +115,8 @@ namespace ZenUI.Wpf.Controls
         /// <summary>
         /// 设置指定元素的月份和年份按钮内边距。
         /// </summary>
+        /// <param name="element">要在其上设置属性值的元素。</param>
+        /// <param name="value">要设置的内边距。</param>
         public static void SetButtonPadding(DependencyObject element, Thickness value)
         {
             element.SetValue(ButtonPaddingProperty, value);
@@ -132,6 +144,8 @@ namespace ZenUI.Wpf.Controls
         /// <summary>
         /// 获取指定元素的导航按钮边长。
         /// </summary>
+        /// <param name="element">要从中读取属性值的元素。</param>
+        /// <returns>指定元素的导航按钮边长。</returns>
         public static double GetNavigationButtonSize(DependencyObject element)
         {
             return (double)element.GetValue(NavigationButtonSizeProperty);
@@ -140,6 +154,8 @@ namespace ZenUI.Wpf.Controls
         /// <summary>
         /// 设置指定元素的导航按钮边长。
         /// </summary>
+        /// <param name="element">要在其上设置属性值的元素。</param>
+        /// <param name="value">要设置的边长。</param>
         public static void SetNavigationButtonSize(DependencyObject element, double value)
         {
             element.SetValue(NavigationButtonSizeProperty, value);

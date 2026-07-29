@@ -25,9 +25,9 @@ namespace ZenUI.Wpf.Controls
         }
 
         /// <summary>
-        /// 获取或设置用作浮层触发器的内容；用户单击该内容时打开或关闭浮层。
-        /// 默认显示问号。
+        /// 获取或设置用作浮层触发器的内容。用户单击该内容时打开或关闭浮层。
         /// </summary>
+        /// <value>用作浮层触发器的内容。默认值为 <c>?</c>。</value>
         [Bindable(true)]
         public object Trigger
         {
@@ -86,7 +86,8 @@ namespace ZenUI.Wpf.Controls
                 new FrameworkPropertyMetadata(null));
 
         /// <summary>
-        /// 获取或设置浮层当前是否打开；该属性默认以双向方式参与数据绑定。
+        /// 获取或设置一个值，该值指示浮层当前是否打开。
+        /// 该属性默认以双向方式参与数据绑定。
         /// </summary>
         [Bindable(true)]
         public bool IsOpen
@@ -169,6 +170,7 @@ namespace ZenUI.Wpf.Controls
 
         /// <summary>
         /// 获取或设置气泡箭头尖端与触发器之间的距离。
+        /// 该值必须为大于或等于零的有限值。
         /// </summary>
         [Bindable(true)]
         public double TargetGap
@@ -209,7 +211,7 @@ namespace ZenUI.Wpf.Controls
                 new FrameworkPropertyMetadata(new CornerRadius(6)));
 
         /// <summary>
-        /// 获取或设置是否显示指向触发器的三角箭头。
+        /// 获取或设置一个值，该值指示是否显示指向触发器的三角箭头。
         /// </summary>
         [Bindable(true)]
         public bool ShowArrow

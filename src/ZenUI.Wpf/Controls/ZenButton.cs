@@ -7,7 +7,7 @@ using System.Windows.Media;
 namespace ZenUI.Wpf.Controls
 {
     /// <summary>
-    /// 支持语义外观与自定义圆角的按钮。
+    /// 表示支持语义外观与自定义圆角的按钮。
     /// </summary>
     public class ZenButton : Button
     {
@@ -83,7 +83,7 @@ namespace ZenUI.Wpf.Controls
                 new FrameworkPropertyMetadata(ButtonAppearance.Filled));
 
         /// <summary>
-        /// 获取或设置鼠标悬浮时的背景画刷。
+        /// 获取或设置鼠标悬停时的背景画刷。
         /// </summary>
         [Bindable(true)]
         public Brush HoverBackground
@@ -123,7 +123,7 @@ namespace ZenUI.Wpf.Controls
                 new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsRender));
 
         /// <summary>
-        /// 获取或设置鼠标悬浮时的前景画刷。
+        /// 获取或设置鼠标悬停时的前景画刷。
         /// </summary>
         [Bindable(true)]
         public Brush HoverForeground
@@ -163,7 +163,7 @@ namespace ZenUI.Wpf.Controls
                 new FrameworkPropertyMetadata(null, FrameworkPropertyMetadataOptions.AffectsRender));
 
         /// <summary>
-        /// 获取或设置鼠标悬浮时的边框画刷。
+        /// 获取或设置鼠标悬停时的边框画刷。
         /// </summary>
         [Bindable(true)]
         public Brush HoverBorderBrush

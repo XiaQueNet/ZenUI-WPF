@@ -57,7 +57,7 @@ namespace ZenUI.Wpf.Controls
                     FrameworkPropertyMetadataOptions.AffectsMeasure));
 
         /// <summary>
-        /// 获取或设置相邻选项之间的间距，该值不能小于零。
+        /// 获取或设置相邻选项之间的间距。该值必须为大于或等于零的有限值。
         /// </summary>
         [Bindable(true)]
         public double Spacing
@@ -80,7 +80,7 @@ namespace ZenUI.Wpf.Controls
                 IsValidSpacing);
 
         /// <summary>
-        /// 获取或设置是否沿排列方向为所有可见选项分配相同尺寸。
+        /// 获取或设置一个值，该值指示是否沿排列方向为所有可见选项分配相同尺寸。
         /// </summary>
         [Bindable(true)]
         public bool IsItemWidthUniform

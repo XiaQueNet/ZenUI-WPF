@@ -67,8 +67,8 @@
         <Setter Property="Background" Value="{Binding ColumnHeaderBackground, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenDataGrid}}}" />
         <Setter Property="Foreground" Value="{Binding ColumnHeaderForeground, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenDataGrid}}}" />
         <Setter Property="FontWeight" Value="{DynamicResource ZenFontWeightSemibold}" />
-        <Setter Property="HorizontalContentAlignment" Value="{Binding Column.HeaderHorizontalContentAlignment, FallbackValue=Left, RelativeSource={RelativeSource Self}}" />
-        <Setter Property="VerticalContentAlignment" Value="{Binding Column.HeaderVerticalContentAlignment, FallbackValue=Center, RelativeSource={RelativeSource Self}}" />
+        <Setter Property="HorizontalContentAlignment" Value="{Binding Path=Column.(zen:ZenDataGridTextColumn.HeaderHorizontalContentAlignment), RelativeSource={RelativeSource Self}}" />
+        <Setter Property="VerticalContentAlignment" Value="{Binding Path=Column.(zen:ZenDataGridTextColumn.HeaderVerticalContentAlignment), RelativeSource={RelativeSource Self}}" />
         <Setter Property="BorderBrush" Value="{DynamicResource ZenDividerBrush}" />
         <Setter Property="BorderThickness" Value="0,0,1,1" />
         <Setter Property="Template">
@@ -136,8 +136,8 @@
         <Setter Property="Foreground" Value="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenDataGrid}}}" />
         <Setter Property="BorderBrush" Value="{DynamicResource ZenBorderBrush}" />
         <Setter Property="BorderThickness" Value="0,0,0,1" />
-        <Setter Property="HorizontalContentAlignment" Value="{Binding Column.CellHorizontalContentAlignment, FallbackValue=Stretch, RelativeSource={RelativeSource Self}}" />
-        <Setter Property="VerticalContentAlignment" Value="{Binding Column.CellVerticalContentAlignment, FallbackValue=Center, RelativeSource={RelativeSource Self}}" />
+        <Setter Property="HorizontalContentAlignment" Value="{Binding Path=Column.(zen:ZenDataGridTextColumn.CellHorizontalContentAlignment), RelativeSource={RelativeSource Self}}" />
+        <Setter Property="VerticalContentAlignment" Value="{Binding Path=Column.(zen:ZenDataGridTextColumn.CellVerticalContentAlignment), RelativeSource={RelativeSource Self}}" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="Template">
             <Setter.Value>

@@ -8,7 +8,6 @@
     <LangVersion>8.0</LangVersion>
     <Deterministic>true</Deterministic>
     <GenerateDocumentationFile>true</GenerateDocumentationFile>
-    <NoWarn>$(NoWarn);1591</NoWarn>
 
     <IsPackable>true</IsPackable>
     <VersionPrefix>0.1.0</VersionPrefix>

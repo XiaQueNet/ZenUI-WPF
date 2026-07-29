@@ -193,7 +193,7 @@ namespace ZenUI.Wpf.Controls
                 new FrameworkPropertyMetadata(string.Empty));
 
         /// <summary>
-        /// 获取或设置是否允许通过键盘直接输入日期。
+        /// 获取或设置一个值，该值指示是否允许通过键盘直接输入日期。
         /// </summary>
         [Bindable(true)]
         public bool IsTextInputEnabled

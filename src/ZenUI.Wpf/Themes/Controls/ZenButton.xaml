@@ -3,22 +3,18 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:zen="clr-namespace:ZenUI.Wpf.Controls">
 
-    <!-- 仅当焦点由键盘操作触发时，WPF 才显示此装饰器。 -->
+    <!--  仅当焦点由键盘操作触发时，WPF 才显示此装饰器。  -->
     <Style x:Key="ZenButtonFocusVisualStyle" TargetType="{x:Type Control}">
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type Control}">
-                    <Border
-                        CornerRadius="{DynamicResource ZenButtonFocusVisualCornerRadius}"
-                        Style="{DynamicResource ZenFocusVisualBorderStyle}" />
+                    <Border CornerRadius="{DynamicResource ZenButtonFocusVisualCornerRadius}" Style="{DynamicResource ZenFocusVisualBorderStyle}" />
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
     </Style>
 
-    <Style
-        x:Key="ZenButtonStyle"
-        TargetType="{x:Type zen:ZenButton}">
+    <Style x:Key="ZenButtonStyle" TargetType="{x:Type zen:ZenButton}">
         <Setter Property="FontSize" Value="{DynamicResource ZenFontSizeBody}" />
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Cursor" Value="Hand" />

@@ -7,16 +7,22 @@ using System.Windows.Data;
 namespace ZenUI.Wpf.Controls
 {
     /// <summary>
-    /// 计算气泡相对于触发器的居中偏移。
+    /// 表示用于计算气泡相对于触发器居中偏移的多值转换器。
     /// </summary>
     public sealed class CalloutOffsetConverter : Freezable, IMultiValueConverter
     {
+        /// <summary>
+        /// 获取或设置气泡与触发器之间的间距。
+        /// </summary>
         public double Gap
         {
             get { return (double)GetValue(GapProperty); }
             set { SetValue(GapProperty, value); }
         }
 
+        /// <summary>
+        /// 标识 <see cref="Gap"/> 依赖属性。
+        /// </summary>
         public static readonly DependencyProperty GapProperty =
             DependencyProperty.Register(
                 nameof(Gap),

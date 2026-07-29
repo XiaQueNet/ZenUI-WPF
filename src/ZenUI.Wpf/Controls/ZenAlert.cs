@@ -34,6 +34,9 @@ namespace ZenUI.Wpf.Controls
             set { SetValue(AccentBrushProperty, value); }
         }
 
+        /// <summary>
+        /// 标识 <see cref="AccentBrush"/> 依赖属性。
+        /// </summary>
         public static readonly DependencyProperty AccentBrushProperty =
             RegisterBrush(nameof(AccentBrush));
 
@@ -47,11 +50,14 @@ namespace ZenUI.Wpf.Controls
             set { SetValue(IconForegroundProperty, value); }
         }
 
+        /// <summary>
+        /// 标识 <see cref="IconForeground"/> 依赖属性。
+        /// </summary>
         public static readonly DependencyProperty IconForegroundProperty =
             RegisterBrush(nameof(IconForeground));
 
         /// <summary>
-        /// 获取或设置提示图标的边长。
+        /// 获取或设置提示图标的边长。该值必须为大于或等于零的有限值。
         /// </summary>
         [Bindable(true)]
         public double IconSize
@@ -74,6 +80,9 @@ namespace ZenUI.Wpf.Controls
                     FrameworkPropertyMetadataOptions.AffectsRender),
                 IsValidIconSize);
 
+        /// <summary>
+        /// 获取或设置由提示级别提供的默认背景画刷。
+        /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
         public Brush ThemeBackground
         {
@@ -81,9 +90,15 @@ namespace ZenUI.Wpf.Controls
             set { SetValue(ThemeBackgroundProperty, value); }
         }
 
+        /// <summary>
+        /// 标识 <see cref="ThemeBackground"/> 依赖属性。
+        /// </summary>
         public static readonly DependencyProperty ThemeBackgroundProperty =
             RegisterBrush(nameof(ThemeBackground));
 
+        /// <summary>
+        /// 获取或设置由提示级别提供的默认边框画刷。
+        /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
         public Brush ThemeBorderBrush
         {
@@ -91,9 +106,15 @@ namespace ZenUI.Wpf.Controls
             set { SetValue(ThemeBorderBrushProperty, value); }
         }
 
+        /// <summary>
+        /// 标识 <see cref="ThemeBorderBrush"/> 依赖属性。
+        /// </summary>
         public static readonly DependencyProperty ThemeBorderBrushProperty =
             RegisterBrush(nameof(ThemeBorderBrush));
 
+        /// <summary>
+        /// 获取或设置由提示级别提供的默认强调色画刷。
+        /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
         public Brush ThemeAccentBrush
         {
@@ -101,6 +122,9 @@ namespace ZenUI.Wpf.Controls
             set { SetValue(ThemeAccentBrushProperty, value); }
         }
 
+        /// <summary>
+        /// 标识 <see cref="ThemeAccentBrush"/> 依赖属性。
+        /// </summary>
         public static readonly DependencyProperty ThemeAccentBrushProperty =
             RegisterBrush(nameof(ThemeAccentBrush));
 

@@ -99,7 +99,8 @@ namespace ZenUI.Wpf.Controls
         }
 
         /// <summary>
-        /// 获取或设置是否显示密码明文切换按钮。按钮的可见性不依赖密码是否为空。
+        /// 获取或设置一个值，该值指示是否显示密码明文切换按钮。
+        /// 按钮的可见性不依赖密码是否为空。
         /// </summary>
         [Bindable(true)]
         public bool IsPasswordRevealButtonEnabled
@@ -119,7 +120,7 @@ namespace ZenUI.Wpf.Controls
                 new FrameworkPropertyMetadata(false, OnIsPasswordRevealButtonEnabledChanged));
 
         /// <summary>
-        /// 获取或设置当前是否以明文显示密码。
+        /// 获取或设置一个值，该值指示当前是否以明文显示密码。
         /// </summary>
         [Bindable(true)]
         public bool IsPasswordRevealed

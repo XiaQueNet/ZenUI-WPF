@@ -18,7 +18,7 @@ namespace ZenUI.Wpf.Controls
         }
 
         /// <summary>
-        /// 获取该选项当前是否被选中。
+        /// 获取一个值，该值指示当前选项是否被选中。
         /// </summary>
         public bool IsSelected
         {

@@ -38,7 +38,7 @@ namespace ZenUI.Wpf.Controls
                 new FrameworkPropertyMetadata(4d));
 
         /// <summary>
-        /// 获取或设置滑块 Thumb 的填充画刷。
+        /// 获取或设置滑块手柄的填充画刷。
         /// </summary>
         [Bindable(true)]
         public Brush ThumbBrush
@@ -47,6 +47,9 @@ namespace ZenUI.Wpf.Controls
             set { SetValue(ThumbBrushProperty, value); }
         }
 
+        /// <summary>
+        /// 标识 <see cref="ThumbBrush"/> 依赖属性。
+        /// </summary>
         public static readonly DependencyProperty ThumbBrushProperty =
             DependencyProperty.Register(
                 nameof(ThumbBrush),
@@ -57,7 +60,7 @@ namespace ZenUI.Wpf.Controls
                     FrameworkPropertyMetadataOptions.AffectsRender));
 
         /// <summary>
-        /// 获取或设置鼠标悬浮时 Thumb 的填充画刷。
+        /// 获取或设置鼠标悬停时滑块手柄的填充画刷。
         /// </summary>
         [Bindable(true)]
         public Brush ThumbHoverBrush
@@ -66,6 +69,9 @@ namespace ZenUI.Wpf.Controls
             set { SetValue(ThumbHoverBrushProperty, value); }
         }
 
+        /// <summary>
+        /// 标识 <see cref="ThumbHoverBrush"/> 依赖属性。
+        /// </summary>
         public static readonly DependencyProperty ThumbHoverBrushProperty =
             DependencyProperty.Register(
                 nameof(ThumbHoverBrush),

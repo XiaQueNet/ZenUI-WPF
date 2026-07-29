@@ -125,9 +125,9 @@
                             Padding="12,8"
                             Background="{DynamicResource ZenSurfaceMutedBrush}"
                             BorderThickness="0"
+                            Content="也可以隐藏三角箭头。"
                             CornerRadius="10"
-                            ShowArrow="False"
-                            Content="也可以隐藏三角箭头。" />
+                            ShowArrow="False" />
                     </StackPanel>
                 </StackPanel>
             </Border>

@@ -2,17 +2,24 @@ using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
+using System.IO;
 using System.Linq;
 using System.Reflection;
 using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Xml;
+using System.Xml.Linq;
 
 namespace ZenUI.Wpf.Gallery.Controls
 {
     public partial class PropertyTable : UserControl
     {
+        private static readonly Dictionary<Assembly, Dictionary<string, string>>
+            XmlDescriptionsByAssembly =
+                new Dictionary<Assembly, Dictionary<string, string>>();
+
         private static readonly Dictionary<string, string> Descriptions =
             new Dictionary<string, string>(StringComparer.Ordinal)
             {
@@ -238,15 +245,167 @@ namespace ZenUI.Wpf.Gallery.Controls
             return new PropertyRow
             {
                 Name = property.Name,
-                Description = Descriptions.TryGetValue(key, out var description)
-                    ? description
-                    : "ZenUI 为此控件新增的公开属性。",
+                Description = GetDescription(property, key),
                 TypeName = FormatType(property.PropertyType),
                 DefaultValue = FormatDefaultValue(
                     dependencyProperty.GetMetadata(controlType).DefaultValue,
                     property.PropertyType),
                 IntroducedVersion = GetIntroducedVersion(controlType, key),
             };
+        }
+
+        private static string GetDescription(PropertyInfo property, string key)
+        {
+            var xmlDescription = GetXmlDescription(property);
+            if (!string.IsNullOrEmpty(xmlDescription))
+            {
+                return xmlDescription;
+            }
+
+            return Descriptions.TryGetValue(key, out var description)
+                ? description
+                : "ZenUI 为此控件新增的公开属性。";
+        }
+
+        private static string GetXmlDescription(PropertyInfo property)
+        {
+            var declaringType = property.DeclaringType;
+            if (declaringType == null)
+            {
+                return null;
+            }
+
+            var descriptions = GetXmlDescriptions(declaringType.Assembly);
+            var memberName = "P:" + declaringType.FullName + "." + property.Name;
+            return descriptions.TryGetValue(memberName, out var description)
+                ? description
+                : null;
+        }
+
+        private static Dictionary<string, string> GetXmlDescriptions(Assembly assembly)
+        {
+            lock (XmlDescriptionsByAssembly)
+            {
+                if (XmlDescriptionsByAssembly.TryGetValue(
+                    assembly,
+                    out var descriptions))
+                {
+                    return descriptions;
+                }
+
+                descriptions = LoadXmlDescriptions(assembly);
+                XmlDescriptionsByAssembly[assembly] = descriptions;
+                return descriptions;
+            }
+        }
+
+        private static Dictionary<string, string> LoadXmlDescriptions(Assembly assembly)
+        {
+            var descriptions =
+                new Dictionary<string, string>(StringComparer.Ordinal);
+
+            try
+            {
+                var documentationPath =
+                    Path.ChangeExtension(assembly.Location, ".xml");
+                if (!File.Exists(documentationPath))
+                {
+                    return descriptions;
+                }
+
+                var document = XDocument.Load(documentationPath);
+                foreach (var member in document.Descendants("member"))
+                {
+                    var memberName = (string)member.Attribute("name");
+                    var summary = member.Element("summary");
+                    if (string.IsNullOrEmpty(memberName) || summary == null)
+                    {
+                        continue;
+                    }
+
+                    var description = NormalizeDocumentationText(
+                        GetDocumentationText(summary));
+                    if (!string.IsNullOrEmpty(description))
+                    {
+                        descriptions[memberName] = description;
+                    }
+                }
+            }
+            catch (IOException)
+            {
+            }
+            catch (UnauthorizedAccessException)
+            {
+            }
+            catch (XmlException)
+            {
+            }
+
+            return descriptions;
+        }
+
+        private static string GetDocumentationText(XElement element)
+        {
+            return string.Concat(element.Nodes().Select(GetDocumentationNodeText));
+        }
+
+        private static string GetDocumentationNodeText(XNode node)
+        {
+            if (node is XText text)
+            {
+                return text.Value;
+            }
+
+            if (!(node is XElement element))
+            {
+                return string.Empty;
+            }
+
+            if (element.Name.LocalName == "see")
+            {
+                var reference = (string)element.Attribute("cref")
+                    ?? (string)element.Attribute("langword");
+                return FormatDocumentationReference(reference);
+            }
+
+            if (element.Name.LocalName == "paramref")
+            {
+                return (string)element.Attribute("name") ?? string.Empty;
+            }
+
+            return GetDocumentationText(element);
+        }
+
+        private static string FormatDocumentationReference(string reference)
+        {
+            if (string.IsNullOrEmpty(reference))
+            {
+                return string.Empty;
+            }
+
+            var separatorIndex = reference.IndexOf(':');
+            if (separatorIndex >= 0)
+            {
+                reference = reference.Substring(separatorIndex + 1);
+            }
+
+            var parametersIndex = reference.IndexOf('(');
+            if (parametersIndex >= 0)
+            {
+                reference = reference.Substring(0, parametersIndex);
+            }
+
+            var memberIndex = reference.LastIndexOf('.');
+            return memberIndex >= 0
+                ? reference.Substring(memberIndex + 1)
+                : reference;
+        }
+
+        private static string NormalizeDocumentationText(string text)
+        {
+            return string.Join(
+                " ",
+                text.Split((char[])null, StringSplitOptions.RemoveEmptyEntries));
         }
 
         private static string GetIntroducedVersion(Type controlType, string propertyKey)
@@ -258,7 +417,7 @@ namespace ZenUI.Wpf.Gallery.Controls
 
             return ControlVersions.TryGetValue(controlType.Name, out var controlVersion)
                 ? controlVersion
-                : "Unreleased";
+                : "未发布";
         }
 
         private static string FormatType(Type type)

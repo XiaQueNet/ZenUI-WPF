@@ -6,7 +6,7 @@ using System.Windows.Controls;
 namespace ZenUI.Wpf.Controls
 {
     /// <summary>
-    /// 为 <see cref="ZenRadioGroup"/> 提供带间距和等分能力的布局。
+    /// 表示为 <see cref="ZenRadioGroup"/> 提供间距和等分能力的布局面板。
     /// </summary>
     [EditorBrowsable(EditorBrowsableState.Never)]
     public class ZenRadioGroupPanel : Panel
@@ -54,7 +54,7 @@ namespace ZenUI.Wpf.Controls
                     FrameworkPropertyMetadataOptions.AffectsMeasure));
 
         /// <summary>
-        /// 获取或设置是否在排列方向上为子元素分配相同尺寸。
+        /// 获取或设置一个值，该值指示是否在排列方向上为子元素分配相同尺寸。
         /// </summary>
         public bool IsItemWidthUniform
         {
