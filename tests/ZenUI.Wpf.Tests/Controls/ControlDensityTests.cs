@@ -75,7 +75,7 @@ namespace ZenUI.Wpf.Tests.Controls
                 Assert.IsNotNull(sliderTrack.DecreaseRepeatButton);
                 Assert.IsNotNull(switchThumb);
                 Assert.AreEqual(36d, textBox.MinHeight);
-                Assert.AreEqual(new Thickness(5, 0, 5, 0), button.Padding);
+                Assert.AreEqual(new Thickness(16, 8, 16, 8), button.Padding);
                 Assert.AreEqual(new Thickness(12, 9, 12, 9), item.Padding);
                 Assert.AreEqual(12d, scrollBar.Width);
                 Assert.AreEqual(64d, @switch.Width);
@@ -92,7 +92,7 @@ namespace ZenUI.Wpf.Tests.Controls
                 window.UpdateLayout();
 
                 Assert.AreEqual(32d, textBox.MinHeight);
-                Assert.AreEqual(new Thickness(4, 0, 4, 0), button.Padding);
+                Assert.AreEqual(new Thickness(12, 6, 12, 6), button.Padding);
                 Assert.AreEqual(new Thickness(10, 6, 10, 6), item.Padding);
                 Assert.AreEqual(10d, scrollBar.Width);
                 Assert.AreEqual(56d, @switch.Width);
@@ -109,7 +109,7 @@ namespace ZenUI.Wpf.Tests.Controls
                 window.UpdateLayout();
 
                 Assert.AreEqual(40d, textBox.MinHeight);
-                Assert.AreEqual(new Thickness(8, 3, 8, 3), button.Padding);
+                Assert.AreEqual(new Thickness(18, 10, 18, 10), button.Padding);
                 Assert.AreEqual(new Thickness(14, 11, 14, 11), item.Padding);
                 Assert.AreEqual(14d, scrollBar.Width);
                 Assert.AreEqual(72d, @switch.Width);

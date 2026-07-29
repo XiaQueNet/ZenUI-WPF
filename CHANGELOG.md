@@ -11,6 +11,10 @@
 - 增加 `ZenRadioGroup` 单选组控件，支持互斥选择、键盘导航、排列方向、等分布局和两种视觉样式。
 - 增加 `ZenContextMenu` 与 `ZenMenuItem` 右键菜单控件，支持图标、快捷键提示、勾选项、分隔线和级联菜单。
 
+### Changed
+
+- 调整 `ZenButton` 三档 Density 的默认内边距；按钮继续使用内容驱动的自动宽高，不设置固定或最小尺寸。
+
 ## [0.1.0-preview.5] - 2026-07-27
 
 ### Added

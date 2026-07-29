@@ -58,8 +58,6 @@
         BasedOn="{StaticResource ZenButtonStyle}"
         TargetType="{x:Type zen:ZenButton}">
         <Setter Property="MinWidth" Value="92" />
-        <Setter Property="Height" Value="36" />
         <Setter Property="Margin" Value="0,0,12,0" />
-        <Setter Property="Padding" Value="16,0" />
     </Style>
 </ResourceDictionary>
