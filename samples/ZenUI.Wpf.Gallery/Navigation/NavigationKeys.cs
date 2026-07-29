@@ -20,6 +20,7 @@ namespace ZenUI.Wpf.Gallery.Navigation
         public const string Slider = nameof(Slider);
         public const string ProgressBar = nameof(ProgressBar);
         public const string Alert = nameof(Alert);
+        public const string Popover = nameof(Popover);
     }
 
     public static class RegionNames

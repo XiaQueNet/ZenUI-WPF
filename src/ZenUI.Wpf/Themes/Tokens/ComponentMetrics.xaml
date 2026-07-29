@@ -28,6 +28,13 @@
     <Thickness x:Key="ZenComboBoxPopupPadding">4</Thickness>
     <CornerRadius x:Key="ZenComboBoxPopupCornerRadius">6</CornerRadius>
 
+    <!-- 气泡提示 -->
+    <Thickness x:Key="ZenCalloutPadding">14,10</Thickness>
+    <CornerRadius x:Key="ZenCalloutCornerRadius">6</CornerRadius>
+    <sys:Double x:Key="ZenCalloutMaxWidth">360</sys:Double>
+    <sys:Double x:Key="ZenCalloutTriggerSize">24</sys:Double>
+    <sys:Double x:Key="ZenCalloutTargetGap">4</sys:Double>
+
     <!-- 数据网格 -->
     <sys:Double x:Key="ZenDataGridColumnHeaderHeight">44</sys:Double>
     <sys:Double x:Key="ZenDataGridRowMinHeight">44</sys:Double>

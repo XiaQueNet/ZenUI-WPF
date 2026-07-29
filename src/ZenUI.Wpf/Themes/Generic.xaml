@@ -32,6 +32,7 @@
         <ResourceDictionary Source="/ZenUI.Wpf;component/Themes/Controls/ZenSlider.xaml" />
         <ResourceDictionary Source="/ZenUI.Wpf;component/Themes/Controls/ZenProgressBar.xaml" />
         <ResourceDictionary Source="/ZenUI.Wpf;component/Themes/Controls/ZenAlert.xaml" />
+        <ResourceDictionary Source="/ZenUI.Wpf;component/Themes/Controls/ZenPopover.xaml" />
         <ResourceDictionary Source="/ZenUI.Wpf;component/Themes/Controls/ZenDataGrid.xaml" />
     </ResourceDictionary.MergedDictionaries>
 </ResourceDictionary>

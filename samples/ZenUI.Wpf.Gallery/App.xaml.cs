@@ -44,6 +44,7 @@ namespace ZenUI.Wpf.Gallery
             containerRegistry.RegisterForNavigation<SliderView>(NavigationKeys.Slider);
             containerRegistry.RegisterForNavigation<ProgressBarView>(NavigationKeys.ProgressBar);
             containerRegistry.RegisterForNavigation<AlertView>(NavigationKeys.Alert);
+            containerRegistry.RegisterForNavigation<PopoverView>(NavigationKeys.Popover);
         }
 
         protected override void OnInitialized()
