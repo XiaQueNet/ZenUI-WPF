@@ -25,15 +25,11 @@
                         </StackPanel>
                         <StackPanel Margin="6,0,3,0">
                             <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="仅日历选择" />
-                            <zen:ZenDatePicker
-                                IsTextInputEnabled="False"
-                                Watermark="请从日历选择" />
+                            <zen:ZenDatePicker IsTextInputEnabled="False" Watermark="请从日历选择" />
                         </StackPanel>
                         <StackPanel Margin="9,0,0,0">
                             <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="禁用" />
-                            <zen:ZenDatePicker
-                                IsEnabled="False"
-                                Watermark="不可用" />
+                            <zen:ZenDatePicker IsEnabled="False" Watermark="不可用" />
                         </StackPanel>
                     </UniformGrid>
                 </StackPanel>

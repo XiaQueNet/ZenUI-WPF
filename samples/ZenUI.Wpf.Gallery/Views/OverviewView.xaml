@@ -222,7 +222,7 @@
                                     Margin="0,7,0,0"
                                     Foreground="{DynamicResource ZenTextSecondaryBrush}"
                                     LineHeight="21"
-                                    Text="TextBox · PasswordBox&#x0a;NumberBox · ComboBox&#x0a;Slider · DatePicker"
+                                    Text="TextBox · PasswordBox&#x0a;NumberBox · ComboBox&#x0a;Slider · DatePicker · TimePicker"
                                     TextWrapping="Wrap" />
                             </StackPanel>
                         </Border>

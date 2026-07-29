@@ -59,7 +59,8 @@ namespace ZenUI.Wpf.Gallery.ViewModels
                     new MenuItemViewModel("数字输入框  NumberBox", NavigationKeys.NumberBox),
                     new MenuItemViewModel("下拉框  ComboBox", NavigationKeys.ComboBox),
                     new MenuItemViewModel("滑块  Slider", NavigationKeys.Slider),
-                    new MenuItemViewModel("日期选择器  DatePicker", NavigationKeys.DatePicker)),
+                    new MenuItemViewModel("日期选择器  DatePicker", NavigationKeys.DatePicker),
+                    new MenuItemViewModel("时间选择器  TimePicker", NavigationKeys.TimePicker)),
                 new NavigationGroupViewModel(
                     "数据展示",
                     SelectMenuItem,

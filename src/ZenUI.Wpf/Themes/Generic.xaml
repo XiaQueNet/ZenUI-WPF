@@ -28,6 +28,7 @@
         <ResourceDictionary Source="/ZenUI.Wpf;component/Themes/Controls/ZenComboBox.xaml" />
         <ResourceDictionary Source="/ZenUI.Wpf;component/Themes/Controls/ZenListBox.xaml" />
         <ResourceDictionary Source="/ZenUI.Wpf;component/Themes/Controls/ZenDatePicker.xaml" />
+        <ResourceDictionary Source="/ZenUI.Wpf;component/Themes/Controls/ZenTimePicker.xaml" />
         <ResourceDictionary Source="/ZenUI.Wpf;component/Themes/Controls/ZenPasswordBox.xaml" />
         <ResourceDictionary Source="/ZenUI.Wpf;component/Themes/Controls/ZenSlider.xaml" />
         <ResourceDictionary Source="/ZenUI.Wpf;component/Themes/Controls/ZenProgressBar.xaml" />
