@@ -387,7 +387,10 @@ namespace ZenUI.Wpf.Tests.Controls
             var slider = new ZenSlider { IsEnabled = false };
             var scrollBar = new ScrollBar { IsEnabled = false, Height = 80 };
             var datePicker = new ZenDatePicker { IsEnabled = false };
+            var timePicker = new ZenTimePicker { IsEnabled = false };
             var dataGrid = new ZenDataGrid { IsEnabled = false, Height = 80 };
+            var progressBar = new ZenProgressBar { IsEnabled = false };
+            var expander = new ZenExpander { Header = "Disabled", IsEnabled = false };
             listBox.Items.Add("Disabled item");
 
             var panel = new StackPanel();
@@ -403,7 +406,10 @@ namespace ZenUI.Wpf.Tests.Controls
             panel.Children.Add(slider);
             panel.Children.Add(scrollBar);
             panel.Children.Add(datePicker);
+            panel.Children.Add(timePicker);
             panel.Children.Add(dataGrid);
+            panel.Children.Add(progressBar);
+            panel.Children.Add(expander);
 
             var window = CreateTestWindow(panel, 420, 800);
             window.Resources.MergedDictionaries.Add(new ResourceDictionary
@@ -430,7 +436,14 @@ namespace ZenUI.Wpf.Tests.Controls
                 Assert.AreEqual(0.4d, slider.Opacity);
                 Assert.AreEqual(0.45d, scrollBar.Opacity);
                 Assert.AreEqual(0.55d, datePicker.Opacity);
+                Assert.AreEqual(0.6d, timePicker.Opacity);
+                var timePickerDropDownButton =
+                    timePicker.Template.FindName("DropDownButton", timePicker) as ToggleButton;
+                Assert.IsNotNull(timePickerDropDownButton);
+                Assert.AreEqual(1d, timePickerDropDownButton.Opacity);
                 Assert.AreEqual(0.55d, dataGrid.Opacity);
+                Assert.AreEqual(0.45d, progressBar.Opacity);
+                Assert.AreEqual(0.65d, expander.Opacity);
 
                 ZenThemeManager.ApplyTheme(window.Resources, ZenTheme.HighContrast, false);
                 window.UpdateLayout();
@@ -447,7 +460,11 @@ namespace ZenUI.Wpf.Tests.Controls
                 Assert.AreEqual(1d, slider.Opacity);
                 Assert.AreEqual(1d, scrollBar.Opacity);
                 Assert.AreEqual(1d, datePicker.Opacity);
+                Assert.AreEqual(1d, timePicker.Opacity);
+                Assert.AreEqual(1d, timePickerDropDownButton.Opacity);
                 Assert.AreEqual(1d, dataGrid.Opacity);
+                Assert.AreEqual(1d, progressBar.Opacity);
+                Assert.AreEqual(1d, expander.Opacity);
             }
             finally
             {

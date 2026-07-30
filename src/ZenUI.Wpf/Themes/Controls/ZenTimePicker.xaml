@@ -43,9 +43,6 @@
                             <Setter TargetName="ButtonBorder" Property="Background" Value="{DynamicResource ZenInfoLightBrush}" />
                             <Setter Property="Foreground" Value="{DynamicResource ZenPrimaryBrush}" />
                         </Trigger>
-                        <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Opacity" Value="0.35" />
-                        </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
