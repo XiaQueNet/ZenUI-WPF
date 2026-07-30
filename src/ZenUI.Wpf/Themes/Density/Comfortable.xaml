@@ -20,6 +20,13 @@
 
     <Thickness x:Key="ZenComboBoxPopupMargin">0,6,0,0</Thickness>
     <Thickness x:Key="ZenComboBoxPopupPadding">6</Thickness>
+    <Thickness x:Key="ZenTimePickerPopupMargin">0,6,0,10</Thickness>
+    <Thickness x:Key="ZenTimePickerPopupPadding">8</Thickness>
+    <sys:Double x:Key="ZenTimePickerColumnWidth">70</sys:Double>
+    <sys:Double x:Key="ZenTimePickerPeriodColumnWidth">80</sys:Double>
+    <sys:Double x:Key="ZenTimePickerListHeight">220</sys:Double>
+    <sys:Double x:Key="ZenTimePickerItemHeight">40</sys:Double>
+    <Thickness x:Key="ZenTimePickerItemMargin">0,3</Thickness>
     <Thickness x:Key="ZenContextMenuPadding">6</Thickness>
     <sys:Double x:Key="ZenContextMenuItemMinHeight">42</sys:Double>
     <Thickness x:Key="ZenContextMenuItemPadding">10,6</Thickness>

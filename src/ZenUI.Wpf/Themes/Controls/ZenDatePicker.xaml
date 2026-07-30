@@ -462,7 +462,7 @@
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Opacity" Value="{DynamicResource ZenDisabledInputOpacity}" />
-                            <Setter TargetName="InputBorder" Property="Background" Value="{DynamicResource ZenSurfaceMutedBrush}" />
+                            <Setter TargetName="InputBorder" Property="Background" Value="{DynamicResource ZenSurfaceDisabledBrush}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

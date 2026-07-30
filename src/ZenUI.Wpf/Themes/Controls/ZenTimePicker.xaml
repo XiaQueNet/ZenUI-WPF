@@ -53,8 +53,8 @@
     </Style>
 
     <Style x:Key="ZenTimePickerListStyle" TargetType="{x:Type ListBox}">
-        <Setter Property="Width" Value="64" />
-        <Setter Property="Height" Value="196" />
+        <Setter Property="Width" Value="{DynamicResource ZenTimePickerColumnWidth}" />
+        <Setter Property="Height" Value="{DynamicResource ZenTimePickerListHeight}" />
         <Setter Property="Padding" Value="0,4" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderThickness" Value="0" />
@@ -64,8 +64,8 @@
             <Setter.Value>
                 <Style TargetType="{x:Type ListBoxItem}">
                     <Setter Property="IsEnabled" Value="{Binding IsEnabled}" />
-                    <Setter Property="Height" Value="36" />
-                    <Setter Property="Margin" Value="0,2" />
+                    <Setter Property="Height" Value="{DynamicResource ZenTimePickerItemHeight}" />
+                    <Setter Property="Margin" Value="{DynamicResource ZenTimePickerItemMargin}" />
                     <Setter Property="Padding" Value="8,0" />
                     <Setter Property="HorizontalContentAlignment" Value="Center" />
                     <Setter Property="VerticalContentAlignment" Value="Center" />
@@ -107,6 +107,7 @@
         <Setter Property="FontSize" Value="{DynamicResource ZenFontSizeBody}" />
         <Setter Property="MinWidth" Value="148" />
         <Setter Property="MinHeight" Value="{DynamicResource ZenInputControlMinHeight}" />
+        <Setter Property="CornerRadius" Value="{DynamicResource ZenInputControlCornerRadius}" />
         <Setter Property="Background" Value="{DynamicResource ZenSurfaceBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource ZenBorderBrush}" />
         <Setter Property="BorderThickness" Value="{DynamicResource ZenControlBorderThickness}" />
@@ -179,12 +180,12 @@
                             PopupAnimation="Fade"
                             StaysOpen="False">
                             <Border
-                                Margin="0,4,0,8"
-                                Padding="6"
+                                Margin="{DynamicResource ZenTimePickerPopupMargin}"
+                                Padding="{DynamicResource ZenTimePickerPopupPadding}"
                                 Background="{DynamicResource ZenSurfaceBrush}"
                                 BorderBrush="{DynamicResource ZenBorderBrush}"
                                 BorderThickness="1"
-                                CornerRadius="8">
+                                CornerRadius="{DynamicResource ZenTimePickerPopupCornerRadius}">
                                 <Border.Effect>
                                     <DropShadowEffect
                                         BlurRadius="16"
@@ -219,7 +220,7 @@
                                             Background="{DynamicResource ZenDividerBrush}" />
                                         <ListBox
                                             x:Name="PART_PeriodList"
-                                            Width="74"
+                                            Width="{DynamicResource ZenTimePickerPeriodColumnWidth}"
                                             AutomationProperties.Name="上午或下午"
                                             Style="{StaticResource ZenTimePickerListStyle}" />
                                     </StackPanel>

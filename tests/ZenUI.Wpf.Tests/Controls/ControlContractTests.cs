@@ -159,6 +159,14 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.AreEqual(new Thickness(0, 4, 0, 0), dictionary["ZenComboBoxPopupMargin"]);
             Assert.AreEqual(new Thickness(4), dictionary["ZenComboBoxPopupPadding"]);
             Assert.AreEqual(new CornerRadius(6), dictionary["ZenComboBoxPopupCornerRadius"]);
+            Assert.AreEqual(new Thickness(0, 4, 0, 8), dictionary["ZenTimePickerPopupMargin"]);
+            Assert.AreEqual(new Thickness(6), dictionary["ZenTimePickerPopupPadding"]);
+            Assert.AreEqual(new CornerRadius(8), dictionary["ZenTimePickerPopupCornerRadius"]);
+            Assert.AreEqual(64d, dictionary["ZenTimePickerColumnWidth"]);
+            Assert.AreEqual(74d, dictionary["ZenTimePickerPeriodColumnWidth"]);
+            Assert.AreEqual(196d, dictionary["ZenTimePickerListHeight"]);
+            Assert.AreEqual(36d, dictionary["ZenTimePickerItemHeight"]);
+            Assert.AreEqual(new Thickness(0, 2, 0, 2), dictionary["ZenTimePickerItemMargin"]);
             Assert.AreEqual(44d, dictionary["ZenDataGridColumnHeaderHeight"]);
             Assert.AreEqual(44d, dictionary["ZenDataGridRowMinHeight"]);
             Assert.AreEqual(new Thickness(14, 0, 14, 0), dictionary["ZenDataGridCellPadding"]);

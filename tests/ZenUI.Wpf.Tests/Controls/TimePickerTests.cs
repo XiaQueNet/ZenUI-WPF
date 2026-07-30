@@ -2,10 +2,13 @@ using System;
 using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
+using System.Windows.Threading;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using ZenUI.Wpf.Controls;
+using ZenUI.Wpf.Theming;
 
 namespace ZenUI.Wpf.Tests.Controls
 {
@@ -77,6 +80,95 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.AreEqual(
                 ScrollBarVisibility.Hidden,
                 ScrollViewer.GetVerticalScrollBarVisibility(hourList));
+        }
+
+        [TestMethod]
+        public void PopupMetricsFollowDensityChanges()
+        {
+            var picker = new ZenTimePicker
+            {
+                Is24Hour = false,
+                IsDropDownOpen = true
+            };
+            var window = new Window
+            {
+                ShowInTaskbar = false,
+                WindowStyle = WindowStyle.None,
+                Width = 420,
+                Height = 360,
+                Content = picker
+            };
+            window.Resources.MergedDictionaries.Add(new ResourceDictionary
+            {
+                Source = new Uri(
+                    "/ZenUI.Wpf;component/Themes/Generic.xaml",
+                    UriKind.Relative)
+            });
+
+            try
+            {
+                window.Show();
+                window.Dispatcher.Invoke(DispatcherPriority.ContextIdle, new Action(() => { }));
+                window.UpdateLayout();
+
+                var popup = (Popup)picker.Template.FindName("PART_Popup", picker);
+                var popupBorder = popup.Child as Border;
+                var hourList = (ListBox)picker.Template.FindName("PART_HourList", picker);
+                var periodList = (ListBox)picker.Template.FindName("PART_PeriodList", picker);
+                hourList.ScrollIntoView(hourList.Items[0]);
+                window.Dispatcher.Invoke(DispatcherPriority.ContextIdle, new Action(() => { }));
+                hourList.UpdateLayout();
+                var firstItem = hourList.ItemContainerGenerator.ContainerFromIndex(0) as ListBoxItem;
+                Assert.IsNotNull(popupBorder);
+                Assert.IsNotNull(firstItem);
+                AssertPopupMetrics(
+                    popupBorder,
+                    hourList,
+                    periodList,
+                    firstItem,
+                    new Thickness(0, 4, 0, 8),
+                    new Thickness(6),
+                    64d,
+                    74d,
+                    196d,
+                    36d,
+                    new Thickness(0, 2, 0, 2));
+
+                ZenDensityManager.ApplyDensity(window.Resources, ZenDensity.Compact);
+                window.UpdateLayout();
+                AssertPopupMetrics(
+                    popupBorder,
+                    hourList,
+                    periodList,
+                    firstItem,
+                    new Thickness(0, 3, 0, 6),
+                    new Thickness(4),
+                    58d,
+                    68d,
+                    172d,
+                    32d,
+                    new Thickness(0, 1, 0, 1));
+
+                ZenDensityManager.ApplyDensity(window.Resources, ZenDensity.Comfortable);
+                window.UpdateLayout();
+                AssertPopupMetrics(
+                    popupBorder,
+                    hourList,
+                    periodList,
+                    firstItem,
+                    new Thickness(0, 6, 0, 10),
+                    new Thickness(8),
+                    70d,
+                    80d,
+                    220d,
+                    40d,
+                    new Thickness(0, 3, 0, 3));
+            }
+            finally
+            {
+                picker.IsDropDownOpen = false;
+                window.Close();
+            }
         }
 
         [TestMethod]
@@ -177,6 +269,28 @@ namespace ZenUI.Wpf.Tests.Controls
             minuteList.SelectedItem = FindOption(minuteList, 15);
             Assert.IsTrue(FindOption(secondList, 30).IsEnabled);
             Assert.IsFalse(FindOption(secondList, 31).IsEnabled);
+        }
+
+        private static void AssertPopupMetrics(
+            Border popupBorder,
+            ListBox hourList,
+            ListBox periodList,
+            ListBoxItem firstItem,
+            Thickness popupMargin,
+            Thickness popupPadding,
+            double columnWidth,
+            double periodColumnWidth,
+            double listHeight,
+            double itemHeight,
+            Thickness itemMargin)
+        {
+            Assert.AreEqual(popupMargin, popupBorder.Margin);
+            Assert.AreEqual(popupPadding, popupBorder.Padding);
+            Assert.AreEqual(columnWidth, hourList.Width);
+            Assert.AreEqual(periodColumnWidth, periodList.Width);
+            Assert.AreEqual(listHeight, hourList.Height);
+            Assert.AreEqual(itemHeight, firstItem.Height);
+            Assert.AreEqual(itemMargin, firstItem.Margin);
         }
 
         private static TimePickerOption FindOption(ListBox selector, int value)

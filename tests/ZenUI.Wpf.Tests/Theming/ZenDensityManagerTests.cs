@@ -24,6 +24,8 @@ namespace ZenUI.Wpf.Tests.Theming
             Assert.AreEqual(new Thickness(10, 6, 10, 6), resources["ZenListBoxItemPadding"]);
             Assert.AreEqual(36d, resources["ZenDataGridRowMinHeight"]);
             Assert.AreEqual(328d, resources["ZenCalendarPopupWidth"]);
+            Assert.AreEqual(172d, resources["ZenTimePickerListHeight"]);
+            Assert.AreEqual(32d, resources["ZenTimePickerItemHeight"]);
             Assert.AreEqual(52d, resources["ZenSwitchWidth"]);
             Assert.AreEqual(3d, resources["ZenSliderTrackThickness"]);
             Assert.AreEqual(6d, resources["ZenProgressBarThickness"]);
@@ -37,6 +39,8 @@ namespace ZenUI.Wpf.Tests.Theming
             Assert.AreEqual(new Thickness(14, 11, 14, 11), resources["ZenListBoxItemPadding"]);
             Assert.AreEqual(52d, resources["ZenDataGridRowMinHeight"]);
             Assert.AreEqual(412d, resources["ZenCalendarPopupWidth"]);
+            Assert.AreEqual(220d, resources["ZenTimePickerListHeight"]);
+            Assert.AreEqual(40d, resources["ZenTimePickerItemHeight"]);
             Assert.AreEqual(68d, resources["ZenSwitchWidth"]);
             Assert.AreEqual(6d, resources["ZenSliderTrackThickness"]);
             Assert.AreEqual(10d, resources["ZenProgressBarThickness"]);
@@ -50,6 +54,8 @@ namespace ZenUI.Wpf.Tests.Theming
             Assert.AreEqual(new Thickness(12, 9, 12, 9), resources["ZenListBoxItemPadding"]);
             Assert.AreEqual(44d, resources["ZenDataGridRowMinHeight"]);
             Assert.AreEqual(368d, resources["ZenCalendarPopupWidth"]);
+            Assert.AreEqual(196d, resources["ZenTimePickerListHeight"]);
+            Assert.AreEqual(36d, resources["ZenTimePickerItemHeight"]);
             Assert.AreEqual(60d, resources["ZenSwitchWidth"]);
             Assert.AreEqual(4d, resources["ZenSliderTrackThickness"]);
             Assert.AreEqual(8d, resources["ZenProgressBarThickness"]);
