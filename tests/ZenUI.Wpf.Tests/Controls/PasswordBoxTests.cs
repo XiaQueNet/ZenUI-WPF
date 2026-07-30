@@ -88,6 +88,12 @@ namespace ZenUI.Wpf.Tests.Controls
                 Height = 100,
                 Content = passwordBox
             };
+            window.Resources.MergedDictionaries.Add(new ResourceDictionary
+            {
+                Source = new Uri(
+                    "/ZenUI.Wpf;component/Themes/Generic.xaml",
+                    UriKind.Relative)
+            });
 
             try
             {
@@ -102,6 +108,9 @@ namespace ZenUI.Wpf.Tests.Controls
                 Assert.IsNotNull(revealTextBox);
                 Assert.AreEqual(Visibility.Visible, revealButton.Visibility);
                 Assert.AreEqual(string.Empty, nativePasswordBox.Password);
+                Assert.AreEqual(
+                    ((SolidColorBrush)passwordBox.FindResource("ZenTextSecondaryBrush")).Color,
+                    ((SolidColorBrush)revealButton.Foreground).Color);
 
                 nativePasswordBox.Password = "secret";
                 passwordBox.IsPasswordRevealed = true;

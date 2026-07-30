@@ -4,7 +4,7 @@
     xmlns:zen="clr-namespace:ZenUI.Wpf.Controls">
 
     <Style x:Key="ZenComboBoxItemStyle" TargetType="{x:Type ComboBoxItem}">
-        <Setter Property="Padding" Value="12,8" />
+        <Setter Property="Padding" Value="{DynamicResource ZenListBoxItemPadding}" />
         <Setter Property="Margin" Value="0,1" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="Template">
@@ -198,7 +198,7 @@
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Opacity" Value="{DynamicResource ZenDisabledInputOpacity}" />
-                            <Setter TargetName="InputBorder" Property="Background" Value="{DynamicResource ZenSurfaceMutedBrush}" />
+                            <Setter TargetName="InputBorder" Property="Background" Value="{DynamicResource ZenSurfaceDisabledBrush}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>

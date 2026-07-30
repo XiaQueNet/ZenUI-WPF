@@ -133,6 +133,7 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.AreEqual(36d, dictionary["ZenInputControlMinHeight"]);
             Assert.AreEqual(new Thickness(8, 4, 8, 4), dictionary["ZenInputControlPadding"]);
             Assert.AreEqual(new CornerRadius(6), dictionary["ZenInputControlCornerRadius"]);
+            Assert.AreEqual(new CornerRadius(9), dictionary["ZenInputFocusVisualCornerRadius"]);
             Assert.AreEqual(new Thickness(1), dictionary["ZenControlBorderThickness"]);
             Assert.AreEqual(new Thickness(-2), dictionary["ZenFocusVisualMargin"]);
             Assert.AreEqual(new Thickness(1), dictionary["ZenFocusVisualBorderThickness"]);

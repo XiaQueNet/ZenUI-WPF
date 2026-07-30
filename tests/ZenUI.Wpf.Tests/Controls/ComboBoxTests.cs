@@ -265,7 +265,7 @@ namespace ZenUI.Wpf.Tests.Controls
         }
 
         [TestMethod]
-        public void ComboBoxItemsUseListSelectionStateTokens()
+        public void ComboBoxItemsUseListSelectionStateAndDensityTokens()
         {
             var comboBox = new ZenComboBox { Width = 180 };
             comboBox.Items.Add("第一项");
@@ -290,6 +290,15 @@ namespace ZenUI.Wpf.Tests.Controls
                 var itemBorder = item.Template.FindName("ItemBorder", item) as Border;
                 Assert.IsNotNull(itemBorder);
                 Assert.AreEqual(new Thickness(0, 1, 0, 1), item.Margin);
+                Assert.AreEqual(new Thickness(12, 9, 12, 9), item.Padding);
+
+                ZenDensityManager.ApplyDensity(window.Resources, ZenDensity.Compact);
+                window.UpdateLayout();
+                Assert.AreEqual(new Thickness(10, 6, 10, 6), item.Padding);
+
+                ZenDensityManager.ApplyDensity(window.Resources, ZenDensity.Standard);
+                window.UpdateLayout();
+                Assert.AreEqual(new Thickness(12, 9, 12, 9), item.Padding);
 
                 Keyboard.Focus(comboBox);
                 comboBox.RaiseEvent(new KeyEventArgs(

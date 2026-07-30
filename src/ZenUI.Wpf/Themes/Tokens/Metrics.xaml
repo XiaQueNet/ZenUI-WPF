@@ -7,6 +7,7 @@
     <sys:Double x:Key="ZenInputControlMinHeight">36</sys:Double>
     <Thickness x:Key="ZenInputControlPadding">8,4</Thickness>
     <CornerRadius x:Key="ZenInputControlCornerRadius">6</CornerRadius>
+    <CornerRadius x:Key="ZenInputFocusVisualCornerRadius">9</CornerRadius>
     <Thickness x:Key="ZenControlBorderThickness">1</Thickness>
 
     <!-- 共享键盘焦点尺寸 -->
