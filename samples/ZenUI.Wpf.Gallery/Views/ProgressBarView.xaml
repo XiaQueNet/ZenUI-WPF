@@ -6,7 +6,7 @@
     xmlns:prism="http://prismlibrary.com/"
     xmlns:zen="https://zenui.mnorg.cn/xaml/wpf"
     prism:ViewModelLocator.AutoWireViewModel="True">
-    <ScrollViewer Padding="40" HorizontalContentAlignment="Stretch" VerticalScrollBarVisibility="Auto">
+    <ScrollViewer Padding="{StaticResource GalleryPagePadding}" HorizontalContentAlignment="Stretch" VerticalScrollBarVisibility="Auto">
         <StackPanel>
             <gallery:PageHeader Description="用于展示任务、上传或流程的当前完成进度。" Title="ProgressBar 进度条" />
             <Border Style="{StaticResource GalleryCardStyle}">
@@ -16,6 +16,38 @@
                     <zen:ZenProgressBar Maximum="100" Value="72" />
                     <TextBlock Margin="0,18,0,8" Foreground="{DynamicResource ZenTextSecondaryBrush}" Text="自定义颜色与高度 · 45%" />
                     <zen:ZenProgressBar Height="12" CornerRadius="6" Foreground="{DynamicResource ZenSuccessBrush}" Maximum="100" Value="45" />
+                </StackPanel>
+            </Border>
+            <Border Style="{StaticResource GalleryCardStyle}">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="不确定进度与方向" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="40" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel>
+                            <TextBlock
+                                Margin="0,0,0,8"
+                                Foreground="{DynamicResource ZenTextSecondaryBrush}"
+                                Text="正在连接服务，暂时无法估算完成比例" />
+                            <zen:ZenProgressBar IsIndeterminate="True" />
+                        </StackPanel>
+                        <StackPanel Grid.Column="2">
+                            <TextBlock
+                                Margin="0,0,0,8"
+                                Foreground="{DynamicResource ZenTextSecondaryBrush}"
+                                Text="垂直进度 · 60%" />
+                            <zen:ZenProgressBar
+                                Width="8"
+                                Height="120"
+                                HorizontalAlignment="Center"
+                                Maximum="100"
+                                Orientation="Vertical"
+                                Value="60" />
+                        </StackPanel>
+                    </Grid>
                 </StackPanel>
             </Border>
             <Border Style="{StaticResource GalleryCardStyle}">

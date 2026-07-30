@@ -5,7 +5,7 @@
     xmlns:gallery="clr-namespace:ZenUI.Wpf.Gallery.Controls"
     xmlns:local="clr-namespace:ZenUI.Wpf.Gallery.Views"
     xmlns:zen="https://zenui.mnorg.cn/xaml/wpf">
-    <ScrollViewer Padding="40" HorizontalContentAlignment="Stretch" VerticalScrollBarVisibility="Auto">
+    <ScrollViewer Padding="{StaticResource GalleryPagePadding}" HorizontalContentAlignment="Stretch" VerticalScrollBarVisibility="Auto">
         <StackPanel>
             <gallery:PageHeader Description="用于从较长的候选列表中选择一个选项。" Title="ComboBox 下拉框" />
             <Border Style="{StaticResource GalleryCardStyle}">

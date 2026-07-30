@@ -13,7 +13,7 @@
     MinWidth="1024"
     MinHeight="640"
     prism:ViewModelLocator.AutoWireViewModel="True"
-    Background="{DynamicResource ZenSurfaceMutedBrush}"
+    Background="{DynamicResource ZenSurfaceBrush}"
     FontFamily="Microsoft YaHei UI"
     Foreground="{DynamicResource ZenTextPrimaryBrush}"
     WindowStartupLocation="CenterScreen"
@@ -51,7 +51,7 @@
 
     <Grid>
         <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="272" />
+            <ColumnDefinition Width="256" />
             <ColumnDefinition Width="*" />
         </Grid.ColumnDefinitions>
 
@@ -66,25 +66,25 @@
                     <RowDefinition Height="Auto" />
                 </Grid.RowDefinitions>
 
-                <StackPanel Margin="24,28,24,4">
+                <StackPanel Margin="24,28,24,8">
                     <TextBlock
-                        FontSize="23"
+                        FontSize="{DynamicResource ZenFontSizeTitle}"
                         FontWeight="SemiBold"
                         Foreground="{DynamicResource ZenTextPrimaryBrush}"
                         Text="ZenUI" />
                     <TextBlock
-                        Margin="0,5,0,0"
-                        FontSize="12"
+                        Margin="0,4,0,0"
+                        FontSize="{DynamicResource ZenFontSizeCaption}"
                         Foreground="{DynamicResource ZenTextSecondaryBrush}"
                         Text="Controls Gallery" />
                 </StackPanel>
 
                 <ScrollViewer
                     Grid.Row="1"
-                    Margin="0,12,0,8"
+                    Margin="0,16,0,8"
                     HorizontalScrollBarVisibility="Disabled"
                     VerticalScrollBarVisibility="Auto">
-                    <ItemsControl Margin="16,0,12,0" ItemsSource="{Binding NavigationGroups}">
+                    <ItemsControl Margin="12,0" ItemsSource="{Binding NavigationGroups}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <zen:ZenExpander
@@ -107,7 +107,7 @@
                     </ItemsControl>
                 </ScrollViewer>
 
-                <StackPanel Grid.Row="2" Margin="24,8,24,24">
+                <StackPanel Grid.Row="2" Margin="24,12,24,24">
                     <TextBlock
                         Margin="0,0,0,8"
                         FontSize="12"

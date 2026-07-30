@@ -91,10 +91,9 @@
 
             <Border
                 x:Name="EmptyState"
-                Padding="16"
+                Padding="18"
                 Background="{DynamicResource ZenSurfaceMutedBrush}"
-                BorderBrush="{DynamicResource ZenDividerBrush}"
-                BorderThickness="1"
+                BorderThickness="0"
                 CornerRadius="6"
                 Visibility="Collapsed">
                 <TextBlock

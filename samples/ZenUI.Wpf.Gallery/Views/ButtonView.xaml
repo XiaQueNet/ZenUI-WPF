@@ -96,7 +96,7 @@
         </Style>
     </UserControl.Resources>
     <ScrollViewer
-        Padding="40"
+        Padding="{StaticResource GalleryPagePadding}"
         HorizontalContentAlignment="Stretch"
         VerticalScrollBarVisibility="Auto">
         <StackPanel>

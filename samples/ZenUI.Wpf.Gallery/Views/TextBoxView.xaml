@@ -5,7 +5,7 @@
     xmlns:gallery="clr-namespace:ZenUI.Wpf.Gallery.Controls"
     xmlns:zen="https://zenui.mnorg.cn/xaml/wpf">
     <ScrollViewer
-        Padding="40"
+        Padding="{StaticResource GalleryPagePadding}"
         HorizontalContentAlignment="Stretch"
         VerticalScrollBarVisibility="Auto">
         <StackPanel>
@@ -165,21 +165,6 @@
                 </StackPanel>
             </Border>
 
-            <Border Style="{StaticResource GalleryCardStyle}">
-                <StackPanel>
-                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="推荐用法" />
-                    <Border
-                        Padding="16"
-                        Background="{DynamicResource ZenSurfaceMutedBrush}"
-                        CornerRadius="8">
-                        <TextBlock
-                            FontFamily="Consolas"
-                            Foreground="{DynamicResource ZenTextPrimaryBrush}"
-                            Text="&lt;zen:ZenTextBox Watermark=&quot;请输入关键字&quot;&gt;&#x0a;    &lt;zen:ZenTextBox.LeadingContent&gt;&#x0a;        &lt;Path Margin=&quot;8,0,0,0&quot;&#x0a;              Data=&quot;{StaticResource SearchIcon}&quot; /&gt;&#x0a;    &lt;/zen:ZenTextBox.LeadingContent&gt;&#x0a;&lt;/zen:ZenTextBox&gt;"
-                            TextWrapping="Wrap" />
-                    </Border>
-                </StackPanel>
-            </Border>
             <gallery:PropertyTable ControlType="{x:Type zen:ZenTextBox}" />
         </StackPanel>
     </ScrollViewer>

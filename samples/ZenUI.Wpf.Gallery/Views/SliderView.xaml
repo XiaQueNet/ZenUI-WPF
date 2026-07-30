@@ -6,7 +6,7 @@
     xmlns:prism="http://prismlibrary.com/"
     xmlns:zen="https://zenui.mnorg.cn/xaml/wpf"
     prism:ViewModelLocator.AutoWireViewModel="True">
-    <ScrollViewer Padding="40" HorizontalContentAlignment="Stretch" VerticalScrollBarVisibility="Auto">
+    <ScrollViewer Padding="{StaticResource GalleryPagePadding}" HorizontalContentAlignment="Stretch" VerticalScrollBarVisibility="Auto">
         <StackPanel>
             <gallery:PageHeader Description="用于在连续或分段区间内选择一个数值。" Title="Slider 滑块" />
             <Border Style="{StaticResource GalleryCardStyle}">
@@ -39,9 +39,33 @@
             </Border>
             <Border Style="{StaticResource GalleryCardStyle}">
                 <StackPanel>
-                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="禁用状态" />
-                    <TextBlock Margin="0,0,0,8" Foreground="{DynamicResource ZenTextSecondaryBrush}" Text="当前值 · 35%" />
-                    <zen:ZenSlider IsEnabled="False" Maximum="100" Value="35" />
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="方向与状态" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="Auto" />
+                            <ColumnDefinition Width="40" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <StackPanel>
+                            <TextBlock
+                                Margin="0,0,0,8"
+                                Foreground="{DynamicResource ZenTextSecondaryBrush}"
+                                Text="垂直音量 · 70%" />
+                            <zen:ZenSlider
+                                Height="140"
+                                HorizontalAlignment="Center"
+                                Maximum="100"
+                                Orientation="Vertical"
+                                Value="70" />
+                        </StackPanel>
+                        <StackPanel Grid.Column="2" VerticalAlignment="Center">
+                            <TextBlock
+                                Margin="0,0,0,8"
+                                Foreground="{DynamicResource ZenTextSecondaryBrush}"
+                                Text="禁用状态 · 35%" />
+                            <zen:ZenSlider IsEnabled="False" Maximum="100" Value="35" />
+                        </StackPanel>
+                    </Grid>
                 </StackPanel>
             </Border>
             <gallery:PropertyTable ControlType="{x:Type zen:ZenSlider}" />

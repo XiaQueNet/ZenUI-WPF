@@ -7,6 +7,7 @@
     <SolidColorBrush x:Key="GalleryOnPrimaryMutedSurfaceBrush" Color="#22FFFFFF" />
     <SolidColorBrush x:Key="GallerySuccessForegroundBrush" Color="#064E2C" />
     <SolidColorBrush x:Key="GalleryErrorForegroundBrush" Color="#681515" />
+    <Thickness x:Key="GalleryPagePadding">48,40,48,56</Thickness>
 
     <Style x:Key="PageTitleStyle" TargetType="{x:Type TextBlock}">
         <Setter Property="Foreground" Value="{DynamicResource ZenTextPrimaryBrush}" />
@@ -16,7 +17,7 @@
     </Style>
 
     <Style x:Key="PageDescriptionStyle" TargetType="{x:Type TextBlock}">
-        <Setter Property="Margin" Value="0,8,0,28" />
+        <Setter Property="Margin" Value="0,8,0,36" />
         <Setter Property="Foreground" Value="{DynamicResource ZenTextSecondaryBrush}" />
         <Setter Property="FontSize" Value="{DynamicResource ZenFontSizeBody}" />
         <Setter Property="LineHeight" Value="{DynamicResource ZenLineHeightBody}" />
@@ -24,7 +25,7 @@
     </Style>
 
     <Style x:Key="SectionTitleStyle" TargetType="{x:Type TextBlock}">
-        <Setter Property="Margin" Value="0,0,0,18" />
+        <Setter Property="Margin" Value="0,0,0,12" />
         <Setter Property="Foreground" Value="{DynamicResource ZenTextPrimaryBrush}" />
         <Setter Property="FontSize" Value="{DynamicResource ZenFontSizeSubtitle}" />
         <Setter Property="FontWeight" Value="{DynamicResource ZenFontWeightSemibold}" />
@@ -45,12 +46,11 @@
     </Style>
 
     <Style x:Key="GalleryCardStyle" TargetType="{x:Type Border}">
-        <Setter Property="Margin" Value="0,0,0,18" />
-        <Setter Property="Padding" Value="24" />
-        <Setter Property="Background" Value="{DynamicResource ZenSurfaceBrush}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource ZenDividerBrush}" />
-        <Setter Property="BorderThickness" Value="1" />
-        <Setter Property="CornerRadius" Value="10" />
+        <Setter Property="Margin" Value="0,0,0,36" />
+        <Setter Property="Padding" Value="0" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="CornerRadius" Value="0" />
     </Style>
 
     <Style

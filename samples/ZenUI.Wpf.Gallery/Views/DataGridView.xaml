@@ -5,7 +5,7 @@
     xmlns:gallery="clr-namespace:ZenUI.Wpf.Gallery.Controls"
     xmlns:zen="https://zenui.mnorg.cn/xaml/wpf">
     <ScrollViewer
-        Padding="40"
+        Padding="{StaticResource GalleryPagePadding}"
         HorizontalContentAlignment="Stretch"
         VerticalScrollBarVisibility="Auto">
         <StackPanel>

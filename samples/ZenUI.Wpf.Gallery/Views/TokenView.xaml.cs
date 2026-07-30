@@ -69,17 +69,15 @@ namespace ZenUI.Wpf.Gallery.Views
 
                 var sourceBadge = new Border
                 {
-                    Padding = new Thickness(9, 4, 9, 4),
-                    CornerRadius = new CornerRadius(10)
+                    Padding = new Thickness(0, 2, 0, 2)
                 };
-                sourceBadge.SetResourceReference(Border.BackgroundProperty, "ZenInfoLightBrush");
                 var sourceText = new TextBlock
                 {
                     Text = group.FileName,
                     FontFamily = new FontFamily("Consolas"),
                     FontSize = 11
                 };
-                sourceText.SetResourceReference(TextBlock.ForegroundProperty, "ZenPrimaryBrush");
+                sourceText.SetResourceReference(TextBlock.ForegroundProperty, "ZenTextSecondaryBrush");
                 sourceBadge.Child = sourceText;
                 Grid.SetColumn(sourceBadge, 1);
                 heading.Children.Add(sourceBadge);
@@ -114,11 +112,9 @@ namespace ZenUI.Wpf.Gallery.Views
                 Width = 276,
                 MinHeight = 68,
                 Margin = new Thickness(0, 0, 12, 12),
-                Padding = new Thickness(12),
-                BorderThickness = new Thickness(1),
-                CornerRadius = new CornerRadius(7)
+                Padding = new Thickness(0, 8, 12, 12),
+                BorderThickness = new Thickness(0, 0, 0, 1)
             };
-            card.SetResourceReference(Border.BackgroundProperty, "ZenSurfaceMutedBrush");
             card.SetResourceReference(Border.BorderBrushProperty, "ZenDividerBrush");
             var layout = new Grid();
             layout.ColumnDefinitions.Add(new ColumnDefinition { Width = GridLength.Auto });
@@ -131,7 +127,7 @@ namespace ZenUI.Wpf.Gallery.Views
                 Margin = new Thickness(0, 0, 12, 0),
                 VerticalAlignment = VerticalAlignment.Center,
                 BorderThickness = new Thickness(1),
-                CornerRadius = new CornerRadius(5),
+                CornerRadius = new CornerRadius(4),
                 Visibility = isBrush ? Visibility.Visible : Visibility.Collapsed
             };
             swatch.SetResourceReference(Border.BorderBrushProperty, "ZenBorderBrush");
