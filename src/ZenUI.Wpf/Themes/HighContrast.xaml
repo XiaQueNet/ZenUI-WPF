@@ -57,6 +57,9 @@
     <SolidColorBrush x:Key="ZenListBoxItemSelectedForegroundBrush" Color="{DynamicResource {x:Static SystemColors.HighlightTextColorKey}}" />
     <SolidColorBrush x:Key="ZenListBoxItemSelectedInactiveBrush" Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}" />
     <SolidColorBrush x:Key="ZenListBoxItemSelectedInactiveForegroundBrush" Color="{DynamicResource {x:Static SystemColors.ControlTextColorKey}}" />
+    <SolidColorBrush x:Key="ZenRadioSegmentedSelectedBrush" Color="{DynamicResource {x:Static SystemColors.HighlightColorKey}}" />
+    <SolidColorBrush x:Key="ZenRadioSegmentedSelectedHoverBrush" Color="{DynamicResource {x:Static SystemColors.HighlightColorKey}}" />
+    <SolidColorBrush x:Key="ZenRadioSegmentedSelectedForegroundBrush" Color="{DynamicResource {x:Static SystemColors.HighlightTextColorKey}}" />
     <SolidColorBrush x:Key="ZenContextMenuItemHoverForegroundBrush" Color="{DynamicResource {x:Static SystemColors.HighlightTextColorKey}}" />
     <SolidColorBrush x:Key="ZenDataGridAlternatingRowBrush" Color="{DynamicResource {x:Static SystemColors.ControlColorKey}}" />
     <SolidColorBrush x:Key="ZenDataGridRowHoverBrush" Color="{DynamicResource {x:Static SystemColors.HighlightColorKey}}" />

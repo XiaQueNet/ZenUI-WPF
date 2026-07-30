@@ -6,8 +6,8 @@
     <!-- 按钮 -->
     <sys:Double x:Key="ZenButtonMinHeight">36</sys:Double>
     <Thickness x:Key="ZenButtonPadding">10,4</Thickness>
-    <CornerRadius x:Key="ZenButtonCornerRadius">10</CornerRadius>
-    <CornerRadius x:Key="ZenButtonFocusVisualCornerRadius">13</CornerRadius>
+    <CornerRadius x:Key="ZenButtonCornerRadius">8</CornerRadius>
+    <CornerRadius x:Key="ZenButtonFocusVisualCornerRadius">11</CornerRadius>
 
     <!-- 列表框 -->
     <Thickness x:Key="ZenListBoxPadding">4</Thickness>
@@ -65,7 +65,7 @@
     <sys:Double x:Key="ZenCalendarNavigationButtonSize">40</sys:Double>
 
     <!-- 开关 -->
-    <sys:Double x:Key="ZenSwitchWidth">64</sys:Double>
+    <sys:Double x:Key="ZenSwitchWidth">60</sys:Double>
     <sys:Double x:Key="ZenSwitchHeight">30</sys:Double>
     <Thickness x:Key="ZenSwitchThumbMargin">4</Thickness>
 
@@ -89,6 +89,7 @@
     <!-- 按钮式单选组 -->
     <sys:Double x:Key="ZenRadioItemMinHeight">36</sys:Double>
     <Thickness x:Key="ZenRadioItemPadding">14,0</Thickness>
-    <CornerRadius x:Key="ZenRadioItemCornerRadius">10</CornerRadius>
-    <CornerRadius x:Key="ZenRadioItemFocusVisualCornerRadius">13</CornerRadius>
+    <CornerRadius x:Key="ZenRadioItemCornerRadius">8</CornerRadius>
+    <CornerRadius x:Key="ZenRadioItemInnerCornerRadius">6</CornerRadius>
+    <CornerRadius x:Key="ZenRadioItemFocusVisualCornerRadius">11</CornerRadius>
 </ResourceDictionary>

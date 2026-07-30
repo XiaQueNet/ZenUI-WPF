@@ -20,6 +20,11 @@
     <SolidColorBrush x:Key="ZenListBoxItemSelectedInactiveBrush" Color="#F1F4FA" />
     <SolidColorBrush x:Key="ZenListBoxItemSelectedInactiveForegroundBrush" Color="#4E5969" />
 
+    <!-- 分段单选组 -->
+    <SolidColorBrush x:Key="ZenRadioSegmentedSelectedBrush" Color="#EEF2FF" />
+    <SolidColorBrush x:Key="ZenRadioSegmentedSelectedHoverBrush" Color="#E3E9FB" />
+    <SolidColorBrush x:Key="ZenRadioSegmentedSelectedForegroundBrush" Color="#3D63D2" />
+
     <!-- 右键菜单 -->
     <SolidColorBrush x:Key="ZenContextMenuItemHoverForegroundBrush" Color="#1D2129" />
 

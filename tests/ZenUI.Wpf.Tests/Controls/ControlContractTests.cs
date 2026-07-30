@@ -125,6 +125,9 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.IsNotNull(dictionary["ZenControlThumbBrush"]);
             Assert.IsNotNull(dictionary["ZenControlThumbBorderBrush"]);
             Assert.IsNotNull(dictionary["ZenListBoxItemSelectedBrush"]);
+            Assert.IsNotNull(dictionary["ZenRadioSegmentedSelectedBrush"]);
+            Assert.IsNotNull(dictionary["ZenRadioSegmentedSelectedHoverBrush"]);
+            Assert.IsNotNull(dictionary["ZenRadioSegmentedSelectedForegroundBrush"]);
             Assert.IsInstanceOfType<Style>(dictionary["ZenListBoxStyle"]);
             Assert.IsInstanceOfType<Style>(dictionary["ZenListBoxItemStyle"]);
             Assert.AreEqual(36d, dictionary["ZenInputControlMinHeight"]);
@@ -134,9 +137,9 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.AreEqual(new Thickness(-2), dictionary["ZenFocusVisualMargin"]);
             Assert.AreEqual(new Thickness(1), dictionary["ZenFocusVisualBorderThickness"]);
             Assert.AreEqual(36d, dictionary["ZenButtonMinHeight"]);
-            Assert.AreEqual(new Thickness(16, 8, 16, 8), dictionary["ZenButtonPadding"]);
-            Assert.AreEqual(new CornerRadius(10), dictionary["ZenButtonCornerRadius"]);
-            Assert.AreEqual(new CornerRadius(13), dictionary["ZenButtonFocusVisualCornerRadius"]);
+            Assert.AreEqual(new Thickness(10, 4, 10, 4), dictionary["ZenButtonPadding"]);
+            Assert.AreEqual(new CornerRadius(8), dictionary["ZenButtonCornerRadius"]);
+            Assert.AreEqual(new CornerRadius(11), dictionary["ZenButtonFocusVisualCornerRadius"]);
             Assert.AreEqual(new Thickness(4), dictionary["ZenListBoxPadding"]);
             Assert.AreEqual(new CornerRadius(8), dictionary["ZenListBoxCornerRadius"]);
             Assert.AreEqual(new Thickness(12, 9, 12, 9), dictionary["ZenListBoxItemPadding"]);
@@ -164,9 +167,14 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.AreEqual(376d, dictionary["ZenCalendarPopupHeight"]);
             Assert.AreEqual(new Thickness(12, 16, 12, 16), dictionary["ZenCalendarButtonPadding"]);
             Assert.AreEqual(40d, dictionary["ZenCalendarNavigationButtonSize"]);
-            Assert.AreEqual(64d, dictionary["ZenSwitchWidth"]);
+            Assert.AreEqual(60d, dictionary["ZenSwitchWidth"]);
             Assert.AreEqual(30d, dictionary["ZenSwitchHeight"]);
             Assert.AreEqual(new Thickness(4), dictionary["ZenSwitchThumbMargin"]);
+            Assert.AreEqual(36d, dictionary["ZenRadioItemMinHeight"]);
+            Assert.AreEqual(new Thickness(14, 0, 14, 0), dictionary["ZenRadioItemPadding"]);
+            Assert.AreEqual(new CornerRadius(8), dictionary["ZenRadioItemCornerRadius"]);
+            Assert.AreEqual(new CornerRadius(6), dictionary["ZenRadioItemInnerCornerRadius"]);
+            Assert.AreEqual(new CornerRadius(11), dictionary["ZenRadioItemFocusVisualCornerRadius"]);
             Assert.AreEqual(18d, dictionary["ZenSliderThumbSize"]);
             Assert.AreEqual(4d, dictionary["ZenSliderTrackThickness"]);
             Assert.AreEqual(24d, dictionary["ZenSliderCrossAxisMinSize"]);

@@ -98,7 +98,7 @@ namespace ZenUI.Wpf.Tests.Controls
                 Assert.AreEqual(328d, calendar.Width);
                 Assert.AreEqual(348d, calendar.Height);
                 Assert.AreEqual(
-                    new Thickness(12, 6, 12, 6),
+                    new Thickness(8, 3, 8, 3),
                     GetCalendarHeaderButton(calendar).Padding);
 
                 ZenDensityManager.ApplyDensity(window.Resources, ZenDensity.Comfortable);
@@ -106,7 +106,7 @@ namespace ZenUI.Wpf.Tests.Controls
                 Assert.AreEqual(412d, calendar.Width);
                 Assert.AreEqual(416d, calendar.Height);
                 Assert.AreEqual(
-                    new Thickness(18, 10, 18, 10),
+                    new Thickness(12, 6, 12, 6),
                     GetCalendarHeaderButton(calendar).Padding);
             }
             finally

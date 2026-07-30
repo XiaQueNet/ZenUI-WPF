@@ -75,10 +75,10 @@ namespace ZenUI.Wpf.Tests.Controls
                 Assert.IsNotNull(sliderTrack.DecreaseRepeatButton);
                 Assert.IsNotNull(switchThumb);
                 Assert.AreEqual(36d, textBox.MinHeight);
-                Assert.AreEqual(new Thickness(16, 8, 16, 8), button.Padding);
+                Assert.AreEqual(new Thickness(10, 4, 10, 4), button.Padding);
                 Assert.AreEqual(new Thickness(12, 9, 12, 9), item.Padding);
                 Assert.AreEqual(12d, scrollBar.Width);
-                Assert.AreEqual(64d, @switch.Width);
+                Assert.AreEqual(60d, @switch.Width);
                 Assert.AreEqual(30d, @switch.Height);
                 Assert.AreEqual(new Thickness(4), switchThumb.Margin);
                 Assert.AreEqual(24d, slider.MinHeight);
@@ -92,10 +92,10 @@ namespace ZenUI.Wpf.Tests.Controls
                 window.UpdateLayout();
 
                 Assert.AreEqual(32d, textBox.MinHeight);
-                Assert.AreEqual(new Thickness(12, 6, 12, 6), button.Padding);
+                Assert.AreEqual(new Thickness(8, 3, 8, 3), button.Padding);
                 Assert.AreEqual(new Thickness(10, 6, 10, 6), item.Padding);
                 Assert.AreEqual(10d, scrollBar.Width);
-                Assert.AreEqual(56d, @switch.Width);
+                Assert.AreEqual(52d, @switch.Width);
                 Assert.AreEqual(26d, @switch.Height);
                 Assert.AreEqual(new Thickness(3), switchThumb.Margin);
                 Assert.AreEqual(20d, slider.MinHeight);
@@ -109,10 +109,10 @@ namespace ZenUI.Wpf.Tests.Controls
                 window.UpdateLayout();
 
                 Assert.AreEqual(40d, textBox.MinHeight);
-                Assert.AreEqual(new Thickness(18, 10, 18, 10), button.Padding);
+                Assert.AreEqual(new Thickness(12, 6, 12, 6), button.Padding);
                 Assert.AreEqual(new Thickness(14, 11, 14, 11), item.Padding);
                 Assert.AreEqual(14d, scrollBar.Width);
-                Assert.AreEqual(72d, @switch.Width);
+                Assert.AreEqual(68d, @switch.Width);
                 Assert.AreEqual(34d, @switch.Height);
                 Assert.AreEqual(new Thickness(4), switchThumb.Margin);
                 Assert.AreEqual(28d, slider.MinHeight);

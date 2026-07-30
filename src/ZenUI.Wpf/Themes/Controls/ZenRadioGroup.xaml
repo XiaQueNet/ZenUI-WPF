@@ -184,7 +184,7 @@
                         x:Name="ItemBorder"
                         Padding="{TemplateBinding Padding}"
                         Background="{TemplateBinding Background}"
-                        CornerRadius="7"
+                        CornerRadius="{DynamicResource ZenRadioItemInnerCornerRadius}"
                         SnapsToDevicePixels="True">
                         <ContentPresenter
                             HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
@@ -200,10 +200,20 @@
                             <Setter
                                 TargetName="ItemBorder"
                                 Property="Background"
-                                Value="{Binding AccentBrush, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenRadioGroup}}}" />
-                            <Setter Property="Foreground" Value="{DynamicResource ZenOnAccentBrush}" />
+                                Value="{DynamicResource ZenRadioSegmentedSelectedBrush}" />
+                            <Setter Property="Foreground" Value="{DynamicResource ZenRadioSegmentedSelectedForegroundBrush}" />
                             <Setter Property="FontWeight" Value="SemiBold" />
                         </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsSelected" Value="True" />
+                                <Condition Property="IsMouseOver" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter
+                                TargetName="ItemBorder"
+                                Property="Background"
+                                Value="{DynamicResource ZenRadioSegmentedSelectedHoverBrush}" />
+                        </MultiTrigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Opacity" Value="{DynamicResource ZenDisabledItemOpacity}" />
                             <Setter Property="Cursor" Value="Arrow" />

@@ -37,7 +37,7 @@
     <Thickness x:Key="ZenCalendarButtonPadding">14,18</Thickness>
     <sys:Double x:Key="ZenCalendarNavigationButtonSize">44</sys:Double>
 
-    <sys:Double x:Key="ZenSwitchWidth">72</sys:Double>
+    <sys:Double x:Key="ZenSwitchWidth">68</sys:Double>
     <sys:Double x:Key="ZenSwitchHeight">34</sys:Double>
     <Thickness x:Key="ZenSwitchThumbMargin">4</Thickness>
 
