@@ -30,6 +30,7 @@ namespace ZenUI.Wpf.Tests.Controls
         public void DensitySwitchUpdatesRealizedControlMetrics()
         {
             var textBox = new ZenTextBox();
+            var numberBox = new ZenNumberBox();
             var button = new ZenButton { Content = "Action" };
             var listBox = new ZenListBox { Height = 100 };
             listBox.Items.Add("Item");
@@ -47,6 +48,7 @@ namespace ZenUI.Wpf.Tests.Controls
 
             var panel = new StackPanel();
             panel.Children.Add(textBox);
+            panel.Children.Add(numberBox);
             panel.Children.Add(button);
             panel.Children.Add(listBox);
             panel.Children.Add(scrollBar);
@@ -79,6 +81,7 @@ namespace ZenUI.Wpf.Tests.Controls
                 Assert.IsNotNull(sliderTrack.DecreaseRepeatButton);
                 Assert.IsNotNull(switchThumb);
                 Assert.AreEqual(36d, textBox.MinHeight);
+                Assert.AreEqual(34d, numberBox.SpinButtonWidth);
                 Assert.AreEqual(new Thickness(10, 4, 10, 4), button.Padding);
                 Assert.AreEqual(new Thickness(12, 9, 12, 9), item.Padding);
                 Assert.AreEqual(12d, scrollBar.Width);
@@ -98,6 +101,7 @@ namespace ZenUI.Wpf.Tests.Controls
                 window.UpdateLayout();
 
                 Assert.AreEqual(32d, textBox.MinHeight);
+                Assert.AreEqual(32d, numberBox.SpinButtonWidth);
                 Assert.AreEqual(new Thickness(8, 3, 8, 3), button.Padding);
                 Assert.AreEqual(new Thickness(10, 6, 10, 6), item.Padding);
                 Assert.AreEqual(10d, scrollBar.Width);
@@ -117,6 +121,7 @@ namespace ZenUI.Wpf.Tests.Controls
                 window.UpdateLayout();
 
                 Assert.AreEqual(40d, textBox.MinHeight);
+                Assert.AreEqual(40d, numberBox.SpinButtonWidth);
                 Assert.AreEqual(new Thickness(12, 6, 12, 6), button.Padding);
                 Assert.AreEqual(new Thickness(14, 11, 14, 11), item.Padding);
                 Assert.AreEqual(14d, scrollBar.Width);
@@ -210,6 +215,7 @@ namespace ZenUI.Wpf.Tests.Controls
                 Assert.AreEqual(new Thickness(14, 0, 14, 0), cell.Padding);
                 Assert.AreEqual(368d, popupContainer.ActualWidth);
                 Assert.AreEqual(376d, popupContainer.ActualHeight);
+                Assert.AreEqual(new Thickness(8), calendarItem.Margin);
                 Assert.AreEqual(16d, calendar.FontSize);
                 Assert.IsTrue(double.IsNaN(dayButton.Width));
                 Assert.IsTrue(double.IsNaN(dayButton.Height));
@@ -229,6 +235,7 @@ namespace ZenUI.Wpf.Tests.Controls
                 Assert.AreEqual(new Thickness(10, 0, 10, 0), cell.Padding);
                 Assert.AreEqual(328d, popupContainer.ActualWidth);
                 Assert.AreEqual(348d, popupContainer.ActualHeight);
+                Assert.AreEqual(new Thickness(6), calendarItem.Margin);
                 Assert.IsTrue(double.IsNaN(dayButton.Width));
                 Assert.IsTrue(double.IsNaN(dayButton.Height));
                 Assert.AreEqual(new Thickness(10, 13, 10, 13), monthButton.Padding);
@@ -245,6 +252,7 @@ namespace ZenUI.Wpf.Tests.Controls
                 Assert.AreEqual(new Thickness(18, 0, 18, 0), cell.Padding);
                 Assert.AreEqual(412d, popupContainer.ActualWidth);
                 Assert.AreEqual(416d, popupContainer.ActualHeight);
+                Assert.AreEqual(new Thickness(10), calendarItem.Margin);
                 Assert.IsTrue(double.IsNaN(dayButton.Width));
                 Assert.IsTrue(double.IsNaN(dayButton.Height));
                 Assert.AreEqual(new Thickness(14, 18, 14, 18), monthButton.Padding);

@@ -72,7 +72,7 @@
                             <Setter Property="Foreground" Value="{DynamicResource ZenPrimaryBrush}" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Opacity" Value="0.35" />
+                            <Setter Property="Opacity" Value="{DynamicResource ZenDisabledAuxiliaryActionOpacity}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
@@ -154,7 +154,7 @@
                             <Setter Property="Opacity" Value="1" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
-                            <Setter Property="Opacity" Value="0.3" />
+                            <Setter Property="Opacity" Value="{DynamicResource ZenDisabledAuxiliaryActionOpacity}" />
                         </Trigger>
                         <Trigger Property="IsKeyboardFocused" Value="True">
                             <Setter TargetName="DayBorder" Property="BorderBrush" Value="{DynamicResource ZenFocusBrush}" />
@@ -190,7 +190,7 @@
                             <Setter TargetName="MonthBorder" Property="Background" Value="{DynamicResource ZenSurfaceHoverBrush}" />
                         </Trigger>
                         <Trigger Property="IsInactive" Value="True">
-                            <Setter Property="Opacity" Value="0.35" />
+                            <Setter Property="Opacity" Value="{DynamicResource ZenDisabledAuxiliaryActionOpacity}" />
                         </Trigger>
                         <Trigger Property="IsKeyboardFocused" Value="True">
                             <Setter TargetName="MonthBorder" Property="Background" Value="{DynamicResource ZenInfoLightBrush}" />
@@ -262,7 +262,7 @@
                             Height="1"
                             Margin="0,8"
                             VerticalAlignment="Bottom"
-                            Background="{DynamicResource ZenBorderBrush}"
+                            Background="{DynamicResource ZenDividerBrush}"
                             IsHitTestVisible="False"
                             SnapsToDevicePixels="True" />
                         <Grid x:Name="PART_MonthView" Grid.Row="2">
@@ -338,7 +338,7 @@
                         CornerRadius="{Binding Path=(zen:ZenCalendar.CornerRadius), RelativeSource={RelativeSource TemplatedParent}}">
                         <CalendarItem
                             x:Name="PART_CalendarItem"
-                            Margin="8"
+                            Margin="{DynamicResource ZenCalendarContentMargin}"
                             Background="{TemplateBinding Background}"
                             BorderThickness="0"
                             Style="{TemplateBinding CalendarItemStyle}"

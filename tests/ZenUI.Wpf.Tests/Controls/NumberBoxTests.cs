@@ -10,6 +10,7 @@ using System.Windows.Shapes;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
 using ZenUI.Wpf.Controls;
+using ZenUI.Wpf.Theming;
 
 namespace ZenUI.Wpf.Tests.Controls
 {
@@ -153,6 +154,49 @@ namespace ZenUI.Wpf.Tests.Controls
         public void InvalidStepIsRejected()
         {
             Assert.ThrowsExactly<ArgumentException>(() => new ZenNumberBox { Step = 0m });
+        }
+
+        [TestMethod]
+        public void DensityAndDisabledStateKeepSpinButtonsBalanced()
+        {
+            var numberBox = new ZenNumberBox();
+            var window = CreateWindow(numberBox);
+            window.Resources.MergedDictionaries.Add(new ResourceDictionary
+            {
+                Source = new Uri("/ZenUI.Wpf;component/Themes/Generic.xaml", UriKind.Relative)
+            });
+
+            try
+            {
+                window.Show();
+                window.UpdateLayout();
+
+                var increase = numberBox.Template.FindName("PART_IncreaseButton", numberBox) as RepeatButton;
+                Assert.IsNotNull(increase);
+                Assert.AreEqual(34d, numberBox.SpinButtonWidth);
+
+                ZenDensityManager.ApplyDensity(window.Resources, ZenDensity.Compact);
+                window.UpdateLayout();
+                Assert.AreEqual(32d, numberBox.SpinButtonWidth);
+
+                ZenDensityManager.ApplyDensity(window.Resources, ZenDensity.Comfortable);
+                window.UpdateLayout();
+                Assert.AreEqual(40d, numberBox.SpinButtonWidth);
+
+                numberBox.IsEnabled = false;
+                window.UpdateLayout();
+                Assert.AreEqual(0.6d, numberBox.Opacity);
+                Assert.AreEqual(1d, increase.Opacity);
+
+                ZenThemeManager.ApplyTheme(window.Resources, ZenTheme.HighContrast, false);
+                window.UpdateLayout();
+                Assert.AreEqual(1d, numberBox.Opacity);
+                Assert.AreEqual(1d, increase.Opacity);
+            }
+            finally
+            {
+                window.Close();
+            }
         }
 
         [TestMethod]

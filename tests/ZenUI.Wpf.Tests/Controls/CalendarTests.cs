@@ -54,7 +54,7 @@ namespace ZenUI.Wpf.Tests.Controls
                 Assert.AreEqual(1d, headerDivider.Height);
                 Assert.AreEqual(1, Grid.GetRow(headerDivider));
                 Assert.AreEqual(new Thickness(0, 8, 0, 8), headerDivider.Margin);
-                Assert.AreSame(window.Resources["ZenBorderBrush"], headerDivider.Background);
+                Assert.AreSame(window.Resources["ZenDividerBrush"], headerDivider.Background);
                 var headerPanel =
                     calendarItem.Template.FindName("HeaderPanel", calendarItem) as Grid;
                 Assert.IsNotNull(headerPanel);
@@ -97,6 +97,7 @@ namespace ZenUI.Wpf.Tests.Controls
                 window.UpdateLayout();
                 Assert.AreEqual(328d, calendar.Width);
                 Assert.AreEqual(348d, calendar.Height);
+                Assert.AreEqual(new Thickness(6), GetCalendarItem(calendar).Margin);
                 Assert.AreEqual(
                     new Thickness(8, 3, 8, 3),
                     GetCalendarHeaderButton(calendar).Padding);
@@ -105,6 +106,7 @@ namespace ZenUI.Wpf.Tests.Controls
                 window.UpdateLayout();
                 Assert.AreEqual(412d, calendar.Width);
                 Assert.AreEqual(416d, calendar.Height);
+                Assert.AreEqual(new Thickness(10), GetCalendarItem(calendar).Margin);
                 Assert.AreEqual(
                     new Thickness(12, 6, 12, 6),
                     GetCalendarHeaderButton(calendar).Padding);
@@ -142,15 +144,21 @@ namespace ZenUI.Wpf.Tests.Controls
 
         private static Button GetCalendarHeaderButton(Calendar calendar)
         {
-            calendar.ApplyTemplate();
-            var calendarItem =
-                calendar.Template.FindName("PART_CalendarItem", calendar) as CalendarItem;
-            Assert.IsNotNull(calendarItem);
+            var calendarItem = GetCalendarItem(calendar);
             calendarItem.ApplyTemplate();
             var headerButton =
                 calendarItem.Template.FindName("PART_HeaderButton", calendarItem) as Button;
             Assert.IsNotNull(headerButton);
             return headerButton;
+        }
+
+        private static CalendarItem GetCalendarItem(Calendar calendar)
+        {
+            calendar.ApplyTemplate();
+            var calendarItem =
+                calendar.Template.FindName("PART_CalendarItem", calendar) as CalendarItem;
+            Assert.IsNotNull(calendarItem);
+            return calendarItem;
         }
     }
 }

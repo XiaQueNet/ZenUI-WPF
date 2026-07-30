@@ -40,6 +40,9 @@
                             <Setter Property="Cursor" Value="Arrow" />
                             <Setter Property="Opacity" Value="{DynamicResource ZenDisabledAuxiliaryActionOpacity}" />
                         </Trigger>
+                        <DataTrigger Binding="{Binding IsEnabled, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenNumberBox}}}" Value="False">
+                            <Setter Property="Opacity" Value="1" />
+                        </DataTrigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
             </Setter.Value>
@@ -63,6 +66,7 @@
         <Setter Property="FontSize" Value="{DynamicResource ZenFontSizeBody}" />
         <Setter Property="MinWidth" Value="112" />
         <Setter Property="MinHeight" Value="{DynamicResource ZenInputControlMinHeight}" />
+        <Setter Property="SpinButtonWidth" Value="{DynamicResource ZenNumberBoxSpinButtonWidth}" />
         <Setter Property="Background" Value="{DynamicResource ZenSurfaceBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource ZenBorderBrush}" />
         <Setter Property="BorderThickness" Value="{DynamicResource ZenControlBorderThickness}" />
@@ -107,7 +111,7 @@
                                         </Path>
                                     </Grid>
                                 </RepeatButton>
-                                <Border Grid.Column="1" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1,0">
+                                <Border Grid.Column="1" BorderBrush="{DynamicResource ZenDividerBrush}" BorderThickness="1,0">
                                     <TextBox
                                         x:Name="PART_TextBox"
                                         IsReadOnly="{TemplateBinding IsReadOnly}"
@@ -143,7 +147,7 @@
                                     x:Name="PART_VerticalTextBox"
                                     IsReadOnly="{TemplateBinding IsReadOnly}"
                                     Style="{StaticResource ZenNumberBoxTextBoxStyle}" />
-                                <Border Grid.Column="1" BorderBrush="{TemplateBinding BorderBrush}" BorderThickness="1,0,0,0">
+                                <Border Grid.Column="1" BorderBrush="{DynamicResource ZenDividerBrush}" BorderThickness="1,0,0,0">
                                     <Grid>
                                         <Grid.RowDefinitions>
                                             <RowDefinition />

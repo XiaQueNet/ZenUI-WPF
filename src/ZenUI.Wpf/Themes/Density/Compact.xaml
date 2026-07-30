@@ -12,6 +12,8 @@
     <Thickness x:Key="ZenListBoxItemPadding">10,6</Thickness>
     <Thickness x:Key="ZenListBoxItemMargin">0</Thickness>
 
+    <sys:Double x:Key="ZenNumberBoxSpinButtonWidth">32</sys:Double>
+
     <sys:Double x:Key="ZenScrollBarThickness">10</sys:Double>
     <sys:Double x:Key="ZenScrollBarTrackThickness">4</sys:Double>
     <sys:Double x:Key="ZenScrollBarThumbMinLength">24</sys:Double>
@@ -41,6 +43,7 @@
 
     <sys:Double x:Key="ZenCalendarPopupWidth">328</sys:Double>
     <sys:Double x:Key="ZenCalendarPopupHeight">348</sys:Double>
+    <Thickness x:Key="ZenCalendarContentMargin">6</Thickness>
     <Thickness x:Key="ZenCalendarButtonPadding">10,13</Thickness>
     <sys:Double x:Key="ZenCalendarNavigationButtonSize">36</sys:Double>
 

@@ -156,6 +156,7 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.AreEqual(new Thickness(5, 0, 1, 0), dictionary["ZenVerticalScrollBarThumbMargin"]);
             Assert.AreEqual(new Thickness(0, 5, 0, 1), dictionary["ZenHorizontalScrollBarThumbMargin"]);
             Assert.AreEqual(new CornerRadius(3), dictionary["ZenScrollBarCornerRadius"]);
+            Assert.AreEqual(34d, dictionary["ZenNumberBoxSpinButtonWidth"]);
             Assert.AreEqual(new Thickness(0, 4, 0, 0), dictionary["ZenComboBoxPopupMargin"]);
             Assert.AreEqual(new Thickness(4), dictionary["ZenComboBoxPopupPadding"]);
             Assert.AreEqual(new CornerRadius(6), dictionary["ZenComboBoxPopupCornerRadius"]);
@@ -174,6 +175,7 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.AreEqual(new Thickness(2), dictionary["ZenDataGridCellValidationBorderThickness"]);
             Assert.AreEqual(368d, dictionary["ZenCalendarPopupWidth"]);
             Assert.AreEqual(376d, dictionary["ZenCalendarPopupHeight"]);
+            Assert.AreEqual(new Thickness(8), dictionary["ZenCalendarContentMargin"]);
             Assert.AreEqual(new Thickness(12, 16, 12, 16), dictionary["ZenCalendarButtonPadding"]);
             Assert.AreEqual(40d, dictionary["ZenCalendarNavigationButtonSize"]);
             Assert.AreEqual(60d, dictionary["ZenSwitchWidth"]);
