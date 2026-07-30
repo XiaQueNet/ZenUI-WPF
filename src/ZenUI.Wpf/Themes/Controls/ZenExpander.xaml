@@ -143,9 +143,6 @@
                         <Trigger Property="ExpandDirection" Value="Right">
                             <Setter TargetName="HeaderSite" Property="DockPanel.Dock" Value="Left" />
                         </Trigger>
-                        <Trigger Property="IsMouseOver" Value="True">
-                            <Setter TargetName="OuterBorder" Property="BorderBrush" Value="{DynamicResource ZenBorderHoverBrush}" />
-                        </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Opacity" Value="{DynamicResource ZenDisabledContainerOpacity}" />
                         </Trigger>

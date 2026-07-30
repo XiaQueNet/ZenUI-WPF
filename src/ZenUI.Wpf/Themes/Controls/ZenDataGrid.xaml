@@ -62,14 +62,14 @@
     </Style>
 
     <Style x:Key="ZenDataGridColumnHeaderStyle" TargetType="{x:Type DataGridColumnHeader}">
-        <Setter Property="Padding" Value="14,0" />
+        <Setter Property="Padding" Value="{DynamicResource ZenDataGridCellPadding}" />
         <Setter Property="Background" Value="{Binding ColumnHeaderBackground, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenDataGrid}}}" />
         <Setter Property="Foreground" Value="{Binding ColumnHeaderForeground, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenDataGrid}}}" />
         <Setter Property="FontWeight" Value="{DynamicResource ZenFontWeightSemibold}" />
         <Setter Property="HorizontalContentAlignment" Value="{Binding Path=Column.(zen:ZenDataGridTextColumn.HeaderHorizontalContentAlignment), RelativeSource={RelativeSource Self}}" />
         <Setter Property="VerticalContentAlignment" Value="{Binding Path=Column.(zen:ZenDataGridTextColumn.HeaderVerticalContentAlignment), RelativeSource={RelativeSource Self}}" />
         <Setter Property="BorderBrush" Value="{DynamicResource ZenDividerBrush}" />
-        <Setter Property="BorderThickness" Value="0,0,1,1" />
+        <Setter Property="BorderThickness" Value="0,0,0,1" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type DataGridColumnHeader}">
@@ -133,7 +133,7 @@
         <Setter Property="Padding" Value="{DynamicResource ZenDataGridCellPadding}" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="Foreground" Value="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenDataGrid}}}" />
-        <Setter Property="BorderBrush" Value="{DynamicResource ZenBorderBrush}" />
+        <Setter Property="BorderBrush" Value="{DynamicResource ZenDividerBrush}" />
         <Setter Property="BorderThickness" Value="0,0,0,1" />
         <Setter Property="HorizontalContentAlignment" Value="{Binding Path=Column.(zen:ZenDataGridTextColumn.CellHorizontalContentAlignment), RelativeSource={RelativeSource Self}}" />
         <Setter Property="VerticalContentAlignment" Value="{Binding Path=Column.(zen:ZenDataGridTextColumn.CellVerticalContentAlignment), RelativeSource={RelativeSource Self}}" />
@@ -258,11 +258,6 @@
         <Setter Property="AutoGenerateColumns" Value="True" />
         <Setter Property="CanUserAddRows" Value="False" />
         <Setter Property="CanUserDeleteRows" Value="False" />
-        <Setter Property="SelectionMode" Value="Single" />
-        <Setter Property="SelectionUnit" Value="FullRow" />
-        <Setter Property="RowHeaderWidth" Value="0" />
-        <Setter Property="HorizontalScrollBarVisibility" Value="Auto" />
-        <Setter Property="VerticalScrollBarVisibility" Value="Auto" />
         <Setter Property="ScrollViewer.CanContentScroll" Value="True" />
         <Setter Property="EnableRowVirtualization" Value="True" />
         <Setter Property="EnableColumnVirtualization" Value="True" />
@@ -306,7 +301,7 @@
                                                 Height="{Binding ColumnHeaderHeight, RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
                                                 Background="{Binding ColumnHeaderBackground, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenDataGrid}}}"
                                                 BorderBrush="{DynamicResource ZenDividerBrush}"
-                                                BorderThickness="0,0,1,1"
+                                                BorderThickness="0,0,0,1"
                                                 Command="{x:Static DataGrid.SelectAllCommand}"
                                                 CommandTarget="{Binding RelativeSource={RelativeSource AncestorType={x:Type DataGrid}}}"
                                                 Focusable="False"
