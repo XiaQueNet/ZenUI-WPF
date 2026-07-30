@@ -6,7 +6,7 @@
     <sys:Double x:Key="ZenInputControlMinHeight">40</sys:Double>
     <Thickness x:Key="ZenInputControlPadding">10,6</Thickness>
 
-    <Thickness x:Key="ZenButtonPadding">18,10</Thickness>
+    <Thickness x:Key="ZenButtonPadding">12,6</Thickness>
     <Thickness x:Key="ZenListBoxPadding">6</Thickness>
     <Thickness x:Key="ZenListBoxItemPadding">14,11</Thickness>
     <Thickness x:Key="ZenListBoxItemMargin">0,2</Thickness>
