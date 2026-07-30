@@ -25,7 +25,7 @@
                 IsTabStop="False"
                 ItemsSource="{Binding Rows, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}">
                 <DataGrid.Columns>
-                    <DataGridTemplateColumn Width="1.55*" Header="属性名">
+                    <DataGridTemplateColumn Width="1.8*" Header="属性名">
                         <DataGridTemplateColumn.CellTemplate>
                             <DataTemplate>
                                 <zen:ZenButton
@@ -34,15 +34,18 @@
                                     Appearance="Text"
                                     AutomationProperties.Name="{Binding Name, StringFormat=复制属性 {0}}"
                                     Click="CopyPropertyName_OnClick"
-                                    Content="{Binding Name}"
-                                    FontFamily="Consolas"
                                     ToolTip="单击复制属性名"
-                                    Variant="Neutral" />
+                                    Variant="Neutral">
+                                    <TextBlock
+                                        FontFamily="Consolas"
+                                        Text="{Binding Name}"
+                                        TextWrapping="Wrap" />
+                                </zen:ZenButton>
                             </DataTemplate>
                         </DataGridTemplateColumn.CellTemplate>
                     </DataGridTemplateColumn>
                     <DataGridTextColumn
-                        Width="2.5*"
+                        Width="2.2*"
                         Binding="{Binding Description}"
                         Header="说明">
                         <DataGridTextColumn.ElementStyle>
@@ -51,41 +54,59 @@
                             </Style>
                         </DataGridTextColumn.ElementStyle>
                     </DataGridTextColumn>
-                    <DataGridTextColumn
-                        Width="0.85*"
-                        Binding="{Binding TypeName}"
-                        Header="类型">
-                        <DataGridTextColumn.ElementStyle>
-                            <Style TargetType="{x:Type TextBlock}">
-                                <Setter Property="Foreground" Value="{DynamicResource ZenTextSecondaryBrush}" />
-                                <Setter Property="TextWrapping" Value="Wrap" />
-                            </Style>
-                        </DataGridTextColumn.ElementStyle>
-                    </DataGridTextColumn>
-                    <DataGridTextColumn
-                        Width="1*"
-                        Binding="{Binding DefaultValue}"
-                        Header="属性默认值">
-                        <DataGridTextColumn.ElementStyle>
-                            <Style TargetType="{x:Type TextBlock}">
-                                <Setter Property="FontFamily" Value="Consolas" />
-                                <Setter Property="Foreground" Value="{DynamicResource ZenTextSecondaryBrush}" />
-                                <Setter Property="TextWrapping" Value="Wrap" />
-                            </Style>
-                        </DataGridTextColumn.ElementStyle>
-                    </DataGridTextColumn>
-                    <DataGridTextColumn
-                        Width="1.1*"
-                        Binding="{Binding IntroducedVersion}"
-                        Header="引入版本">
-                        <DataGridTextColumn.ElementStyle>
-                            <Style TargetType="{x:Type TextBlock}">
-                                <Setter Property="FontFamily" Value="Consolas" />
-                                <Setter Property="Foreground" Value="{DynamicResource ZenTextSecondaryBrush}" />
-                                <Setter Property="TextWrapping" Value="Wrap" />
-                            </Style>
-                        </DataGridTextColumn.ElementStyle>
-                    </DataGridTextColumn>
+                    <DataGridTemplateColumn Width="2*" Header="属性信息">
+                        <DataGridTemplateColumn.CellTemplate>
+                            <DataTemplate>
+                                <StackPanel>
+                                    <Grid Margin="0,0,0,3">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="44" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock
+                                            Foreground="{DynamicResource ZenTextPlaceholderBrush}"
+                                            Text="类型" />
+                                        <TextBlock
+                                            Grid.Column="1"
+                                            FontFamily="Consolas"
+                                            Foreground="{DynamicResource ZenTextSecondaryBrush}"
+                                            Text="{Binding TypeName}"
+                                            TextWrapping="Wrap" />
+                                    </Grid>
+                                    <Grid Margin="0,0,0,3">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="44" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock
+                                            Foreground="{DynamicResource ZenTextPlaceholderBrush}"
+                                            Text="默认" />
+                                        <TextBlock
+                                            Grid.Column="1"
+                                            FontFamily="Consolas"
+                                            Foreground="{DynamicResource ZenTextSecondaryBrush}"
+                                            Text="{Binding DefaultValue}"
+                                            TextWrapping="Wrap" />
+                                    </Grid>
+                                    <Grid>
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="44" />
+                                            <ColumnDefinition Width="*" />
+                                        </Grid.ColumnDefinitions>
+                                        <TextBlock
+                                            Foreground="{DynamicResource ZenTextPlaceholderBrush}"
+                                            Text="版本" />
+                                        <TextBlock
+                                            Grid.Column="1"
+                                            FontFamily="Consolas"
+                                            Foreground="{DynamicResource ZenTextSecondaryBrush}"
+                                            Text="{Binding IntroducedVersion}"
+                                            TextWrapping="Wrap" />
+                                    </Grid>
+                                </StackPanel>
+                            </DataTemplate>
+                        </DataGridTemplateColumn.CellTemplate>
+                    </DataGridTemplateColumn>
                 </DataGrid.Columns>
             </zen:ZenDataGrid>
 
