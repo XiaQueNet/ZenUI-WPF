@@ -1,7 +1,7 @@
 namespace ZenUI.Wpf.Controls
 {
     /// <summary>
-    /// 指定 <see cref="ZenRadioGroup"/> 选项的视觉外观。
+    /// 指定 <see cref="ZenRadioGroup"/> 按钮选项的视觉外观。
     /// </summary>
     public enum RadioGroupAppearance
     {

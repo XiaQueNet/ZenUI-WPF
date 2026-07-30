@@ -102,7 +102,27 @@ namespace ZenUI.Wpf.Controls
                     FrameworkPropertyMetadataOptions.AffectsMeasure));
 
         /// <summary>
-        /// 获取或设置选项的视觉样式，可选描边样式或填充样式。
+        /// 获取或设置选项的显示模式。
+        /// </summary>
+        [Bindable(true)]
+        public RadioGroupDisplayMode DisplayMode
+        {
+            get { return (RadioGroupDisplayMode)GetValue(DisplayModeProperty); }
+            set { SetValue(DisplayModeProperty, value); }
+        }
+
+        /// <summary>
+        /// 标识 <see cref="DisplayMode"/> 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty DisplayModeProperty =
+            DependencyProperty.Register(
+                nameof(DisplayMode),
+                typeof(RadioGroupDisplayMode),
+                SelfType,
+                new FrameworkPropertyMetadata(RadioGroupDisplayMode.Button));
+
+        /// <summary>
+        /// 获取或设置按钮选项的视觉样式，可选描边样式或填充样式。
         /// </summary>
         [Bindable(true)]
         public RadioGroupAppearance Appearance

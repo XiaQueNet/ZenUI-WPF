@@ -17,6 +17,21 @@ namespace ZenUI.Wpf.Tests.Controls
     public class RadioGroupTests
     {
         [TestMethod]
+        public void RadioGroupSupportsDisplayModes()
+        {
+            var group = new ZenRadioGroup();
+
+            Assert.AreEqual(RadioGroupDisplayMode.Button, group.DisplayMode);
+
+            group.DisplayMode = RadioGroupDisplayMode.Segmented;
+
+            Assert.AreEqual(RadioGroupDisplayMode.Segmented, group.DisplayMode);
+            Assert.AreEqual(
+                RadioGroupDisplayMode.Segmented,
+                group.GetValue(ZenRadioGroup.DisplayModeProperty));
+        }
+
+        [TestMethod]
         public void RadioGroupGeneratesDedicatedContainersAndKeepsSingleSelection()
         {
             var group = new ZenRadioGroup
@@ -85,6 +100,15 @@ namespace ZenUI.Wpf.Tests.Controls
                     group).X;
                 var secondLeft = items[1].TranslatePoint(new Point(), group).X;
                 Assert.AreEqual(10d, secondLeft - firstRight, 0.1d);
+
+                group.DisplayMode = RadioGroupDisplayMode.Segmented;
+                window.UpdateLayout();
+
+                firstRight = items[0].TranslatePoint(
+                    new Point(items[0].ActualWidth, 0),
+                    group).X;
+                secondLeft = items[1].TranslatePoint(new Point(), group).X;
+                Assert.AreEqual(0d, secondLeft - firstRight, 0.1d);
             }
             finally
             {

@@ -54,6 +54,27 @@ namespace ZenUI.Wpf.Controls
                     FrameworkPropertyMetadataOptions.AffectsMeasure));
 
         /// <summary>
+        /// 获取或设置选项的显示模式。
+        /// </summary>
+        public RadioGroupDisplayMode DisplayMode
+        {
+            get { return (RadioGroupDisplayMode)GetValue(DisplayModeProperty); }
+            set { SetValue(DisplayModeProperty, value); }
+        }
+
+        /// <summary>
+        /// 标识 <see cref="DisplayMode"/> 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty DisplayModeProperty =
+            DependencyProperty.Register(
+                nameof(DisplayMode),
+                typeof(RadioGroupDisplayMode),
+                typeof(ZenRadioGroupPanel),
+                new FrameworkPropertyMetadata(
+                    RadioGroupDisplayMode.Button,
+                    FrameworkPropertyMetadataOptions.AffectsMeasure));
+
+        /// <summary>
         /// 获取或设置一个值，该值指示是否在排列方向上为子元素分配相同尺寸。
         /// </summary>
         public bool IsItemWidthUniform
@@ -86,7 +107,8 @@ namespace ZenUI.Wpf.Controls
             var horizontal = Orientation == Orientation.Horizontal;
             var availablePrimary = horizontal ? availableSize.Width : availableSize.Height;
             var availableCross = horizontal ? availableSize.Height : availableSize.Width;
-            var totalSpacing = Spacing * Math.Max(0, visibleCount - 1);
+            var spacing = GetEffectiveSpacing();
+            var totalSpacing = spacing * Math.Max(0, visibleCount - 1);
             var hasFinitePrimary = !double.IsInfinity(availablePrimary);
             var uniformPrimary = IsItemWidthUniform && hasFinitePrimary
                 ? Math.Max(0d, (availablePrimary - totalSpacing) / visibleCount)
@@ -149,7 +171,8 @@ namespace ZenUI.Wpf.Controls
             var horizontal = Orientation == Orientation.Horizontal;
             var finalPrimary = horizontal ? finalSize.Width : finalSize.Height;
             var finalCross = horizontal ? finalSize.Height : finalSize.Width;
-            var totalSpacing = Spacing * Math.Max(0, visibleCount - 1);
+            var spacing = GetEffectiveSpacing();
+            var totalSpacing = spacing * Math.Max(0, visibleCount - 1);
             var uniformPrimary = Math.Max(0d, (finalPrimary - totalSpacing) / visibleCount);
             var offset = 0d;
 
@@ -168,7 +191,7 @@ namespace ZenUI.Wpf.Controls
                     ? new Rect(offset, 0d, childPrimary, finalCross)
                     : new Rect(0d, offset, finalCross, childPrimary);
                 child.Arrange(rect);
-                offset += childPrimary + Spacing;
+                offset += childPrimary + spacing;
             }
 
             return finalSize;
@@ -186,6 +209,11 @@ namespace ZenUI.Wpf.Controls
             }
 
             return count;
+        }
+
+        private double GetEffectiveSpacing()
+        {
+            return DisplayMode == RadioGroupDisplayMode.Segmented ? 0d : Spacing;
         }
     }
 }

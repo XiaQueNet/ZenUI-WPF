@@ -28,9 +28,11 @@
 
             <Border Style="{StaticResource GalleryCardStyle}">
                 <StackPanel>
-                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="外观" />
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="显示模式" />
                     <Grid>
                         <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="32" />
                             <ColumnDefinition Width="*" />
                             <ColumnDefinition Width="32" />
                             <ColumnDefinition Width="*" />
@@ -39,8 +41,9 @@
                             <TextBlock
                                 Margin="0,0,0,10"
                                 Style="{StaticResource GallerySupportingTextStyle}"
-                                Text="Outlined" />
+                                Text="Radio" />
                             <zen:ZenRadioGroup
+                                DisplayMode="Radio"
                                 ItemsSource="{Binding ShortOptions, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
                                 SelectedIndex="0"
                                 Spacing="8" />
@@ -49,9 +52,20 @@
                             <TextBlock
                                 Margin="0,0,0,10"
                                 Style="{StaticResource GallerySupportingTextStyle}"
-                                Text="Filled" />
+                                Text="Button" />
                             <zen:ZenRadioGroup
-                                Appearance="Filled"
+                                DisplayMode="Button"
+                                ItemsSource="{Binding ShortOptions, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+                                SelectedIndex="1"
+                                Spacing="8" />
+                        </StackPanel>
+                        <StackPanel Grid.Column="4">
+                            <TextBlock
+                                Margin="0,0,0,10"
+                                Style="{StaticResource GallerySupportingTextStyle}"
+                                Text="Segmented" />
+                            <zen:ZenRadioGroup
+                                DisplayMode="Segmented"
                                 ItemsSource="{Binding ShortOptions, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
                                 SelectedIndex="1"
                                 Spacing="8" />

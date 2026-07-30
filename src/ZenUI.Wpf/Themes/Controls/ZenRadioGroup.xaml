@@ -16,7 +16,76 @@
     </Style>
 
     <Style
-        x:Key="ZenRadioItemStyle"
+        x:Key="ZenRadioItemRadioStyle"
+        TargetType="{x:Type zen:ZenRadioItem}">
+        <Setter Property="MinHeight" Value="{DynamicResource ZenRadioItemMinHeight}" />
+        <Setter Property="Padding" Value="4,0" />
+        <Setter Property="Foreground" Value="{DynamicResource ZenTextPrimaryBrush}" />
+        <Setter Property="HorizontalContentAlignment" Value="Left" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="FocusVisualStyle" Value="{StaticResource ZenRadioItemFocusVisualStyle}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type zen:ZenRadioItem}">
+                    <Border Padding="{TemplateBinding Padding}" Background="Transparent">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="Auto" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid
+                                Width="18"
+                                Height="18"
+                                VerticalAlignment="Center">
+                                <Ellipse
+                                    x:Name="Ring"
+                                    Fill="{DynamicResource ZenSurfaceBrush}"
+                                    Stroke="{DynamicResource ZenBorderBrush}"
+                                    StrokeThickness="1" />
+                                <Ellipse
+                                    x:Name="Dot"
+                                    Width="8"
+                                    Height="8"
+                                    Fill="{Binding AccentBrush, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenRadioGroup}}}"
+                                    Visibility="Collapsed" />
+                            </Grid>
+                            <ContentPresenter
+                                Grid.Column="1"
+                                Margin="8,0,0,0"
+                                HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                                VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                                ContentSource="Content"
+                                RecognizesAccessKey="True" />
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter
+                                TargetName="Ring"
+                                Property="Stroke"
+                                Value="{Binding AccentBrush, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenRadioGroup}}}" />
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter
+                                TargetName="Ring"
+                                Property="Stroke"
+                                Value="{Binding AccentBrush, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenRadioGroup}}}" />
+                            <Setter TargetName="Ring" Property="StrokeThickness" Value="2" />
+                            <Setter TargetName="Dot" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="{DynamicResource ZenDisabledItemOpacity}" />
+                            <Setter Property="Cursor" Value="Arrow" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style
+        x:Key="ZenRadioItemButtonStyle"
         TargetType="{x:Type zen:ZenRadioItem}">
         <Setter Property="MinHeight" Value="{DynamicResource ZenRadioItemMinHeight}" />
         <Setter Property="Padding" Value="{DynamicResource ZenRadioItemPadding}" />
@@ -96,7 +165,56 @@
             </Setter.Value>
         </Setter>
     </Style>
-    <Style BasedOn="{StaticResource ZenRadioItemStyle}" TargetType="{x:Type zen:ZenRadioItem}" />
+
+    <Style
+        x:Key="ZenRadioItemSegmentedStyle"
+        TargetType="{x:Type zen:ZenRadioItem}">
+        <Setter Property="MinHeight" Value="{DynamicResource ZenRadioItemMinHeight}" />
+        <Setter Property="Padding" Value="{DynamicResource ZenRadioItemPadding}" />
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{DynamicResource ZenTextPrimaryBrush}" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
+        <Setter Property="Cursor" Value="Hand" />
+        <Setter Property="FocusVisualStyle" Value="{StaticResource ZenRadioItemFocusVisualStyle}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type zen:ZenRadioItem}">
+                    <Border
+                        x:Name="ItemBorder"
+                        Padding="{TemplateBinding Padding}"
+                        Background="{TemplateBinding Background}"
+                        CornerRadius="7"
+                        SnapsToDevicePixels="True">
+                        <ContentPresenter
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
+                            ContentSource="Content"
+                            RecognizesAccessKey="True" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="ItemBorder" Property="Background" Value="{DynamicResource ZenSurfaceHoverBrush}" />
+                        </Trigger>
+                        <Trigger Property="IsSelected" Value="True">
+                            <Setter
+                                TargetName="ItemBorder"
+                                Property="Background"
+                                Value="{Binding AccentBrush, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenRadioGroup}}}" />
+                            <Setter Property="Foreground" Value="{DynamicResource ZenOnAccentBrush}" />
+                            <Setter Property="FontWeight" Value="SemiBold" />
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="{DynamicResource ZenDisabledItemOpacity}" />
+                            <Setter Property="Cursor" Value="Arrow" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style BasedOn="{StaticResource ZenRadioItemRadioStyle}" TargetType="{x:Type zen:ZenRadioItem}" />
 
     <Style
         x:Key="ZenRadioGroupStyle"
@@ -108,7 +226,7 @@
         <Setter Property="AccentBrush" Value="{DynamicResource ZenPrimaryBrush}" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Stretch" />
-        <Setter Property="ItemContainerStyle" Value="{StaticResource ZenRadioItemStyle}" />
+        <Setter Property="ItemContainerStyle" Value="{StaticResource ZenRadioItemButtonStyle}" />
         <Setter Property="IsSynchronizedWithCurrentItem" Value="False" />
         <Setter Property="ScrollViewer.HorizontalScrollBarVisibility" Value="Disabled" />
         <Setter Property="ScrollViewer.VerticalScrollBarVisibility" Value="Disabled" />
@@ -116,6 +234,7 @@
             <Setter.Value>
                 <ItemsPanelTemplate>
                     <zen:ZenRadioGroupPanel
+                        DisplayMode="{Binding DisplayMode, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenRadioGroup}}}"
                         IsItemWidthUniform="{Binding IsItemWidthUniform, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenRadioGroup}}}"
                         Orientation="{Binding Orientation, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenRadioGroup}}}"
                         Spacing="{Binding Spacing, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenRadioGroup}}}" />
@@ -126,6 +245,7 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type zen:ZenRadioGroup}">
                     <Border
+                        x:Name="GroupBorder"
                         Background="{TemplateBinding Background}"
                         BorderBrush="{TemplateBinding BorderBrush}"
                         BorderThickness="{TemplateBinding BorderThickness}"
@@ -141,6 +261,13 @@
                         </ScrollViewer>
                     </Border>
                     <ControlTemplate.Triggers>
+                        <Trigger Property="DisplayMode" Value="{x:Static zen:RadioGroupDisplayMode.Segmented}">
+                            <Setter TargetName="GroupBorder" Property="Background" Value="{DynamicResource ZenSurfaceMutedBrush}" />
+                            <Setter TargetName="GroupBorder" Property="BorderBrush" Value="{DynamicResource ZenBorderBrush}" />
+                            <Setter TargetName="GroupBorder" Property="BorderThickness" Value="{DynamicResource ZenControlBorderThickness}" />
+                            <Setter TargetName="GroupBorder" Property="CornerRadius" Value="{DynamicResource ZenRadioItemCornerRadius}" />
+                            <Setter TargetName="GroupBorder" Property="Padding" Value="2" />
+                        </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Opacity" Value="{DynamicResource ZenDisabledContainerOpacity}" />
                         </Trigger>
@@ -148,6 +275,14 @@
                 </ControlTemplate>
             </Setter.Value>
         </Setter>
+        <Style.Triggers>
+            <Trigger Property="DisplayMode" Value="{x:Static zen:RadioGroupDisplayMode.Radio}">
+                <Setter Property="ItemContainerStyle" Value="{StaticResource ZenRadioItemRadioStyle}" />
+            </Trigger>
+            <Trigger Property="DisplayMode" Value="{x:Static zen:RadioGroupDisplayMode.Segmented}">
+                <Setter Property="ItemContainerStyle" Value="{StaticResource ZenRadioItemSegmentedStyle}" />
+            </Trigger>
+        </Style.Triggers>
     </Style>
     <Style BasedOn="{StaticResource ZenRadioGroupStyle}" TargetType="{x:Type zen:ZenRadioGroup}" />
 </ResourceDictionary>
