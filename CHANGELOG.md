@@ -4,6 +4,8 @@
 
 ## Unreleased
 
+## [0.1.0-preview.6] - 2026-07-30
+
 ### Added
 
 - `ZenAlert` 增加 `IconSize` 属性，用于自定义提示图标尺寸。
@@ -121,7 +123,8 @@
 - Password 明文绑定默认关闭，并标记为过时兼容 API。
 - DataGrid 恢复行虚拟化、行头、行详情、全选、冻结列偏移和高级编辑契约。
 
-[Unreleased]: https://github.com/XiaQueNet/ZenUI-WPF/compare/v0.1.0-preview.5...HEAD
+[Unreleased]: https://github.com/XiaQueNet/ZenUI-WPF/compare/v0.1.0-preview.6...HEAD
+[0.1.0-preview.6]: https://github.com/XiaQueNet/ZenUI-WPF/compare/v0.1.0-preview.5...v0.1.0-preview.6
 [0.1.0-preview.5]: https://github.com/XiaQueNet/ZenUI-WPF/compare/v0.1.0-preview.4...v0.1.0-preview.5
 [0.1.0-preview.4]: https://github.com/XiaQueNet/ZenUI-WPF/compare/v0.1.0-preview.3...v0.1.0-preview.4
 [0.1.0-preview.3]: https://github.com/XiaQueNet/ZenUI-WPF/compare/v0.1.0-preview.2...v0.1.0-preview.3

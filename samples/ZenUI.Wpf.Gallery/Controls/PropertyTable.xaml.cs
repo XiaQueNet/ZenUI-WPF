@@ -119,7 +119,7 @@ namespace ZenUI.Wpf.Gallery.Controls
                 ["ZenDataGrid"] = "0.1.0-preview.1",
                 ["ZenDataGridTextColumn"] = "0.1.0-preview.5",
                 ["ZenDatePicker"] = "0.1.0-preview.2",
-                ["ZenTimePicker"] = "未发布",
+                ["ZenTimePicker"] = "0.1.0-preview.6",
                 ["ZenListBox"] = "0.1.0-preview.3",
                 ["ZenNumberBox"] = "0.1.0-preview.2",
                 ["ZenPasswordBox"] = "0.1.0-preview.2",
@@ -135,7 +135,7 @@ namespace ZenUI.Wpf.Gallery.Controls
                 ["ZenAlert.Severity"] = "0.1.0-preview.1",
                 ["ZenButton.CornerRadius"] = "0.1.0-preview.1",
                 ["ZenButton.Variant"] = "0.1.0-preview.1",
-                ["ZenCalendar.CornerRadius"] = "未发布",
+                ["ZenCalendar.CornerRadius"] = "0.1.0-preview.6",
                 ["ZenDataGrid.IsRowSelectionHighlightEnabled"] = "0.1.0-preview.3",
                 ["ZenDataGrid.IsCellFocusVisualEnabled"] = "0.1.0-preview.3",
                 ["ZenDataGrid.CellFocusVisualBorderThickness"] = "0.1.0-preview.3",
@@ -428,7 +428,7 @@ namespace ZenUI.Wpf.Gallery.Controls
 
             return ControlVersions.TryGetValue(controlType.Name, out var controlVersion)
                 ? controlVersion
-                : "未发布";
+                : "0.1.0-preview.6";
         }
 
         private static string FormatType(Type type)
