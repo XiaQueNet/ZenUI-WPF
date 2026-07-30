@@ -41,12 +41,12 @@
                                 <StackPanel>
                                     <TextBlock
                                         FontSize="{DynamicResource ZenFontSizeSubtitle}"
-                                        FontWeight="SemiBold"
+                                        FontWeight="{DynamicResource ZenFontWeightSemibold}"
                                         Text="任务栏行为" />
                                     <TextBlock
                                         Margin="0,3,0,0"
                                         FontSize="{DynamicResource ZenFontSizeCaption}"
-                                        FontWeight="Regular"
+                                        FontWeight="{DynamicResource ZenFontWeightRegular}"
                                         Foreground="{DynamicResource ZenTextSecondaryBrush}"
                                         Text="任务栏对齐、标记、自动隐藏和多个显示器" />
                                 </StackPanel>
@@ -170,11 +170,11 @@
                                     <ColumnDefinition Width="Auto" />
                                 </Grid.ColumnDefinitions>
                                 <StackPanel>
-                                    <TextBlock FontWeight="SemiBold" Text="通知偏好" />
+                                    <TextBlock FontWeight="{DynamicResource ZenFontWeightSemibold}" Text="通知偏好" />
                                     <TextBlock
                                         Margin="0,3,0,0"
                                         FontSize="{DynamicResource ZenFontSizeCaption}"
-                                        FontWeight="Regular"
+                                        FontWeight="{DynamicResource ZenFontWeightRegular}"
                                         Foreground="{DynamicResource ZenTextSecondaryBrush}"
                                         Text="管理应用内消息和系统通知" />
                                 </StackPanel>

@@ -23,76 +23,19 @@
             <Setter Property="StrokeEndLineCap" Value="Round" />
             <Setter Property="StrokeLineJoin" Value="Round" />
         </Style>
-        <LinearGradientBrush x:Key="RainbowButtonBackgroundBrush" StartPoint="0,0" EndPoint="1,1">
-            <GradientStop Offset="0" Color="#FF3B30" />
-            <GradientStop Offset="0.18" Color="#FF9500" />
-            <GradientStop Offset="0.36" Color="#FFCC00" />
-            <GradientStop Offset="0.54" Color="#34C759" />
-            <GradientStop Offset="0.72" Color="#00C7BE" />
-            <GradientStop Offset="0.86" Color="#007AFF" />
-            <GradientStop Offset="1" Color="#AF52DE" />
-        </LinearGradientBrush>
-        <LinearGradientBrush x:Key="RainbowButtonBorderBrush" StartPoint="0,0.5" EndPoint="1,0.5">
-            <GradientStop Offset="0" Color="#00F5FF" />
-            <GradientStop Offset="0.33" Color="#A3FF12" />
-            <GradientStop Offset="0.66" Color="#FFF200" />
-            <GradientStop Offset="1" Color="#FF2BD6" />
-        </LinearGradientBrush>
-        <LinearGradientBrush x:Key="RainbowButtonForegroundBrush" StartPoint="0,0" EndPoint="1,0">
-            <GradientStop Offset="0" Color="#3B0764" />
-            <GradientStop Offset="0.5" Color="#172554" />
-            <GradientStop Offset="1" Color="#4C0519" />
-        </LinearGradientBrush>
-        <LinearGradientBrush x:Key="RainbowButtonHoverBrush" StartPoint="0,1" EndPoint="1,0">
-            <GradientStop Offset="0" Color="#FF2BD6" />
-            <GradientStop Offset="0.2" Color="#8B5CF6" />
-            <GradientStop Offset="0.4" Color="#007AFF" />
-            <GradientStop Offset="0.6" Color="#00E5A8" />
-            <GradientStop Offset="0.8" Color="#D9FF00" />
-            <GradientStop Offset="1" Color="#FF6B00" />
-        </LinearGradientBrush>
-        <LinearGradientBrush x:Key="RainbowButtonHoverBorderBrush" StartPoint="0,0" EndPoint="1,1">
-            <GradientStop Offset="0" Color="#FF1744" />
-            <GradientStop Offset="0.5" Color="#7C3AED" />
-            <GradientStop Offset="1" Color="#00E5FF" />
-        </LinearGradientBrush>
-        <LinearGradientBrush x:Key="RainbowButtonHoverForegroundBrush" StartPoint="0,0" EndPoint="1,0">
-            <GradientStop Offset="0" Color="#111827" />
-            <GradientStop Offset="0.5" Color="#3B0764" />
-            <GradientStop Offset="1" Color="#111827" />
-        </LinearGradientBrush>
-        <LinearGradientBrush x:Key="RainbowButtonPressedBrush" StartPoint="1,0" EndPoint="0,1">
-            <GradientStop Offset="0" Color="#701A75" />
-            <GradientStop Offset="0.2" Color="#4338CA" />
-            <GradientStop Offset="0.4" Color="#0369A1" />
-            <GradientStop Offset="0.6" Color="#047857" />
-            <GradientStop Offset="0.8" Color="#C2410C" />
-            <GradientStop Offset="1" Color="#BE123C" />
-        </LinearGradientBrush>
-        <LinearGradientBrush x:Key="RainbowButtonPressedBorderBrush" StartPoint="0,0.5" EndPoint="1,0.5">
-            <GradientStop Offset="0" Color="#D9FF00" />
-            <GradientStop Offset="0.5" Color="#00F5FF" />
-            <GradientStop Offset="1" Color="#FF2BD6" />
-        </LinearGradientBrush>
-        <LinearGradientBrush x:Key="RainbowButtonPressedForegroundBrush" StartPoint="0,0" EndPoint="1,0">
-            <GradientStop Offset="0" Color="#FFFFFF" />
-            <GradientStop Offset="0.5" Color="#FFF7A8" />
-            <GradientStop Offset="1" Color="#FFFFFF" />
-        </LinearGradientBrush>
         <Style
-            x:Key="RainbowInteractionButtonStyle"
+            x:Key="CustomInteractionButtonStyle"
             BasedOn="{StaticResource ZenButtonStyle}"
             TargetType="{x:Type zen:ZenButton}">
-            <Setter Property="Background" Value="{StaticResource RainbowButtonBackgroundBrush}" />
-            <Setter Property="BorderBrush" Value="{StaticResource RainbowButtonBorderBrush}" />
-            <Setter Property="BorderThickness" Value="2" />
-            <Setter Property="Foreground" Value="{StaticResource RainbowButtonForegroundBrush}" />
-            <Setter Property="HoverBackground" Value="{StaticResource RainbowButtonHoverBrush}" />
-            <Setter Property="HoverBorderBrush" Value="{StaticResource RainbowButtonHoverBorderBrush}" />
-            <Setter Property="HoverForeground" Value="{StaticResource RainbowButtonHoverForegroundBrush}" />
-            <Setter Property="PressedBackground" Value="{StaticResource RainbowButtonPressedBrush}" />
-            <Setter Property="PressedBorderBrush" Value="{StaticResource RainbowButtonPressedBorderBrush}" />
-            <Setter Property="PressedForeground" Value="{StaticResource RainbowButtonPressedForegroundBrush}" />
+            <Setter Property="Background" Value="{DynamicResource ZenSurfaceMutedBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ZenPrimaryBrush}" />
+            <Setter Property="Foreground" Value="{DynamicResource ZenPrimaryBrush}" />
+            <Setter Property="HoverBackground" Value="{DynamicResource ZenPrimaryBrush}" />
+            <Setter Property="HoverBorderBrush" Value="{DynamicResource ZenPrimaryHoverBrush}" />
+            <Setter Property="HoverForeground" Value="{DynamicResource ZenOnAccentBrush}" />
+            <Setter Property="PressedBackground" Value="{DynamicResource ZenPrimaryPressedBrush}" />
+            <Setter Property="PressedBorderBrush" Value="{DynamicResource ZenPrimaryPressedBrush}" />
+            <Setter Property="PressedForeground" Value="{DynamicResource ZenOnAccentBrush}" />
         </Style>
     </UserControl.Resources>
     <ScrollViewer
@@ -321,7 +264,7 @@
                                 <ColumnDefinition Width="Auto" />
                             </Grid.ColumnDefinitions>
                             <StackPanel VerticalAlignment="Center">
-                                <TextBlock FontWeight="SemiBold" Text="发布当前版本" />
+                                <TextBlock FontWeight="{DynamicResource ZenFontWeightSemibold}" Text="发布当前版本" />
                                 <TextBlock
                                     Margin="0,5,24,0"
                                     Style="{StaticResource GallerySupportingTextStyle}"
@@ -423,9 +366,9 @@
                         Height="40"
                         HorizontalAlignment="Left"
                         Appearance="Outlined"
-                        Content="🌈 自定义交互颜色"
-                        FontWeight="SemiBold"
-                        Style="{StaticResource RainbowInteractionButtonStyle}" />
+                        Content="自定义交互颜色"
+                        FontWeight="{DynamicResource ZenFontWeightSemibold}"
+                        Style="{StaticResource CustomInteractionButtonStyle}" />
                 </StackPanel>
             </Border>
 

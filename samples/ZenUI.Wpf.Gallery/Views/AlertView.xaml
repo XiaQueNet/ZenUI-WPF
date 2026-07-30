@@ -33,7 +33,7 @@
                     <TextBlock Style="{StaticResource SectionTitleStyle}" Text="富内容" />
                     <zen:ZenAlert Severity="Success">
                         <StackPanel>
-                            <TextBlock FontWeight="SemiBold" Text="发布已完成" />
+                            <TextBlock FontWeight="{DynamicResource ZenFontWeightSemibold}" Text="发布已完成" />
                             <TextBlock
                                 Margin="0,4,0,0"
                                 Foreground="{DynamicResource ZenTextSecondaryBrush}"

@@ -59,7 +59,7 @@
                                 <TextBlock
                                     HorizontalAlignment="Center"
                                     VerticalAlignment="Center"
-                                    FontWeight="SemiBold"
+                                    FontWeight="{DynamicResource ZenFontWeightSemibold}"
                                     Foreground="{DynamicResource ZenTextSecondaryBrush}"
                                     Text="?" />
                             </Border>

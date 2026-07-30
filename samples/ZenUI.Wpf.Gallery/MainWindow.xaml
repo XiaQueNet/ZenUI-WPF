@@ -69,7 +69,7 @@
                 <StackPanel Margin="24,28,24,8">
                     <TextBlock
                         FontSize="{DynamicResource ZenFontSizeTitle}"
-                        FontWeight="SemiBold"
+                        FontWeight="{DynamicResource ZenFontWeightSemibold}"
                         Foreground="{DynamicResource ZenTextPrimaryBrush}"
                         Text="ZenUI" />
                     <TextBlock

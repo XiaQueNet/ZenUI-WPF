@@ -125,7 +125,7 @@
                                 </Viewbox>
                             </Border>
                             <StackPanel Grid.Column="1" VerticalAlignment="Center">
-                                <TextBlock FontWeight="SemiBold" Text="ZenUI 设计规范.pdf" />
+                                <TextBlock FontWeight="{DynamicResource ZenFontWeightSemibold}" Text="ZenUI 设计规范.pdf" />
                                 <TextBlock
                                     Margin="0,4,0,0"
                                     Style="{StaticResource GallerySupportingTextStyle}"
