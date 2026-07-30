@@ -49,6 +49,10 @@
             <Setter Property="FontSize" Value="{DynamicResource ZenFontSizeBody}" />
             <Setter Property="FontWeight" Value="{DynamicResource ZenFontWeightSemibold}" />
         </Style>
+
+        <Style x:Key="OverviewCapabilityItemStyle" TargetType="{x:Type StackPanel}">
+            <Setter Property="Margin" Value="0,0,28,24" />
+        </Style>
     </UserControl.Resources>
 
     <ScrollViewer
@@ -339,30 +343,30 @@
                         Margin="0,0,0,22"
                         Style="{StaticResource OverviewSupportingTextStyle}"
                         Text="默认视觉保持克制，完整能力通过主题、状态和 WPF 原生契约按需提供。" />
-                    <UniformGrid Columns="4">
-                        <StackPanel Margin="0,0,24,0">
+                    <UniformGrid Columns="2">
+                        <StackPanel Style="{StaticResource OverviewCapabilityItemStyle}">
                             <TextBlock Style="{StaticResource OverviewEyebrowStyle}" Text="01" />
                             <TextBlock Style="{StaticResource OverviewCapabilityTitleStyle}" Text="统一外观" />
                             <TextBlock Style="{StaticResource OverviewSupportingTextStyle}" Text="一致的间距、圆角和视觉层级。" />
                         </StackPanel>
-                        <StackPanel Margin="0,0,24,0">
+                        <StackPanel Style="{StaticResource OverviewCapabilityItemStyle}">
                             <TextBlock Style="{StaticResource OverviewEyebrowStyle}" Text="02" />
                             <TextBlock Style="{StaticResource OverviewCapabilityTitleStyle}" Text="完整状态" />
                             <TextBlock Style="{StaticResource OverviewSupportingTextStyle}" Text="悬停、焦点、选中与禁用反馈。" />
                         </StackPanel>
-                        <StackPanel Margin="0,0,24,0">
+                        <StackPanel Style="{StaticResource OverviewCapabilityItemStyle}">
                             <TextBlock Style="{StaticResource OverviewEyebrowStyle}" Text="03" />
                             <TextBlock Style="{StaticResource OverviewCapabilityTitleStyle}" Text="主题与密度" />
                             <TextBlock Style="{StaticResource OverviewSupportingTextStyle}" Text="三套主题和三档密度独立切换。" />
                         </StackPanel>
-                        <StackPanel>
+                        <StackPanel Style="{StaticResource OverviewCapabilityItemStyle}">
                             <TextBlock Style="{StaticResource OverviewEyebrowStyle}" Text="04" />
                             <TextBlock Style="{StaticResource OverviewCapabilityTitleStyle}" Text="WPF 原生" />
                             <TextBlock Style="{StaticResource OverviewSupportingTextStyle}" Text="保留绑定、命令、键盘和自动化契约。" />
                         </StackPanel>
                     </UniformGrid>
                     <Border
-                        Margin="0,26,0,0"
+                        Margin="0,2,0,0"
                         Padding="16,12"
                         Background="{DynamicResource ZenSurfaceMutedBrush}"
                         CornerRadius="6">

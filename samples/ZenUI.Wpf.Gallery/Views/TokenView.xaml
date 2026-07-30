@@ -318,7 +318,7 @@
                         Margin="0,0,0,14"
                         Style="{StaticResource TokenSupportingTextStyle}"
                         Text="从设计语义到组件实现，每一层职责独立，并可通过 DynamicResource 在运行时重新解析。" />
-                    <UniformGrid Columns="3" Rows="2">
+                    <UniformGrid Columns="2" Rows="3">
                         <Border Style="{StaticResource TokenArchitectureItemStyle}">
                             <StackPanel>
                                 <TextBlock Style="{StaticResource TokenEyebrowStyle}" Text="01" />
