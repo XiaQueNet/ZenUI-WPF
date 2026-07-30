@@ -45,6 +45,11 @@
         <Setter Property="TextWrapping" Value="Wrap" />
     </Style>
 
+    <Style x:Key="GalleryWrapFieldStyle" TargetType="{x:Type StackPanel}">
+        <Setter Property="Width" Value="220" />
+        <Setter Property="Margin" Value="0,0,18,14" />
+    </Style>
+
     <Style x:Key="GalleryCardStyle" TargetType="{x:Type Border}">
         <Setter Property="Margin" Value="0,0,0,36" />
         <Setter Property="Padding" Value="0" />

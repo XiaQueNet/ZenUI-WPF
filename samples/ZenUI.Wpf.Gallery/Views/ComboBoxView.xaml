@@ -11,27 +11,27 @@
             <Border Style="{StaticResource GalleryCardStyle}">
                 <StackPanel>
                     <TextBlock Style="{StaticResource SectionTitleStyle}" Text="基本用法与状态" />
-                    <StackPanel Orientation="Horizontal">
-                        <zen:ZenComboBox Width="240" Margin="0,0,18,0" Watermark="请选择城市">
+                    <WrapPanel>
+                        <zen:ZenComboBox Width="240" Margin="0,0,18,14" Watermark="请选择城市">
                             <ComboBoxItem Content="北京" />
                             <ComboBoxItem Content="上海" />
                             <ComboBoxItem Content="深圳" />
                             <ComboBoxItem Content="成都" />
                         </zen:ZenComboBox>
-                        <zen:ZenComboBox Width="240" Margin="0,0,18,0" SelectedIndex="1">
+                        <zen:ZenComboBox Width="240" Margin="0,0,18,14" SelectedIndex="1">
                             <ComboBoxItem Content="普通用户" />
                             <ComboBoxItem Content="管理员" />
                             <ComboBoxItem Content="访客" />
                         </zen:ZenComboBox>
-                        <zen:ZenComboBox Width="180" IsEnabled="False" Watermark="禁用状态" />
-                    </StackPanel>
+                        <zen:ZenComboBox Width="180" Margin="0,0,18,14" IsEnabled="False" Watermark="禁用状态" />
+                    </WrapPanel>
                 </StackPanel>
             </Border>
             <Border Style="{StaticResource GalleryCardStyle}">
                 <StackPanel>
                     <TextBlock Style="{StaticResource SectionTitleStyle}" Text="圆角" />
-                    <StackPanel Orientation="Horizontal">
-                        <StackPanel Margin="0,0,18,0">
+                    <WrapPanel>
+                        <StackPanel Style="{StaticResource GalleryWrapFieldStyle}">
                             <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="直角" />
                             <zen:ZenComboBox Width="220" CornerRadius="0" SelectedIndex="0">
                                 <ComboBoxItem Content="设计" />
@@ -39,7 +39,7 @@
                                 <ComboBoxItem Content="测试" />
                             </zen:ZenComboBox>
                         </StackPanel>
-                        <StackPanel Margin="0,0,18,0">
+                        <StackPanel Style="{StaticResource GalleryWrapFieldStyle}">
                             <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="默认圆角" />
                             <zen:ZenComboBox Width="220" CornerRadius="6" SelectedIndex="1">
                                 <ComboBoxItem Content="设计" />
@@ -47,7 +47,7 @@
                                 <ComboBoxItem Content="测试" />
                             </zen:ZenComboBox>
                         </StackPanel>
-                        <StackPanel>
+                        <StackPanel Style="{StaticResource GalleryWrapFieldStyle}">
                             <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="大圆角" />
                             <zen:ZenComboBox Width="220" CornerRadius="18" SelectedIndex="2">
                                 <ComboBoxItem Content="设计" />
@@ -55,35 +55,35 @@
                                 <ComboBoxItem Content="测试" />
                             </zen:ZenComboBox>
                         </StackPanel>
-                    </StackPanel>
+                    </WrapPanel>
                 </StackPanel>
             </Border>
             <Border Style="{StaticResource GalleryCardStyle}">
                 <StackPanel>
                     <TextBlock Style="{StaticResource SectionTitleStyle}" Text="尺寸" />
-                    <StackPanel Orientation="Horizontal" VerticalAlignment="Bottom">
-                        <StackPanel Margin="0,0,18,0">
+                    <WrapPanel VerticalAlignment="Bottom">
+                        <StackPanel Style="{StaticResource GalleryWrapFieldStyle}">
                             <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="紧凑 · 32px" />
                             <zen:ZenComboBox Width="200" Height="32" SelectedIndex="0">
                                 <ComboBoxItem Content="小尺寸" />
                                 <ComboBoxItem Content="其他选项" />
                             </zen:ZenComboBox>
                         </StackPanel>
-                        <StackPanel Margin="0,0,18,0">
+                        <StackPanel Style="{StaticResource GalleryWrapFieldStyle}">
                             <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="默认 · 36px" />
                             <zen:ZenComboBox Width="220" Height="36" SelectedIndex="0">
                                 <ComboBoxItem Content="默认尺寸" />
                                 <ComboBoxItem Content="其他选项" />
                             </zen:ZenComboBox>
                         </StackPanel>
-                        <StackPanel>
+                        <StackPanel Width="240" Margin="0,0,18,14">
                             <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="宽松 · 44px" />
                             <zen:ZenComboBox Width="240" Height="44" SelectedIndex="0">
                                 <ComboBoxItem Content="大尺寸" />
                                 <ComboBoxItem Content="其他选项" />
                             </zen:ZenComboBox>
                         </StackPanel>
-                    </StackPanel>
+                    </WrapPanel>
                 </StackPanel>
             </Border>
             <Border Style="{StaticResource GalleryCardStyle}">

@@ -15,12 +15,12 @@
             <Border Style="{StaticResource GalleryCardStyle}">
                 <StackPanel>
                     <TextBlock Style="{StaticResource SectionTitleStyle}" Text="基本用法与状态" />
-                    <UniformGrid Columns="4">
-                        <StackPanel Margin="0,0,9,0">
+                    <WrapPanel>
+                        <StackPanel Style="{StaticResource GalleryWrapFieldStyle}">
                             <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="待选择" />
                             <zen:ZenTimePicker Watermark="请选择时间" />
                         </StackPanel>
-                        <StackPanel Margin="3,0,6,0">
+                        <StackPanel Style="{StaticResource GalleryWrapFieldStyle}">
                             <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="已选择" />
                             <zen:ZenTimePicker>
                                 <zen:ZenTimePicker.SelectedTime>
@@ -28,23 +28,23 @@
                                 </zen:ZenTimePicker.SelectedTime>
                             </zen:ZenTimePicker>
                         </StackPanel>
-                        <StackPanel Margin="6,0,3,0">
+                        <StackPanel Style="{StaticResource GalleryWrapFieldStyle}">
                             <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="仅弹层选择" />
                             <zen:ZenTimePicker IsTextInputEnabled="False" Watermark="请从列表选择" />
                         </StackPanel>
-                        <StackPanel Margin="9,0,0,0">
+                        <StackPanel Style="{StaticResource GalleryWrapFieldStyle}">
                             <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="禁用" />
                             <zen:ZenTimePicker IsEnabled="False" Watermark="不可用" />
                         </StackPanel>
-                    </UniformGrid>
+                    </WrapPanel>
                 </StackPanel>
             </Border>
 
             <Border Style="{StaticResource GalleryCardStyle}">
                 <StackPanel>
                     <TextBlock Style="{StaticResource SectionTitleStyle}" Text="显示格式" />
-                    <StackPanel Orientation="Horizontal">
-                        <StackPanel Margin="0,0,18,0">
+                    <WrapPanel>
+                        <StackPanel Style="{StaticResource GalleryWrapFieldStyle}">
                             <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="24 小时制" />
                             <zen:ZenTimePicker Width="190" IsSecondVisible="False">
                                 <zen:ZenTimePicker.SelectedTime>
@@ -52,7 +52,7 @@
                                 </zen:ZenTimePicker.SelectedTime>
                             </zen:ZenTimePicker>
                         </StackPanel>
-                        <StackPanel Margin="0,0,18,0">
+                        <StackPanel Style="{StaticResource GalleryWrapFieldStyle}">
                             <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="12 小时制" />
                             <zen:ZenTimePicker Width="210" Is24Hour="False">
                                 <zen:ZenTimePicker.SelectedTime>
@@ -60,7 +60,7 @@
                                 </zen:ZenTimePicker.SelectedTime>
                             </zen:ZenTimePicker>
                         </StackPanel>
-                        <StackPanel>
+                        <StackPanel Style="{StaticResource GalleryWrapFieldStyle}">
                             <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="显示秒" />
                             <zen:ZenTimePicker
                                 Width="210"
@@ -71,7 +71,7 @@
                                 </zen:ZenTimePicker.SelectedTime>
                             </zen:ZenTimePicker>
                         </StackPanel>
-                    </StackPanel>
+                    </WrapPanel>
                 </StackPanel>
             </Border>
 
@@ -100,24 +100,25 @@
             <Border Style="{StaticResource GalleryCardStyle}">
                 <StackPanel>
                     <TextBlock Style="{StaticResource SectionTitleStyle}" Text="圆角与尺寸" />
-                    <StackPanel VerticalAlignment="Bottom" Orientation="Horizontal">
+                    <WrapPanel VerticalAlignment="Bottom">
                         <zen:ZenTimePicker
                             Width="190"
                             Height="32"
-                            Margin="0,0,18,0"
+                            Margin="0,0,18,14"
                             CornerRadius="0"
                             Watermark="紧凑 · 32px" />
                         <zen:ZenTimePicker
                             Width="210"
                             Height="36"
-                            Margin="0,0,18,0"
+                            Margin="0,0,18,14"
                             Watermark="默认 · 36px" />
                         <zen:ZenTimePicker
                             Width="230"
                             Height="44"
+                            Margin="0,0,18,14"
                             CornerRadius="18"
                             Watermark="宽松 · 44px" />
-                    </StackPanel>
+                    </WrapPanel>
                 </StackPanel>
             </Border>
 

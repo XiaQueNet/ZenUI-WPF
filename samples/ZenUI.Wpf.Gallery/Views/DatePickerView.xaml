@@ -14,46 +14,46 @@
             <Border Style="{StaticResource GalleryCardStyle}">
                 <StackPanel>
                     <TextBlock Style="{StaticResource SectionTitleStyle}" Text="基本用法与状态" />
-                    <UniformGrid Columns="4">
-                        <StackPanel Margin="0,0,9,0">
+                    <WrapPanel>
+                        <StackPanel Style="{StaticResource GalleryWrapFieldStyle}">
                             <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="待选择" />
                             <zen:ZenDatePicker Watermark="请选择日期" />
                         </StackPanel>
-                        <StackPanel Margin="3,0,6,0">
+                        <StackPanel Style="{StaticResource GalleryWrapFieldStyle}">
                             <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="已选择" />
                             <zen:ZenDatePicker x:Name="SelectedDatePicker" />
                         </StackPanel>
-                        <StackPanel Margin="6,0,3,0">
+                        <StackPanel Style="{StaticResource GalleryWrapFieldStyle}">
                             <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="仅日历选择" />
                             <zen:ZenDatePicker IsTextInputEnabled="False" Watermark="请从日历选择" />
                         </StackPanel>
-                        <StackPanel Margin="9,0,0,0">
+                        <StackPanel Style="{StaticResource GalleryWrapFieldStyle}">
                             <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="禁用" />
                             <zen:ZenDatePicker IsEnabled="False" Watermark="不可用" />
                         </StackPanel>
-                    </UniformGrid>
+                    </WrapPanel>
                 </StackPanel>
             </Border>
 
             <Border Style="{StaticResource GalleryCardStyle}">
                 <StackPanel>
                     <TextBlock Style="{StaticResource SectionTitleStyle}" Text="日期格式" />
-                    <StackPanel Orientation="Horizontal">
-                        <StackPanel Margin="0,0,18,0">
+                    <WrapPanel>
+                        <StackPanel Style="{StaticResource GalleryWrapFieldStyle}">
                             <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="短日期" />
                             <zen:ZenDatePicker
                                 x:Name="ShortDatePicker"
                                 Width="220"
                                 SelectedDateFormat="Short" />
                         </StackPanel>
-                        <StackPanel>
+                        <StackPanel Width="300" Margin="0,0,18,14">
                             <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="长日期" />
                             <zen:ZenDatePicker
                                 x:Name="LongDatePicker"
                                 Width="300"
                                 SelectedDateFormat="Long" />
                         </StackPanel>
-                    </StackPanel>
+                    </WrapPanel>
                 </StackPanel>
             </Border>
 
@@ -75,8 +75,8 @@
             <Border Style="{StaticResource GalleryCardStyle}">
                 <StackPanel>
                     <TextBlock Style="{StaticResource SectionTitleStyle}" Text="圆角与尺寸" />
-                    <StackPanel VerticalAlignment="Bottom" Orientation="Horizontal">
-                        <StackPanel Margin="0,0,18,0">
+                    <WrapPanel VerticalAlignment="Bottom">
+                        <StackPanel Style="{StaticResource GalleryWrapFieldStyle}">
                             <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="紧凑 · 32px" />
                             <zen:ZenDatePicker
                                 Width="200"
@@ -84,7 +84,7 @@
                                 CornerRadius="0"
                                 Watermark="直角" />
                         </StackPanel>
-                        <StackPanel Margin="0,0,18,0">
+                        <StackPanel Style="{StaticResource GalleryWrapFieldStyle}">
                             <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="默认 · 36px" />
                             <zen:ZenDatePicker
                                 Width="220"
@@ -92,7 +92,7 @@
                                 CornerRadius="6"
                                 Watermark="默认圆角" />
                         </StackPanel>
-                        <StackPanel>
+                        <StackPanel Width="240" Margin="0,0,18,14">
                             <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="宽松 · 44px" />
                             <zen:ZenDatePicker
                                 Width="240"
@@ -100,7 +100,7 @@
                                 CornerRadius="18"
                                 Watermark="大圆角" />
                         </StackPanel>
-                    </StackPanel>
+                    </WrapPanel>
                 </StackPanel>
             </Border>
             <gallery:PropertyTable ControlType="{x:Type zen:ZenDatePicker}" />

@@ -24,22 +24,22 @@
             <Border Style="{StaticResource GalleryCardStyle}">
                 <StackPanel>
                     <TextBlock Style="{StaticResource SectionTitleStyle}" Text="选择模式" />
-                    <UniformGrid Columns="2">
-                        <StackPanel Margin="0,0,12,0">
+                    <WrapPanel>
+                        <StackPanel Width="412" Margin="0,0,18,18">
                             <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="单个范围" />
                             <zen:ZenCalendar
                                 HorizontalAlignment="Left"
                                 DisplayDate="2026-07-01"
                                 SelectionMode="SingleRange" />
                         </StackPanel>
-                        <StackPanel Margin="12,0,0,0">
+                        <StackPanel Width="412" Margin="0,0,18,18">
                             <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="多个范围" />
                             <zen:ZenCalendar
                                 HorizontalAlignment="Left"
                                 DisplayDate="2026-07-01"
                                 SelectionMode="MultipleRange" />
                         </StackPanel>
-                    </UniformGrid>
+                    </WrapPanel>
                 </StackPanel>
             </Border>
 
