@@ -68,6 +68,43 @@ namespace ZenUI.Wpf.Tests.Controls
         }
 
         [TestMethod]
+        public void DataGridColumnHeaderHeightCanOverrideThemeDefault()
+        {
+            var dataGrid = new ZenDataGrid
+            {
+                Height = 120,
+                ItemsSource = new[] { new { Name = "成员" } }
+            };
+            dataGrid.Columns.Add(new DataGridTextColumn
+            {
+                Header = "名称",
+                Binding = new Binding("Name")
+            });
+            var window = CreateTestWindow(dataGrid, 240, 180);
+
+            try
+            {
+                window.Show();
+                window.UpdateLayout();
+
+                var style = new Style(typeof(ZenDataGrid), dataGrid.Style);
+                style.Setters.Add(new Setter(DataGrid.ColumnHeaderHeightProperty, 60d));
+                dataGrid.Style = style;
+                window.UpdateLayout();
+
+                var header = FindVisualDescendants<DataGridColumnHeader>(dataGrid)
+                    .FirstOrDefault(candidate => candidate.Column == dataGrid.Columns[0]);
+                Assert.IsNotNull(header);
+                Assert.AreEqual(60d, dataGrid.ColumnHeaderHeight);
+                Assert.AreEqual(60d, header.ActualHeight);
+            }
+            finally
+            {
+                window.Close();
+            }
+        }
+
+        [TestMethod]
         public void DataGridAppliesColumnHeaderBrushes()
         {
             var headerBackground = new SolidColorBrush(Color.FromRgb(0x12, 0x34, 0x56));

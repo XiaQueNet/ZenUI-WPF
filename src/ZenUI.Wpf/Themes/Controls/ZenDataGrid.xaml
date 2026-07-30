@@ -62,7 +62,6 @@
     </Style>
 
     <Style x:Key="ZenDataGridColumnHeaderStyle" TargetType="{x:Type DataGridColumnHeader}">
-        <Setter Property="Height" Value="{DynamicResource ZenDataGridColumnHeaderHeight}" />
         <Setter Property="Padding" Value="14,0" />
         <Setter Property="Background" Value="{Binding ColumnHeaderBackground, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenDataGrid}}}" />
         <Setter Property="Foreground" Value="{Binding ColumnHeaderForeground, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenDataGrid}}}" />
@@ -244,6 +243,7 @@
         <Setter Property="Foreground" Value="{DynamicResource ZenTextPrimaryBrush}" />
         <Setter Property="ColumnHeaderBackground" Value="{DynamicResource ZenSurfaceMutedBrush}" />
         <Setter Property="ColumnHeaderForeground" Value="{DynamicResource ZenTextSecondaryBrush}" />
+        <Setter Property="ColumnHeaderHeight" Value="{DynamicResource ZenDataGridColumnHeaderHeight}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="RowBackground" Value="{DynamicResource ZenSurfaceBrush}" />
         <Setter Property="AlternatingRowBackground" Value="{DynamicResource ZenDataGridAlternatingRowBrush}" />
