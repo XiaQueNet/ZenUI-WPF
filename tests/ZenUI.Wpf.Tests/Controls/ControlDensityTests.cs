@@ -39,6 +39,8 @@ namespace ZenUI.Wpf.Tests.Controls
                 Orientation = Orientation.Vertical
             };
             var @switch = new ZenSwitch();
+            var checkBox = new ZenCheckBox { Content = "Option" };
+            var radioButton = new ZenRadioButton { Content = "Choice" };
             var slider = new ZenSlider();
             var progressBar = new ZenProgressBar();
             var alert = new ZenAlert { Content = "Status" };
@@ -49,6 +51,8 @@ namespace ZenUI.Wpf.Tests.Controls
             panel.Children.Add(listBox);
             panel.Children.Add(scrollBar);
             panel.Children.Add(@switch);
+            panel.Children.Add(checkBox);
+            panel.Children.Add(radioButton);
             panel.Children.Add(slider);
             panel.Children.Add(progressBar);
             panel.Children.Add(alert);
@@ -81,6 +85,8 @@ namespace ZenUI.Wpf.Tests.Controls
                 Assert.AreEqual(60d, @switch.Width);
                 Assert.AreEqual(30d, @switch.Height);
                 Assert.AreEqual(new Thickness(4), switchThumb.Margin);
+                Assert.AreEqual(18d, checkBox.IndicatorSize);
+                Assert.AreEqual(18d, radioButton.IndicatorSize);
                 Assert.AreEqual(24d, slider.MinHeight);
                 Assert.AreEqual(4d, slider.TrackThickness);
                 Assert.AreEqual(18d, sliderTrack.Thumb.Width);
@@ -98,6 +104,8 @@ namespace ZenUI.Wpf.Tests.Controls
                 Assert.AreEqual(52d, @switch.Width);
                 Assert.AreEqual(26d, @switch.Height);
                 Assert.AreEqual(new Thickness(3), switchThumb.Margin);
+                Assert.AreEqual(16d, checkBox.IndicatorSize);
+                Assert.AreEqual(16d, radioButton.IndicatorSize);
                 Assert.AreEqual(20d, slider.MinHeight);
                 Assert.AreEqual(3d, slider.TrackThickness);
                 Assert.AreEqual(16d, sliderTrack.Thumb.Width);
@@ -115,10 +123,12 @@ namespace ZenUI.Wpf.Tests.Controls
                 Assert.AreEqual(68d, @switch.Width);
                 Assert.AreEqual(34d, @switch.Height);
                 Assert.AreEqual(new Thickness(4), switchThumb.Margin);
+                Assert.AreEqual(20d, checkBox.IndicatorSize);
+                Assert.AreEqual(20d, radioButton.IndicatorSize);
                 Assert.AreEqual(28d, slider.MinHeight);
-                Assert.AreEqual(6d, slider.TrackThickness);
-                Assert.AreEqual(22d, sliderTrack.Thumb.Width);
-                Assert.AreEqual(6d, sliderTrack.DecreaseRepeatButton.Height);
+                Assert.AreEqual(4d, slider.TrackThickness);
+                Assert.AreEqual(20d, sliderTrack.Thumb.Width);
+                Assert.AreEqual(4d, sliderTrack.DecreaseRepeatButton.Height);
                 Assert.AreEqual(10d, progressBar.Height);
                 Assert.AreEqual(new Thickness(16, 14, 16, 14), alert.Padding);
             }

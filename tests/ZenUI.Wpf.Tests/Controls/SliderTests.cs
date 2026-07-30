@@ -60,7 +60,7 @@ namespace ZenUI.Wpf.Tests.Controls
 
                 ZenDensityManager.ApplyDensity(window.Resources, ZenDensity.Comfortable);
                 window.UpdateLayout();
-                Assert.AreEqual(6d, track.DecreaseRepeatButton.Width);
+                Assert.AreEqual(4d, track.DecreaseRepeatButton.Width);
             }
             finally
             {

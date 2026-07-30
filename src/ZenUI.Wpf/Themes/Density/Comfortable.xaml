@@ -48,8 +48,10 @@
     <sys:Double x:Key="ZenSwitchHeight">34</sys:Double>
     <Thickness x:Key="ZenSwitchThumbMargin">4</Thickness>
 
-    <sys:Double x:Key="ZenSliderThumbSize">22</sys:Double>
-    <sys:Double x:Key="ZenSliderTrackThickness">6</sys:Double>
+    <sys:Double x:Key="ZenSelectionIndicatorSize">20</sys:Double>
+
+    <sys:Double x:Key="ZenSliderThumbSize">20</sys:Double>
+    <sys:Double x:Key="ZenSliderTrackThickness">4</sys:Double>
     <sys:Double x:Key="ZenSliderCrossAxisMinSize">28</sys:Double>
 
     <sys:Double x:Key="ZenProgressBarThickness">10</sys:Double>

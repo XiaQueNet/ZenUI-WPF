@@ -27,6 +27,8 @@ namespace ZenUI.Wpf.Tests.Theming
             Assert.AreEqual(172d, resources["ZenTimePickerListHeight"]);
             Assert.AreEqual(32d, resources["ZenTimePickerItemHeight"]);
             Assert.AreEqual(52d, resources["ZenSwitchWidth"]);
+            Assert.AreEqual(16d, resources["ZenSelectionIndicatorSize"]);
+            Assert.AreEqual(16d, resources["ZenSliderThumbSize"]);
             Assert.AreEqual(3d, resources["ZenSliderTrackThickness"]);
             Assert.AreEqual(6d, resources["ZenProgressBarThickness"]);
             Assert.AreEqual(new Thickness(12, 8, 12, 8), resources["ZenAlertPadding"]);
@@ -42,7 +44,9 @@ namespace ZenUI.Wpf.Tests.Theming
             Assert.AreEqual(220d, resources["ZenTimePickerListHeight"]);
             Assert.AreEqual(40d, resources["ZenTimePickerItemHeight"]);
             Assert.AreEqual(68d, resources["ZenSwitchWidth"]);
-            Assert.AreEqual(6d, resources["ZenSliderTrackThickness"]);
+            Assert.AreEqual(20d, resources["ZenSelectionIndicatorSize"]);
+            Assert.AreEqual(20d, resources["ZenSliderThumbSize"]);
+            Assert.AreEqual(4d, resources["ZenSliderTrackThickness"]);
             Assert.AreEqual(10d, resources["ZenProgressBarThickness"]);
             Assert.AreEqual(new Thickness(16, 14, 16, 14), resources["ZenAlertPadding"]);
             Assert.AreEqual(2, resources.MergedDictionaries.Count);
@@ -57,6 +61,8 @@ namespace ZenUI.Wpf.Tests.Theming
             Assert.AreEqual(196d, resources["ZenTimePickerListHeight"]);
             Assert.AreEqual(36d, resources["ZenTimePickerItemHeight"]);
             Assert.AreEqual(60d, resources["ZenSwitchWidth"]);
+            Assert.AreEqual(18d, resources["ZenSelectionIndicatorSize"]);
+            Assert.AreEqual(18d, resources["ZenSliderThumbSize"]);
             Assert.AreEqual(4d, resources["ZenSliderTrackThickness"]);
             Assert.AreEqual(8d, resources["ZenProgressBarThickness"]);
             Assert.AreEqual(new Thickness(14, 11, 14, 11), resources["ZenAlertPadding"]);

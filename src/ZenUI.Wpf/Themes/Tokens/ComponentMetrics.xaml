@@ -77,6 +77,11 @@
     <sys:Double x:Key="ZenSwitchHeight">30</sys:Double>
     <Thickness x:Key="ZenSwitchThumbMargin">4</Thickness>
 
+    <!-- 选择控件 -->
+    <sys:Double x:Key="ZenSelectionIndicatorSize">18</sys:Double>
+    <CornerRadius x:Key="ZenSelectionIndicatorCornerRadius">4</CornerRadius>
+    <CornerRadius x:Key="ZenSelectionFocusVisualCornerRadius">4</CornerRadius>
+
     <!-- 滑块 -->
     <sys:Double x:Key="ZenSliderThumbSize">18</sys:Double>
     <sys:Double x:Key="ZenSliderTrackThickness">4</sys:Double>

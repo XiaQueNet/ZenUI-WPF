@@ -179,6 +179,9 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.AreEqual(60d, dictionary["ZenSwitchWidth"]);
             Assert.AreEqual(30d, dictionary["ZenSwitchHeight"]);
             Assert.AreEqual(new Thickness(4), dictionary["ZenSwitchThumbMargin"]);
+            Assert.AreEqual(18d, dictionary["ZenSelectionIndicatorSize"]);
+            Assert.AreEqual(new CornerRadius(4), dictionary["ZenSelectionIndicatorCornerRadius"]);
+            Assert.AreEqual(new CornerRadius(4), dictionary["ZenSelectionFocusVisualCornerRadius"]);
             Assert.AreEqual(36d, dictionary["ZenRadioItemMinHeight"]);
             Assert.AreEqual(new Thickness(14, 0, 14, 0), dictionary["ZenRadioItemPadding"]);
             Assert.AreEqual(new CornerRadius(8), dictionary["ZenRadioItemCornerRadius"]);
