@@ -4,6 +4,7 @@
     xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
     <!-- 按钮 -->
+    <sys:Double x:Key="ZenButtonMinHeight">36</sys:Double>
     <Thickness x:Key="ZenButtonPadding">10,4</Thickness>
     <CornerRadius x:Key="ZenButtonCornerRadius">10</CornerRadius>
     <CornerRadius x:Key="ZenButtonFocusVisualCornerRadius">13</CornerRadius>

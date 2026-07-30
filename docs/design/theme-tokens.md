@@ -20,7 +20,7 @@
 | `Tokens/ComponentColors.xaml` | 控件或控件部件特有的颜色状态 | `ZenScrollBarThumbBrush`、`ZenListBoxItemSelectedBrush` |
 | `Tokens/Typography.xaml` | 语义字号、字重和绝对行高 | `ZenFontSizeBody`、`ZenFontWeightSemibold`、`ZenLineHeightBody` |
 | `Tokens/Metrics.xaml` | 跨控件共享的尺寸与边框指标 | `ZenInputControlMinHeight`、`ZenInputControlPadding` |
-| `Tokens/ComponentMetrics.xaml` | 控件特有但允许应用统一覆盖的尺寸 | `ZenButtonCornerRadius`、`ZenListBoxItemPadding` |
+| `Tokens/ComponentMetrics.xaml` | 控件特有但允许应用统一覆盖的尺寸 | `ZenButtonMinHeight`、`ZenButtonCornerRadius`、`ZenListBoxItemPadding` |
 | `Tokens/Interaction.xaml` | 焦点和禁用状态的透明度语义 | `ZenFocusVisualOpacity`、`ZenDisabledActionOpacity` |
 
 `Dark.xaml` 和 `HighContrast.xaml` 覆盖相同的公开颜色 Token。高对比度资源应优先使用 WPF `SystemColors`，而不是复制普通主题的固定色值。

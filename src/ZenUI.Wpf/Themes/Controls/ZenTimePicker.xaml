@@ -236,6 +236,7 @@
                                             <zen:ZenButton
                                                 x:Name="PART_NowButton"
                                                 MinWidth="0"
+                                                MinHeight="0"
                                                 Height="28"
                                                 Padding="6,0"
                                                 HorizontalAlignment="Left"
@@ -247,6 +248,7 @@
                                                 x:Name="PART_ConfirmButton"
                                                 Grid.Column="1"
                                                 MinWidth="64"
+                                                MinHeight="0"
                                                 Height="32"
                                                 AutomationProperties.Name="确定时间"
                                                 Content="确定"

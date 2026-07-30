@@ -19,6 +19,7 @@
         <Setter Property="BorderThickness" Value="0" />
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="CornerRadius" Value="{DynamicResource ZenButtonCornerRadius}" />
+        <Setter Property="MinHeight" Value="{DynamicResource ZenButtonMinHeight}" />
         <Setter Property="Padding" Value="{DynamicResource ZenButtonPadding}" />
         <Setter Property="FocusVisualStyle" Value="{StaticResource ZenButtonFocusVisualStyle}" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />

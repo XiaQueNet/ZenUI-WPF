@@ -125,6 +125,7 @@ namespace ZenUI.Wpf.Tests.Controls
                     UriKind.Relative)
             });
             window.Resources["ZenControlBorderThickness"] = new Thickness(2);
+            window.Resources["ZenButtonMinHeight"] = 44d;
             window.Resources["ZenButtonPadding"] = new Thickness(14, 6, 14, 6);
             window.Resources["ZenButtonCornerRadius"] = new CornerRadius(12);
             window.Resources["ZenListBoxPadding"] = new Thickness(6);
@@ -138,6 +139,7 @@ namespace ZenUI.Wpf.Tests.Controls
                 window.Show();
                 window.UpdateLayout();
 
+                Assert.AreEqual(44d, button.MinHeight);
                 Assert.AreEqual(new Thickness(14, 6, 14, 6), button.Padding);
                 Assert.AreEqual(new CornerRadius(12), button.CornerRadius);
                 Assert.AreEqual(new Thickness(2), button.BorderThickness);

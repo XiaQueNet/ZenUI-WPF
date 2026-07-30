@@ -97,6 +97,7 @@ Density 会更新输入控件、Button、ListBox、ScrollBar、ComboBox Popup、
 | --- | --- |
 | 主色与交互色 | `ZenPrimaryBrush`、`ZenPrimaryHoverBrush`、`ZenPrimaryPressedBrush` |
 | 输入控件高度与内边距 | `ZenInputControlMinHeight`、`ZenInputControlPadding` |
+| 按钮高度与内边距 | `ZenButtonMinHeight`、`ZenButtonPadding` |
 | DataGrid 表头、行和单元格 | `ZenDataGridColumnHeaderHeight`、`ZenDataGridRowMinHeight`、`ZenDataGridCellPadding` |
 | Calendar 弹层与导航 | `ZenCalendarPopupWidth`、`ZenCalendarPopupHeight`、`ZenCalendarNavigationButtonSize` |
 | Switch 与 Slider | `ZenSwitchWidth`、`ZenSwitchHeight`、`ZenSliderThumbSize`、`ZenSliderTrackThickness` |
