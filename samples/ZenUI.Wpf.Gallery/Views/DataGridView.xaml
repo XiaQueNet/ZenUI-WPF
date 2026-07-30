@@ -17,8 +17,10 @@
                     <zen:ZenDataGrid
                         Height="310"
                         AutoGenerateColumns="False"
+                        IsRowSelectionHighlightEnabled="True"
                         IsReadOnly="True"
-                        ItemsSource="{Binding Users}">
+                        ItemsSource="{Binding Users}"
+                        SelectedIndex="1">
                         <DataGrid.Columns>
                             <DataGridTemplateColumn Width="48" CanUserSort="False">
                                 <DataGridTemplateColumn.HeaderTemplate>
@@ -79,7 +81,7 @@
                                 Header="状态" />
                         </DataGrid.Columns>
                     </zen:ZenDataGrid>
-                    <TextBlock Style="{StaticResource GallerySupportingTextStyle}" Text="表头复选框支持全选、取消全选和部分选中的三态反馈；本月工时作为数值列，列头和内容均右对齐。" />
+                    <TextBlock Style="{StaticResource GallerySupportingTextStyle}" Text="第二行同时展示数据勾选与当前行高亮；表头复选框提供部分选中的三态反馈，数值列的列头和内容均右对齐。" />
                 </StackPanel>
             </Border>
 

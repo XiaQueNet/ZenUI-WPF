@@ -33,25 +33,6 @@
             </Border>
             <Border Style="{StaticResource GalleryCardStyle}">
                 <StackPanel>
-                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="不同宽度" />
-                    <StackPanel Orientation="Horizontal">
-                        <StackPanel Margin="0,0,40,0">
-                            <zen:ZenSwitch Width="48" IsChecked="True" />
-                            <TextBlock HorizontalAlignment="Center" Style="{StaticResource GallerySupportingTextStyle}" Text="紧凑" />
-                        </StackPanel>
-                        <StackPanel Margin="0,0,40,0">
-                            <zen:ZenSwitch IsChecked="True" />
-                            <TextBlock HorizontalAlignment="Center" Style="{StaticResource GallerySupportingTextStyle}" Text="默认" />
-                        </StackPanel>
-                        <StackPanel>
-                            <zen:ZenSwitch Width="80" IsChecked="True" />
-                            <TextBlock HorizontalAlignment="Center" Style="{StaticResource GallerySupportingTextStyle}" Text="宽型" />
-                        </StackPanel>
-                    </StackPanel>
-                </StackPanel>
-            </Border>
-            <Border Style="{StaticResource GalleryCardStyle}">
-                <StackPanel>
                     <TextBlock Style="{StaticResource SectionTitleStyle}" Text="设置列表" />
                     <Grid>
                         <Grid.ColumnDefinitions>

@@ -21,6 +21,7 @@ namespace ZenUI.Wpf.Gallery.Views
                 new UserRow(4, 1004, "宋予安", "yuan.song@example.com", "项目管理", 128, "离线"),
                 new UserRow(5, 1005, "顾言川", "yanchuan.gu@example.com", "后端开发", 149, "在线")
             };
+            Users[1].IsSelected = true;
 
             foreach (var user in Users)
             {
