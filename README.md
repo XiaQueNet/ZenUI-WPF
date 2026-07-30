@@ -154,6 +154,14 @@ CI 还会生成 Light、Dark、HighContrast × Compact、Standard、Comfortable 
 - [贡献指南](CONTRIBUTING.md)
 - [变更记录](CHANGELOG.md)
 
+## 交流与反馈
+
+欢迎加入 ZenUI-WPF QQ 交流群：`650590176`。
+
+<p align="center">
+  <img src="assets/community/qq-group-650590176.jpg" alt="ZenUI-WPF QQ 交流群二维码，群号 650590176" width="360" />
+</p>
+
 ## License
 
 ZenUI.Wpf 使用 [MIT License](LICENSE)。
