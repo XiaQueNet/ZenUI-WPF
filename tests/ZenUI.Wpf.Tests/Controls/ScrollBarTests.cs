@@ -56,6 +56,10 @@ namespace ZenUI.Wpf.Tests.Controls
             window.Resources["ZenScrollBarThickness"] = 18d;
             window.Resources["ZenScrollBarTrackThickness"] = 8d;
             window.Resources["ZenScrollBarThumbMinLength"] = 40d;
+            window.Resources["ZenVerticalScrollBarMargin"] = new Thickness(0, 7, 0, 7);
+            window.Resources["ZenHorizontalScrollBarMargin"] = new Thickness(7, 0, 7, 0);
+            window.Resources["ZenVerticalScrollBarTrackMargin"] = new Thickness(0, 0, 2, 0);
+            window.Resources["ZenHorizontalScrollBarTrackMargin"] = new Thickness(0, 0, 0, 2);
             window.Resources["ZenVerticalScrollBarThumbMargin"] = new Thickness(5, 0, 5, 0);
             window.Resources["ZenHorizontalScrollBarThumbMargin"] = new Thickness(0, 5, 0, 5);
             window.Resources["ZenScrollBarCornerRadius"] = new CornerRadius(4);
@@ -67,6 +71,20 @@ namespace ZenUI.Wpf.Tests.Controls
 
                 Assert.AreEqual(18d, vertical.Width);
                 Assert.AreEqual(18d, horizontal.Height);
+                Assert.AreEqual(new Thickness(0, 7, 0, 7), vertical.Margin);
+                Assert.AreEqual(new Thickness(7, 0, 7, 0), horizontal.Margin);
+                var verticalTrackBackground =
+                    vertical.Template.FindName("TrackBackground", vertical) as Border;
+                var horizontalTrackBackground =
+                    horizontal.Template.FindName("TrackBackground", horizontal) as Border;
+                Assert.IsNotNull(verticalTrackBackground);
+                Assert.IsNotNull(horizontalTrackBackground);
+                Assert.AreEqual(
+                    new Thickness(0, 0, 2, 0),
+                    verticalTrackBackground.Margin);
+                Assert.AreEqual(
+                    new Thickness(0, 0, 0, 2),
+                    horizontalTrackBackground.Margin);
                 AssertScrollBarMetrics(
                     vertical,
                     8d,

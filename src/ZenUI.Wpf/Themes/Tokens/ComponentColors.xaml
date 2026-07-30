@@ -9,8 +9,8 @@
     <!-- 滚动条 -->
     <SolidColorBrush x:Key="ZenScrollBarTrackBrush" Color="#EEF1F5" />
     <SolidColorBrush x:Key="ZenScrollBarThumbBrush" Color="#AAB2C0" />
-    <SolidColorBrush x:Key="ZenScrollBarThumbHoverBrush" Color="#7892E5" />
-    <SolidColorBrush x:Key="ZenScrollBarThumbPressedBrush" Color="#3D63D2" />
+    <SolidColorBrush x:Key="ZenScrollBarThumbHoverBrush" Color="#8F99A8" />
+    <SolidColorBrush x:Key="ZenScrollBarThumbPressedBrush" Color="#778292" />
 
     <!-- 列表框与选择容器 -->
     <SolidColorBrush x:Key="ZenListBoxItemHoverBrush" Color="#EEF3FA" />

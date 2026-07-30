@@ -55,7 +55,10 @@ namespace ZenUI.Wpf.Tests.Controls
                 var popupBorder = comboPopup.Child as Border;
                 Assert.IsNotNull(popupBorder);
                 Assert.AreEqual(new Thickness(0, 6, 0, 0), popupBorder.Margin);
-                Assert.AreEqual(new Thickness(7), popupBorder.Padding);
+                var popupScrollViewer =
+                    FindVisualDescendant<ScrollViewer>(popupBorder);
+                Assert.IsNotNull(popupScrollViewer);
+                Assert.AreEqual(new Thickness(7), popupScrollViewer.Padding);
                 Assert.AreEqual(new Thickness(2), popupBorder.BorderThickness);
                 Assert.AreEqual(new CornerRadius(9), popupBorder.CornerRadius);
             }

@@ -14,6 +14,8 @@
     <sys:Double x:Key="ZenScrollBarThickness">14</sys:Double>
     <sys:Double x:Key="ZenScrollBarTrackThickness">8</sys:Double>
     <sys:Double x:Key="ZenScrollBarThumbMinLength">40</sys:Double>
+    <Thickness x:Key="ZenVerticalScrollBarMargin">0,6</Thickness>
+    <Thickness x:Key="ZenHorizontalScrollBarMargin">6,0</Thickness>
 
     <Thickness x:Key="ZenComboBoxPopupMargin">0,6,0,0</Thickness>
     <Thickness x:Key="ZenComboBoxPopupPadding">6</Thickness>

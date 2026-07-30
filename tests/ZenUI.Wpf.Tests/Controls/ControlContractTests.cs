@@ -144,8 +144,12 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.AreEqual(12d, dictionary["ZenScrollBarThickness"]);
             Assert.AreEqual(6d, dictionary["ZenScrollBarTrackThickness"]);
             Assert.AreEqual(32d, dictionary["ZenScrollBarThumbMinLength"]);
-            Assert.AreEqual(new Thickness(3, 0, 3, 0), dictionary["ZenVerticalScrollBarThumbMargin"]);
-            Assert.AreEqual(new Thickness(0, 3, 0, 3), dictionary["ZenHorizontalScrollBarThumbMargin"]);
+            Assert.AreEqual(new Thickness(0, 4, 0, 4), dictionary["ZenVerticalScrollBarMargin"]);
+            Assert.AreEqual(new Thickness(4, 0, 4, 0), dictionary["ZenHorizontalScrollBarMargin"]);
+            Assert.AreEqual(new Thickness(0, 0, 1, 0), dictionary["ZenVerticalScrollBarTrackMargin"]);
+            Assert.AreEqual(new Thickness(0, 0, 0, 1), dictionary["ZenHorizontalScrollBarTrackMargin"]);
+            Assert.AreEqual(new Thickness(5, 0, 1, 0), dictionary["ZenVerticalScrollBarThumbMargin"]);
+            Assert.AreEqual(new Thickness(0, 5, 0, 1), dictionary["ZenHorizontalScrollBarThumbMargin"]);
             Assert.AreEqual(new CornerRadius(3), dictionary["ZenScrollBarCornerRadius"]);
             Assert.AreEqual(new Thickness(0, 4, 0, 0), dictionary["ZenComboBoxPopupMargin"]);
             Assert.AreEqual(new Thickness(4), dictionary["ZenComboBoxPopupPadding"]);
