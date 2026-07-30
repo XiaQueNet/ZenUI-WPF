@@ -189,6 +189,7 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.AreEqual(24d, dictionary["ZenSliderCrossAxisMinSize"]);
             Assert.AreEqual(8d, dictionary["ZenProgressBarThickness"]);
             Assert.AreEqual(new Thickness(14, 11, 14, 11), dictionary["ZenAlertPadding"]);
+            Assert.AreEqual(new CornerRadius(6), dictionary["ZenAlertCornerRadius"]);
             Assert.AreEqual(new Thickness(14, 12, 14, 12), dictionary["ZenExpanderHeaderPadding"]);
             Assert.AreEqual(new Thickness(14, 10, 14, 14), dictionary["ZenExpanderContentPadding"]);
             Assert.AreEqual(new CornerRadius(8), dictionary["ZenExpanderCornerRadius"]);

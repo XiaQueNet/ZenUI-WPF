@@ -27,6 +27,41 @@ namespace ZenUI.Wpf.Tests.Controls
     public class ControlTokenTests
     {
         [TestMethod]
+        public void AlertUsesNeutralBorderAndCornerRadiusToken()
+        {
+            var alert = new ZenAlert
+            {
+                Content = "Saved",
+                Severity = AlertSeverity.Warning
+            };
+            var window = CreateTestWindow(alert, 320, 120);
+            window.Resources.MergedDictionaries.Add(new ResourceDictionary
+            {
+                Source = new Uri(
+                    "/ZenUI.Wpf;component/Themes/Generic.xaml",
+                    UriKind.Relative)
+            });
+            window.Resources["ZenAlertCornerRadius"] = new CornerRadius(10);
+
+            try
+            {
+                window.Show();
+                window.UpdateLayout();
+
+                var alertBorder = alert.Template.FindName("AlertBorder", alert) as Border;
+                Assert.IsNotNull(alertBorder);
+                Assert.AreEqual(new CornerRadius(10), alertBorder.CornerRadius);
+                Assert.AreEqual(
+                    ((SolidColorBrush)alert.FindResource("ZenBorderBrush")).Color,
+                    ((SolidColorBrush)alert.BorderBrush).Color);
+            }
+            finally
+            {
+                window.Close();
+            }
+        }
+
+        [TestMethod]
         public void TypographyTokensCanBeOverriddenInWindowResources()
         {
             var alert = new ZenAlert { Content = "Saved" };

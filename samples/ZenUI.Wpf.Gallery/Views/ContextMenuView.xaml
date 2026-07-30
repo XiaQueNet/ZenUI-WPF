@@ -200,16 +200,6 @@
                 </StackPanel>
             </Border>
 
-            <Border Style="{StaticResource GalleryCardStyle}">
-                <StackPanel>
-                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="使用建议" />
-                    <TextBlock
-                        Style="{StaticResource GallerySupportingTextStyle}"
-                        Text="菜单项保持简短并按任务分组；危险操作置于末尾。InputGestureText 仅负责展示快捷键提示，实际快捷键仍由应用命令绑定处理。"
-                        TextWrapping="Wrap" />
-                </StackPanel>
-            </Border>
-
             <gallery:PropertyTable ControlType="{x:Type zen:ZenContextMenu}" />
         </StackPanel>
     </ScrollViewer>

@@ -87,6 +87,7 @@
 
     <!-- 提示条 -->
     <Thickness x:Key="ZenAlertPadding">14,11</Thickness>
+    <CornerRadius x:Key="ZenAlertCornerRadius">6</CornerRadius>
 
     <!-- 折叠面板 -->
     <Thickness x:Key="ZenExpanderHeaderPadding">14,12</Thickness>
