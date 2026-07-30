@@ -3,6 +3,7 @@
     <TargetFramework>net472</TargetFramework>
     <UseWPF>true</UseWPF>
     <OutputType>WinExe</OutputType>
+    <ApplicationIcon>..\..\assets\brand\zenui-icon.ico</ApplicationIcon>
     <RootNamespace>ZenUI.Wpf.Gallery</RootNamespace>
     <AssemblyName>ZenUI.Wpf.Gallery</AssemblyName>
     <LangVersion>8.0</LangVersion>
