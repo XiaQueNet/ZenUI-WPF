@@ -68,6 +68,14 @@ namespace ZenUI.Wpf.Tests.Controls
                 var indeterminate = progressBar.Template.FindName("IndeterminateIndicator", progressBar) as FrameworkElement;
                 Assert.IsNotNull(indeterminate);
                 Assert.AreEqual(Visibility.Visible, indeterminate.Visibility);
+
+                progressBar.IsEnabled = false;
+                window.UpdateLayout();
+                Assert.AreEqual(0.45d, progressBar.Opacity);
+
+                ZenThemeManager.ApplyTheme(window.Resources, ZenTheme.HighContrast, false);
+                window.UpdateLayout();
+                Assert.AreEqual(1d, progressBar.Opacity);
             }
             finally
             {

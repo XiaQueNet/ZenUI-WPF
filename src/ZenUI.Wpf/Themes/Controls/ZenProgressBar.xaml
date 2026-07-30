@@ -45,15 +45,18 @@
                                         <DoubleAnimation
                                             Storyboard.TargetName="IndeterminateIndicator"
                                             Storyboard.TargetProperty="Opacity"
-                                            From="0.25"
-                                            To="1"
-                                            Duration="0:0:0.7" />
+                                            From="0.4"
+                                            To="0.85"
+                                            Duration="0:0:1.2" />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.EnterActions>
                             <Trigger.ExitActions>
                                 <StopStoryboard BeginStoryboardName="IndeterminateStoryboard" />
                             </Trigger.ExitActions>
+                        </Trigger>
+                        <Trigger Property="IsEnabled" Value="False">
+                            <Setter Property="Opacity" Value="{DynamicResource ZenDisabledItemOpacity}" />
                         </Trigger>
                     </ControlTemplate.Triggers>
                 </ControlTemplate>
