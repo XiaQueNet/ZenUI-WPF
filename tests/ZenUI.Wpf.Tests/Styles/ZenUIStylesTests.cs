@@ -80,6 +80,7 @@ namespace ZenUI.Wpf.Tests.Styles
                 [new ZenNumberBox()] = "XqZenNumberBoxStyle",
                 [new ZenPasswordBox()] = "XqZenPasswordBoxStyle",
                 [new ZenProgressBar()] = "XqZenProgressBarStyle",
+                [new ZenLoading()] = "XqZenLoadingStyle",
                 [new ZenRadioButton()] = "XqZenRadioButtonStyle",
                 [new ZenSlider()] = "XqZenSliderStyle",
                 [new ZenSwitch()] = "XqZenSwitchStyle",

@@ -44,6 +44,7 @@ namespace ZenUI.Wpf.Gallery
             containerRegistry.RegisterForNavigation<DataGridView>(NavigationKeys.DataGrid);
             containerRegistry.RegisterForNavigation<SliderView>(NavigationKeys.Slider);
             containerRegistry.RegisterForNavigation<ProgressBarView>(NavigationKeys.ProgressBar);
+            containerRegistry.RegisterForNavigation<LoadingView>(NavigationKeys.Loading);
             containerRegistry.RegisterForNavigation<AlertView>(NavigationKeys.Alert);
             containerRegistry.RegisterForNavigation<ExpanderView>(NavigationKeys.Expander);
             containerRegistry.RegisterForNavigation<PopoverView>(NavigationKeys.Popover);

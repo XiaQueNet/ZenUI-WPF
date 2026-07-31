@@ -58,6 +58,9 @@
     <sys:Double x:Key="ZenSliderCrossAxisMinSize">20</sys:Double>
 
     <sys:Double x:Key="ZenProgressBarThickness">6</sys:Double>
+    <sys:Double x:Key="ZenLoadingIndicatorSize">20</sys:Double>
+    <sys:Double x:Key="ZenLoadingIndicatorThickness">2</sys:Double>
+    <sys:Double x:Key="ZenLoadingContentSpacing">8</sys:Double>
     <Thickness x:Key="ZenAlertPadding">12,8</Thickness>
     <Thickness x:Key="ZenExpanderHeaderPadding">12,8</Thickness>
     <Thickness x:Key="ZenExpanderContentPadding">12,7,12,10</Thickness>

@@ -41,6 +41,7 @@ namespace ZenUI.Wpf.Tests.Controls
             var passwordBox = new TestZenPasswordBox();
             var slider = new TestZenSlider();
             var progressBar = new TestZenProgressBar();
+            var loading = new TestZenLoading();
             var alert = new TestZenAlert();
             var expander = new TestZenExpander();
 
@@ -56,6 +57,7 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.AreEqual(typeof(ZenPasswordBox), passwordBox.ExposedDefaultStyleKey);
             Assert.AreEqual(typeof(ZenSlider), slider.ExposedDefaultStyleKey);
             Assert.AreEqual(typeof(ZenProgressBar), progressBar.ExposedDefaultStyleKey);
+            Assert.AreEqual(typeof(ZenLoading), loading.ExposedDefaultStyleKey);
             Assert.AreEqual(typeof(ZenAlert), alert.ExposedDefaultStyleKey);
             Assert.AreEqual(typeof(ZenExpander), expander.ExposedDefaultStyleKey);
             Assert.AreEqual(ButtonVariant.Primary, button.Variant);
@@ -114,6 +116,7 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.IsInstanceOfType<Style>(dictionary[typeof(ZenPasswordBox)]);
             Assert.IsInstanceOfType<Style>(dictionary[typeof(ZenSlider)]);
             Assert.IsInstanceOfType<Style>(dictionary[typeof(ZenProgressBar)]);
+            Assert.IsInstanceOfType<Style>(dictionary[typeof(ZenLoading)]);
             Assert.IsInstanceOfType<Style>(dictionary[typeof(ZenAlert)]);
             Assert.IsInstanceOfType<Style>(dictionary[typeof(ZenExpander)]);
             Assert.IsInstanceOfType<Style>(dictionary[typeof(ScrollBar)]);
@@ -193,6 +196,10 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.AreEqual(4d, dictionary["ZenSliderTrackThickness"]);
             Assert.AreEqual(24d, dictionary["ZenSliderCrossAxisMinSize"]);
             Assert.AreEqual(8d, dictionary["ZenProgressBarThickness"]);
+            Assert.AreEqual(24d, dictionary["ZenLoadingIndicatorSize"]);
+            Assert.AreEqual(2d, dictionary["ZenLoadingIndicatorThickness"]);
+            Assert.AreEqual(10d, dictionary["ZenLoadingContentSpacing"]);
+            Assert.IsNotNull(dictionary["ZenLoadingOverlayBrush"]);
             Assert.AreEqual(new Thickness(14, 11, 14, 11), dictionary["ZenAlertPadding"]);
             Assert.AreEqual(new CornerRadius(6), dictionary["ZenAlertCornerRadius"]);
             Assert.AreEqual(new Thickness(14, 12, 14, 12), dictionary["ZenExpanderHeaderPadding"]);
@@ -241,6 +248,7 @@ namespace ZenUI.Wpf.Tests.Controls
                 new ZenDataGrid(),
                 new ZenSlider(),
                 new ZenProgressBar(),
+                new ZenLoading(),
                 new ZenAlert(),
                 new ZenExpander { Header = "Expander" }
             };
@@ -717,6 +725,7 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.AreEqual(AutomationControlType.DataGrid, new TestZenDataGrid().ExposedAutomationPeer.GetAutomationControlType());
             Assert.AreEqual(AutomationControlType.Slider, new TestZenSlider().ExposedAutomationPeer.GetAutomationControlType());
             Assert.AreEqual(AutomationControlType.ProgressBar, new TestZenProgressBar().ExposedAutomationPeer.GetAutomationControlType());
+            Assert.AreEqual(AutomationControlType.ProgressBar, new TestZenLoading().ExposedAutomationPeer.GetAutomationControlType());
             Assert.AreEqual(AutomationControlType.Group, new TestZenExpander().ExposedAutomationPeer.GetAutomationControlType());
         }
     }

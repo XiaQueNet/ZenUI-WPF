@@ -32,6 +32,7 @@
         <ResourceDictionary Source="/ZenUI.Wpf;component/Themes/Controls/ZenPasswordBox.xaml" />
         <ResourceDictionary Source="/ZenUI.Wpf;component/Themes/Controls/ZenSlider.xaml" />
         <ResourceDictionary Source="/ZenUI.Wpf;component/Themes/Controls/ZenProgressBar.xaml" />
+        <ResourceDictionary Source="/ZenUI.Wpf;component/Themes/Controls/ZenLoading.xaml" />
         <ResourceDictionary Source="/ZenUI.Wpf;component/Themes/Controls/ZenAlert.xaml" />
         <ResourceDictionary Source="/ZenUI.Wpf;component/Themes/Controls/ZenExpander.xaml" />
         <ResourceDictionary Source="/ZenUI.Wpf;component/Themes/Controls/ZenPopover.xaml" />

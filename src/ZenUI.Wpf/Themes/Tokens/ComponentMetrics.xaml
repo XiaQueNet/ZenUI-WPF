@@ -94,6 +94,11 @@
     <!-- 进度条 -->
     <sys:Double x:Key="ZenProgressBarThickness">8</sys:Double>
 
+    <!-- 加载状态 -->
+    <sys:Double x:Key="ZenLoadingIndicatorSize">24</sys:Double>
+    <sys:Double x:Key="ZenLoadingIndicatorThickness">2</sys:Double>
+    <sys:Double x:Key="ZenLoadingContentSpacing">10</sys:Double>
+
     <!-- 提示条 -->
     <Thickness x:Key="ZenAlertPadding">14,11</Thickness>
     <CornerRadius x:Key="ZenAlertCornerRadius">6</CornerRadius>

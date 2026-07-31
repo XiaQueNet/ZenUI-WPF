@@ -44,6 +44,7 @@ dotnet add package ZenUI.Wpf.Converters
         <zen:ZenTextBox Watermark="请输入内容" />
         <zen:ZenButton Content="保存" Variant="Primary" />
         <zen:ZenSwitch IsChecked="True" />
+        <zen:ZenLoading IsLoading="True" LoadingText="正在加载…" />
         <zen:ZenAlert Content="保存成功" Severity="Success" />
     </StackPanel>
 </Window>
@@ -72,7 +73,7 @@ dotnet add package ZenUI.Wpf.Converters
 
 | 类别 | 组件 |
 | --- | --- |
-| 操作与反馈 | Button、Switch、CheckBox、RadioButton、RadioGroup、Alert、ProgressBar |
+| 操作与反馈 | Button、Switch、CheckBox、RadioButton、RadioGroup、Alert、ProgressBar、Loading |
 | 文本与数值输入 | TextBox、PasswordBox、NumberBox、Slider |
 | 选择与日期时间 | ComboBox、ListBox、Calendar、DatePicker、TimePicker |
 | 数据与布局 | DataGrid、Expander |

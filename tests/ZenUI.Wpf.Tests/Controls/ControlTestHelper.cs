@@ -220,6 +220,11 @@ namespace ZenUI.Wpf.Tests.Controls
             public object ExposedDefaultStyleKey => DefaultStyleKey;
             public AutomationPeer ExposedAutomationPeer => OnCreateAutomationPeer();
         }
+        internal sealed class TestZenLoading : ZenLoading
+        {
+            public object ExposedDefaultStyleKey => DefaultStyleKey;
+            public AutomationPeer ExposedAutomationPeer => OnCreateAutomationPeer();
+        }
         internal sealed class TestZenAlert : ZenAlert
         {
             public object ExposedDefaultStyleKey => DefaultStyleKey;

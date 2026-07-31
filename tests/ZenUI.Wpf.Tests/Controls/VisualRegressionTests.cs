@@ -225,6 +225,13 @@ namespace ZenUI.Wpf.Tests.Controls
                 Maximum = 100,
                 Value = 64
             });
+            panel.Children.Add(new ZenLoading
+            {
+                Height = 80,
+                Margin = new Thickness(0, 14, 0, 0),
+                IsLoading = true,
+                LoadingText = "正在加载主题资源…"
+            });
             panel.Children.Add(new ZenAlert
             {
                 Margin = new Thickness(0, 14, 0, 0),

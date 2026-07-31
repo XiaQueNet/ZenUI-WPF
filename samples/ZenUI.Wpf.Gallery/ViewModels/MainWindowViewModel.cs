@@ -72,7 +72,8 @@ namespace ZenUI.Wpf.Gallery.ViewModels
                     "反馈",
                     SelectMenuItem,
                     new MenuItemViewModel("状态提示  Alert", NavigationKeys.Alert),
-                    new MenuItemViewModel("进度条  ProgressBar", NavigationKeys.ProgressBar)),
+                    new MenuItemViewModel("进度条  ProgressBar", NavigationKeys.ProgressBar),
+                    new MenuItemViewModel("加载状态  Loading", NavigationKeys.Loading)),
                 new NavigationGroupViewModel(
                     "浮层与菜单",
                     SelectMenuItem,

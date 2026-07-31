@@ -84,6 +84,15 @@
     <Style BasedOn="{StaticResource XqZenProgressBarStyle}" TargetType="zen:ZenProgressBar" />
 
     <Style
+        x:Key="XqZenLoadingStyle"
+        BasedOn="{StaticResource ZenLoadingStyle}"
+        TargetType="zen:ZenLoading">
+        <Setter Property="FontFamily" Value="{StaticResource DefaultFontFamily}" />
+        <Setter Property="FontSize" Value="{StaticResource DefaultFontSize}" />
+    </Style>
+    <Style BasedOn="{StaticResource XqZenLoadingStyle}" TargetType="zen:ZenLoading" />
+
+    <Style
         x:Key="XqZenDataGridStyle"
         BasedOn="{StaticResource ZenDataGridStyle}"
         TargetType="zen:ZenDataGrid">

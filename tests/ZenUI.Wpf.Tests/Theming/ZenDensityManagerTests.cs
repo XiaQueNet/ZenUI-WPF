@@ -33,6 +33,9 @@ namespace ZenUI.Wpf.Tests.Theming
             Assert.AreEqual(16d, resources["ZenSliderThumbSize"]);
             Assert.AreEqual(3d, resources["ZenSliderTrackThickness"]);
             Assert.AreEqual(6d, resources["ZenProgressBarThickness"]);
+            Assert.AreEqual(20d, resources["ZenLoadingIndicatorSize"]);
+            Assert.AreEqual(2d, resources["ZenLoadingIndicatorThickness"]);
+            Assert.AreEqual(8d, resources["ZenLoadingContentSpacing"]);
             Assert.AreEqual(new Thickness(12, 8, 12, 8), resources["ZenAlertPadding"]);
             Assert.AreEqual(2, resources.MergedDictionaries.Count);
 
@@ -52,6 +55,9 @@ namespace ZenUI.Wpf.Tests.Theming
             Assert.AreEqual(20d, resources["ZenSliderThumbSize"]);
             Assert.AreEqual(4d, resources["ZenSliderTrackThickness"]);
             Assert.AreEqual(10d, resources["ZenProgressBarThickness"]);
+            Assert.AreEqual(28d, resources["ZenLoadingIndicatorSize"]);
+            Assert.AreEqual(2.5d, resources["ZenLoadingIndicatorThickness"]);
+            Assert.AreEqual(12d, resources["ZenLoadingContentSpacing"]);
             Assert.AreEqual(new Thickness(16, 14, 16, 14), resources["ZenAlertPadding"]);
             Assert.AreEqual(2, resources.MergedDictionaries.Count);
 
@@ -71,6 +77,9 @@ namespace ZenUI.Wpf.Tests.Theming
             Assert.AreEqual(18d, resources["ZenSliderThumbSize"]);
             Assert.AreEqual(4d, resources["ZenSliderTrackThickness"]);
             Assert.AreEqual(8d, resources["ZenProgressBarThickness"]);
+            Assert.AreEqual(24d, resources["ZenLoadingIndicatorSize"]);
+            Assert.AreEqual(2d, resources["ZenLoadingIndicatorThickness"]);
+            Assert.AreEqual(10d, resources["ZenLoadingContentSpacing"]);
             Assert.AreEqual(new Thickness(14, 11, 14, 11), resources["ZenAlertPadding"]);
             Assert.AreEqual(1, resources.MergedDictionaries.Count);
         }

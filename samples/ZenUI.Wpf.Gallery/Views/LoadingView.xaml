@@ -1,0 +1,79 @@
+<UserControl
+    x:Class="ZenUI.Wpf.Gallery.Views.LoadingView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:gallery="clr-namespace:ZenUI.Wpf.Gallery.Controls"
+    xmlns:zen="https://zenui.mnorg.cn/xaml/wpf">
+    <ScrollViewer
+        Padding="{StaticResource GalleryPagePadding}"
+        HorizontalContentAlignment="Stretch"
+        VerticalScrollBarVisibility="Auto">
+        <StackPanel>
+            <gallery:PageHeader Title="Loading 加载状态" Description="在内容加载期间提供克制、明确的不确定进度反馈。" />
+            <Border Style="{StaticResource GalleryCardStyle}">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="内容加载" />
+                    <zen:ZenSwitch
+                        x:Name="LoadingSwitch"
+                        Margin="0,0,0,14"
+                        HorizontalAlignment="Left"
+                        AutomationProperties.Name="切换加载状态"
+                        IsChecked="True" />
+                    <zen:ZenLoading
+                        Height="190"
+                        IsLoading="{Binding IsChecked, ElementName=LoadingSwitch}"
+                        LoadingText="正在加载订单数据…">
+                        <Border
+                            Padding="18"
+                            Background="{DynamicResource ZenSurfaceMutedBrush}"
+                            CornerRadius="8">
+                            <StackPanel>
+                                <TextBlock FontWeight="{DynamicResource ZenFontWeightSemibold}" Text="今日订单" />
+                                <TextBlock
+                                    Margin="0,10,0,0"
+                                    Foreground="{DynamicResource ZenTextSecondaryBrush}"
+                                    Text="订单数量 128" />
+                                <TextBlock
+                                    Margin="0,6,0,0"
+                                    Foreground="{DynamicResource ZenTextSecondaryBrush}"
+                                    Text="销售额 ¥12,860.00" />
+                            </StackPanel>
+                        </Border>
+                    </zen:ZenLoading>
+                </StackPanel>
+            </Border>
+            <Border Style="{StaticResource GalleryCardStyle}">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="独立指示器与非阻断状态" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="18" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <zen:ZenLoading
+                            Height="110"
+                            Padding="10"
+                            IsLoading="True"
+                            LoadingText="正在连接服务…" />
+                        <zen:ZenLoading
+                            Grid.Column="2"
+                            Height="110"
+                            Padding="10"
+                            IsContentInteractionBlocked="False"
+                            IsLoading="True"
+                            LoadingText="后台同步中"
+                            Orientation="Horizontal">
+                            <zen:ZenButton
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Bottom"
+                                Content="仍可操作"
+                                Style="{StaticResource GalleryButtonStyle}" />
+                        </zen:ZenLoading>
+                    </Grid>
+                </StackPanel>
+            </Border>
+            <gallery:PropertyTable ControlType="{x:Type zen:ZenLoading}" />
+        </StackPanel>
+    </ScrollViewer>
+</UserControl>

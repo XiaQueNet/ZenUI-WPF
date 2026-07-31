@@ -20,6 +20,7 @@ namespace ZenUI.Wpf.Gallery.Navigation
         public const string DataGrid = nameof(DataGrid);
         public const string Slider = nameof(Slider);
         public const string ProgressBar = nameof(ProgressBar);
+        public const string Loading = nameof(Loading);
         public const string Alert = nameof(Alert);
         public const string Expander = nameof(Expander);
         public const string Popover = nameof(Popover);
