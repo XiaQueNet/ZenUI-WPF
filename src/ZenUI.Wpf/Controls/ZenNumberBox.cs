@@ -37,6 +37,7 @@ namespace ZenUI.Wpf.Controls
         private RepeatButton verticalIncreaseButton;
         private RepeatButton verticalDecreaseButton;
         private bool isUpdatingText;
+        private bool isUpdatingValueFromText;
 
         static ZenNumberBox()
         {
@@ -55,7 +56,7 @@ namespace ZenUI.Wpf.Controls
         }
 
         /// <summary>
-        /// 获取或设置当前值。
+        /// 获取或设置当前值。编辑器中的文本可解析为有效数字时会立即更新该值。
         /// </summary>
         [Bindable(true)]
         public decimal Value
@@ -266,6 +267,46 @@ namespace ZenUI.Wpf.Controls
                 new FrameworkPropertyMetadata(null));
 
         /// <summary>
+        /// 获取或设置在用户点击数字输入区域时执行的命令。
+        /// </summary>
+        [Bindable(true)]
+        public ICommand EditorClickCommand
+        {
+            get { return (ICommand)GetValue(EditorClickCommandProperty); }
+            set { SetValue(EditorClickCommandProperty, value); }
+        }
+
+        /// <summary>
+        /// 标识 <see cref="EditorClickCommand"/> 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty EditorClickCommandProperty =
+            DependencyProperty.Register(
+                nameof(EditorClickCommand),
+                typeof(ICommand),
+                SelfType,
+                new FrameworkPropertyMetadata(null));
+
+        /// <summary>
+        /// 获取或设置传递给 <see cref="EditorClickCommand"/> 的参数。
+        /// </summary>
+        [Bindable(true)]
+        public object EditorClickCommandParameter
+        {
+            get { return GetValue(EditorClickCommandParameterProperty); }
+            set { SetValue(EditorClickCommandParameterProperty, value); }
+        }
+
+        /// <summary>
+        /// 标识 <see cref="EditorClickCommandParameter"/> 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty EditorClickCommandParameterProperty =
+            DependencyProperty.Register(
+                nameof(EditorClickCommandParameter),
+                typeof(object),
+                SelfType,
+                new FrameworkPropertyMetadata(null));
+
+        /// <summary>
         /// 获取或设置一个值，该值指示是否禁止直接编辑文本。增减按钮仍然可用。
         /// </summary>
         [Bindable(true)]
@@ -395,7 +436,11 @@ namespace ZenUI.Wpf.Controls
         private static void OnValueChanged(DependencyObject dependencyObject, DependencyPropertyChangedEventArgs e)
         {
             var owner = (ZenNumberBox)dependencyObject;
-            owner.UpdateText();
+            if (!owner.isUpdatingValueFromText)
+            {
+                owner.UpdateText();
+            }
+
             owner.UpdateButtonStates();
             owner.RaiseEvent(new RoutedPropertyChangedEventArgs<decimal>(
                 (decimal)e.OldValue,
@@ -418,13 +463,51 @@ namespace ZenUI.Wpf.Controls
             CommitInput();
             try
             {
-                Value = delta > 0m
-                    ? Math.Min(Maximum, checked(Value + delta))
-                    : Math.Max(Minimum, checked(Value + delta));
+                SetCurrentValue(
+                    ValueProperty,
+                    delta > 0m
+                        ? Math.Min(Maximum, checked(Value + delta))
+                        : Math.Max(Minimum, checked(Value + delta)));
             }
             catch (OverflowException)
             {
-                Value = delta > 0m ? Maximum : Minimum;
+                SetCurrentValue(ValueProperty, delta > 0m ? Maximum : Minimum);
+            }
+        }
+
+        private void OnTextBoxTextChanged(object sender, TextChangedEventArgs e)
+        {
+            var activeTextBox = GetActiveTextBox();
+            if (activeTextBox == null ||
+                isUpdatingText ||
+                IsReadOnly ||
+                !ReferenceEquals(sender, activeTextBox) ||
+                !decimal.TryParse(
+                    activeTextBox.Text,
+                    NumberStyles.Number,
+                    CultureInfo.CurrentCulture,
+                    out var parsedValue))
+            {
+                return;
+            }
+
+            isUpdatingValueFromText = true;
+            try
+            {
+                SetCurrentValue(ValueProperty, parsedValue);
+            }
+            finally
+            {
+                isUpdatingValueFromText = false;
+            }
+
+            if (Value != parsedValue)
+            {
+                UpdateText();
+            }
+            else
+            {
+                UpdateInactiveTextBox(activeTextBox);
             }
         }
 
@@ -447,6 +530,16 @@ namespace ZenUI.Wpf.Controls
             CommitInput();
         }
 
+        private void OnEditorMouseLeftButtonUp(object sender, MouseButtonEventArgs e)
+        {
+            var command = EditorClickCommand;
+            var parameter = EditorClickCommandParameter;
+            if (command != null && command.CanExecute(parameter))
+            {
+                command.Execute(parameter);
+            }
+        }
+
         private void OnIsKeyboardFocusWithinChanged(object sender, DependencyPropertyChangedEventArgs e)
         {
             if (!(bool)e.NewValue)
@@ -462,9 +555,7 @@ namespace ZenUI.Wpf.Controls
 
         private void CommitInput()
         {
-            var activeTextBox = SpinButtonLayout == SpinButtonLayout.Vertical
-                ? verticalTextBox
-                : textBox;
+            var activeTextBox = GetActiveTextBox();
             if (activeTextBox == null || isUpdatingText || IsReadOnly)
             {
                 return;
@@ -476,10 +567,17 @@ namespace ZenUI.Wpf.Controls
                 CultureInfo.CurrentCulture,
                 out var parsedValue))
             {
-                Value = parsedValue;
+                SetCurrentValue(ValueProperty, parsedValue);
             }
 
             UpdateText();
+        }
+
+        private TextBox GetActiveTextBox()
+        {
+            return SpinButtonLayout == SpinButtonLayout.Vertical
+                ? verticalTextBox
+                : textBox;
         }
 
         private void UpdateText()
@@ -487,6 +585,13 @@ namespace ZenUI.Wpf.Controls
             isUpdatingText = true;
             UpdateTextBox(textBox);
             UpdateTextBox(verticalTextBox);
+            isUpdatingText = false;
+        }
+
+        private void UpdateInactiveTextBox(TextBox activeTextBox)
+        {
+            isUpdatingText = true;
+            UpdateTextBox(ReferenceEquals(activeTextBox, textBox) ? verticalTextBox : textBox);
             isUpdatingText = false;
         }
 
@@ -531,8 +636,13 @@ namespace ZenUI.Wpf.Controls
         {
             if (target != null)
             {
+                target.TextChanged += OnTextBoxTextChanged;
                 target.KeyDown += OnTextBoxKeyDown;
                 target.LostKeyboardFocus += OnTextBoxLostKeyboardFocus;
+                target.AddHandler(
+                    MouseLeftButtonUpEvent,
+                    new MouseButtonEventHandler(OnEditorMouseLeftButtonUp),
+                    true);
             }
         }
 
@@ -540,8 +650,12 @@ namespace ZenUI.Wpf.Controls
         {
             if (target != null)
             {
+                target.TextChanged -= OnTextBoxTextChanged;
                 target.KeyDown -= OnTextBoxKeyDown;
                 target.LostKeyboardFocus -= OnTextBoxLostKeyboardFocus;
+                target.RemoveHandler(
+                    MouseLeftButtonUpEvent,
+                    new MouseButtonEventHandler(OnEditorMouseLeftButtonUp));
             }
         }
 

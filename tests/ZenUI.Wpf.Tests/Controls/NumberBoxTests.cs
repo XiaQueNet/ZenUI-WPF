@@ -1,10 +1,13 @@
 using System;
+using System.Globalization;
 using System.Windows;
 using System.Windows.Automation;
 using System.Windows.Automation.Peers;
 using System.Windows.Automation.Provider;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Data;
+using System.Windows.Input;
 using System.Windows.Shapes;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -31,6 +34,8 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.IsNull(numberBox.IncreaseButtonContentTemplate);
             Assert.IsNull(numberBox.DecreaseButtonContent);
             Assert.IsNull(numberBox.DecreaseButtonContentTemplate);
+            Assert.IsNull(numberBox.EditorClickCommand);
+            Assert.IsNull(numberBox.EditorClickCommandParameter);
         }
 
         [TestMethod]
@@ -267,6 +272,114 @@ namespace ZenUI.Wpf.Tests.Controls
         }
 
         [TestMethod]
+        public void EditorClickExecutesBoundCommandInBothLayouts()
+        {
+            var parameter = new object();
+            var command = new RecordingCommand();
+            var numberBox = new ZenNumberBox
+            {
+                EditorClickCommand = command,
+                EditorClickCommandParameter = parameter
+            };
+            var window = CreateWindow(numberBox);
+
+            try
+            {
+                window.Show();
+                window.UpdateLayout();
+
+                RaiseMouseLeftButtonUp(
+                    numberBox.Template.FindName("PART_TextBox", numberBox) as TextBox);
+                Assert.AreEqual(1, command.ExecutionCount);
+                Assert.AreSame(parameter, command.LastParameter);
+
+                numberBox.SpinButtonLayout = SpinButtonLayout.Vertical;
+                window.UpdateLayout();
+
+                RaiseMouseLeftButtonUp(
+                    numberBox.Template.FindName("PART_VerticalTextBox", numberBox) as TextBox);
+                Assert.AreEqual(2, command.ExecutionCount);
+                Assert.AreSame(parameter, command.LastParameter);
+
+                command.CanExecuteResult = false;
+                RaiseMouseLeftButtonUp(
+                    numberBox.Template.FindName("PART_VerticalTextBox", numberBox) as TextBox);
+                Assert.AreEqual(2, command.ExecutionCount);
+            }
+            finally
+            {
+                window.Close();
+            }
+        }
+
+        [TestMethod]
+        public void PropertyChangedBindingUpdatesSourceWhileTyping()
+        {
+            var source = new NumberValueSource { Value = 1m };
+            var numberBox = new ZenNumberBox();
+            BindingOperations.SetBinding(
+                numberBox,
+                ZenNumberBox.ValueProperty,
+                new Binding(nameof(NumberValueSource.Value))
+                {
+                    Mode = BindingMode.TwoWay,
+                    Source = source,
+                    UpdateSourceTrigger = UpdateSourceTrigger.PropertyChanged
+                });
+            var window = CreateWindow(numberBox);
+
+            try
+            {
+                window.Show();
+                window.UpdateLayout();
+
+                var editor = numberBox.Template.FindName("PART_TextBox", numberBox) as TextBox;
+                Assert.IsNotNull(editor);
+
+                editor.Text = 12.5m.ToString(CultureInfo.CurrentCulture);
+
+                Assert.AreEqual(12.5m, numberBox.Value);
+                Assert.AreEqual(12.5m, source.Value);
+                Assert.AreEqual(
+                    12.5m.ToString(CultureInfo.CurrentCulture),
+                    editor.Text);
+                Assert.IsNotNull(
+                    BindingOperations.GetBindingExpression(
+                        numberBox,
+                        ZenNumberBox.ValueProperty));
+            }
+            finally
+            {
+                window.Close();
+            }
+        }
+
+        [TestMethod]
+        public void IncompleteEditorTextDoesNotReplaceCurrentValue()
+        {
+            var numberBox = new ZenNumberBox { Value = 3m };
+            var window = CreateWindow(numberBox);
+
+            try
+            {
+                window.Show();
+                window.UpdateLayout();
+
+                var editor = numberBox.Template.FindName("PART_TextBox", numberBox) as TextBox;
+                Assert.IsNotNull(editor);
+
+                editor.Text = "-";
+
+                Assert.AreEqual(3m, numberBox.Value);
+                Assert.AreEqual("-", editor.Text);
+            }
+            finally
+            {
+                window.Close();
+            }
+        }
+
+        [TestMethod]
         public void DensityAndDisabledStateKeepSpinButtonsBalanced()
         {
             var numberBox = new ZenNumberBox();
@@ -344,10 +457,51 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.AreSame(expectedTemplate, presenter.ContentTemplate);
         }
 
+        private static void RaiseMouseLeftButtonUp(TextBox textBox)
+        {
+            Assert.IsNotNull(textBox);
+            textBox.RaiseEvent(new MouseButtonEventArgs(
+                Mouse.PrimaryDevice,
+                Environment.TickCount,
+                MouseButton.Left)
+            {
+                RoutedEvent = UIElement.MouseLeftButtonUpEvent
+            });
+        }
+
         private sealed class TestZenNumberBox : ZenNumberBox
         {
             public object ExposedDefaultStyleKey => DefaultStyleKey;
             public AutomationPeer ExposedAutomationPeer => OnCreateAutomationPeer();
+        }
+
+        private sealed class RecordingCommand : ICommand
+        {
+            public bool CanExecuteResult { get; set; } = true;
+            public int ExecutionCount { get; private set; }
+            public object LastParameter { get; private set; }
+
+            public event EventHandler CanExecuteChanged
+            {
+                add { }
+                remove { }
+            }
+
+            public bool CanExecute(object parameter)
+            {
+                return CanExecuteResult;
+            }
+
+            public void Execute(object parameter)
+            {
+                ExecutionCount++;
+                LastParameter = parameter;
+            }
+        }
+
+        private sealed class NumberValueSource
+        {
+            public decimal Value { get; set; }
         }
     }
 }
