@@ -25,62 +25,65 @@ namespace ZenUI.Wpf.Controls
         }
 
         /// <summary>
-        /// 获取或设置用作浮层触发器的内容。用户单击该内容时打开或关闭浮层。
+        /// 获取或设置浮层的锚点内容。用户单击该内容时打开或关闭浮层。
         /// </summary>
-        /// <value>用作浮层触发器的内容。默认值为 <c>?</c>。</value>
+        /// <value>
+        /// 浮层的锚点内容。默认值为 <see langword="null"/>；
+        /// 使用默认样式时显示内置的问号锚点。
+        /// </value>
         [Bindable(true)]
-        public object Trigger
+        public object Anchor
         {
-            get { return GetValue(TriggerProperty); }
-            set { SetValue(TriggerProperty, value); }
+            get { return GetValue(AnchorProperty); }
+            set { SetValue(AnchorProperty, value); }
         }
 
         /// <summary>
-        /// 标识 <see cref="Trigger"/> 依赖属性。
+        /// 标识 <see cref="Anchor"/> 依赖属性。
         /// </summary>
-        public static readonly DependencyProperty TriggerProperty =
+        public static readonly DependencyProperty AnchorProperty =
             DependencyProperty.Register(
-                nameof(Trigger),
+                nameof(Anchor),
                 typeof(object),
                 SelfType,
-                new FrameworkPropertyMetadata("?"));
+                new FrameworkPropertyMetadata(null));
 
         /// <summary>
-        /// 获取或设置用于呈现 <see cref="Trigger"/> 内容的数据模板。
+        /// 获取或设置用于呈现 <see cref="Anchor"/> 内容的数据模板。
         /// </summary>
         [Bindable(true)]
-        public DataTemplate TriggerTemplate
+        public DataTemplate AnchorTemplate
         {
-            get { return (DataTemplate)GetValue(TriggerTemplateProperty); }
-            set { SetValue(TriggerTemplateProperty, value); }
+            get { return (DataTemplate)GetValue(AnchorTemplateProperty); }
+            set { SetValue(AnchorTemplateProperty, value); }
         }
 
         /// <summary>
-        /// 标识 <see cref="TriggerTemplate"/> 依赖属性。
+        /// 标识 <see cref="AnchorTemplate"/> 依赖属性。
         /// </summary>
-        public static readonly DependencyProperty TriggerTemplateProperty =
+        public static readonly DependencyProperty AnchorTemplateProperty =
             DependencyProperty.Register(
-                nameof(TriggerTemplate),
+                nameof(AnchorTemplate),
                 typeof(DataTemplate),
                 SelfType,
                 new FrameworkPropertyMetadata(null));
 
         /// <summary>
-        /// 获取或设置应用于触发按钮的样式。
+        /// 获取或设置应用于锚点按钮的样式。
         /// </summary>
         [Bindable(true)]
-        public Style TriggerStyle
+        public Style AnchorButtonStyle
         {
-            get { return (Style)GetValue(TriggerStyleProperty); }
-            set { SetValue(TriggerStyleProperty, value); }
+            get { return (Style)GetValue(AnchorButtonStyleProperty); }
+            set { SetValue(AnchorButtonStyleProperty, value); }
         }
 
         /// <summary>
-        /// 标识 <see cref="TriggerStyle"/> 依赖属性。
+        /// 标识 <see cref="AnchorButtonStyle"/> 依赖属性。
         /// </summary>
-        public static readonly DependencyProperty TriggerStyleProperty =
+        public static readonly DependencyProperty AnchorButtonStyleProperty =
             DependencyProperty.Register(
-                nameof(TriggerStyle),
+                nameof(AnchorButtonStyle),
                 typeof(Style),
                 SelfType,
                 new FrameworkPropertyMetadata(null));

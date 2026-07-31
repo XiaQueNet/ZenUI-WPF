@@ -35,19 +35,19 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.AreEqual(360d, dictionary["ZenCalloutMaxWidth"]);
             Assert.AreEqual(24d, dictionary["ZenCalloutTriggerSize"]);
             Assert.AreEqual(4d, dictionary["ZenCalloutTargetGap"]);
-            Assert.AreEqual("?", popover.Trigger);
+            Assert.IsNull(popover.Anchor);
             Assert.AreEqual(new CornerRadius(6), popover.CornerRadius);
             Assert.IsTrue(popover.ShowArrow);
             Assert.AreEqual(0d, popover.MinPopupWidth);
             Assert.AreEqual(360d, popover.MaxPopupWidth);
             Assert.AreEqual(4d, popover.TargetGap);
-            Assert.IsNull(popover.TriggerStyle);
+            Assert.IsNull(popover.AnchorButtonStyle);
         }
 
         [TestMethod]
         public void PopoverTemplateConnectsTriggerAndPopupToIsOpen()
         {
-            var triggerStyle = new Style(typeof(ToggleButton));
+            var anchorButtonStyle = new Style(typeof(ToggleButton));
             var popover = new ZenPopover
             {
                 Content = "气泡内容",
@@ -61,7 +61,7 @@ namespace ZenUI.Wpf.Tests.Controls
                 TargetGap = 8,
                 MinPopupWidth = 120,
                 MaxPopupWidth = 280,
-                TriggerStyle = triggerStyle
+                AnchorButtonStyle = anchorButtonStyle
             };
             var window = CreateTestWindow(popover, 320, 240);
             window.Resources.MergedDictionaries.Add(new ResourceDictionary
@@ -84,9 +84,9 @@ namespace ZenUI.Wpf.Tests.Controls
                 Assert.IsNotNull(trigger);
                 Assert.IsNotNull(popup);
                 Assert.IsNotNull(chrome);
-                Assert.AreEqual("?", trigger.Content);
+                Assert.IsNull(trigger.Content);
                 Assert.AreEqual(HorizontalAlignment.Left, popover.HorizontalAlignment);
-                Assert.AreEqual(triggerStyle, trigger.Style);
+                Assert.AreEqual(anchorButtonStyle, trigger.Style);
                 Assert.AreEqual(trigger, popup.PlacementTarget);
                 Assert.AreEqual(PlacementMode.Top, popup.Placement);
                 Assert.AreEqual(popover.Padding, chrome.Padding);
@@ -115,6 +115,101 @@ namespace ZenUI.Wpf.Tests.Controls
             {
                 popover.IsOpen = false;
                 window.Dispatcher.Invoke(DispatcherPriority.ContextIdle, new Action(() => { }));
+                window.Close();
+            }
+        }
+
+        [TestMethod]
+        public void DefaultAnchorUsesQuestionMarkChrome()
+        {
+            var popover = new ZenPopover
+            {
+                Content = "气泡内容"
+            };
+            var window = CreateTestWindow(popover, 320, 240);
+            window.Resources.MergedDictionaries.Add(new ResourceDictionary
+            {
+                Source = new Uri(
+                    "/ZenUI.Wpf;component/Themes/Generic.xaml",
+                    UriKind.Relative)
+            });
+
+            try
+            {
+                window.Show();
+                window.UpdateLayout();
+                popover.ApplyTemplate();
+
+                var trigger = popover.Template.FindName("PART_Trigger", popover) as ToggleButton;
+                Assert.IsNotNull(trigger);
+                trigger.ApplyTemplate();
+
+                var defaultAnchor = trigger.Template.FindName(
+                    "DefaultAnchorBorder",
+                    trigger) as FrameworkElement;
+                var customAnchor = trigger.Template.FindName(
+                    "CustomAnchorPresenter",
+                    trigger) as ContentPresenter;
+
+                Assert.IsNull(trigger.Content);
+                Assert.IsNotNull(defaultAnchor);
+                Assert.IsNotNull(customAnchor);
+                Assert.AreEqual(Visibility.Visible, defaultAnchor.Visibility);
+                Assert.AreEqual(Visibility.Collapsed, customAnchor.Visibility);
+                Assert.AreEqual("?", System.Windows.Automation.AutomationProperties.GetName(trigger));
+            }
+            finally
+            {
+                window.Close();
+            }
+        }
+
+        [TestMethod]
+        public void CustomAnchorReplacesDefaultQuestionMarkChrome()
+        {
+            var anchor = new TextBlock
+            {
+                Text = "查看说明"
+            };
+            var popover = new ZenPopover
+            {
+                Anchor = anchor,
+                Content = "气泡内容"
+            };
+            var window = CreateTestWindow(popover, 320, 240);
+            window.Resources.MergedDictionaries.Add(new ResourceDictionary
+            {
+                Source = new Uri(
+                    "/ZenUI.Wpf;component/Themes/Generic.xaml",
+                    UriKind.Relative)
+            });
+
+            try
+            {
+                window.Show();
+                window.UpdateLayout();
+                popover.ApplyTemplate();
+
+                var trigger = popover.Template.FindName("PART_Trigger", popover) as ToggleButton;
+                Assert.IsNotNull(trigger);
+                trigger.ApplyTemplate();
+
+                var defaultAnchor = trigger.Template.FindName(
+                    "DefaultAnchorBorder",
+                    trigger) as FrameworkElement;
+                var customAnchor = trigger.Template.FindName(
+                    "CustomAnchorPresenter",
+                    trigger) as ContentPresenter;
+
+                Assert.AreEqual(anchor, trigger.Content);
+                Assert.IsNotNull(defaultAnchor);
+                Assert.IsNotNull(customAnchor);
+                Assert.AreEqual(Visibility.Collapsed, defaultAnchor.Visibility);
+                Assert.AreEqual(Visibility.Visible, customAnchor.Visibility);
+                Assert.AreEqual(anchor, customAnchor.Content);
+            }
+            finally
+            {
                 window.Close();
             }
         }

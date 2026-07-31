@@ -186,7 +186,7 @@
     </Style>
     <Style BasedOn="{StaticResource ZenToolTipStyle}" TargetType="{x:Type ToolTip}" />
 
-    <Style x:Key="ZenPopoverTriggerStyle" TargetType="{x:Type ToggleButton}">
+    <Style x:Key="ZenPopoverAnchorButtonStyle" TargetType="{x:Type ToggleButton}">
         <Setter Property="MinWidth" Value="{DynamicResource ZenCalloutTriggerSize}" />
         <Setter Property="MinHeight" Value="{DynamicResource ZenCalloutTriggerSize}" />
         <Setter Property="Padding" Value="0" />
@@ -195,37 +195,56 @@
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderBrush" Value="{DynamicResource ZenTextPlaceholderBrush}" />
         <Setter Property="BorderThickness" Value="1" />
+        <Setter Property="HorizontalContentAlignment" Value="Center" />
+        <Setter Property="VerticalContentAlignment" Value="Center" />
         <Setter Property="FocusVisualStyle" Value="{x:Null}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type ToggleButton}">
-                    <Border
-                        x:Name="TriggerBorder"
-                        Padding="{TemplateBinding Padding}"
-                        Background="{TemplateBinding Background}"
-                        BorderBrush="{TemplateBinding BorderBrush}"
-                        BorderThickness="{TemplateBinding BorderThickness}"
-                        CornerRadius="999">
+                    <Grid>
+                        <Border
+                            x:Name="DefaultAnchorBorder"
+                            MinWidth="{TemplateBinding MinWidth}"
+                            MinHeight="{TemplateBinding MinHeight}"
+                            Padding="{TemplateBinding Padding}"
+                            Background="{TemplateBinding Background}"
+                            BorderBrush="{TemplateBinding BorderBrush}"
+                            BorderThickness="{TemplateBinding BorderThickness}"
+                            CornerRadius="999"
+                            Visibility="Collapsed">
+                            <TextBlock
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                FontWeight="{DynamicResource ZenFontWeightSemibold}"
+                                Foreground="{TemplateBinding Foreground}"
+                                Text="?" />
+                        </Border>
                         <ContentPresenter
-                            HorizontalAlignment="Center"
-                            VerticalAlignment="Center"
+                            x:Name="CustomAnchorPresenter"
+                            HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}"
+                            VerticalAlignment="{TemplateBinding VerticalContentAlignment}"
                             Content="{TemplateBinding Content}"
                             ContentTemplate="{TemplateBinding ContentTemplate}"
                             TextElement.Foreground="{TemplateBinding Foreground}" />
-                    </Border>
+                    </Grid>
                     <ControlTemplate.Triggers>
+                        <Trigger Property="Content" Value="{x:Null}">
+                            <Setter Property="AutomationProperties.Name" Value="?" />
+                            <Setter TargetName="DefaultAnchorBorder" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="CustomAnchorPresenter" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter Property="Foreground" Value="{DynamicResource ZenPrimaryBrush}" />
                             <Setter Property="BorderBrush" Value="{DynamicResource ZenPrimaryBrush}" />
-                            <Setter TargetName="TriggerBorder" Property="Background" Value="{DynamicResource ZenInfoLightBrush}" />
+                            <Setter TargetName="DefaultAnchorBorder" Property="Background" Value="{DynamicResource ZenInfoLightBrush}" />
                         </Trigger>
                         <Trigger Property="IsChecked" Value="True">
                             <Setter Property="Foreground" Value="{DynamicResource ZenPrimaryBrush}" />
                             <Setter Property="BorderBrush" Value="{DynamicResource ZenPrimaryBrush}" />
-                            <Setter TargetName="TriggerBorder" Property="Background" Value="{DynamicResource ZenInfoLightBrush}" />
+                            <Setter TargetName="DefaultAnchorBorder" Property="Background" Value="{DynamicResource ZenInfoLightBrush}" />
                         </Trigger>
                         <Trigger Property="IsKeyboardFocused" Value="True">
-                            <Setter TargetName="TriggerBorder" Property="BorderThickness" Value="2" />
+                            <Setter TargetName="DefaultAnchorBorder" Property="BorderThickness" Value="2" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Opacity" Value="{DynamicResource ZenDisabledAuxiliaryActionOpacity}" />
@@ -246,7 +265,7 @@
         <Setter Property="CornerRadius" Value="{DynamicResource ZenCalloutCornerRadius}" />
         <Setter Property="ShowArrow" Value="True" />
         <Setter Property="TargetGap" Value="{DynamicResource ZenCalloutTargetGap}" />
-        <Setter Property="TriggerStyle" Value="{StaticResource ZenPopoverTriggerStyle}" />
+        <Setter Property="AnchorButtonStyle" Value="{StaticResource ZenPopoverAnchorButtonStyle}" />
         <Setter Property="MaxPopupWidth" Value="{DynamicResource ZenCalloutMaxWidth}" />
         <Setter Property="HorizontalAlignment" Value="Left" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
@@ -256,10 +275,10 @@
                     <Grid>
                         <ToggleButton
                             x:Name="PART_Trigger"
-                            Content="{TemplateBinding Trigger}"
-                            ContentTemplate="{TemplateBinding TriggerTemplate}"
+                            Content="{TemplateBinding Anchor}"
+                            ContentTemplate="{TemplateBinding AnchorTemplate}"
                             IsChecked="{Binding IsOpen, Mode=TwoWay, RelativeSource={RelativeSource TemplatedParent}}"
-                            Style="{TemplateBinding TriggerStyle}" />
+                            Style="{TemplateBinding AnchorButtonStyle}" />
                         <Popup
                             x:Name="PART_Popup"
                             AllowsTransparency="True"

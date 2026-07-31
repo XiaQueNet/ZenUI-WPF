@@ -6,14 +6,14 @@
     xmlns:zen="https://zenui.mnorg.cn/xaml/wpf">
     <UserControl.Resources>
         <Style
-            x:Key="GalleryPopoverTriggerStyle"
-            BasedOn="{StaticResource ZenPopoverTriggerStyle}"
+            x:Key="GalleryTextAnchorButtonStyle"
+            BasedOn="{StaticResource ZenPopoverAnchorButtonStyle}"
             TargetType="{x:Type ToggleButton}">
-            <Setter Property="Width" Value="30" />
-            <Setter Property="Height" Value="30" />
-            <Setter Property="FontWeight" Value="SemiBold" />
-            <Setter Property="Foreground" Value="{DynamicResource ZenWarningBrush}" />
-            <Setter Property="BorderBrush" Value="{DynamicResource ZenWarningBrush}" />
+            <Setter Property="MinWidth" Value="0" />
+            <Setter Property="MinHeight" Value="0" />
+            <Setter Property="Padding" Value="0" />
+            <Setter Property="FontWeight" Value="{DynamicResource ZenFontWeightSemibold}" />
+            <Setter Property="Foreground" Value="{DynamicResource ZenPrimaryBrush}" />
         </Style>
     </UserControl.Resources>
 
@@ -22,85 +22,35 @@
         HorizontalContentAlignment="Stretch"
         VerticalScrollBarVisibility="Auto">
         <StackPanel>
-            <gallery:PageHeader Title="Popover 气泡提示" Description="ToolTip 与点击气泡使用相同外观，并根据不同交互场景采用悬浮或点击触发。" />
+            <gallery:PageHeader
+                Title="Popover 气泡提示"
+                Description="通过点击锚点显示轻量补充信息；既可直接使用默认问号，也可完整替换锚点和浮层内容。" />
 
             <Border Style="{StaticResource GalleryCardStyle}">
                 <StackPanel>
-                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="相同外观，不同交互" />
-                    <Grid Margin="0,10,0,18">
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="240" />
-                            <ColumnDefinition Width="240" />
-                        </Grid.ColumnDefinitions>
-
-                        <StackPanel>
-                            <TextBlock
-                                Margin="0,0,0,14"
-                                Foreground="{DynamicResource ZenTextSecondaryBrush}"
-                                Text="鼠标悬浮（ToolTip）" />
-                            <Border
-                                Width="24"
-                                Height="24"
-                                HorizontalAlignment="Left"
-                                Background="Transparent"
-                                BorderBrush="{DynamicResource ZenTextPlaceholderBrush}"
-                                BorderThickness="1"
-                                CornerRadius="12"
-                                Cursor="Hand"
-                                ToolTipService.InitialShowDelay="180"
-                                ToolTipService.Placement="Top">
-                                <Border.ToolTip>
-                                    <ToolTip>
-                                        <TextBlock Width="330">
-                                            请选择收银机链接的称重设备信息<LineBreak />
-                                            开启后，收银购物车列表显示称重信息；</TextBlock>
-                                    </ToolTip>
-                                </Border.ToolTip>
-                                <TextBlock
-                                    HorizontalAlignment="Center"
-                                    VerticalAlignment="Center"
-                                    FontWeight="{DynamicResource ZenFontWeightSemibold}"
-                                    Foreground="{DynamicResource ZenTextSecondaryBrush}"
-                                    Text="?" />
-                            </Border>
-                        </StackPanel>
-
-                        <StackPanel Grid.Column="1">
-                            <TextBlock
-                                Margin="0,0,0,14"
-                                Foreground="{DynamicResource ZenTextSecondaryBrush}"
-                                Text="鼠标点击（ZenPopover）" />
-                            <zen:ZenPopover Content="将鼠标停在左侧问号上，或点击右侧问号进行对比" />
-                        </StackPanel>
-                    </Grid>
-                    <TextBlock Foreground="{DynamicResource ZenTextPlaceholderBrush}" Text="将鼠标停在左侧问号上，或点击右侧问号进行对比。" />
-                </StackPanel>
-            </Border>
-
-            <Border Style="{StaticResource GalleryCardStyle}">
-                <StackPanel>
-                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="不同方向" />
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="默认锚点" />
+                    <TextBlock
+                        Margin="0,8,0,16"
+                        Foreground="{DynamicResource ZenTextSecondaryBrush}"
+                        Text="未设置 Anchor 时，控件提供圆圈加问号的默认入口。" />
                     <StackPanel Orientation="Horizontal">
-                        <zen:ZenPopover
-                            Margin="0,0,28,0"
-                            Placement="Top"
-                            Trigger="↑">
-                            <TextBlock Text="显示在触发器上方" />
+                        <zen:ZenPopover Margin="0,0,28,0">
+                            <TextBlock
+                                Width="260"
+                                Text="默认锚点适合字段说明、规则解释和不需要长期占据界面的辅助信息。"
+                                TextWrapping="Wrap" />
                         </zen:ZenPopover>
-                        <zen:ZenPopover
-                            Margin="0,0,28,0"
-                            Placement="Bottom"
-                            Trigger="↓">
-                            <TextBlock Text="显示在触发器下方" />
-                        </zen:ZenPopover>
-                        <zen:ZenPopover
-                            Margin="0,0,28,0"
-                            Placement="Left"
-                            Trigger="←">
-                            <TextBlock Text="显示在触发器左侧" />
-                        </zen:ZenPopover>
-                        <zen:ZenPopover Placement="Right" Trigger="→">
-                            <TextBlock Text="显示在触发器右侧" />
+                        <zen:ZenPopover Placement="Bottom">
+                            <StackPanel Width="240">
+                                <TextBlock
+                                    FontWeight="{DynamicResource ZenFontWeightSemibold}"
+                                    Text="库存预警" />
+                                <TextBlock
+                                    Margin="0,6,0,0"
+                                    Foreground="{DynamicResource ZenTextSecondaryBrush}"
+                                    Text="库存低于安全数量时，系统会在商品列表中显示预警状态。"
+                                    TextWrapping="Wrap" />
+                            </StackPanel>
                         </zen:ZenPopover>
                     </StackPanel>
                 </StackPanel>
@@ -108,24 +58,216 @@
 
             <Border Style="{StaticResource GalleryCardStyle}">
                 <StackPanel>
-                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="自定义外观" />
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="自定义锚点" />
+                    <TextBlock
+                        Margin="0,8,0,16"
+                        Foreground="{DynamicResource ZenTextSecondaryBrush}"
+                        Text="设置 Anchor 后将完整呈现指定内容，不再附加默认圆圈或问号。" />
+                    <WrapPanel>
+                        <zen:ZenPopover
+                            Margin="0,0,32,12"
+                            Anchor="查看帮助"
+                            AnchorButtonStyle="{StaticResource GalleryTextAnchorButtonStyle}">
+                            <TextBlock
+                                Width="220"
+                                Text="文字链接可以作为轻量锚点，并继续保留键盘和点击操作。"
+                                TextWrapping="Wrap" />
+                        </zen:ZenPopover>
+
+                        <zen:ZenPopover Margin="0,0,32,12" Placement="Bottom">
+                            <zen:ZenPopover.Anchor>
+                                <Border
+                                    MinWidth="28"
+                                    Height="28"
+                                    Padding="8,0"
+                                    Background="{DynamicResource ZenInfoLightBrush}"
+                                    CornerRadius="14">
+                                    <TextBlock
+                                        VerticalAlignment="Center"
+                                        FontWeight="{DynamicResource ZenFontWeightSemibold}"
+                                        Foreground="{DynamicResource ZenPrimaryBrush}"
+                                        Text="3 条更新" />
+                                </Border>
+                            </zen:ZenPopover.Anchor>
+                            <StackPanel Width="220">
+                                <TextBlock
+                                    FontWeight="{DynamicResource ZenFontWeightSemibold}"
+                                    Text="最近更新" />
+                                <TextBlock Margin="0,8,0,0" Text="• 新增批量导出能力" />
+                                <TextBlock Margin="0,4,0,0" Text="• 优化高对比度主题" />
+                                <TextBlock Margin="0,4,0,0" Text="• 修复键盘焦点反馈" />
+                            </StackPanel>
+                        </zen:ZenPopover>
+
+                        <zen:ZenPopover Margin="0,0,32,12" Placement="Right">
+                            <zen:ZenPopover.Anchor>
+                                <Border
+                                    Padding="10,5"
+                                    Background="{DynamicResource ZenSuccessLightBrush}"
+                                    CornerRadius="999">
+                                    <StackPanel Orientation="Horizontal">
+                                        <Ellipse
+                                            Width="7"
+                                            Height="7"
+                                            Margin="0,0,7,0"
+                                            VerticalAlignment="Center"
+                                            Fill="{DynamicResource ZenSuccessBrush}" />
+                                        <TextBlock
+                                            Foreground="{DynamicResource ZenSuccessBrush}"
+                                            Text="服务正常" />
+                                    </StackPanel>
+                                </Border>
+                            </zen:ZenPopover.Anchor>
+                            <TextBlock Text="所有服务均正常运行。" />
+                        </zen:ZenPopover>
+                    </WrapPanel>
+                </StackPanel>
+            </Border>
+
+            <Border Style="{StaticResource GalleryCardStyle}">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="显示方向" />
+                    <TextBlock
+                        Margin="0,8,0,16"
+                        Foreground="{DynamicResource ZenTextSecondaryBrush}"
+                        Text="Popover 相对于 Anchor 定位，并自动将箭头放在对应方向。" />
                     <StackPanel Orientation="Horizontal">
                         <zen:ZenPopover
-                            Margin="0,0,28,0"
+                            Margin="0,0,32,0"
+                            Anchor="↑ 上方"
+                            AnchorButtonStyle="{StaticResource GalleryTextAnchorButtonStyle}"
+                            Placement="Top"
+                            Content="显示在锚点上方" />
+                        <zen:ZenPopover
+                            Margin="0,0,32,0"
+                            Anchor="↓ 下方"
+                            AnchorButtonStyle="{StaticResource GalleryTextAnchorButtonStyle}"
+                            Placement="Bottom"
+                            Content="显示在锚点下方" />
+                        <zen:ZenPopover
+                            Margin="0,0,32,0"
+                            Anchor="← 左侧"
+                            AnchorButtonStyle="{StaticResource GalleryTextAnchorButtonStyle}"
+                            Placement="Left"
+                            Content="显示在锚点左侧" />
+                        <zen:ZenPopover
+                            Anchor="→ 右侧"
+                            AnchorButtonStyle="{StaticResource GalleryTextAnchorButtonStyle}"
+                            Placement="Right"
+                            Content="显示在锚点右侧" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <Border Style="{StaticResource GalleryCardStyle}">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="业务内容" />
+                    <TextBlock
+                        Margin="0,8,0,16"
+                        Foreground="{DynamicResource ZenTextSecondaryBrush}"
+                        Text="浮层内容支持任意 WPF 元素，包括布局、数据绑定和可交互控件。" />
+                    <StackPanel Orientation="Horizontal">
+                        <zen:ZenPopover Margin="0,0,40,0" Padding="14,12" Placement="Top">
+                            <zen:ZenPopover.Anchor>
+                                <TextBlock FontSize="18" Text="🔊" />
+                            </zen:ZenPopover.Anchor>
+                            <StackPanel Width="36">
+                                <TextBlock
+                                    Margin="0,0,0,10"
+                                    HorizontalAlignment="Center"
+                                    Foreground="{DynamicResource ZenTextSecondaryBrush}"
+                                    Text="音量" />
+                                <zen:ZenSlider
+                                    x:Name="volumeSlider"
+                                    Height="150"
+                                    IsSnapToTickEnabled="True"
+                                    Maximum="100"
+                                    Minimum="0"
+                                    Orientation="Vertical"
+                                    TickFrequency="1"
+                                    Value="30" />
+                                <TextBlock
+                                    Margin="0,10,0,0"
+                                    HorizontalAlignment="Center"
+                                    FontWeight="{DynamicResource ZenFontWeightSemibold}"
+                                    Text="{Binding ElementName=volumeSlider, Path=Value, StringFormat={}{0}%}" />
+                            </StackPanel>
+                        </zen:ZenPopover>
+
+                        <zen:ZenPopover Placement="Bottom">
+                            <zen:ZenPopover.Anchor>
+                                <Border
+                                    Padding="12,7"
+                                    BorderBrush="{DynamicResource ZenBorderBrush}"
+                                    BorderThickness="1"
+                                    CornerRadius="6">
+                                    <TextBlock Text="快捷键" />
+                                </Border>
+                            </zen:ZenPopover.Anchor>
+                            <Grid Width="230">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+                                <TextBlock FontWeight="{DynamicResource ZenFontWeightSemibold}" Text="常用操作" />
+                                <TextBlock
+                                    Grid.Row="1"
+                                    Margin="0,10,20,0"
+                                    Foreground="{DynamicResource ZenTextSecondaryBrush}"
+                                    Text="保存当前内容" />
+                                <TextBlock
+                                    Grid.Row="1"
+                                    Grid.Column="1"
+                                    Margin="0,10,0,0"
+                                    Text="Ctrl + S" />
+                                <TextBlock
+                                    Grid.Row="2"
+                                    Margin="0,6,20,0"
+                                    Foreground="{DynamicResource ZenTextSecondaryBrush}"
+                                    Text="关闭浮层" />
+                                <TextBlock
+                                    Grid.Row="2"
+                                    Grid.Column="1"
+                                    Margin="0,6,0,0"
+                                    Text="Esc" />
+                            </Grid>
+                        </zen:ZenPopover>
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <Border Style="{StaticResource GalleryCardStyle}">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="浮层外观" />
+                    <TextBlock
+                        Margin="0,8,0,16"
+                        Foreground="{DynamicResource ZenTextSecondaryBrush}"
+                        Text="背景、边框、圆角、内边距、宽度和箭头均可独立调整。" />
+                    <StackPanel Orientation="Horizontal">
+                        <zen:ZenPopover
+                            Margin="0,0,32,0"
                             Padding="18,12"
                             Background="{DynamicResource ZenWarningLightBrush}"
                             BorderBrush="{DynamicResource ZenWarningBrush}"
                             CornerRadius="12"
-                            MaxPopupWidth="280"
-                            Trigger="i"
-                            TriggerStyle="{StaticResource GalleryPopoverTriggerStyle}">
-                            <TextBlock Text="可分别设置气泡和触发按钮的外观。" TextWrapping="Wrap" />
+                            MaxPopupWidth="280">
+                            <TextBlock
+                                Width="220"
+                                Text="使用状态色时仍应保证内容清晰，并避免大面积高饱和颜色。"
+                                TextWrapping="Wrap" />
                         </zen:ZenPopover>
                         <zen:ZenPopover
+                            Anchor="无箭头浮层"
+                            AnchorButtonStyle="{StaticResource GalleryTextAnchorButtonStyle}"
                             Padding="12,8"
                             Background="{DynamicResource ZenSurfaceMutedBrush}"
                             BorderThickness="0"
-                            Content="也可以隐藏三角箭头。"
+                            Content="适合不需要强调指向关系的轻量内容。"
                             CornerRadius="10"
                             ShowArrow="False" />
                     </StackPanel>
