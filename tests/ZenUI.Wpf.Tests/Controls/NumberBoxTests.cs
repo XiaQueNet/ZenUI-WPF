@@ -27,6 +27,10 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.AreEqual(1m, numberBox.Step);
             Assert.AreEqual(SpinButtonLayout.Horizontal, numberBox.SpinButtonLayout);
             Assert.AreEqual(34d, numberBox.SpinButtonWidth);
+            Assert.IsNull(numberBox.IncreaseButtonContent);
+            Assert.IsNull(numberBox.IncreaseButtonContentTemplate);
+            Assert.IsNull(numberBox.DecreaseButtonContent);
+            Assert.IsNull(numberBox.DecreaseButtonContentTemplate);
         }
 
         [TestMethod]
@@ -128,8 +132,16 @@ namespace ZenUI.Wpf.Tests.Controls
                 Assert.AreEqual(40d, decrease.Width);
                 Assert.IsNotNull(divider);
                 Assert.AreEqual(1d, divider.Height);
-                Assert.IsInstanceOfType<Path>(((Viewbox)increase.Content).Child);
-                Assert.IsInstanceOfType<Path>(((Viewbox)decrease.Content).Child);
+                var increaseDefaultContent =
+                    numberBox.Template.FindName("VerticalIncreaseDefaultContent", numberBox) as Viewbox;
+                var decreaseDefaultContent =
+                    numberBox.Template.FindName("VerticalDecreaseDefaultContent", numberBox) as Viewbox;
+                Assert.IsNotNull(increaseDefaultContent);
+                Assert.IsNotNull(decreaseDefaultContent);
+                Assert.AreEqual(Visibility.Visible, increaseDefaultContent.Visibility);
+                Assert.AreEqual(Visibility.Visible, decreaseDefaultContent.Visibility);
+                Assert.IsInstanceOfType<Path>(increaseDefaultContent.Child);
+                Assert.IsInstanceOfType<Path>(decreaseDefaultContent.Child);
                 increase.ApplyTemplate();
                 decrease.ApplyTemplate();
                 var increaseBackground = increase.Template.FindName("ButtonBackground", increase) as Border;
@@ -154,6 +166,104 @@ namespace ZenUI.Wpf.Tests.Controls
         public void InvalidStepIsRejected()
         {
             Assert.ThrowsExactly<ArgumentException>(() => new ZenNumberBox { Step = 0m });
+        }
+
+        [TestMethod]
+        public void SpinButtonsDisplayCustomContentAndTemplatesInBothLayouts()
+        {
+            var increaseTemplate = new DataTemplate();
+            var decreaseTemplate = new DataTemplate();
+            var numberBox = new ZenNumberBox
+            {
+                IncreaseButtonContent = "添加",
+                IncreaseButtonContentTemplate = increaseTemplate,
+                DecreaseButtonContent = "移除",
+                DecreaseButtonContentTemplate = decreaseTemplate
+            };
+            var window = CreateWindow(numberBox);
+
+            try
+            {
+                window.Show();
+                window.UpdateLayout();
+
+                AssertCustomButtonContent(
+                    numberBox,
+                    "HorizontalIncreaseCustomContent",
+                    "添加",
+                    increaseTemplate);
+                AssertCustomButtonContent(
+                    numberBox,
+                    "HorizontalDecreaseCustomContent",
+                    "移除",
+                    decreaseTemplate);
+
+                numberBox.SpinButtonLayout = SpinButtonLayout.Vertical;
+                window.UpdateLayout();
+
+                AssertCustomButtonContent(
+                    numberBox,
+                    "VerticalIncreaseCustomContent",
+                    "添加",
+                    increaseTemplate);
+                AssertCustomButtonContent(
+                    numberBox,
+                    "VerticalDecreaseCustomContent",
+                    "移除",
+                    decreaseTemplate);
+            }
+            finally
+            {
+                window.Close();
+            }
+        }
+
+        [TestMethod]
+        public void SpinButtonUiElementContentMovesWhenLayoutChanges()
+        {
+            var increaseContent = new TextBlock { Text = "添加" };
+            var decreaseContent = new TextBlock { Text = "移除" };
+            var numberBox = new ZenNumberBox
+            {
+                IncreaseButtonContent = increaseContent,
+                DecreaseButtonContent = decreaseContent
+            };
+            var window = CreateWindow(numberBox);
+
+            try
+            {
+                window.Show();
+                window.UpdateLayout();
+
+                AssertCustomButtonContent(
+                    numberBox,
+                    "HorizontalIncreaseCustomContent",
+                    increaseContent,
+                    null);
+                AssertCustomButtonContent(
+                    numberBox,
+                    "HorizontalDecreaseCustomContent",
+                    decreaseContent,
+                    null);
+
+                numberBox.SpinButtonLayout = SpinButtonLayout.Vertical;
+                window.UpdateLayout();
+
+                AssertCustomButtonContent(
+                    numberBox,
+                    "VerticalIncreaseCustomContent",
+                    increaseContent,
+                    null);
+                AssertCustomButtonContent(
+                    numberBox,
+                    "VerticalDecreaseCustomContent",
+                    decreaseContent,
+                    null);
+            }
+            finally
+            {
+                window.Close();
+            }
         }
 
         [TestMethod]
@@ -218,6 +328,20 @@ namespace ZenUI.Wpf.Tests.Controls
                 Height = 100,
                 Content = content
             };
+        }
+
+        private static void AssertCustomButtonContent(
+            ZenNumberBox numberBox,
+            string presenterName,
+            object expectedContent,
+            DataTemplate expectedTemplate)
+        {
+            var presenter = numberBox.Template.FindName(presenterName, numberBox) as ContentPresenter;
+
+            Assert.IsNotNull(presenter);
+            Assert.AreEqual(Visibility.Visible, presenter.Visibility);
+            Assert.AreEqual(expectedContent, presenter.Content);
+            Assert.AreSame(expectedTemplate, presenter.ContentTemplate);
         }
 
         private sealed class TestZenNumberBox : ZenNumberBox

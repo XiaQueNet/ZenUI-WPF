@@ -95,20 +95,26 @@
                                     AutomationProperties.Name="减少"
                                     Style="{StaticResource ZenNumberBoxRepeatButtonStyle}"
                                     Tag="{StaticResource ZenNumberBoxLeftButtonCornerRadius}">
-                                    <Grid Width="14" Height="14">
-                                        <Path
+                                    <Grid>
+                                        <Grid x:Name="HorizontalDecreaseDefaultContent" Width="14" Height="14" Visibility="Collapsed">
+                                            <Path
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                Data="M 0,0 L 10,0"
+                                                Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type RepeatButton}}}"
+                                                StrokeEndLineCap="Round"
+                                                StrokeStartLineCap="Round"
+                                                StrokeThickness="1.5"
+                                                Stretch="None">
+                                                <Path.RenderTransform>
+                                                    <TranslateTransform Y="1" />
+                                                </Path.RenderTransform>
+                                            </Path>
+                                        </Grid>
+                                        <ContentPresenter
+                                            x:Name="HorizontalDecreaseCustomContent"
                                             HorizontalAlignment="Center"
-                                            VerticalAlignment="Center"
-                                            Data="M 0,0 L 10,0"
-                                            Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type RepeatButton}}}"
-                                            StrokeEndLineCap="Round"
-                                            StrokeStartLineCap="Round"
-                                            StrokeThickness="1.5"
-                                            Stretch="None">
-                                            <Path.RenderTransform>
-                                                <TranslateTransform Y="1" />
-                                            </Path.RenderTransform>
-                                        </Path>
+                                            VerticalAlignment="Center" />
                                     </Grid>
                                 </RepeatButton>
                                 <Border Grid.Column="1" BorderBrush="{DynamicResource ZenDividerBrush}" BorderThickness="1,0">
@@ -124,16 +130,22 @@
                                     AutomationProperties.Name="增加"
                                     Style="{StaticResource ZenNumberBoxRepeatButtonStyle}"
                                     Tag="{StaticResource ZenNumberBoxRightButtonCornerRadius}">
-                                    <Grid Width="14" Height="14">
-                                        <Path
+                                    <Grid>
+                                        <Grid x:Name="HorizontalIncreaseDefaultContent" Width="14" Height="14" Visibility="Collapsed">
+                                            <Path
+                                                HorizontalAlignment="Center"
+                                                VerticalAlignment="Center"
+                                                Data="M 0,5 L 10,5 M 5,0 L 5,10"
+                                                Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type RepeatButton}}}"
+                                                StrokeEndLineCap="Round"
+                                                StrokeStartLineCap="Round"
+                                                StrokeThickness="1.5"
+                                                Stretch="None" />
+                                        </Grid>
+                                        <ContentPresenter
+                                            x:Name="HorizontalIncreaseCustomContent"
                                             HorizontalAlignment="Center"
-                                            VerticalAlignment="Center"
-                                            Data="M 0,5 L 10,5 M 5,0 L 5,10"
-                                            Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type RepeatButton}}}"
-                                            StrokeEndLineCap="Round"
-                                            StrokeStartLineCap="Round"
-                                            StrokeThickness="1.5"
-                                            Stretch="None" />
+                                            VerticalAlignment="Center" />
                                     </Grid>
                                 </RepeatButton>
                             </Grid>
@@ -159,15 +171,21 @@
                                             AutomationProperties.Name="增加"
                                             Style="{StaticResource ZenNumberBoxRepeatButtonStyle}"
                                             Tag="{StaticResource ZenNumberBoxTopRightButtonCornerRadius}">
-                                            <Viewbox Width="12" Height="7">
-                                                <Path
-                                                    Data="M 1,6 L 6,1 L 11,6"
-                                                    Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type RepeatButton}}}"
-                                                    StrokeEndLineCap="Round"
-                                                    StrokeLineJoin="Round"
-                                                    StrokeStartLineCap="Round"
-                                                    StrokeThickness="1.4" />
-                                            </Viewbox>
+                                            <Grid>
+                                                <Viewbox x:Name="VerticalIncreaseDefaultContent" Width="12" Height="7" Visibility="Collapsed">
+                                                    <Path
+                                                        Data="M 1,6 L 6,1 L 11,6"
+                                                        Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type RepeatButton}}}"
+                                                        StrokeEndLineCap="Round"
+                                                        StrokeLineJoin="Round"
+                                                        StrokeStartLineCap="Round"
+                                                        StrokeThickness="1.4" />
+                                                </Viewbox>
+                                                <ContentPresenter
+                                                    x:Name="VerticalIncreaseCustomContent"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center" />
+                                            </Grid>
                                         </RepeatButton>
                                         <RepeatButton
                                             x:Name="PART_VerticalDecreaseButton"
@@ -176,15 +194,21 @@
                                             AutomationProperties.Name="减少"
                                             Style="{StaticResource ZenNumberBoxRepeatButtonStyle}"
                                             Tag="{StaticResource ZenNumberBoxBottomRightButtonCornerRadius}">
-                                            <Viewbox Width="12" Height="7">
-                                                <Path
-                                                    Data="M 1,1 L 6,6 L 11,1"
-                                                    Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type RepeatButton}}}"
-                                                    StrokeEndLineCap="Round"
-                                                    StrokeLineJoin="Round"
-                                                    StrokeStartLineCap="Round"
-                                                    StrokeThickness="1.4" />
-                                            </Viewbox>
+                                            <Grid>
+                                                <Viewbox x:Name="VerticalDecreaseDefaultContent" Width="12" Height="7" Visibility="Collapsed">
+                                                    <Path
+                                                        Data="M 1,1 L 6,6 L 11,1"
+                                                        Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type RepeatButton}}}"
+                                                        StrokeEndLineCap="Round"
+                                                        StrokeLineJoin="Round"
+                                                        StrokeStartLineCap="Round"
+                                                        StrokeThickness="1.4" />
+                                                </Viewbox>
+                                                <ContentPresenter
+                                                    x:Name="VerticalDecreaseCustomContent"
+                                                    HorizontalAlignment="Center"
+                                                    VerticalAlignment="Center" />
+                                            </Grid>
                                         </RepeatButton>
                                         <Border
                                             x:Name="VerticalButtonDivider"
@@ -200,9 +224,59 @@
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
+                        <Trigger Property="SpinButtonLayout" Value="Horizontal">
+                            <Setter
+                                TargetName="HorizontalIncreaseCustomContent"
+                                Property="Content"
+                                Value="{Binding IncreaseButtonContent, RelativeSource={RelativeSource TemplatedParent}}" />
+                            <Setter
+                                TargetName="HorizontalIncreaseCustomContent"
+                                Property="ContentTemplate"
+                                Value="{Binding IncreaseButtonContentTemplate, RelativeSource={RelativeSource TemplatedParent}}" />
+                            <Setter
+                                TargetName="HorizontalDecreaseCustomContent"
+                                Property="Content"
+                                Value="{Binding DecreaseButtonContent, RelativeSource={RelativeSource TemplatedParent}}" />
+                            <Setter
+                                TargetName="HorizontalDecreaseCustomContent"
+                                Property="ContentTemplate"
+                                Value="{Binding DecreaseButtonContentTemplate, RelativeSource={RelativeSource TemplatedParent}}" />
+                        </Trigger>
                         <Trigger Property="SpinButtonLayout" Value="Vertical">
                             <Setter TargetName="HorizontalLayout" Property="Visibility" Value="Collapsed" />
                             <Setter TargetName="VerticalLayout" Property="Visibility" Value="Visible" />
+                            <Setter
+                                TargetName="VerticalIncreaseCustomContent"
+                                Property="Content"
+                                Value="{Binding IncreaseButtonContent, RelativeSource={RelativeSource TemplatedParent}}" />
+                            <Setter
+                                TargetName="VerticalIncreaseCustomContent"
+                                Property="ContentTemplate"
+                                Value="{Binding IncreaseButtonContentTemplate, RelativeSource={RelativeSource TemplatedParent}}" />
+                            <Setter
+                                TargetName="VerticalDecreaseCustomContent"
+                                Property="Content"
+                                Value="{Binding DecreaseButtonContent, RelativeSource={RelativeSource TemplatedParent}}" />
+                            <Setter
+                                TargetName="VerticalDecreaseCustomContent"
+                                Property="ContentTemplate"
+                                Value="{Binding DecreaseButtonContentTemplate, RelativeSource={RelativeSource TemplatedParent}}" />
+                        </Trigger>
+                        <Trigger Property="IncreaseButtonContent" Value="{x:Null}">
+                            <Setter TargetName="HorizontalIncreaseCustomContent" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="VerticalIncreaseCustomContent" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                        <Trigger Property="DecreaseButtonContent" Value="{x:Null}">
+                            <Setter TargetName="HorizontalDecreaseCustomContent" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="VerticalDecreaseCustomContent" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                        <Trigger Property="IncreaseButtonContent" Value="{x:Null}">
+                            <Setter TargetName="HorizontalIncreaseDefaultContent" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="VerticalIncreaseDefaultContent" Property="Visibility" Value="Visible" />
+                        </Trigger>
+                        <Trigger Property="DecreaseButtonContent" Value="{x:Null}">
+                            <Setter TargetName="HorizontalDecreaseDefaultContent" Property="Visibility" Value="Visible" />
+                            <Setter TargetName="VerticalDecreaseDefaultContent" Property="Visibility" Value="Visible" />
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="InputBorder" Property="BorderBrush" Value="{DynamicResource ZenBorderHoverBrush}" />

@@ -4,6 +4,10 @@
 
 ## Unreleased
 
+### Added
+
+- `ZenNumberBox` 增加增减按钮的自定义内容与内容模板属性，并在水平、垂直布局间保持一致。
+
 ## [0.1.0-preview.6] - 2026-07-30
 
 ### Added

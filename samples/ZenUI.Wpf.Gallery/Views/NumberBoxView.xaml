@@ -47,6 +47,36 @@
 
             <Border Style="{StaticResource GalleryCardStyle}">
                 <StackPanel>
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="自定义按钮内容" />
+                    <TextBlock
+                        Margin="0,0,0,10"
+                        Foreground="{DynamicResource ZenTextSecondaryBrush}"
+                        Text="通过 IncreaseButtonContent 和 DecreaseButtonContent 将默认图标替换为“加”和“减”。" />
+                    <StackPanel Orientation="Horizontal">
+                        <zen:ZenNumberBox
+                            Width="180"
+                            DecreaseButtonContent="减"
+                            IncreaseButtonContent="加"
+                            Maximum="20"
+                            Minimum="0"
+                            SpinButtonWidth="42"
+                            Value="5" />
+                        <zen:ZenNumberBox
+                            Width="180"
+                            Margin="16,0,0,0"
+                            DecreaseButtonContent="减"
+                            IncreaseButtonContent="加"
+                            Maximum="20"
+                            Minimum="0"
+                            SpinButtonLayout="Vertical"
+                            SpinButtonWidth="32"
+                            Value="5" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <Border Style="{StaticResource GalleryCardStyle}">
+                <StackPanel>
                     <TextBlock Style="{StaticResource SectionTitleStyle}" Text="状态" />
                     <StackPanel Orientation="Horizontal">
                         <zen:ZenNumberBox

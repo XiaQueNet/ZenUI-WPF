@@ -186,6 +186,86 @@ namespace ZenUI.Wpf.Controls
                 IsValidSpinButtonWidth);
 
         /// <summary>
+        /// 获取或设置增加按钮中显示的自定义内容。值为 <see langword="null"/> 时显示默认图标。
+        /// </summary>
+        [Bindable(true)]
+        public object IncreaseButtonContent
+        {
+            get { return GetValue(IncreaseButtonContentProperty); }
+            set { SetValue(IncreaseButtonContentProperty, value); }
+        }
+
+        /// <summary>
+        /// 标识 <see cref="IncreaseButtonContent"/> 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty IncreaseButtonContentProperty =
+            DependencyProperty.Register(
+                nameof(IncreaseButtonContent),
+                typeof(object),
+                SelfType,
+                new FrameworkPropertyMetadata(null));
+
+        /// <summary>
+        /// 获取或设置用于显示 <see cref="IncreaseButtonContent"/> 的数据模板。
+        /// </summary>
+        [Bindable(true)]
+        public DataTemplate IncreaseButtonContentTemplate
+        {
+            get { return (DataTemplate)GetValue(IncreaseButtonContentTemplateProperty); }
+            set { SetValue(IncreaseButtonContentTemplateProperty, value); }
+        }
+
+        /// <summary>
+        /// 标识 <see cref="IncreaseButtonContentTemplate"/> 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty IncreaseButtonContentTemplateProperty =
+            DependencyProperty.Register(
+                nameof(IncreaseButtonContentTemplate),
+                typeof(DataTemplate),
+                SelfType,
+                new FrameworkPropertyMetadata(null));
+
+        /// <summary>
+        /// 获取或设置减少按钮中显示的自定义内容。值为 <see langword="null"/> 时显示默认图标。
+        /// </summary>
+        [Bindable(true)]
+        public object DecreaseButtonContent
+        {
+            get { return GetValue(DecreaseButtonContentProperty); }
+            set { SetValue(DecreaseButtonContentProperty, value); }
+        }
+
+        /// <summary>
+        /// 标识 <see cref="DecreaseButtonContent"/> 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty DecreaseButtonContentProperty =
+            DependencyProperty.Register(
+                nameof(DecreaseButtonContent),
+                typeof(object),
+                SelfType,
+                new FrameworkPropertyMetadata(null));
+
+        /// <summary>
+        /// 获取或设置用于显示 <see cref="DecreaseButtonContent"/> 的数据模板。
+        /// </summary>
+        [Bindable(true)]
+        public DataTemplate DecreaseButtonContentTemplate
+        {
+            get { return (DataTemplate)GetValue(DecreaseButtonContentTemplateProperty); }
+            set { SetValue(DecreaseButtonContentTemplateProperty, value); }
+        }
+
+        /// <summary>
+        /// 标识 <see cref="DecreaseButtonContentTemplate"/> 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty DecreaseButtonContentTemplateProperty =
+            DependencyProperty.Register(
+                nameof(DecreaseButtonContentTemplate),
+                typeof(DataTemplate),
+                SelfType,
+                new FrameworkPropertyMetadata(null));
+
+        /// <summary>
         /// 获取或设置一个值，该值指示是否禁止直接编辑文本。增减按钮仍然可用。
         /// </summary>
         [Bindable(true)]
