@@ -106,7 +106,15 @@ namespace ZenUI.Wpf.Tests.Controls
                 Assert.IsNotNull(revealButton);
                 Assert.IsNotNull(nativePasswordBox);
                 Assert.IsNotNull(revealTextBox);
+                var hiddenIcon = FindVisualDescendants<Path>(revealButton)
+                    .Single(path => path.Name == "PasswordHiddenIcon");
+                var visibleIcon = FindVisualDescendants<Path>(revealButton)
+                    .Single(path => path.Name == "PasswordVisibleIcon");
                 Assert.AreEqual(Visibility.Visible, revealButton.Visibility);
+                Assert.AreEqual(Visibility.Visible, hiddenIcon.Visibility);
+                Assert.AreEqual(Visibility.Collapsed, visibleIcon.Visibility);
+                Assert.AreEqual("显示密码", revealButton.ToolTip);
+                Assert.AreEqual("显示密码", AutomationProperties.GetName(revealButton));
                 Assert.AreEqual(string.Empty, nativePasswordBox.Password);
                 Assert.AreEqual(
                     ((SolidColorBrush)passwordBox.FindResource("ZenTextSecondaryBrush")).Color,
@@ -114,17 +122,27 @@ namespace ZenUI.Wpf.Tests.Controls
 
                 nativePasswordBox.Password = "secret";
                 passwordBox.IsPasswordRevealed = true;
+                window.Dispatcher.Invoke(DispatcherPriority.ContextIdle, new Action(() => { }));
                 window.UpdateLayout();
                 Assert.AreEqual(Visibility.Collapsed, nativePasswordBox.Visibility);
                 Assert.AreEqual(Visibility.Visible, revealTextBox.Visibility);
+                Assert.AreEqual(Visibility.Collapsed, hiddenIcon.Visibility);
+                Assert.AreEqual(Visibility.Visible, visibleIcon.Visibility);
                 Assert.AreEqual("secret", revealTextBox.Text);
+                Assert.AreEqual("隐藏密码", revealButton.ToolTip);
+                Assert.AreEqual("隐藏密码", AutomationProperties.GetName(revealButton));
 
                 passwordBox.IsPasswordRevealed = false;
+                window.Dispatcher.Invoke(DispatcherPriority.ContextIdle, new Action(() => { }));
                 window.UpdateLayout();
                 Assert.AreEqual(Visibility.Visible, nativePasswordBox.Visibility);
                 Assert.AreEqual(Visibility.Collapsed, revealTextBox.Visibility);
+                Assert.AreEqual(Visibility.Visible, hiddenIcon.Visibility);
+                Assert.AreEqual(Visibility.Collapsed, visibleIcon.Visibility);
                 Assert.AreEqual(string.Empty, revealTextBox.Text);
                 Assert.AreEqual("secret", nativePasswordBox.Password);
+                Assert.AreEqual("显示密码", revealButton.ToolTip);
+                Assert.AreEqual("显示密码", AutomationProperties.GetName(revealButton));
             }
             finally
             {

@@ -66,9 +66,7 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
 
-                <Border
-                    BorderBrush="{DynamicResource ZenDividerBrush}"
-                    BorderThickness="0,0,1,0">
+                <Border BorderBrush="{DynamicResource ZenDividerBrush}" BorderThickness="0,0,1,0">
                     <StackPanel
                         Margin="24,0"
                         VerticalAlignment="Center"
@@ -147,7 +145,7 @@
                     Margin="0,12,0,12"
                     HorizontalScrollBarVisibility="Disabled"
                     VerticalScrollBarVisibility="Auto">
-                    <ItemsControl Margin="12,0,10,0" ItemsSource="{Binding NavigationGroups}">
+                    <ItemsControl Margin="8,0,0,0" ItemsSource="{Binding NavigationGroups}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
                                 <zen:ZenExpander
@@ -164,9 +162,7 @@
                                         Spacing="2">
                                         <zen:ZenRadioGroup.ItemTemplate>
                                             <DataTemplate>
-                                                <StackPanel
-                                                    AutomationProperties.Name="{Binding DisplayName}"
-                                                    ToolTip="{Binding DisplayName}">
+                                                <StackPanel AutomationProperties.Name="{Binding DisplayName}" ToolTip="{Binding DisplayName}">
                                                     <TextBlock
                                                         FontSize="{DynamicResource ZenFontSizeBody}"
                                                         Text="{Binding ControlName}"
