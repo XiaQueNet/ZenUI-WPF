@@ -629,6 +629,8 @@ namespace ZenUI.Wpf.Controls
             if (calendar != null)
             {
                 calendar.SelectedDatesChanged += HandleCalendarSelectedDatesChanged;
+                calendar.PreviewMouseLeftButtonUp +=
+                    HandleCalendarPreviewMouseLeftButtonUp;
             }
 
             if (timeSelector != null)
@@ -664,6 +666,8 @@ namespace ZenUI.Wpf.Controls
             if (calendar != null)
             {
                 calendar.SelectedDatesChanged -= HandleCalendarSelectedDatesChanged;
+                calendar.PreviewMouseLeftButtonUp -=
+                    HandleCalendarPreviewMouseLeftButtonUp;
             }
 
             if (timeSelector != null)
@@ -920,7 +924,35 @@ namespace ZenUI.Wpf.Controls
             }
 
             draftValue = Clamp(calendar.SelectedDate.Value.Date + draftValue.TimeOfDay);
-            SynchronizeDraft();
+            isSynchronizingDraft = true;
+            try
+            {
+                ConfigureTimeSelector();
+                timeSelector.SetCurrentValue(
+                    ZenTimeSelector.SelectedTimeProperty,
+                    (TimeSpan?)draftValue.TimeOfDay);
+            }
+            finally
+            {
+                isSynchronizingDraft = false;
+            }
+        }
+
+        private void HandleCalendarPreviewMouseLeftButtonUp(
+            object sender,
+            MouseButtonEventArgs e)
+        {
+            Dispatcher.BeginInvoke(new Action(ReleaseCalendarMouseCapture));
+        }
+
+        private void ReleaseCalendarMouseCapture()
+        {
+            // CalendarItem 在日期选择手势中使用鼠标捕获；模板状态同步后仍可能
+            // 留在日历子树中，导致弹层内的下一个按钮点击只用于释放捕获。
+            if (calendar != null && calendar.IsMouseCaptureWithin)
+            {
+                Mouse.Capture(null);
+            }
         }
 
         private void HandleTimeSelectorSelectedTimeChanged(object sender, EventArgs e)

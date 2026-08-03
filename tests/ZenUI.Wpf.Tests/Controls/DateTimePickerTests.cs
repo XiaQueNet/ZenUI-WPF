@@ -4,6 +4,8 @@ using System.Windows;
 using System.Windows.Automation.Peers;
 using System.Windows.Automation.Provider;
 using System.Windows.Controls;
+using System.Windows.Input;
+using System.Windows.Threading;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -162,6 +164,45 @@ namespace ZenUI.Wpf.Tests.Controls
         }
 
         [TestMethod]
+        public void CalendarMouseGestureReleasesCaptureBeforeConfirmAction()
+        {
+            var picker = CreateTemplatedPicker();
+            var window = new Window
+            {
+                ShowInTaskbar = false,
+                WindowStyle = WindowStyle.None,
+                Content = picker
+            };
+
+            try
+            {
+                window.Show();
+                picker.IsDropDownOpen = true;
+                PumpDispatcher();
+
+                var calendar = GetPart<Calendar>(picker, "PART_Calendar");
+                Assert.IsTrue(Mouse.Capture(calendar, CaptureMode.SubTree));
+                Assert.IsTrue(calendar.IsMouseCaptureWithin);
+
+                calendar.RaiseEvent(new MouseButtonEventArgs(
+                    Mouse.PrimaryDevice,
+                    Environment.TickCount,
+                    MouseButton.Left)
+                {
+                    RoutedEvent = UIElement.PreviewMouseLeftButtonUpEvent
+                });
+                PumpDispatcher();
+
+                Assert.IsFalse(calendar.IsMouseCaptureWithin);
+            }
+            finally
+            {
+                Mouse.Capture(null);
+                window.Close();
+            }
+        }
+
+        [TestMethod]
         public void NowActionUpdatesDateAndTimeAsOneDraftValue()
         {
             var picker = CreateTemplatedPicker();
@@ -253,6 +294,15 @@ namespace ZenUI.Wpf.Tests.Controls
             where T : DependencyObject
         {
             return (T)picker.Template.FindName(name, picker);
+        }
+
+        private static void PumpDispatcher()
+        {
+            var frame = new DispatcherFrame();
+            Dispatcher.CurrentDispatcher.BeginInvoke(
+                DispatcherPriority.Background,
+                new Action(() => frame.Continue = false));
+            Dispatcher.PushFrame(frame);
         }
 
         private sealed class TestDateTimePicker : ZenDateTimePicker
