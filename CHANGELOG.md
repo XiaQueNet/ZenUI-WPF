@@ -16,6 +16,10 @@
 
 - `ZenPopover` 将触发内容 API 更名为 `Anchor`、`AnchorTemplate` 和 `AnchorButtonStyle`；未设置锚点时保留默认问号样式，设置后完整呈现自定义锚点内容。
 
+### Fixed
+
+- 修正 Gallery 控件属性表的引入版本映射，并让未登记项明确显示为“待核对”，避免回退到错误的固定版本。
+
 ## [0.1.0-preview.6] - 2026-07-30
 
 ### Added
