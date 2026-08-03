@@ -17,8 +17,7 @@
                 <StackPanel>
                     <TextBlock Style="{StaticResource SectionTitleStyle}" Text="等宽描边选项" />
                     <TextBlock
-                        Margin="0,0,0,16"
-                        Style="{StaticResource GallerySupportingTextStyle}"
+                        Style="{StaticResource GallerySectionDescriptionStyle}"
                         Text="通过 ItemsSource 提供选项，SelectedItem 或 SelectedValue 双向绑定当前选择。" />
                     <zen:ZenRadioGroup
                         ItemsSource="{Binding Categories, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
@@ -103,8 +102,7 @@
                 <StackPanel>
                     <TextBlock Style="{StaticResource SectionTitleStyle}" Text="布局" />
                     <TextBlock
-                        Margin="0,0,0,16"
-                        Style="{StaticResource GallerySupportingTextStyle}"
+                        Style="{StaticResource GallerySectionDescriptionStyle}"
                         Text="可以切换为纵向排列，并关闭等宽分配。" />
                     <zen:ZenRadioGroup
                         Width="320"

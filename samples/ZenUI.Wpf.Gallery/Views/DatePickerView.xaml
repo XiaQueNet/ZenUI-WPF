@@ -46,7 +46,7 @@
                                 Width="220"
                                 SelectedDateFormat="Short" />
                         </StackPanel>
-                        <StackPanel Width="300" Margin="0,0,18,14">
+                        <StackPanel Width="300" Style="{StaticResource GalleryWrapFieldStyle}">
                             <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="长日期" />
                             <zen:ZenDatePicker
                                 x:Name="LongDatePicker"
@@ -61,8 +61,7 @@
                 <StackPanel>
                     <TextBlock Style="{StaticResource SectionTitleStyle}" Text="日期约束" />
                     <TextBlock
-                        Margin="0,0,0,12"
-                        Style="{StaticResource GallerySupportingTextStyle}"
+                        Style="{StaticResource GallerySectionDescriptionStyle}"
                         Text="仅可选择今天起 30 天内的工作日；周末日期在日历中不可选。" />
                     <zen:ZenDatePicker
                         x:Name="ConstrainedDatePicker"
@@ -92,7 +91,7 @@
                                 CornerRadius="6"
                                 Watermark="默认圆角" />
                         </StackPanel>
-                        <StackPanel Width="240" Margin="0,0,18,14">
+                        <StackPanel Width="240" Style="{StaticResource GalleryWrapFieldStyle}">
                             <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="宽松 · 44px" />
                             <zen:ZenDatePicker
                                 Width="240"

@@ -25,14 +25,14 @@
                 <StackPanel>
                     <TextBlock Style="{StaticResource SectionTitleStyle}" Text="选择模式" />
                     <WrapPanel>
-                        <StackPanel Width="412" Margin="0,0,18,18">
+                        <StackPanel Width="412" Style="{StaticResource GalleryWrapFieldStyle}">
                             <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="单个范围" />
                             <zen:ZenCalendar
                                 HorizontalAlignment="Left"
                                 DisplayDate="2026-07-01"
                                 SelectionMode="SingleRange" />
                         </StackPanel>
-                        <StackPanel Width="412" Margin="0,0,18,18">
+                        <StackPanel Width="412" Style="{StaticResource GalleryWrapFieldStyle}">
                             <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="多个范围" />
                             <zen:ZenCalendar
                                 HorizontalAlignment="Left"
@@ -47,8 +47,7 @@
                 <StackPanel>
                     <TextBlock Style="{StaticResource SectionTitleStyle}" Text="自定义外观与尺寸" />
                     <TextBlock
-                        Margin="0,0,0,12"
-                        Style="{StaticResource GallerySupportingTextStyle}"
+                        Style="{StaticResource GallerySectionDescriptionStyle}"
                         Text="圆角、整体尺寸、月份按钮内边距和导航按钮尺寸可单独覆盖。" />
                     <zen:ZenCalendar
                         Width="326"

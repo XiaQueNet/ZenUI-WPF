@@ -17,6 +17,7 @@ namespace ZenUI.Wpf.Gallery.Navigation
         public const string Calendar = nameof(Calendar);
         public const string DatePicker = nameof(DatePicker);
         public const string TimePicker = nameof(TimePicker);
+        public const string DateTimePicker = nameof(DateTimePicker);
         public const string DataGrid = nameof(DataGrid);
         public const string Slider = nameof(Slider);
         public const string ProgressBar = nameof(ProgressBar);

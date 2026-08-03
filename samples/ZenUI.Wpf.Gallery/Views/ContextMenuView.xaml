@@ -15,8 +15,7 @@
                 <StackPanel>
                     <TextBlock Style="{StaticResource SectionTitleStyle}" Text="基本用法" />
                     <TextBlock
-                        Margin="0,0,0,14"
-                        Style="{StaticResource GallerySupportingTextStyle}"
+                        Style="{StaticResource GallerySectionDescriptionStyle}"
                         Text="在下方文件卡片上单击右键。" />
                     <Border
                         Width="420"
@@ -146,8 +145,7 @@
                 <StackPanel>
                     <TextBlock Style="{StaticResource SectionTitleStyle}" Text="按钮触发" />
                     <TextBlock
-                        Margin="0,0,0,14"
-                        Style="{StaticResource GallerySupportingTextStyle}"
+                        Style="{StaticResource GallerySectionDescriptionStyle}"
                         Text="同一个 ContextMenu 既可以响应右键，也可以由按钮单击后在按钮下方打开。" />
                     <zen:ZenButton HorizontalAlignment="Left" Click="OpenButtonMenu_Click">
                         <zen:ZenButton.ContextMenu>

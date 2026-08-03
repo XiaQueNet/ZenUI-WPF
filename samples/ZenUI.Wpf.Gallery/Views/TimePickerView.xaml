@@ -86,8 +86,7 @@
                 <StackPanel>
                     <TextBlock Style="{StaticResource SectionTitleStyle}" Text="步长与时间约束" />
                     <TextBlock
-                        Margin="0,0,0,12"
-                        Style="{StaticResource GallerySupportingTextStyle}"
+                        Style="{StaticResource GallerySectionDescriptionStyle}"
                         Text="营业时间为 09:00–18:00，分钟按 15 分钟递增。" />
                     <zen:ZenTimePicker
                         Width="220"
@@ -111,18 +110,18 @@
                         <zen:ZenTimePicker
                             Width="190"
                             Height="32"
-                            Margin="0,0,18,14"
+                            Margin="{StaticResource GalleryFieldMargin}"
                             CornerRadius="0"
                             Watermark="紧凑 · 32px" />
                         <zen:ZenTimePicker
                             Width="210"
                             Height="36"
-                            Margin="0,0,18,14"
+                            Margin="{StaticResource GalleryFieldMargin}"
                             Watermark="默认 · 36px" />
                         <zen:ZenTimePicker
                             Width="230"
                             Height="44"
-                            Margin="0,0,18,14"
+                            Margin="{StaticResource GalleryFieldMargin}"
                             CornerRadius="18"
                             Watermark="宽松 · 44px" />
                     </WrapPanel>

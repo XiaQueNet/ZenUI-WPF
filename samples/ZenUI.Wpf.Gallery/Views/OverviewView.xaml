@@ -109,7 +109,7 @@
                     </StackPanel>
                     <UniformGrid Grid.Column="2" Columns="3" VerticalAlignment="Center">
                         <StackPanel>
-                            <TextBlock Style="{StaticResource OverviewMetricValueStyle}" Text="21" />
+                            <TextBlock Style="{StaticResource OverviewMetricValueStyle}" Text="22" />
                             <TextBlock Style="{StaticResource OverviewMetricLabelStyle}" Text="图库控件" />
                         </StackPanel>
                         <StackPanel>

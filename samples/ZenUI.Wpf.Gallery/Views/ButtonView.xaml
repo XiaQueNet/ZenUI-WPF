@@ -49,8 +49,7 @@
                 <StackPanel>
                     <TextBlock Style="{StaticResource SectionTitleStyle}" Text="外观与语义" />
                     <TextBlock
-                        Margin="0,0,0,16"
-                        Style="{StaticResource GallerySupportingTextStyle}"
+                        Style="{StaticResource GallerySectionDescriptionStyle}"
                         Text="Appearance 控制表现形式，Variant 控制操作语义；两者可以自由组合。"
                         TextWrapping="Wrap" />
                     <StackPanel>
@@ -137,8 +136,7 @@
                 <StackPanel>
                     <TextBlock Style="{StaticResource SectionTitleStyle}" Text="尺寸与内容" />
                     <TextBlock
-                        Margin="0,0,0,16"
-                        Style="{StaticResource GallerySupportingTextStyle}"
+                        Style="{StaticResource GallerySectionDescriptionStyle}"
                         Text="通过 Height、Padding 和 FontSize 组合尺寸；Content 可承载文字、图标或任意 WPF 内容。" />
                     <DockPanel Margin="0,0,0,18">
                         <TextBlock
@@ -201,8 +199,7 @@
                 <StackPanel>
                     <TextBlock Style="{StaticResource SectionTitleStyle}" Text="按钮状态" />
                     <TextBlock
-                        Margin="0,0,0,16"
-                        Style="{StaticResource GallerySupportingTextStyle}"
+                        Style="{StaticResource GallerySectionDescriptionStyle}"
                         Text="将鼠标移到可用按钮上并按下，可以查看 Hover 和 Pressed 状态。"
                         TextWrapping="Wrap" />
                     <DockPanel Margin="0,0,0,12">
@@ -251,8 +248,7 @@
                 <StackPanel>
                     <TextBlock Style="{StaticResource SectionTitleStyle}" Text="实际操作组合" />
                     <TextBlock
-                        Margin="0,0,0,16"
-                        Style="{StaticResource GallerySupportingTextStyle}"
+                        Style="{StaticResource GallerySectionDescriptionStyle}"
                         Text="一个区域通常只保留一个主要操作，次要操作使用 Outlined 或 Text 降低视觉层级。" />
                     <Border
                         Padding="18"
@@ -300,8 +296,7 @@
                 <StackPanel>
                     <TextBlock Style="{StaticResource SectionTitleStyle}" Text="圆角定制" />
                     <TextBlock
-                        Margin="0,0,0,16"
-                        Style="{StaticResource GallerySupportingTextStyle}"
+                        Style="{StaticResource GallerySectionDescriptionStyle}"
                         Text="CornerRadius 支持统一圆角和四角独立设置；胶囊按钮的圆角等于按钮高度的一半。"
                         TextWrapping="Wrap" />
                     <DockPanel Margin="0,0,0,12">
@@ -358,8 +353,7 @@
                 <StackPanel>
                     <TextBlock Style="{StaticResource SectionTitleStyle}" Text="交互颜色定制" />
                     <TextBlock
-                        Margin="0,0,0,16"
-                        Style="{StaticResource GallerySupportingTextStyle}"
+                        Style="{StaticResource GallerySectionDescriptionStyle}"
                         Text="背景、文字和边框都可分别覆盖 Hover 与 Pressed 状态色；未设置的状态继续使用主题默认值。" />
                     <zen:ZenButton
                         Width="168"

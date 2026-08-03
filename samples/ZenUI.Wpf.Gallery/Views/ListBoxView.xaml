@@ -52,7 +52,7 @@
             <Border Style="{StaticResource GalleryCardStyle}">
                 <StackPanel>
                     <TextBlock Style="{StaticResource SectionTitleStyle}" Text="多选" />
-                    <TextBlock Margin="0,0,0,12" Style="{StaticResource GallerySupportingTextStyle}" Text="SelectionMode=&quot;Extended&quot; 保留 WPF 原生的 Ctrl 与 Shift 范围选择。" />
+                    <TextBlock Style="{StaticResource GallerySectionDescriptionStyle}" Text="SelectionMode=&quot;Extended&quot; 保留 WPF 原生的 Ctrl 与 Shift 范围选择。" />
                     <zen:ZenListBox Height="180" SelectionMode="Extended">
                         <ListBoxItem Content="北京" IsSelected="True" />
                         <ListBoxItem Content="上海" IsSelected="True" />
@@ -104,7 +104,7 @@
             <Border Style="{StaticResource GalleryCardStyle}">
                 <StackPanel>
                     <TextBlock Style="{StaticResource SectionTitleStyle}" Text="长列表与圆角" />
-                    <TextBlock Margin="0,0,0,12" Style="{StaticResource GallerySupportingTextStyle}" Text="默认启用 UI 虚拟化与容器回收；固定高度后，超出内容使用主题滚动条。" />
+                    <TextBlock Style="{StaticResource GallerySectionDescriptionStyle}" Text="默认启用 UI 虚拟化与容器回收；固定高度后，超出内容使用主题滚动条。" />
                     <zen:ZenListBox Height="210" CornerRadius="14" SelectedIndex="7">
                         <ListBoxItem Content="项目 01" />
                         <ListBoxItem Content="项目 02" />

@@ -41,6 +41,7 @@ namespace ZenUI.Wpf.Gallery
             containerRegistry.RegisterForNavigation<CalendarView>(NavigationKeys.Calendar);
             containerRegistry.RegisterForNavigation<DatePickerView>(NavigationKeys.DatePicker);
             containerRegistry.RegisterForNavigation<TimePickerView>(NavigationKeys.TimePicker);
+            containerRegistry.RegisterForNavigation<DateTimePickerView>(NavigationKeys.DateTimePicker);
             containerRegistry.RegisterForNavigation<DataGridView>(NavigationKeys.DataGrid);
             containerRegistry.RegisterForNavigation<SliderView>(NavigationKeys.Slider);
             containerRegistry.RegisterForNavigation<ProgressBarView>(NavigationKeys.ProgressBar);
