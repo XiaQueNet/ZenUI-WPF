@@ -12,7 +12,7 @@ ZenUI 提供两个互不依赖的 NuGet 包。只需要控件时安装 `ZenUI.Wp
 
 ```xml
 <ItemGroup>
-  <PackageReference Include="ZenUI.Wpf" Version="0.1.0-preview.6" />
+  <PackageReference Include="ZenUI.Wpf" Version="0.1.0-preview.7" />
 </ItemGroup>
 ```
 
@@ -20,7 +20,7 @@ ZenUI 提供两个互不依赖的 NuGet 包。只需要控件时安装 `ZenUI.Wp
 
 ```xml
 <ItemGroup>
-  <PackageReference Include="ZenUI.Wpf.Converters" Version="0.1.0-preview.6" />
+  <PackageReference Include="ZenUI.Wpf.Converters" Version="0.1.0-preview.7" />
 </ItemGroup>
 ```
 

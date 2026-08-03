@@ -4,6 +4,8 @@
 
 ## Unreleased
 
+## [0.1.0-preview.7] - 2026-08-03
+
 ### Added
 
 - 增加 `ZenDateTimePicker` 日期时间选择控件，支持日历与时分秒一体弹层、确认式提交、文本输入、日期时间范围和 12/24 小时制；“此刻”操作会同步更新年月日时分秒。
@@ -133,7 +135,8 @@
 - Password 明文绑定默认关闭，并标记为过时兼容 API。
 - DataGrid 恢复行虚拟化、行头、行详情、全选、冻结列偏移和高级编辑契约。
 
-[Unreleased]: https://github.com/XiaQueNet/ZenUI-WPF/compare/v0.1.0-preview.6...HEAD
+[Unreleased]: https://github.com/XiaQueNet/ZenUI-WPF/compare/v0.1.0-preview.7...HEAD
+[0.1.0-preview.7]: https://github.com/XiaQueNet/ZenUI-WPF/compare/v0.1.0-preview.6...v0.1.0-preview.7
 [0.1.0-preview.6]: https://github.com/XiaQueNet/ZenUI-WPF/compare/v0.1.0-preview.5...v0.1.0-preview.6
 [0.1.0-preview.5]: https://github.com/XiaQueNet/ZenUI-WPF/compare/v0.1.0-preview.4...v0.1.0-preview.5
 [0.1.0-preview.4]: https://github.com/XiaQueNet/ZenUI-WPF/compare/v0.1.0-preview.3...v0.1.0-preview.4
