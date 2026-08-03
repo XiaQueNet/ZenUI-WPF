@@ -1,8 +1,10 @@
 <UserControl
     x:Class="ZenUI.Wpf.Gallery.Views.OverviewView"
+    x:Name="Root"
     xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:gallery="clr-namespace:ZenUI.Wpf.Gallery.Controls"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
     xmlns:zen="https://zenui.mnorg.cn/xaml/wpf">
     <UserControl.Resources>
         <Style x:Key="OverviewSupportingTextStyle" TargetType="{x:Type TextBlock}">
@@ -30,28 +32,37 @@
             <Setter Property="FontSize" Value="{DynamicResource ZenFontSizeCaption}" />
         </Style>
 
-        <Style x:Key="OverviewCategoryStyle" TargetType="{x:Type Border}">
-            <Setter Property="Padding" Value="0,16,24,22" />
+        <Style x:Key="OverviewPanelStyle" TargetType="{x:Type Border}">
+            <Setter Property="Padding" Value="22" />
+            <Setter Property="Background" Value="{DynamicResource ZenSurfaceMutedBrush}" />
+            <Setter Property="BorderBrush" Value="{DynamicResource ZenBorderBrush}" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="8" />
+        </Style>
+
+        <Style x:Key="OverviewPanelTitleStyle" TargetType="{x:Type TextBlock}">
+            <Setter Property="Margin" Value="0,6,0,6" />
+            <Setter Property="Foreground" Value="{DynamicResource ZenTextPrimaryBrush}" />
+            <Setter Property="FontSize" Value="{DynamicResource ZenFontSizeSubtitle}" />
+            <Setter Property="FontWeight" Value="{DynamicResource ZenFontWeightSemibold}" />
+        </Style>
+
+        <Style x:Key="OverviewFieldStyle" TargetType="{x:Type StackPanel}">
+            <Setter Property="Margin" Value="0,0,0,15" />
+        </Style>
+
+        <Style x:Key="OverviewChoiceCardStyle" TargetType="{x:Type Border}">
+            <Setter Property="Padding" Value="18" />
+            <Setter Property="Background" Value="{DynamicResource ZenSurfaceBrush}" />
             <Setter Property="BorderBrush" Value="{DynamicResource ZenDividerBrush}" />
-            <Setter Property="BorderThickness" Value="0,1,0,0" />
+            <Setter Property="BorderThickness" Value="1" />
+            <Setter Property="CornerRadius" Value="7" />
         </Style>
 
-        <Style x:Key="OverviewCategoryTitleStyle" TargetType="{x:Type TextBlock}">
-            <Setter Property="Margin" Value="0,5,0,6" />
-            <Setter Property="Foreground" Value="{DynamicResource ZenTextPrimaryBrush}" />
-            <Setter Property="FontSize" Value="{DynamicResource ZenFontSizeBody}" />
-            <Setter Property="FontWeight" Value="{DynamicResource ZenFontWeightSemibold}" />
-        </Style>
-
-        <Style x:Key="OverviewCapabilityTitleStyle" TargetType="{x:Type TextBlock}">
-            <Setter Property="Margin" Value="0,8,0,6" />
-            <Setter Property="Foreground" Value="{DynamicResource ZenTextPrimaryBrush}" />
-            <Setter Property="FontSize" Value="{DynamicResource ZenFontSizeBody}" />
-            <Setter Property="FontWeight" Value="{DynamicResource ZenFontWeightSemibold}" />
-        </Style>
-
-        <Style x:Key="OverviewCapabilityItemStyle" TargetType="{x:Type StackPanel}">
-            <Setter Property="Margin" Value="0,0,28,24" />
+        <Style x:Key="OverviewStatusPillStyle" TargetType="{x:Type Border}">
+            <Setter Property="Padding" Value="9,4" />
+            <Setter Property="HorizontalAlignment" Value="Left" />
+            <Setter Property="CornerRadius" Value="12" />
         </Style>
     </UserControl.Resources>
 
@@ -63,50 +74,43 @@
         <StackPanel>
             <gallery:PageHeader
                 Title="ZenUI Controls Gallery"
-                Description="探索 ZenUI 的常用 WPF 控件、完整交互状态，以及可实时切换的主题、密度与设计 Token。" />
+                Description="在一张完整页面中浏览不同尺寸、形态与交互层级的 ZenUI WPF 控件。" />
 
-            <!--  Calm product introduction: one message, one visual focus.  -->
+            <!--  Intro and library scope.  -->
             <Border
-                Margin="0,0,0,40"
+                Margin="0,0,0,36"
                 Padding="28"
                 Background="{DynamicResource ZenSurfaceMutedBrush}"
                 CornerRadius="8">
                 <Grid>
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="5*" />
-                        <ColumnDefinition Width="48" />
+                        <ColumnDefinition Width="40" />
                         <ColumnDefinition Width="3*" />
                     </Grid.ColumnDefinitions>
-
                     <StackPanel VerticalAlignment="Center">
                         <TextBlock Style="{StaticResource OverviewEyebrowStyle}" Text="ZEN STYLE FOR WPF" />
                         <TextBlock
-                            MaxWidth="520"
-                            Margin="0,12,0,0"
+                            MaxWidth="560"
+                            Margin="0,10,0,0"
                             HorizontalAlignment="Left"
                             FontSize="24"
                             FontWeight="{DynamicResource ZenFontWeightSemibold}"
                             Foreground="{DynamicResource ZenTextPrimaryBrush}"
                             LineHeight="34"
-                            Text="删除噪声，保留必要信息"
+                            Text="一页看清整套控件"
                             TextWrapping="Wrap" />
                         <TextBlock
-                            MaxWidth="560"
+                            MaxWidth="590"
                             Margin="0,10,0,0"
                             HorizontalAlignment="Left"
                             Style="{StaticResource OverviewSupportingTextStyle}"
-                            Text="通过克制的视觉与交互表达，让桌面应用保持清晰、从容，同时完整保留 WPF 的行为、可访问性与定制能力。" />
-                        <TextBlock
-                            Margin="0,18,0,0"
-                            FontSize="{DynamicResource ZenFontSizeCaption}"
-                            Foreground="{DynamicResource ZenTextPlaceholderBrush}"
-                            Text=".NET Framework 4.7.2  ·  .NET 8" />
+                            Text="小型操作紧凑成组，高型内容并排陈列，横向数据独占整行；所有示例均可直接交互，并同步响应主题与密度。" />
                     </StackPanel>
-
                     <UniformGrid Grid.Column="2" Columns="3" VerticalAlignment="Center">
                         <StackPanel>
-                            <TextBlock Style="{StaticResource OverviewMetricValueStyle}" Text="20" />
-                            <TextBlock Style="{StaticResource OverviewMetricLabelStyle}" Text="常用控件" />
+                            <TextBlock Style="{StaticResource OverviewMetricValueStyle}" Text="21" />
+                            <TextBlock Style="{StaticResource OverviewMetricLabelStyle}" Text="图库控件" />
                         </StackPanel>
                         <StackPanel>
                             <TextBlock Style="{StaticResource OverviewMetricValueStyle}" Text="3" />
@@ -120,260 +124,358 @@
                 </Grid>
             </Border>
 
-            <!--  Primary interactive example.  -->
+            <!--  Compact controls share one horizontal playground.  -->
             <Border Style="{StaticResource GalleryCardStyle}">
                 <StackPanel>
-                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="快速体验" />
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="操作与状态" />
                     <TextBlock
-                        Margin="0,0,0,22"
+                        Margin="0,0,0,18"
                         Style="{StaticResource OverviewSupportingTextStyle}"
-                        Text="在一个简短流程中观察输入、选择、状态反馈与操作之间的一致协作。" />
+                        Text="按钮、选择、开关和连续值高度接近，放在同一操作台中更容易比较层级与状态。" />
+                    <Border Style="{StaticResource OverviewPanelStyle}">
+                        <StackPanel>
+                            <WrapPanel>
+                                <zen:ZenButton Content="创建项目" Style="{StaticResource GalleryButtonStyle}" />
+                                <zen:ZenButton Appearance="Outlined" Content="导入配置" Style="{StaticResource GalleryButtonStyle}" />
+                                <zen:ZenButton Appearance="Text" Content="查看文档" Style="{StaticResource GalleryButtonStyle}" Variant="Neutral" />
+                                <zen:ZenButton Content="不可用" IsEnabled="False" Style="{StaticResource GalleryButtonStyle}" />
+                            </WrapPanel>
+                            <Border Margin="0,20,0,20" BorderBrush="{DynamicResource ZenDividerBrush}" BorderThickness="0,1,0,0" />
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="18" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Border Style="{StaticResource OverviewChoiceCardStyle}">
+                                    <StackPanel>
+                                        <TextBlock Style="{StaticResource OverviewEyebrowStyle}" Text="CHECKBOX" />
+                                        <TextBlock Style="{StaticResource OverviewPanelTitleStyle}" Text="同步内容" />
+                                        <TextBlock Margin="0,0,0,16" Style="{StaticResource OverviewSupportingTextStyle}" Text="可同时选择多项，并完整展示常用交互状态。" />
+                                        <Grid>
+                                            <Grid.ColumnDefinitions>
+                                                <ColumnDefinition Width="*" />
+                                                <ColumnDefinition Width="12" />
+                                                <ColumnDefinition Width="*" />
+                                            </Grid.ColumnDefinitions>
+                                            <Grid.RowDefinitions>
+                                                <RowDefinition Height="Auto" />
+                                                <RowDefinition Height="12" />
+                                                <RowDefinition Height="Auto" />
+                                            </Grid.RowDefinitions>
+                                            <zen:ZenCheckBox Content="主题资源" IsChecked="True" />
+                                            <zen:ZenCheckBox Grid.Column="2" Content="示例数据" />
+                                            <zen:ZenCheckBox
+                                                Grid.Row="2"
+                                                Content="部分组件"
+                                                IsChecked="{x:Null}"
+                                                IsThreeState="True" />
+                                            <zen:ZenCheckBox
+                                                Grid.Row="2"
+                                                Grid.Column="2"
+                                                Content="历史版本"
+                                                IsChecked="True"
+                                                IsEnabled="False" />
+                                        </Grid>
+                                        <TextBlock Margin="0,15,0,0" Style="{StaticResource OverviewSupportingTextStyle}" Text="选中 · 未选 · 部分选中 · 禁用" />
+                                    </StackPanel>
+                                </Border>
+                                <Border Grid.Column="2" Style="{StaticResource OverviewChoiceCardStyle}">
+                                    <StackPanel>
+                                        <TextBlock Style="{StaticResource OverviewEyebrowStyle}" Text="RADIO BUTTON" />
+                                        <TextBlock Style="{StaticResource OverviewPanelTitleStyle}" Text="发布通道" />
+                                        <TextBlock Margin="0,0,0,16" Style="{StaticResource OverviewSupportingTextStyle}" Text="一组互斥选项只保留一个明确选择。" />
+                                        <zen:ZenRadioButton Margin="0,0,0,12" GroupName="OverviewReleaseChannel" IsChecked="True">
+                                            <StackPanel>
+                                                <TextBlock FontWeight="{DynamicResource ZenFontWeightSemibold}" Text="稳定版" />
+                                                <TextBlock Margin="0,3,0,0" Style="{StaticResource OverviewSupportingTextStyle}" Text="经过完整验证，适合生产环境" />
+                                            </StackPanel>
+                                        </zen:ZenRadioButton>
+                                        <zen:ZenRadioButton Margin="0,0,0,12" GroupName="OverviewReleaseChannel">
+                                            <StackPanel>
+                                                <TextBlock FontWeight="{DynamicResource ZenFontWeightSemibold}" Text="预览版" />
+                                                <TextBlock Margin="0,3,0,0" Style="{StaticResource OverviewSupportingTextStyle}" Text="提前体验即将发布的能力" />
+                                            </StackPanel>
+                                        </zen:ZenRadioButton>
+                                        <zen:ZenRadioButton Content="夜间构建（暂不可用）" GroupName="OverviewReleaseChannel" IsEnabled="False" />
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                            <Grid Margin="0,20,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="0.8*" />
+                                    <ColumnDefinition Width="28" />
+                                    <ColumnDefinition Width="1.2*" />
+                                </Grid.ColumnDefinitions>
+                                <StackPanel>
+                                    <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="服务状态" />
+                                    <Grid>
+                                        <StackPanel>
+                                            <TextBlock FontWeight="{DynamicResource ZenFontWeightSemibold}" Text="实时同步" />
+                                            <TextBlock Margin="0,3,48,0" Style="{StaticResource OverviewSupportingTextStyle}" Text="保持团队配置一致" />
+                                        </StackPanel>
+                                        <zen:ZenSwitch HorizontalAlignment="Right" VerticalAlignment="Center" IsChecked="True" />
+                                    </Grid>
+                                </StackPanel>
+                                <StackPanel Grid.Column="2">
+                                    <DockPanel Margin="0,0,0,8">
+                                        <TextBlock DockPanel.Dock="Left" Style="{StaticResource GalleryFieldLabelStyle}" Text="资源配额" />
+                                        <TextBlock HorizontalAlignment="Right" Foreground="{DynamicResource ZenTextSecondaryBrush}" Text="72%" />
+                                    </DockPanel>
+                                    <zen:ZenSlider Maximum="100" Value="72" />
+                                    <zen:ZenProgressBar Margin="0,12,0,0" Maximum="100" Value="72" />
+                                </StackPanel>
+                            </Grid>
+                            <zen:ZenAlert Margin="0,22,0,0" Severity="Success">
+                                <TextBlock Text="所有依赖均已就绪，可以安全创建项目。" TextWrapping="Wrap" />
+                            </zen:ZenAlert>
+                        </StackPanel>
+                    </Border>
+                </StackPanel>
+            </Border>
+
+            <!--  Input controls need width, so they are arranged as two complete columns.  -->
+            <Border Style="{StaticResource GalleryCardStyle}">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="输入工作台" />
+                    <TextBlock
+                        Margin="0,0,0,18"
+                        Style="{StaticResource OverviewSupportingTextStyle}"
+                        Text="长输入框保持完整宽度，日期、时间与数字等短字段在另一列纵向对齐。" />
                     <Grid>
                         <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="40" />
-                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="1.15*" />
+                            <ColumnDefinition Width="20" />
+                            <ColumnDefinition Width="0.85*" />
                         </Grid.ColumnDefinitions>
-
-                        <StackPanel>
-                            <TextBlock Style="{StaticResource OverviewEyebrowStyle}" Text="01  配置项目" />
-                            <TextBlock
-                                Margin="0,5,0,18"
-                                Style="{StaticResource OverviewSupportingTextStyle}"
-                                Text="填写基本信息与初始化选项。" />
-
-                            <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="项目名称" />
-                            <zen:ZenTextBox
-                                Margin="0,0,0,14"
-                                AutomationProperties.Name="项目名称"
-                                Text="ZenUI Dashboard"
-                                Watermark="请输入项目名称" />
-                            <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="项目类型" />
-                            <zen:ZenComboBox
-                                Margin="0,0,0,16"
-                                AutomationProperties.Name="项目类型"
-                                SelectedIndex="2"
-                                Watermark="请选择项目类型">
-                                <ComboBoxItem Content="桌面应用" />
-                                <ComboBoxItem Content="管理工具" />
-                                <ComboBoxItem Content="数据看板" />
-                            </zen:ZenComboBox>
-                            <Grid>
-                                <StackPanel>
-                                    <TextBlock FontWeight="{DynamicResource ZenFontWeightSemibold}" Text="启用状态通知" />
-                                    <TextBlock
-                                        Margin="0,3,0,0"
-                                        Style="{StaticResource OverviewSupportingTextStyle}"
-                                        Text="在关键流程完成时显示提醒。" />
+                        <Border Style="{StaticResource OverviewPanelStyle}">
+                            <StackPanel>
+                                <TextBlock Style="{StaticResource OverviewEyebrowStyle}" Text="PROJECT DETAILS" />
+                                <TextBlock Style="{StaticResource OverviewPanelTitleStyle}" Text="基本信息" />
+                                <TextBlock Margin="0,0,0,18" Style="{StaticResource OverviewSupportingTextStyle}" Text="文本类控件使用整列宽度，避免内容和水印被截断。" />
+                                <StackPanel Style="{StaticResource OverviewFieldStyle}">
+                                    <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="项目名称" />
+                                    <zen:ZenTextBox Text="ZenUI Dashboard" Watermark="请输入项目名称" />
                                 </StackPanel>
-                                <zen:ZenSwitch
-                                    HorizontalAlignment="Right"
-                                    VerticalAlignment="Center"
-                                    AutomationProperties.Name="启用状态通知"
-                                    IsChecked="True" />
-                            </Grid>
-                        </StackPanel>
+                                <StackPanel Style="{StaticResource OverviewFieldStyle}">
+                                    <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="访问密钥" />
+                                    <zen:ZenPasswordBox Watermark="请输入访问密钥" />
+                                </StackPanel>
+                                <StackPanel Style="{StaticResource OverviewFieldStyle}">
+                                    <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="项目模板" />
+                                    <zen:ZenComboBox SelectedIndex="1" Watermark="选择模板">
+                                        <ComboBoxItem Content="桌面应用" />
+                                        <ComboBoxItem Content="数据看板" />
+                                        <ComboBoxItem Content="管理工具" />
+                                    </zen:ZenComboBox>
+                                </StackPanel>
+                                <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="界面布局" />
+                                <zen:ZenRadioGroup
+                                    DisplayMode="Segmented"
+                                    ItemsSource="{Binding ViewModes, ElementName=Root}"
+                                    SelectedIndex="1"
+                                    Spacing="6" />
+                            </StackPanel>
+                        </Border>
+                        <Border Grid.Column="2" Style="{StaticResource OverviewPanelStyle}">
+                            <StackPanel>
+                                <TextBlock Style="{StaticResource OverviewEyebrowStyle}" Text="SCHEDULE &amp; SCALE" />
+                                <TextBlock Style="{StaticResource OverviewPanelTitleStyle}" Text="时间与规模" />
+                                <TextBlock Margin="0,0,0,18" Style="{StaticResource OverviewSupportingTextStyle}" Text="格式化字段采用一致标签、间距和对齐方式。" />
+                                <StackPanel Style="{StaticResource OverviewFieldStyle}">
+                                    <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="发布日期" />
+                                    <zen:ZenDatePicker SelectedDate="2026-08-18" Watermark="请选择日期" />
+                                </StackPanel>
+                                <StackPanel Style="{StaticResource OverviewFieldStyle}">
+                                    <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="提醒时间" />
+                                    <zen:ZenTimePicker IsSecondVisible="False">
+                                        <zen:ZenTimePicker.SelectedTime>
+                                            <sys:TimeSpan>09:30:00</sys:TimeSpan>
+                                        </zen:ZenTimePicker.SelectedTime>
+                                    </zen:ZenTimePicker>
+                                </StackPanel>
+                                <StackPanel Style="{StaticResource OverviewFieldStyle}">
+                                    <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="实例数量" />
+                                    <zen:ZenNumberBox Maximum="20" Minimum="1" SpinButtonLayout="Vertical" Step="1" Value="4" />
+                                </StackPanel>
+                                <Grid Margin="0,3,0,0">
+                                    <StackPanel>
+                                        <TextBlock FontWeight="{DynamicResource ZenFontWeightSemibold}" Text="发布后通知成员" />
+                                        <TextBlock Margin="0,3,50,0" Style="{StaticResource OverviewSupportingTextStyle}" Text="通过系统状态提醒。" />
+                                    </StackPanel>
+                                    <zen:ZenSwitch HorizontalAlignment="Right" VerticalAlignment="Center" IsChecked="True" />
+                                </Grid>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
+                </StackPanel>
+            </Border>
 
+            <!--  Tall controls sit side by side and receive fixed, uncut vertical space.  -->
+            <Border Style="{StaticResource GalleryCardStyle}">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="日期与内容选择" />
+                    <TextBlock
+                        Margin="0,0,0,18"
+                        Style="{StaticResource OverviewSupportingTextStyle}"
+                        Text="日历是页面中最高的控件；右侧组合列表、加载状态和折叠面板，以保持两列视觉重量平衡。" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.05*" />
+                            <ColumnDefinition Width="20" />
+                            <ColumnDefinition Width="0.95*" />
+                        </Grid.ColumnDefinitions>
+                        <Border Style="{StaticResource OverviewPanelStyle}">
+                            <StackPanel>
+                                <TextBlock Style="{StaticResource OverviewEyebrowStyle}" Text="CALENDAR" />
+                                <TextBlock Style="{StaticResource OverviewPanelTitleStyle}" Text="迭代计划" />
+                                <TextBlock Margin="0,0,0,16" Style="{StaticResource OverviewSupportingTextStyle}" Text="直接展示完整月份和当前选中日期。" />
+                                <zen:ZenCalendar
+                                    HorizontalAlignment="Stretch"
+                                    DisplayDate="2026-08-01"
+                                    SelectedDate="2026-08-18" />
+                            </StackPanel>
+                        </Border>
                         <StackPanel Grid.Column="2">
-                            <TextBlock Style="{StaticResource OverviewEyebrowStyle}" Text="02  检查并创建" />
-                            <TextBlock
-                                Margin="0,5,0,18"
-                                Style="{StaticResource OverviewSupportingTextStyle}"
-                                Text="确认配置，并观察实时反馈。" />
-
-                            <Border
-                                Padding="20"
-                                Background="{DynamicResource ZenSurfaceMutedBrush}"
-                                CornerRadius="6">
+                            <Border Margin="0,0,0,20" Style="{StaticResource OverviewPanelStyle}">
                                 <StackPanel>
-                                    <DockPanel>
-                                        <TextBlock
-                                            DockPanel.Dock="Left"
-                                            FontWeight="{DynamicResource ZenFontWeightSemibold}"
-                                            Text="环境准备进度" />
-                                        <TextBlock
-                                            HorizontalAlignment="Right"
-                                            Foreground="{DynamicResource ZenTextSecondaryBrush}"
-                                            Text="68%" />
-                                    </DockPanel>
-                                    <zen:ZenProgressBar
-                                        Margin="0,10,0,16"
-                                        Maximum="100"
-                                        Value="68" />
-                                    <zen:ZenCheckBox
-                                        Margin="0,0,0,10"
-                                        Content="创建基础目录"
-                                        IsChecked="True" />
-                                    <zen:ZenCheckBox
-                                        Margin="0,0,0,10"
-                                        Content="应用主题资源"
-                                        IsChecked="True" />
-                                    <zen:ZenCheckBox Content="生成示例页面" />
+                                    <TextBlock Style="{StaticResource OverviewEyebrowStyle}" Text="LIST BOX" />
+                                    <TextBlock Style="{StaticResource OverviewPanelTitleStyle}" Text="工作阶段" />
+                                    <zen:ZenListBox Height="166" SelectedIndex="1">
+                                        <ListBoxItem Content="需求梳理" />
+                                        <ListBoxItem Content="组件开发" />
+                                        <ListBoxItem Content="质量验证" />
+                                        <ListBoxItem Content="发布准备" />
+                                    </zen:ZenListBox>
                                 </StackPanel>
                             </Border>
-                            <zen:ZenAlert Margin="0,12,0,0" Severity="Success">
-                                <TextBlock Text="依赖检查通过，可以开始创建。" TextWrapping="Wrap" />
-                            </zen:ZenAlert>
-                            <WrapPanel Margin="0,16,0,0">
-                                <zen:ZenButton Content="确认创建" Style="{StaticResource GalleryButtonStyle}" />
-                                <zen:ZenButton
-                                    Appearance="Text"
-                                    Content="保存草稿"
-                                    Style="{StaticResource GalleryButtonStyle}"
-                                    Variant="Neutral" />
-                            </WrapPanel>
+                            <Border Style="{StaticResource OverviewPanelStyle}">
+                                <StackPanel>
+                                    <TextBlock Style="{StaticResource OverviewEyebrowStyle}" Text="LOADING &amp; EXPANDER" />
+                                    <TextBlock Style="{StaticResource OverviewPanelTitleStyle}" Text="按需反馈" />
+                                    <zen:ZenLoading
+                                        Height="94"
+                                        Margin="0,4,0,14"
+                                        IsContentInteractionBlocked="False"
+                                        IsLoading="True"
+                                        LoadingText="正在同步组件元数据…"
+                                        Orientation="Horizontal">
+                                        <Border Background="{DynamicResource ZenSurfaceBrush}" CornerRadius="6" />
+                                    </zen:ZenLoading>
+                                    <zen:ZenExpander Header="查看同步范围" IsExpanded="True">
+                                        <TextBlock Style="{StaticResource OverviewSupportingTextStyle}" Text="主题资源、密度 Token、控件模板与自动化信息。" />
+                                    </zen:ZenExpander>
+                                </StackPanel>
+                            </Border>
                         </StackPanel>
                     </Grid>
                 </StackPanel>
             </Border>
 
-            <!--  Interaction states remain discoverable without a second card shell.  -->
+            <!--  Wide structured data occupies the full row.  -->
             <Border Style="{StaticResource GalleryCardStyle}">
                 <StackPanel>
-                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="交互状态" />
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="结构化数据" />
                     <TextBlock
-                        Margin="0,0,0,20"
+                        Margin="0,0,0,18"
                         Style="{StaticResource OverviewSupportingTextStyle}"
-                        Text="主要操作保持唯一视觉焦点；次要操作和状态反馈使用更安静的表达。" />
-                    <WrapPanel>
-                        <zen:ZenButton Content="主要操作" Style="{StaticResource GalleryButtonStyle}" />
-                        <zen:ZenButton
-                            Appearance="Outlined"
-                            Content="次要操作"
-                            Style="{StaticResource GalleryButtonStyle}" />
-                        <zen:ZenButton
-                            Appearance="Text"
-                            Content="文字操作"
-                            Style="{StaticResource GalleryButtonStyle}"
-                            Variant="Neutral" />
-                        <zen:ZenButton
-                            Content="不可用"
-                            IsEnabled="False"
-                            Style="{StaticResource GalleryButtonStyle}" />
-                    </WrapPanel>
-                    <UniformGrid Margin="0,24,0,0" Columns="3">
-                        <StackPanel Margin="0,0,20,0">
-                            <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="选择状态" />
-                            <WrapPanel>
-                                <zen:ZenCheckBox
-                                    Margin="0,0,18,0"
-                                    Content="已选择"
-                                    IsChecked="True" />
-                                <zen:ZenCheckBox Content="未选择" />
-                            </WrapPanel>
+                        Text="表格需要连续的横向空间，因此独占整行；列宽按信息长度分配，不挤入窄卡片。" />
+                    <Border Style="{StaticResource OverviewPanelStyle}">
+                        <StackPanel>
+                            <DockPanel Margin="0,0,0,16">
+                                <StackPanel DockPanel.Dock="Left">
+                                    <TextBlock Style="{StaticResource OverviewEyebrowStyle}" Text="DATA GRID" />
+                                    <TextBlock Style="{StaticResource OverviewPanelTitleStyle}" Text="组件交付状态" />
+                                </StackPanel>
+                                <Border
+                                    Margin="14,0,0,0"
+                                    VerticalAlignment="Center"
+                                    Background="{DynamicResource ZenSuccessLightBrush}"
+                                    Style="{StaticResource OverviewStatusPillStyle}">
+                                    <TextBlock Foreground="{DynamicResource ZenSuccessBrush}" Text="4 项交付中" />
+                                </Border>
+                            </DockPanel>
+                            <zen:ZenDataGrid
+                                Height="244"
+                                AutoGenerateColumns="False"
+                                IsReadOnly="True"
+                                IsRowSelectionHighlightEnabled="True"
+                                ItemsSource="{Binding DeliveryItems, ElementName=Root}"
+                                SelectedIndex="1">
+                                <DataGrid.Columns>
+                                    <DataGridTextColumn Width="1.2*" MinWidth="130" Binding="{Binding Component}" Header="组件" />
+                                    <DataGridTextColumn Width="*" MinWidth="120" Binding="{Binding Category}" Header="分类" />
+                                    <DataGridTextColumn Width="1.3*" MinWidth="150" Binding="{Binding Owner}" Header="负责人" />
+                                    <DataGridTextColumn Width="*" MinWidth="110" Binding="{Binding Progress}" Header="进度" />
+                                    <DataGridTextColumn Width="*" MinWidth="110" Binding="{Binding Status}" Header="状态" />
+                                </DataGrid.Columns>
+                            </zen:ZenDataGrid>
                         </StackPanel>
-                        <StackPanel Margin="10,0">
-                            <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="开关状态" />
-                            <WrapPanel>
-                                <zen:ZenSwitch Margin="0,0,18,0" IsChecked="True" />
-                                <zen:ZenSwitch />
-                            </WrapPanel>
-                        </StackPanel>
-                        <StackPanel Margin="20,0,0,0">
-                            <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="连续数值" />
-                            <zen:ZenSlider
-                                AutomationProperties.Name="连续数值"
-                                Maximum="100"
-                                Value="72" />
-                        </StackPanel>
-                    </UniformGrid>
-                </StackPanel>
-            </Border>
-
-            <!--  Categories use rhythm and dividers instead of nested cards and color coding.  -->
-            <Border Style="{StaticResource GalleryCardStyle}">
-                <StackPanel>
-                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="组件地图" />
-                    <TextBlock
-                        Margin="0,0,0,14"
-                        Style="{StaticResource OverviewSupportingTextStyle}"
-                        Text="按使用场景定位控件；颜色、排版、尺寸和状态由同一套设计 Token 贯穿。" />
-                    <UniformGrid Columns="3" Rows="2">
-                        <Border Style="{StaticResource OverviewCategoryStyle}">
-                            <StackPanel>
-                                <TextBlock Style="{StaticResource OverviewEyebrowStyle}" Text="5 个控件" />
-                                <TextBlock Style="{StaticResource OverviewCategoryTitleStyle}" Text="基础交互" />
-                                <TextBlock Style="{StaticResource OverviewSupportingTextStyle}" Text="Button · CheckBox&#x0a;RadioButton · RadioGroup · Switch" />
-                            </StackPanel>
-                        </Border>
-                        <Border Style="{StaticResource OverviewCategoryStyle}">
-                            <StackPanel>
-                                <TextBlock Style="{StaticResource OverviewEyebrowStyle}" Text="7 个控件" />
-                                <TextBlock Style="{StaticResource OverviewCategoryTitleStyle}" Text="数据输入" />
-                                <TextBlock Style="{StaticResource OverviewSupportingTextStyle}" Text="TextBox · PasswordBox · NumberBox&#x0a;ComboBox · Slider · DatePicker · TimePicker" />
-                            </StackPanel>
-                        </Border>
-                        <Border Style="{StaticResource OverviewCategoryStyle}">
-                            <StackPanel>
-                                <TextBlock Style="{StaticResource OverviewEyebrowStyle}" Text="4 个控件" />
-                                <TextBlock Style="{StaticResource OverviewCategoryTitleStyle}" Text="数据展示" />
-                                <TextBlock Style="{StaticResource OverviewSupportingTextStyle}" Text="ListBox · DataGrid&#x0a;Calendar · Expander" />
-                            </StackPanel>
-                        </Border>
-                        <Border Style="{StaticResource OverviewCategoryStyle}">
-                            <StackPanel>
-                                <TextBlock Style="{StaticResource OverviewEyebrowStyle}" Text="2 个控件" />
-                                <TextBlock Style="{StaticResource OverviewCategoryTitleStyle}" Text="状态反馈" />
-                                <TextBlock Style="{StaticResource OverviewSupportingTextStyle}" Text="Alert · ProgressBar&#x0a;成功、警告、错误与信息语义" />
-                            </StackPanel>
-                        </Border>
-                        <Border Style="{StaticResource OverviewCategoryStyle}">
-                            <StackPanel>
-                                <TextBlock Style="{StaticResource OverviewEyebrowStyle}" Text="2 个控件" />
-                                <TextBlock Style="{StaticResource OverviewCategoryTitleStyle}" Text="浮层与菜单" />
-                                <TextBlock Style="{StaticResource OverviewSupportingTextStyle}" Text="Popover · ContextMenu&#x0a;轻量提示与上下文操作" />
-                            </StackPanel>
-                        </Border>
-                        <Border Style="{StaticResource OverviewCategoryStyle}">
-                            <StackPanel>
-                                <TextBlock Style="{StaticResource OverviewEyebrowStyle}" Text="6 层资源" />
-                                <TextBlock Style="{StaticResource OverviewCategoryTitleStyle}" Text="设计 Token" />
-                                <TextBlock Style="{StaticResource OverviewSupportingTextStyle}" Text="语义颜色 · 排版 · 圆角 · 间距&#x0a;组件尺寸 · 交互状态" />
-                            </StackPanel>
-                        </Border>
-                    </UniformGrid>
-                </StackPanel>
-            </Border>
-
-            <!--  Design qualities are presented as a quiet summary, not another dashboard.  -->
-            <Border Style="{StaticResource GalleryCardStyle}">
-                <StackPanel>
-                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="设计系统能力" />
-                    <TextBlock
-                        Margin="0,0,0,22"
-                        Style="{StaticResource OverviewSupportingTextStyle}"
-                        Text="默认视觉保持克制，完整能力通过主题、状态和 WPF 原生契约按需提供。" />
-                    <UniformGrid Columns="2">
-                        <StackPanel Style="{StaticResource OverviewCapabilityItemStyle}">
-                            <TextBlock Style="{StaticResource OverviewEyebrowStyle}" Text="01" />
-                            <TextBlock Style="{StaticResource OverviewCapabilityTitleStyle}" Text="统一外观" />
-                            <TextBlock Style="{StaticResource OverviewSupportingTextStyle}" Text="一致的间距、圆角和视觉层级。" />
-                        </StackPanel>
-                        <StackPanel Style="{StaticResource OverviewCapabilityItemStyle}">
-                            <TextBlock Style="{StaticResource OverviewEyebrowStyle}" Text="02" />
-                            <TextBlock Style="{StaticResource OverviewCapabilityTitleStyle}" Text="完整状态" />
-                            <TextBlock Style="{StaticResource OverviewSupportingTextStyle}" Text="悬停、焦点、选中与禁用反馈。" />
-                        </StackPanel>
-                        <StackPanel Style="{StaticResource OverviewCapabilityItemStyle}">
-                            <TextBlock Style="{StaticResource OverviewEyebrowStyle}" Text="03" />
-                            <TextBlock Style="{StaticResource OverviewCapabilityTitleStyle}" Text="主题与密度" />
-                            <TextBlock Style="{StaticResource OverviewSupportingTextStyle}" Text="三套主题和三档密度独立切换。" />
-                        </StackPanel>
-                        <StackPanel Style="{StaticResource OverviewCapabilityItemStyle}">
-                            <TextBlock Style="{StaticResource OverviewEyebrowStyle}" Text="04" />
-                            <TextBlock Style="{StaticResource OverviewCapabilityTitleStyle}" Text="WPF 原生" />
-                            <TextBlock Style="{StaticResource OverviewSupportingTextStyle}" Text="保留绑定、命令、键盘和自动化契约。" />
-                        </StackPanel>
-                    </UniformGrid>
-                    <Border
-                        Margin="0,2,0,0"
-                        Padding="16,12"
-                        Background="{DynamicResource ZenSurfaceMutedBrush}"
-                        CornerRadius="6">
-                        <TextBlock
-                            Style="{StaticResource OverviewSupportingTextStyle}"
-                            Text="可在左侧切换主题与界面密度，观察当前页面的资源和控件同步更新。" />
                     </Border>
+                </StackPanel>
+            </Border>
+
+            <!--  Overlays are anchored to a realistic object rather than given empty space.  -->
+            <Border Style="{StaticResource GalleryCardStyle}">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="浮层与上下文操作" />
+                    <TextBlock
+                        Margin="0,0,0,18"
+                        Style="{StaticResource OverviewSupportingTextStyle}"
+                        Text="Popover 依附轻量说明入口，ContextMenu 则依附具体对象；点击问号或右键文件卡片即可体验。" />
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="1.1*" />
+                            <ColumnDefinition Width="20" />
+                            <ColumnDefinition Width="0.9*" />
+                        </Grid.ColumnDefinitions>
+                        <Border Style="{StaticResource OverviewPanelStyle}">
+                            <Border.ContextMenu>
+                                <zen:ZenContextMenu>
+                                    <zen:ZenMenuItem Header="打开" InputGestureText="Enter" />
+                                    <zen:ZenMenuItem Header="重命名" InputGestureText="F2" />
+                                    <zen:ZenMenuItem Header="共享">
+                                        <zen:ZenMenuItem Header="复制链接" />
+                                        <zen:ZenMenuItem Header="管理权限" />
+                                    </zen:ZenMenuItem>
+                                    <Separator />
+                                    <zen:ZenMenuItem Header="固定到快速访问" IsCheckable="True" IsChecked="True" />
+                                    <zen:ZenMenuItem Foreground="{DynamicResource ZenErrorBrush}" Header="删除" />
+                                </zen:ZenContextMenu>
+                            </Border.ContextMenu>
+                            <Grid>
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="52" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="Auto" />
+                                </Grid.ColumnDefinitions>
+                                <Border Width="38" Height="46" HorizontalAlignment="Left" Background="{DynamicResource ZenInfoLightBrush}" CornerRadius="5">
+                                    <TextBlock HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="18" Foreground="{DynamicResource ZenInfoBrush}" Text="Aa" />
+                                </Border>
+                                <StackPanel Grid.Column="1" VerticalAlignment="Center">
+                                    <TextBlock FontWeight="{DynamicResource ZenFontWeightSemibold}" Text="ZenUI 组件规范.docx" />
+                                    <TextBlock Margin="0,4,0,0" Style="{StaticResource OverviewSupportingTextStyle}" Text="1.8 MB · 刚刚更新 · 右键查看更多" />
+                                </StackPanel>
+                                <zen:ZenPopover Grid.Column="2" VerticalAlignment="Center" Placement="Left">
+                                    <StackPanel Width="230">
+                                        <TextBlock FontWeight="{DynamicResource ZenFontWeightSemibold}" Text="文件状态" />
+                                        <TextBlock Margin="0,6,0,0" Style="{StaticResource OverviewSupportingTextStyle}" Text="已同步至团队空间，当前共有 3 位协作者。" />
+                                    </StackPanel>
+                                </zen:ZenPopover>
+                            </Grid>
+                        </Border>
+                        <Border Grid.Column="2" Style="{StaticResource OverviewPanelStyle}">
+                            <StackPanel VerticalAlignment="Center">
+                                <TextBlock Style="{StaticResource OverviewEyebrowStyle}" Text="DISCOVER MORE" />
+                                <TextBlock Style="{StaticResource OverviewPanelTitleStyle}" Text="完整示例仍在左侧" />
+                                <TextBlock Style="{StaticResource OverviewSupportingTextStyle}" Text="总览用于快速认识控件形态；每个独立页面还包含状态、尺寸、外观和属性说明。" />
+                                <WrapPanel Margin="0,18,0,0">
+                                    <zen:ZenButton Content="浏览控件" Style="{StaticResource GalleryButtonStyle}" />
+                                    <zen:ZenButton Appearance="Text" Content="切换主题试试" Style="{StaticResource GalleryButtonStyle}" Variant="Neutral" />
+                                </WrapPanel>
+                            </StackPanel>
+                        </Border>
+                    </Grid>
                 </StackPanel>
             </Border>
         </StackPanel>
