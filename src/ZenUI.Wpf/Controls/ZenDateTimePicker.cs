@@ -270,7 +270,7 @@ namespace ZenUI.Wpf.Controls
                 new FrameworkPropertyMetadata(string.Empty, HandleDisplayOptionsChanged));
 
         /// <summary>
-        /// 获取或设置一个值，该值指示是否允许通过键盘直接输入日期时间。
+        /// 获取或设置一个值，该值指示是否允许通过键盘直接输入日期时间。禁用后，点击只读输入区域会打开日期时间选择弹层。
         /// </summary>
         [Bindable(true)]
         public bool IsTextInputEnabled
@@ -619,6 +619,10 @@ namespace ZenUI.Wpf.Controls
             {
                 textBox.LostKeyboardFocus += HandleTextBoxLostKeyboardFocus;
                 textBox.KeyDown += HandleTextBoxKeyDown;
+                textBox.AddHandler(
+                    MouseLeftButtonUpEvent,
+                    new MouseButtonEventHandler(HandleTextBoxMouseLeftButtonUp),
+                    true);
             }
 
             if (popup != null)
@@ -656,6 +660,9 @@ namespace ZenUI.Wpf.Controls
             {
                 textBox.LostKeyboardFocus -= HandleTextBoxLostKeyboardFocus;
                 textBox.KeyDown -= HandleTextBoxKeyDown;
+                textBox.RemoveHandler(
+                    MouseLeftButtonUpEvent,
+                    new MouseButtonEventHandler(HandleTextBoxMouseLeftButtonUp));
             }
 
             if (popup != null)
@@ -971,6 +978,19 @@ namespace ZenUI.Wpf.Controls
             KeyboardFocusChangedEventArgs e)
         {
             CommitText();
+        }
+
+        private void HandleTextBoxMouseLeftButtonUp(
+            object sender,
+            MouseButtonEventArgs e)
+        {
+            if (IsTextInputEnabled || !IsEnabled || IsDropDownOpen)
+            {
+                return;
+            }
+
+            SetCurrentValue(IsDropDownOpenProperty, true);
+            e.Handled = true;
         }
 
         private void HandleTextBoxKeyDown(object sender, KeyEventArgs e)

@@ -81,8 +81,45 @@ namespace ZenUI.Wpf.Tests.Controls
         {
             var picker = CreateTemplatedPicker();
             picker.IsTextInputEnabled = false;
+            var window = new Window
+            {
+                ShowInTaskbar = false,
+                WindowStyle = WindowStyle.None,
+                Content = picker
+            };
 
-            Assert.IsTrue(GetPart<TextBox>(picker, "PART_TextBox").IsReadOnly);
+            try
+            {
+                window.Show();
+                var textBox = GetPart<TextBox>(picker, "PART_TextBox");
+                Assert.IsTrue(textBox.IsReadOnly);
+
+                textBox.RaiseEvent(new MouseButtonEventArgs(
+                    Mouse.PrimaryDevice,
+                    Environment.TickCount,
+                    MouseButton.Left)
+                {
+                    RoutedEvent = UIElement.MouseLeftButtonUpEvent
+                });
+                PumpDispatcher();
+                Assert.IsTrue(picker.IsDropDownOpen);
+
+                picker.IsDropDownOpen = false;
+                picker.IsTextInputEnabled = true;
+                textBox.RaiseEvent(new MouseButtonEventArgs(
+                    Mouse.PrimaryDevice,
+                    Environment.TickCount,
+                    MouseButton.Left)
+                {
+                    RoutedEvent = UIElement.MouseLeftButtonUpEvent
+                });
+                Assert.IsFalse(picker.IsDropDownOpen);
+            }
+            finally
+            {
+                picker.IsDropDownOpen = false;
+                window.Close();
+            }
         }
 
         [TestMethod]

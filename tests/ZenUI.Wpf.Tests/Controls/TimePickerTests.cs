@@ -3,6 +3,7 @@ using System.Globalization;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
+using System.Windows.Input;
 using System.Windows.Threading;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
@@ -85,6 +86,7 @@ namespace ZenUI.Wpf.Tests.Controls
         [TestMethod]
         public void DisablingTextInputMakesTemplateTextBoxReadOnly()
         {
+            _ = new ZenButton();
             var dictionary = new ResourceDictionary
             {
                 Source = new Uri(
@@ -96,11 +98,49 @@ namespace ZenUI.Wpf.Tests.Controls
                 Style = (Style)dictionary[typeof(ZenTimePicker)],
                 IsTextInputEnabled = false
             };
+            var window = new Window
+            {
+                ShowInTaskbar = false,
+                WindowStyle = WindowStyle.None,
+                Content = picker
+            };
 
-            picker.ApplyTemplate();
+            try
+            {
+                window.Show();
+                picker.ApplyTemplate();
 
-            var textBox = (TextBox)picker.Template.FindName("PART_TextBox", picker);
-            Assert.IsTrue(textBox.IsReadOnly);
+                var textBox = (TextBox)picker.Template.FindName("PART_TextBox", picker);
+                Assert.IsTrue(textBox.IsReadOnly);
+
+                textBox.RaiseEvent(new MouseButtonEventArgs(
+                    Mouse.PrimaryDevice,
+                    Environment.TickCount,
+                    MouseButton.Left)
+                {
+                    RoutedEvent = UIElement.MouseLeftButtonUpEvent
+                });
+                picker.Dispatcher.Invoke(
+                    DispatcherPriority.ContextIdle,
+                    new Action(() => { }));
+                Assert.IsTrue(picker.IsDropDownOpen);
+
+                picker.IsDropDownOpen = false;
+                picker.IsTextInputEnabled = true;
+                textBox.RaiseEvent(new MouseButtonEventArgs(
+                    Mouse.PrimaryDevice,
+                    Environment.TickCount,
+                    MouseButton.Left)
+                {
+                    RoutedEvent = UIElement.MouseLeftButtonUpEvent
+                });
+                Assert.IsFalse(picker.IsDropDownOpen);
+            }
+            finally
+            {
+                picker.IsDropDownOpen = false;
+                window.Close();
+            }
         }
 
         [TestMethod]

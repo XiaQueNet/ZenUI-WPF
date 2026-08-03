@@ -433,8 +433,29 @@ namespace ZenUI.Wpf.Tests.Controls
                 Assert.IsTrue(textBox.IsReadOnly);
                 Assert.IsTrue(button.IsEnabled);
 
+                textBox.RaiseEvent(new MouseButtonEventArgs(
+                    Mouse.PrimaryDevice,
+                    Environment.TickCount,
+                    MouseButton.Left)
+                {
+                    RoutedEvent = UIElement.MouseLeftButtonUpEvent
+                });
+                datePicker.Dispatcher.Invoke(
+                    DispatcherPriority.ContextIdle,
+                    new Action(() => { }));
+                Assert.IsTrue(datePicker.IsDropDownOpen);
+
+                datePicker.IsDropDownOpen = false;
                 datePicker.IsTextInputEnabled = true;
                 Assert.IsFalse(textBox.IsReadOnly);
+                textBox.RaiseEvent(new MouseButtonEventArgs(
+                    Mouse.PrimaryDevice,
+                    Environment.TickCount,
+                    MouseButton.Left)
+                {
+                    RoutedEvent = UIElement.MouseLeftButtonUpEvent
+                });
+                Assert.IsFalse(datePicker.IsDropDownOpen);
             }
             finally
             {

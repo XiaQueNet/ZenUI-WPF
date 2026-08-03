@@ -5,6 +5,7 @@ using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
 using System.Windows.Data;
+using System.Windows.Input;
 
 namespace ZenUI.Wpf.Controls
 {
@@ -13,6 +14,7 @@ namespace ZenUI.Wpf.Controls
     /// </summary>
     public class ZenDatePicker : DatePicker
     {
+        private DatePickerTextBox _textBox;
         private Calendar _popupCalendar;
         private readonly List<CalendarDateRange> _constraintBlackoutRanges =
             new List<CalendarDateRange>();
@@ -41,8 +43,37 @@ namespace ZenUI.Wpf.Controls
         /// <inheritdoc />
         public override void OnApplyTemplate()
         {
+            if (_textBox != null)
+            {
+                _textBox.RemoveHandler(
+                    MouseLeftButtonUpEvent,
+                    new MouseButtonEventHandler(HandleTextBoxMouseLeftButtonUp));
+            }
+
             base.OnApplyTemplate();
+            _textBox = GetTemplateChild("PART_TextBox") as DatePickerTextBox;
+            if (_textBox != null)
+            {
+                _textBox.AddHandler(
+                    MouseLeftButtonUpEvent,
+                    new MouseButtonEventHandler(HandleTextBoxMouseLeftButtonUp),
+                    true);
+            }
+
             ApplyPopupBindings();
+        }
+
+        private void HandleTextBoxMouseLeftButtonUp(
+            object sender,
+            MouseButtonEventArgs e)
+        {
+            if (IsTextInputEnabled || !IsEnabled || IsDropDownOpen)
+            {
+                return;
+            }
+
+            SetCurrentValue(IsDropDownOpenProperty, true);
+            e.Handled = true;
         }
 
         private void HandleCalendarOpened(object sender, RoutedEventArgs e)
@@ -191,7 +222,7 @@ namespace ZenUI.Wpf.Controls
                 new FrameworkPropertyMetadata(string.Empty));
 
         /// <summary>
-        /// 获取或设置一个值，该值指示是否允许通过键盘直接输入日期。
+        /// 获取或设置一个值，该值指示是否允许通过键盘直接输入日期。禁用后，点击只读输入区域会打开日期选择弹层。
         /// </summary>
         [Bindable(true)]
         public bool IsTextInputEnabled
