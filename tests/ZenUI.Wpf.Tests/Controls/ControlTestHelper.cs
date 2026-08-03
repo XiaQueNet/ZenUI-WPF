@@ -200,6 +200,11 @@ namespace ZenUI.Wpf.Tests.Controls
             public object ExposedDefaultStyleKey => DefaultStyleKey;
             public AutomationPeer ExposedAutomationPeer => OnCreateAutomationPeer();
         }
+        internal sealed class TestZenDateTimePicker : ZenDateTimePicker
+        {
+            public object ExposedDefaultStyleKey => DefaultStyleKey;
+            public AutomationPeer ExposedAutomationPeer => OnCreateAutomationPeer();
+        }
         internal sealed class TestZenDataGrid : ZenDataGrid
         {
             public object ExposedDefaultStyleKey => DefaultStyleKey;

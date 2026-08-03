@@ -10,7 +10,7 @@ ZenUI 以克制、清晰的 Zen Style 改善 WPF 控件的默认体验，同时�
 
 ## 核心能力
 
-- 提供 Button、TextBox、DataGrid、DatePicker 等常用 WPF 控件。
+- 提供 Button、TextBox、DataGrid、DatePicker、DateTimePicker 等常用 WPF 控件。
 - 内置 Light、Dark、HighContrast 主题，支持运行时切换。
 - 提供 Compact、Standard、Comfortable 三档界面密度。
 - 使用语义化设计 Token，应用无需复制模板即可覆盖颜色与尺寸。
@@ -75,7 +75,7 @@ dotnet add package ZenUI.Wpf.Converters
 | --- | --- |
 | 操作与反馈 | Button、Switch、CheckBox、RadioButton、RadioGroup、Alert、ProgressBar、Loading |
 | 文本与数值输入 | TextBox、PasswordBox、NumberBox、Slider |
-| 选择与日期时间 | ComboBox、ListBox、Calendar、DatePicker、TimePicker |
+| 选择与日期时间 | ComboBox、ListBox、Calendar、DatePicker、TimePicker、DateTimePicker |
 | 数据与布局 | DataGrid、Expander |
 | 浮层与菜单 | Popover、ContextMenu |
 

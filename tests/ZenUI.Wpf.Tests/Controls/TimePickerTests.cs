@@ -83,6 +83,27 @@ namespace ZenUI.Wpf.Tests.Controls
         }
 
         [TestMethod]
+        public void DisablingTextInputMakesTemplateTextBoxReadOnly()
+        {
+            var dictionary = new ResourceDictionary
+            {
+                Source = new Uri(
+                    "/ZenUI.Wpf;component/Themes/Generic.xaml",
+                    UriKind.Relative)
+            };
+            var picker = new ZenTimePicker
+            {
+                Style = (Style)dictionary[typeof(ZenTimePicker)],
+                IsTextInputEnabled = false
+            };
+
+            picker.ApplyTemplate();
+
+            var textBox = (TextBox)picker.Template.FindName("PART_TextBox", picker);
+            Assert.IsTrue(textBox.IsReadOnly);
+        }
+
+        [TestMethod]
         public void InternalTimeSelectorCanBeUsedWithoutTimePicker()
         {
             var dictionary = new ResourceDictionary

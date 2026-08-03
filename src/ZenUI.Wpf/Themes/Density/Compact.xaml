@@ -29,6 +29,15 @@
     <sys:Double x:Key="ZenTimePickerListHeight">172</sys:Double>
     <sys:Double x:Key="ZenTimePickerItemHeight">32</sys:Double>
     <Thickness x:Key="ZenTimePickerItemMargin">0,1</Thickness>
+    <Thickness x:Key="ZenDateTimePickerPopupPadding">3</Thickness>
+    <sys:Double x:Key="ZenDateTimePickerCalendarWidth">280</sys:Double>
+    <sys:Double x:Key="ZenDateTimePickerCalendarHeight">280</sys:Double>
+    <sys:Double x:Key="ZenDateTimePickerTimeColumnWidth">50</sys:Double>
+    <sys:Double x:Key="ZenDateTimePickerPeriodColumnWidth">62</sys:Double>
+    <sys:Double x:Key="ZenDateTimePickerTimeListHeight">280</sys:Double>
+    <sys:Double x:Key="ZenDateTimePickerTimeItemHeight">28</sys:Double>
+    <Thickness x:Key="ZenDateTimePickerTimePanelMargin">0</Thickness>
+    <Thickness x:Key="ZenDateTimePickerTimePanelPadding">3,0,0,0</Thickness>
     <Thickness x:Key="ZenContextMenuPadding">3</Thickness>
     <sys:Double x:Key="ZenContextMenuItemMinHeight">32</sys:Double>
     <Thickness x:Key="ZenContextMenuItemPadding">7,2</Thickness>

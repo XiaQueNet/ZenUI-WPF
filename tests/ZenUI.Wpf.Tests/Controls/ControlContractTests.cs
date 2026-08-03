@@ -37,6 +37,7 @@ namespace ZenUI.Wpf.Tests.Controls
             var comboBox = new TestZenComboBox();
             var listBox = new TestZenListBox();
             var datePicker = new TestZenDatePicker();
+            var dateTimePicker = new TestZenDateTimePicker();
             var dataGrid = new TestZenDataGrid();
             var passwordBox = new TestZenPasswordBox();
             var slider = new TestZenSlider();
@@ -53,6 +54,7 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.AreEqual(typeof(ZenComboBox), comboBox.ExposedDefaultStyleKey);
             Assert.AreEqual(typeof(ZenListBox), listBox.ExposedDefaultStyleKey);
             Assert.AreEqual(typeof(ZenDatePicker), datePicker.ExposedDefaultStyleKey);
+            Assert.AreEqual(typeof(ZenDateTimePicker), dateTimePicker.ExposedDefaultStyleKey);
             Assert.AreEqual(typeof(ZenDataGrid), dataGrid.ExposedDefaultStyleKey);
             Assert.AreEqual(typeof(ZenPasswordBox), passwordBox.ExposedDefaultStyleKey);
             Assert.AreEqual(typeof(ZenSlider), slider.ExposedDefaultStyleKey);
@@ -112,6 +114,7 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.IsInstanceOfType<Style>(dictionary[typeof(ZenComboBox)]);
             Assert.IsInstanceOfType<Style>(dictionary[typeof(ZenListBox)]);
             Assert.IsInstanceOfType<Style>(dictionary[typeof(ZenDatePicker)]);
+            Assert.IsInstanceOfType<Style>(dictionary[typeof(ZenDateTimePicker)]);
             Assert.IsInstanceOfType<Style>(dictionary[typeof(ZenDataGrid)]);
             Assert.IsInstanceOfType<Style>(dictionary[typeof(ZenPasswordBox)]);
             Assert.IsInstanceOfType<Style>(dictionary[typeof(ZenSlider)]);
@@ -251,6 +254,7 @@ namespace ZenUI.Wpf.Tests.Controls
                 new ZenComboBox(),
                 new ZenListBox(),
                 new ZenDatePicker(),
+                new ZenDateTimePicker(),
                 new ZenDataGrid(),
                 new ZenSlider(),
                 new ZenProgressBar(),
@@ -728,6 +732,7 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.AreEqual(AutomationControlType.ComboBox, new TestZenComboBox().ExposedAutomationPeer.GetAutomationControlType());
             Assert.AreEqual(AutomationControlType.List, new TestZenListBox().ExposedAutomationPeer.GetAutomationControlType());
             Assert.AreEqual(AutomationControlType.Custom, new TestZenDatePicker().ExposedAutomationPeer.GetAutomationControlType());
+            Assert.AreEqual(AutomationControlType.Custom, new TestZenDateTimePicker().ExposedAutomationPeer.GetAutomationControlType());
             Assert.AreEqual(AutomationControlType.DataGrid, new TestZenDataGrid().ExposedAutomationPeer.GetAutomationControlType());
             Assert.AreEqual(AutomationControlType.Slider, new TestZenSlider().ExposedAutomationPeer.GetAutomationControlType());
             Assert.AreEqual(AutomationControlType.ProgressBar, new TestZenProgressBar().ExposedAutomationPeer.GetAutomationControlType());

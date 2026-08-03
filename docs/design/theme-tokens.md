@@ -29,7 +29,7 @@ Metrics 当前统一 TextBox、PasswordBox、ComboBox、DatePicker 和 NumberBox
 
 Component Metrics 只收录具有明确控件语义、且不依赖模板内部布局计算的尺寸。单次出现的图标坐标、路径尺寸和与相邻列宽耦合的数值继续作为模板实现细节，不因追求 Token 数量而公开。
 
-当前 Component Metrics 覆盖 Button、ListBox、ScrollBar、ComboBox 弹层、DataGrid、Calendar、Switch、Slider、ProgressBar、Loading 和 Alert。DatePicker 创建的 Calendar 位于独立 Popup 资源作用域，弹层宽高、日期格、月份按钮、导航按钮和字号通过 `ZenDatePicker` 依赖属性及显式源绑定传递；更复杂的外观仍应通过 WPF 原生 `CalendarStyle` 定制。图标路径和只服务于单个模板结构的坐标仍属于实现细节。
+当前 Component Metrics 覆盖 Button、ListBox、ScrollBar、ComboBox 弹层、DataGrid、Calendar、DateTimePicker、Switch、Slider、ProgressBar、Loading 和 Alert。DatePicker 创建的 Calendar 位于独立 Popup 资源作用域，弹层宽高、日期格、月份按钮、导航按钮和字号通过 `ZenDatePicker` 依赖属性及显式源绑定传递；更复杂的外观仍应通过 WPF 原生 `CalendarStyle` 定制。图标路径和只服务于单个模板结构的坐标仍属于实现细节。
 
 Interaction Token 按控件角色区分禁用后的视觉强调程度，而不是按具体控件命名。Light 和 Dark 使用原有透明度层级；HighContrast 将这些可靠的状态 Token 覆盖为完全不透明，让系统色承担禁用语义，避免透明度进一步削弱可读性。
 

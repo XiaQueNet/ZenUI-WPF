@@ -182,6 +182,62 @@ namespace ZenUI.Wpf.Controls
                 SelfType,
                 new FrameworkPropertyMetadata(true, HandleOptionsChanged));
 
+        internal double ColumnWidth
+        {
+            get { return (double)GetValue(ColumnWidthProperty); }
+            set { SetValue(ColumnWidthProperty, value); }
+        }
+
+        internal static readonly DependencyProperty ColumnWidthProperty =
+            DependencyProperty.Register(
+                nameof(ColumnWidth),
+                typeof(double),
+                SelfType,
+                new FrameworkPropertyMetadata(64d),
+                value => (double)value > 0d);
+
+        internal double PeriodColumnWidth
+        {
+            get { return (double)GetValue(PeriodColumnWidthProperty); }
+            set { SetValue(PeriodColumnWidthProperty, value); }
+        }
+
+        internal static readonly DependencyProperty PeriodColumnWidthProperty =
+            DependencyProperty.Register(
+                nameof(PeriodColumnWidth),
+                typeof(double),
+                SelfType,
+                new FrameworkPropertyMetadata(74d),
+                value => (double)value > 0d);
+
+        internal double ListHeight
+        {
+            get { return (double)GetValue(ListHeightProperty); }
+            set { SetValue(ListHeightProperty, value); }
+        }
+
+        internal static readonly DependencyProperty ListHeightProperty =
+            DependencyProperty.Register(
+                nameof(ListHeight),
+                typeof(double),
+                SelfType,
+                new FrameworkPropertyMetadata(196d),
+                value => (double)value > 0d);
+
+        internal double ItemHeight
+        {
+            get { return (double)GetValue(ItemHeightProperty); }
+            set { SetValue(ItemHeightProperty, value); }
+        }
+
+        internal static readonly DependencyProperty ItemHeightProperty =
+            DependencyProperty.Register(
+                nameof(ItemHeight),
+                typeof(double),
+                SelfType,
+                new FrameworkPropertyMetadata(36d),
+                value => (double)value > 0d);
+
         internal event EventHandler SelectedTimeChanged;
 
         /// <inheritdoc />
