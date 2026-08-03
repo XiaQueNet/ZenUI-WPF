@@ -46,7 +46,10 @@
                     <WrapPanel>
                         <StackPanel Style="{StaticResource GalleryWrapFieldStyle}">
                             <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="24 小时制" />
-                            <zen:ZenTimePicker Width="190" IsSecondVisible="False">
+                            <zen:ZenTimePicker
+                                Width="210"
+                                HorizontalAlignment="Left"
+                                IsSecondVisible="False">
                                 <zen:ZenTimePicker.SelectedTime>
                                     <sys:TimeSpan>18:45:00</sys:TimeSpan>
                                 </zen:ZenTimePicker.SelectedTime>
@@ -54,7 +57,10 @@
                         </StackPanel>
                         <StackPanel Style="{StaticResource GalleryWrapFieldStyle}">
                             <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="12 小时制" />
-                            <zen:ZenTimePicker Width="210" Is24Hour="False">
+                            <zen:ZenTimePicker
+                                Width="210"
+                                HorizontalAlignment="Left"
+                                Is24Hour="False">
                                 <zen:ZenTimePicker.SelectedTime>
                                     <sys:TimeSpan>18:45:00</sys:TimeSpan>
                                 </zen:ZenTimePicker.SelectedTime>
@@ -64,6 +70,7 @@
                             <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="显示秒" />
                             <zen:ZenTimePicker
                                 Width="210"
+                                HorizontalAlignment="Left"
                                 IsSecondVisible="True"
                                 SecondIncrement="5">
                                 <zen:ZenTimePicker.SelectedTime>

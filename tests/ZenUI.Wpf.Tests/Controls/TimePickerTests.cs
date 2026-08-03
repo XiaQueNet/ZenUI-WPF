@@ -68,9 +68,9 @@ namespace ZenUI.Wpf.Tests.Controls
 
             picker.ApplyTemplate();
 
-            var hourList = (ListBox)picker.Template.FindName("PART_HourList", picker);
-            var minuteList = (ListBox)picker.Template.FindName("PART_MinuteList", picker);
-            var secondList = (ListBox)picker.Template.FindName("PART_SecondList", picker);
+            var hourList = GetTimeSelectorPart<ListBox>(picker, "PART_HourList");
+            var minuteList = GetTimeSelectorPart<ListBox>(picker, "PART_MinuteList");
+            var secondList = GetTimeSelectorPart<ListBox>(picker, "PART_SecondList");
             Assert.IsNotNull(hourList);
             Assert.IsNotNull(minuteList);
             Assert.IsNotNull(secondList);
@@ -80,6 +80,32 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.AreEqual(
                 ScrollBarVisibility.Hidden,
                 ScrollViewer.GetVerticalScrollBarVisibility(hourList));
+        }
+
+        [TestMethod]
+        public void InternalTimeSelectorCanBeUsedWithoutTimePicker()
+        {
+            var dictionary = new ResourceDictionary
+            {
+                Source = new Uri(
+                    "/ZenUI.Wpf;component/Themes/Generic.xaml",
+                    UriKind.Relative)
+            };
+            var selector = new ZenTimeSelector
+            {
+                Style = (Style)dictionary[typeof(ZenTimeSelector)],
+                MinuteIncrement = 15,
+                SelectedTime = new TimeSpan(9, 30, 0)
+            };
+
+            selector.ApplyTemplate();
+
+            var minuteList = GetTimeSelectorPart<ListBox>(
+                selector,
+                "PART_MinuteList");
+            minuteList.SelectedItem = FindOption(minuteList, 45);
+
+            Assert.AreEqual(new TimeSpan(9, 45, 0), selector.SelectedTime);
         }
 
         [TestMethod]
@@ -113,8 +139,8 @@ namespace ZenUI.Wpf.Tests.Controls
 
                 var popup = (Popup)picker.Template.FindName("PART_Popup", picker);
                 var popupBorder = popup.Child as Border;
-                var hourList = (ListBox)picker.Template.FindName("PART_HourList", picker);
-                var periodList = (ListBox)picker.Template.FindName("PART_PeriodList", picker);
+                var hourList = GetTimeSelectorPart<ListBox>(picker, "PART_HourList");
+                var periodList = GetTimeSelectorPart<ListBox>(picker, "PART_PeriodList");
                 hourList.ScrollIntoView(hourList.Items[0]);
                 window.Dispatcher.Invoke(DispatcherPriority.ContextIdle, new Action(() => { }));
                 hourList.UpdateLayout();
@@ -188,9 +214,9 @@ namespace ZenUI.Wpf.Tests.Controls
             };
             picker.ApplyTemplate();
 
-            var hourList = (ListBox)picker.Template.FindName("PART_HourList", picker);
-            var minuteList = (ListBox)picker.Template.FindName("PART_MinuteList", picker);
-            var periodList = (ListBox)picker.Template.FindName("PART_PeriodList", picker);
+            var hourList = GetTimeSelectorPart<ListBox>(picker, "PART_HourList");
+            var minuteList = GetTimeSelectorPart<ListBox>(picker, "PART_MinuteList");
+            var periodList = GetTimeSelectorPart<ListBox>(picker, "PART_PeriodList");
             hourList.SelectedItem = FindOption(hourList, 6);
             minuteList.SelectedItem = FindOption(minuteList, 30);
             periodList.SelectedIndex = 1;
@@ -224,13 +250,13 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.AreEqual(0, picker.SelectedTime.Value.Milliseconds);
             Assert.AreEqual(
                 picker.SelectedTime.Value.Hours.ToString("00", CultureInfo.CurrentCulture),
-                ((ListBox)picker.Template.FindName("PART_HourList", picker)).SelectedItem.ToString());
+                GetTimeSelectorPart<ListBox>(picker, "PART_HourList").SelectedItem.ToString());
             Assert.AreEqual(
                 picker.SelectedTime.Value.Minutes.ToString("00", CultureInfo.CurrentCulture),
-                ((ListBox)picker.Template.FindName("PART_MinuteList", picker)).SelectedItem.ToString());
+                GetTimeSelectorPart<ListBox>(picker, "PART_MinuteList").SelectedItem.ToString());
             Assert.AreEqual(
                 picker.SelectedTime.Value.Seconds.ToString("00", CultureInfo.CurrentCulture),
-                ((ListBox)picker.Template.FindName("PART_SecondList", picker)).SelectedItem.ToString());
+                GetTimeSelectorPart<ListBox>(picker, "PART_SecondList").SelectedItem.ToString());
 
             confirmButton.RaiseEvent(new RoutedEventArgs(Button.ClickEvent));
             Assert.IsFalse(picker.IsDropDownOpen);
@@ -254,9 +280,9 @@ namespace ZenUI.Wpf.Tests.Controls
             };
             picker.ApplyTemplate();
 
-            var hourList = (ListBox)picker.Template.FindName("PART_HourList", picker);
-            var minuteList = (ListBox)picker.Template.FindName("PART_MinuteList", picker);
-            var secondList = (ListBox)picker.Template.FindName("PART_SecondList", picker);
+            var hourList = GetTimeSelectorPart<ListBox>(picker, "PART_HourList");
+            var minuteList = GetTimeSelectorPart<ListBox>(picker, "PART_MinuteList");
+            var secondList = GetTimeSelectorPart<ListBox>(picker, "PART_SecondList");
 
             Assert.IsFalse(FindOption(hourList, 8).IsEnabled);
             Assert.IsTrue(FindOption(hourList, 9).IsEnabled);
@@ -293,11 +319,11 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.AreEqual(itemMargin, firstItem.Margin);
         }
 
-        private static TimePickerOption FindOption(ListBox selector, int value)
+        private static TimeSelectorOption FindOption(ListBox selector, int value)
         {
             foreach (var item in selector.Items)
             {
-                if (item is TimePickerOption option && option.Value == value)
+                if (item is TimeSelectorOption option && option.Value == value)
                 {
                     return option;
                 }
@@ -305,6 +331,24 @@ namespace ZenUI.Wpf.Tests.Controls
 
             Assert.Fail("未找到时间选项。");
             return null;
+        }
+
+        private static T GetTimeSelectorPart<T>(ZenTimePicker picker, string partName)
+            where T : FrameworkElement
+        {
+            var selector = picker.Template.FindName("PART_TimeSelector", picker) as Control;
+            Assert.IsNotNull(selector);
+            selector.ApplyTemplate();
+
+            return GetTimeSelectorPart<T>(selector, partName);
+        }
+
+        private static T GetTimeSelectorPart<T>(Control selector, string partName)
+            where T : FrameworkElement
+        {
+            var part = selector.Template.FindName(partName, selector) as T;
+            Assert.IsNotNull(part);
+            return part;
         }
 
         private sealed class TestTimePicker : ZenTimePicker

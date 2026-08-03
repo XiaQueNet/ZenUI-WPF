@@ -1,5 +1,4 @@
 using System;
-using System.Collections.Generic;
 using System.ComponentModel;
 using System.Globalization;
 using System.Windows;
@@ -14,6 +13,7 @@ namespace ZenUI.Wpf.Controls
     /// </summary>
     [TemplatePart(Name = PartTextBox, Type = typeof(TextBox))]
     [TemplatePart(Name = PartPopup, Type = typeof(Popup))]
+    [TemplatePart(Name = PartTimeSelector, Type = typeof(Control))]
     [TemplatePart(Name = PartHourList, Type = typeof(ListBox))]
     [TemplatePart(Name = PartMinuteList, Type = typeof(ListBox))]
     [TemplatePart(Name = PartSecondList, Type = typeof(ListBox))]
@@ -24,6 +24,7 @@ namespace ZenUI.Wpf.Controls
     {
         internal const string PartTextBox = "PART_TextBox";
         internal const string PartPopup = "PART_Popup";
+        internal const string PartTimeSelector = "PART_TimeSelector";
         internal const string PartHourList = "PART_HourList";
         internal const string PartMinuteList = "PART_MinuteList";
         internal const string PartSecondList = "PART_SecondList";
@@ -34,13 +35,10 @@ namespace ZenUI.Wpf.Controls
         private static readonly Type SelfType = typeof(ZenTimePicker);
         private TextBox textBox;
         private Popup popup;
-        private ListBox hourList;
-        private ListBox minuteList;
-        private ListBox secondList;
-        private ListBox periodList;
+        private ZenTimeSelector timeSelector;
+        private TimeSelectorCoordinator legacyTimeSelector;
         private Button nowButton;
         private Button confirmButton;
-        private bool isSynchronizing;
 
         static ZenTimePicker()
         {
@@ -301,15 +299,21 @@ namespace ZenUI.Wpf.Controls
 
             textBox = GetTemplateChild(PartTextBox) as TextBox;
             popup = GetTemplateChild(PartPopup) as Popup;
-            hourList = GetTemplateChild(PartHourList) as ListBox;
-            minuteList = GetTemplateChild(PartMinuteList) as ListBox;
-            secondList = GetTemplateChild(PartSecondList) as ListBox;
-            periodList = GetTemplateChild(PartPeriodList) as ListBox;
+            timeSelector = GetTemplateChild(PartTimeSelector) as ZenTimeSelector;
             nowButton = GetTemplateChild(PartNowButton) as Button;
             confirmButton = GetTemplateChild(PartConfirmButton) as Button;
+            if (timeSelector == null)
+            {
+                legacyTimeSelector = new TimeSelectorCoordinator(
+                    GetTemplateChild(PartHourList) as ListBox,
+                    GetTemplateChild(PartMinuteList) as ListBox,
+                    GetTemplateChild(PartSecondList) as ListBox,
+                    GetTemplateChild(PartPeriodList) as ListBox,
+                    HandleSelectorSelectedTimeChanged);
+            }
 
             AttachTemplateHandlers();
-            PopulateSelectors();
+            ConfigureTimeSelector();
             SynchronizeTemplate();
         }
 
@@ -392,7 +396,7 @@ namespace ZenUI.Wpf.Controls
             DependencyPropertyChangedEventArgs e)
         {
             var control = (ZenTimePicker)dependencyObject;
-            control.PopulateSelectors();
+            control.ConfigureTimeSelector();
             control.SynchronizeTemplate();
         }
 
@@ -401,7 +405,7 @@ namespace ZenUI.Wpf.Controls
             DependencyPropertyChangedEventArgs e)
         {
             var control = (ZenTimePicker)dependencyObject;
-            control.PopulateSelectors();
+            control.ConfigureTimeSelector();
             control.SynchronizeTemplate();
         }
 
@@ -441,10 +445,10 @@ namespace ZenUI.Wpf.Controls
                 confirmButton.Click += HandleConfirmButtonClick;
             }
 
-            AddSelectorHandler(hourList);
-            AddSelectorHandler(minuteList);
-            AddSelectorHandler(secondList);
-            AddSelectorHandler(periodList);
+            if (timeSelector != null)
+            {
+                timeSelector.SelectedTimeChanged += HandleTimeSelectorSelectedTimeChanged;
+            }
         }
 
         private void DetachTemplateHandlers()
@@ -470,130 +474,59 @@ namespace ZenUI.Wpf.Controls
                 confirmButton.Click -= HandleConfirmButtonClick;
             }
 
-            RemoveSelectorHandler(hourList);
-            RemoveSelectorHandler(minuteList);
-            RemoveSelectorHandler(secondList);
-            RemoveSelectorHandler(periodList);
+            if (timeSelector != null)
+            {
+                timeSelector.SelectedTimeChanged -= HandleTimeSelectorSelectedTimeChanged;
+            }
+
+            legacyTimeSelector?.Detach();
+            timeSelector = null;
+            legacyTimeSelector = null;
         }
 
-        private void AddSelectorHandler(ListBox selector)
+        private void ConfigureTimeSelector()
         {
-            if (selector != null)
+            if (timeSelector != null)
             {
-                selector.SelectionChanged += HandleSelectorSelectionChanged;
-            }
-        }
-
-        private void RemoveSelectorHandler(ListBox selector)
-        {
-            if (selector != null)
-            {
-                selector.SelectionChanged -= HandleSelectorSelectionChanged;
-            }
-        }
-
-        private void PopulateSelectors()
-        {
-            if (hourList != null)
-            {
-                hourList.ItemsSource = CreateRange(Is24Hour ? 0 : 1, Is24Hour ? 23 : 12, 1);
+                timeSelector.SetCurrentValue(ZenTimeSelector.Is24HourProperty, Is24Hour);
+                timeSelector.SetCurrentValue(
+                    ZenTimeSelector.IsSecondVisibleProperty,
+                    IsSecondVisible);
+                timeSelector.SetCurrentValue(
+                    ZenTimeSelector.MinuteIncrementProperty,
+                    MinuteIncrement);
+                timeSelector.SetCurrentValue(
+                    ZenTimeSelector.SecondIncrementProperty,
+                    SecondIncrement);
+                timeSelector.SetCurrentValue(ZenTimeSelector.MinimumProperty, Minimum);
+                timeSelector.SetCurrentValue(ZenTimeSelector.MaximumProperty, Maximum);
             }
 
-            if (minuteList != null)
-            {
-                minuteList.ItemsSource = CreateRange(0, 59, MinuteIncrement);
-            }
-
-            if (secondList != null)
-            {
-                secondList.ItemsSource = CreateRange(0, 59, SecondIncrement);
-            }
-
-            if (periodList != null)
-            {
-                periodList.ItemsSource = new[]
-                {
-                    new TimePickerOption(
-                        0,
-                        CultureInfo.CurrentCulture.DateTimeFormat.AMDesignator),
-                    new TimePickerOption(
-                        1,
-                        CultureInfo.CurrentCulture.DateTimeFormat.PMDesignator)
-                };
-            }
-        }
-
-        private static List<TimePickerOption> CreateRange(int start, int end, int increment)
-        {
-            var values = new List<TimePickerOption>();
-            for (var value = start; value <= end; value += increment)
-            {
-                values.Add(
-                    new TimePickerOption(
-                        value,
-                        value.ToString("00", CultureInfo.CurrentCulture)));
-            }
-
-            return values;
+            legacyTimeSelector?.Configure(
+                Is24Hour,
+                IsSecondVisible,
+                MinuteIncrement,
+                SecondIncrement,
+                Minimum,
+                Maximum);
         }
 
         private void SynchronizeTemplate()
         {
-            if (isSynchronizing)
+            if (textBox != null)
             {
-                return;
+                textBox.Text = FormatTime(SelectedTime);
             }
 
-            isSynchronizing = true;
-            try
+            if (timeSelector != null &&
+                timeSelector.SelectedTime != SelectedTime)
             {
-                if (textBox != null)
-                {
-                    textBox.Text = FormatTime(SelectedTime);
-                }
-
-                var time = SelectedTime ?? DateTime.Now.TimeOfDay;
-                var displayHour = Is24Hour
-                    ? time.Hours
-                    : (time.Hours % 12 == 0 ? 12 : time.Hours % 12);
-
-                SelectNearest(hourList, displayHour, 1);
-                SelectNearest(minuteList, time.Minutes, MinuteIncrement);
-                SelectNearest(secondList, time.Seconds, SecondIncrement);
-                if (periodList != null)
-                {
-                    SelectOption(periodList, time.Hours >= 12 ? 1 : 0);
-                }
-
-                UpdateOptionStates();
-            }
-            finally
-            {
-                isSynchronizing = false;
-            }
-        }
-
-        private static void SelectNearest(ListBox selector, int value, int increment)
-        {
-            if (selector == null)
-            {
-                return;
+                timeSelector.SetCurrentValue(
+                    ZenTimeSelector.SelectedTimeProperty,
+                    SelectedTime);
             }
 
-            var selected = increment <= 1 ? value : value - (value % increment);
-            SelectOption(selector, selected);
-        }
-
-        private static void SelectOption(ListBox selector, int value)
-        {
-            foreach (var item in selector.Items)
-            {
-                if (item is TimePickerOption option && option.Value == value)
-                {
-                    selector.SelectedItem = option;
-                    return;
-                }
-            }
+            legacyTimeSelector?.Synchronize(SelectedTime ?? DateTime.Now.TimeOfDay);
         }
 
         private string FormatTime(TimeSpan? value)
@@ -610,128 +543,16 @@ namespace ZenUI.Wpf.Controls
             return dateTime.ToString(format, CultureInfo.CurrentCulture);
         }
 
-        private void HandleSelectorSelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void HandleSelectorSelectedTimeChanged(TimeSpan selectedTime)
         {
-            if (isSynchronizing ||
-                hourList?.SelectedItem == null ||
-                minuteList?.SelectedItem == null ||
-                (IsSecondVisible && secondList?.SelectedItem == null))
-            {
-                return;
-            }
-
-            if (sender is ListBox selector &&
-                selector.SelectedItem is TimePickerOption selectedOption &&
-                !selectedOption.IsEnabled)
-            {
-                SynchronizeTemplate();
-                return;
-            }
-
-            var hour = ParseSelector(hourList);
-            var minute = ParseSelector(minuteList);
-            var second = IsSecondVisible ? ParseSelector(secondList) : 0;
-            if (!Is24Hour && periodList != null)
-            {
-                hour %= 12;
-                if (periodList.SelectedIndex == 1)
-                {
-                    hour += 12;
-                }
-            }
-
-            SetCurrentValue(
-                SelectedTimeProperty,
-                (TimeSpan?)new TimeSpan(hour, minute, second));
+            SetCurrentValue(SelectedTimeProperty, (TimeSpan?)selectedTime);
         }
 
-        private static int ParseSelector(ListBox selector)
+        private void HandleTimeSelectorSelectedTimeChanged(object sender, EventArgs e)
         {
-            return ((TimePickerOption)selector.SelectedItem).Value;
-        }
-
-        private void UpdateOptionStates()
-        {
-            var selectedTime = SelectedTime ?? DateTime.Now.TimeOfDay;
-            var period = periodList?.SelectedItem is TimePickerOption periodOption
-                ? periodOption.Value
-                : (selectedTime.Hours >= 12 ? 1 : 0);
-            var selectedHour = hourList?.SelectedItem is TimePickerOption hourOption
-                ? hourOption.Value
-                : (Is24Hour
-                    ? selectedTime.Hours
-                    : (selectedTime.Hours % 12 == 0 ? 12 : selectedTime.Hours % 12));
-            var actualHour = ConvertToActualHour(selectedHour, period);
-            var selectedMinute = minuteList?.SelectedItem is TimePickerOption minuteOption
-                ? minuteOption.Value
-                : selectedTime.Minutes;
-
-            SetOptionStates(
-                hourList,
-                option =>
-                {
-                    var hour = ConvertToActualHour(option.Value, period);
-                    return IntersectsRange(
-                        new TimeSpan(hour, 0, 0),
-                        new TimeSpan(hour, 59, 59));
-                });
-            SetOptionStates(
-                minuteList,
-                option =>
-                {
-                    var start = new TimeSpan(actualHour, option.Value, 0);
-                    var end = IsSecondVisible
-                        ? new TimeSpan(actualHour, option.Value, 59)
-                        : start;
-                    return IntersectsRange(start, end);
-                });
-            SetOptionStates(
-                secondList,
-                option => IsWithinRange(
-                    new TimeSpan(actualHour, selectedMinute, option.Value)));
-            SetOptionStates(
-                periodList,
-                option => IntersectsRange(
-                    new TimeSpan(option.Value == 0 ? 0 : 12, 0, 0),
-                    new TimeSpan(option.Value == 0 ? 11 : 23, 59, 59)));
-        }
-
-        private int ConvertToActualHour(int displayHour, int period)
-        {
-            if (Is24Hour)
+            if (timeSelector != null && timeSelector.SelectedTime != SelectedTime)
             {
-                return displayHour;
-            }
-
-            var hour = displayHour % 12;
-            return period == 1 ? hour + 12 : hour;
-        }
-
-        private bool IntersectsRange(TimeSpan start, TimeSpan end)
-        {
-            return end >= Minimum && start <= Maximum;
-        }
-
-        private bool IsWithinRange(TimeSpan value)
-        {
-            return value >= Minimum && value <= Maximum;
-        }
-
-        private static void SetOptionStates(
-            ListBox selector,
-            Func<TimePickerOption, bool> predicate)
-        {
-            if (selector == null)
-            {
-                return;
-            }
-
-            foreach (var item in selector.Items)
-            {
-                if (item is TimePickerOption option)
-                {
-                    option.IsEnabled = predicate(option);
-                }
+                SetCurrentValue(SelectedTimeProperty, timeSelector.SelectedTime);
             }
         }
 
@@ -807,25 +628,8 @@ namespace ZenUI.Wpf.Controls
 
         private void ScrollSelectorsIntoView()
         {
-            ScrollSelectedItemIntoView(hourList);
-            ScrollSelectedItemIntoView(minuteList);
-            if (IsSecondVisible)
-            {
-                ScrollSelectedItemIntoView(secondList);
-            }
-
-            if (!Is24Hour)
-            {
-                ScrollSelectedItemIntoView(periodList);
-            }
-        }
-
-        private static void ScrollSelectedItemIntoView(ListBox selector)
-        {
-            if (selector?.SelectedItem != null)
-            {
-                selector.ScrollIntoView(selector.SelectedItem);
-            }
+            timeSelector?.ScrollSelectedItemsIntoView();
+            legacyTimeSelector?.ScrollSelectedItemsIntoView();
         }
 
         private void HandleConfirmButtonClick(object sender, RoutedEventArgs e)
@@ -840,45 +644,6 @@ namespace ZenUI.Wpf.Controls
             {
                 IsDropDownOpen = false;
             }
-        }
-    }
-
-    internal sealed class TimePickerOption : INotifyPropertyChanged
-    {
-        private bool isEnabled = true;
-
-        internal TimePickerOption(int value, string displayText)
-        {
-            Value = value;
-            DisplayText = displayText;
-        }
-
-        internal int Value { get; }
-
-        public string DisplayText { get; }
-
-        public bool IsEnabled
-        {
-            get { return isEnabled; }
-            set
-            {
-                if (isEnabled == value)
-                {
-                    return;
-                }
-
-                isEnabled = value;
-                PropertyChanged?.Invoke(
-                    this,
-                    new PropertyChangedEventArgs(nameof(IsEnabled)));
-            }
-        }
-
-        public event PropertyChangedEventHandler PropertyChanged;
-
-        public override string ToString()
-        {
-            return DisplayText;
         }
     }
 }

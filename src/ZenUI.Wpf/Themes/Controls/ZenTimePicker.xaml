@@ -100,6 +100,58 @@
         </Setter>
     </Style>
 
+    <Style x:Key="ZenTimeSelectorStyle" TargetType="{x:Type zen:ZenTimeSelector}">
+        <Setter Property="FocusVisualStyle" Value="{x:Null}" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type zen:ZenTimeSelector}">
+                    <StackPanel Orientation="Horizontal">
+                        <ListBox
+                            x:Name="PART_HourList"
+                            AutomationProperties.Name="小时"
+                            Style="{StaticResource ZenTimePickerListStyle}" />
+                        <Border Width="1" Margin="2,6" Background="{DynamicResource ZenDividerBrush}" />
+                        <ListBox
+                            x:Name="PART_MinuteList"
+                            AutomationProperties.Name="分钟"
+                            Style="{StaticResource ZenTimePickerListStyle}" />
+                        <Border
+                            x:Name="SecondDivider"
+                            Width="1"
+                            Margin="2,6"
+                            Background="{DynamicResource ZenDividerBrush}" />
+                        <ListBox
+                            x:Name="PART_SecondList"
+                            AutomationProperties.Name="秒"
+                            Style="{StaticResource ZenTimePickerListStyle}" />
+                        <Border
+                            x:Name="PeriodDivider"
+                            Width="1"
+                            Margin="2,6"
+                            Background="{DynamicResource ZenDividerBrush}" />
+                        <ListBox
+                            x:Name="PART_PeriodList"
+                            Width="{DynamicResource ZenTimePickerPeriodColumnWidth}"
+                            AutomationProperties.Name="上午或下午"
+                            Style="{StaticResource ZenTimePickerListStyle}" />
+                    </StackPanel>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsSecondVisible" Value="False">
+                            <Setter TargetName="SecondDivider" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="PART_SecondList" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                        <Trigger Property="Is24Hour" Value="True">
+                            <Setter TargetName="PeriodDivider" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="PART_PeriodList" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
+    <Style BasedOn="{StaticResource ZenTimeSelectorStyle}" TargetType="{x:Type zen:ZenTimeSelector}" />
+
     <Style x:Key="ZenTimePickerStyle" TargetType="{x:Type zen:ZenTimePicker}">
         <Setter Property="FontSize" Value="{DynamicResource ZenFontSizeBody}" />
         <Setter Property="MinWidth" Value="148" />
@@ -191,36 +243,7 @@
                                         Color="Black" />
                                 </Border.Effect>
                                 <StackPanel>
-                                    <StackPanel Orientation="Horizontal">
-                                        <ListBox
-                                            x:Name="PART_HourList"
-                                            AutomationProperties.Name="小时"
-                                            Style="{StaticResource ZenTimePickerListStyle}" />
-                                        <Border Width="1" Margin="2,6" Background="{DynamicResource ZenDividerBrush}" />
-                                        <ListBox
-                                            x:Name="PART_MinuteList"
-                                            AutomationProperties.Name="分钟"
-                                            Style="{StaticResource ZenTimePickerListStyle}" />
-                                        <Border
-                                            x:Name="SecondDivider"
-                                            Width="1"
-                                            Margin="2,6"
-                                            Background="{DynamicResource ZenDividerBrush}" />
-                                        <ListBox
-                                            x:Name="PART_SecondList"
-                                            AutomationProperties.Name="秒"
-                                            Style="{StaticResource ZenTimePickerListStyle}" />
-                                        <Border
-                                            x:Name="PeriodDivider"
-                                            Width="1"
-                                            Margin="2,6"
-                                            Background="{DynamicResource ZenDividerBrush}" />
-                                        <ListBox
-                                            x:Name="PART_PeriodList"
-                                            Width="{DynamicResource ZenTimePickerPeriodColumnWidth}"
-                                            AutomationProperties.Name="上午或下午"
-                                            Style="{StaticResource ZenTimePickerListStyle}" />
-                                    </StackPanel>
+                                    <zen:ZenTimeSelector x:Name="PART_TimeSelector" />
                                     <Border
                                         Margin="4,2,4,0"
                                         Padding="0,8,0,2"
@@ -258,14 +281,6 @@
                         </Popup>
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsSecondVisible" Value="False">
-                            <Setter TargetName="SecondDivider" Property="Visibility" Value="Collapsed" />
-                            <Setter TargetName="PART_SecondList" Property="Visibility" Value="Collapsed" />
-                        </Trigger>
-                        <Trigger Property="Is24Hour" Value="True">
-                            <Setter TargetName="PeriodDivider" Property="Visibility" Value="Collapsed" />
-                            <Setter TargetName="PART_PeriodList" Property="Visibility" Value="Collapsed" />
-                        </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="InputBorder" Property="BorderBrush" Value="{DynamicResource ZenBorderHoverBrush}" />
                         </Trigger>
