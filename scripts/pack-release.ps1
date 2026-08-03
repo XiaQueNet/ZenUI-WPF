@@ -4,6 +4,10 @@ param(
     [ValidatePattern('^\d+\.\d+\.\d+(?:-[0-9A-Za-z]+(?:\.[0-9A-Za-z]+)*)?$')]
     [string]$Version,
 
+    [Parameter(Mandatory = $true)]
+    [ValidateSet('ZenUI.Wpf', 'ZenUI.Wpf.Converters')]
+    [string[]]$Package,
+
     [switch]$Force
 )
 
@@ -187,12 +191,21 @@ try {
     )
     $worktreeAdded = $true
 
-    $controlProject = Join-Path $worktreePath 'src\ZenUI.Wpf\ZenUI.Wpf.csproj'
-    $converterProject = Join-Path $worktreePath 'src\ZenUI.Wpf.Converters\ZenUI.Wpf.Converters.csproj'
-    $controlVersion = Get-ProjectPackageVersion -ProjectPath $controlProject
-    $converterVersion = Get-ProjectPackageVersion -ProjectPath $converterProject
-    if ($controlVersion -ne $Version -or $converterVersion -ne $Version) {
-        throw "Project versions do not match ${Version}: ZenUI.Wpf=$controlVersion; ZenUI.Wpf.Converters=$converterVersion."
+    $releasePackages = foreach ($packageId in $Package) {
+        $projectPath = switch ($packageId) {
+            'ZenUI.Wpf' { 'src\ZenUI.Wpf\ZenUI.Wpf.csproj' }
+            'ZenUI.Wpf.Converters' { 'src\ZenUI.Wpf.Converters\ZenUI.Wpf.Converters.csproj' }
+        }
+        $fullProjectPath = Join-Path $worktreePath $projectPath
+        $projectVersion = Get-ProjectPackageVersion -ProjectPath $fullProjectPath
+        if ($projectVersion -ne $Version) {
+            throw "Expected $packageId version ${Version}, found $projectVersion."
+        }
+
+        [pscustomobject]@{
+            Id = $packageId
+            ProjectPath = $projectPath
+        }
     }
 
     Invoke-NativeCommand -FilePath 'dotnet' -WorkingDirectory $worktreePath -ArgumentList @(
@@ -245,35 +258,29 @@ try {
     }
 
     New-Item -ItemType Directory -Path $outputDirectory | Out-Null
-    Invoke-NativeCommand -FilePath 'dotnet' -WorkingDirectory $worktreePath -ArgumentList @(
-        'pack',
-        'src\ZenUI.Wpf\ZenUI.Wpf.csproj',
-        '-c',
-        'Release',
-        '--no-build',
-        '-o',
-        $outputDirectory
-    )
-    Invoke-NativeCommand -FilePath 'dotnet' -WorkingDirectory $worktreePath -ArgumentList @(
-        'pack',
-        'src\ZenUI.Wpf.Converters\ZenUI.Wpf.Converters.csproj',
-        '-c',
-        'Release',
-        '--no-build',
-        '-o',
-        $outputDirectory
-    )
+    foreach ($releasePackage in $releasePackages) {
+        Invoke-NativeCommand -FilePath 'dotnet' -WorkingDirectory $worktreePath -ArgumentList @(
+            'pack',
+            $releasePackage.ProjectPath,
+            '-c',
+            'Release',
+            '--no-build',
+            '-o',
+            $outputDirectory
+        )
+    }
 
     Add-Type -AssemblyName System.IO.Compression.FileSystem
 
-    $expectedPackages = @{
-        "ZenUI.Wpf.$Version.nupkg" = 'ZenUI.Wpf'
-        "ZenUI.Wpf.Converters.$Version.nupkg" = 'ZenUI.Wpf.Converters'
+    $expectedPackages = @{}
+    foreach ($releasePackage in $releasePackages) {
+        $expectedPackages["$($releasePackage.Id).$Version.nupkg"] = $releasePackage.Id
     }
     $packages = Get-ChildItem -LiteralPath $outputDirectory -Filter '*.nupkg' -File
     $symbolPackages = Get-ChildItem -LiteralPath $outputDirectory -Filter '*.snupkg' -File
-    if ($packages.Count -ne 2 -or $symbolPackages.Count -ne 2) {
-        throw "Expected two .nupkg and two .snupkg files in $outputDirectory."
+    if ($packages.Count -ne $releasePackages.Count -or
+        $symbolPackages.Count -ne $releasePackages.Count) {
+        throw "Expected $($releasePackages.Count) .nupkg and .snupkg file(s) in $outputDirectory."
     }
 
     foreach ($package in $packages) {

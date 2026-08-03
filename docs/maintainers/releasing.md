@@ -46,16 +46,23 @@ rc.1
 - `src/ZenUI.Wpf/ZenUI.Wpf.csproj`
 - `src/ZenUI.Wpf.Converters/ZenUI.Wpf.Converters.csproj`
 
-当前两个包采用同步版本和同步发布策略：
+两个包独立决定是否发布；只有包含实际代码、API、资源、文档或包元数据变更的包才提升版本并上传 NuGet：
 
 - `VersionPrefix`：下一目标版本的 `MAJOR.MINOR.PATCH`。
 - `VersionSuffix`：预发布后缀；稳定版本应删除或清空。
 - `AssemblyVersion`：同一兼容发布线保持稳定。
 - `FileVersion`：四段式文件版本，随发布的数字版本更新；预发布后缀不写入该字段。
 
-当前 `0.1.x` 发布线使用：
+当前 `0.1.x` 发布线分别使用：
 
 ```xml
+<!-- ZenUI.Wpf -->
+<VersionPrefix>0.1.0</VersionPrefix>
+<VersionSuffix>preview.7</VersionSuffix>
+<AssemblyVersion>0.1.0.0</AssemblyVersion>
+<FileVersion>0.1.0.0</FileVersion>
+
+<!-- ZenUI.Wpf.Converters -->
 <VersionPrefix>0.1.0</VersionPrefix>
 <VersionSuffix>preview.6</VersionSuffix>
 <AssemblyVersion>0.1.0.0</AssemblyVersion>
@@ -64,7 +71,7 @@ rc.1
 
 进入 `1.x` 后，整个兼容发布线原则上保持 `AssemblyVersion=1.0.0.0`；只有进入新的破坏性主版本时才改为 `2.0.0.0`。
 
-CI 在 `.github/workflows/ci.yml` 中为两个包生成相同版本的 `0.1.0-ci.<run_number>` 构件。调整目标发布线时，必须同步修改两个项目版本、CI 包版本和 `CHANGELOG.md`。
+CI 在 `.github/workflows/ci.yml` 中仍为两个包生成相同版本的 `0.1.0-ci.<run_number>` 构件，用于持续验证，不代表两个正式包必须同步发布。准备公开版本时，只修改本次实际发布的项目版本，并同步更新 `CHANGELOG.md` 与对应安装文档；未变更的包保持上一公开版本。
 
 ## 分支策略
 
@@ -187,14 +194,14 @@ git push origin v<version>
 Tag 创建后，使用唯一发布脚本从该 Tag 的临时 Git Worktree 重新还原、构建、测试、检查依赖并打包。不要复用提交前生成的旧包，否则 Source Link 可能记录错误提交。
 
 ```powershell
-.\scripts\pack-release.ps1 -Version <version>
+.\scripts\pack-release.ps1 -Version <version> -Package <package-id>
 ```
 
-正式产物固定生成到 `artifacts/releases/<version>`。脚本会验证两个项目版本、Tag 提交、包 ID、包版本、License、README、Changelog、Logo、目标框架、XML 文档、符号包和 Repository Commit，并生成 `SHA256SUMS.txt`。预检包不得写入该目录；需要重新生成尚未公开的同一版本时，显式传入 `-Force`。
+同时发布两个确有变更的包时使用 `-Package ZenUI.Wpf,ZenUI.Wpf.Converters`。正式产物固定生成到 `artifacts/releases/<version>`。脚本只验证并打包显式选择的项目，同时检查 Tag 提交、包 ID、包版本、License、README、Changelog、Logo、目标框架、XML 文档、符号包和 Repository Commit，并生成 `SHA256SUMS.txt`。预检包不得写入该目录；需要重新生成尚未公开的同一版本时，显式传入 `-Force`。
 
 发布前检查 `.nupkg`：
 
-- 两个包的包 ID 和版本正确。
+- 所选包的包 ID 和版本正确，发布目录中不包含未选择的包。
 - MIT License、README、Logo、目标框架和 XML 文档存在。
 - `.snupkg` 已生成。
 - Repository URL 指向 `XiaQueNet/ZenUI-WPF`。
@@ -220,10 +227,6 @@ dotnet nuget push "artifacts/releases/<version>/ZenUI.Wpf.<version>.nupkg" `
   --api-key $env:NUGET_API_KEY `
   --source "https://api.nuget.org/v3/index.json"
 
-dotnet nuget push "artifacts/releases/<version>/ZenUI.Wpf.Converters.<version>.nupkg" `
-  --api-key $env:NUGET_API_KEY `
-  --source "https://api.nuget.org/v3/index.json"
-
 Remove-Item Env:\NUGET_API_KEY
 ```
 
@@ -235,13 +238,13 @@ Remove-Item Env:\NUGET_API_KEY
 - 标题：`ZenUI WPF <version>`。
 - 预发布版本必须勾选 **Set as a pre-release**。
 - 发布说明使用中文，包含主要变更、安装命令、兼容性提示和破坏性修改。
-- 上传对应的 `.nupkg` 与 `.snupkg`。
+- 只上传本次所选包对应的 `.nupkg` 与 `.snupkg`。
 
 安装命令：
 
 ```powershell
-dotnet add package ZenUI.Wpf --version <version>
-dotnet add package ZenUI.Wpf.Converters --version <version>
+dotnet add package ZenUI.Wpf --version <ZenUI.Wpf version>
+dotnet add package ZenUI.Wpf.Converters --version <Converters version>
 ```
 
 ### 8. 发布后验证

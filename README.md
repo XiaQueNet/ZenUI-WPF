@@ -143,7 +143,7 @@ dotnet build ZenUI.Wpf.slnx -c Release --no-restore
 dotnet test ZenUI.Wpf.slnx -c Release --no-build
 ```
 
-仓库在 Windows CI 中将编译器与 .NET 分析器警告视为错误，同时验证 `net472`、`net8.0-windows`、NuGet/Symbol 包及多主题、多 Density、多 DPI 视觉快照。正式发布包通过 `.\scripts\pack-release.ps1 -Version <version>` 生成。
+仓库在 Windows CI 中将编译器与 .NET 分析器警告视为错误，同时验证 `net472`、`net8.0-windows`、NuGet/Symbol 包及多主题、多 Density、多 DPI 视觉快照。正式发布包通过 `.\scripts\pack-release.ps1 -Version <version> -Package <package-id>` 生成，只发布有实际变更的包。
 
 ## 参与贡献
 
