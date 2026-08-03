@@ -11,13 +11,28 @@ namespace ZenUI.Wpf.Controls
         Radio,
 
         /// <summary>
-        /// 使用相互独立的按钮呈现选项。
+        /// 使用强调色填充的按钮呈现选中项。
         /// </summary>
-        Button,
+        Filled,
 
         /// <summary>
-        /// 使用相连的分段控件呈现选项。
+        /// 使用描边按钮呈现选项。
         /// </summary>
-        Segmented
+        Outline,
+
+        /// <summary>
+        /// 使用无常驻背景和边框的按钮呈现选项。
+        /// </summary>
+        Ghost,
+
+        /// <summary>
+        /// 使用下划线指示选中项。
+        /// </summary>
+        Underline,
+
+        /// <summary>
+        /// 使用相连的胶囊式分段控件呈现选项。
+        /// </summary>
+        Segment
     }
 }

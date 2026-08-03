@@ -119,31 +119,10 @@ namespace ZenUI.Wpf.Controls
                 nameof(DisplayMode),
                 typeof(RadioGroupDisplayMode),
                 SelfType,
-                new FrameworkPropertyMetadata(RadioGroupDisplayMode.Button));
+                new FrameworkPropertyMetadata(RadioGroupDisplayMode.Outline));
 
         /// <summary>
-        /// 获取或设置按钮选项的视觉样式，可选描边样式或填充样式。
-        /// </summary>
-        [Bindable(true)]
-        public RadioGroupAppearance Appearance
-        {
-            get { return (RadioGroupAppearance)GetValue(AppearanceProperty); }
-            set { SetValue(AppearanceProperty, value); }
-        }
-
-        /// <summary>
-        /// 标识 <see cref="Appearance"/> 依赖属性。
-        /// </summary>
-        public static readonly DependencyProperty AppearanceProperty =
-            DependencyProperty.Register(
-                nameof(Appearance),
-                typeof(RadioGroupAppearance),
-                SelfType,
-                new FrameworkPropertyMetadata(RadioGroupAppearance.Outlined));
-
-        /// <summary>
-        /// 获取或设置选中项的边框或背景所使用的强调色画刷，具体用法取决于
-        /// <see cref="Appearance"/>。
+        /// 获取或设置选中项的边框、背景或指示器所使用的强调色画刷。
         /// </summary>
         [Bindable(true)]
         public Brush AccentBrush

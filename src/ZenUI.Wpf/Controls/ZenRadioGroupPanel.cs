@@ -71,7 +71,7 @@ namespace ZenUI.Wpf.Controls
                 typeof(RadioGroupDisplayMode),
                 typeof(ZenRadioGroupPanel),
                 new FrameworkPropertyMetadata(
-                    RadioGroupDisplayMode.Button,
+                    RadioGroupDisplayMode.Outline,
                     FrameworkPropertyMetadataOptions.AffectsMeasure));
 
         /// <summary>
@@ -213,7 +213,7 @@ namespace ZenUI.Wpf.Controls
 
         private double GetEffectiveSpacing()
         {
-            return DisplayMode == RadioGroupDisplayMode.Segmented ? 0d : Spacing;
+            return DisplayMode == RadioGroupDisplayMode.Segment ? 0d : Spacing;
         }
     }
 }

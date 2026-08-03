@@ -131,6 +131,12 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.IsNotNull(dictionary["ZenRadioSegmentedSelectedBrush"]);
             Assert.IsNotNull(dictionary["ZenRadioSegmentedSelectedHoverBrush"]);
             Assert.IsNotNull(dictionary["ZenRadioSegmentedSelectedForegroundBrush"]);
+            Assert.IsInstanceOfType<Style>(dictionary["ZenRadioItemRadioStyle"]);
+            Assert.IsInstanceOfType<Style>(dictionary["ZenRadioItemFilledStyle"]);
+            Assert.IsInstanceOfType<Style>(dictionary["ZenRadioItemOutlineStyle"]);
+            Assert.IsInstanceOfType<Style>(dictionary["ZenRadioItemGhostStyle"]);
+            Assert.IsInstanceOfType<Style>(dictionary["ZenRadioItemUnderlineStyle"]);
+            Assert.IsInstanceOfType<Style>(dictionary["ZenRadioItemSegmentStyle"]);
             Assert.IsInstanceOfType<Style>(dictionary["ZenListBoxStyle"]);
             Assert.IsInstanceOfType<Style>(dictionary["ZenListBoxItemStyle"]);
             Assert.AreEqual(36d, dictionary["ZenInputControlMinHeight"]);

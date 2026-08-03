@@ -271,7 +271,7 @@
                                 </StackPanel>
                                 <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="界面布局" />
                                 <zen:ZenRadioGroup
-                                    DisplayMode="Segmented"
+                                    DisplayMode="Segment"
                                     ItemsSource="{Binding ViewModes, ElementName=Root}"
                                     SelectedIndex="1"
                                     Spacing="6" />

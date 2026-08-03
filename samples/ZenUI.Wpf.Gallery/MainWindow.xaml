@@ -35,7 +35,7 @@
 
         <Style
             x:Key="NavigationRadioItemStyle"
-            BasedOn="{StaticResource ZenRadioItemButtonStyle}"
+            BasedOn="{StaticResource ZenRadioItemOutlineStyle}"
             TargetType="{x:Type zen:ZenRadioItem}">
             <Setter Property="Height" Value="36" />
             <Setter Property="Padding" Value="14,0,12,0" />

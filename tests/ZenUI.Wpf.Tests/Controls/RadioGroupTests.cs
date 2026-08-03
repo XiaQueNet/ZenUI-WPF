@@ -21,14 +21,68 @@ namespace ZenUI.Wpf.Tests.Controls
         {
             var group = new ZenRadioGroup();
 
-            Assert.AreEqual(RadioGroupDisplayMode.Button, group.DisplayMode);
+            Assert.AreEqual(RadioGroupDisplayMode.Outline, group.DisplayMode);
 
-            group.DisplayMode = RadioGroupDisplayMode.Segmented;
+            var modes = new[]
+            {
+                RadioGroupDisplayMode.Radio,
+                RadioGroupDisplayMode.Filled,
+                RadioGroupDisplayMode.Outline,
+                RadioGroupDisplayMode.Ghost,
+                RadioGroupDisplayMode.Underline,
+                RadioGroupDisplayMode.Segment
+            };
 
-            Assert.AreEqual(RadioGroupDisplayMode.Segmented, group.DisplayMode);
-            Assert.AreEqual(
-                RadioGroupDisplayMode.Segmented,
-                group.GetValue(ZenRadioGroup.DisplayModeProperty));
+            foreach (var mode in modes)
+            {
+                group.DisplayMode = mode;
+                Assert.AreEqual(mode, group.DisplayMode);
+                Assert.AreEqual(mode, group.GetValue(ZenRadioGroup.DisplayModeProperty));
+            }
+        }
+
+        [TestMethod]
+        public void RadioGroupUsesDedicatedStyleForEachDisplayMode()
+        {
+            var group = new ZenRadioGroup
+            {
+                Width = 480,
+                ItemsSource = new[] { "第一项", "第二项" }
+            };
+            var modes = new[]
+            {
+                RadioGroupDisplayMode.Radio,
+                RadioGroupDisplayMode.Filled,
+                RadioGroupDisplayMode.Outline,
+                RadioGroupDisplayMode.Ghost,
+                RadioGroupDisplayMode.Underline,
+                RadioGroupDisplayMode.Segment
+            };
+            var styles = new HashSet<Style>();
+            var window = CreateTestWindow(group, 540, 120);
+
+            try
+            {
+                window.Show();
+
+                foreach (var mode in modes)
+                {
+                    group.DisplayMode = mode;
+                    window.UpdateLayout();
+                    Assert.IsNotNull(group.ItemContainerStyle, mode.ToString());
+                    Assert.AreEqual(
+                        typeof(ZenRadioItem),
+                        group.ItemContainerStyle.TargetType,
+                        mode.ToString());
+                    styles.Add(group.ItemContainerStyle);
+                }
+
+                Assert.AreEqual(modes.Length, styles.Count);
+            }
+            finally
+            {
+                window.Close();
+            }
         }
 
         [TestMethod]
@@ -101,7 +155,7 @@ namespace ZenUI.Wpf.Tests.Controls
                 var secondLeft = items[1].TranslatePoint(new Point(), group).X;
                 Assert.AreEqual(10d, secondLeft - firstRight, 0.1d);
 
-                group.DisplayMode = RadioGroupDisplayMode.Segmented;
+                group.DisplayMode = RadioGroupDisplayMode.Segment;
                 window.UpdateLayout();
 
                 firstRight = items[0].TranslatePoint(
