@@ -9,9 +9,7 @@
         HorizontalContentAlignment="Stretch"
         VerticalScrollBarVisibility="Auto">
         <StackPanel>
-            <gallery:PageHeader
-                Title="DateTimePicker 日期时间选择器"
-                Description="在一个输入入口中组合日期和时间，并在确认后统一提交。" />
+            <gallery:PageHeader Title="DateTimePicker 日期时间选择器" Description="在一个输入入口中组合日期和时间，并在确认后统一提交。" />
 
             <Border Style="{StaticResource GalleryCardStyle}">
                 <StackPanel>
@@ -27,9 +25,7 @@
                         </StackPanel>
                         <StackPanel Style="{StaticResource GalleryWrapFieldStyle}">
                             <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="仅弹层选择" />
-                            <zen:ZenDateTimePicker
-                                IsTextInputEnabled="False"
-                                Watermark="请从弹层选择" />
+                            <zen:ZenDateTimePicker IsTextInputEnabled="False" Watermark="请从弹层选择" />
                         </StackPanel>
                         <StackPanel Style="{StaticResource GalleryWrapFieldStyle}">
                             <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="禁用" />
@@ -66,6 +62,17 @@
                                 Width="250"
                                 DateTimeFormat="yyyy/MM/dd HH:mm" />
                         </StackPanel>
+                        <StackPanel Width="Auto" Style="{StaticResource GalleryWrapFieldStyle}">
+                            <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="自定义大小" />
+                            <zen:ZenDateTimePicker
+                                Width="300"
+                                CalendarWidth="400"
+                                DateTimeFormat="yyyy/MM/dd HH:mm:ss"
+                                FontSize="26"
+                                IconSize="26"
+                                SelectionHeight="400"
+                                TimeColumnWidth="70" />
+                        </StackPanel>
                     </WrapPanel>
                 </StackPanel>
             </Border>
@@ -73,9 +80,7 @@
             <Border Style="{StaticResource GalleryCardStyle}">
                 <StackPanel>
                     <TextBlock Style="{StaticResource SectionTitleStyle}" Text="日期时间范围" />
-                    <TextBlock
-                        Style="{StaticResource GallerySectionDescriptionStyle}"
-                        Text="限制未来七天内的营业时间边界；首日和末日的可选时间会自动收窄。" />
+                    <TextBlock Style="{StaticResource GallerySectionDescriptionStyle}" Text="限制未来七天内的营业时间边界；首日和末日的可选时间会自动收窄。" />
                     <zen:ZenDateTimePicker
                         x:Name="ConstrainedDateTimePicker"
                         Width="280"

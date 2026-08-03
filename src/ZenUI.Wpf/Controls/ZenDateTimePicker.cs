@@ -374,6 +374,93 @@ namespace ZenUI.Wpf.Controls
                 SelfType,
                 new FrameworkPropertyMetadata(true));
 
+        /// <summary>
+        /// 获取或设置输入框右侧日历图标的边长。该值必须为大于或等于零的有限值。
+        /// </summary>
+        [Bindable(true)]
+        public double IconSize
+        {
+            get { return (double)GetValue(IconSizeProperty); }
+            set { SetValue(IconSizeProperty, value); }
+        }
+
+        /// <summary>
+        /// 标识 <see cref="IconSize"/> 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty IconSizeProperty =
+            DependencyProperty.Register(
+                nameof(IconSize),
+                typeof(double),
+                SelfType,
+                new FrameworkPropertyMetadata(
+                    16d,
+                    FrameworkPropertyMetadataOptions.AffectsMeasure |
+                    FrameworkPropertyMetadataOptions.AffectsRender),
+                IsValidIconSize);
+
+        /// <summary>
+        /// 获取或设置弹层中日历区域的宽度。该值必须为大于零的有限值。
+        /// </summary>
+        [Bindable(true)]
+        public double CalendarWidth
+        {
+            get { return (double)GetValue(CalendarWidthProperty); }
+            set { SetValue(CalendarWidthProperty, value); }
+        }
+
+        /// <summary>
+        /// 标识 <see cref="CalendarWidth"/> 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty CalendarWidthProperty =
+            DependencyProperty.Register(
+                nameof(CalendarWidth),
+                typeof(double),
+                SelfType,
+                new FrameworkPropertyMetadata(304d),
+                IsValidPositiveDimension);
+
+        /// <summary>
+        /// 获取或设置弹层中日历和时间选择区域的共同高度。该值必须为大于零的有限值。
+        /// </summary>
+        [Bindable(true)]
+        public double SelectionHeight
+        {
+            get { return (double)GetValue(SelectionHeightProperty); }
+            set { SetValue(SelectionHeightProperty, value); }
+        }
+
+        /// <summary>
+        /// 标识 <see cref="SelectionHeight"/> 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty SelectionHeightProperty =
+            DependencyProperty.Register(
+                nameof(SelectionHeight),
+                typeof(double),
+                SelfType,
+                new FrameworkPropertyMetadata(304d),
+                IsValidPositiveDimension);
+
+        /// <summary>
+        /// 获取或设置小时、分钟和秒列表的列宽。该值必须为大于零的有限值。
+        /// </summary>
+        [Bindable(true)]
+        public double TimeColumnWidth
+        {
+            get { return (double)GetValue(TimeColumnWidthProperty); }
+            set { SetValue(TimeColumnWidthProperty, value); }
+        }
+
+        /// <summary>
+        /// 标识 <see cref="TimeColumnWidth"/> 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty TimeColumnWidthProperty =
+            DependencyProperty.Register(
+                nameof(TimeColumnWidth),
+                typeof(double),
+                SelfType,
+                new FrameworkPropertyMetadata(54d),
+                IsValidPositiveDimension);
+
         /// <inheritdoc />
         public override void OnApplyTemplate()
         {
@@ -423,6 +510,22 @@ namespace ZenUI.Wpf.Controls
         protected override AutomationPeer OnCreateAutomationPeer()
         {
             return new ZenDateTimePickerAutomationPeer(this);
+        }
+
+        private static bool IsValidPositiveDimension(object value)
+        {
+            var dimension = (double)value;
+            return !double.IsNaN(dimension) &&
+                !double.IsInfinity(dimension) &&
+                dimension > 0d;
+        }
+
+        private static bool IsValidIconSize(object value)
+        {
+            var size = (double)value;
+            return !double.IsNaN(size) &&
+                !double.IsInfinity(size) &&
+                size >= 0d;
         }
 
         private static DateTime? CoerceMaximum(DependencyObject dependencyObject, object baseValue)

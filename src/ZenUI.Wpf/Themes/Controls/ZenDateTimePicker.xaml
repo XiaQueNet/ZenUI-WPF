@@ -7,7 +7,12 @@
         <Setter Property="FontSize" Value="{DynamicResource ZenFontSizeBody}" />
         <Setter Property="MinWidth" Value="210" />
         <Setter Property="MinHeight" Value="{DynamicResource ZenInputControlMinHeight}" />
+        <Setter Property="Padding" Value="{DynamicResource ZenInputControlPadding}" />
         <Setter Property="CornerRadius" Value="{DynamicResource ZenInputControlCornerRadius}" />
+        <Setter Property="IconSize" Value="{DynamicResource ZenDateTimePickerIconSize}" />
+        <Setter Property="CalendarWidth" Value="{DynamicResource ZenDateTimePickerCalendarWidth}" />
+        <Setter Property="SelectionHeight" Value="{DynamicResource ZenDateTimePickerSelectionHeight}" />
+        <Setter Property="TimeColumnWidth" Value="{DynamicResource ZenDateTimePickerTimeColumnWidth}" />
         <Setter Property="Background" Value="{DynamicResource ZenSurfaceBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource ZenBorderBrush}" />
         <Setter Property="BorderThickness" Value="{DynamicResource ZenControlBorderThickness}" />
@@ -27,9 +32,10 @@
                         <TextBox
                             x:Name="PART_TextBox"
                             AutomationProperties.Name="日期和时间"
+                            Padding="{TemplateBinding Padding}"
                             Style="{DynamicResource ZenTimePickerTextBoxStyle}" />
                         <TextBlock
-                            Margin="{DynamicResource ZenInputControlPadding}"
+                            Margin="{TemplateBinding Padding}"
                             VerticalAlignment="Center"
                             Foreground="{DynamicResource ZenTextPlaceholderBrush}"
                             IsHitTestVisible="False"
@@ -56,27 +62,33 @@
                             Focusable="False"
                             IsChecked="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                             Style="{DynamicResource ZenTimePickerDropDownButtonStyle}">
-                            <Grid Width="16" Height="16">
-                                <Rectangle
-                                    Margin="1.5,2.5,1.5,1.5"
-                                    RadiusX="1.5"
-                                    RadiusY="1.5"
-                                    Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type ToggleButton}}}"
-                                    StrokeThickness="1.3" />
-                                <Path
-                                    Data="M 2,6 L 14,6 M 5,1.5 L 5,4 M 11,1.5 L 11,4"
-                                    Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type ToggleButton}}}"
-                                    StrokeEndLineCap="Round"
-                                    StrokeStartLineCap="Round"
-                                    StrokeThickness="1.3" />
-                                <Ellipse
-                                    Width="2.5"
-                                    Height="2.5"
-                                    Margin="0,0,3,3"
-                                    HorizontalAlignment="Right"
-                                    VerticalAlignment="Bottom"
-                                    Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type ToggleButton}}}" />
-                            </Grid>
+                            <Viewbox
+                                x:Name="CalendarIcon"
+                                Width="{TemplateBinding IconSize}"
+                                Height="{TemplateBinding IconSize}"
+                                Stretch="Uniform">
+                                <Grid Width="16" Height="16">
+                                    <Rectangle
+                                        Margin="1.5,2.5,1.5,1.5"
+                                        RadiusX="1.5"
+                                        RadiusY="1.5"
+                                        Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type ToggleButton}}}"
+                                        StrokeThickness="1.3" />
+                                    <Path
+                                        Data="M 2,6 L 14,6 M 5,1.5 L 5,4 M 11,1.5 L 11,4"
+                                        Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type ToggleButton}}}"
+                                        StrokeEndLineCap="Round"
+                                        StrokeStartLineCap="Round"
+                                        StrokeThickness="1.3" />
+                                    <Ellipse
+                                        Width="2.5"
+                                        Height="2.5"
+                                        Margin="0,0,3,3"
+                                        HorizontalAlignment="Right"
+                                        VerticalAlignment="Bottom"
+                                        Fill="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type ToggleButton}}}" />
+                                </Grid>
+                            </Viewbox>
                         </ToggleButton>
 
                         <Popup
@@ -113,10 +125,11 @@
 
                                     <Calendar
                                         x:Name="PART_Calendar"
-                                        Width="{DynamicResource ZenDateTimePickerCalendarWidth}"
-                                        Height="{DynamicResource ZenDateTimePickerCalendarHeight}"
+                                        Width="{TemplateBinding CalendarWidth}"
+                                        Height="{TemplateBinding SelectionHeight}"
                                         BorderThickness="0"
                                         FirstDayOfWeek="{TemplateBinding FirstDayOfWeek}"
+                                        FontSize="{TemplateBinding FontSize}"
                                         IsTodayHighlighted="{TemplateBinding IsTodayHighlighted}"
                                         SelectionMode="SingleDate"
                                         zen:ZenCalendar.CornerRadius="0"
@@ -130,10 +143,11 @@
                                         BorderThickness="1,0,0,0">
                                         <zen:ZenTimeSelector
                                             x:Name="PART_TimeSelector"
-                                            ColumnWidth="{DynamicResource ZenDateTimePickerTimeColumnWidth}"
+                                            ColumnWidth="{TemplateBinding TimeColumnWidth}"
+                                            FontSize="{TemplateBinding FontSize}"
                                             ItemHeight="{DynamicResource ZenDateTimePickerTimeItemHeight}"
-                                            ListHeight="{DynamicResource ZenDateTimePickerTimeListHeight}"
-                                            PeriodColumnWidth="{DynamicResource ZenDateTimePickerPeriodColumnWidth}" />
+                                            ListHeight="{TemplateBinding SelectionHeight}"
+                                            PeriodColumnWidth="{TemplateBinding TimeColumnWidth}" />
                                     </Border>
 
                                     <Border
@@ -151,22 +165,19 @@
                                             <zen:ZenButton
                                                 x:Name="PART_NowButton"
                                                 MinWidth="0"
-                                                MinHeight="0"
-                                                Height="28"
-                                                Padding="6,0"
                                                 HorizontalAlignment="Left"
                                                 Appearance="Text"
                                                 AutomationProperties.Name="选择此刻"
                                                 Content="此刻"
+                                                FontSize="{TemplateBinding FontSize}"
                                                 Variant="Neutral" />
                                             <zen:ZenButton
                                                 x:Name="PART_ConfirmButton"
                                                 Grid.Column="1"
                                                 MinWidth="64"
-                                                MinHeight="0"
-                                                Height="32"
                                                 AutomationProperties.Name="确定日期时间"
                                                 Content="确定"
+                                                FontSize="{TemplateBinding FontSize}"
                                                 Variant="Primary" />
                                         </Grid>
                                     </Border>

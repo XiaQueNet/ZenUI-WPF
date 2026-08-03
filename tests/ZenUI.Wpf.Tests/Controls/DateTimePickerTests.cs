@@ -32,6 +32,10 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.IsTrue(picker.IsTextInputEnabled);
             Assert.IsFalse(picker.IsDropDownOpen);
             Assert.AreEqual(new CornerRadius(6), picker.CornerRadius);
+            Assert.AreEqual(16d, picker.IconSize);
+            Assert.AreEqual(304d, picker.CalendarWidth);
+            Assert.AreEqual(304d, picker.SelectionHeight);
+            Assert.AreEqual(54d, picker.TimeColumnWidth);
             Assert.AreEqual(
                 CultureInfo.CurrentCulture.DateTimeFormat.FirstDayOfWeek,
                 picker.FirstDayOfWeek);
@@ -77,6 +81,56 @@ namespace ZenUI.Wpf.Tests.Controls
             picker.IsTextInputEnabled = false;
 
             Assert.IsTrue(GetPart<TextBox>(picker, "PART_TextBox").IsReadOnly);
+        }
+
+        [TestMethod]
+        public void FontSizeFlowsToCalendarAndTimeSelector()
+        {
+            var picker = CreateTemplatedPicker();
+            picker.FontSize = 24d;
+
+            Assert.AreEqual(24d, GetPart<Calendar>(picker, "PART_Calendar").FontSize);
+            Assert.AreEqual(
+                24d,
+                GetPart<ZenTimeSelector>(picker, "PART_TimeSelector").FontSize);
+            Assert.AreEqual(24d, GetPart<Button>(picker, "PART_NowButton").FontSize);
+            Assert.AreEqual(24d, GetPart<Button>(picker, "PART_ConfirmButton").FontSize);
+        }
+
+        [TestMethod]
+        public void InstanceMetricsFlowToPopupParts()
+        {
+            var picker = CreateTemplatedPicker();
+            picker.Padding = new Thickness(12, 8, 12, 8);
+            picker.IconSize = 24d;
+            picker.CalendarWidth = 380d;
+            picker.SelectionHeight = 390d;
+            picker.TimeColumnWidth = 70d;
+
+            var calendar = GetPart<Calendar>(picker, "PART_Calendar");
+            var selector = GetPart<ZenTimeSelector>(picker, "PART_TimeSelector");
+            var textBox = GetPart<TextBox>(picker, "PART_TextBox");
+            var icon = GetPart<Viewbox>(picker, "CalendarIcon");
+
+            Assert.AreEqual(new Thickness(12, 8, 12, 8), textBox.Padding);
+            Assert.AreEqual(24d, icon.Width);
+            Assert.AreEqual(24d, icon.Height);
+            Assert.AreEqual(380d, calendar.Width);
+            Assert.AreEqual(390d, calendar.Height);
+            Assert.AreEqual(70d, selector.ColumnWidth);
+            Assert.AreEqual(70d, selector.PeriodColumnWidth);
+            Assert.AreEqual(390d, selector.ListHeight);
+        }
+
+        [TestMethod]
+        public void IconSizeRejectsInvalidValues()
+        {
+            var picker = new ZenDateTimePicker();
+
+            Assert.ThrowsExactly<ArgumentException>(() => picker.IconSize = -1d);
+            Assert.ThrowsExactly<ArgumentException>(() => picker.IconSize = double.NaN);
+            Assert.ThrowsExactly<ArgumentException>(
+                () => picker.IconSize = double.PositiveInfinity);
         }
 
         [TestMethod]
