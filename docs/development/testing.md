@@ -9,7 +9,7 @@
 - 使用项目现有的 MSTest；除独立 NuGet 包边界外，不为单个控件或功能新建测试工程。
 - 普通测试使用 `[TestClass]` 和 `[TestMethod]`。
 - 创建或操作 WPF 控件、窗口、模板、Dispatcher 或 UI Automation Peer 的测试使用 `[STATestClass]`。
-- 测试必须同时兼容项目当前目标框架 `net472` 和 `net8.0-windows`；不要使用仅在其中一个目标可用的测试 API。
+- 测试必须兼容 CI 矩阵中的 `net472`、`net48`、`net481`、`net8.0-windows`、`net9.0-windows` 和 `net10.0-windows`；不要使用仅在其中一个目标可用的测试 API。正式包仍只构建 `net472` 与 `net8.0-windows` 资产，其他目标用于验证向上兼容性。
 
 ## 命名与组织
 

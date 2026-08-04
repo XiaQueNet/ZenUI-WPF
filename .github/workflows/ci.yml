@@ -27,17 +27,6 @@ jobs:
       - name: Build
         run: dotnet build ZenUI.Wpf.slnx -c Release --no-restore
 
-      - name: Test
-        run: dotnet test ZenUI.Wpf.slnx -c Release --no-build
-
-      - name: Upload visual snapshots
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: visual-regression-snapshots
-          path: tests/ZenUI.Wpf.Tests/bin/**/visual-regression/**/*.png
-          if-no-files-found: error
-
       - name: Pack
         shell: pwsh
         run: |
@@ -52,4 +41,43 @@ jobs:
           path: |
             ${{ runner.temp }}/nuget-packages/*.nupkg
             ${{ runner.temp }}/nuget-packages/*.snupkg
+          if-no-files-found: error
+
+  test:
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        framework:
+          - net472
+          - net48
+          - net481
+          - net8.0-windows
+          - net9.0-windows
+          - net10.0-windows
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup .NET SDK
+        uses: actions/setup-dotnet@v5
+        with:
+          global-json-file: global.json
+
+      - name: Restore
+        run: dotnet restore ZenUI.Wpf.slnx
+
+      - name: Test controls
+        run: dotnet test --project tests/ZenUI.Wpf.Tests/ZenUI.Wpf.Tests.csproj --configuration Release --framework ${{ matrix.framework }} --no-restore
+
+      - name: Test converters
+        run: dotnet test --project tests/ZenUI.Wpf.Converters.Tests/ZenUI.Wpf.Converters.Tests.csproj --configuration Release --framework ${{ matrix.framework }} --no-restore
+
+      - name: Upload visual snapshots
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: visual-regression-snapshots-${{ matrix.framework }}
+          path: tests/ZenUI.Wpf.Tests/bin/Release/${{ matrix.framework }}/visual-regression/**/*.png
           if-no-files-found: error
