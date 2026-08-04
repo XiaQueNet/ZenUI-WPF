@@ -137,7 +137,7 @@ function Test-NuGetPackage {
             Where-Object { $_ -like 'lib/*/*.dll' } |
             ForEach-Object { ($_ -split '/')[1] } |
             Sort-Object -Unique
-        if (($frameworks -join ',') -ne 'net462,net471,net472,net8.0-windows7.0') {
+        if (($frameworks -join ',') -ne 'net462,net471,net472,net5.0-windows7.0,net8.0-windows7.0') {
             throw "Target frameworks are incorrect in $($Package.Name): $($frameworks -join ', ')."
         }
         if (-not ($archive.Entries.FullName | Where-Object { $_ -like 'lib/*/*.xml' })) {

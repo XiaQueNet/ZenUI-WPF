@@ -15,7 +15,7 @@ ZenUI 以克制、清晰的 Zen Style 改善 WPF 控件的默认体验，同时�
 - 提供 Compact、Standard、Comfortable 三档界面密度。
 - 使用语义化设计 Token，应用无需复制模板即可覆盖颜色与尺寸。
 - 覆盖悬停、按下、焦点、选中、禁用、只读和验证错误等交互状态。
-- 提供 `net462`、`net471`、`net472` 与 `net8.0-windows` 资产，覆盖 .NET Framework 4.6.2 及以上版本与现代 .NET，并提供独立的通用转换器包。
+- 提供 `net462`、`net471`、`net472`、`net5.0-windows` 与 `net8.0-windows` 资产；正式支持 .NET Framework 4.6.2 及以上版本与 .NET 8 及以上版本，并为已停止维护的 .NET 5/6/7 提供兼容资产。
 
 ## 安装
 
@@ -143,7 +143,7 @@ dotnet build ZenUI.Wpf.slnx -c Release --no-restore
 dotnet test ZenUI.Wpf.slnx -c Release --no-build
 ```
 
-仓库在 Windows CI 中将编译器与 .NET 分析器警告视为错误，同时通过测试矩阵逐版本验证 .NET Framework 4.6.2～4.8.1、`.NET 8/9/10 for Windows`、NuGet/Symbol 包及多主题、多 Density、多 DPI 视觉快照。正式发布包包含 `net462`、`net471`、`net472` 与 `net8.0-windows` 四套资产，并通过 `.\scripts\pack-release.ps1 -Version <version> -Package <package-id>` 生成；只发布有实际变更的包。
+仓库在 Windows CI 中将编译器与 .NET 分析器警告视为错误，同时通过完整测试矩阵逐版本验证 .NET Framework 4.6.2～4.8.1 与 `.NET 8/9/10 for Windows`，并在对应运行时上对 `.NET 5/6/7 for Windows` 执行兼容性冒烟测试。正式发布包包含 `net462`、`net471`、`net472`、`net5.0-windows` 与 `net8.0-windows` 五套资产，并验证 NuGet/Symbol 包及多主题、多 Density、多 DPI 视觉快照。正式产物通过 `.\scripts\pack-release.ps1 -Version <version> -Package <package-id>` 生成；只发布有实际变更的包。
 
 ## 参与贡献
 

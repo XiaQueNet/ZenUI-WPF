@@ -6,10 +6,11 @@
 
 - 控件和主题测试放在 `tests/ZenUI.Wpf.Tests/`，目录与被测能力对应，例如 `Controls/`、`Theming/`。
 - 转换器测试放在 `tests/ZenUI.Wpf.Converters.Tests/`，保证转换器包不通过测试项目间接依赖控件包。
+- .NET 5、6、7 使用 `tests/ZenUI.Wpf.ModernCompatibilityTests/` 在对应运行时验证主题资源、控件元数据、Live Region 与转换器；这些已停止维护的运行时只提供兼容性保障。
 - 使用项目现有的 MSTest；除独立 NuGet 包边界外，不为单个控件或功能新建测试工程。
 - 普通测试使用 `[TestClass]` 和 `[TestMethod]`。
 - 创建或操作 WPF 控件、窗口、模板、Dispatcher 或 UI Automation Peer 的测试使用 `[STATestClass]`。
-- 测试必须兼容 CI 矩阵中的 .NET Framework 4.6.2～4.8.1，以及 `net8.0-windows`、`net9.0-windows` 和 `net10.0-windows`；不要无条件使用仅在部分目标可用的测试 API。正式包构建 `net462`、`net471`、`net472` 与 `net8.0-windows` 资产，中间目标用于逐版本验证兼容性。
+- 测试必须兼容 CI 矩阵中的 .NET Framework 4.6.2～4.8.1，以及 `.NET 5～10 for Windows`；不要无条件使用仅在部分目标可用的测试 API。正式包构建 `net462`、`net471`、`net472`、`net5.0-windows` 与 `net8.0-windows` 资产，中间目标用于逐版本验证兼容性。
 
 ## 命名与组织
 

@@ -172,7 +172,7 @@ public static readonly DependencyProperty SeverityProperty;
 - 模板测试可以定位公开的 `PART_*` 部件，不应依赖易变的非契约视觉树层级。
 - 视觉快照覆盖 Light、Dark、HighContrast 以及 100%、150%、200% DPI。
 - 视觉快照不能替代行为断言；调整默认视觉时仍需验证原生选择、编辑、输入和自动化能力。
-- 测试必须兼容 .NET Framework 4.6.2～4.8.1 与 `.NET 8/9/10 for Windows` 测试矩阵；仅在较新框架存在的 API 必须提供旧框架降级行为。
+- 测试必须兼容 .NET Framework 4.6.2～4.8.1 与 `.NET 5～10 for Windows` 测试矩阵；仅在较新框架存在的 API 必须提供旧框架降级行为。.NET 5/6/7 仅作为已停止维护运行时的兼容性目标。
 
 具体的测试组织、断言边界和 WPF 测试方法遵循[测试规范](../development/testing.md)。
 

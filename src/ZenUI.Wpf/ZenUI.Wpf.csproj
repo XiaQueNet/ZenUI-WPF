@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net462;net471;net472;net8.0-windows</TargetFrameworks>
+    <TargetFrameworks>net462;net471;net472;net5.0-windows;net8.0-windows</TargetFrameworks>
     <UseWPF>true</UseWPF>
 
     <RootNamespace>ZenUI.Wpf</RootNamespace>
@@ -18,7 +18,7 @@
     <Title>ZenUI WPF Controls</Title>
     <Authors>XiaQueNet</Authors>
     <Description>A themeable and accessible WPF control library for .NET Framework 4.6.2 and modern .NET.</Description>
-    <PackageTags>wpf;controls;ui;net462;net471;net472;net8;windows</PackageTags>
+    <PackageTags>wpf;controls;ui;net462;net471;net472;net5;net8;windows</PackageTags>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageIcon>zenui-icon.png</PackageIcon>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
@@ -33,7 +33,7 @@
     <DebugType>portable</DebugType>
   </PropertyGroup>
 
-  <PropertyGroup Condition="'$(TargetFramework)' == 'net471' Or '$(TargetFramework)' == 'net472' Or '$(TargetFramework)' == 'net8.0-windows'">
+  <PropertyGroup Condition="'$(TargetFramework)' == 'net471' Or '$(TargetFramework)' == 'net472' Or '$(TargetFramework)' == 'net5.0-windows' Or '$(TargetFramework)' == 'net8.0-windows'">
     <DefineConstants>$(DefineConstants);ZENUI_LIVE_REGIONS</DefineConstants>
   </PropertyGroup>
 

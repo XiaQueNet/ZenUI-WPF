@@ -84,3 +84,33 @@ jobs:
           name: visual-regression-snapshots-${{ matrix.framework }}
           path: tests/ZenUI.Wpf.Tests/bin/Release/${{ matrix.framework }}/visual-regression/**/*.png
           if-no-files-found: error
+
+  modern-compatibility-test:
+    runs-on: windows-latest
+    strategy:
+      fail-fast: false
+      matrix:
+        include:
+          - framework: net5.0-windows
+            sdk: 5.0.x
+          - framework: net6.0-windows
+            sdk: 6.0.x
+          - framework: net7.0-windows
+            sdk: 7.0.x
+
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v6
+
+      - name: Setup current .NET SDK
+        uses: actions/setup-dotnet@v5
+        with:
+          global-json-file: global.json
+
+      - name: Setup compatibility runtime
+        uses: actions/setup-dotnet@v5
+        with:
+          dotnet-version: ${{ matrix.sdk }}
+
+      - name: Run compatibility smoke test
+        run: dotnet run --project tests/ZenUI.Wpf.ModernCompatibilityTests/ZenUI.Wpf.ModernCompatibilityTests.csproj --configuration Release --framework ${{ matrix.framework }}

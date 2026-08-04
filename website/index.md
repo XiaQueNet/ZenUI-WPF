@@ -56,7 +56,7 @@ layout: landing
       <article>
         <span class="zenui-card-index">03</span>
         <h3>面向真实项目</h3>
-        <p>同时支持 .NET Framework 4.6.2 及以上版本与现代 .NET，便于现有桌面应用渐进升级。</p>
+        <p>正式支持 .NET Framework 4.6.2 及以上版本与现代 .NET，并为 .NET 5、6、7 WPF 存量应用提供兼容资产。</p>
       </article>
     </div>
   </section>

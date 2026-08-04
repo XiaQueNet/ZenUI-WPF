@@ -5,6 +5,7 @@
   </Folder>
   <Project Path="src/ZenUI.Wpf/ZenUI.Wpf.csproj" Id="8657e873-416d-4f61-b78f-c05ace906693" />
   <Project Path="src/ZenUI.Wpf.Converters/ZenUI.Wpf.Converters.csproj" Id="8908c61d-250e-4fb4-8820-622bc2219f33" />
+  <Project Path="tests/ZenUI.Wpf.ModernCompatibilityTests/ZenUI.Wpf.ModernCompatibilityTests.csproj" />
   <Project Path="tests/ZenUI.Wpf.Converters.Tests/ZenUI.Wpf.Converters.Tests.csproj" Id="a1e5fcc6-e532-4e48-8e30-523325586dfe" />
   <Project Path="tests/ZenUI.Wpf.Tests/ZenUI.Wpf.Tests.csproj" Id="a7934738-e88a-4d95-b607-bb6dbe50c594" />
 </Solution>

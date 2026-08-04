@@ -8,7 +8,9 @@
 
 - `ZenSwitch` 增加 `CheckedContent` 和 `UncheckedContent`，支持在开关轨道内显示随选中状态切换的内容；只设置高度时会自动保留不小于高度两倍的宽度。
 - NuGet 包增加 `net462` 与 `net471` 资产，将 .NET Framework 支持范围扩展到 4.6.2 及以上版本；4.7.1 起保留 Live Region 通知，较旧框架保留其余 UI Automation 语义。
+- NuGet 包增加 `net5.0-windows` 兼容资产，供已停止维护的 .NET 5、6、7 WPF 应用使用。
 - CI 增加 .NET Framework 4.6.2～4.8.1 与 `.NET 8/9/10 for Windows` 测试矩阵，逐版本验证包资产兼容性。
+- CI 在对应运行时上增加 `.NET 5/6/7 for Windows` 兼容性冒烟测试。
 
 ## [0.1.0-preview.7] - 2026-08-03
 

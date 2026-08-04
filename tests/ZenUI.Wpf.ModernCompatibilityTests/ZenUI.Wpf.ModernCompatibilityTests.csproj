@@ -1,0 +1,15 @@
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <OutputType>Exe</OutputType>
+    <TargetFrameworks>net5.0-windows;net6.0-windows;net7.0-windows</TargetFrameworks>
+    <UseWPF>true</UseWPF>
+    <LangVersion>8.0</LangVersion>
+    <IsPackable>false</IsPackable>
+    <CheckEolTargetFramework>false</CheckEolTargetFramework>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\..\src\ZenUI.Wpf\ZenUI.Wpf.csproj" />
+    <ProjectReference Include="..\..\src\ZenUI.Wpf.Converters\ZenUI.Wpf.Converters.csproj" />
+  </ItemGroup>
+</Project>

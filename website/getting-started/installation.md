@@ -32,6 +32,8 @@ ZenUI 提供两个互不依赖的 NuGet 包。只需要控件时安装 `ZenUI.Wp
 - .NET Framework 4.6.2 及以上版本
 - .NET 8 for Windows
 
+此外提供 `net5.0-windows` 兼容资产，可供 .NET 5、6、7 WPF 项目使用；这些运行时已经停止维护，不属于长期支持范围。
+
 WPF 项目需要启用 `UseWPF`：
 
 ```xml
