@@ -224,6 +224,8 @@ try {
         'ZenUI.Wpf.slnx',
         '-c',
         'Release',
+        '--max-parallel-test-modules',
+        '1',
         '--no-build',
         '--no-restore'
     )
@@ -283,14 +285,14 @@ try {
         throw "Expected $($releasePackages.Count) .nupkg and .snupkg file(s) in $outputDirectory."
     }
 
-    foreach ($package in $packages) {
-        if (-not $expectedPackages.ContainsKey($package.Name)) {
-            throw "Unexpected package in release directory: $($package.Name)."
+    foreach ($packageFile in $packages) {
+        if (-not $expectedPackages.ContainsKey($packageFile.Name)) {
+            throw "Unexpected package in release directory: $($packageFile.Name)."
         }
 
         Test-NuGetPackage `
-            -Package $package `
-            -ExpectedId $expectedPackages[$package.Name] `
+            -Package $packageFile `
+            -ExpectedId $expectedPackages[$packageFile.Name] `
             -ExpectedVersion $Version `
             -ExpectedCommit $tagCommit
     }
