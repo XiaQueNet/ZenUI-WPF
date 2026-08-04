@@ -82,6 +82,169 @@ namespace ZenUI.Wpf.Tests.Controls
             }
         }
 
+        [TestMethod]
+        public void StateContentFollowsCheckedState()
+        {
+            var @switch = new ZenSwitch
+            {
+                CheckedContent = "开",
+                UncheckedContent = "关"
+            };
+            var window = CreateTestWindow(@switch, 160, 90);
+            window.Resources.MergedDictionaries.Add(new ResourceDictionary
+            {
+                Source = new Uri(
+                    "/ZenUI.Wpf;component/Themes/Generic.xaml",
+                    UriKind.Relative)
+            });
+
+            try
+            {
+                window.Show();
+                window.UpdateLayout();
+
+                var stateContent = @switch.Template.FindName(
+                    "StateContent",
+                    @switch) as ContentPresenter;
+                var thumbHost = @switch.Template.FindName(
+                    "ThumbHost",
+                    @switch) as Grid;
+                Assert.IsNotNull(stateContent);
+                Assert.IsNotNull(thumbHost);
+                Assert.AreEqual("关", stateContent.Content);
+                Assert.AreEqual(
+                    HorizontalAlignment.Center,
+                    stateContent.HorizontalAlignment);
+                Assert.AreEqual(1, Grid.GetColumn(stateContent));
+                Assert.AreEqual(2, Grid.GetColumnSpan(stateContent));
+                Assert.AreEqual(0, Grid.GetColumn(thumbHost));
+
+                @switch.IsChecked = true;
+                window.UpdateLayout();
+
+                Assert.AreEqual("开", stateContent.Content);
+                Assert.AreEqual(0, Grid.GetColumn(stateContent));
+                Assert.AreEqual(2, Grid.GetColumnSpan(stateContent));
+                Assert.AreEqual(2, Grid.GetColumn(thumbHost));
+            }
+            finally
+            {
+                window.Close();
+            }
+        }
+
+        [TestMethod]
+        public void CustomSizeStateContentKeepsThumbAtTrackEdges()
+        {
+            var @switch = new ZenSwitch
+            {
+                CheckedContent = "已开启",
+                Height = 40,
+                UncheckedContent = "已关闭",
+                Width = 120
+            };
+            var window = CreateTestWindow(@switch, 180, 90);
+            window.Resources.MergedDictionaries.Add(new ResourceDictionary
+            {
+                Source = new Uri(
+                    "/ZenUI.Wpf;component/Themes/Generic.xaml",
+                    UriKind.Relative)
+            });
+
+            try
+            {
+                window.Show();
+                window.UpdateLayout();
+
+                var track = @switch.Template.FindName("Track", @switch) as Border;
+                var thumbHost = @switch.Template.FindName(
+                    "ThumbHost",
+                    @switch) as Grid;
+                Assert.IsNotNull(track);
+                Assert.IsNotNull(thumbHost);
+                Assert.AreEqual(
+                    0d,
+                    thumbHost.TranslatePoint(new Point(), track).X,
+                    0.01d);
+
+                @switch.IsChecked = true;
+                window.UpdateLayout();
+
+                Assert.AreEqual(
+                    track.ActualWidth - thumbHost.ActualWidth,
+                    thumbHost.TranslatePoint(new Point(), track).X,
+                    0.01d);
+            }
+            finally
+            {
+                window.Close();
+            }
+        }
+
+        [TestMethod]
+        public void HeightOnlyCustomizationPreservesTwoToOneMinimumWidth()
+        {
+            var @switch = new ZenSwitch
+            {
+                Height = 40
+            };
+            var window = CreateTestWindow(@switch, 160, 90);
+            window.Resources.MergedDictionaries.Add(new ResourceDictionary
+            {
+                Source = new Uri(
+                    "/ZenUI.Wpf;component/Themes/Generic.xaml",
+                    UriKind.Relative)
+            });
+
+            try
+            {
+                window.Show();
+                window.UpdateLayout();
+
+                Assert.AreEqual(80d, @switch.MinWidth);
+                Assert.AreEqual(80d, @switch.ActualWidth);
+                Assert.AreEqual(40d, @switch.ActualHeight);
+            }
+            finally
+            {
+                window.Close();
+            }
+        }
+
+        [TestMethod]
+        public void StateContentIsOptional()
+        {
+            var @switch = new ZenSwitch();
+            var window = CreateTestWindow(@switch, 160, 90);
+            window.Resources.MergedDictionaries.Add(new ResourceDictionary
+            {
+                Source = new Uri(
+                    "/ZenUI.Wpf;component/Themes/Generic.xaml",
+                    UriKind.Relative)
+            });
+
+            try
+            {
+                window.Show();
+                window.UpdateLayout();
+
+                var stateContent = @switch.Template.FindName(
+                    "StateContent",
+                    @switch) as ContentPresenter;
+                Assert.IsNotNull(stateContent);
+                Assert.IsNull(stateContent.Content);
+
+                @switch.IsChecked = true;
+                window.UpdateLayout();
+
+                Assert.IsNull(stateContent.Content);
+            }
+            finally
+            {
+                window.Close();
+            }
+        }
+
         private static Setter CreateBrushBindingSetter(
             DependencyProperty property,
             string path,

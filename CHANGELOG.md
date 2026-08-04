@@ -4,6 +4,10 @@
 
 ## Unreleased
 
+### Added
+
+- `ZenSwitch` 增加 `CheckedContent` 和 `UncheckedContent`，支持在开关轨道内显示随选中状态切换的内容；只设置高度时会自动保留不小于高度两倍的宽度。
+
 ## [0.1.0-preview.7] - 2026-08-03
 
 ### Added

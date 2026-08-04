@@ -4,59 +4,133 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:gallery="clr-namespace:ZenUI.Wpf.Gallery.Controls"
     xmlns:zen="https://zenui.mnorg.cn/xaml/wpf">
-    <ScrollViewer Padding="{StaticResource GalleryPagePadding}" HorizontalContentAlignment="Stretch" VerticalScrollBarVisibility="Auto">
+    <ScrollViewer
+        Padding="{StaticResource GalleryPagePadding}"
+        HorizontalContentAlignment="Stretch"
+        VerticalScrollBarVisibility="Auto">
         <StackPanel>
-            <gallery:PageHeader Description="用于在打开和关闭状态之间即时切换。" Title="Switch 开关" />
+            <gallery:PageHeader Title="Switch 开关" Description="用于在打开和关闭状态之间即时切换。" />
             <Border Style="{StaticResource GalleryCardStyle}">
                 <StackPanel>
-                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="基本状态" />
-                    <StackPanel Orientation="Horizontal">
-                        <StackPanel Margin="0,0,40,0">
-                            <zen:ZenSwitch IsChecked="True" />
-                            <TextBlock Margin="0,10,0,0" HorizontalAlignment="Center" Foreground="{DynamicResource ZenTextSecondaryBrush}" Text="开启" />
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="状态与内容" />
+                    <TextBlock Style="{StaticResource GallerySectionDescriptionStyle}" Text="对比默认、带状态文字和禁用状态下的开关呈现。" />
+                    <WrapPanel>
+                        <WrapPanel.Resources>
+                            <Style BasedOn="{StaticResource ZenSwitchStyle}" TargetType="{x:Type zen:ZenSwitch}">
+                                <Setter Property="HorizontalAlignment" Value="Left" />
+                            </Style>
+                        </WrapPanel.Resources>
+                        <StackPanel Style="{StaticResource GalleryWrapFieldStyle}">
+                            <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="默认 · 关闭" />
+                            <zen:ZenSwitch AutomationProperties.Name="关闭" />
                         </StackPanel>
-                        <StackPanel>
-                            <zen:ZenSwitch />
-                            <TextBlock Margin="0,10,0,0" HorizontalAlignment="Center" Foreground="{DynamicResource ZenTextSecondaryBrush}" Text="关闭" />
+                        <StackPanel Style="{StaticResource GalleryWrapFieldStyle}">
+                            <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="默认 · 开启" />
+                            <zen:ZenSwitch AutomationProperties.Name="开启" IsChecked="True" />
                         </StackPanel>
-                    </StackPanel>
+                        <StackPanel Style="{StaticResource GalleryWrapFieldStyle}">
+                            <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="带文字 · 关闭" />
+                            <zen:ZenSwitch
+                                AutomationProperties.Name="带状态文字的关闭开关"
+                                CheckedContent="开"
+                                UncheckedContent="关" />
+                        </StackPanel>
+                        <StackPanel Style="{StaticResource GalleryWrapFieldStyle}">
+                            <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="带文字 · 开启" />
+                            <zen:ZenSwitch
+                                AutomationProperties.Name="带状态文字的开启开关"
+                                CheckedContent="开"
+                                IsChecked="True"
+                                UncheckedContent="关" />
+                        </StackPanel>
+                        <StackPanel Style="{StaticResource GalleryWrapFieldStyle}">
+                            <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="禁用 · 关闭" />
+                            <zen:ZenSwitch AutomationProperties.Name="禁用的关闭开关" IsEnabled="False" />
+                        </StackPanel>
+                        <StackPanel Style="{StaticResource GalleryWrapFieldStyle}">
+                            <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="禁用 · 开启" />
+                            <zen:ZenSwitch
+                                AutomationProperties.Name="禁用的开启开关"
+                                IsChecked="True"
+                                IsEnabled="False" />
+                        </StackPanel>
+                    </WrapPanel>
                 </StackPanel>
             </Border>
             <Border Style="{StaticResource GalleryCardStyle}">
                 <StackPanel>
-                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="禁用状态" />
-                    <StackPanel Orientation="Horizontal">
-                        <zen:ZenSwitch Margin="0,0,24,0" IsChecked="True" IsEnabled="False" />
-                        <zen:ZenSwitch IsEnabled="False" />
-                    </StackPanel>
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="尺寸变化" />
+                    <TextBlock Style="{StaticResource GallerySectionDescriptionStyle}" Text="只设置高度时自动保留两倍宽度；较长状态文字仍可按内容继续加宽。" />
+                    <WrapPanel>
+                        <WrapPanel.Resources>
+                            <Style BasedOn="{StaticResource ZenSwitchStyle}" TargetType="{x:Type zen:ZenSwitch}">
+                                <Setter Property="HorizontalAlignment" Value="Left" />
+                            </Style>
+                        </WrapPanel.Resources>
+                        <StackPanel Style="{StaticResource GalleryWrapFieldStyle}">
+                            <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="加宽 · 完整文字" />
+                            <zen:ZenSwitch
+                                Width="120"
+                                AutomationProperties.Name="加宽的状态文字开关"
+                                CheckedContent="已开启"
+                                IsChecked="True"
+                                UncheckedContent="已关闭" />
+                        </StackPanel>
+                        <StackPanel Style="{StaticResource GalleryWrapFieldStyle}">
+                            <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="仅加高 · 自动宽度" />
+                            <zen:ZenSwitch
+                                Height="40"
+                                AutomationProperties.Name="仅设置高度的开关"
+                                CheckedContent="开"
+                                IsChecked="True"
+                                UncheckedContent="关" />
+                        </StackPanel>
+                    </WrapPanel>
                 </StackPanel>
             </Border>
             <Border Style="{StaticResource GalleryCardStyle}">
                 <StackPanel>
-                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="设置列表" />
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <StackPanel>
-                            <TextBlock Text="桌面通知" />
-                            <TextBlock Style="{StaticResource GallerySupportingTextStyle}" Text="有新消息时显示系统通知。" />
-                        </StackPanel>
-                        <zen:ZenSwitch Grid.Column="1" Margin="24,0,0,0" IsChecked="True" />
-                    </Grid>
-                    <Border Margin="0,18,0,18" BorderBrush="{DynamicResource ZenDividerBrush}" BorderThickness="0,1,0,0" />
-                    <Grid>
-                        <Grid.ColumnDefinitions>
-                            <ColumnDefinition Width="*" />
-                            <ColumnDefinition Width="Auto" />
-                        </Grid.ColumnDefinitions>
-                        <StackPanel>
-                            <TextBlock Text="自动下载更新" />
-                            <TextBlock Style="{StaticResource GallerySupportingTextStyle}" Text="连接到非计费网络时下载最新版本。" />
-                        </StackPanel>
-                        <zen:ZenSwitch Grid.Column="1" Margin="24,0,0,0" />
-                    </Grid>
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="联动示例" />
+                    <TextBlock Style="{StaticResource GallerySectionDescriptionStyle}" Text="关闭桌面通知后，从属的通知声音选项同步进入禁用状态。" />
+                    <Border Padding="{StaticResource GalleryListRowPadding}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel VerticalAlignment="Center">
+                                <TextBlock Text="桌面通知" />
+                                <TextBlock Style="{StaticResource GallerySupportingTextStyle}" Text="有新消息时显示系统通知。" />
+                            </StackPanel>
+                            <zen:ZenSwitch
+                                x:Name="DesktopNotificationsSwitch"
+                                Grid.Column="1"
+                                Margin="{StaticResource GalleryTrailingControlMargin}"
+                                VerticalAlignment="Center"
+                                AutomationProperties.Name="桌面通知"
+                                IsChecked="True" />
+                        </Grid>
+                    </Border>
+                    <Border BorderBrush="{DynamicResource ZenDividerBrush}" BorderThickness="0,1,0,0" />
+                    <Border Padding="{StaticResource GalleryListRowPadding}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="Auto" />
+                            </Grid.ColumnDefinitions>
+                            <StackPanel VerticalAlignment="Center">
+                                <TextBlock Text="通知声音" />
+                                <TextBlock Style="{StaticResource GallerySupportingTextStyle}" Text="收到桌面通知时播放提示音；需先开启桌面通知。" />
+                            </StackPanel>
+                            <zen:ZenSwitch
+                                Grid.Column="1"
+                                Margin="{StaticResource GalleryTrailingControlMargin}"
+                                VerticalAlignment="Center"
+                                AutomationProperties.Name="通知声音"
+                                IsChecked="True"
+                                IsEnabled="{Binding IsChecked, ElementName=DesktopNotificationsSwitch}" />
+                        </Grid>
+                    </Border>
                 </StackPanel>
             </Border>
             <gallery:PropertyTable ControlType="{x:Type zen:ZenSwitch}" />

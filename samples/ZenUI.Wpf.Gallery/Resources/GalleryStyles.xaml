@@ -14,6 +14,8 @@
     <Thickness x:Key="GalleryFieldMargin">0,0,18,14</Thickness>
     <Thickness x:Key="GalleryFieldLabelMargin">0,0,0,8</Thickness>
     <Thickness x:Key="GallerySupportingTextMargin">0,4,0,0</Thickness>
+    <Thickness x:Key="GalleryListRowPadding">0,12</Thickness>
+    <Thickness x:Key="GalleryTrailingControlMargin">24,0,0,0</Thickness>
 
     <Style x:Key="PageTitleStyle" TargetType="{x:Type TextBlock}">
         <Setter Property="Foreground" Value="{DynamicResource ZenTextPrimaryBrush}" />

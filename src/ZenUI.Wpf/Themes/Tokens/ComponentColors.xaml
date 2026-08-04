@@ -6,6 +6,10 @@
     <SolidColorBrush x:Key="ZenControlThumbBrush" Color="#FFFFFF" />
     <SolidColorBrush x:Key="ZenControlThumbBorderBrush" Color="#18000000" />
 
+    <!-- 开关 -->
+    <SolidColorBrush x:Key="ZenSwitchCheckedContentBrush" Color="#FFFFFF" />
+    <SolidColorBrush x:Key="ZenSwitchUncheckedContentBrush" Color="#FFFFFF" />
+
     <!-- 滚动条 -->
     <SolidColorBrush x:Key="ZenScrollBarTrackBrush" Color="#EEF1F5" />
     <SolidColorBrush x:Key="ZenScrollBarThumbBrush" Color="#AAB2C0" />

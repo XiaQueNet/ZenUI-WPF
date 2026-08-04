@@ -201,6 +201,8 @@ namespace ZenUI.Wpf.Gallery.Controls
                 ["ZenSlider.ThumbHoverBrush"] = "0.1.0-preview.4",
                 ["ZenSlider.TrackThickness"] = "0.1.0-preview.3",
                 ["ZenSwitch.CapsuleCornerRadius"] = "0.1.0-preview.4",
+                ["ZenSwitch.CheckedContent"] = "待发布",
+                ["ZenSwitch.UncheckedContent"] = "待发布",
                 ["ZenTextBox.LeadingContent"] = "0.1.0-preview.2",
                 ["ZenTextBox.LeadingContentTemplate"] = "0.1.0-preview.2",
                 ["ZenTextBox.TrailingContent"] = "0.1.0-preview.2",

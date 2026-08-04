@@ -19,7 +19,60 @@ namespace ZenUI.Wpf.Controls
             DefaultStyleKeyProperty.OverrideMetadata(
                 SelfType,
                 new FrameworkPropertyMetadata(SelfType));
+            HeightProperty.OverrideMetadata(
+                SelfType,
+                new FrameworkPropertyMetadata(
+                    double.NaN,
+                    OnHeightChanged));
+            MinWidthProperty.OverrideMetadata(
+                SelfType,
+                new FrameworkPropertyMetadata(
+                    0d,
+                    FrameworkPropertyMetadataOptions.None,
+                    null,
+                    (dependencyObject, baseValue) =>
+                        CoerceMinWidth(
+                            dependencyObject,
+                            (double)baseValue)));
         }
+
+        /// <summary>
+        /// 获取或设置开关处于选中状态时显示的内容。
+        /// </summary>
+        public object CheckedContent
+        {
+            get { return GetValue(CheckedContentProperty); }
+            set { SetValue(CheckedContentProperty, value); }
+        }
+
+        /// <summary>
+        /// 标识 <see cref="CheckedContent" /> 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty CheckedContentProperty =
+            DependencyProperty.Register(
+                nameof(CheckedContent),
+                typeof(object),
+                SelfType,
+                new FrameworkPropertyMetadata(null));
+
+        /// <summary>
+        /// 获取或设置开关处于未选中状态时显示的内容。
+        /// </summary>
+        public object UncheckedContent
+        {
+            get { return GetValue(UncheckedContentProperty); }
+            set { SetValue(UncheckedContentProperty, value); }
+        }
+
+        /// <summary>
+        /// 标识 <see cref="UncheckedContent" /> 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty UncheckedContentProperty =
+            DependencyProperty.Register(
+                nameof(UncheckedContent),
+                typeof(object),
+                SelfType,
+                new FrameworkPropertyMetadata(null));
 
         /// <summary>
         /// 获取或设置由开关状态提供的默认轨道背景画刷。
@@ -80,6 +133,24 @@ namespace ZenUI.Wpf.Controls
         protected override AutomationPeer OnCreateAutomationPeer()
         {
             return new ZenSwitchAutomationPeer(this);
+        }
+
+        private static void OnHeightChanged(
+            DependencyObject dependencyObject,
+            DependencyPropertyChangedEventArgs eventArgs)
+        {
+            dependencyObject.CoerceValue(MinWidthProperty);
+        }
+
+        private static double CoerceMinWidth(
+            DependencyObject dependencyObject,
+            double baseValue)
+        {
+            var @switch = (ZenSwitch)dependencyObject;
+
+            return double.IsNaN(@switch.Height)
+                ? baseValue
+                : Math.Max(baseValue, @switch.Height * 2d);
         }
 
         private sealed class ZenSwitchAutomationPeer : ToggleButtonAutomationPeer

@@ -42,21 +42,41 @@
                         Background="{TemplateBinding Background}"
                         CornerRadius="{TemplateBinding CapsuleCornerRadius}"
                         SnapsToDevicePixels="True">
-                        <Grid
-                            x:Name="ThumbHost"
-                            Width="{Binding ActualHeight, RelativeSource={RelativeSource TemplatedParent}}"
-                            HorizontalAlignment="Left">
-                            <Ellipse
-                                Margin="{DynamicResource ZenSwitchThumbMargin}"
-                                Fill="{TemplateBinding Foreground}"
-                                Stroke="{TemplateBinding BorderBrush}"
-                                StrokeThickness="1" />
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="{Binding ActualHeight, RelativeSource={RelativeSource TemplatedParent}}" />
+                                <ColumnDefinition Width="*" />
+                                <ColumnDefinition Width="{Binding ActualHeight, RelativeSource={RelativeSource TemplatedParent}}" />
+                            </Grid.ColumnDefinitions>
+                            <ContentPresenter
+                                x:Name="StateContent"
+                                Grid.Column="1"
+                                Grid.ColumnSpan="2"
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Content="{TemplateBinding UncheckedContent}"
+                                TextElement.FontSize="{TemplateBinding FontSize}"
+                                TextElement.Foreground="{DynamicResource ZenSwitchUncheckedContentBrush}" />
+                            <Grid
+                                x:Name="ThumbHost"
+                                Grid.Column="0"
+                                Width="{Binding ActualHeight, RelativeSource={RelativeSource TemplatedParent}}"
+                                HorizontalAlignment="Center">
+                                <Ellipse
+                                    Margin="{DynamicResource ZenSwitchThumbMargin}"
+                                    Fill="{TemplateBinding Foreground}"
+                                    Stroke="{TemplateBinding BorderBrush}"
+                                    StrokeThickness="1" />
+                            </Grid>
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsChecked" Value="True">
                             <Setter Property="ThemeBackground" Value="{DynamicResource ZenPrimaryBrush}" />
-                            <Setter TargetName="ThumbHost" Property="HorizontalAlignment" Value="Right" />
+                            <Setter TargetName="ThumbHost" Property="Grid.Column" Value="2" />
+                            <Setter TargetName="StateContent" Property="Grid.Column" Value="0" />
+                            <Setter TargetName="StateContent" Property="Content" Value="{Binding CheckedContent, RelativeSource={RelativeSource TemplatedParent}}" />
+                            <Setter TargetName="StateContent" Property="TextElement.Foreground" Value="{DynamicResource ZenSwitchCheckedContentBrush}" />
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="Track" Property="Opacity" Value="0.9" />

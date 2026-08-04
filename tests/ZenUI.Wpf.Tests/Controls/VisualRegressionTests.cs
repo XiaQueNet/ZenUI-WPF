@@ -197,7 +197,22 @@ namespace ZenUI.Wpf.Tests.Controls
             var actions = new StackPanel { Orientation = Orientation.Horizontal };
             actions.Children.Add(new ZenButton { Content = "主要操作", Margin = new Thickness(0, 0, 10, 0) });
             actions.Children.Add(new ZenButton { Content = "禁用", IsEnabled = false });
-            actions.Children.Add(new ZenSwitch { Margin = new Thickness(16, 0, 0, 0), IsChecked = true });
+            actions.Children.Add(new ZenSwitch
+            {
+                CheckedContent = "开",
+                IsChecked = true,
+                Margin = new Thickness(16, 0, 0, 0),
+                UncheckedContent = "关"
+            });
+            actions.Children.Add(new ZenSwitch
+            {
+                CheckedContent = "已开启",
+                Height = 40,
+                IsChecked = true,
+                Margin = new Thickness(10, 0, 0, 0),
+                UncheckedContent = "已关闭",
+                Width = 120
+            });
             panel.Children.Add(actions);
             panel.Children.Add(new ZenTextBox
             {
