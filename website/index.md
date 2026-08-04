@@ -14,7 +14,7 @@ layout: landing
         <a class="zenui-button zenui-button-secondary" href="https://github.com/XiaQueNet/ZenUI-WPF">查看 GitHub</a>
       </div>
       <div class="zenui-platforms" aria-label="支持信息">
-        <span>.NET Framework 4.7.2</span>
+        <span>.NET Framework 4.6.2+</span>
         <span>.NET 8</span>
         <span>MIT License</span>
       </div>
@@ -56,7 +56,7 @@ layout: landing
       <article>
         <span class="zenui-card-index">03</span>
         <h3>面向真实项目</h3>
-        <p>同时支持 .NET Framework 4.7.2 与现代 .NET，便于现有桌面应用渐进升级。</p>
+        <p>同时支持 .NET Framework 4.6.2 及以上版本与现代 .NET，便于现有桌面应用渐进升级。</p>
       </article>
     </div>
   </section>

@@ -123,7 +123,9 @@ namespace ZenUI.Wpf.Tests.Controls
                 AutomationControlType.ProgressBar,
                 loading.ExposedAutomationPeer.GetAutomationControlType());
             Assert.AreEqual("正在读取数据", loading.ExposedAutomationPeer.GetName());
+#if ZENUI_LIVE_REGIONS
             Assert.AreEqual(AutomationLiveSetting.Polite, AutomationProperties.GetLiveSetting(loading));
+#endif
         }
 
         [TestMethod]

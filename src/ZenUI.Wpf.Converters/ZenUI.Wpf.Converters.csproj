@@ -1,6 +1,6 @@
 <Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <TargetFrameworks>net472;net8.0-windows</TargetFrameworks>
+    <TargetFrameworks>net462;net471;net472;net8.0-windows</TargetFrameworks>
     <UseWPF>true</UseWPF>
 
     <RootNamespace>ZenUI.Wpf.Converters</RootNamespace>
@@ -17,8 +17,8 @@
     <PackageId>ZenUI.Wpf.Converters</PackageId>
     <Title>ZenUI WPF Converters</Title>
     <Authors>XiaQueNet</Authors>
-    <Description>Reusable value converters for .NET Framework 4.7.2 and modern .NET WPF applications.</Description>
-    <PackageTags>wpf;converters;binding;ui;net472;net8;windows</PackageTags>
+    <Description>Reusable value converters for .NET Framework 4.6.2 and modern .NET WPF applications.</Description>
+    <PackageTags>wpf;converters;binding;ui;net462;net471;net472;net8;windows</PackageTags>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageIcon>zenui-icon.png</PackageIcon>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>

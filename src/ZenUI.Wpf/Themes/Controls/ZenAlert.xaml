@@ -8,7 +8,6 @@
         TargetType="{x:Type zen:ZenAlert}">
         <Setter Property="FontSize" Value="{DynamicResource ZenFontSizeBody}" />
         <Setter Property="Padding" Value="{DynamicResource ZenAlertPadding}" />
-        <Setter Property="AutomationProperties.LiveSetting" Value="Polite" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="Foreground" Value="{DynamicResource ZenTextPrimaryBrush}" />
         <Setter Property="IconForeground" Value="{DynamicResource ZenOnAccentBrush}" />

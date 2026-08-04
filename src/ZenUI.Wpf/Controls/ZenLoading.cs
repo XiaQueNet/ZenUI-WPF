@@ -19,9 +19,11 @@ namespace ZenUI.Wpf.Controls
             DefaultStyleKeyProperty.OverrideMetadata(
                 SelfType,
                 new FrameworkPropertyMetadata(SelfType));
+#if ZENUI_LIVE_REGIONS
             AutomationProperties.LiveSettingProperty.OverrideMetadata(
                 SelfType,
                 new FrameworkPropertyMetadata(AutomationLiveSetting.Polite));
+#endif
         }
 
         /// <summary>
@@ -179,8 +181,10 @@ namespace ZenUI.Wpf.Controls
             DependencyPropertyChangedEventArgs e)
         {
             var loading = (ZenLoading)dependencyObject;
+#if ZENUI_LIVE_REGIONS
             var peer = UIElementAutomationPeer.FromElement(loading);
             peer?.RaiseAutomationEvent(AutomationEvents.LiveRegionChanged);
+#endif
         }
 
         private sealed class ZenLoadingAutomationPeer : FrameworkElementAutomationPeer

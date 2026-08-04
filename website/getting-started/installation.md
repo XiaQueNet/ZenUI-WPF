@@ -29,7 +29,7 @@ ZenUI 提供两个互不依赖的 NuGet 包。只需要控件时安装 `ZenUI.Wp
 
 ## 支持的目标框架
 
-- .NET Framework 4.7.2
+- .NET Framework 4.6.2 及以上版本
 - .NET 8 for Windows
 
 WPF 项目需要启用 `UseWPF`：

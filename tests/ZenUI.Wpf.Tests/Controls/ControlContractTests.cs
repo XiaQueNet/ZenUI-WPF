@@ -719,7 +719,9 @@ namespace ZenUI.Wpf.Tests.Controls
             var alertPeer = alert.ExposedAutomationPeer;
             Assert.AreEqual(AutomationControlType.Text, alertPeer.GetAutomationControlType());
             Assert.AreEqual("保存成功", alertPeer.GetName());
+#if ZENUI_LIVE_REGIONS
             Assert.AreEqual(AutomationLiveSetting.Polite, AutomationProperties.GetLiveSetting(alert));
+#endif
 
             var passwordBox = new TestZenPasswordBox();
             Assert.IsTrue(passwordBox.ExposedAutomationPeer.IsPassword());

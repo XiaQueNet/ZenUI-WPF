@@ -19,9 +19,11 @@ namespace ZenUI.Wpf.Controls
             DefaultStyleKeyProperty.OverrideMetadata(
                 SelfType,
                 new FrameworkPropertyMetadata(SelfType));
+#if ZENUI_LIVE_REGIONS
             AutomationProperties.LiveSettingProperty.OverrideMetadata(
                 SelfType,
                 new FrameworkPropertyMetadata(AutomationLiveSetting.Polite));
+#endif
         }
 
         /// <summary>
