@@ -6,6 +6,7 @@
     <ApplicationIcon>..\..\assets\brand\zenui-icon.ico</ApplicationIcon>
     <RootNamespace>ZenUI.Wpf.Gallery</RootNamespace>
     <AssemblyName>ZenUI.Wpf.Gallery</AssemblyName>
+    <StartupObject>ZenUI.Wpf.Gallery.Program</StartupObject>
     <LangVersion>8.0</LangVersion>
     <GenerateAssemblyInfo>false</GenerateAssemblyInfo>
     <AutoGenerateBindingRedirects>true</AutoGenerateBindingRedirects>
@@ -13,7 +14,14 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="Prism.DryIoc" Version="9.0.537" />
+    <PackageReference Include="NLog" Version="6.1.4" />
+    <PackageReference Include="Prism.DryIoc" Version="8.1.97" />
     <ProjectReference Include="..\..\src\ZenUI.Wpf\ZenUI.Wpf.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Update="NLog.config">
+      <CopyToOutputDirectory>PreserveNewest</CopyToOutputDirectory>
+    </None>
   </ItemGroup>
 </Project>

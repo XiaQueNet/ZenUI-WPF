@@ -2,7 +2,7 @@ using System.Collections.Generic;
 using System.Windows;
 
 using Prism.Mvvm;
-using Prism.Navigation.Regions;
+using Prism.Regions;
 
 using ZenUI.Wpf.Gallery.Navigation;
 using ZenUI.Wpf.Theming;
