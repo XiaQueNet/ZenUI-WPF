@@ -1,6 +1,7 @@
 using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Controls.Primitives;
@@ -162,6 +163,82 @@ namespace ZenUI.Wpf.Tests.Controls
                         window.Close();
                     }
                 }
+            }
+        }
+
+        [TestMethod]
+        public void DateTimePickerPopupProducesReviewableCellDrivenSnapshot()
+        {
+            var framework = Environment.Version.Major >= 8 ? "net8" : "net472";
+            var outputDirectory = Path.Combine(
+                AppContext.BaseDirectory,
+                "visual-regression",
+                framework,
+                "date-time-picker");
+            Directory.CreateDirectory(outputDirectory);
+
+            var picker = new ZenDateTimePicker
+            {
+                SelectedDateTime = new DateTime(2026, 8, 5, 14, 36, 28)
+            };
+            var window = new Window
+            {
+                ShowInTaskbar = false,
+                WindowStyle = WindowStyle.None,
+                ResizeMode = ResizeMode.NoResize,
+                Width = 360,
+                Height = 460,
+                Content = picker
+            };
+            window.Resources.MergedDictionaries.Add(new ResourceDictionary
+            {
+                Source = new Uri(
+                    "/ZenUI.Wpf;component/Themes/Generic.xaml",
+                    UriKind.Relative)
+            });
+
+            try
+            {
+                window.Show();
+                picker.IsDropDownOpen = true;
+                window.Dispatcher.Invoke(DispatcherPriority.ContextIdle, new Action(() => { }));
+                window.UpdateLayout();
+
+                var popup = picker.Template.FindName("PART_Popup", picker) as Popup;
+                Assert.IsNotNull(popup);
+                var popupContent = popup.Child as FrameworkElement;
+                Assert.IsNotNull(popupContent);
+                var calendar = picker.Template.FindName("PART_Calendar", picker) as Calendar;
+                Assert.IsNotNull(calendar);
+                calendar.ApplyTemplate();
+                var calendarItem =
+                    calendar.Template.FindName("PART_CalendarItem", calendar) as CalendarItem;
+                Assert.IsNotNull(calendarItem);
+                calendarItem.ApplyTemplate();
+                window.Dispatcher.Invoke(DispatcherPriority.ContextIdle, new Action(() => { }));
+                window.UpdateLayout();
+
+                var monthView =
+                    calendarItem.Template.FindName("PART_MonthView", calendarItem) as Grid;
+                Assert.IsNotNull(monthView);
+                var dayButton = FindCalendarDayButton(monthView, calendar.CalendarDayButtonStyle);
+                Assert.IsNotNull(dayButton);
+                var weekday = monthView.Children
+                    .OfType<FrameworkElement>()
+                    .First(element => Grid.GetRow(element) == 0);
+                Assert.AreEqual(weekday.ActualHeight, dayButton.ActualHeight, 1d);
+
+                var bitmap = RenderRealizedElement(popupContent, 1.25d);
+                Assert.IsGreaterThan(12, CountDistinctSampledColors(bitmap));
+                SavePng(
+                    bitmap,
+                    Path.Combine(outputDirectory, "Light-Standard-1.25x.png"));
+            }
+            finally
+            {
+                picker.IsDropDownOpen = false;
+                window.Dispatcher.Invoke(DispatcherPriority.ContextIdle, new Action(() => { }));
+                window.Close();
             }
         }
 

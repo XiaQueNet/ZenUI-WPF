@@ -30,7 +30,7 @@
                         </StackPanel>
                         <StackPanel Style="{StaticResource GalleryWrapFieldStyle}">
                             <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="仅弹层选择" />
-                            <zen:ZenTimePicker IsTextInputEnabled="False" Watermark="请从列表选择" />
+                            <zen:ZenTimePicker IsTextInputReadOnly="True" Watermark="请从列表选择" />
                         </StackPanel>
                         <StackPanel Style="{StaticResource GalleryWrapFieldStyle}">
                             <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="禁用" />

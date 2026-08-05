@@ -4,6 +4,12 @@
 
 ## Unreleased
 
+### Changed
+
+- `ZenDateTimePicker` 使用 `DropDownWidth`、`DropDownHeight`、`SelectionCellWidth` 和 `SelectionCellHeight` 统一弹层整体尺寸与选择单元尺寸；默认由 Cell 驱动，也可将 Cell 设为 `Auto` 后由弹层尺寸自动均分。
+- Calendar 的头部、星期栏与日期网格改为稳定比例布局，星期单元与日期单元保持相同尺寸。
+- `ZenDatePicker`、`ZenTimePicker` 和 `ZenDateTimePicker` 将文本输入开关更名为 `IsTextInputReadOnly`；默认值为 `false`，设为 `true` 时禁止键盘输入但仍允许通过弹层选择。
+
 ## [0.1.0-preview.8] - 2026-08-04
 
 ### Added

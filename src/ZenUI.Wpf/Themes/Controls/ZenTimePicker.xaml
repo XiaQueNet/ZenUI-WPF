@@ -131,7 +131,7 @@
                         <ListBox
                             x:Name="PART_PeriodList"
                             Width="{Binding PeriodColumnWidth, RelativeSource={RelativeSource TemplatedParent}}"
-                            AutomationProperties.Name="上午或下午"
+                            AutomationProperties.Name="AM 或 PM"
                             Style="{StaticResource ZenTimePickerListStyle}" />
                     </StackPanel>
                     <ControlTemplate.Triggers>
@@ -289,7 +289,7 @@
                         <Trigger Property="IsDropDownOpen" Value="True">
                             <Setter TargetName="InputBorder" Property="BorderBrush" Value="{DynamicResource ZenPrimaryBrush}" />
                         </Trigger>
-                        <Trigger Property="IsTextInputEnabled" Value="False">
+                        <Trigger Property="IsTextInputReadOnly" Value="True">
                             <Setter TargetName="PART_TextBox" Property="IsReadOnly" Value="True" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">

@@ -67,7 +67,7 @@ namespace ZenUI.Wpf.Controls
             object sender,
             MouseButtonEventArgs e)
         {
-            if (IsTextInputEnabled || !IsEnabled || IsDropDownOpen)
+            if (!IsTextInputReadOnly || !IsEnabled || IsDropDownOpen)
             {
                 return;
             }
@@ -222,24 +222,24 @@ namespace ZenUI.Wpf.Controls
                 new FrameworkPropertyMetadata(string.Empty));
 
         /// <summary>
-        /// 获取或设置一个值，该值指示是否允许通过键盘直接输入日期。禁用后，点击只读输入区域会打开日期选择弹层。
+        /// 获取或设置一个值，该值指示日期文本输入是否只读。只读时，点击输入区域会打开日期选择弹层。
         /// </summary>
         [Bindable(true)]
-        public bool IsTextInputEnabled
+        public bool IsTextInputReadOnly
         {
-            get { return (bool)GetValue(IsTextInputEnabledProperty); }
-            set { SetValue(IsTextInputEnabledProperty, value); }
+            get { return (bool)GetValue(IsTextInputReadOnlyProperty); }
+            set { SetValue(IsTextInputReadOnlyProperty, value); }
         }
 
         /// <summary>
-        /// 标识 <see cref="IsTextInputEnabled"/> 依赖属性。
+        /// 标识 <see cref="IsTextInputReadOnly"/> 依赖属性。
         /// </summary>
-        public static readonly DependencyProperty IsTextInputEnabledProperty =
+        public static readonly DependencyProperty IsTextInputReadOnlyProperty =
             DependencyProperty.Register(
-                nameof(IsTextInputEnabled),
+                nameof(IsTextInputReadOnly),
                 typeof(bool),
                 typeof(ZenDatePicker),
-                new FrameworkPropertyMetadata(true));
+                new FrameworkPropertyMetadata(false));
 
         /// <summary>
         /// 获取或设置输入框的圆角。

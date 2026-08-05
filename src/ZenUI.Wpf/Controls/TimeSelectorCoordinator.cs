@@ -144,10 +144,10 @@ namespace ZenUI.Wpf.Controls
                     {
                         new TimeSelectorOption(
                             0,
-                            CultureInfo.CurrentCulture.DateTimeFormat.AMDesignator),
+                            "AM"),
                         new TimeSelectorOption(
                             1,
-                            CultureInfo.CurrentCulture.DateTimeFormat.PMDesignator)
+                            "PM")
                     };
                 }
             }

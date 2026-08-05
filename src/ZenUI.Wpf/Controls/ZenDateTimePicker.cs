@@ -27,6 +27,9 @@ namespace ZenUI.Wpf.Controls
     {
         internal const string PartTextBox = "PART_TextBox";
         internal const string PartPopup = "PART_Popup";
+        internal const string PartDropDownBorder = "PART_DropDownBorder";
+        internal const string PartSelectionPanel = "PART_SelectionPanel";
+        internal const string PartTimePanel = "PART_TimePanel";
         internal const string PartCalendar = "PART_Calendar";
         internal const string PartTimeSelector = "PART_TimeSelector";
         internal const string PartNowButton = "PART_NowButton";
@@ -37,6 +40,9 @@ namespace ZenUI.Wpf.Controls
             new List<CalendarDateRange>();
         private TextBox textBox;
         private Popup popup;
+        private Border dropDownBorder;
+        private Grid selectionPanel;
+        private Border timePanel;
         private Calendar calendar;
         private ZenTimeSelector timeSelector;
         private Button nowButton;
@@ -270,24 +276,24 @@ namespace ZenUI.Wpf.Controls
                 new FrameworkPropertyMetadata(string.Empty, HandleDisplayOptionsChanged));
 
         /// <summary>
-        /// 获取或设置一个值，该值指示是否允许通过键盘直接输入日期时间。禁用后，点击只读输入区域会打开日期时间选择弹层。
+        /// 获取或设置一个值，该值指示日期时间文本输入是否只读。只读时，点击输入区域会打开日期时间选择弹层。
         /// </summary>
         [Bindable(true)]
-        public bool IsTextInputEnabled
+        public bool IsTextInputReadOnly
         {
-            get { return (bool)GetValue(IsTextInputEnabledProperty); }
-            set { SetValue(IsTextInputEnabledProperty, value); }
+            get { return (bool)GetValue(IsTextInputReadOnlyProperty); }
+            set { SetValue(IsTextInputReadOnlyProperty, value); }
         }
 
         /// <summary>
-        /// 标识 <see cref="IsTextInputEnabled"/> 依赖属性。
+        /// 标识 <see cref="IsTextInputReadOnly"/> 依赖属性。
         /// </summary>
-        public static readonly DependencyProperty IsTextInputEnabledProperty =
+        public static readonly DependencyProperty IsTextInputReadOnlyProperty =
             DependencyProperty.Register(
-                nameof(IsTextInputEnabled),
+                nameof(IsTextInputReadOnly),
                 typeof(bool),
                 SelfType,
-                new FrameworkPropertyMetadata(true));
+                new FrameworkPropertyMetadata(false));
 
         /// <summary>
         /// 获取或设置输入框的圆角。
@@ -399,67 +405,92 @@ namespace ZenUI.Wpf.Controls
                 IsValidIconSize);
 
         /// <summary>
-        /// 获取或设置弹层中日历区域的宽度。该值必须为大于零的有限值。
+        /// 获取或设置下拉弹层的宽度。<see cref="double.NaN"/> 表示根据选择单元自然测量。
         /// </summary>
         [Bindable(true)]
-        public double CalendarWidth
+        [TypeConverter(typeof(LengthConverter))]
+        public double DropDownWidth
         {
-            get { return (double)GetValue(CalendarWidthProperty); }
-            set { SetValue(CalendarWidthProperty, value); }
+            get { return (double)GetValue(DropDownWidthProperty); }
+            set { SetValue(DropDownWidthProperty, value); }
         }
 
         /// <summary>
-        /// 标识 <see cref="CalendarWidth"/> 依赖属性。
+        /// 标识 <see cref="DropDownWidth"/> 依赖属性。
         /// </summary>
-        public static readonly DependencyProperty CalendarWidthProperty =
+        public static readonly DependencyProperty DropDownWidthProperty =
             DependencyProperty.Register(
-                nameof(CalendarWidth),
+                nameof(DropDownWidth),
                 typeof(double),
                 SelfType,
-                new FrameworkPropertyMetadata(304d),
-                IsValidPositiveDimension);
+                new FrameworkPropertyMetadata(double.NaN, HandleSelectionMetricsChanged),
+                IsValidAutoOrPositiveDimension);
 
         /// <summary>
-        /// 获取或设置弹层中日历和时间选择区域的共同高度。该值必须为大于零的有限值。
+        /// 获取或设置下拉弹层的高度。<see cref="double.NaN"/> 表示根据选择单元自然测量。
         /// </summary>
         [Bindable(true)]
-        public double SelectionHeight
+        [TypeConverter(typeof(LengthConverter))]
+        public double DropDownHeight
         {
-            get { return (double)GetValue(SelectionHeightProperty); }
-            set { SetValue(SelectionHeightProperty, value); }
+            get { return (double)GetValue(DropDownHeightProperty); }
+            set { SetValue(DropDownHeightProperty, value); }
         }
 
         /// <summary>
-        /// 标识 <see cref="SelectionHeight"/> 依赖属性。
+        /// 标识 <see cref="DropDownHeight"/> 依赖属性。
         /// </summary>
-        public static readonly DependencyProperty SelectionHeightProperty =
+        public static readonly DependencyProperty DropDownHeightProperty =
             DependencyProperty.Register(
-                nameof(SelectionHeight),
+                nameof(DropDownHeight),
                 typeof(double),
                 SelfType,
-                new FrameworkPropertyMetadata(304d),
-                IsValidPositiveDimension);
+                new FrameworkPropertyMetadata(double.NaN, HandleSelectionMetricsChanged),
+                IsValidAutoOrPositiveDimension);
 
         /// <summary>
-        /// 获取或设置小时、分钟和秒列表的列宽。该值必须为大于零的有限值。
+        /// 获取或设置日期、星期和时间选择单元的宽度。<see cref="double.NaN"/> 表示根据弹层宽度自动均分。
         /// </summary>
         [Bindable(true)]
-        public double TimeColumnWidth
+        [TypeConverter(typeof(LengthConverter))]
+        public double SelectionCellWidth
         {
-            get { return (double)GetValue(TimeColumnWidthProperty); }
-            set { SetValue(TimeColumnWidthProperty, value); }
+            get { return (double)GetValue(SelectionCellWidthProperty); }
+            set { SetValue(SelectionCellWidthProperty, value); }
         }
 
         /// <summary>
-        /// 标识 <see cref="TimeColumnWidth"/> 依赖属性。
+        /// 标识 <see cref="SelectionCellWidth"/> 依赖属性。
         /// </summary>
-        public static readonly DependencyProperty TimeColumnWidthProperty =
+        public static readonly DependencyProperty SelectionCellWidthProperty =
             DependencyProperty.Register(
-                nameof(TimeColumnWidth),
+                nameof(SelectionCellWidth),
                 typeof(double),
                 SelfType,
-                new FrameworkPropertyMetadata(54d),
-                IsValidPositiveDimension);
+                new FrameworkPropertyMetadata(40d, HandleSelectionMetricsChanged),
+                IsValidAutoOrPositiveDimension);
+
+        /// <summary>
+        /// 获取或设置日期、星期和时间选择单元的高度。<see cref="double.NaN"/> 表示根据弹层高度自动均分。
+        /// </summary>
+        [Bindable(true)]
+        [TypeConverter(typeof(LengthConverter))]
+        public double SelectionCellHeight
+        {
+            get { return (double)GetValue(SelectionCellHeightProperty); }
+            set { SetValue(SelectionCellHeightProperty, value); }
+        }
+
+        /// <summary>
+        /// 标识 <see cref="SelectionCellHeight"/> 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty SelectionCellHeightProperty =
+            DependencyProperty.Register(
+                nameof(SelectionCellHeight),
+                typeof(double),
+                SelfType,
+                new FrameworkPropertyMetadata(36d, HandleSelectionMetricsChanged),
+                IsValidAutoOrPositiveDimension);
 
         /// <inheritdoc />
         public override void OnApplyTemplate()
@@ -469,12 +500,16 @@ namespace ZenUI.Wpf.Controls
 
             textBox = GetTemplateChild(PartTextBox) as TextBox;
             popup = GetTemplateChild(PartPopup) as Popup;
+            dropDownBorder = GetTemplateChild(PartDropDownBorder) as Border;
+            selectionPanel = GetTemplateChild(PartSelectionPanel) as Grid;
+            timePanel = GetTemplateChild(PartTimePanel) as Border;
             calendar = GetTemplateChild(PartCalendar) as Calendar;
             timeSelector = GetTemplateChild(PartTimeSelector) as ZenTimeSelector;
             nowButton = GetTemplateChild(PartNowButton) as Button;
             confirmButton = GetTemplateChild(PartConfirmButton) as Button;
 
             AttachTemplateHandlers();
+            UpdateSelectionLayout();
             ConfigureCalendarRange();
             SynchronizeText();
             if (IsDropDownOpen)
@@ -512,12 +547,11 @@ namespace ZenUI.Wpf.Controls
             return new ZenDateTimePickerAutomationPeer(this);
         }
 
-        private static bool IsValidPositiveDimension(object value)
+        private static bool IsValidAutoOrPositiveDimension(object value)
         {
             var dimension = (double)value;
-            return !double.IsNaN(dimension) &&
-                !double.IsInfinity(dimension) &&
-                dimension > 0d;
+            return double.IsNaN(dimension) ||
+                (!double.IsInfinity(dimension) && dimension > 0d);
         }
 
         private static bool IsValidIconSize(object value)
@@ -597,8 +631,16 @@ namespace ZenUI.Wpf.Controls
         {
             var picker = (ZenDateTimePicker)dependencyObject;
             picker.ConfigureTimeSelector();
+            picker.UpdateSelectionLayout();
             picker.SynchronizeText();
             picker.SynchronizeDraft();
+        }
+
+        private static void HandleSelectionMetricsChanged(
+            DependencyObject dependencyObject,
+            DependencyPropertyChangedEventArgs e)
+        {
+            ((ZenDateTimePicker)dependencyObject).UpdateSelectionLayout();
         }
 
         private static void HandleIsDropDownOpenChanged(
@@ -642,6 +684,11 @@ namespace ZenUI.Wpf.Controls
                 timeSelector.SelectedTimeChanged += HandleTimeSelectorSelectedTimeChanged;
             }
 
+            if (selectionPanel != null)
+            {
+                selectionPanel.SizeChanged += HandleSelectionPanelSizeChanged;
+            }
+
             if (nowButton != null)
             {
                 nowButton.Click += HandleNowButtonClick;
@@ -682,6 +729,11 @@ namespace ZenUI.Wpf.Controls
                 timeSelector.SelectedTimeChanged -= HandleTimeSelectorSelectedTimeChanged;
             }
 
+            if (selectionPanel != null)
+            {
+                selectionPanel.SizeChanged -= HandleSelectionPanelSizeChanged;
+            }
+
             if (nowButton != null)
             {
                 nowButton.Click -= HandleNowButtonClick;
@@ -691,6 +743,100 @@ namespace ZenUI.Wpf.Controls
             {
                 confirmButton.Click -= HandleConfirmButtonClick;
             }
+        }
+
+        private void HandleSelectionPanelSizeChanged(object sender, SizeChangedEventArgs e)
+        {
+            UpdateTimeSelectorMetrics();
+        }
+
+        private void UpdateSelectionLayout()
+        {
+            if (dropDownBorder == null || selectionPanel == null || calendar == null)
+            {
+                return;
+            }
+
+            dropDownBorder.Width = DropDownWidth;
+            dropDownBorder.Height = DropDownHeight;
+
+            var visibleTimeColumnCount = GetVisibleTimeColumnCount();
+            var fixedCellWidth = !double.IsNaN(SelectionCellWidth);
+            var fixedCellHeight = !double.IsNaN(SelectionCellHeight);
+
+            selectionPanel.Width = double.NaN;
+            selectionPanel.Height = double.NaN;
+            selectionPanel.HorizontalAlignment = fixedCellWidth
+                ? HorizontalAlignment.Left
+                : HorizontalAlignment.Stretch;
+            selectionPanel.VerticalAlignment = fixedCellHeight
+                ? VerticalAlignment.Top
+                : VerticalAlignment.Stretch;
+
+            if (selectionPanel.ColumnDefinitions.Count >= 2)
+            {
+                selectionPanel.ColumnDefinitions[0].Width = fixedCellWidth
+                    ? GridLength.Auto
+                    : new GridLength(7d, GridUnitType.Star);
+                selectionPanel.ColumnDefinitions[1].Width = fixedCellWidth
+                    ? GridLength.Auto
+                    : new GridLength(visibleTimeColumnCount, GridUnitType.Star);
+            }
+
+            calendar.Width = fixedCellWidth
+                ? 7d * SelectionCellWidth
+                : double.NaN;
+            calendar.Height = fixedCellHeight
+                ? 8.25d * SelectionCellHeight
+                : double.NaN;
+
+            UpdateTimeSelectorMetrics();
+        }
+
+        private void UpdateTimeSelectorMetrics()
+        {
+            if (calendar == null || timeSelector == null || selectionPanel == null)
+            {
+                return;
+            }
+
+            var visibleTimeColumnCount = GetVisibleTimeColumnCount();
+            var cellWidth = SelectionCellWidth;
+            if (double.IsNaN(cellWidth))
+            {
+                cellWidth = calendar.ActualWidth > 0d
+                    ? calendar.ActualWidth / 7d
+                    : 1d;
+            }
+
+            var cellHeight = SelectionCellHeight;
+            if (double.IsNaN(cellHeight))
+            {
+                cellHeight = calendar.ActualHeight > 0d
+                    ? calendar.ActualHeight / 8.25d
+                    : 1d;
+            }
+
+            if (timePanel != null && double.IsNaN(SelectionCellWidth))
+            {
+                var horizontalChrome = timePanel.BorderThickness.Left +
+                    timePanel.BorderThickness.Right +
+                    timePanel.Padding.Left +
+                    timePanel.Padding.Right;
+                cellWidth = Math.Max(
+                    1d,
+                    (timePanel.ActualWidth - horizontalChrome) /
+                    visibleTimeColumnCount);
+            }
+
+            timeSelector.SetCurrentValue(ZenTimeSelector.ColumnWidthProperty, cellWidth);
+            timeSelector.SetCurrentValue(ZenTimeSelector.PeriodColumnWidthProperty, cellWidth);
+            timeSelector.SetCurrentValue(ZenTimeSelector.ItemHeightProperty, cellHeight);
+        }
+
+        private int GetVisibleTimeColumnCount()
+        {
+            return 2 + (IsSecondVisible ? 1 : 0) + (Is24Hour ? 0 : 1);
         }
 
         private void BeginDraft()
@@ -895,7 +1041,7 @@ namespace ZenUI.Wpf.Controls
 
         private void CommitText()
         {
-            if (textBox == null || !IsTextInputEnabled)
+            if (textBox == null || IsTextInputReadOnly)
             {
                 return;
             }
@@ -984,7 +1130,7 @@ namespace ZenUI.Wpf.Controls
             object sender,
             MouseButtonEventArgs e)
         {
-            if (IsTextInputEnabled || !IsEnabled || IsDropDownOpen)
+            if (!IsTextInputReadOnly || !IsEnabled || IsDropDownOpen)
             {
                 return;
             }
@@ -1052,7 +1198,7 @@ namespace ZenUI.Wpf.Controls
         private ZenDateTimePicker DateTimePicker => (ZenDateTimePicker)Owner;
 
         public bool IsReadOnly =>
-            !DateTimePicker.IsEnabled || !DateTimePicker.IsTextInputEnabled;
+            !DateTimePicker.IsEnabled || DateTimePicker.IsTextInputReadOnly;
 
         public string Value => DateTimePicker.SelectedDateTime.HasValue
             ? DateTimePicker.SelectedDateTime.Value.ToString("g", CultureInfo.CurrentCulture)

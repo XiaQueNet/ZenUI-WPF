@@ -189,7 +189,7 @@ namespace ZenUI.Wpf.Controls
                 new FrameworkPropertyMetadata(true, HandleDisplayOptionsChanged));
 
         /// <summary>
-        /// 获取或设置是否使用 24 小时制。设置为 <see langword="false"/> 时显示上午/下午选择。
+        /// 获取或设置是否使用 24 小时制。设置为 <see langword="false"/> 时显示 AM/PM 选择。
         /// </summary>
         [Bindable(true)]
         public bool Is24Hour
@@ -229,24 +229,24 @@ namespace ZenUI.Wpf.Controls
                 new FrameworkPropertyMetadata(string.Empty));
 
         /// <summary>
-        /// 获取或设置一个值，该值指示是否允许通过键盘直接输入时间。禁用后，点击只读输入区域会打开时间选择弹层。
+        /// 获取或设置一个值，该值指示时间文本输入是否只读。只读时，点击输入区域会打开时间选择弹层。
         /// </summary>
         [Bindable(true)]
-        public bool IsTextInputEnabled
+        public bool IsTextInputReadOnly
         {
-            get { return (bool)GetValue(IsTextInputEnabledProperty); }
-            set { SetValue(IsTextInputEnabledProperty, value); }
+            get { return (bool)GetValue(IsTextInputReadOnlyProperty); }
+            set { SetValue(IsTextInputReadOnlyProperty, value); }
         }
 
         /// <summary>
-        /// 标识 <see cref="IsTextInputEnabled"/> 依赖属性。
+        /// 标识 <see cref="IsTextInputReadOnly"/> 依赖属性。
         /// </summary>
-        public static readonly DependencyProperty IsTextInputEnabledProperty =
+        public static readonly DependencyProperty IsTextInputReadOnlyProperty =
             DependencyProperty.Register(
-                nameof(IsTextInputEnabled),
+                nameof(IsTextInputReadOnly),
                 typeof(bool),
                 SelfType,
-                new FrameworkPropertyMetadata(true));
+                new FrameworkPropertyMetadata(false));
 
         /// <summary>
         /// 获取或设置输入框的圆角。
@@ -572,7 +572,7 @@ namespace ZenUI.Wpf.Controls
             object sender,
             MouseButtonEventArgs e)
         {
-            if (IsTextInputEnabled || !IsEnabled || IsDropDownOpen)
+            if (!IsTextInputReadOnly || !IsEnabled || IsDropDownOpen)
             {
                 return;
             }
@@ -593,7 +593,7 @@ namespace ZenUI.Wpf.Controls
 
         private void CommitText()
         {
-            if (textBox == null || !IsTextInputEnabled)
+            if (textBox == null || IsTextInputReadOnly)
             {
                 return;
             }

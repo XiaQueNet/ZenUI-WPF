@@ -417,7 +417,7 @@ namespace ZenUI.Wpf.Tests.Controls
         {
             var datePicker = new ZenDatePicker
             {
-                IsTextInputEnabled = false
+                IsTextInputReadOnly = true
             };
             var window = CreateTestWindow(datePicker, 260, 120);
 
@@ -446,7 +446,7 @@ namespace ZenUI.Wpf.Tests.Controls
                 Assert.IsTrue(datePicker.IsDropDownOpen);
 
                 datePicker.IsDropDownOpen = false;
-                datePicker.IsTextInputEnabled = true;
+                datePicker.IsTextInputReadOnly = false;
                 Assert.IsFalse(textBox.IsReadOnly);
                 textBox.RaiseEvent(new MouseButtonEventArgs(
                     Mouse.PrimaryDevice,

@@ -31,13 +31,14 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.AreEqual(1, picker.SecondIncrement);
             Assert.IsTrue(picker.IsSecondVisible);
             Assert.IsTrue(picker.Is24Hour);
-            Assert.IsTrue(picker.IsTextInputEnabled);
+            Assert.IsFalse(picker.IsTextInputReadOnly);
             Assert.IsFalse(picker.IsDropDownOpen);
             Assert.AreEqual(new CornerRadius(6), picker.CornerRadius);
             Assert.AreEqual(16d, picker.IconSize);
-            Assert.AreEqual(304d, picker.CalendarWidth);
-            Assert.AreEqual(304d, picker.SelectionHeight);
-            Assert.AreEqual(54d, picker.TimeColumnWidth);
+            Assert.IsTrue(double.IsNaN(picker.DropDownWidth));
+            Assert.IsTrue(double.IsNaN(picker.DropDownHeight));
+            Assert.AreEqual(40d, picker.SelectionCellWidth);
+            Assert.AreEqual(36d, picker.SelectionCellHeight);
             Assert.AreEqual(
                 CultureInfo.CurrentCulture.DateTimeFormat.FirstDayOfWeek,
                 picker.FirstDayOfWeek);
@@ -80,7 +81,7 @@ namespace ZenUI.Wpf.Tests.Controls
         public void SharedTextBoxStyleDoesNotDependOnTimePickerAncestor()
         {
             var picker = CreateTemplatedPicker();
-            picker.IsTextInputEnabled = false;
+            picker.IsTextInputReadOnly = true;
             var window = new Window
             {
                 ShowInTaskbar = false,
@@ -105,7 +106,7 @@ namespace ZenUI.Wpf.Tests.Controls
                 Assert.IsTrue(picker.IsDropDownOpen);
 
                 picker.IsDropDownOpen = false;
-                picker.IsTextInputEnabled = true;
+                picker.IsTextInputReadOnly = false;
                 textBox.RaiseEvent(new MouseButtonEventArgs(
                     Mouse.PrimaryDevice,
                     Environment.TickCount,
@@ -142,9 +143,10 @@ namespace ZenUI.Wpf.Tests.Controls
             var picker = CreateTemplatedPicker();
             picker.Padding = new Thickness(12, 8, 12, 8);
             picker.IconSize = 24d;
-            picker.CalendarWidth = 380d;
-            picker.SelectionHeight = 390d;
-            picker.TimeColumnWidth = 70d;
+            picker.DropDownWidth = 520d;
+            picker.DropDownHeight = 400d;
+            picker.SelectionCellWidth = 70d;
+            picker.SelectionCellHeight = 44d;
 
             var calendar = GetPart<Calendar>(picker, "PART_Calendar");
             var selector = GetPart<ZenTimeSelector>(picker, "PART_TimeSelector");
@@ -154,11 +156,13 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.AreEqual(new Thickness(12, 8, 12, 8), textBox.Padding);
             Assert.AreEqual(24d, icon.Width);
             Assert.AreEqual(24d, icon.Height);
-            Assert.AreEqual(380d, calendar.Width);
-            Assert.AreEqual(390d, calendar.Height);
+            Assert.AreEqual(520d, GetPart<Border>(picker, "PART_DropDownBorder").Width);
+            Assert.AreEqual(400d, GetPart<Border>(picker, "PART_DropDownBorder").Height);
+            Assert.AreEqual(490d, calendar.Width);
+            Assert.AreEqual(363d, calendar.Height);
             Assert.AreEqual(70d, selector.ColumnWidth);
             Assert.AreEqual(70d, selector.PeriodColumnWidth);
-            Assert.AreEqual(390d, selector.ListHeight);
+            Assert.AreEqual(44d, selector.ItemHeight);
         }
 
         [TestMethod]
@@ -170,6 +174,44 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.ThrowsExactly<ArgumentException>(() => picker.IconSize = double.NaN);
             Assert.ThrowsExactly<ArgumentException>(
                 () => picker.IconSize = double.PositiveInfinity);
+        }
+
+        [TestMethod]
+        public void AutoSelectionCellsLetDropDownBoundsDriveLayout()
+        {
+            var picker = CreateTemplatedPicker();
+            picker.SelectionCellWidth = double.NaN;
+            picker.SelectionCellHeight = double.NaN;
+            picker.DropDownWidth = 520d;
+            picker.DropDownHeight = 400d;
+
+            var calendar = GetPart<Calendar>(picker, "PART_Calendar");
+            var panel = GetPart<Grid>(picker, "PART_SelectionPanel");
+            var border = GetPart<Border>(picker, "PART_DropDownBorder");
+
+            Assert.AreEqual(520d, border.Width);
+            Assert.AreEqual(400d, border.Height);
+            Assert.IsTrue(double.IsNaN(calendar.Width));
+            Assert.IsTrue(double.IsNaN(calendar.Height));
+            Assert.AreEqual(HorizontalAlignment.Stretch, panel.HorizontalAlignment);
+            Assert.AreEqual(VerticalAlignment.Stretch, panel.VerticalAlignment);
+        }
+
+        [TestMethod]
+        public void SelectionMetricsRejectInvalidValues()
+        {
+            var picker = new ZenDateTimePicker();
+
+            Assert.ThrowsExactly<ArgumentException>(() => picker.DropDownWidth = 0d);
+            Assert.ThrowsExactly<ArgumentException>(() => picker.DropDownHeight = -1d);
+            Assert.ThrowsExactly<ArgumentException>(
+                () => picker.SelectionCellWidth = double.PositiveInfinity);
+            Assert.ThrowsExactly<ArgumentException>(() => picker.SelectionCellHeight = 0d);
+
+            picker.DropDownWidth = double.NaN;
+            picker.DropDownHeight = double.NaN;
+            picker.SelectionCellWidth = double.NaN;
+            picker.SelectionCellHeight = double.NaN;
         }
 
         [TestMethod]

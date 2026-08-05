@@ -25,7 +25,7 @@
                         </StackPanel>
                         <StackPanel Style="{StaticResource GalleryWrapFieldStyle}">
                             <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="仅弹层选择" />
-                            <zen:ZenDateTimePicker IsTextInputEnabled="False" Watermark="请从弹层选择" />
+                            <zen:ZenDateTimePicker IsTextInputReadOnly="True" Watermark="请从弹层选择" />
                         </StackPanel>
                         <StackPanel Style="{StaticResource GalleryWrapFieldStyle}">
                             <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="禁用" />
@@ -66,12 +66,12 @@
                             <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="自定义大小" />
                             <zen:ZenDateTimePicker
                                 Width="300"
-                                CalendarWidth="400"
-                                DateTimeFormat="yyyy/MM/dd HH:mm:ss"
-                                FontSize="26"
-                                IconSize="26"
-                                SelectionHeight="400"
-                                TimeColumnWidth="70" />
+                                DropDownHeight="Auto"
+                                DropDownWidth="Auto"
+                                FontSize="24"
+                                IconSize="24"
+                                SelectionCellHeight="40"
+                                SelectionCellWidth="50" />
                         </StackPanel>
                     </WrapPanel>
                 </StackPanel>

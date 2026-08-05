@@ -100,6 +100,7 @@ Density 会更新输入控件、Button、ListBox、ScrollBar、ComboBox Popup、
 | 按钮高度与内边距 | `ZenButtonMinHeight`、`ZenButtonPadding` |
 | DataGrid 表头、行和单元格 | `ZenDataGridColumnHeaderHeight`、`ZenDataGridRowMinHeight`、`ZenDataGridCellPadding` |
 | Calendar 弹层与导航 | `ZenCalendarPopupWidth`、`ZenCalendarPopupHeight`、`ZenCalendarNavigationButtonSize` |
+| DateTimePicker 选择单元 | `ZenDateTimePickerSelectionCellWidth`、`ZenDateTimePickerSelectionCellHeight` |
 | Switch 与 Slider | `ZenSwitchWidth`、`ZenSwitchHeight`、`ZenSliderThumbSize`、`ZenSliderTrackThickness` |
 | Alert 内边距 | `ZenAlertPadding` |
 | Expander 布局 | `ZenExpanderHeaderPadding`、`ZenExpanderContentPadding`、`ZenExpanderCornerRadius`、`ZenExpanderGlyphSize` |
@@ -132,6 +133,8 @@ DatePicker 的 Calendar 位于独立 Popup 中。颜色与 Density 尺寸由 `Ze
 ```
 
 单个 DatePicker 也可以通过 `CalendarPopupWidth`、`CalendarPopupHeight`、`CalendarFontSize`、`CalendarButtonPadding` 和 `CalendarNavigationButtonSize` 覆盖默认结果。日期按钮不固定宽高，而是自动填充月份网格。
+
+`ZenDateTimePicker` 默认由 `SelectionCellWidth` 和 `SelectionCellHeight` 驱动弹层的自然尺寸；星期、日期和时分秒选择项共享同一单元尺寸，日历头部高度为单元高度的 1.25 倍。将单元尺寸设为 `Auto` 并设置 `DropDownWidth` 或 `DropDownHeight`，可以改为由弹层整体尺寸驱动对应方向的自动均分。四个属性均为显式值时，控件尊重全部设置，不自动修正内容溢出或剩余空间。
 
 ## 从硬编码样式迁移
 

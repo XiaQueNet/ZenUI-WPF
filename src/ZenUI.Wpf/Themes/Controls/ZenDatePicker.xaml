@@ -100,7 +100,7 @@
     </Style>
 
     <Style x:Key="ZenCalendarDayButtonStyle" TargetType="{x:Type CalendarDayButton}">
-        <Setter Property="Margin" Value="1" />
+        <Setter Property="Margin" Value="0" />
         <Setter Property="Padding" Value="0" />
         <Setter Property="FontSize" Value="{Binding FontSize, RelativeSource={RelativeSource AncestorType={x:Type Calendar}}}" />
         <Setter Property="HorizontalContentAlignment" Value="Center" />
@@ -115,11 +115,13 @@
                     <Grid>
                         <Border
                             x:Name="BlackoutBackground"
+                            Margin="1"
                             Background="{DynamicResource ZenSurfaceDisabledBrush}"
                             CornerRadius="5"
                             Opacity="0" />
                         <Border
                             x:Name="DayBorder"
+                            Margin="1"
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
@@ -207,20 +209,25 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type CalendarItem}">
                     <ControlTemplate.Resources>
+                        <Style TargetType="{x:Type ContentControl}">
+                            <Setter Property="HorizontalContentAlignment" Value="Stretch" />
+                            <Setter Property="VerticalContentAlignment" Value="Stretch" />
+                        </Style>
                         <DataTemplate x:Key="{x:Static CalendarItem.DayTitleTemplateResourceKey}">
-                            <TextBlock
-                                HorizontalAlignment="Center"
-                                VerticalAlignment="Center"
-                                FontSize="{Binding FontSize, RelativeSource={RelativeSource AncestorType={x:Type Calendar}}}"
-                                Foreground="{DynamicResource ZenTextSecondaryBrush}"
-                                Text="{Binding}" />
+                            <Grid>
+                                <TextBlock
+                                    HorizontalAlignment="Center"
+                                    VerticalAlignment="Center"
+                                    FontSize="{Binding FontSize, RelativeSource={RelativeSource AncestorType={x:Type Calendar}}}"
+                                    Foreground="{DynamicResource ZenTextSecondaryBrush}"
+                                    Text="{Binding}" />
+                            </Grid>
                         </DataTemplate>
                     </ControlTemplate.Resources>
                     <Grid x:Name="PART_Root">
                         <Grid.RowDefinitions>
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="Auto" />
-                            <RowDefinition Height="*" />
+                            <RowDefinition Height="1.25*" />
+                            <RowDefinition Height="7*" />
                         </Grid.RowDefinitions>
                         <Grid x:Name="HeaderPanel">
                             <Button
@@ -258,14 +265,14 @@
                         </Grid>
                         <Border
                             x:Name="HeaderDivider"
-                            Grid.Row="1"
+                            Grid.Row="0"
                             Height="1"
-                            Margin="0,8"
+                            Margin="0,0,0,1"
                             VerticalAlignment="Bottom"
                             Background="{DynamicResource ZenDividerBrush}"
                             IsHitTestVisible="False"
                             SnapsToDevicePixels="True" />
-                        <Grid x:Name="PART_MonthView" Grid.Row="2">
+                        <Grid x:Name="PART_MonthView" Grid.Row="1">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition />
                                 <ColumnDefinition />
@@ -287,7 +294,7 @@
                         </Grid>
                         <Grid
                             x:Name="PART_YearView"
-                            Grid.Row="2"
+                            Grid.Row="1"
                             Visibility="Hidden">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition />
@@ -321,6 +328,7 @@
         <Setter Property="Background" Value="{DynamicResource ZenSurfaceBrush}" />
         <Setter Property="Foreground" Value="{DynamicResource ZenTextPrimaryBrush}" />
         <Setter Property="FontSize" Value="{DynamicResource ZenFontSizeBody}" />
+        <Setter Property="Padding" Value="{DynamicResource ZenCalendarContentMargin}" />
         <Setter Property="BorderBrush" Value="{DynamicResource ZenBorderBrush}" />
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="zen:ZenCalendar.CornerRadius" Value="{DynamicResource ZenCalendarCornerRadius}" />
@@ -338,7 +346,7 @@
                         CornerRadius="{Binding Path=(zen:ZenCalendar.CornerRadius), RelativeSource={RelativeSource TemplatedParent}}">
                         <CalendarItem
                             x:Name="PART_CalendarItem"
-                            Margin="{DynamicResource ZenCalendarContentMargin}"
+                            Margin="{TemplateBinding Padding}"
                             Background="{TemplateBinding Background}"
                             BorderThickness="0"
                             Style="{TemplateBinding CalendarItemStyle}"
@@ -444,7 +452,7 @@
                             StaysOpen="False" />
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsTextInputEnabled" Value="False">
+                        <Trigger Property="IsTextInputReadOnly" Value="True">
                             <Setter TargetName="PART_TextBox" Property="IsReadOnly" Value="True" />
                         </Trigger>
                         <Trigger Property="IsMouseOver" Value="True">

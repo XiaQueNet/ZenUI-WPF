@@ -25,7 +25,7 @@
                         </StackPanel>
                         <StackPanel Style="{StaticResource GalleryWrapFieldStyle}">
                             <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="仅日历选择" />
-                            <zen:ZenDatePicker IsTextInputEnabled="False" Watermark="请从日历选择" />
+                            <zen:ZenDatePicker IsTextInputReadOnly="True" Watermark="请从日历选择" />
                         </StackPanel>
                         <StackPanel Style="{StaticResource GalleryWrapFieldStyle}">
                             <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="禁用" />

@@ -29,7 +29,7 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.AreEqual(1, picker.SecondIncrement);
             Assert.IsTrue(picker.IsSecondVisible);
             Assert.IsTrue(picker.Is24Hour);
-            Assert.IsTrue(picker.IsTextInputEnabled);
+            Assert.IsFalse(picker.IsTextInputReadOnly);
             Assert.IsFalse(picker.IsDropDownOpen);
             Assert.AreEqual(new CornerRadius(6), picker.CornerRadius);
         }
@@ -96,7 +96,7 @@ namespace ZenUI.Wpf.Tests.Controls
             var picker = new ZenTimePicker
             {
                 Style = (Style)dictionary[typeof(ZenTimePicker)],
-                IsTextInputEnabled = false
+                IsTextInputReadOnly = true
             };
             var window = new Window
             {
@@ -126,7 +126,7 @@ namespace ZenUI.Wpf.Tests.Controls
                 Assert.IsTrue(picker.IsDropDownOpen);
 
                 picker.IsDropDownOpen = false;
-                picker.IsTextInputEnabled = true;
+                picker.IsTextInputReadOnly = false;
                 textBox.RaiseEvent(new MouseButtonEventArgs(
                     Mouse.PrimaryDevice,
                     Environment.TickCount,
@@ -278,6 +278,8 @@ namespace ZenUI.Wpf.Tests.Controls
             var hourList = GetTimeSelectorPart<ListBox>(picker, "PART_HourList");
             var minuteList = GetTimeSelectorPart<ListBox>(picker, "PART_MinuteList");
             var periodList = GetTimeSelectorPart<ListBox>(picker, "PART_PeriodList");
+            Assert.AreEqual("AM", periodList.Items[0].ToString());
+            Assert.AreEqual("PM", periodList.Items[1].ToString());
             hourList.SelectedItem = FindOption(hourList, 6);
             minuteList.SelectedItem = FindOption(minuteList, 30);
             periodList.SelectedIndex = 1;

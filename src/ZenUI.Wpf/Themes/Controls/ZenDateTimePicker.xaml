@@ -10,9 +10,10 @@
         <Setter Property="Padding" Value="{DynamicResource ZenInputControlPadding}" />
         <Setter Property="CornerRadius" Value="{DynamicResource ZenInputControlCornerRadius}" />
         <Setter Property="IconSize" Value="{DynamicResource ZenDateTimePickerIconSize}" />
-        <Setter Property="CalendarWidth" Value="{DynamicResource ZenDateTimePickerCalendarWidth}" />
-        <Setter Property="SelectionHeight" Value="{DynamicResource ZenDateTimePickerSelectionHeight}" />
-        <Setter Property="TimeColumnWidth" Value="{DynamicResource ZenDateTimePickerTimeColumnWidth}" />
+        <Setter Property="DropDownWidth" Value="Auto" />
+        <Setter Property="DropDownHeight" Value="Auto" />
+        <Setter Property="SelectionCellWidth" Value="{DynamicResource ZenDateTimePickerSelectionCellWidth}" />
+        <Setter Property="SelectionCellHeight" Value="{DynamicResource ZenDateTimePickerSelectionCellHeight}" />
         <Setter Property="Background" Value="{DynamicResource ZenSurfaceBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource ZenBorderBrush}" />
         <Setter Property="BorderThickness" Value="{DynamicResource ZenControlBorderThickness}" />
@@ -100,6 +101,7 @@
                             PopupAnimation="Fade"
                             StaysOpen="False">
                             <Border
+                                x:Name="PART_DropDownBorder"
                                 Margin="{DynamicResource ZenTimePickerPopupMargin}"
                                 Padding="{DynamicResource ZenDateTimePickerPopupPadding}"
                                 Background="{DynamicResource ZenSurfaceBrush}"
@@ -113,46 +115,45 @@
                                         Opacity="0.16"
                                         ShadowDepth="3" />
                                 </Border.Effect>
-                                <Grid>
+                                <Grid ClipToBounds="True">
                                     <Grid.RowDefinitions>
-                                        <RowDefinition Height="Auto" />
+                                        <RowDefinition Height="*" />
                                         <RowDefinition Height="Auto" />
                                     </Grid.RowDefinitions>
-                                    <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="Auto" />
-                                        <ColumnDefinition Width="Auto" />
-                                    </Grid.ColumnDefinitions>
+                                    <Grid x:Name="PART_SelectionPanel">
+                                        <Grid.ColumnDefinitions>
+                                            <ColumnDefinition Width="7*" />
+                                            <ColumnDefinition Width="3*" />
+                                        </Grid.ColumnDefinitions>
 
-                                    <Calendar
-                                        x:Name="PART_Calendar"
-                                        Width="{TemplateBinding CalendarWidth}"
-                                        Height="{TemplateBinding SelectionHeight}"
-                                        BorderThickness="0"
-                                        FirstDayOfWeek="{TemplateBinding FirstDayOfWeek}"
-                                        FontSize="{TemplateBinding FontSize}"
-                                        IsTodayHighlighted="{TemplateBinding IsTodayHighlighted}"
-                                        SelectionMode="SingleDate"
-                                        zen:ZenCalendar.CornerRadius="0"
-                                        Style="{DynamicResource ZenCalendarStyle}" />
-
-                                    <Border
-                                        Grid.Column="1"
-                                        Margin="{DynamicResource ZenDateTimePickerTimePanelMargin}"
-                                        Padding="{DynamicResource ZenDateTimePickerTimePanelPadding}"
-                                        BorderBrush="{DynamicResource ZenDividerBrush}"
-                                        BorderThickness="1,0,0,0">
-                                        <zen:ZenTimeSelector
-                                            x:Name="PART_TimeSelector"
-                                            ColumnWidth="{TemplateBinding TimeColumnWidth}"
+                                        <Calendar
+                                            x:Name="PART_Calendar"
+                                            BorderThickness="0"
+                                            FirstDayOfWeek="{TemplateBinding FirstDayOfWeek}"
                                             FontSize="{TemplateBinding FontSize}"
-                                            ItemHeight="{DynamicResource ZenDateTimePickerTimeItemHeight}"
-                                            ListHeight="{TemplateBinding SelectionHeight}"
-                                            PeriodColumnWidth="{TemplateBinding TimeColumnWidth}" />
-                                    </Border>
+                                            IsTodayHighlighted="{TemplateBinding IsTodayHighlighted}"
+                                            Padding="0"
+                                            SelectionMode="SingleDate"
+                                            zen:ZenCalendar.CornerRadius="0"
+                                            Style="{DynamicResource ZenCalendarStyle}" />
+
+                                        <Border
+                                            x:Name="PART_TimePanel"
+                                            Grid.Column="1"
+                                            Margin="{DynamicResource ZenDateTimePickerTimePanelMargin}"
+                                            Padding="0"
+                                            BorderBrush="{DynamicResource ZenDividerBrush}"
+                                            BorderThickness="1,0,0,0">
+                                            <zen:ZenTimeSelector
+                                                x:Name="PART_TimeSelector"
+                                                VerticalAlignment="Stretch"
+                                                FontSize="{TemplateBinding FontSize}"
+                                                ListHeight="{Binding ActualHeight, ElementName=PART_Calendar}" />
+                                        </Border>
+                                    </Grid>
 
                                     <Border
                                         Grid.Row="1"
-                                        Grid.ColumnSpan="2"
                                         Margin="4,2,4,0"
                                         Padding="0,8,0,2"
                                         BorderBrush="{DynamicResource ZenDividerBrush}"
@@ -198,7 +199,7 @@
                         <Trigger Property="Validation.HasError" Value="True">
                             <Setter TargetName="InputBorder" Property="BorderBrush" Value="{DynamicResource ZenErrorBrush}" />
                         </Trigger>
-                        <Trigger Property="IsTextInputEnabled" Value="False">
+                        <Trigger Property="IsTextInputReadOnly" Value="True">
                             <Setter TargetName="PART_TextBox" Property="IsReadOnly" Value="True" />
                         </Trigger>
                         <Trigger Property="IsEnabled" Value="False">

@@ -31,6 +31,8 @@ Component Metrics 只收录具有明确控件语义、且不依赖模板内部�
 
 当前 Component Metrics 覆盖 Button、ListBox、ScrollBar、ComboBox 弹层、DataGrid、Calendar、DateTimePicker、Switch、Slider、ProgressBar、Loading 和 Alert。DatePicker 创建的 Calendar 位于独立 Popup 资源作用域，弹层宽高、日期格、月份按钮、导航按钮和字号通过 `ZenDatePicker` 依赖属性及显式源绑定传递；更复杂的外观仍应通过 WPF 原生 `CalendarStyle` 定制。图标路径和只服务于单个模板结构的坐标仍属于实现细节。
 
+DateTimePicker 使用 `ZenDateTimePickerSelectionCellWidth` 和 `ZenDateTimePickerSelectionCellHeight` 作为默认尺寸入口。默认由 Cell 尺寸自然测量弹层；实例把 `SelectionCellWidth` 或 `SelectionCellHeight` 设为 `Auto` 后，对应方向改由 `DropDownWidth` 或 `DropDownHeight` 的可用空间自动均分。星期、日期与时间项共用单元尺寸，头部按单元高度的固定比例布局。组合控件内的 Calendar 和时间面板不再叠加各自的内容 Padding，外围留白统一由 `ZenDateTimePickerPopupPadding` 管理。
+
 Interaction Token 按控件角色区分禁用后的视觉强调程度，而不是按具体控件命名。Light 和 Dark 使用原有透明度层级；HighContrast 将这些可靠的状态 Token 覆盖为完全不透明，让系统色承担禁用语义，避免透明度进一步削弱可读性。
 
 Calendar 弹层和部分 DataGrid 模板内部状态暂不纳入 Interaction Token：前者位于独立 Popup 资源边界，后者包含通过 `TargetName` 修改模板内部元素的触发器。此类状态应优先通过 `CalendarStyle` 或控件依赖属性显式传递，避免产生看似可覆盖、实际无法可靠解析的 Token。
