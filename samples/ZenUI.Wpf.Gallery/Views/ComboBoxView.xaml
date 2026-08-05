@@ -131,9 +131,7 @@
             <Border Style="{StaticResource GalleryCardStyle}">
                 <StackPanel>
                     <TextBlock Style="{StaticResource SectionTitleStyle}" Text="长列表" />
-                    <TextBlock
-                        Style="{StaticResource GallerySectionDescriptionStyle}"
-                        Text="通过 MaxDropDownHeight 限制面板高度，超出后可滚动浏览。" />
+                    <TextBlock Style="{StaticResource GallerySectionDescriptionStyle}" Text="通过 MaxDropDownHeight 限制面板高度，超出后可滚动浏览。" />
                     <zen:ZenComboBox
                         Width="320"
                         HorizontalAlignment="Left"
@@ -153,9 +151,7 @@
             <Border Style="{StaticResource GalleryCardStyle}">
                 <StackPanel>
                     <TextBlock Style="{StaticResource SectionTitleStyle}" Text="枚举集合绑定" />
-                    <TextBlock
-                        Style="{StaticResource GallerySectionDescriptionStyle}"
-                        Text="通过 ItemsSource 直接绑定 Enum.GetValues 返回的订单状态集合。" />
+                    <TextBlock Style="{StaticResource GallerySectionDescriptionStyle}" Text="通过 ItemsSource 直接绑定 Enum.GetValues 返回的订单状态集合。" />
                     <StackPanel Orientation="Horizontal">
                         <zen:ZenComboBox
                             x:Name="OrderStatusComboBox"

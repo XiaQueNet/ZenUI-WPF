@@ -10,8 +10,6 @@
         <Setter Property="Padding" Value="{DynamicResource ZenInputControlPadding}" />
         <Setter Property="CornerRadius" Value="{DynamicResource ZenInputControlCornerRadius}" />
         <Setter Property="IconSize" Value="{DynamicResource ZenDateTimePickerIconSize}" />
-        <Setter Property="DropDownWidth" Value="Auto" />
-        <Setter Property="DropDownHeight" Value="Auto" />
         <Setter Property="CalendarCellWidth" Value="{DynamicResource ZenDateTimePickerCalendarCellWidth}" />
         <Setter Property="CalendarCellHeight" Value="{DynamicResource ZenDateTimePickerCalendarCellHeight}" />
         <Setter Property="TimeItemWidth" Value="{DynamicResource ZenDateTimePickerTimeItemWidth}" />

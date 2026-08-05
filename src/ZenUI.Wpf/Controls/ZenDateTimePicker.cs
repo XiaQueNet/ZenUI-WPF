@@ -721,6 +721,7 @@ namespace ZenUI.Wpf.Controls
                 calendar.SelectedDatesChanged += HandleCalendarSelectedDatesChanged;
                 calendar.PreviewMouseLeftButtonUp +=
                     HandleCalendarPreviewMouseLeftButtonUp;
+                calendar.SizeChanged += HandleSelectionMetricsSizeChanged;
             }
 
             if (timeSelector != null)
@@ -730,7 +731,12 @@ namespace ZenUI.Wpf.Controls
 
             if (selectionPanel != null)
             {
-                selectionPanel.SizeChanged += HandleSelectionPanelSizeChanged;
+                selectionPanel.SizeChanged += HandleSelectionMetricsSizeChanged;
+            }
+
+            if (timePanel != null)
+            {
+                timePanel.SizeChanged += HandleSelectionMetricsSizeChanged;
             }
 
             if (nowButton != null)
@@ -766,6 +772,7 @@ namespace ZenUI.Wpf.Controls
                 calendar.SelectedDatesChanged -= HandleCalendarSelectedDatesChanged;
                 calendar.PreviewMouseLeftButtonUp -=
                     HandleCalendarPreviewMouseLeftButtonUp;
+                calendar.SizeChanged -= HandleSelectionMetricsSizeChanged;
             }
 
             if (timeSelector != null)
@@ -775,7 +782,12 @@ namespace ZenUI.Wpf.Controls
 
             if (selectionPanel != null)
             {
-                selectionPanel.SizeChanged -= HandleSelectionPanelSizeChanged;
+                selectionPanel.SizeChanged -= HandleSelectionMetricsSizeChanged;
+            }
+
+            if (timePanel != null)
+            {
+                timePanel.SizeChanged -= HandleSelectionMetricsSizeChanged;
             }
 
             if (nowButton != null)
@@ -789,7 +801,7 @@ namespace ZenUI.Wpf.Controls
             }
         }
 
-        private void HandleSelectionPanelSizeChanged(object sender, SizeChangedEventArgs e)
+        private void HandleSelectionMetricsSizeChanged(object sender, SizeChangedEventArgs e)
         {
             UpdateTimeSelectorMetrics();
         }

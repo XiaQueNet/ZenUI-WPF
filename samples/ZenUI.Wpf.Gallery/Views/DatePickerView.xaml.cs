@@ -13,6 +13,7 @@ namespace ZenUI.Wpf.Gallery.Views
             SelectedDatePicker.SelectedDate = today;
             ShortDatePicker.SelectedDate = today;
             LongDatePicker.SelectedDate = today;
+            PopupMetricsDatePicker.SelectedDate = today;
 
             ConstrainedDatePicker.DisplayDateStart = today;
             ConstrainedDatePicker.DisplayDateEnd = today.AddDays(30);

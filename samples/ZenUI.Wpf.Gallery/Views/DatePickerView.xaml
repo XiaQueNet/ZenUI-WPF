@@ -73,6 +73,23 @@
 
             <Border Style="{StaticResource GalleryCardStyle}">
                 <StackPanel>
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="日历弹层" />
+                    <TextBlock
+                        Style="{StaticResource GallerySectionDescriptionStyle}"
+                        Text="通过 CalendarPopupWidth、CalendarPopupHeight 和 CalendarFontSize 调整单个日期选择器的弹层尺寸与字号。" />
+                    <zen:ZenDatePicker
+                        x:Name="PopupMetricsDatePicker"
+                        Width="260"
+                        HorizontalAlignment="Left"
+                        CalendarFontSize="16"
+                        CalendarPopupHeight="380"
+                        CalendarPopupWidth="420"
+                        Watermark="打开自定义日历" />
+                </StackPanel>
+            </Border>
+
+            <Border Style="{StaticResource GalleryCardStyle}">
+                <StackPanel>
                     <TextBlock Style="{StaticResource SectionTitleStyle}" Text="圆角与尺寸" />
                     <WrapPanel VerticalAlignment="Bottom">
                         <StackPanel Style="{StaticResource GalleryWrapFieldStyle}">

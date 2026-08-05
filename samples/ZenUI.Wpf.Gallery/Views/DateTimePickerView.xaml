@@ -62,31 +62,6 @@
                                 Width="250"
                                 DateTimeFormat="yyyy/MM/dd HH:mm" />
                         </StackPanel>
-                        <StackPanel Width="Auto" Style="{StaticResource GalleryWrapFieldStyle}">
-                            <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="自定义大小" />
-                            <zen:ZenDateTimePicker
-                                Width="300"
-                                CalendarCellHeight="50"
-                                CalendarCellWidth="60"
-                                DropDownHeight="Auto"
-                                DropDownWidth="Auto"
-                                FontSize="24"
-                                IconSize="24"
-                                IsSecondVisible="True"
-                                TimeItemHeight="50"
-                                TimeItemWidth="82" />
-                            <zen:ZenDateTimePicker
-                                Width="400"
-                                CalendarCellHeight="50"
-                                CalendarCellWidth="60"
-                                DropDownHeight="Auto"
-                                DropDownWidth="Auto"
-                                FontSize="24"
-                                IconSize="24"
-                                IsSecondVisible="False"
-                                TimeItemHeight="40"
-                                TimeItemWidth="52" />
-                        </StackPanel>
                     </WrapPanel>
                 </StackPanel>
             </Border>
@@ -101,6 +76,75 @@
                         HorizontalAlignment="Left"
                         MinuteIncrement="15"
                         Watermark="选择预约时间" />
+                </StackPanel>
+            </Border>
+
+            <Border Style="{StaticResource GalleryCardStyle}">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="日历行为" />
+                    <TextBlock Style="{StaticResource GallerySectionDescriptionStyle}" Text="可设置一周的起始日，并按业务需要关闭今日高亮。" />
+                    <WrapPanel>
+                        <StackPanel Width="280" Style="{StaticResource GalleryWrapFieldStyle}">
+                            <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="周一为首日" />
+                            <zen:ZenDateTimePicker
+                                x:Name="MondayFirstPicker"
+                                Width="260"
+                                FirstDayOfWeek="Monday"
+                                Watermark="打开日历查看" />
+                        </StackPanel>
+                        <StackPanel Width="280" Style="{StaticResource GalleryWrapFieldStyle}">
+                            <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="不突出今天" />
+                            <zen:ZenDateTimePicker
+                                x:Name="WithoutTodayHighlightPicker"
+                                Width="260"
+                                IsTodayHighlighted="False"
+                                Watermark="打开日历查看" />
+                        </StackPanel>
+                    </WrapPanel>
+                </StackPanel>
+            </Border>
+
+            <Border Style="{StaticResource GalleryCardStyle}">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="弹层布局" />
+                    <TextBlock Style="{StaticResource GallerySectionDescriptionStyle}" Text="分别设置日历单元与时间项的尺寸，弹层会按内容自然测量；本例使用等高但不同宽度的日期与时间选项。" />
+                    <WrapPanel>
+                        <StackPanel Width="320" Style="{StaticResource GalleryWrapFieldStyle}">
+                            <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="自然测量 · 自定义单元" />
+                            <zen:ZenDateTimePicker
+                                x:Name="NaturalMetricsPicker"
+                                Width="300"
+                                HorizontalAlignment="Left"
+                                CalendarCellHeight="44"
+                                CalendarCellWidth="52"
+                                CornerRadius="12"
+                                IconSize="20"
+                                IsSecondVisible="True"
+                                TimeItemHeight="44"
+                                TimeItemWidth="70" />
+                        </StackPanel>
+                    </WrapPanel>
+                </StackPanel>
+            </Border>
+
+            <Border Style="{StaticResource GalleryCardStyle}">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="变更事件" />
+                    <TextBlock Style="{StaticResource GallerySectionDescriptionStyle}" Text="SelectedDateTimeChanged 会在确认新值后通知业务代码。" />
+                    <WrapPanel VerticalAlignment="Center">
+                        <zen:ZenDateTimePicker
+                            Width="280"
+                            Margin="0,0,18,0"
+                            HorizontalAlignment="Left"
+                            SelectedDateTimeChanged="DateTimePicker_OnSelectedDateTimeChanged"
+                            Watermark="选择后查看事件结果" />
+                        <TextBlock
+                            x:Name="DateTimeChangedStatus"
+                            MaxWidth="320"
+                            VerticalAlignment="Center"
+                            Style="{StaticResource GallerySupportingTextStyle}"
+                            Text="尚未触发 SelectedDateTimeChanged。" />
+                    </WrapPanel>
                 </StackPanel>
             </Border>
 

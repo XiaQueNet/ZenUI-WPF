@@ -204,6 +204,44 @@ namespace ZenUI.Wpf.Tests.Controls
         }
 
         [TestMethod]
+        public void AutoTimeItemsRecalculateAfterPopupReceivesItsFinalSize()
+        {
+            var picker = CreateTemplatedPicker();
+            picker.CalendarCellWidth = double.NaN;
+            picker.CalendarCellHeight = double.NaN;
+            picker.TimeItemWidth = double.NaN;
+            picker.TimeItemHeight = double.NaN;
+            picker.DropDownWidth = 520d;
+            picker.DropDownHeight = 400d;
+            var window = new Window
+            {
+                Width = 800d,
+                Height = 600d,
+                ShowInTaskbar = false,
+                WindowStyle = WindowStyle.None,
+                Content = picker
+            };
+
+            try
+            {
+                window.Show();
+                picker.IsDropDownOpen = true;
+                PumpDispatcher();
+
+                var timePanel = GetPart<Border>(picker, "PART_TimePanel");
+                var selector = GetPart<ZenTimeSelector>(picker, "PART_TimeSelector");
+                Assert.IsGreaterThan(100d, timePanel.ActualWidth);
+                Assert.IsGreaterThan(20d, selector.ColumnWidth);
+                Assert.IsGreaterThan(20d, selector.ItemHeight);
+            }
+            finally
+            {
+                picker.IsDropDownOpen = false;
+                window.Close();
+            }
+        }
+
+        [TestMethod]
         public void CalendarAndTimeMetricsRejectInvalidValues()
         {
             var picker = new ZenDateTimePicker();
