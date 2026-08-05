@@ -7,6 +7,15 @@
   --zenui-line: #dfe5ef;
   --zenui-surface: #ffffff;
   --zenui-surface-soft: #f6f8fc;
+  --zenui-surface-raised: #ffffff;
+  --zenui-code-surface: #f2f5fa;
+  --zenui-code-ink: #24304a;
+  --zenui-focus: #315bd9;
+  --zenui-selection: #dce6ff;
+  --zenui-shadow: 0 14px 36px rgb(30 47 80 / 8%);
+  --zenui-content-width: 780px;
+  --zenui-radius-sm: 8px;
+  --zenui-radius-md: 12px;
 }
 
 html[data-bs-theme="dark"] {
@@ -18,11 +27,51 @@ html[data-bs-theme="dark"] {
   --zenui-line: #303b50;
   --zenui-surface: #151b27;
   --zenui-surface-soft: #101620;
+  --zenui-surface-raised: #1b2332;
+  --zenui-code-surface: #0e1420;
+  --zenui-code-ink: #dce5f7;
+  --zenui-focus: #91aaff;
+  --zenui-selection: #243c77;
+  --zenui-shadow: 0 16px 40px rgb(0 0 0 / 24%);
+}
+
+html {
+  scroll-padding-top: 5.5rem;
+}
+
+body {
+  color: var(--zenui-ink);
+  background: var(--zenui-surface);
+  font-family: "Segoe UI Variable Text", "Segoe UI", "Microsoft YaHei UI", sans-serif;
+  font-size: 15px;
+  line-height: 1.75;
+  text-rendering: optimizeLegibility;
+}
+
+::selection {
+  background: var(--zenui-selection);
+}
+
+:focus-visible {
+  outline: 2px solid var(--zenui-focus);
+  outline-offset: 3px;
+}
+
+a {
+  color: var(--zenui-blue);
+  text-decoration-thickness: 1px;
+  text-underline-offset: 0.18em;
+}
+
+a:hover {
+  color: var(--zenui-blue-strong);
 }
 
 header.bg-body {
+  border-bottom: 1px solid color-mix(in srgb, var(--zenui-line) 72%, transparent);
   background-color: color-mix(in srgb, var(--zenui-surface) 92%, transparent) !important;
   backdrop-filter: blur(16px);
+  box-shadow: none;
 }
 
 .navbar-brand > img.svg {
@@ -32,8 +81,563 @@ header.bg-body {
 }
 
 .navbar-brand {
+  color: var(--zenui-ink);
   font-weight: 700;
   letter-spacing: -0.02em;
+}
+
+.navbar .nav-link,
+.navbar .btn {
+  border-radius: var(--zenui-radius-sm);
+  color: var(--zenui-muted);
+}
+
+.navbar .nav-link:hover,
+.navbar .btn:hover {
+  color: var(--zenui-ink);
+  background: var(--zenui-surface-soft);
+}
+
+.navbar input[type="search"],
+.navbar .form-control,
+#search-query {
+  min-height: 38px;
+  border: 1px solid var(--zenui-line);
+  border-radius: var(--zenui-radius-sm);
+  background: var(--zenui-surface-soft);
+  color: var(--zenui-ink);
+  box-shadow: none;
+}
+
+.navbar input[type="search"]:focus,
+.navbar .form-control:focus,
+#search-query:focus {
+  border-color: var(--zenui-focus);
+  background: var(--zenui-surface);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--zenui-focus) 16%, transparent);
+}
+
+/* Documentation shell */
+.container-xxl {
+  max-width: 1540px;
+}
+
+.sidebar,
+.toc-offcanvas .toc {
+  scrollbar-color: color-mix(in srgb, var(--zenui-muted) 30%, transparent) transparent;
+}
+
+.sidebar .nav-link,
+.toc-offcanvas .toc a {
+  margin-block: 2px;
+  padding: 0.38rem 0.7rem;
+  border-radius: 7px;
+  color: var(--zenui-muted);
+  line-height: 1.45;
+}
+
+.sidebar .nav-link:hover,
+.toc-offcanvas .toc a:hover {
+  color: var(--zenui-ink);
+  background: var(--zenui-surface-soft);
+}
+
+.sidebar .nav-link.active,
+.sidebar .nav-link[aria-current="page"],
+.toc-offcanvas .toc a.active,
+.toc-offcanvas .toc a[aria-current="page"] {
+  color: var(--zenui-blue);
+  background: var(--zenui-blue-soft);
+  font-weight: 650;
+}
+
+.sidebar .nav-link.active::before,
+.sidebar .nav-link[aria-current="page"]::before,
+.toc-offcanvas .toc a.active::before,
+.toc-offcanvas .toc a[aria-current="page"]::before {
+  display: none;
+}
+
+.affix {
+  font-size: 0.86rem;
+}
+
+.affix .nav-link {
+  padding-block: 0.28rem;
+  border-left-color: var(--zenui-line);
+  color: var(--zenui-muted);
+}
+
+.affix .nav-link:hover,
+.affix .nav-link.active {
+  color: var(--zenui-blue);
+}
+
+main > .content {
+  min-width: 0;
+}
+
+article.content,
+main > .content > article {
+  max-width: var(--zenui-content-width);
+  margin-inline: auto;
+  padding-bottom: 5rem;
+}
+
+article > h1:first-child {
+  margin-top: 0.3rem;
+  font-size: clamp(2.15rem, 4vw, 3rem);
+}
+
+article h1,
+article h2,
+article h3,
+article h4 {
+  color: var(--zenui-ink);
+  font-weight: 690;
+  letter-spacing: -0.025em;
+  line-height: 1.25;
+  scroll-margin-top: 5.5rem;
+}
+
+article h2 {
+  margin-top: 3rem;
+  padding-bottom: 0.6rem;
+  border-bottom: 1px solid var(--zenui-line);
+  font-size: 1.65rem;
+}
+
+article h3 {
+  margin-top: 2.2rem;
+  font-size: 1.25rem;
+}
+
+article p,
+article li {
+  color: color-mix(in srgb, var(--zenui-ink) 88%, var(--zenui-muted));
+}
+
+article p {
+  margin-block: 0.85rem 1.1rem;
+}
+
+article ul,
+article ol {
+  padding-left: 1.35rem;
+}
+
+article li + li {
+  margin-top: 0.35rem;
+}
+
+article blockquote {
+  margin: 1.5rem 0;
+  padding: 0.9rem 1.1rem;
+  border-left: 3px solid var(--zenui-blue);
+  border-radius: 0 var(--zenui-radius-sm) var(--zenui-radius-sm) 0;
+  background: var(--zenui-blue-soft);
+  color: var(--zenui-ink);
+}
+
+article blockquote > :last-child {
+  margin-bottom: 0;
+}
+
+article :not(pre) > code {
+  padding: 0.14em 0.38em;
+  border: 1px solid color-mix(in srgb, var(--zenui-line) 78%, transparent);
+  border-radius: 5px;
+  background: var(--zenui-code-surface);
+  color: var(--zenui-code-ink);
+  font-size: 0.88em;
+}
+
+article pre {
+  margin-block: 1.4rem;
+  padding: 1.15rem 1.25rem;
+  border: 1px solid var(--zenui-line);
+  border-radius: var(--zenui-radius-md);
+  background: var(--zenui-code-surface);
+  box-shadow: none;
+  line-height: 1.65;
+}
+
+article pre code {
+  color: var(--zenui-code-ink);
+  font-family: "Cascadia Code", "SFMono-Regular", Consolas, monospace;
+  font-size: 0.88rem;
+}
+
+article table {
+  display: table;
+  width: 100%;
+  margin-block: 1.5rem;
+  overflow: hidden;
+  border: 1px solid var(--zenui-line);
+  border-radius: var(--zenui-radius-md);
+  border-collapse: separate;
+  border-spacing: 0;
+}
+
+article table th {
+  padding: 0.75rem 0.9rem;
+  border-bottom: 1px solid var(--zenui-line);
+  background: var(--zenui-surface-soft);
+  color: var(--zenui-ink);
+  font-weight: 650;
+}
+
+article table td {
+  padding: 0.72rem 0.9rem;
+  border-bottom: 1px solid color-mix(in srgb, var(--zenui-line) 75%, transparent);
+  background: var(--zenui-surface);
+  vertical-align: top;
+}
+
+article table tr:last-child td {
+  border-bottom: 0;
+}
+
+article table tbody tr:hover td {
+  background: color-mix(in srgb, var(--zenui-blue-soft) 42%, var(--zenui-surface));
+}
+
+.NOTE,
+.TIP,
+.IMPORTANT,
+.WARNING,
+.CAUTION {
+  margin-block: 1.5rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--zenui-line);
+  border-left: 4px solid var(--zenui-blue);
+  border-radius: var(--zenui-radius-md);
+  background: var(--zenui-surface-soft);
+  box-shadow: none;
+}
+
+.WARNING,
+.CAUTION {
+  border-left-color: #c47a16;
+}
+
+.NOTE > h5,
+.TIP > h5,
+.IMPORTANT > h5,
+.WARNING > h5,
+.CAUTION > h5 {
+  color: var(--zenui-ink);
+  font-weight: 700;
+  letter-spacing: 0.02em;
+}
+
+/* API reference */
+body[data-yaml-mime="ManagedReference"] main > .content > article {
+  max-width: 940px;
+}
+
+body[data-yaml-mime="ManagedReference"] article > h1:first-of-type {
+  margin-bottom: 1rem;
+  font-family: "Segoe UI Variable Display", "Segoe UI", "Microsoft YaHei UI", sans-serif;
+  font-size: clamp(2.35rem, 4vw, 3.35rem);
+  font-weight: 720;
+}
+
+body[data-yaml-mime="ManagedReference"] article > .markdown.summary {
+  max-width: 720px;
+  margin-block: 1.1rem 1.5rem;
+  color: var(--zenui-muted);
+  font-size: 1.08rem;
+  line-height: 1.75;
+}
+
+body[data-yaml-mime="ManagedReference"] article > .codewrapper pre {
+  padding: 1.25rem 1.35rem;
+  border-color: color-mix(in srgb, var(--zenui-blue) 22%, var(--zenui-line));
+  background: color-mix(in srgb, var(--zenui-blue-soft) 38%, var(--zenui-code-surface));
+}
+
+body[data-yaml-mime="ManagedReference"] article > .facts {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.55rem;
+  padding: 0;
+  border: 0;
+  background: transparent;
+}
+
+body[data-yaml-mime="ManagedReference"] article > .facts dl {
+  display: inline-flex;
+  gap: 0.4rem;
+  align-items: center;
+  width: fit-content;
+  padding: 0.38rem 0.68rem;
+  border: 1px solid var(--zenui-line);
+  border-radius: 999px;
+  background: var(--zenui-surface-soft);
+  font-size: 0.82rem;
+}
+
+body[data-yaml-mime="ManagedReference"] article > .facts dt {
+  color: var(--zenui-muted);
+  font-weight: 550;
+}
+
+body[data-yaml-mime="ManagedReference"] article > .facts dd {
+  color: var(--zenui-ink);
+  font-weight: 650;
+}
+
+body[data-yaml-mime="ManagedReference"] .typelist.inheritance {
+  margin-block: 1.25rem 2.2rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--zenui-line);
+  border-radius: var(--zenui-radius-md);
+  background: var(--zenui-surface-soft);
+}
+
+body[data-yaml-mime="ManagedReference"] .typelist.inheritance dt {
+  margin-bottom: 0.55rem;
+  color: var(--zenui-muted);
+  font-size: 0.76rem;
+  font-weight: 700;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+}
+
+body[data-yaml-mime="ManagedReference"] .typelist.inheritance dd {
+  margin-bottom: 0;
+}
+
+body[data-yaml-mime="ManagedReference"] .typelist.inheritance div {
+  color: var(--zenui-muted);
+  line-height: 1.55;
+}
+
+body[data-yaml-mime="ManagedReference"] article h2.section {
+  display: flex;
+  gap: 0.75rem;
+  align-items: center;
+  margin: 4rem 0 1rem;
+  padding: 0;
+  border: 0;
+  font-size: 1.55rem;
+}
+
+body[data-yaml-mime="ManagedReference"] article h2.section::after {
+  flex: 1;
+  height: 1px;
+  background: var(--zenui-line);
+  content: "";
+}
+
+body[data-yaml-mime="ManagedReference"] article h2.section[data-section-label]::before {
+  order: -1;
+  padding: 0.22rem 0.5rem;
+  border-radius: 6px;
+  background: var(--zenui-blue-soft);
+  color: var(--zenui-blue);
+  content: attr(data-section-label);
+  font-size: 0.7rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+}
+
+.zenui-api-member {
+  position: relative;
+  margin-block: 0.8rem;
+  padding: 1.15rem 1.25rem 1.2rem;
+  border: 1px solid var(--zenui-line);
+  border-radius: var(--zenui-radius-md);
+  background: var(--zenui-surface-raised);
+  transition: border-color 150ms ease, box-shadow 150ms ease;
+}
+
+.zenui-api-member:hover {
+  border-color: color-mix(in srgb, var(--zenui-blue) 38%, var(--zenui-line));
+  box-shadow: 0 9px 24px rgb(30 47 80 / 7%);
+}
+
+.zenui-api-member:has(> h3:target) {
+  border-color: var(--zenui-focus);
+  box-shadow: 0 0 0 3px color-mix(in srgb, var(--zenui-focus) 12%, transparent);
+}
+
+.zenui-api-member > h3[data-uid] {
+  display: flex;
+  gap: 0.65rem;
+  align-items: center;
+  justify-content: space-between;
+  margin: 0;
+  padding: 0;
+  border: 0;
+  color: var(--zenui-ink);
+  font-family: "Cascadia Code", "SFMono-Regular", Consolas, monospace;
+  font-size: 1rem;
+  letter-spacing: -0.015em;
+}
+
+.zenui-api-member > h3[data-uid] .header-action {
+  display: inline-flex;
+  flex: none;
+  align-items: center;
+  justify-content: center;
+  width: 30px;
+  height: 30px;
+  border-radius: 7px;
+  color: var(--zenui-muted);
+}
+
+.zenui-api-member > h3[data-uid] .header-action:hover {
+  color: var(--zenui-blue);
+  background: var(--zenui-blue-soft);
+}
+
+.zenui-api-member > .markdown.summary {
+  margin-top: 0.6rem;
+  color: var(--zenui-muted);
+}
+
+.zenui-api-member > .markdown.summary p {
+  margin: 0;
+  color: inherit;
+}
+
+.zenui-api-member > .markdown.conceptual:empty {
+  display: none;
+}
+
+.zenui-api-member > .codewrapper pre {
+  margin-block: 0.9rem 0;
+  padding: 0.75rem 0.9rem;
+  border: 0;
+  border-radius: var(--zenui-radius-sm);
+  background: var(--zenui-code-surface);
+}
+
+.zenui-api-member > h4.section {
+  margin: 1rem 0 0.35rem;
+  color: var(--zenui-muted);
+  font-size: 0.74rem;
+  font-weight: 700;
+  letter-spacing: 0.07em;
+  text-transform: uppercase;
+}
+
+.zenui-api-member > dl {
+  margin: 0;
+  padding: 0;
+  border: 0;
+}
+
+.zenui-api-member > dl dt {
+  color: var(--zenui-ink);
+  font-family: "Cascadia Code", "SFMono-Regular", Consolas, monospace;
+  font-size: 0.86rem;
+}
+
+.zenui-api-member > dl dd {
+  margin: 0.25rem 0 0;
+  color: var(--zenui-muted);
+}
+
+html[data-bs-theme="dark"] .zenui-api-member:hover {
+  box-shadow: 0 12px 28px rgb(0 0 0 / 18%);
+}
+
+.memberInfo,
+.memberInfo + .memberInfo,
+.api-doc-table,
+.parameters,
+.returns {
+  border-color: var(--zenui-line);
+}
+
+.memberInfo {
+  margin-block: 1.25rem;
+  padding: 1.1rem 1.2rem;
+  border: 1px solid var(--zenui-line);
+  border-radius: var(--zenui-radius-md);
+  background: var(--zenui-surface-raised);
+}
+
+.memberInfo:hover {
+  border-color: color-mix(in srgb, var(--zenui-blue) 36%, var(--zenui-line));
+}
+
+article h2.section {
+  margin-top: 3.2rem;
+}
+
+article h3[data-uid] {
+  margin-top: 2rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--zenui-line);
+  font-family: "Cascadia Code", "SFMono-Regular", Consolas, monospace;
+  font-size: 1.05rem;
+  letter-spacing: -0.015em;
+}
+
+article .facts {
+  margin-block: 1.25rem;
+  padding: 1rem 1.1rem;
+  border: 1px solid var(--zenui-line);
+  border-radius: var(--zenui-radius-md);
+  background: var(--zenui-surface-soft);
+}
+
+article .facts dl {
+  display: grid;
+  grid-template-columns: minmax(84px, auto) 1fr;
+  gap: 0.35rem 1rem;
+  margin: 0;
+}
+
+article .facts dt,
+article .facts dd {
+  margin: 0;
+}
+
+.xref,
+.xref:hover {
+  text-decoration: none;
+}
+
+.badge,
+.language-csharp,
+.language-xaml {
+  border-radius: 999px;
+}
+
+.breadcrumb {
+  color: var(--zenui-muted);
+  font-size: 0.86rem;
+}
+
+.breadcrumb-item.active {
+  color: var(--zenui-ink);
+}
+
+.pagination .page-link,
+.next-article a,
+.prev-article a {
+  border-color: var(--zenui-line);
+  border-radius: var(--zenui-radius-sm);
+  color: var(--zenui-muted);
+  background: transparent;
+}
+
+.pagination .page-link:hover,
+.next-article a:hover,
+.prev-article a:hover {
+  color: var(--zenui-blue);
+  background: var(--zenui-blue-soft);
+}
+
+footer {
+  border-top: 1px solid var(--zenui-line);
+  color: var(--zenui-muted);
+  background: var(--zenui-surface-soft);
 }
 
 /* WPF controls inherit hundreds of framework members and interfaces.
@@ -79,19 +683,12 @@ body[data-layout="landing"] article {
   min-height: min(760px, calc(100vh - 64px));
   padding: clamp(5rem, 9vw, 8rem) max(5vw, calc((100vw - 1180px) / 2));
   background:
-    radial-gradient(circle at 88% 22%, color-mix(in srgb, var(--zenui-blue) 18%, transparent), transparent 30%),
+    radial-gradient(circle at 88% 22%, color-mix(in srgb, var(--zenui-blue) 10%, transparent), transparent 32%),
     linear-gradient(145deg, var(--zenui-surface) 45%, var(--zenui-surface-soft));
 }
 
 .zenui-hero::before {
-  position: absolute;
-  top: 12%;
-  right: 5%;
-  width: 320px;
-  height: 320px;
-  border: 1px solid color-mix(in srgb, var(--zenui-blue) 22%, transparent);
-  border-radius: 50%;
-  content: "";
+  display: none;
 }
 
 .zenui-eyebrow {
@@ -137,16 +734,15 @@ body[data-layout="landing"] article {
   border-radius: 10px;
   font-weight: 650;
   text-decoration: none;
-  transition: transform 160ms ease, box-shadow 160ms ease, background-color 160ms ease;
+  transition: border-color 160ms ease, background-color 160ms ease, color 160ms ease;
 }
 
 .zenui-button:hover {
-  transform: translateY(-1px);
+  text-decoration: none;
 }
 
 .zenui-button-primary {
   background: var(--zenui-blue);
-  box-shadow: 0 10px 28px color-mix(in srgb, var(--zenui-blue) 28%, transparent);
   color: #ffffff;
 }
 
@@ -186,16 +782,15 @@ body[data-layout="landing"] article {
   z-index: 1;
   padding: 18px;
   border: 1px solid color-mix(in srgb, var(--zenui-blue) 20%, var(--zenui-line));
-  border-radius: 28px;
-  background: color-mix(in srgb, var(--zenui-surface) 62%, transparent);
-  box-shadow: 0 34px 80px color-mix(in srgb, var(--zenui-blue) 18%, transparent);
-  backdrop-filter: blur(18px);
+  border-radius: 22px;
+  background: var(--zenui-surface-raised);
+  box-shadow: var(--zenui-shadow);
 }
 
 .zenui-preview-window {
   overflow: hidden;
   border: 1px solid var(--zenui-line);
-  border-radius: 18px;
+  border-radius: 14px;
   background: var(--zenui-surface);
 }
 
@@ -319,7 +914,13 @@ body[data-layout="landing"] article {
   padding: 2rem;
   border: 1px solid var(--zenui-line);
   border-radius: 16px;
-  background: var(--zenui-surface-soft);
+  background: var(--zenui-surface);
+  transition: border-color 160ms ease, background-color 160ms ease;
+}
+
+.zenui-value-grid article:hover {
+  border-color: color-mix(in srgb, var(--zenui-blue) 32%, var(--zenui-line));
+  background: color-mix(in srgb, var(--zenui-blue-soft) 35%, var(--zenui-surface));
 }
 
 .zenui-card-index {
@@ -413,6 +1014,11 @@ body[data-layout="landing"] article {
   .zenui-install-section > div:first-child {
     grid-row: auto;
   }
+
+  article.content,
+  main > .content > article {
+    max-width: none;
+  }
 }
 
 @media (max-width: 576px) {
@@ -439,10 +1045,54 @@ body[data-layout="landing"] article {
     padding: 10px;
     border-radius: 20px;
   }
+
+  article > h1:first-child {
+    font-size: 2rem;
+  }
+
+  article h2 {
+    margin-top: 2.4rem;
+    font-size: 1.45rem;
+  }
+
+  article table {
+    display: block;
+    overflow-x: auto;
+    white-space: nowrap;
+  }
+
+  article pre {
+    margin-right: -0.25rem;
+    margin-left: -0.25rem;
+    padding: 1rem;
+  }
 }
 
 @media (prefers-reduced-motion: reduce) {
-  .zenui-button {
+  *,
+  *::before,
+  *::after {
+    scroll-behavior: auto !important;
     transition: none;
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+  }
+}
+
+@media (forced-colors: active) {
+  .sidebar .nav-link.active,
+  .sidebar .nav-link[aria-current="page"],
+  .zenui-button,
+  .NOTE,
+  .TIP,
+  .IMPORTANT,
+  .WARNING,
+  .CAUTION {
+    border: 1px solid CanvasText;
+  }
+
+  .zenui-button-primary {
+    color: HighlightText;
+    background: Highlight;
   }
 }
