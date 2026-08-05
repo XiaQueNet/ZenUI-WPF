@@ -72,10 +72,10 @@ jobs:
         run: dotnet restore ZenUI.Wpf.slnx
 
       - name: Test controls
-        run: dotnet test --project tests/ZenUI.Wpf.Tests/ZenUI.Wpf.Tests.csproj --configuration Release --framework ${{ matrix.framework }} --no-restore
+        run: dotnet test --project tests/ZenUI.Wpf.Tests/ZenUI.Wpf.Tests.csproj --configuration Release --framework ${{ matrix.framework }} --max-parallel-test-modules 1 --no-restore
 
       - name: Test converters
-        run: dotnet test --project tests/ZenUI.Wpf.Converters.Tests/ZenUI.Wpf.Converters.Tests.csproj --configuration Release --framework ${{ matrix.framework }} --no-restore
+        run: dotnet test --project tests/ZenUI.Wpf.Converters.Tests/ZenUI.Wpf.Converters.Tests.csproj --configuration Release --framework ${{ matrix.framework }} --max-parallel-test-modules 1 --no-restore
 
       - name: Upload visual snapshots
         if: always()

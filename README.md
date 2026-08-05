@@ -140,7 +140,7 @@ private void PasswordBox_OnPasswordChanged(object sender, RoutedEventArgs e)
 ```powershell
 dotnet restore ZenUI.Wpf.slnx
 dotnet build ZenUI.Wpf.slnx -c Release --no-restore
-dotnet test ZenUI.Wpf.slnx -c Release --no-build
+dotnet test ZenUI.Wpf.slnx -c Release --max-parallel-test-modules 1 --no-build
 ```
 
 仓库在 Windows CI 中将编译器与 .NET 分析器警告视为错误，同时通过完整测试矩阵逐版本验证 .NET Framework 4.6.2～4.8.1 与 `.NET 8/9/10 for Windows`，并在对应运行时上对 `.NET 5/6/7 for Windows` 执行兼容性冒烟测试。正式发布包包含 `net462`、`net471`、`net472`、`net5.0-windows` 与 `net8.0-windows` 五套资产，并验证 NuGet/Symbol 包及多主题、多 Density、多 DPI 视觉快照。正式产物通过 `.\scripts\pack-release.ps1 -Version <version> -Package <package-id>` 生成；只发布有实际变更的包。

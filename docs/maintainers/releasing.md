@@ -158,7 +158,7 @@ git push origin v0.1.0-preview.2
 ```powershell
 dotnet restore ZenUI.Wpf.slnx
 dotnet build ZenUI.Wpf.slnx -c Release --no-restore
-dotnet test ZenUI.Wpf.slnx -c Release --no-build --no-restore
+dotnet test ZenUI.Wpf.slnx -c Release --max-parallel-test-modules 1 --no-build --no-restore
 dotnet list ZenUI.Wpf.slnx package --vulnerable --include-transitive
 ```
 

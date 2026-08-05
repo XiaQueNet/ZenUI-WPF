@@ -61,7 +61,7 @@ ZenUI 只调整 WPF 控件的默认值和默认呈现，不覆盖或移除基类
 ```powershell
 dotnet restore ZenUI.Wpf.slnx
 dotnet build ZenUI.Wpf.slnx -c Release --no-restore
-dotnet test ZenUI.Wpf.slnx -c Release --no-build
+dotnet test ZenUI.Wpf.slnx -c Release --max-parallel-test-modules 1 --no-build
 $packageOutput = Join-Path ([System.IO.Path]::GetTempPath()) "ZenUI-WPF-packages"
 dotnet pack src/ZenUI.Wpf/ZenUI.Wpf.csproj -c Release --no-build -o $packageOutput
 dotnet pack src/ZenUI.Wpf.Converters/ZenUI.Wpf.Converters.csproj -c Release --no-build -o $packageOutput

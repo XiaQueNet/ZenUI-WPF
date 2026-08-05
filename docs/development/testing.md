@@ -71,10 +71,18 @@
 
 修复缺陷时先添加能复现问题的回归测试；纯重构、测试基础设施修复或为已有行为补覆盖时，不要求刻意制造失败。
 
-提交前至少运行：
+组件库的日常新增、修改或删除不运行本地全框架矩阵，只运行受影响测试并选择一个当前主目标框架。全框架验证仅用于目标框架或兼容层变更、构建与打包基础设施变更、发布验证，或明确要求全量验证的场景。
+
+提交前至少运行受影响测试，例如控件和主题改动可执行：
 
 ```powershell
-dotnet test ZenUI.Wpf.slnx -c Release
+dotnet test --project tests/ZenUI.Wpf.Tests/ZenUI.Wpf.Tests.csproj -c Release -f net10.0-windows
+```
+
+确需运行解决方案级全量自动化测试时，测试模块必须串行执行，避免共享的 WPF、主题、Dispatcher、视觉快照或其他进程级状态互相干扰。统一将 `--max-parallel-test-modules` 设为 `1`；仅运行单个测试项目、测试类或测试方法时不强制附加该参数。
+
+```powershell
+dotnet test ZenUI.Wpf.slnx -c Release --max-parallel-test-modules 1
 ```
 
 影响打包、公共 API 或多目标框架配置时，还应按 `CONTRIBUTING.md` 运行完整构建与打包检查。
