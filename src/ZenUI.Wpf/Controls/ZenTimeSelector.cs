@@ -14,9 +14,24 @@ namespace ZenUI.Wpf.Controls
     [TemplatePart(Name = PartPeriodList, Type = typeof(ListBox))]
     internal class ZenTimeSelector : Control
     {
+        /// <summary>
+        /// 时间选择模板中小时列表部件的名称。
+        /// </summary>
         internal const string PartHourList = "PART_HourList";
+
+        /// <summary>
+        /// 时间选择模板中分钟列表部件的名称。
+        /// </summary>
         internal const string PartMinuteList = "PART_MinuteList";
+
+        /// <summary>
+        /// 时间选择模板中秒列表部件的名称。
+        /// </summary>
         internal const string PartSecondList = "PART_SecondList";
+
+        /// <summary>
+        /// 时间选择模板中 AM/PM 列表部件的名称。
+        /// </summary>
         internal const string PartPeriodList = "PART_PeriodList";
 
         private static readonly Type SelfType = typeof(ZenTimeSelector);
@@ -182,12 +197,18 @@ namespace ZenUI.Wpf.Controls
                 SelfType,
                 new FrameworkPropertyMetadata(true, HandleOptionsChanged));
 
+        /// <summary>
+        /// 获取或设置小时、分钟和秒选择列的宽度。
+        /// </summary>
         internal double ColumnWidth
         {
             get { return (double)GetValue(ColumnWidthProperty); }
             set { SetValue(ColumnWidthProperty, value); }
         }
 
+        /// <summary>
+        /// 标识 <see cref="ColumnWidth"/> 依赖属性。
+        /// </summary>
         internal static readonly DependencyProperty ColumnWidthProperty =
             DependencyProperty.Register(
                 nameof(ColumnWidth),
@@ -196,26 +217,38 @@ namespace ZenUI.Wpf.Controls
                 new FrameworkPropertyMetadata(64d),
                 value => (double)value > 0d);
 
+        /// <summary>
+        /// 获取或设置 AM/PM 选择列的宽度。
+        /// </summary>
         internal double PeriodColumnWidth
         {
             get { return (double)GetValue(PeriodColumnWidthProperty); }
             set { SetValue(PeriodColumnWidthProperty, value); }
         }
 
+        /// <summary>
+        /// 标识 <see cref="PeriodColumnWidth"/> 依赖属性。
+        /// </summary>
         internal static readonly DependencyProperty PeriodColumnWidthProperty =
             DependencyProperty.Register(
                 nameof(PeriodColumnWidth),
                 typeof(double),
                 SelfType,
-                new FrameworkPropertyMetadata(74d),
+                new FrameworkPropertyMetadata(64d),
                 value => (double)value > 0d);
 
+        /// <summary>
+        /// 获取或设置时间选择列表的高度。
+        /// </summary>
         internal double ListHeight
         {
             get { return (double)GetValue(ListHeightProperty); }
             set { SetValue(ListHeightProperty, value); }
         }
 
+        /// <summary>
+        /// 标识 <see cref="ListHeight"/> 依赖属性。
+        /// </summary>
         internal static readonly DependencyProperty ListHeightProperty =
             DependencyProperty.Register(
                 nameof(ListHeight),
@@ -230,12 +263,18 @@ namespace ZenUI.Wpf.Controls
                            !double.IsInfinity(height);
                 });
 
+        /// <summary>
+        /// 获取或设置时间选择项的高度。
+        /// </summary>
         internal double ItemHeight
         {
             get { return (double)GetValue(ItemHeightProperty); }
             set { SetValue(ItemHeightProperty, value); }
         }
 
+        /// <summary>
+        /// 标识 <see cref="ItemHeight"/> 依赖属性。
+        /// </summary>
         internal static readonly DependencyProperty ItemHeightProperty =
             DependencyProperty.Register(
                 nameof(ItemHeight),
@@ -244,6 +283,9 @@ namespace ZenUI.Wpf.Controls
                 new FrameworkPropertyMetadata(36d),
                 value => (double)value > 0d);
 
+        /// <summary>
+        /// 当选中时间发生变化时发生。
+        /// </summary>
         internal event EventHandler SelectedTimeChanged;
 
         /// <inheritdoc />
@@ -262,6 +304,9 @@ namespace ZenUI.Wpf.Controls
             SynchronizeTemplate();
         }
 
+        /// <summary>
+        /// 将各时间列表滚动到当前选中项。
+        /// </summary>
         internal void ScrollSelectedItemsIntoView()
         {
             coordinator?.ScrollSelectedItemsIntoView();

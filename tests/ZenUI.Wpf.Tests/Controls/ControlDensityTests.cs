@@ -221,8 +221,9 @@ namespace ZenUI.Wpf.Tests.Controls
                 Assert.IsTrue(double.IsNaN(dayButton.Height));
                 Assert.IsGreaterThan(0d, dayButton.ActualWidth);
                 Assert.IsGreaterThan(0d, dayButton.ActualHeight);
-                Assert.AreEqual(new Thickness(12, 16, 12, 16), monthButton.Padding);
-                Assert.AreEqual(40d, navigationButton.Width);
+                Assert.AreEqual(new Thickness(0), monthButton.Padding);
+                Assert.IsTrue(double.IsNaN(navigationButton.Width));
+                Assert.IsGreaterThan(0d, navigationButton.ActualWidth);
                 AssertCalendarDayButtonsFit(monthView);
 
                 ZenDensityManager.ApplyDensity(window.Resources, ZenDensity.Compact);
@@ -238,8 +239,9 @@ namespace ZenUI.Wpf.Tests.Controls
                 Assert.AreEqual(new Thickness(6), calendarItem.Margin);
                 Assert.IsTrue(double.IsNaN(dayButton.Width));
                 Assert.IsTrue(double.IsNaN(dayButton.Height));
-                Assert.AreEqual(new Thickness(10, 13, 10, 13), monthButton.Padding);
-                Assert.AreEqual(36d, navigationButton.Width);
+                Assert.AreEqual(new Thickness(0), monthButton.Padding);
+                Assert.IsTrue(double.IsNaN(navigationButton.Width));
+                Assert.IsGreaterThan(0d, navigationButton.ActualWidth);
                 AssertCalendarDayButtonsFit(monthView);
 
                 ZenDensityManager.ApplyDensity(window.Resources, ZenDensity.Comfortable);
@@ -255,8 +257,9 @@ namespace ZenUI.Wpf.Tests.Controls
                 Assert.AreEqual(new Thickness(10), calendarItem.Margin);
                 Assert.IsTrue(double.IsNaN(dayButton.Width));
                 Assert.IsTrue(double.IsNaN(dayButton.Height));
-                Assert.AreEqual(new Thickness(14, 18, 14, 18), monthButton.Padding);
-                Assert.AreEqual(44d, navigationButton.Width);
+                Assert.AreEqual(new Thickness(0), monthButton.Padding);
+                Assert.IsTrue(double.IsNaN(navigationButton.Width));
+                Assert.IsGreaterThan(0d, navigationButton.ActualWidth);
                 AssertCalendarDayButtonsFit(monthView);
             }
             finally

@@ -105,14 +105,9 @@ namespace ZenUI.Wpf.Controls
 
             BindPopupProperty(calendar, FrameworkElement.WidthProperty, nameof(CalendarPopupWidth));
             BindPopupProperty(calendar, FrameworkElement.HeightProperty, nameof(CalendarPopupHeight));
-            BindPopupProperty(calendar, ZenCalendar.ButtonPaddingProperty, nameof(CalendarButtonPadding));
             BindPopupProperty(calendar, Calendar.FirstDayOfWeekProperty, nameof(FirstDayOfWeek));
             BindPopupProperty(calendar, FrameworkElement.FlowDirectionProperty, nameof(FlowDirection));
             BindPopupProperty(calendar, Control.FontSizeProperty, nameof(CalendarFontSize));
-            BindPopupProperty(
-                calendar,
-                ZenCalendar.NavigationButtonSizeProperty,
-                nameof(CalendarNavigationButtonSize));
             BindPopupProperty(calendar, FrameworkElement.StyleProperty, nameof(CalendarStyle));
             ApplyPopupDateConstraints(calendar);
         }
@@ -260,46 +255,6 @@ namespace ZenUI.Wpf.Controls
                 typeof(CornerRadius),
                 typeof(ZenDatePicker),
                 new FrameworkPropertyMetadata(new CornerRadius(6)));
-
-        /// <summary>
-        /// 获取或设置日历月份和年份按钮的内边距。
-        /// </summary>
-        [Bindable(true)]
-        public Thickness CalendarButtonPadding
-        {
-            get { return (Thickness)GetValue(CalendarButtonPaddingProperty); }
-            set { SetValue(CalendarButtonPaddingProperty, value); }
-        }
-
-        /// <summary>
-        /// 标识 <see cref="CalendarButtonPadding"/> 依赖属性。
-        /// </summary>
-        public static readonly DependencyProperty CalendarButtonPaddingProperty =
-            DependencyProperty.Register(
-                nameof(CalendarButtonPadding),
-                typeof(Thickness),
-                typeof(ZenDatePicker),
-                new FrameworkPropertyMetadata(new Thickness(12, 16, 12, 16)));
-
-        /// <summary>
-        /// 获取或设置日历导航按钮的边长。
-        /// </summary>
-        [Bindable(true)]
-        public double CalendarNavigationButtonSize
-        {
-            get { return (double)GetValue(CalendarNavigationButtonSizeProperty); }
-            set { SetValue(CalendarNavigationButtonSizeProperty, value); }
-        }
-
-        /// <summary>
-        /// 标识 <see cref="CalendarNavigationButtonSize"/> 依赖属性。
-        /// </summary>
-        public static readonly DependencyProperty CalendarNavigationButtonSizeProperty =
-            DependencyProperty.Register(
-                nameof(CalendarNavigationButtonSize),
-                typeof(double),
-                typeof(ZenDatePicker),
-                new FrameworkPropertyMetadata(40d));
 
         /// <summary>
         /// 获取或设置日历弹层的宽度。

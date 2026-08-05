@@ -3,13 +3,13 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:sys="clr-namespace:System;assembly=mscorlib">
 
-    <!-- 按钮 -->
+    <!--  按钮  -->
     <sys:Double x:Key="ZenButtonMinHeight">36</sys:Double>
     <Thickness x:Key="ZenButtonPadding">10,4</Thickness>
     <CornerRadius x:Key="ZenButtonCornerRadius">8</CornerRadius>
     <CornerRadius x:Key="ZenButtonFocusVisualCornerRadius">11</CornerRadius>
 
-    <!-- 列表框 -->
+    <!--  列表框  -->
     <Thickness x:Key="ZenListBoxPadding">4</Thickness>
     <CornerRadius x:Key="ZenListBoxCornerRadius">8</CornerRadius>
     <Thickness x:Key="ZenListBoxItemPadding">12,9</Thickness>
@@ -28,10 +28,10 @@
     <Thickness x:Key="ZenHorizontalScrollBarThumbMargin">0,5,0,1</Thickness>
     <CornerRadius x:Key="ZenScrollBarCornerRadius">3</CornerRadius>
 
-    <!-- 数字输入框 -->
+    <!--  数字输入框  -->
     <sys:Double x:Key="ZenNumberBoxSpinButtonWidth">34</sys:Double>
 
-    <!-- 弹层表面 -->
+    <!--  弹层表面  -->
     <Thickness x:Key="ZenComboBoxPopupMargin">0,4,0,0</Thickness>
     <Thickness x:Key="ZenComboBoxPopupPadding">4</Thickness>
     <CornerRadius x:Key="ZenComboBoxPopupCornerRadius">6</CornerRadius>
@@ -39,17 +39,20 @@
     <Thickness x:Key="ZenTimePickerPopupPadding">6</Thickness>
     <CornerRadius x:Key="ZenTimePickerPopupCornerRadius">8</CornerRadius>
     <sys:Double x:Key="ZenTimePickerColumnWidth">64</sys:Double>
-    <sys:Double x:Key="ZenTimePickerPeriodColumnWidth">74</sys:Double>
+    <sys:Double x:Key="ZenTimePickerPeriodColumnWidth">64</sys:Double>
     <sys:Double x:Key="ZenTimePickerListHeight">196</sys:Double>
     <sys:Double x:Key="ZenTimePickerItemHeight">36</sys:Double>
     <Thickness x:Key="ZenTimePickerItemMargin">0,2</Thickness>
     <Thickness x:Key="ZenDateTimePickerPopupPadding">4</Thickness>
     <sys:Double x:Key="ZenDateTimePickerIconSize">16</sys:Double>
-    <sys:Double x:Key="ZenDateTimePickerSelectionCellWidth">40</sys:Double>
-    <sys:Double x:Key="ZenDateTimePickerSelectionCellHeight">36</sys:Double>
-    <Thickness x:Key="ZenDateTimePickerTimePanelMargin">0</Thickness>
+    <sys:Double x:Key="ZenDateTimePickerCalendarCellWidth">40</sys:Double>
+    <sys:Double x:Key="ZenDateTimePickerCalendarCellHeight">36</sys:Double>
+    <sys:Double x:Key="ZenDateTimePickerTimeItemWidth">64</sys:Double>
+    <sys:Double x:Key="ZenDateTimePickerTimeItemHeight">36</sys:Double>
+    <Thickness x:Key="ZenDateTimePickerTimePanelMargin">8,0,0,0</Thickness>
+    <Thickness x:Key="ZenDateTimePickerTimePanelPadding">8,0,0,0</Thickness>
 
-    <!-- 右键菜单 -->
+    <!--  右键菜单  -->
     <sys:Double x:Key="ZenContextMenuMinWidth">184</sys:Double>
     <Thickness x:Key="ZenContextMenuPadding">5</Thickness>
     <CornerRadius x:Key="ZenContextMenuCornerRadius">8</CornerRadius>
@@ -59,62 +62,61 @@
     <Thickness x:Key="ZenContextMenuGestureMargin">28,0,6,0</Thickness>
     <Thickness x:Key="ZenContextMenuSeparatorMargin">8,5</Thickness>
 
-    <!-- 气泡提示 -->
+    <!--  气泡提示  -->
     <Thickness x:Key="ZenCalloutPadding">14,10</Thickness>
     <CornerRadius x:Key="ZenCalloutCornerRadius">6</CornerRadius>
     <sys:Double x:Key="ZenCalloutMaxWidth">360</sys:Double>
     <sys:Double x:Key="ZenCalloutTriggerSize">24</sys:Double>
     <sys:Double x:Key="ZenCalloutTargetGap">4</sys:Double>
 
-    <!-- 数据网格 -->
+    <!--  数据网格  -->
     <sys:Double x:Key="ZenDataGridColumnHeaderHeight">44</sys:Double>
     <sys:Double x:Key="ZenDataGridRowMinHeight">44</sys:Double>
     <Thickness x:Key="ZenDataGridCellPadding">14,0</Thickness>
     <Thickness x:Key="ZenDataGridCellFocusVisualBorderThickness">1</Thickness>
     <Thickness x:Key="ZenDataGridCellValidationBorderThickness">2</Thickness>
 
-    <!-- 日历 -->
+    <!--  日历  -->
     <sys:Double x:Key="ZenCalendarPopupWidth">368</sys:Double>
     <sys:Double x:Key="ZenCalendarPopupHeight">376</sys:Double>
     <CornerRadius x:Key="ZenCalendarCornerRadius">8</CornerRadius>
     <Thickness x:Key="ZenCalendarContentMargin">8</Thickness>
     <Thickness x:Key="ZenCalendarButtonPadding">12,16</Thickness>
-    <sys:Double x:Key="ZenCalendarNavigationButtonSize">40</sys:Double>
 
-    <!-- 开关 -->
+    <!--  开关  -->
     <sys:Double x:Key="ZenSwitchWidth">60</sys:Double>
     <sys:Double x:Key="ZenSwitchHeight">30</sys:Double>
     <Thickness x:Key="ZenSwitchThumbMargin">4</Thickness>
 
-    <!-- 选择控件 -->
+    <!--  选择控件  -->
     <sys:Double x:Key="ZenSelectionIndicatorSize">18</sys:Double>
     <CornerRadius x:Key="ZenSelectionIndicatorCornerRadius">4</CornerRadius>
     <CornerRadius x:Key="ZenSelectionFocusVisualCornerRadius">4</CornerRadius>
 
-    <!-- 滑块 -->
+    <!--  滑块  -->
     <sys:Double x:Key="ZenSliderThumbSize">18</sys:Double>
     <sys:Double x:Key="ZenSliderTrackThickness">4</sys:Double>
     <sys:Double x:Key="ZenSliderCrossAxisMinSize">24</sys:Double>
 
-    <!-- 进度条 -->
+    <!--  进度条  -->
     <sys:Double x:Key="ZenProgressBarThickness">8</sys:Double>
 
-    <!-- 加载状态 -->
+    <!--  加载状态  -->
     <sys:Double x:Key="ZenLoadingIndicatorSize">24</sys:Double>
     <sys:Double x:Key="ZenLoadingIndicatorThickness">2</sys:Double>
     <sys:Double x:Key="ZenLoadingContentSpacing">10</sys:Double>
 
-    <!-- 提示条 -->
+    <!--  提示条  -->
     <Thickness x:Key="ZenAlertPadding">14,11</Thickness>
     <CornerRadius x:Key="ZenAlertCornerRadius">6</CornerRadius>
 
-    <!-- 折叠面板 -->
+    <!--  折叠面板  -->
     <Thickness x:Key="ZenExpanderHeaderPadding">14,12</Thickness>
     <Thickness x:Key="ZenExpanderContentPadding">14,10,14,14</Thickness>
     <CornerRadius x:Key="ZenExpanderCornerRadius">8</CornerRadius>
     <sys:Double x:Key="ZenExpanderGlyphSize">16</sys:Double>
 
-    <!-- 按钮式单选组 -->
+    <!--  按钮式单选组  -->
     <sys:Double x:Key="ZenRadioItemMinHeight">36</sys:Double>
     <Thickness x:Key="ZenRadioItemPadding">14,0</Thickness>
     <CornerRadius x:Key="ZenRadioItemCornerRadius">8</CornerRadius>

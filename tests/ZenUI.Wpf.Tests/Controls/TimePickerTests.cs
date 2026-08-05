@@ -79,7 +79,7 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.AreEqual(4, minuteList.Items.Count);
             Assert.AreEqual(6, secondList.Items.Count);
             Assert.AreEqual(
-                ScrollBarVisibility.Hidden,
+                ScrollBarVisibility.Visible,
                 ScrollViewer.GetVerticalScrollBarVisibility(hourList));
         }
 
@@ -230,7 +230,7 @@ namespace ZenUI.Wpf.Tests.Controls
                     new Thickness(0, 4, 0, 8),
                     new Thickness(6),
                     64d,
-                    74d,
+                    64d,
                     196d,
                     36d,
                     new Thickness(0, 2, 0, 2));
@@ -244,8 +244,8 @@ namespace ZenUI.Wpf.Tests.Controls
                     firstItem,
                     new Thickness(0, 3, 0, 6),
                     new Thickness(4),
-                    58d,
-                    68d,
+                    60d,
+                    60d,
                     172d,
                     32d,
                     new Thickness(0, 1, 0, 1));
@@ -259,8 +259,8 @@ namespace ZenUI.Wpf.Tests.Controls
                     firstItem,
                     new Thickness(0, 6, 0, 10),
                     new Thickness(8),
-                    70d,
-                    80d,
+                    68d,
+                    68d,
                     220d,
                     40d,
                     new Thickness(0, 3, 0, 3));

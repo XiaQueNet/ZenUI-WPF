@@ -167,7 +167,7 @@ namespace ZenUI.Wpf.Tests.Controls
         }
 
         [TestMethod]
-        public void DateTimePickerPopupProducesReviewableCellDrivenSnapshot()
+        public void DateTimePickerPopupProducesReviewableIndependentMetricsSnapshot()
         {
             var framework = Environment.Version.Major >= 8 ? "net8" : "net472";
             var outputDirectory = Path.Combine(
@@ -177,8 +177,25 @@ namespace ZenUI.Wpf.Tests.Controls
                 "date-time-picker");
             Directory.CreateDirectory(outputDirectory);
 
+            foreach (var density in new[]
+            {
+                ZenDensity.Compact,
+                ZenDensity.Standard,
+                ZenDensity.Comfortable
+            })
+            {
+                SaveDateTimePickerPopupSnapshot(outputDirectory, density);
+            }
+        }
+
+        private static void SaveDateTimePickerPopupSnapshot(
+            string outputDirectory,
+            ZenDensity density)
+        {
             var picker = new ZenDateTimePicker
             {
+                Height = 40d,
+                VerticalAlignment = VerticalAlignment.Top,
                 SelectedDateTime = new DateTime(2026, 8, 5, 14, 36, 28)
             };
             var window = new Window
@@ -196,6 +213,18 @@ namespace ZenUI.Wpf.Tests.Controls
                     "/ZenUI.Wpf;component/Themes/Generic.xaml",
                     UriKind.Relative)
             });
+            ZenDensityManager.ApplyDensity(window.Resources, density);
+
+            var calendarCellWidth =
+                (double)window.Resources["ZenDateTimePickerCalendarCellWidth"];
+            var calendarCellHeight =
+                (double)window.Resources["ZenDateTimePickerCalendarCellHeight"];
+            picker.CalendarCellWidth = calendarCellWidth;
+            picker.CalendarCellHeight = calendarCellHeight;
+            picker.TimeItemWidth =
+                (double)window.Resources["ZenDateTimePickerTimeItemWidth"];
+            picker.TimeItemHeight =
+                (double)window.Resources["ZenDateTimePickerTimeItemHeight"];
 
             try
             {
@@ -226,13 +255,20 @@ namespace ZenUI.Wpf.Tests.Controls
                 var weekday = monthView.Children
                     .OfType<FrameworkElement>()
                     .First(element => Grid.GetRow(element) == 0);
-                Assert.AreEqual(weekday.ActualHeight, dayButton.ActualHeight, 1d);
+                Assert.AreEqual(
+                    weekday.ActualHeight,
+                    dayButton.ActualHeight +
+                    dayButton.Margin.Top +
+                    dayButton.Margin.Bottom,
+                    1d);
 
                 var bitmap = RenderRealizedElement(popupContent, 1.25d);
                 Assert.IsGreaterThan(12, CountDistinctSampledColors(bitmap));
                 SavePng(
                     bitmap,
-                    Path.Combine(outputDirectory, "Light-Standard-1.25x.png"));
+                    Path.Combine(
+                        outputDirectory,
+                        $"Light-{density}-IndependentMetrics-1.25x.png"));
             }
             finally
             {

@@ -69,9 +69,15 @@ namespace ZenUI.Wpf.Tests.Controls
                     calendarItem.Template.FindName("PART_MonthView", calendarItem) as Grid;
                 Assert.IsNotNull(root);
                 Assert.IsNotNull(monthView);
+                Assert.AreEqual(3, root.RowDefinitions.Count);
                 Assert.AreEqual(
-                    GridUnitType.Auto,
-                    root.RowDefinitions[0].Height.GridUnitType);
+                    new GridLength(1, GridUnitType.Star),
+                    root.RowDefinitions[0].Height);
+                Assert.AreEqual(GridLength.Auto, root.RowDefinitions[1].Height);
+                Assert.AreEqual(
+                    new GridLength(7, GridUnitType.Star),
+                    root.RowDefinitions[2].Height);
+                Assert.AreEqual(2, Grid.GetRow(monthView));
                 Assert.AreEqual(
                     GridUnitType.Star,
                     monthView.RowDefinitions[0].Height.GridUnitType);

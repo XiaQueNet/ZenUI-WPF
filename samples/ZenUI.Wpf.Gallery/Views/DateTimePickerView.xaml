@@ -66,12 +66,26 @@
                             <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="自定义大小" />
                             <zen:ZenDateTimePicker
                                 Width="300"
+                                CalendarCellHeight="50"
+                                CalendarCellWidth="60"
                                 DropDownHeight="Auto"
                                 DropDownWidth="Auto"
                                 FontSize="24"
                                 IconSize="24"
-                                SelectionCellHeight="40"
-                                SelectionCellWidth="50" />
+                                IsSecondVisible="True"
+                                TimeItemHeight="50"
+                                TimeItemWidth="82" />
+                            <zen:ZenDateTimePicker
+                                Width="400"
+                                CalendarCellHeight="50"
+                                CalendarCellWidth="60"
+                                DropDownHeight="Auto"
+                                DropDownWidth="Auto"
+                                FontSize="24"
+                                IconSize="24"
+                                IsSecondVisible="False"
+                                TimeItemHeight="40"
+                                TimeItemWidth="52" />
                         </StackPanel>
                     </WrapPanel>
                 </StackPanel>

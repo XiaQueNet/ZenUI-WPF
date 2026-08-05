@@ -449,44 +449,88 @@ namespace ZenUI.Wpf.Controls
                 IsValidAutoOrPositiveDimension);
 
         /// <summary>
-        /// 获取或设置日期、星期和时间选择单元的宽度。<see cref="double.NaN"/> 表示根据弹层宽度自动均分。
+        /// 获取或设置日历网格单元的宽度。<see cref="double.NaN"/> 表示根据弹层宽度自动分配。
         /// </summary>
         [Bindable(true)]
         [TypeConverter(typeof(LengthConverter))]
-        public double SelectionCellWidth
+        public double CalendarCellWidth
         {
-            get { return (double)GetValue(SelectionCellWidthProperty); }
-            set { SetValue(SelectionCellWidthProperty, value); }
+            get { return (double)GetValue(CalendarCellWidthProperty); }
+            set { SetValue(CalendarCellWidthProperty, value); }
         }
 
         /// <summary>
-        /// 标识 <see cref="SelectionCellWidth"/> 依赖属性。
+        /// 标识 <see cref="CalendarCellWidth"/> 依赖属性。
         /// </summary>
-        public static readonly DependencyProperty SelectionCellWidthProperty =
+        public static readonly DependencyProperty CalendarCellWidthProperty =
             DependencyProperty.Register(
-                nameof(SelectionCellWidth),
+                nameof(CalendarCellWidth),
                 typeof(double),
                 SelfType,
                 new FrameworkPropertyMetadata(40d, HandleSelectionMetricsChanged),
                 IsValidAutoOrPositiveDimension);
 
         /// <summary>
-        /// 获取或设置日期、星期和时间选择单元的高度。<see cref="double.NaN"/> 表示根据弹层高度自动均分。
+        /// 获取或设置日历网格单元的高度。<see cref="double.NaN"/> 表示根据弹层高度自动分配。
         /// </summary>
         [Bindable(true)]
         [TypeConverter(typeof(LengthConverter))]
-        public double SelectionCellHeight
+        public double CalendarCellHeight
         {
-            get { return (double)GetValue(SelectionCellHeightProperty); }
-            set { SetValue(SelectionCellHeightProperty, value); }
+            get { return (double)GetValue(CalendarCellHeightProperty); }
+            set { SetValue(CalendarCellHeightProperty, value); }
         }
 
         /// <summary>
-        /// 标识 <see cref="SelectionCellHeight"/> 依赖属性。
+        /// 标识 <see cref="CalendarCellHeight"/> 依赖属性。
         /// </summary>
-        public static readonly DependencyProperty SelectionCellHeightProperty =
+        public static readonly DependencyProperty CalendarCellHeightProperty =
             DependencyProperty.Register(
-                nameof(SelectionCellHeight),
+                nameof(CalendarCellHeight),
+                typeof(double),
+                SelfType,
+                new FrameworkPropertyMetadata(36d, HandleSelectionMetricsChanged),
+                IsValidAutoOrPositiveDimension);
+
+        /// <summary>
+        /// 获取或设置时间选择项的宽度。<see cref="double.NaN"/> 表示根据时间面板宽度自动均分。
+        /// </summary>
+        [Bindable(true)]
+        [TypeConverter(typeof(LengthConverter))]
+        public double TimeItemWidth
+        {
+            get { return (double)GetValue(TimeItemWidthProperty); }
+            set { SetValue(TimeItemWidthProperty, value); }
+        }
+
+        /// <summary>
+        /// 标识 <see cref="TimeItemWidth"/> 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty TimeItemWidthProperty =
+            DependencyProperty.Register(
+                nameof(TimeItemWidth),
+                typeof(double),
+                SelfType,
+                new FrameworkPropertyMetadata(64d, HandleSelectionMetricsChanged),
+                IsValidAutoOrPositiveDimension);
+
+        /// <summary>
+        /// 获取或设置时间选择项的高度。<see cref="double.NaN"/> 表示根据时间列表高度自动计算。
+        /// </summary>
+        [Bindable(true)]
+        [TypeConverter(typeof(LengthConverter))]
+        public double TimeItemHeight
+        {
+            get { return (double)GetValue(TimeItemHeightProperty); }
+            set { SetValue(TimeItemHeightProperty, value); }
+        }
+
+        /// <summary>
+        /// 标识 <see cref="TimeItemHeight"/> 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty TimeItemHeightProperty =
+            DependencyProperty.Register(
+                nameof(TimeItemHeight),
                 typeof(double),
                 SelfType,
                 new FrameworkPropertyMetadata(36d, HandleSelectionMetricsChanged),
@@ -761,33 +805,37 @@ namespace ZenUI.Wpf.Controls
             dropDownBorder.Height = DropDownHeight;
 
             var visibleTimeColumnCount = GetVisibleTimeColumnCount();
-            var fixedCellWidth = !double.IsNaN(SelectionCellWidth);
-            var fixedCellHeight = !double.IsNaN(SelectionCellHeight);
+            var fixedCalendarCellWidth = !double.IsNaN(CalendarCellWidth);
+            var fixedCalendarCellHeight = !double.IsNaN(CalendarCellHeight);
+            var fixedTimeItemWidth = !double.IsNaN(TimeItemWidth);
+            var fixedTimeItemHeight = !double.IsNaN(TimeItemHeight);
 
             selectionPanel.Width = double.NaN;
             selectionPanel.Height = double.NaN;
-            selectionPanel.HorizontalAlignment = fixedCellWidth
+            selectionPanel.HorizontalAlignment =
+                fixedCalendarCellWidth && fixedTimeItemWidth
                 ? HorizontalAlignment.Left
                 : HorizontalAlignment.Stretch;
-            selectionPanel.VerticalAlignment = fixedCellHeight
+            selectionPanel.VerticalAlignment =
+                fixedCalendarCellHeight && fixedTimeItemHeight
                 ? VerticalAlignment.Top
                 : VerticalAlignment.Stretch;
 
             if (selectionPanel.ColumnDefinitions.Count >= 2)
             {
-                selectionPanel.ColumnDefinitions[0].Width = fixedCellWidth
+                selectionPanel.ColumnDefinitions[0].Width = fixedCalendarCellWidth
                     ? GridLength.Auto
                     : new GridLength(7d, GridUnitType.Star);
-                selectionPanel.ColumnDefinitions[1].Width = fixedCellWidth
+                selectionPanel.ColumnDefinitions[1].Width = fixedTimeItemWidth
                     ? GridLength.Auto
                     : new GridLength(visibleTimeColumnCount, GridUnitType.Star);
             }
 
-            calendar.Width = fixedCellWidth
-                ? 7d * SelectionCellWidth
+            calendar.Width = fixedCalendarCellWidth
+                ? 7d * CalendarCellWidth
                 : double.NaN;
-            calendar.Height = fixedCellHeight
-                ? 8.25d * SelectionCellHeight
+            calendar.Height = fixedCalendarCellHeight
+                ? 8.25d * CalendarCellHeight
                 : double.NaN;
 
             UpdateTimeSelectorMetrics();
@@ -801,37 +849,37 @@ namespace ZenUI.Wpf.Controls
             }
 
             var visibleTimeColumnCount = GetVisibleTimeColumnCount();
-            var cellWidth = SelectionCellWidth;
-            if (double.IsNaN(cellWidth))
+            var itemWidth = TimeItemWidth;
+            if (double.IsNaN(itemWidth))
             {
-                cellWidth = calendar.ActualWidth > 0d
-                    ? calendar.ActualWidth / 7d
+                if (timePanel != null)
+                {
+                    var horizontalChrome = timePanel.BorderThickness.Left +
+                        timePanel.BorderThickness.Right +
+                        timePanel.Padding.Left +
+                        timePanel.Padding.Right;
+                    itemWidth = Math.Max(
+                        1d,
+                        (timePanel.ActualWidth - horizontalChrome) /
+                        visibleTimeColumnCount);
+                }
+                else
+                {
+                    itemWidth = 1d;
+                }
+            }
+
+            var itemHeight = TimeItemHeight;
+            if (double.IsNaN(itemHeight))
+            {
+                itemHeight = timeSelector.ListHeight > 0d
+                    ? timeSelector.ListHeight / 8.25d
                     : 1d;
             }
 
-            var cellHeight = SelectionCellHeight;
-            if (double.IsNaN(cellHeight))
-            {
-                cellHeight = calendar.ActualHeight > 0d
-                    ? calendar.ActualHeight / 8.25d
-                    : 1d;
-            }
-
-            if (timePanel != null && double.IsNaN(SelectionCellWidth))
-            {
-                var horizontalChrome = timePanel.BorderThickness.Left +
-                    timePanel.BorderThickness.Right +
-                    timePanel.Padding.Left +
-                    timePanel.Padding.Right;
-                cellWidth = Math.Max(
-                    1d,
-                    (timePanel.ActualWidth - horizontalChrome) /
-                    visibleTimeColumnCount);
-            }
-
-            timeSelector.SetCurrentValue(ZenTimeSelector.ColumnWidthProperty, cellWidth);
-            timeSelector.SetCurrentValue(ZenTimeSelector.PeriodColumnWidthProperty, cellWidth);
-            timeSelector.SetCurrentValue(ZenTimeSelector.ItemHeightProperty, cellHeight);
+            timeSelector.SetCurrentValue(ZenTimeSelector.ColumnWidthProperty, itemWidth);
+            timeSelector.SetCurrentValue(ZenTimeSelector.PeriodColumnWidthProperty, itemWidth);
+            timeSelector.SetCurrentValue(ZenTimeSelector.ItemHeightProperty, itemHeight);
         }
 
         private int GetVisibleTimeColumnCount()

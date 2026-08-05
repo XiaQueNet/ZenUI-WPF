@@ -28,6 +28,10 @@ namespace ZenUI.Wpf.Tests.Theming
             Assert.AreEqual(new Thickness(6), resources["ZenCalendarContentMargin"]);
             Assert.AreEqual(172d, resources["ZenTimePickerListHeight"]);
             Assert.AreEqual(32d, resources["ZenTimePickerItemHeight"]);
+            Assert.AreEqual(36d, resources["ZenDateTimePickerCalendarCellWidth"]);
+            Assert.AreEqual(32d, resources["ZenDateTimePickerCalendarCellHeight"]);
+            Assert.AreEqual(60d, resources["ZenDateTimePickerTimeItemWidth"]);
+            Assert.AreEqual(32d, resources["ZenDateTimePickerTimeItemHeight"]);
             Assert.AreEqual(52d, resources["ZenSwitchWidth"]);
             Assert.AreEqual(16d, resources["ZenSelectionIndicatorSize"]);
             Assert.AreEqual(16d, resources["ZenSliderThumbSize"]);
@@ -50,6 +54,10 @@ namespace ZenUI.Wpf.Tests.Theming
             Assert.AreEqual(new Thickness(10), resources["ZenCalendarContentMargin"]);
             Assert.AreEqual(220d, resources["ZenTimePickerListHeight"]);
             Assert.AreEqual(40d, resources["ZenTimePickerItemHeight"]);
+            Assert.AreEqual(44d, resources["ZenDateTimePickerCalendarCellWidth"]);
+            Assert.AreEqual(40d, resources["ZenDateTimePickerCalendarCellHeight"]);
+            Assert.AreEqual(68d, resources["ZenDateTimePickerTimeItemWidth"]);
+            Assert.AreEqual(40d, resources["ZenDateTimePickerTimeItemHeight"]);
             Assert.AreEqual(68d, resources["ZenSwitchWidth"]);
             Assert.AreEqual(20d, resources["ZenSelectionIndicatorSize"]);
             Assert.AreEqual(20d, resources["ZenSliderThumbSize"]);
@@ -72,6 +80,10 @@ namespace ZenUI.Wpf.Tests.Theming
             Assert.AreEqual(new Thickness(8), resources["ZenCalendarContentMargin"]);
             Assert.AreEqual(196d, resources["ZenTimePickerListHeight"]);
             Assert.AreEqual(36d, resources["ZenTimePickerItemHeight"]);
+            Assert.AreEqual(40d, resources["ZenDateTimePickerCalendarCellWidth"]);
+            Assert.AreEqual(36d, resources["ZenDateTimePickerCalendarCellHeight"]);
+            Assert.AreEqual(64d, resources["ZenDateTimePickerTimeItemWidth"]);
+            Assert.AreEqual(36d, resources["ZenDateTimePickerTimeItemHeight"]);
             Assert.AreEqual(60d, resources["ZenSwitchWidth"]);
             Assert.AreEqual(18d, resources["ZenSelectionIndicatorSize"]);
             Assert.AreEqual(18d, resources["ZenSliderThumbSize"]);

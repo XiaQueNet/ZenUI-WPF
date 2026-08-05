@@ -36,8 +36,6 @@ namespace ZenUI.Wpf.Tests.Controls
                 Assert.AreEqual(368d, calendar.Width);
                 Assert.AreEqual(376d, calendar.Height);
                 Assert.AreEqual(new CornerRadius(8), calendar.CornerRadius);
-                Assert.AreEqual(new Thickness(12, 16, 12, 16), calendar.ButtonPadding);
-                Assert.AreEqual(40d, calendar.NavigationButtonSize);
                 Assert.AreEqual(new DateTime(2026, 7, 27), calendar.SelectedDate);
                 var calendarItem =
                     calendar.Template.FindName("PART_CalendarItem", calendar) as CalendarItem;
@@ -51,14 +49,27 @@ namespace ZenUI.Wpf.Tests.Controls
                 var headerDivider =
                     calendarItem.Template.FindName("HeaderDivider", calendarItem) as Border;
                 Assert.IsNotNull(headerDivider);
-                Assert.AreEqual(1d, headerDivider.Height);
+                Assert.AreEqual(0d, headerDivider.Height);
                 Assert.AreEqual(1, Grid.GetRow(headerDivider));
-                Assert.AreEqual(new Thickness(0, 8, 0, 8), headerDivider.Margin);
+                Assert.AreEqual(new Thickness(0), headerDivider.Margin);
                 Assert.AreSame(window.Resources["ZenDividerBrush"], headerDivider.Background);
                 var headerPanel =
                     calendarItem.Template.FindName("HeaderPanel", calendarItem) as Grid;
                 Assert.IsNotNull(headerPanel);
                 Assert.AreEqual(new Thickness(0), headerPanel.Margin);
+                Assert.AreEqual(7, headerPanel.ColumnDefinitions.Count);
+                Assert.IsTrue(headerPanel.ColumnDefinitions.All(column =>
+                    column.Width == new GridLength(1, GridUnitType.Star)));
+                var previousButton =
+                    calendarItem.Template.FindName("PART_PreviousButton", calendarItem) as Button;
+                Assert.IsNotNull(previousButton);
+                var nextButton =
+                    calendarItem.Template.FindName("PART_NextButton", calendarItem) as Button;
+                Assert.IsNotNull(nextButton);
+                Assert.AreEqual(0, Grid.GetColumn(previousButton));
+                Assert.AreEqual(6, Grid.GetColumn(nextButton));
+                Assert.AreEqual(new Thickness(1), previousButton.Margin);
+                Assert.AreEqual(previousButton.Margin, nextButton.Margin);
                 var headerButton =
                     calendarItem.Template.FindName("PART_HeaderButton", calendarItem) as Button;
                 Assert.IsNotNull(headerButton);
@@ -71,8 +82,16 @@ namespace ZenUI.Wpf.Tests.Controls
                 var monthView =
                     calendarItem.Template.FindName("PART_MonthView", calendarItem) as Grid;
                 Assert.IsNotNull(monthView);
+                Assert.AreEqual(2, Grid.GetRow(monthView));
                 Assert.AreEqual(new Thickness(0), monthView.Margin);
-                var dayTitle = monthView.Children.OfType<TextBlock>().FirstOrDefault();
+                var dayButton = monthView.Children.OfType<CalendarDayButton>().FirstOrDefault();
+                Assert.IsNotNull(dayButton);
+                Assert.AreEqual(previousButton.Margin, dayButton.Margin);
+                Assert.AreEqual(dayButton.ActualWidth, previousButton.ActualWidth, 0.01);
+                Assert.AreEqual(dayButton.ActualHeight, previousButton.ActualHeight, 0.01);
+                Assert.AreEqual(dayButton.ActualWidth, nextButton.ActualWidth, 0.01);
+                Assert.AreEqual(dayButton.ActualHeight, nextButton.ActualHeight, 0.01);
+                var dayTitle = FindVisualDescendant<TextBlock>(monthView);
                 Assert.IsNotNull(dayTitle);
                 Assert.AreEqual(calendar.FontSize, dayTitle.FontSize);
             }
@@ -122,14 +141,10 @@ namespace ZenUI.Wpf.Tests.Controls
         {
             var calendar = new ZenCalendar
             {
-                CornerRadius = new CornerRadius(14),
-                ButtonPadding = new Thickness(8),
-                NavigationButtonSize = 32d
+                CornerRadius = new CornerRadius(14)
             };
 
             Assert.AreEqual(new CornerRadius(14), calendar.CornerRadius);
-            Assert.AreEqual(new Thickness(8), calendar.ButtonPadding);
-            Assert.AreEqual(32d, calendar.NavigationButtonSize);
         }
 
         private static void AddZenResources(FrameworkElement element)

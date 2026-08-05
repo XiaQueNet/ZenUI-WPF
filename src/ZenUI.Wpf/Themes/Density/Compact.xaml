@@ -24,15 +24,18 @@
     <Thickness x:Key="ZenComboBoxPopupPadding">3</Thickness>
     <Thickness x:Key="ZenTimePickerPopupMargin">0,3,0,6</Thickness>
     <Thickness x:Key="ZenTimePickerPopupPadding">4</Thickness>
-    <sys:Double x:Key="ZenTimePickerColumnWidth">58</sys:Double>
-    <sys:Double x:Key="ZenTimePickerPeriodColumnWidth">68</sys:Double>
+    <sys:Double x:Key="ZenTimePickerColumnWidth">60</sys:Double>
+    <sys:Double x:Key="ZenTimePickerPeriodColumnWidth">60</sys:Double>
     <sys:Double x:Key="ZenTimePickerListHeight">172</sys:Double>
     <sys:Double x:Key="ZenTimePickerItemHeight">32</sys:Double>
     <Thickness x:Key="ZenTimePickerItemMargin">0,1</Thickness>
     <Thickness x:Key="ZenDateTimePickerPopupPadding">3</Thickness>
-    <sys:Double x:Key="ZenDateTimePickerSelectionCellWidth">36</sys:Double>
-    <sys:Double x:Key="ZenDateTimePickerSelectionCellHeight">32</sys:Double>
-    <Thickness x:Key="ZenDateTimePickerTimePanelMargin">0</Thickness>
+    <sys:Double x:Key="ZenDateTimePickerCalendarCellWidth">36</sys:Double>
+    <sys:Double x:Key="ZenDateTimePickerCalendarCellHeight">32</sys:Double>
+    <sys:Double x:Key="ZenDateTimePickerTimeItemWidth">60</sys:Double>
+    <sys:Double x:Key="ZenDateTimePickerTimeItemHeight">32</sys:Double>
+    <Thickness x:Key="ZenDateTimePickerTimePanelMargin">6,0,0,0</Thickness>
+    <Thickness x:Key="ZenDateTimePickerTimePanelPadding">6,0,0,0</Thickness>
     <Thickness x:Key="ZenContextMenuPadding">3</Thickness>
     <sys:Double x:Key="ZenContextMenuItemMinHeight">32</sys:Double>
     <Thickness x:Key="ZenContextMenuItemPadding">7,2</Thickness>
@@ -48,8 +51,6 @@
     <sys:Double x:Key="ZenCalendarPopupWidth">328</sys:Double>
     <sys:Double x:Key="ZenCalendarPopupHeight">348</sys:Double>
     <Thickness x:Key="ZenCalendarContentMargin">6</Thickness>
-    <Thickness x:Key="ZenCalendarButtonPadding">10,13</Thickness>
-    <sys:Double x:Key="ZenCalendarNavigationButtonSize">36</sys:Double>
 
     <sys:Double x:Key="ZenSwitchWidth">52</sys:Double>
     <sys:Double x:Key="ZenSwitchHeight">26</sys:Double>

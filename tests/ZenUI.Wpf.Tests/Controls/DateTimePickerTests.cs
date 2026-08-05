@@ -37,8 +37,10 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.AreEqual(16d, picker.IconSize);
             Assert.IsTrue(double.IsNaN(picker.DropDownWidth));
             Assert.IsTrue(double.IsNaN(picker.DropDownHeight));
-            Assert.AreEqual(40d, picker.SelectionCellWidth);
-            Assert.AreEqual(36d, picker.SelectionCellHeight);
+            Assert.AreEqual(40d, picker.CalendarCellWidth);
+            Assert.AreEqual(36d, picker.CalendarCellHeight);
+            Assert.AreEqual(64d, picker.TimeItemWidth);
+            Assert.AreEqual(36d, picker.TimeItemHeight);
             Assert.AreEqual(
                 CultureInfo.CurrentCulture.DateTimeFormat.FirstDayOfWeek,
                 picker.FirstDayOfWeek);
@@ -145,8 +147,10 @@ namespace ZenUI.Wpf.Tests.Controls
             picker.IconSize = 24d;
             picker.DropDownWidth = 520d;
             picker.DropDownHeight = 400d;
-            picker.SelectionCellWidth = 70d;
-            picker.SelectionCellHeight = 44d;
+            picker.CalendarCellWidth = 70d;
+            picker.CalendarCellHeight = 44d;
+            picker.TimeItemWidth = 54d;
+            picker.TimeItemHeight = 32d;
 
             var calendar = GetPart<Calendar>(picker, "PART_Calendar");
             var selector = GetPart<ZenTimeSelector>(picker, "PART_TimeSelector");
@@ -160,9 +164,9 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.AreEqual(400d, GetPart<Border>(picker, "PART_DropDownBorder").Height);
             Assert.AreEqual(490d, calendar.Width);
             Assert.AreEqual(363d, calendar.Height);
-            Assert.AreEqual(70d, selector.ColumnWidth);
-            Assert.AreEqual(70d, selector.PeriodColumnWidth);
-            Assert.AreEqual(44d, selector.ItemHeight);
+            Assert.AreEqual(54d, selector.ColumnWidth);
+            Assert.AreEqual(54d, selector.PeriodColumnWidth);
+            Assert.AreEqual(32d, selector.ItemHeight);
         }
 
         [TestMethod]
@@ -177,11 +181,13 @@ namespace ZenUI.Wpf.Tests.Controls
         }
 
         [TestMethod]
-        public void AutoSelectionCellsLetDropDownBoundsDriveLayout()
+        public void AutoCalendarCellsAndTimeItemsLetDropDownBoundsDriveLayout()
         {
             var picker = CreateTemplatedPicker();
-            picker.SelectionCellWidth = double.NaN;
-            picker.SelectionCellHeight = double.NaN;
+            picker.CalendarCellWidth = double.NaN;
+            picker.CalendarCellHeight = double.NaN;
+            picker.TimeItemWidth = double.NaN;
+            picker.TimeItemHeight = double.NaN;
             picker.DropDownWidth = 520d;
             picker.DropDownHeight = 400d;
 
@@ -198,20 +204,25 @@ namespace ZenUI.Wpf.Tests.Controls
         }
 
         [TestMethod]
-        public void SelectionMetricsRejectInvalidValues()
+        public void CalendarAndTimeMetricsRejectInvalidValues()
         {
             var picker = new ZenDateTimePicker();
 
             Assert.ThrowsExactly<ArgumentException>(() => picker.DropDownWidth = 0d);
             Assert.ThrowsExactly<ArgumentException>(() => picker.DropDownHeight = -1d);
             Assert.ThrowsExactly<ArgumentException>(
-                () => picker.SelectionCellWidth = double.PositiveInfinity);
-            Assert.ThrowsExactly<ArgumentException>(() => picker.SelectionCellHeight = 0d);
+                () => picker.CalendarCellWidth = double.PositiveInfinity);
+            Assert.ThrowsExactly<ArgumentException>(() => picker.CalendarCellHeight = 0d);
+            Assert.ThrowsExactly<ArgumentException>(() => picker.TimeItemWidth = -1d);
+            Assert.ThrowsExactly<ArgumentException>(
+                () => picker.TimeItemHeight = double.NegativeInfinity);
 
             picker.DropDownWidth = double.NaN;
             picker.DropDownHeight = double.NaN;
-            picker.SelectionCellWidth = double.NaN;
-            picker.SelectionCellHeight = double.NaN;
+            picker.CalendarCellWidth = double.NaN;
+            picker.CalendarCellHeight = double.NaN;
+            picker.TimeItemWidth = double.NaN;
+            picker.TimeItemHeight = double.NaN;
         }
 
         [TestMethod]

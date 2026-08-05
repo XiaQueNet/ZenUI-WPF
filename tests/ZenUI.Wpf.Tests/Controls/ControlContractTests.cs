@@ -176,10 +176,16 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.AreEqual(new Thickness(6), dictionary["ZenTimePickerPopupPadding"]);
             Assert.AreEqual(new CornerRadius(8), dictionary["ZenTimePickerPopupCornerRadius"]);
             Assert.AreEqual(64d, dictionary["ZenTimePickerColumnWidth"]);
-            Assert.AreEqual(74d, dictionary["ZenTimePickerPeriodColumnWidth"]);
+            Assert.AreEqual(64d, dictionary["ZenTimePickerPeriodColumnWidth"]);
             Assert.AreEqual(196d, dictionary["ZenTimePickerListHeight"]);
             Assert.AreEqual(36d, dictionary["ZenTimePickerItemHeight"]);
             Assert.AreEqual(new Thickness(0, 2, 0, 2), dictionary["ZenTimePickerItemMargin"]);
+            Assert.AreEqual(new Thickness(8, 0, 0, 0), dictionary["ZenDateTimePickerTimePanelMargin"]);
+            Assert.AreEqual(new Thickness(8, 0, 0, 0), dictionary["ZenDateTimePickerTimePanelPadding"]);
+            Assert.AreEqual(40d, dictionary["ZenDateTimePickerCalendarCellWidth"]);
+            Assert.AreEqual(36d, dictionary["ZenDateTimePickerCalendarCellHeight"]);
+            Assert.AreEqual(64d, dictionary["ZenDateTimePickerTimeItemWidth"]);
+            Assert.AreEqual(36d, dictionary["ZenDateTimePickerTimeItemHeight"]);
             Assert.AreEqual(44d, dictionary["ZenDataGridColumnHeaderHeight"]);
             Assert.AreEqual(44d, dictionary["ZenDataGridRowMinHeight"]);
             Assert.AreEqual(new Thickness(14, 0, 14, 0), dictionary["ZenDataGridCellPadding"]);
@@ -188,8 +194,6 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.AreEqual(368d, dictionary["ZenCalendarPopupWidth"]);
             Assert.AreEqual(376d, dictionary["ZenCalendarPopupHeight"]);
             Assert.AreEqual(new Thickness(8), dictionary["ZenCalendarContentMargin"]);
-            Assert.AreEqual(new Thickness(12, 16, 12, 16), dictionary["ZenCalendarButtonPadding"]);
-            Assert.AreEqual(40d, dictionary["ZenCalendarNavigationButtonSize"]);
             Assert.AreEqual(60d, dictionary["ZenSwitchWidth"]);
             Assert.AreEqual(30d, dictionary["ZenSwitchHeight"]);
             Assert.AreEqual(new Thickness(4), dictionary["ZenSwitchThumbMargin"]);

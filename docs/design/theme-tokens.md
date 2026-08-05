@@ -31,13 +31,13 @@ Component Metrics 只收录具有明确控件语义、且不依赖模板内部�
 
 当前 Component Metrics 覆盖 Button、ListBox、ScrollBar、ComboBox 弹层、DataGrid、Calendar、DateTimePicker、Switch、Slider、ProgressBar、Loading 和 Alert。DatePicker 创建的 Calendar 位于独立 Popup 资源作用域，弹层宽高、日期格、月份按钮、导航按钮和字号通过 `ZenDatePicker` 依赖属性及显式源绑定传递；更复杂的外观仍应通过 WPF 原生 `CalendarStyle` 定制。图标路径和只服务于单个模板结构的坐标仍属于实现细节。
 
-DateTimePicker 使用 `ZenDateTimePickerSelectionCellWidth` 和 `ZenDateTimePickerSelectionCellHeight` 作为默认尺寸入口。默认由 Cell 尺寸自然测量弹层；实例把 `SelectionCellWidth` 或 `SelectionCellHeight` 设为 `Auto` 后，对应方向改由 `DropDownWidth` 或 `DropDownHeight` 的可用空间自动均分。星期、日期与时间项共用单元尺寸，头部按单元高度的固定比例布局。组合控件内的 Calendar 和时间面板不再叠加各自的内容 Padding，外围留白统一由 `ZenDateTimePickerPopupPadding` 管理。
+DateTimePicker 使用 `ZenDateTimePickerCalendarCellWidth`、`ZenDateTimePickerCalendarCellHeight`、`ZenDateTimePickerTimeItemWidth` 和 `ZenDateTimePickerTimeItemHeight` 分别定义日历单元与时间选项的默认尺寸。实例可独立调整两组尺寸；将某项设为 `Auto` 后，对应区域改由 `DropDownWidth` 或 `DropDownHeight` 的可用空间自动分配。日历头部按日历单元高度的固定比例布局。组合控件的外围留白统一由 `ZenDateTimePickerPopupPadding` 管理；日历与分割线之间的留白由 `ZenDateTimePickerTimePanelMargin` 管理，分割线与时间选择列表之间的留白由 `ZenDateTimePickerTimePanelPadding` 管理。
 
 Interaction Token 按控件角色区分禁用后的视觉强调程度，而不是按具体控件命名。Light 和 Dark 使用原有透明度层级；HighContrast 将这些可靠的状态 Token 覆盖为完全不透明，让系统色承担禁用语义，避免透明度进一步削弱可读性。
 
 Calendar 弹层和部分 DataGrid 模板内部状态暂不纳入 Interaction Token：前者位于独立 Popup 资源边界，后者包含通过 `TargetName` 修改模板内部元素的触发器。此类状态应优先通过 `CalendarStyle` 或控件依赖属性显式传递，避免产生看似可覆盖、实际无法可靠解析的 Token。
 
-DatePicker 的 Calendar 位于独立 Popup 中，窗口级定制应通过 `ZenDatePicker.CalendarStyle` 传入；可基于公开的 `ZenCalendarStyle`、`ZenCalendarDayButtonStyle` 等 Style 扩展。弹层整体尺寸经 `CalendarPopupWidth` 和 `CalendarPopupHeight` 传递，日期按钮自动填充月份网格；月份按钮与导航尺寸经 `CalendarButtonPadding` 和 `CalendarNavigationButtonSize` 传递，字号经 `CalendarFontSize` 传递。DataGrid 单元格的焦点与校验边框使用独立覆盖层，厚度分别经 `CellFocusVisualBorderThickness` 和 `CellValidationBorderThickness` 传递，避免状态切换改变内容 Padding 和布局。
+DatePicker 的 Calendar 位于独立 Popup 中，窗口级定制应通过 `ZenDatePicker.CalendarStyle` 传入；可基于公开的 `ZenCalendarStyle`、`ZenCalendarDayButtonStyle` 等 Style 扩展。弹层整体尺寸经 `CalendarPopupWidth` 和 `CalendarPopupHeight` 传递，日期按钮自动填充月份网格，导航按钮始终占用相同大小的网格单元；字号经 `CalendarFontSize` 传递。DataGrid 单元格的焦点与校验边框使用独立覆盖层，厚度分别经 `CellFocusVisualBorderThickness` 和 `CellValidationBorderThickness` 传递，避免状态切换改变内容 Padding 和布局。
 
 Typography Token 提供 Caption、Body、Subtitle、Title、Display 等语义层级。所有公开 Zen 控件的默认 Style 使用 `ZenFontSizeBody`（14）作为正文大小；应用可覆盖该 Token 统一调整，也可在 Style 或单个控件上设置 `FontSize`。ZenUI 不强制设置全局 `FontFamily`，以保留系统字体和应用级本地化选择。绝对行高仅用于 `TextBlock` 排版，不应直接套用到固定高度的输入控件。
 

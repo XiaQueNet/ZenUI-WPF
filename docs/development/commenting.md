@@ -138,23 +138,23 @@ public static readonly DependencyProperty CornerRadiusProperty = /* ... */;
 
 ```csharp
 /// <summary>
-/// 获取指定元素的导航按钮边长。
+/// 获取指定元素的日历外框圆角半径。
 /// </summary>
 /// <param name="element">要从中读取属性值的元素。</param>
-/// <returns>指定元素的导航按钮边长。</returns>
-public static double GetNavigationButtonSize(DependencyObject element)
+/// <returns>指定元素的日历外框圆角半径。</returns>
+public static CornerRadius GetCornerRadius(DependencyObject element)
 {
-    return (double)element.GetValue(NavigationButtonSizeProperty);
+    return (CornerRadius)element.GetValue(CornerRadiusProperty);
 }
 
 /// <summary>
-/// 设置指定元素的导航按钮边长。
+/// 设置指定元素的日历外框圆角半径。
 /// </summary>
 /// <param name="element">要在其上设置属性值的元素。</param>
-/// <param name="value">要设置的边长。</param>
-public static void SetNavigationButtonSize(DependencyObject element, double value)
+/// <param name="value">要设置的圆角半径。</param>
+public static void SetCornerRadius(DependencyObject element, CornerRadius value)
 {
-    element.SetValue(NavigationButtonSizeProperty, value);
+    element.SetValue(CornerRadiusProperty, value);
 }
 ```
 

@@ -12,8 +12,10 @@
         <Setter Property="IconSize" Value="{DynamicResource ZenDateTimePickerIconSize}" />
         <Setter Property="DropDownWidth" Value="Auto" />
         <Setter Property="DropDownHeight" Value="Auto" />
-        <Setter Property="SelectionCellWidth" Value="{DynamicResource ZenDateTimePickerSelectionCellWidth}" />
-        <Setter Property="SelectionCellHeight" Value="{DynamicResource ZenDateTimePickerSelectionCellHeight}" />
+        <Setter Property="CalendarCellWidth" Value="{DynamicResource ZenDateTimePickerCalendarCellWidth}" />
+        <Setter Property="CalendarCellHeight" Value="{DynamicResource ZenDateTimePickerCalendarCellHeight}" />
+        <Setter Property="TimeItemWidth" Value="{DynamicResource ZenDateTimePickerTimeItemWidth}" />
+        <Setter Property="TimeItemHeight" Value="{DynamicResource ZenDateTimePickerTimeItemHeight}" />
         <Setter Property="Background" Value="{DynamicResource ZenSurfaceBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource ZenBorderBrush}" />
         <Setter Property="BorderThickness" Value="{DynamicResource ZenControlBorderThickness}" />
@@ -141,7 +143,7 @@
                                             x:Name="PART_TimePanel"
                                             Grid.Column="1"
                                             Margin="{DynamicResource ZenDateTimePickerTimePanelMargin}"
-                                            Padding="0"
+                                            Padding="{DynamicResource ZenDateTimePickerTimePanelPadding}"
                                             BorderBrush="{DynamicResource ZenDividerBrush}"
                                             BorderThickness="1,0,0,0">
                                             <zen:ZenTimeSelector
