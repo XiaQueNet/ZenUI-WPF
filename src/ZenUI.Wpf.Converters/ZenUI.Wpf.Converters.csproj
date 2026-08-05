@@ -15,14 +15,14 @@
     <AssemblyVersion>0.1.0.0</AssemblyVersion>
     <FileVersion>0.1.0.0</FileVersion>
     <PackageId>ZenUI.Wpf.Converters</PackageId>
-    <Title>ZenUI WPF Converters</Title>
+    <Title>ZenUI WPF 转换器</Title>
     <Authors>XiaQueNet</Authors>
-    <Description>Reusable value converters for .NET Framework 4.6.2 and modern .NET WPF applications.</Description>
+    <Description>面向 .NET Framework 4.6.2 及以上版本与现代 .NET WPF 应用的可复用值转换器库。</Description>
     <PackageTags>wpf;converters;binding;ui;net462;net471;net472;net5;net8;windows</PackageTags>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageIcon>zenui-icon.png</PackageIcon>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageReleaseNotes>See CHANGELOG.md in the package for release details.</PackageReleaseNotes>
+    <PackageReleaseNotes>发布详情请参阅包内的 CHANGELOG.md。</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/XiaQueNet/ZenUI-WPF</PackageProjectUrl>
     <RepositoryUrl>https://github.com/XiaQueNet/ZenUI-WPF.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>

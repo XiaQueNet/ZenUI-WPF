@@ -18,11 +18,11 @@
     <Title>ZenUI WPF 控件库</Title>
     <Authors>XiaQueNet</Authors>
     <Description>面向 .NET Framework 4.6.2 及以上版本与现代 .NET 的可主题化、无障碍 WPF 控件库。</Description>
-    <PackageTags>wpf;controls;ui;net462;net471;net472;net5;net8;windows</PackageTags>
+    <PackageTags>wpf;controls;ui;theme;accessibility;net462;net471;net472;net5;net8;windows</PackageTags>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageIcon>zenui-icon.png</PackageIcon>
     <PackageLicenseExpression>MIT</PackageLicenseExpression>
-    <PackageReleaseNotes>See CHANGELOG.md in the package for release details.</PackageReleaseNotes>
+    <PackageReleaseNotes>发布详情请参阅包内的 CHANGELOG.md。</PackageReleaseNotes>
     <PackageProjectUrl>https://github.com/XiaQueNet/ZenUI-WPF</PackageProjectUrl>
     <RepositoryUrl>https://github.com/XiaQueNet/ZenUI-WPF.git</RepositoryUrl>
     <RepositoryType>git</RepositoryType>
