@@ -15,9 +15,9 @@
     <AssemblyVersion>0.1.0.0</AssemblyVersion>
     <FileVersion>0.1.0.0</FileVersion>
     <PackageId>ZenUI.Wpf</PackageId>
-    <Title>ZenUI WPF Controls</Title>
+    <Title>ZenUI WPF 控件库</Title>
     <Authors>XiaQueNet</Authors>
-    <Description>A themeable and accessible WPF control library for .NET Framework 4.6.2 and modern .NET.</Description>
+    <Description>面向 .NET Framework 4.6.2 及以上版本与现代 .NET 的可主题化、无障碍 WPF 控件库。</Description>
     <PackageTags>wpf;controls;ui;net462;net471;net472;net5;net8;windows</PackageTags>
     <PackageReadmeFile>README.md</PackageReadmeFile>
     <PackageIcon>zenui-icon.png</PackageIcon>
