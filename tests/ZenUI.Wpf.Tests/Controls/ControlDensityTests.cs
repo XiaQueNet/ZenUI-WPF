@@ -73,9 +73,12 @@ namespace ZenUI.Wpf.Tests.Controls
                 window.UpdateLayout();
 
                 var item = listBox.ItemContainerGenerator.ContainerFromIndex(0) as ListBoxItem;
+                var scrollBarTrackBackground =
+                    scrollBar.Template.FindName("TrackBackground", scrollBar) as Border;
                 var sliderTrack = slider.Template.FindName("PART_Track", slider) as Track;
                 var switchThumb = FindVisualDescendant<Ellipse>(@switch);
                 Assert.IsNotNull(item);
+                Assert.IsNotNull(scrollBarTrackBackground);
                 Assert.IsNotNull(sliderTrack);
                 Assert.IsNotNull(sliderTrack.Thumb);
                 Assert.IsNotNull(sliderTrack.DecreaseRepeatButton);
@@ -84,7 +87,8 @@ namespace ZenUI.Wpf.Tests.Controls
                 Assert.AreEqual(34d, numberBox.SpinButtonWidth);
                 Assert.AreEqual(new Thickness(10, 4, 10, 4), button.Padding);
                 Assert.AreEqual(new Thickness(12, 9, 12, 9), item.Padding);
-                Assert.AreEqual(12d, scrollBar.Width);
+                Assert.AreEqual(7d, scrollBar.Width);
+                Assert.AreEqual(7d, scrollBarTrackBackground.Width);
                 Assert.AreEqual(60d, @switch.Width);
                 Assert.AreEqual(30d, @switch.Height);
                 Assert.AreEqual(new Thickness(4), switchThumb.Margin);
@@ -104,7 +108,8 @@ namespace ZenUI.Wpf.Tests.Controls
                 Assert.AreEqual(32d, numberBox.SpinButtonWidth);
                 Assert.AreEqual(new Thickness(8, 3, 8, 3), button.Padding);
                 Assert.AreEqual(new Thickness(10, 6, 10, 6), item.Padding);
-                Assert.AreEqual(10d, scrollBar.Width);
+                Assert.AreEqual(5d, scrollBar.Width);
+                Assert.AreEqual(5d, scrollBarTrackBackground.Width);
                 Assert.AreEqual(52d, @switch.Width);
                 Assert.AreEqual(26d, @switch.Height);
                 Assert.AreEqual(new Thickness(3), switchThumb.Margin);
@@ -124,7 +129,8 @@ namespace ZenUI.Wpf.Tests.Controls
                 Assert.AreEqual(40d, numberBox.SpinButtonWidth);
                 Assert.AreEqual(new Thickness(12, 6, 12, 6), button.Padding);
                 Assert.AreEqual(new Thickness(14, 11, 14, 11), item.Padding);
-                Assert.AreEqual(14d, scrollBar.Width);
+                Assert.AreEqual(9d, scrollBar.Width);
+                Assert.AreEqual(9d, scrollBarTrackBackground.Width);
                 Assert.AreEqual(68d, @switch.Width);
                 Assert.AreEqual(34d, @switch.Height);
                 Assert.AreEqual(new Thickness(4), switchThumb.Margin);

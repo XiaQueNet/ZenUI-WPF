@@ -144,7 +144,7 @@
                 <ScrollViewer
                     Margin="0,12,0,12"
                     HorizontalScrollBarVisibility="Disabled"
-                    VerticalScrollBarVisibility="Auto">
+                    VerticalScrollBarVisibility="Visible">
                     <ItemsControl Margin="8,0,0,0" ItemsSource="{Binding NavigationGroups}">
                         <ItemsControl.ItemTemplate>
                             <DataTemplate>
