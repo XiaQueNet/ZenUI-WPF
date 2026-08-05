@@ -222,7 +222,13 @@ namespace ZenUI.Wpf.Controls
                 typeof(double),
                 SelfType,
                 new FrameworkPropertyMetadata(196d),
-                value => (double)value > 0d);
+                value =>
+                {
+                    var height = (double)value;
+                    return height >= 0d &&
+                           !double.IsNaN(height) &&
+                           !double.IsInfinity(height);
+                });
 
         internal double ItemHeight
         {

@@ -16,6 +16,8 @@ namespace ZenUI.Wpf.Gallery.Controls
 {
     public partial class PropertyTable : UserControl
     {
+        private const string UnreleasedPropertyVersion = "未发布";
+
         private static readonly Dictionary<Assembly, Dictionary<string, string>>
             XmlDescriptionsByAssembly =
                 new Dictionary<Assembly, Dictionary<string, string>>();
@@ -149,6 +151,7 @@ namespace ZenUI.Wpf.Gallery.Controls
                 ["ZenTimePicker"] = "0.1.0-preview.6",
             };
 
+        // 开发中的新增或重命名属性必须显式登记为“未发布”；仅在准备发版时统一替换为实际版本号。
         private static readonly Dictionary<string, string> PropertyVersionOverrides =
             new Dictionary<string, string>(StringComparer.Ordinal)
             {
@@ -178,9 +181,11 @@ namespace ZenUI.Wpf.Gallery.Controls
                 ["ZenDatePicker.CalendarPopupWidth"] = "0.1.0-preview.4",
                 ["ZenDatePicker.CalendarPopupHeight"] = "0.1.0-preview.4",
                 ["ZenDatePicker.CalendarFontSize"] = "0.1.0-preview.4",
+                ["ZenDatePicker.IsTextInputReadOnly"] = UnreleasedPropertyVersion,
                 ["ZenDateTimePicker.DropDownHeight"] = "0.1.0-preview.8",
                 ["ZenDateTimePicker.DropDownWidth"] = "0.1.0-preview.8",
                 ["ZenDateTimePicker.IconSize"] = "0.1.0-preview.8",
+                ["ZenDateTimePicker.IsTextInputReadOnly"] = UnreleasedPropertyVersion,
                 ["ZenDateTimePicker.SelectionCellHeight"] = "0.1.0-preview.8",
                 ["ZenDateTimePicker.SelectionCellWidth"] = "0.1.0-preview.8",
                 ["ZenNumberBox.DecreaseButtonContent"] = "0.1.0-preview.7",
@@ -213,6 +218,7 @@ namespace ZenUI.Wpf.Gallery.Controls
                 ["ZenTextBox.LeadingContentTemplate"] = "0.1.0-preview.2",
                 ["ZenTextBox.TrailingContent"] = "0.1.0-preview.2",
                 ["ZenTextBox.TrailingContentTemplate"] = "0.1.0-preview.2",
+                ["ZenTimePicker.IsTextInputReadOnly"] = UnreleasedPropertyVersion,
             };
 
         public static readonly DependencyProperty ControlTypeProperty =

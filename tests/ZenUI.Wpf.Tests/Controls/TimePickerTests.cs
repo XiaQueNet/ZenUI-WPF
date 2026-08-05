@@ -170,6 +170,20 @@ namespace ZenUI.Wpf.Tests.Controls
         }
 
         [TestMethod]
+        public void InternalTimeSelectorListHeightAcceptsUnarrangedLayout()
+        {
+            var selector = new ZenTimeSelector();
+
+            selector.ListHeight = 0d;
+
+            Assert.AreEqual(0d, selector.ListHeight);
+            Assert.ThrowsExactly<ArgumentException>(() => selector.ListHeight = -1d);
+            Assert.ThrowsExactly<ArgumentException>(() => selector.ListHeight = double.NaN);
+            Assert.ThrowsExactly<ArgumentException>(
+                () => selector.ListHeight = double.PositiveInfinity);
+        }
+
+        [TestMethod]
         public void PopupMetricsFollowDensityChanges()
         {
             var picker = new ZenTimePicker
