@@ -191,7 +191,7 @@ git tag -a v<version> -m "ZenUI.Wpf <version>"
 git push origin v<version>
 ```
 
-推送 `v*` Tag 会触发 `.github/workflows/ci.yml` 中的发布任务。发布任务必须等待构建、完整测试矩阵和兼容性测试全部通过，随后进入 GitHub Environment `生产环境`；若该环境配置了 Required reviewers，需审批后才会继续。
+推送 `v*` Tag 会触发 `.github/workflows/release.yml`。发布工作流会先复用 `.github/workflows/ci.yml` 完成构建、完整测试矩阵和兼容性测试，随后进入 GitHub Environment `生产环境`；若该环境配置了 Required reviewers，需审批后才会继续。
 
 ### 5. 从最终提交打包
 
@@ -284,7 +284,7 @@ NuGet 索引通常需要几分钟。在索引完成前页面可能暂时返回 4
 
 ## 发布自动化
 
-`.github/workflows/ci.yml` 已实现 Tag 驱动的 CD：
+`.github/workflows/release.yml` 已实现 Tag 驱动的 CD，`.github/workflows/ci.yml` 仅负责可复用的持续集成验证：
 
 1. 推送 `v*` Tag 后运行完整 CI。
 2. 自动验证 Tag 格式，并选择版本与 Tag 一致的项目。
@@ -292,4 +292,4 @@ NuGet 索引通常需要几分钟。在索引完成前页面可能暂时返回 4
 4. 通过 GitHub Environment `生产环境` 和 NuGet Trusted Publishing 发布。
 5. 自动创建 GitHub Release 并上传包、符号包和校验和。
 
-版本准备、Changelog 整理、Tag 创建和 `生产环境` 审批仍由维护者负责。首次启用前必须在 GitHub 中创建并保护 `生产环境`，配置 `NUGET_USER`，并确认 NuGet.org 策略中的仓库、工作流文件和环境名称与实际值完全一致。
+版本准备、Changelog 整理、Tag 创建和 `生产环境` 审批仍由维护者负责。首次启用前必须在 GitHub 中创建并保护 `生产环境`，配置 `NUGET_USER`，并确认 NuGet.org 策略中的工作流文件为 `release.yml`、环境名称为 `生产环境`，且仓库信息与实际值完全一致。
