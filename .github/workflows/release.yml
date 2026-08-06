@@ -105,11 +105,24 @@ jobs:
         env:
           NUGET_API_KEY: ${{ steps.nuget_login.outputs.NUGET_API_KEY }}
         run: |
-          dotnet nuget push `
-            "artifacts/releases/${{ steps.release.outputs.version }}/*.nupkg" `
-            --api-key $env:NUGET_API_KEY `
-            --source https://api.nuget.org/v3/index.json `
-            --skip-duplicate
+          $packages = Get-ChildItem `
+            -LiteralPath "artifacts/releases/${{ steps.release.outputs.version }}" `
+            -Filter '*.nupkg' `
+            -File
+          if ($packages.Count -eq 0) {
+            throw "No NuGet packages were found for publication."
+          }
+
+          foreach ($package in $packages) {
+            dotnet nuget push `
+              $package.FullName `
+              --api-key $env:NUGET_API_KEY `
+              --source https://api.nuget.org/v3/index.json `
+              --skip-duplicate
+            if ($LASTEXITCODE -ne 0) {
+              throw "Failed to publish $($package.Name)."
+            }
+          }
 
       - name: Create GitHub Release
         shell: pwsh

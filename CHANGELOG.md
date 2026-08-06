@@ -4,7 +4,7 @@
 
 ## Unreleased
 
-## [0.1.0-preview.10] - 2026-08-06
+## [0.1.0-preview.11] - 2026-08-06
 
 ### Changed
 
@@ -164,8 +164,8 @@
 - Password 明文绑定默认关闭，并标记为过时兼容 API。
 - DataGrid 恢复行虚拟化、行头、行详情、全选、冻结列偏移和高级编辑契约。
 
-[Unreleased]: https://github.com/XiaQueNet/ZenUI-WPF/compare/v0.1.0-preview.10...HEAD
-[0.1.0-preview.10]: https://github.com/XiaQueNet/ZenUI-WPF/compare/v0.1.0-preview.8...v0.1.0-preview.10
+[Unreleased]: https://github.com/XiaQueNet/ZenUI-WPF/compare/v0.1.0-preview.11...HEAD
+[0.1.0-preview.11]: https://github.com/XiaQueNet/ZenUI-WPF/compare/v0.1.0-preview.8...v0.1.0-preview.11
 [0.1.0-preview.8]: https://github.com/XiaQueNet/ZenUI-WPF/compare/v0.1.0-preview.7...v0.1.0-preview.8
 [0.1.0-preview.7]: https://github.com/XiaQueNet/ZenUI-WPF/compare/v0.1.0-preview.6...v0.1.0-preview.7
 [0.1.0-preview.6]: https://github.com/XiaQueNet/ZenUI-WPF/compare/v0.1.0-preview.5...v0.1.0-preview.6
