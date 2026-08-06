@@ -191,9 +191,15 @@ git tag -a v<version> -m "ZenUI.Wpf <version>"
 git push origin v<version>
 ```
 
+推送 `v*` Tag 会触发 `.github/workflows/ci.yml` 中的发布任务。发布任务必须等待构建、完整测试矩阵和兼容性测试全部通过，随后进入 GitHub Environment `生产环境`；若该环境配置了 Required reviewers，需审批后才会继续。
+
 ### 5. 从最终提交打包
 
-Tag 创建后，使用唯一发布脚本从该 Tag 的临时 Git Worktree 重新还原、构建、测试、检查依赖并打包。不要复用提交前生成的旧包，否则 Source Link 可能记录错误提交。
+CD 会根据 Tag 版本选择 `PackageVersion` 完全一致的项目，并使用唯一发布脚本从该 Tag 的临时 Git Worktree 重新还原、构建、测试、检查依赖并打包。不要复用提交前生成的旧包，否则 Source Link 可能记录错误提交。
+
+例如，推送 `v0.1.0-preview.8` 时，只有项目版本为 `0.1.0-preview.8` 的包会进入发布目录。若没有项目版本与 Tag 匹配，发布任务立即失败；两个项目版本都匹配时会同时发布。
+
+需要在本地复现打包时使用：
 
 ```powershell
 .\scripts\pack-release.ps1 -Version <version> -Package <package-id>
@@ -212,35 +218,26 @@ Tag 创建后，使用唯一发布脚本从该 Tag 的临时 Git Worktree 重新
 
 ### 6. 发布 NuGet
 
-API Key 必须：
+CD 使用 NuGet Trusted Publishing，不保存长期 API Key：
 
-- 仅授予 `ZenUI.Wpf` 与 `ZenUI.Wpf.Converters` 所需的 Push 权限。
-- 设置合理的有效期。
-- 不写入源码、脚本、日志、Issue 或聊天。
-- 泄露后立即撤销或刷新。
+1. 发布 Job 仅在 `v*` Tag 上运行，并仅为该 Job 授予 `id-token: write`。
+2. Job 必须声明 GitHub Environment `生产环境`，与 NuGet.org Trusted Publishing 策略完全一致。
+3. `NuGet/login@v1` 在上传前通过 OIDC 换取短期 API Key。
+4. `dotnet nuget push` 使用短期 Key 上传已验证的 `.nupkg`；对应 `.snupkg` 随包发布。
 
-示例：
+GitHub Environment `生产环境` 中必须配置 Secret `NUGET_USER`，值为创建 Trusted Publishing 策略的 NuGet.org 用户名（Profile name，不是邮箱）。不要在仓库中保存用户名之外的 NuGet 凭据。
 
-```powershell
-$secureKey = Read-Host "NuGet API Key" -AsSecureString
-$env:NUGET_API_KEY = [Net.NetworkCredential]::new("", $secureKey).Password
-
-dotnet nuget push "artifacts/releases/<version>/ZenUI.Wpf.<version>.nupkg" `
-  --api-key $env:NUGET_API_KEY `
-  --source "https://api.nuget.org/v3/index.json"
-
-Remove-Item Env:\NUGET_API_KEY
-```
-
-不要单独手工修改 `.nupkg`。若上传后发现问题，应修复源码并发布新版本。
+发布任务允许跳过已存在的同版本包，以便在部分包已上传、但 GitHub Release 创建失败时安全重试。NuGet.org 上的已有版本仍不可覆盖。不要单独手工修改 `.nupkg`；若上传后发现内容问题，应修复源码并发布新版本。
 
 ### 7. 创建 GitHub Release
 
+NuGet 上传成功后，CD 自动创建或更新 GitHub Release：
+
 - Tag：`v<version>`。
 - 标题：`ZenUI WPF <version>`。
-- 预发布版本必须勾选 **Set as a pre-release**。
-- 发布说明使用中文，包含主要变更、安装命令、兼容性提示和破坏性修改。
-- 只上传本次所选包对应的 `.nupkg` 与 `.snupkg`。
+- 带预发布后缀的版本自动标记为 pre-release。
+- 发布说明从 GitHub 自动生成；合并 PR 的标题和说明应清晰、优先使用中文。
+- 附件只包含本次所选包对应的 `.nupkg`、`.snupkg` 和 `SHA256SUMS.txt`。
 
 安装命令：
 
@@ -285,14 +282,14 @@ NuGet 索引通常需要几分钟。在索引完成前页面可能暂时返回 4
 
 当前版本不创建单独 Release 分支；后续开发继续在 `main`，每次公开发布创建新 Tag。
 
-## 后续自动化目标
+## 发布自动化
 
-当前发布仍包含人工操作。后续应增加 Tag 驱动的发布工作流：
+`.github/workflows/ci.yml` 已实现 Tag 驱动的 CD：
 
-1. 推送 `v*` Tag。
-2. 自动验证 Tag 与项目版本一致。
-3. 自动构建、测试、漏洞扫描和打包。
-4. 使用 NuGet Trusted Publishing 或最小权限密钥发布。
-5. 自动创建 GitHub Release 并上传附件。
+1. 推送 `v*` Tag 后运行完整 CI。
+2. 自动验证 Tag 格式，并选择版本与 Tag 一致的项目。
+3. 从 Tag 提交重新构建、测试、扫描漏洞、打包并校验产物。
+4. 通过 GitHub Environment `生产环境` 和 NuGet Trusted Publishing 发布。
+5. 自动创建 GitHub Release 并上传包、符号包和校验和。
 
-自动化完成前，严格执行本文档的人工检查清单。
+版本准备、Changelog 整理、Tag 创建和 `生产环境` 审批仍由维护者负责。首次启用前必须在 GitHub 中创建并保护 `生产环境`，配置 `NUGET_USER`，并确认 NuGet.org 策略中的仓库、工作流文件和环境名称与实际值完全一致。
