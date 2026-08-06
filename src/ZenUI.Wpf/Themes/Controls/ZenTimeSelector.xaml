@@ -99,7 +99,7 @@
                             <Setter TargetName="SecondDivider" Property="Visibility" Value="Collapsed" />
                             <Setter TargetName="PART_SecondList" Property="Visibility" Value="Collapsed" />
                         </Trigger>
-                        <Trigger Property="Is24Hour" Value="True">
+                        <Trigger Property="Is24HourFormat" Value="True">
                             <Setter TargetName="PeriodDivider" Property="Visibility" Value="Collapsed" />
                             <Setter TargetName="PART_PeriodList" Property="Visibility" Value="Collapsed" />
                         </Trigger>

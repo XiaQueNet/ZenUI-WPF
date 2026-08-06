@@ -60,7 +60,7 @@
                             <zen:ZenTimePicker
                                 Width="210"
                                 HorizontalAlignment="Left"
-                                Is24Hour="False">
+                                Is24HourFormat="False">
                                 <zen:ZenTimePicker.SelectedTime>
                                     <sys:TimeSpan>18:45:00</sys:TimeSpan>
                                 </zen:ZenTimePicker.SelectedTime>

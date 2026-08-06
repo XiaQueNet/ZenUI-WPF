@@ -192,18 +192,18 @@ namespace ZenUI.Wpf.Controls
         /// 获取或设置是否使用 24 小时制。设置为 <see langword="false"/> 时显示 AM/PM 选择。
         /// </summary>
         [Bindable(true)]
-        public bool Is24Hour
+        public bool Is24HourFormat
         {
-            get { return (bool)GetValue(Is24HourProperty); }
-            set { SetValue(Is24HourProperty, value); }
+            get { return (bool)GetValue(Is24HourFormatProperty); }
+            set { SetValue(Is24HourFormatProperty, value); }
         }
 
         /// <summary>
-        /// 标识 <see cref="Is24Hour"/> 依赖属性。
+        /// 标识 <see cref="Is24HourFormat"/> 依赖属性。
         /// </summary>
-        public static readonly DependencyProperty Is24HourProperty =
+        public static readonly DependencyProperty Is24HourFormatProperty =
             DependencyProperty.Register(
-                nameof(Is24Hour),
+                nameof(Is24HourFormat),
                 typeof(bool),
                 SelfType,
                 new FrameworkPropertyMetadata(true, HandleDisplayOptionsChanged));
@@ -495,7 +495,9 @@ namespace ZenUI.Wpf.Controls
         {
             if (timeSelector != null)
             {
-                timeSelector.SetCurrentValue(ZenTimeSelector.Is24HourProperty, Is24Hour);
+                timeSelector.SetCurrentValue(
+                    ZenTimeSelector.Is24HourFormatProperty,
+                    Is24HourFormat);
                 timeSelector.SetCurrentValue(
                     ZenTimeSelector.IsSecondVisibleProperty,
                     IsSecondVisible);
@@ -510,7 +512,7 @@ namespace ZenUI.Wpf.Controls
             }
 
             legacyTimeSelector?.Configure(
-                Is24Hour,
+                Is24HourFormat,
                 IsSecondVisible,
                 MinuteIncrement,
                 SecondIncrement,
@@ -544,7 +546,7 @@ namespace ZenUI.Wpf.Controls
             }
 
             var dateTime = DateTime.Today.Add(value.Value);
-            var format = Is24Hour
+            var format = Is24HourFormat
                 ? (IsSecondVisible ? "HH:mm:ss" : "HH:mm")
                 : (IsSecondVisible ? "hh:mm:ss tt" : "hh:mm tt");
             return dateTime.ToString(format, CultureInfo.CurrentCulture);

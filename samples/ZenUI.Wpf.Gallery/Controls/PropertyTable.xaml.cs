@@ -70,7 +70,8 @@ namespace ZenUI.Wpf.Gallery.Controls
                 ["ZenTimePicker.MinuteIncrement"] = "分钟列表的递增步长。",
                 ["ZenTimePicker.SecondIncrement"] = "秒列表的递增步长。",
                 ["ZenTimePicker.IsSecondVisible"] = "是否显示和编辑秒。",
-                ["ZenTimePicker.Is24Hour"] = "是否使用 24 小时制。",
+                ["ZenTimePicker.Is24HourFormat"] = "是否使用 24 小时制。",
+                ["ZenDateTimePicker.Is24HourFormat"] = "是否使用 24 小时制。",
                 ["ZenTimePicker.Watermark"] = "尚未选择时间时显示的水印。",
                 ["ZenTimePicker.IsTextInputReadOnly"] = "时间文本输入是否只读。",
                 ["ZenDateTimePicker.IsTextInputReadOnly"] = "日期时间文本输入是否只读。",
@@ -191,6 +192,7 @@ namespace ZenUI.Wpf.Gallery.Controls
                 ["ZenDateTimePicker.DropDownWidth"] = "0.1.0-preview.8",
                 ["ZenDateTimePicker.DropDownButtonIconSize"] = UnreleasedPropertyVersion,
                 ["ZenDateTimePicker.IsTextInputReadOnly"] = UnreleasedPropertyVersion,
+                ["ZenDateTimePicker.Is24HourFormat"] = UnreleasedPropertyVersion,
                 ["ZenDateTimePicker.CalendarCellHeight"] = "0.1.0-preview.8",
                 ["ZenDateTimePicker.CalendarCellWidth"] = "0.1.0-preview.8",
                 ["ZenDateTimePicker.TimeItemHeight"] = "0.1.0-preview.8",
@@ -231,6 +233,7 @@ namespace ZenUI.Wpf.Gallery.Controls
                 ["ZenTextBox.TrailingContent"] = "0.1.0-preview.2",
                 ["ZenTextBox.TrailingContentTemplate"] = "0.1.0-preview.2",
                 ["ZenTimePicker.IsTextInputReadOnly"] = UnreleasedPropertyVersion,
+                ["ZenTimePicker.Is24HourFormat"] = UnreleasedPropertyVersion,
             };
 
         public static readonly DependencyProperty ControlTypeProperty =

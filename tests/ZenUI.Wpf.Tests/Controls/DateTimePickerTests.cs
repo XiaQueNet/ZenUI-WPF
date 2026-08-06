@@ -30,7 +30,7 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.AreEqual(1, picker.MinuteIncrement);
             Assert.AreEqual(1, picker.SecondIncrement);
             Assert.IsTrue(picker.IsSecondVisible);
-            Assert.IsTrue(picker.Is24Hour);
+            Assert.IsTrue(picker.Is24HourFormat);
             Assert.IsFalse(picker.IsTextInputReadOnly);
             Assert.IsFalse(picker.IsDropDownOpen);
             Assert.AreEqual(new CornerRadius(6), picker.CornerRadius);

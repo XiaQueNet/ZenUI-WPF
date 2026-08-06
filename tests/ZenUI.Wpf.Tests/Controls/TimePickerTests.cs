@@ -28,7 +28,7 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.AreEqual(1, picker.MinuteIncrement);
             Assert.AreEqual(1, picker.SecondIncrement);
             Assert.IsTrue(picker.IsSecondVisible);
-            Assert.IsTrue(picker.Is24Hour);
+            Assert.IsTrue(picker.Is24HourFormat);
             Assert.IsFalse(picker.IsTextInputReadOnly);
             Assert.IsFalse(picker.IsDropDownOpen);
             Assert.AreEqual(new CornerRadius(6), picker.CornerRadius);
@@ -188,7 +188,7 @@ namespace ZenUI.Wpf.Tests.Controls
         {
             var picker = new ZenTimePicker
             {
-                Is24Hour = false,
+                Is24HourFormat = false,
                 IsDropDownOpen = true
             };
             var window = new Window
@@ -284,7 +284,7 @@ namespace ZenUI.Wpf.Tests.Controls
             var picker = new ZenTimePicker
             {
                 Style = (Style)dictionary[typeof(ZenTimePicker)],
-                Is24Hour = false,
+                Is24HourFormat = false,
                 SelectedTime = new TimeSpan(9, 0, 0)
             };
             picker.ApplyTemplate();

@@ -51,7 +51,7 @@
                             <zen:ZenDateTimePicker
                                 x:Name="TwelveHourPicker"
                                 Width="280"
-                                Is24Hour="False"
+                                Is24HourFormat="False"
                                 IsSecondVisible="True"
                                 SecondIncrement="5" />
                         </StackPanel>

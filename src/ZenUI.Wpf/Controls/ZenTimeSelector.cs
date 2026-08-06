@@ -181,18 +181,18 @@ namespace ZenUI.Wpf.Controls
         /// 获取或设置一个值，该值指示是否使用 24 小时制。
         /// </summary>
         [Bindable(true)]
-        public bool Is24Hour
+        public bool Is24HourFormat
         {
-            get { return (bool)GetValue(Is24HourProperty); }
-            set { SetValue(Is24HourProperty, value); }
+            get { return (bool)GetValue(Is24HourFormatProperty); }
+            set { SetValue(Is24HourFormatProperty, value); }
         }
 
         /// <summary>
-        /// 标识 <see cref="Is24Hour"/> 依赖属性。
+        /// 标识 <see cref="Is24HourFormat"/> 依赖属性。
         /// </summary>
-        public static readonly DependencyProperty Is24HourProperty =
+        public static readonly DependencyProperty Is24HourFormatProperty =
             DependencyProperty.Register(
-                nameof(Is24Hour),
+                nameof(Is24HourFormat),
                 typeof(bool),
                 SelfType,
                 new FrameworkPropertyMetadata(true, HandleOptionsChanged));
@@ -386,7 +386,7 @@ namespace ZenUI.Wpf.Controls
         private void ConfigureCoordinator()
         {
             coordinator?.Configure(
-                Is24Hour,
+                Is24HourFormat,
                 IsSecondVisible,
                 MinuteIncrement,
                 SecondIncrement,

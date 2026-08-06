@@ -28,11 +28,11 @@ namespace ZenUI.Wpf.Converters.Tests
         }
 
         [TestMethod]
-        public void BoolConverterAppliesReverseOption()
+        public void BoolConverterAppliesInversionOption()
         {
             var converter = new BoolToVisibilityConverter
             {
-                IsReverse = true
+                IsInverted = true
             };
 
             Assert.AreEqual(
@@ -55,7 +55,7 @@ namespace ZenUI.Wpf.Converters.Tests
                 false,
                 converter.ConvertBack(Visibility.Collapsed, typeof(bool), null, Culture));
 
-            converter.IsReverse = true;
+            converter.IsInverted = true;
             Assert.AreEqual(
                 false,
                 converter.ConvertBack(Visibility.Visible, typeof(bool), null, Culture));

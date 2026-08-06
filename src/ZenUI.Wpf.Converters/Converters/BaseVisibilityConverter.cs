@@ -10,7 +10,7 @@ namespace ZenUI.Wpf.Converters
         /// <summary>
         /// 获取或设置是否反转条件的可见性结果。
         /// </summary>
-        public bool IsReverse { get; set; }
+        public bool IsInverted { get; set; }
 
         /// <summary>
         /// 获取或设置条件不成立时是否返回 <see cref="Visibility.Collapsed"/>；
@@ -28,13 +28,13 @@ namespace ZenUI.Wpf.Converters
         }
 
         /// <summary>
-        /// 将条件结果转换为可见性，并应用 <see cref="IsReverse"/> 设置。
+        /// 将条件结果转换为可见性，并应用 <see cref="IsInverted"/> 设置。
         /// </summary>
         /// <param name="boolValue">要转换的条件结果。</param>
         /// <returns>应用当前选项后的可见性。</returns>
         protected Visibility GetFinalResult(bool boolValue)
         {
-            if (IsReverse)
+            if (IsInverted)
             {
                 return boolValue ? GetInvisibleValue() : Visibility.Visible;
             }

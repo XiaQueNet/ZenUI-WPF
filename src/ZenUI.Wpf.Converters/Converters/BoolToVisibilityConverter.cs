@@ -31,7 +31,7 @@ namespace ZenUI.Wpf.Converters
             }
 
             bool isVisible = visibility == Visibility.Visible;
-            return IsReverse ? !isVisible : isVisible;
+            return IsInverted ? !isVisible : isVisible;
         }
     }
 }

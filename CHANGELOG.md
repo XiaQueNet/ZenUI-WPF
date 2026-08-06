@@ -14,6 +14,7 @@
 - Calendar 的头部、星期栏与日期网格改为稳定比例布局，导航按钮、星期单元与日期单元保持相同尺寸；移除无效或破坏等分布局的 `ZenCalendar.NavigationButtonSize`、`ZenCalendar.ButtonPadding`、`ZenDatePicker.CalendarNavigationButtonSize`、`ZenDatePicker.CalendarButtonPadding` 及对应主题 Token。
 - `ZenDatePicker`、`ZenTimePicker` 和 `ZenDateTimePicker` 将文本输入开关更名为 `IsTextInputReadOnly`；默认值为 `false`，设为 `true` 时禁止键盘输入但仍允许通过弹层选择。
 - `ZenAlert`、`ZenButton`、`ZenCheckBox`、`ZenRadioButton` 和 `ZenSwitch` 的 `Theme*` 状态中转属性，以及 `ZenSwitch.CapsuleCornerRadius`，改为内部模板基础设施，不再作为公共 API 暴露；应用继续通过 `Background`、`BorderBrush` 和各状态画刷属性进行定制。
+- `ZenTimePicker` 和 `ZenDateTimePicker` 将 `Is24Hour` 更名为 `Is24HourFormat`；可见性转换器将反转选项 `IsReverse` 更名为 `IsInverted`。
 
 ## [0.1.0-preview.8] - 2026-08-04
 

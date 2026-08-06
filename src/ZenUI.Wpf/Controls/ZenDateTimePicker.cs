@@ -219,18 +219,18 @@ namespace ZenUI.Wpf.Controls
         /// 获取或设置一个值，该值指示是否使用 24 小时制。
         /// </summary>
         [Bindable(true)]
-        public bool Is24Hour
+        public bool Is24HourFormat
         {
-            get { return (bool)GetValue(Is24HourProperty); }
-            set { SetValue(Is24HourProperty, value); }
+            get { return (bool)GetValue(Is24HourFormatProperty); }
+            set { SetValue(Is24HourFormatProperty, value); }
         }
 
         /// <summary>
-        /// 标识 <see cref="Is24Hour"/> 依赖属性。
+        /// 标识 <see cref="Is24HourFormat"/> 依赖属性。
         /// </summary>
-        public static readonly DependencyProperty Is24HourProperty =
+        public static readonly DependencyProperty Is24HourFormatProperty =
             DependencyProperty.Register(
-                nameof(Is24Hour),
+                nameof(Is24HourFormat),
                 typeof(bool),
                 SelfType,
                 new FrameworkPropertyMetadata(true, HandleDisplayOptionsChanged));
@@ -896,7 +896,7 @@ namespace ZenUI.Wpf.Controls
 
         private int GetVisibleTimeColumnCount()
         {
-            return 2 + (IsSecondVisible ? 1 : 0) + (Is24Hour ? 0 : 1);
+            return 2 + (IsSecondVisible ? 1 : 0) + (Is24HourFormat ? 0 : 1);
         }
 
         private void BeginDraft()
@@ -1010,7 +1010,9 @@ namespace ZenUI.Wpf.Controls
                 maximumTime = Maximum.Value.TimeOfDay;
             }
 
-            timeSelector.SetCurrentValue(ZenTimeSelector.Is24HourProperty, Is24Hour);
+            timeSelector.SetCurrentValue(
+                ZenTimeSelector.Is24HourFormatProperty,
+                Is24HourFormat);
             timeSelector.SetCurrentValue(
                 ZenTimeSelector.IsSecondVisibleProperty,
                 IsSecondVisible);
@@ -1081,7 +1083,7 @@ namespace ZenUI.Wpf.Controls
             var format = DateTimeFormat;
             if (string.IsNullOrWhiteSpace(format))
             {
-                var timeFormat = Is24Hour
+                var timeFormat = Is24HourFormat
                     ? (IsSecondVisible ? "HH:mm:ss" : "HH:mm")
                     : (IsSecondVisible ? "hh:mm:ss tt" : "hh:mm tt");
                 format = CultureInfo.CurrentCulture.DateTimeFormat.ShortDatePattern +
