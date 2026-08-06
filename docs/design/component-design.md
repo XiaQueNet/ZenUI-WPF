@@ -77,25 +77,27 @@ Zen Style 是默认呈现原则，不是删减功能的理由。作为通用组�
 4. 名称是否会与 WPF 中已有的强语义产生错误预期。
 5. 在语义完整的前提下，删除由所属控件、属性或命名空间已经提供的重复上下文。
 
+“名称相同”不等于“语义相同”。候选属性与基类属性只有在含义、作用范围、类型和边界行为均一致时才能直接复用；不得通过 `new` 隐藏基类公共属性，也不得借用 WPF 中已有强语义的名称表达更窄或不同的概念。需要扩展现有概念时，应增加能够说明差异的限定词，例如只控制 NumberBox 增减按钮布局时使用 `SpinButtonLayout`，而不是复用表示整个控件排列轴的 `Orientation`。
+
 WinUI、Web 或其他 UI 框架的名称只能作为参考。除非其语义与 ZenUI 属性完全一致，并且不会破坏 WPF 使用者的既有认知，否则不为了跨框架一致或表面上的“现代化”而改名。例如，输入控件继续使用 WPF 控件库中常见的 `Watermark`，数值步长可以使用清晰的 `Increment`，不机械替换为其他框架的 `PlaceholderText` 或 `SmallChange`。
 
 ### 状态属性
 
 状态属性采用“状态 + 被设置的视觉属性”结构。默认状态直接复用控件已有属性，不增加 `Normal` 前缀：
 
-| 状态 | 背景属性 | 说明 |
-| --- | --- | --- |
-| 默认 | `Background` | 复用基类属性 |
-| 悬停 | `HoverBackground` | 描述用户体验状态，不暴露 `IsMouseOver` 触发机制 |
-| 按下 | `PressedBackground` | 用于按钮或其他可按压控件 |
-| 禁用 | `DisabledBackground` | 对应不可操作状态 |
-| 焦点 | `FocusedBackground` | 对应键盘或逻辑焦点反馈 |
-| 选中 | `SelectedBackground` | 用于列表项、行、单元格等选择控件 |
-| 勾选或开启 | `CheckedBackground` | 用于 CheckBox、RadioButton、ToggleButton 或 Switch |
+| 状态 | 统一前缀 | 背景属性 | 不使用的同义形式 | 说明 |
+| --- | --- | --- | --- | --- |
+| 默认 | 无 | `Background` | `NormalBackground`、`DefaultBackground` | 复用基类属性 |
+| 悬停 | `Hover` | `HoverBackground` | `MouseOverBackground` | 描述用户体验状态，不暴露 `IsMouseOver` 触发机制 |
+| 按下 | `Pressed` | `PressedBackground` | `PressBackground` | 用于按钮或其他可按压控件 |
+| 禁用 | `Disabled` | `DisabledBackground` | `DisableBackground` | 对应不可操作状态 |
+| 焦点 | `Focused` | `FocusedBackground` | `FocusBackground` | 对应键盘或逻辑焦点反馈 |
+| 选中 | `Selected` | `SelectedBackground` | `SelectionBackground` | 用于列表项、行、单元格等选择控件 |
+| 勾选或开启 | `Checked` | `CheckedBackground` | `CheckBackground` | 用于 CheckBox、RadioButton、ToggleButton 或 Switch |
 
 前景和边框使用相同结构，例如 `HoverForeground`、`PressedBorderBrush` 和 `SelectedForeground`。控件只公开确有定制需求的状态属性，不为追求表格完整而增加未使用的 API。
 
-`Hover` 是公共体验语义；`IsMouseOver`、`MouseOver` VisualState 和具体指针事件是模板实现。模板可以使用 WPF 原生机制实现 Hover，但公共 API 不应因此改名为 `MouseOverBackground`。组合状态通常由模板和 Token 处理，除非存在明确且稳定的独立定制需求，不增加 `SelectedHoverBackground` 一类组合属性。
+上述前缀是跨控件的统一公共词汇；同一状态不得因控件或实现方式不同而引入另一套同义名称。`Hover` 是公共体验语义；`IsMouseOver`、`MouseOver` VisualState 和具体指针事件是模板实现。模板可以使用 WPF 原生机制实现 Hover，但公共 API 不应因此改名为 `MouseOverBackground`。组合状态通常由模板和 Token 处理，除非存在明确且稳定的独立定制需求，不增加 `SelectedHoverBackground` 一类组合属性。
 
 ### 名称精确度
 
@@ -109,6 +111,40 @@ WinUI、Web 或其他 UI 框架的名称只能作为参考。除非其语义与 
 - 相关属性应形成语义一致且可预测的属性族，例如 `Minimum` 与 `Maximum`、`SelectedItem` 与 `SelectedValue`。但对称性不能成为增加无实际用途 API 的理由。
 - 属性描述可持续观察或配置的状态；一次性动作使用方法或命令，通知使用事件。不要通过 `DoRefresh`、`StartExport` 一类布尔属性模拟操作。
 
+### 布尔属性
+
+布尔属性的名称必须使 `true` 的含义无需阅读实现即可判断。优先根据语义使用以下结构：
+
+| 结构 | 适用语义 | 示例 |
+| --- | --- | --- |
+| `Is...` | 当前状态，或某项能力是否启用 | `IsDropDownOpen`、`IsPasswordRevealButtonEnabled` |
+| `Has...` | 通常为只读的存在状态 | `HasItems` |
+| `Can...` | 通常为只读的当前执行能力 | `CanIncrement` |
+| `Should...` | 使用者可配置的策略选择 | 仅在确实描述策略且没有更直接名称时使用 |
+
+不得为了形式统一而改写 WPF 已形成稳定惯例的名称，例如 `UseLayoutRounding`、`SnapsToDevicePixels`、`AcceptsReturn` 和 `ShowGridLines`。避免在同一属性族中混用 `Enable...`、`Is...Enabled`、`Show...` 和 `Is...Visible`；它们分别可能表示动作、能力开关、呈现策略和当前可见状态，只有语义确实不同时才能并存。
+
+### 属性族、集合与缩写
+
+- 相关属性应优先沿用 WPF 已有属性族，例如 `Items`/`ItemsSource`、`SelectedItem`/`SelectedValue`/`SelectedIndex`、`DisplayMemberPath`/`SelectedValuePath` 和 `Minimum`/`Maximum`/`Value`。不得为相同概念另建 `Data`、`Options`、`CurrentOption` 等平行词汇。
+- 集合属性使用能够表达元素含义的复数名；提供外部数据源时优先使用 `...Source`，但仅在行为符合 WPF 数据源惯例时使用该后缀。
+- 同一组属性的名词、前缀、后缀和粒度应保持一致，但对称性不能成为增加无实际用途 API 的理由。
+- 不使用 `Btn`、`Bg`、`Cfg` 等压缩拼写或项目内部缩写。通用技术术语遵循 .NET 和 WPF 已有拼写，例如 `Uri`、`Id`、`Dpi` 和 `Xaml`；没有稳定惯例时使用完整单词。
+
+### 正例与反例
+
+下表用于统一常见命名判断。反例所表达的语义若发生变化，仍应重新按命名顺序评审，不能机械替换：
+
+| 不使用 | 使用 | 原因 |
+| --- | --- | --- |
+| `MouseOverBackground` | `HoverBackground` | 表达公共体验语义，不暴露触发机制 |
+| `NormalBackground` | `Background` | 默认状态复用控件已有属性 |
+| `ButtonMode` | `SpinButtonLayout` | 明确被控制的对象和维度 |
+| `Variant` | `Severity` | 准确表达枚举值共同描述的严重级别 |
+| `EnableReveal` | `IsPasswordRevealButtonEnabled` | 明确这是能力开关以及 `true` 的效果 |
+| `PlaceholderText` | `Watermark` | 沿用 WPF 控件生态的稳定术语 |
+| `DoRefresh` | `RefreshCommand` | 一次性动作使用命令或方法，而不是布尔属性 |
+
 ### XAML 可读性检查
 
 候选属性名应放入真实的 XAML 使用场景中评审，而不是只看 C# 声明。评审时至少检查属性与控件名连读是否自然、多个相关属性并列时是否一致，以及 `true`、枚举值和绑定表达式能否形成无歧义的语义。例如：
@@ -121,6 +157,21 @@ WinUI、Web 或其他 UI 框架的名称只能作为参考。除非其语义与 
 ```
 
 若名称必须依赖模板实现、内部缩写或额外口头解释才能理解，应继续调整，而不是只靠文档补救。
+
+### 新增与重命名评审
+
+新增或重命名公共属性必须在实现完成前评审名称。评审材料至少包含属性语义、类型、默认值、有效范围、与 WPF 现有 API 的关系，以及一段真实 XAML 用例，并按以下顺序给出结论：
+
+1. 是否能够直接复用 WPF 基类 API。
+2. 是否沿用了 WPF 控件生态中相同语义的稳定名称。
+3. 名称是否只描述使用者可观察的状态、行为或内容。
+4. 布尔值、枚举值、单位、作用对象和边界是否没有歧义。
+5. 与相关属性并列后，是否形成一致且可预测的属性族。
+6. 是否删除了所属控件和命名空间已经提供的重复上下文。
+7. 放入真实 XAML、绑定、Style Setter 和文档句子后是否自然清晰。
+8. 新增该公共 API 的价值是否足以承担长期兼容成本。
+
+尚未发布的属性发现名称不准确时应在发布前直接纠正，并同步更新 Gallery、测试和文档。已经发布的属性原则上不得直接改名或删除；确需调整时必须按不兼容公共 API 变更处理，不得仅通过 `EditorBrowsableState.Never` 隐藏旧成员来规避兼容性要求。
 
 ### WPF 成员配对
 
@@ -136,7 +187,17 @@ public AlertSeverity Severity
 public static readonly DependencyProperty SeverityProperty;
 ```
 
-依赖属性标识符使用 `<属性名>Property`，注册名、CLR 包装器和标识符必须一致。附加属性使用 `Get<PropertyName>`、`Set<PropertyName>` 和 `<PropertyName>Property`；路由事件使用 `<EventName>` 和 `<EventName>Event`。
+依赖属性标识符使用 `<属性名>Property`，注册名、CLR 包装器和标识符必须一致。注册依赖属性时使用 `nameof` 引用 CLR 属性，避免字符串注册名在重构后发生漂移：
+
+```csharp
+public static readonly DependencyProperty SeverityProperty =
+    DependencyProperty.Register(
+        nameof(Severity),
+        typeof(AlertSeverity),
+        typeof(ZenAlert));
+```
+
+附加属性使用 `Get<PropertyName>`、`Set<PropertyName>` 和 `<PropertyName>Property`，三者的属性名和类型必须一致。只读依赖属性的键使用 `<PropertyName>PropertyKey`，公开标识符仍使用 `<PropertyName>Property`。路由事件使用 `<EventName>` 和 `<EventName>Event`。代码评审和测试应共同验证这些配对关系，不能只依赖命名习惯。
 
 标记为 `EditorBrowsableState.Never` 的成员仍然是公共 API，仍会被 XAML、反射和已编译代码访问。不能把该标记当成内部可见性边界；模板基础设施成员一旦公开，也必须按兼容性规则管理。
 
@@ -206,15 +267,19 @@ public static readonly DependencyProperty SeverityProperty;
 - [ ] 动画服务于状态或空间关系的理解，时长与幅度克制，且没有非必要的循环动画。
 - [ ] 没有删除或屏蔽基类已有的公开能力。
 - [ ] 新增 API 复用了 WPF 语义，并具有完整的 XML 文档注释。
+- [ ] 候选名称已与 WPF 基类 API 比较；没有通过 `new` 隐藏基类公共属性，也没有复用含义、作用范围、类型或边界行为不同的名称。
 - [ ] 新增公共类型和成员遵循 .NET `PascalCase` 等基础命名规范，没有无意义前缀或内部缩写。
 - [ ] 公共属性描述控件语义，没有泄漏触发器、VisualState 或模板部件等实现细节。
 - [ ] 状态属性使用一致的 `Hover`、`Pressed`、`Disabled`、`Focused`、`Selected` 或 `Checked` 前缀。
 - [ ] 没有为了跨框架一致而替换 WPF 使用者已经熟悉且语义准确的名称。
 - [ ] `Mode`、`Orientation`、`Variant` 等宽泛或具有强既定语义的名称经过了作用域和歧义检查。
 - [ ] 布尔属性遵循 WPF 惯例并准确说明 `true` 的效果；相关属性族的名称和语义保持一致。
+- [ ] 集合、选择、范围和数据源属性优先沿用 WPF 属性族，没有为相同概念创建平行词汇。
+- [ ] 名称使用完整单词或 .NET/WPF 已有的通用技术拼写，没有 `Btn`、`Bg`、`Cfg` 等压缩形式。
 - [ ] 属性只表达状态或配置，一次性动作和通知分别使用方法、命令或事件。
 - [ ] 候选属性名已放入真实 XAML 片段检查，单独使用和并列使用均自然、清晰且无歧义。
-- [ ] CLR 属性、依赖属性标识符、附加属性访问器和路由事件标识符正确配对。
+- [ ] 新增或重命名属性的评审材料包含语义、类型、默认值、有效范围、WPF API 对照和真实 XAML 用例。
+- [ ] CLR 属性、依赖属性标识符、注册名、只读属性键、附加属性访问器和路由事件标识符正确配对；依赖属性注册使用 `nameof`。
 - [ ] `PART_*`、VisualState、绑定和布局契约保持有效。
 - [ ] 默认、Hover、Pressed、键盘焦点、Disabled、只读、验证错误和高对比度状态已按适用范围覆盖。
 - [ ] 状态组合不会造成内容不可读、焦点不可见或布局跳动。

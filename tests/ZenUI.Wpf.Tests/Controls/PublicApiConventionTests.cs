@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel;
 using System.Linq;
 using System.Reflection;
 using System.Windows;
@@ -178,6 +179,14 @@ namespace ZenUI.Wpf.Tests.Controls
                 if (property.Name.Length == 0 || !char.IsUpper(property.Name[0]))
                 {
                     failures.Add($"{ownerType.FullName}.{property.Name} must use PascalCase.");
+                }
+
+                var editorBrowsable = property.GetCustomAttribute<EditorBrowsableAttribute>();
+                if (editorBrowsable?.State == EditorBrowsableState.Never)
+                {
+                    failures.Add(
+                        $"{ownerType.FullName}.{property.Name} is public but hidden from IntelliSense; " +
+                        "template infrastructure must be non-public.");
                 }
 
                 var baseProperty = ownerType.BaseType?.GetProperty(

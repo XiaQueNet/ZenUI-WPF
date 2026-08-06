@@ -110,8 +110,7 @@ namespace ZenUI.Wpf.Controls
         /// <summary>
         /// 获取或设置由复选状态提供的默认背景画刷。
         /// </summary>
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public Brush ThemeBackground
+        internal Brush ThemeBackground
         {
             get { return (Brush)GetValue(ThemeBackgroundProperty); }
             set { SetValue(ThemeBackgroundProperty, value); }
@@ -120,14 +119,13 @@ namespace ZenUI.Wpf.Controls
         /// <summary>
         /// 标识 <see cref="ThemeBackground"/> 依赖属性。
         /// </summary>
-        public static readonly DependencyProperty ThemeBackgroundProperty =
+        internal static readonly DependencyProperty ThemeBackgroundProperty =
             RegisterBrush(nameof(ThemeBackground));
 
         /// <summary>
         /// 获取或设置由复选状态提供的默认边框画刷。
         /// </summary>
-        [EditorBrowsable(EditorBrowsableState.Never)]
-        public Brush ThemeBorderBrush
+        internal Brush ThemeBorderBrush
         {
             get { return (Brush)GetValue(ThemeBorderBrushProperty); }
             set { SetValue(ThemeBorderBrushProperty, value); }
@@ -136,7 +134,7 @@ namespace ZenUI.Wpf.Controls
         /// <summary>
         /// 标识 <see cref="ThemeBorderBrush"/> 依赖属性。
         /// </summary>
-        public static readonly DependencyProperty ThemeBorderBrushProperty =
+        internal static readonly DependencyProperty ThemeBorderBrushProperty =
             RegisterBrush(nameof(ThemeBorderBrush));
 
         private static DependencyProperty RegisterBrush(string name)

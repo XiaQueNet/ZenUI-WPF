@@ -224,7 +224,6 @@ namespace ZenUI.Wpf.Gallery.Controls
                 ["ZenSlider.ThumbBrush"] = "0.1.0-preview.4",
                 ["ZenSlider.HoverThumbBrush"] = UnreleasedPropertyVersion,
                 ["ZenSlider.TrackThickness"] = "0.1.0-preview.3",
-                ["ZenSwitch.CapsuleCornerRadius"] = "0.1.0-preview.4",
                 ["ZenSwitch.CheckedContent"] = "0.1.0-preview.8",
                 ["ZenSwitch.UncheckedContent"] = "0.1.0-preview.8",
                 ["ZenTextBox.LeadingContent"] = "0.1.0-preview.2",
