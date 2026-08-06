@@ -4,6 +4,8 @@
 
 ## Unreleased
 
+## [0.1.0-preview.9] - 2026-08-06
+
 ### Changed
 
 - 将 .NET 5、6、7 兼容性验证从基础冒烟检查升级为契约测试，覆盖程序集与公共 WPF API、主题和 Density 资源、关键控件样式与模板、Live Region 及全部转换器行为；普通 CI 增加依赖漏洞扫描，正式打包增加跨目标框架本地 NuGet 消费者编译与资产选择验证。
@@ -162,7 +164,8 @@
 - Password 明文绑定默认关闭，并标记为过时兼容 API。
 - DataGrid 恢复行虚拟化、行头、行详情、全选、冻结列偏移和高级编辑契约。
 
-[Unreleased]: https://github.com/XiaQueNet/ZenUI-WPF/compare/v0.1.0-preview.8...HEAD
+[Unreleased]: https://github.com/XiaQueNet/ZenUI-WPF/compare/v0.1.0-preview.9...HEAD
+[0.1.0-preview.9]: https://github.com/XiaQueNet/ZenUI-WPF/compare/v0.1.0-preview.8...v0.1.0-preview.9
 [0.1.0-preview.8]: https://github.com/XiaQueNet/ZenUI-WPF/compare/v0.1.0-preview.7...v0.1.0-preview.8
 [0.1.0-preview.7]: https://github.com/XiaQueNet/ZenUI-WPF/compare/v0.1.0-preview.6...v0.1.0-preview.7
 [0.1.0-preview.6]: https://github.com/XiaQueNet/ZenUI-WPF/compare/v0.1.0-preview.5...v0.1.0-preview.6

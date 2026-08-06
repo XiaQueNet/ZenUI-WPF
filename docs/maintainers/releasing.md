@@ -58,13 +58,13 @@ rc.1
 ```xml
 <!-- ZenUI.Wpf -->
 <VersionPrefix>0.1.0</VersionPrefix>
-<VersionSuffix>preview.8</VersionSuffix>
+<VersionSuffix>preview.9</VersionSuffix>
 <AssemblyVersion>0.1.0.0</AssemblyVersion>
 <FileVersion>0.1.0.0</FileVersion>
 
 <!-- ZenUI.Wpf.Converters -->
 <VersionPrefix>0.1.0</VersionPrefix>
-<VersionSuffix>preview.6</VersionSuffix>
+<VersionSuffix>preview.9</VersionSuffix>
 <AssemblyVersion>0.1.0.0</AssemblyVersion>
 <FileVersion>0.1.0.0</FileVersion>
 ```
