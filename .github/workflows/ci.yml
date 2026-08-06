@@ -113,5 +113,5 @@ jobs:
         with:
           dotnet-version: ${{ matrix.sdk }}
 
-      - name: Run compatibility smoke test
+      - name: Run compatibility contract tests
         run: dotnet run --project tests/ZenUI.Wpf.ModernCompatibilityTests/ZenUI.Wpf.ModernCompatibilityTests.csproj --configuration Release --framework ${{ matrix.framework }}

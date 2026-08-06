@@ -1,11 +1,5 @@
 using System;
-using System.Globalization;
-using System.Windows;
-using System.Windows.Automation;
-using System.Windows.Controls;
-
-using ZenUI.Wpf.Controls;
-using ZenUI.Wpf.Converters;
+using System.Collections.Generic;
 
 namespace ZenUI.Wpf.ModernCompatibilityTests
 {
@@ -14,66 +8,53 @@ namespace ZenUI.Wpf.ModernCompatibilityTests
         [STAThread]
         private static int Main()
         {
-            try
+            var contracts = new[]
             {
-                VerifyControlsAndResources();
-                VerifyConverters();
-                return 0;
-            }
-            catch (Exception exception)
-            {
-                Console.Error.WriteLine(exception);
-                return 1;
-            }
-        }
-
-        private static void VerifyControlsAndResources()
-        {
-            var application = Application.Current ?? new Application();
-            var resources = new ResourceDictionary
-            {
-                Source = new Uri(
-                    "/ZenUI.Wpf;component/Themes/Generic.xaml",
-                    UriKind.Relative)
+                new ContractCase("程序集与公共 WPF API", PublicApiContracts.Verify),
+                new ContractCase("主题与密度资源", ThemeAndControlContracts.VerifyThemesAndDensities),
+                new ContractCase("控件样式与模板", ThemeAndControlContracts.VerifyControlStylesAndTemplates),
+                new ContractCase("转换器行为", ConverterContracts.Verify)
             };
-            application.Resources.MergedDictionaries.Add(resources);
+            var failures = new List<string>();
 
-            if (!(application.TryFindResource(typeof(ZenButton)) is Style))
+            Console.WriteLine(
+                "ZenUI WPF compatibility contracts on {0} ({1})",
+                System.Runtime.InteropServices.RuntimeInformation.FrameworkDescription,
+                Environment.Version);
+
+            foreach (var contract in contracts)
             {
-                throw new InvalidOperationException("ZenButton 默认样式未能加载。");
+                try
+                {
+                    contract.Execute();
+                    Console.WriteLine("[PASS] {0}", contract.Name);
+                }
+                catch (Exception exception)
+                {
+                    failures.Add(contract.Name + Environment.NewLine + exception);
+                    Console.Error.WriteLine("[FAIL] {0}", contract.Name);
+                    Console.Error.WriteLine(exception);
+                }
             }
 
-            var button = new TestZenButton { Content = "兼容性测试" };
-            if (!Equals(button.ExposedDefaultStyleKey, typeof(ZenButton)))
-            {
-                throw new InvalidOperationException("ZenButton 默认样式键不正确。");
-            }
-
-            var alert = new ZenAlert { Content = "加载成功" };
-            if (AutomationProperties.GetLiveSetting(alert) != AutomationLiveSetting.Polite)
-            {
-                throw new InvalidOperationException("ZenAlert Live Region 语义未启用。");
-            }
+            Console.WriteLine(
+                "Compatibility contracts: {0} passed, {1} failed.",
+                contracts.Length - failures.Count,
+                failures.Count);
+            return failures.Count == 0 ? 0 : 1;
         }
 
-        private static void VerifyConverters()
+        private sealed class ContractCase
         {
-            var converter = new BoolToVisibilityConverter();
-            var result = converter.Convert(
-                true,
-                typeof(Visibility),
-                null,
-                CultureInfo.InvariantCulture);
-
-            if (!Equals(result, Visibility.Visible))
+            public ContractCase(string name, Action execute)
             {
-                throw new InvalidOperationException("BoolToVisibilityConverter 返回值不正确。");
+                Name = name;
+                Execute = execute;
             }
-        }
 
-        private sealed class TestZenButton : ZenButton
-        {
-            public object ExposedDefaultStyleKey => DefaultStyleKey;
+            public string Name { get; }
+
+            public Action Execute { get; }
         }
     }
 }

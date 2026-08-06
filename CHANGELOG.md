@@ -6,6 +6,7 @@
 
 ### Changed
 
+- 将 .NET 5、6、7 兼容性验证从基础冒烟检查升级为契约测试，覆盖程序集与公共 WPF API、主题和 Density 资源、关键控件样式与模板、Live Region 及全部转换器行为。
 - 统一公开属性命名：`ZenAlert.AccentBrush` 更名为 `IconBackground`，`ZenCheckBox.CheckMarkForeground` 更名为 `CheckedGlyphBrush`，`ZenSlider.ThumbHoverBrush` 更名为 `HoverThumbBrush`，`ZenNumberBox.Step` 更名为 `Increment`，`ZenPopover.TargetGap` 更名为 `AnchorGap`，`ZenDateTimePicker.IconSize` 更名为 `DropDownButtonIconSize`。
 - `ZenRadioGroup` 将 `DisplayMode`、`IsItemWidthUniform` 和 `AccentBrush` 分别更名为 `Appearance`、`IsItemSizeUniform` 和 `SelectionBrush`；枚举类型同步更名为 `RadioGroupAppearance`，并使用 `Outlined`、`Segmented` 枚举值。
 - `ZenCheckBox` 将含义宽泛的 `AccentBrush` 和 `GlyphBrush` 重构为 `CheckedBackground`、`CheckedBorderBrush`、`HoverBorderBrush` 和 `CheckedGlyphBrush`，分别控制选中背景、选中边框、悬停边框与复选标记前景。

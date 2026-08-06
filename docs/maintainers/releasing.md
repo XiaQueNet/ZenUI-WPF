@@ -151,8 +151,9 @@ git push origin v0.1.0-preview.2
 1. 确认目标版本符合语义化版本规则。
 2. 修改 `VersionPrefix`、`VersionSuffix`、`AssemblyVersion` 和 `FileVersion`。
 3. 将本次改动从 `CHANGELOG.md` 的 `Unreleased` 整理到带日期的版本章节。
-4. 在 `samples/ZenUI.Wpf.Gallery/Controls/PropertyTable.xaml.cs` 中，将本次发布属性的“未发布”统一替换为实际版本号；不得修改不属于本次发布的未发布项。
-5. 确认 README、安装命令、包元数据和发布说明正确。
+4. 更新 Gallery 属性引入版本：在 `samples/ZenUI.Wpf.Gallery/Controls/PropertyTable.xaml.cs` 中，将本次发布涉及的 `UnreleasedPropertyVersion` 条目统一替换为实际版本号字符串（例如 `"0.1.0-preview.9"`）。保留 `UnreleasedPropertyVersion = "未发布"` 常量不变，也不得修改不属于本次发布的未发布项。
+5. 搜索该文件中剩余的 `UnreleasedPropertyVersion` 条目，逐项确认它们确实不属于本次发布，避免新增或重命名的公共属性漏记引入版本。
+6. 确认 README、安装命令、包元数据和发布说明正确。
 
 ### 2. 本地验证
 

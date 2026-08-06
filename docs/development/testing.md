@@ -6,7 +6,7 @@
 
 - 控件和主题测试放在 `tests/ZenUI.Wpf.Tests/`，目录与被测能力对应，例如 `Controls/`、`Theming/`。
 - 转换器测试放在 `tests/ZenUI.Wpf.Converters.Tests/`，保证转换器包不通过测试项目间接依赖控件包。
-- .NET 5、6、7 使用 `tests/ZenUI.Wpf.ModernCompatibilityTests/` 在对应运行时验证主题资源、控件元数据、Live Region 与转换器；这些已停止维护的运行时只提供兼容性保障。
+- .NET 5、6、7 使用 `tests/ZenUI.Wpf.ModernCompatibilityTests/` 在对应运行时执行兼容性契约测试，验证程序集与公共 WPF API、主题和 Density 资源、关键控件样式与模板、Live Region 及转换器行为；这些已停止维护的运行时只提供兼容性保障。
 - 使用项目现有的 MSTest；除独立 NuGet 包边界外，不为单个控件或功能新建测试工程。
 - 普通测试使用 `[TestClass]` 和 `[TestMethod]`。
 - 创建或操作 WPF 控件、窗口、模板、Dispatcher 或 UI Automation Peer 的测试使用 `[STATestClass]`。
@@ -94,7 +94,7 @@ dotnet test --project tests/ZenUI.Wpf.Converters.Tests/ZenUI.Wpf.Converters.Test
 
 ### 全框架矩阵测试
 
-全框架矩阵在 .NET Framework 4.6.2～4.8.1 与 `.NET 8/9/10 for Windows` 上运行全部控件、主题和转换器测试，并在对应运行时上对 `.NET 5/6/7 for Windows` 运行兼容性冒烟测试。它用于目标框架或跨框架兼容层变更、构建与打包基础设施变更、发布验证，或明确要求全框架验证的场景；日常组件改动不要求在本地运行。
+全框架矩阵在 .NET Framework 4.6.2～4.8.1 与 `.NET 8/9/10 for Windows` 上运行全部控件、主题和转换器测试，并在对应运行时上对 `.NET 5/6/7 for Windows` 运行兼容性契约测试。它用于目标框架或跨框架兼容层变更、构建与打包基础设施变更、发布验证，或明确要求全框架验证的场景；日常组件改动不要求在本地运行。
 
 远程 CI 在隔离 Runner 中执行完整矩阵。本地确需运行时，完整测试模块必须串行执行，避免共享的 WPF、主题、Dispatcher、视觉快照或其他进程级状态互相干扰：
 
