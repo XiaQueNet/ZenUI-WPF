@@ -56,12 +56,13 @@ ZenUI 只调整 WPF 控件的默认值和默认呈现，不覆盖或移除基类
 
 ## 提交前检查
 
-至少执行以下完整验证：
+根据变更范围按[测试规范](docs/development/testing.md#回归与验证)选择组件测试、单框架全量测试或全框架矩阵测试。准备提交 Pull Request 时，通常至少执行以下构建、`net472` 单框架全量测试和打包检查：
 
 ```powershell
 dotnet restore ZenUI.Wpf.slnx
 dotnet build ZenUI.Wpf.slnx -c Release --no-restore
-dotnet test ZenUI.Wpf.slnx -c Release --max-parallel-test-modules 1 --no-build
+dotnet test --project tests/ZenUI.Wpf.Tests/ZenUI.Wpf.Tests.csproj -c Release -f net472 --max-parallel-test-modules 1 --no-build
+dotnet test --project tests/ZenUI.Wpf.Converters.Tests/ZenUI.Wpf.Converters.Tests.csproj -c Release -f net472 --max-parallel-test-modules 1 --no-build
 $packageOutput = Join-Path ([System.IO.Path]::GetTempPath()) "ZenUI-WPF-packages"
 dotnet pack src/ZenUI.Wpf/ZenUI.Wpf.csproj -c Release --no-build -o $packageOutput
 dotnet pack src/ZenUI.Wpf.Converters/ZenUI.Wpf.Converters.csproj -c Release --no-build -o $packageOutput

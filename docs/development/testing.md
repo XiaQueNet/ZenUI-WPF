@@ -71,18 +71,39 @@
 
 修复缺陷时先添加能复现问题的回归测试；纯重构、测试基础设施修复或为已有行为补覆盖时，不要求刻意制造失败。
 
-组件库的日常新增、修改或删除不运行本地全框架矩阵，只运行受影响测试并选择一个当前主目标框架。全框架验证仅用于目标框架或兼容层变更、构建与打包基础设施变更、发布验证，或明确要求全量验证的场景。
+测试验证分为以下三个等级，默认使用能够覆盖传统 WPF 兼容性的 `net472` 作为日常测试框架：
 
-提交前至少运行受影响测试，例如控件和主题改动可执行：
+### 组件测试
+
+组件新增、修改、删除或缺陷修复后，至少运行该组件及受影响能力的测试项目、测试类或测试方法。共享主题、Token、基类或公共测试辅助代码的改动必须包含所有受影响组件，不能只验证直接修改的文件。
+
+例如，仅运行 Button 相关测试：
 
 ```powershell
-dotnet test --project tests/ZenUI.Wpf.Tests/ZenUI.Wpf.Tests.csproj -c Release -f net10.0-windows
+dotnet test --project tests/ZenUI.Wpf.Tests/ZenUI.Wpf.Tests.csproj -c Release -f net472 --filter "FullyQualifiedName~ButtonTests"
 ```
 
-确需运行解决方案级全量自动化测试时，测试模块必须串行执行，避免共享的 WPF、主题、Dispatcher、视觉快照或其他进程级状态互相干扰。统一将 `--max-parallel-test-modules` 设为 `1`；仅运行单个测试项目、测试类或测试方法时不强制附加该参数。
+### 单框架全量测试
+
+改动影响多个组件、共享主题或测试基础设施，进行较大范围重构，或者准备提交 Pull Request 时，在 `net472` 上运行全部控件、主题和转换器测试：
 
 ```powershell
-dotnet test ZenUI.Wpf.slnx -c Release --max-parallel-test-modules 1
+dotnet test --project tests/ZenUI.Wpf.Tests/ZenUI.Wpf.Tests.csproj -c Release -f net472 --max-parallel-test-modules 1
+dotnet test --project tests/ZenUI.Wpf.Converters.Tests/ZenUI.Wpf.Converters.Tests.csproj -c Release -f net472 --max-parallel-test-modules 1
+```
+
+### 全框架矩阵测试
+
+全框架矩阵在 .NET Framework 4.6.2～4.8.1 与 `.NET 8/9/10 for Windows` 上运行全部控件、主题和转换器测试，并在对应运行时上对 `.NET 5/6/7 for Windows` 运行兼容性冒烟测试。它用于目标框架或跨框架兼容层变更、构建与打包基础设施变更、发布验证，或明确要求全框架验证的场景；日常组件改动不要求在本地运行。
+
+远程 CI 在隔离 Runner 中执行完整矩阵。本地确需运行时，完整测试模块必须串行执行，避免共享的 WPF、主题、Dispatcher、视觉快照或其他进程级状态互相干扰：
+
+```powershell
+dotnet test --project tests/ZenUI.Wpf.Tests/ZenUI.Wpf.Tests.csproj -c Release --max-parallel-test-modules 1
+dotnet test --project tests/ZenUI.Wpf.Converters.Tests/ZenUI.Wpf.Converters.Tests.csproj -c Release --max-parallel-test-modules 1
+foreach ($framework in @('net5.0-windows', 'net6.0-windows', 'net7.0-windows')) {
+    dotnet run --project tests/ZenUI.Wpf.ModernCompatibilityTests/ZenUI.Wpf.ModernCompatibilityTests.csproj -c Release -f $framework
+}
 ```
 
 影响打包、公共 API 或多目标框架配置时，还应按 `CONTRIBUTING.md` 运行完整构建与打包检查。
