@@ -18,8 +18,10 @@
         TargetType="{x:Type zen:ZenCheckBox}">
         <Setter Property="FontSize" Value="{DynamicResource ZenFontSizeBody}" />
         <Setter Property="Foreground" Value="{DynamicResource ZenTextPrimaryBrush}" />
-        <Setter Property="AccentBrush" Value="{DynamicResource ZenPrimaryBrush}" />
-        <Setter Property="GlyphBrush" Value="{DynamicResource ZenOnAccentBrush}" />
+        <Setter Property="CheckedBackground" Value="{DynamicResource ZenPrimaryBrush}" />
+        <Setter Property="CheckedBorderBrush" Value="{DynamicResource ZenPrimaryBrush}" />
+        <Setter Property="HoverBorderBrush" Value="{DynamicResource ZenPrimaryBrush}" />
+        <Setter Property="CheckMarkForeground" Value="{DynamicResource ZenOnAccentBrush}" />
         <Setter Property="ThemeBackground" Value="{DynamicResource ZenSurfaceBrush}" />
         <Setter Property="ThemeBorderBrush" Value="{DynamicResource ZenBorderBrush}" />
         <Setter Property="Background" Value="{Binding ThemeBackground, RelativeSource={RelativeSource Self}}" />
@@ -54,7 +56,7 @@
                                         Width="10"
                                         Height="7"
                                         Data="M 1,3.5 L 4,6 L 9,1"
-                                        Stroke="{TemplateBinding GlyphBrush}"
+                                        Stroke="{TemplateBinding CheckMarkForeground}"
                                         StrokeEndLineCap="Round"
                                         StrokeLineJoin="Round"
                                         StrokeStartLineCap="Round"
@@ -72,16 +74,16 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="ThemeBorderBrush" Value="{Binding AccentBrush, RelativeSource={RelativeSource Self}}" />
+                            <Setter Property="ThemeBorderBrush" Value="{Binding HoverBorderBrush, RelativeSource={RelativeSource Self}}" />
                         </Trigger>
                         <Trigger Property="IsChecked" Value="True">
-                            <Setter Property="ThemeBackground" Value="{Binding AccentBrush, RelativeSource={RelativeSource Self}}" />
-                            <Setter Property="ThemeBorderBrush" Value="{Binding AccentBrush, RelativeSource={RelativeSource Self}}" />
+                            <Setter Property="ThemeBackground" Value="{Binding CheckedBackground, RelativeSource={RelativeSource Self}}" />
+                            <Setter Property="ThemeBorderBrush" Value="{Binding CheckedBorderBrush, RelativeSource={RelativeSource Self}}" />
                             <Setter TargetName="CheckMark" Property="Visibility" Value="Visible" />
                         </Trigger>
                         <Trigger Property="IsChecked" Value="{x:Null}">
-                            <Setter Property="ThemeBackground" Value="{Binding AccentBrush, RelativeSource={RelativeSource Self}}" />
-                            <Setter Property="ThemeBorderBrush" Value="{Binding AccentBrush, RelativeSource={RelativeSource Self}}" />
+                            <Setter Property="ThemeBackground" Value="{Binding CheckedBackground, RelativeSource={RelativeSource Self}}" />
+                            <Setter Property="ThemeBorderBrush" Value="{Binding CheckedBorderBrush, RelativeSource={RelativeSource Self}}" />
                             <Setter TargetName="CheckMark" Property="Data" Value="M 1,3.5 L 9,3.5" />
                             <Setter TargetName="CheckMark" Property="Visibility" Value="Visible" />
                         </Trigger>

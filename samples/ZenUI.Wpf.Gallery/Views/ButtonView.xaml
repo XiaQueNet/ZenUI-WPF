@@ -27,15 +27,15 @@
             x:Key="CustomInteractionButtonStyle"
             BasedOn="{StaticResource ZenButtonStyle}"
             TargetType="{x:Type zen:ZenButton}">
-            <Setter Property="Background" Value="{DynamicResource ZenSurfaceMutedBrush}" />
-            <Setter Property="BorderBrush" Value="{DynamicResource ZenPrimaryBrush}" />
-            <Setter Property="Foreground" Value="{DynamicResource ZenPrimaryBrush}" />
-            <Setter Property="HoverBackground" Value="{DynamicResource ZenPrimaryBrush}" />
-            <Setter Property="HoverBorderBrush" Value="{DynamicResource ZenPrimaryHoverBrush}" />
-            <Setter Property="HoverForeground" Value="{DynamicResource ZenOnAccentBrush}" />
-            <Setter Property="PressedBackground" Value="{DynamicResource ZenPrimaryPressedBrush}" />
-            <Setter Property="PressedBorderBrush" Value="{DynamicResource ZenPrimaryPressedBrush}" />
-            <Setter Property="PressedForeground" Value="{DynamicResource ZenOnAccentBrush}" />
+            <Setter Property="Background" Value="#FFFFB703" />
+            <Setter Property="BorderBrush" Value="#FFFB8500" />
+            <Setter Property="Foreground" Value="#FF3A2100" />
+            <Setter Property="HoverBackground" Value="#FFC2185B" />
+            <Setter Property="HoverBorderBrush" Value="#FF880E4F" />
+            <Setter Property="HoverForeground" Value="White" />
+            <Setter Property="PressedBackground" Value="#FF6A1B9A" />
+            <Setter Property="PressedBorderBrush" Value="#FF4A148C" />
+            <Setter Property="PressedForeground" Value="White" />
         </Style>
     </UserControl.Resources>
     <ScrollViewer
@@ -354,7 +354,7 @@
                     <TextBlock Style="{StaticResource SectionTitleStyle}" Text="交互颜色定制" />
                     <TextBlock
                         Style="{StaticResource GallerySectionDescriptionStyle}"
-                        Text="背景、文字和边框都可分别覆盖 Hover 与 Pressed 状态色；未设置的状态继续使用主题默认值。" />
+                        Text="此示例直接使用主题外的彩色画刷：默认琥珀色、Hover 洋红色、Pressed 紫色；背景、文字和边框均可独立覆盖。" />
                     <zen:ZenButton
                         Width="168"
                         Height="40"

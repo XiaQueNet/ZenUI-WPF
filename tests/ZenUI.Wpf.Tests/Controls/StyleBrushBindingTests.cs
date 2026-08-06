@@ -106,8 +106,10 @@ namespace ZenUI.Wpf.Tests.Controls
             AddBrushBinding(style, Control.BackgroundProperty, nameof(palette.Surface), palette);
             AddBrushBinding(style, Control.BorderBrushProperty, nameof(palette.Border), palette);
             AddBrushBinding(style, Control.ForegroundProperty, nameof(palette.Foreground), palette);
-            AddBrushBinding(style, ZenCheckBox.AccentBrushProperty, nameof(palette.Accent), palette);
-            AddBrushBinding(style, ZenCheckBox.GlyphBrushProperty, nameof(palette.Glyph), palette);
+            AddBrushBinding(style, ZenCheckBox.CheckedBackgroundProperty, nameof(palette.Accent), palette);
+            AddBrushBinding(style, ZenCheckBox.CheckedBorderBrushProperty, nameof(palette.Accent), palette);
+            AddBrushBinding(style, ZenCheckBox.HoverBorderBrushProperty, nameof(palette.Accent), palette);
+            AddBrushBinding(style, ZenCheckBox.CheckMarkForegroundProperty, nameof(palette.Glyph), palette);
             return new ZenCheckBox
             {
                 Content = "复选",

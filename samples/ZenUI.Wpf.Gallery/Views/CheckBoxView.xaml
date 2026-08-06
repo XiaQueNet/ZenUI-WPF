@@ -91,6 +91,48 @@
                     </zen:ZenCheckBox>
                 </StackPanel>
             </Border>
+            <Border Style="{StaticResource GalleryCardStyle}">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="外观定制" />
+                    <TextBlock
+                        Style="{StaticResource GallerySectionDescriptionStyle}"
+                        Text="CheckedBackground、CheckedBorderBrush、HoverBorderBrush、CheckMarkForeground 和 IndicatorSize 可分别定制各状态的选择标识。" />
+                    <WrapPanel Margin="0,0,0,18">
+                        <zen:ZenCheckBox
+                            Margin="0,0,28,0"
+                            CheckedBackground="#FF7B2CBF"
+                            CheckedBorderBrush="#FF5A189A"
+                            CheckMarkForeground="#FFFFD166"
+                            Content="紫色强调、黄色标记"
+                            HoverBorderBrush="#FFFF8500"
+                            IsChecked="True" />
+                        <zen:ZenCheckBox
+                            CheckedBackground="#FF00A896"
+                            CheckedBorderBrush="#FF007F73"
+                            CheckMarkForeground="White"
+                            Content="青色三态标记"
+                            HoverBorderBrush="#FFFF8500"
+                            IsChecked="{x:Null}"
+                            IsThreeState="True" />
+                    </WrapPanel>
+                    <WrapPanel>
+                        <zen:ZenCheckBox
+                            Margin="0,0,28,0"
+                            Content="小尺寸 14"
+                            IndicatorSize="14"
+                            IsChecked="True" />
+                        <zen:ZenCheckBox
+                            Margin="0,0,28,0"
+                            Content="标准尺寸 18"
+                            IndicatorSize="18"
+                            IsChecked="True" />
+                        <zen:ZenCheckBox
+                            Content="大尺寸 24"
+                            IndicatorSize="24"
+                            IsChecked="True" />
+                    </WrapPanel>
+                </StackPanel>
+            </Border>
             <gallery:PropertyTable ControlType="{x:Type zen:ZenCheckBox}" />
         </StackPanel>
     </ScrollViewer>

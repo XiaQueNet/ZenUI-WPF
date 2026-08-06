@@ -20,36 +20,68 @@ namespace ZenUI.Wpf.Controls
         }
 
         /// <summary>
-        /// 获取或设置选中状态使用的强调色画刷。
+        /// 获取或设置选中或不确定状态下选择标识的背景画刷。
         /// </summary>
         [Bindable(true)]
-        public Brush AccentBrush
+        public Brush CheckedBackground
         {
-            get { return (Brush)GetValue(AccentBrushProperty); }
-            set { SetValue(AccentBrushProperty, value); }
+            get { return (Brush)GetValue(CheckedBackgroundProperty); }
+            set { SetValue(CheckedBackgroundProperty, value); }
         }
 
         /// <summary>
-        /// 标识 <see cref="AccentBrush"/> 依赖属性。
+        /// 标识 <see cref="CheckedBackground"/> 依赖属性。
         /// </summary>
-        public static readonly DependencyProperty AccentBrushProperty =
-            RegisterBrush(nameof(AccentBrush));
+        public static readonly DependencyProperty CheckedBackgroundProperty =
+            RegisterBrush(nameof(CheckedBackground));
 
         /// <summary>
-        /// 获取或设置选中标记的前景画刷。
+        /// 获取或设置选中或不确定状态下选择标识的边框画刷。
         /// </summary>
         [Bindable(true)]
-        public Brush GlyphBrush
+        public Brush CheckedBorderBrush
         {
-            get { return (Brush)GetValue(GlyphBrushProperty); }
-            set { SetValue(GlyphBrushProperty, value); }
+            get { return (Brush)GetValue(CheckedBorderBrushProperty); }
+            set { SetValue(CheckedBorderBrushProperty, value); }
         }
 
         /// <summary>
-        /// 标识 <see cref="GlyphBrush"/> 依赖属性。
+        /// 标识 <see cref="CheckedBorderBrush"/> 依赖属性。
         /// </summary>
-        public static readonly DependencyProperty GlyphBrushProperty =
-            RegisterBrush(nameof(GlyphBrush));
+        public static readonly DependencyProperty CheckedBorderBrushProperty =
+            RegisterBrush(nameof(CheckedBorderBrush));
+
+        /// <summary>
+        /// 获取或设置鼠标悬停时选择标识的边框画刷。
+        /// </summary>
+        [Bindable(true)]
+        public Brush HoverBorderBrush
+        {
+            get { return (Brush)GetValue(HoverBorderBrushProperty); }
+            set { SetValue(HoverBorderBrushProperty, value); }
+        }
+
+        /// <summary>
+        /// 标识 <see cref="HoverBorderBrush"/> 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty HoverBorderBrushProperty =
+            RegisterBrush(nameof(HoverBorderBrush));
+
+        /// <summary>
+        /// 获取或设置勾号或不确定标记的前景画刷。
+        /// </summary>
+        [Bindable(true)]
+        public Brush CheckMarkForeground
+        {
+            get { return (Brush)GetValue(CheckMarkForegroundProperty); }
+            set { SetValue(CheckMarkForegroundProperty, value); }
+        }
+
+        /// <summary>
+        /// 标识 <see cref="CheckMarkForeground"/> 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty CheckMarkForegroundProperty =
+            RegisterBrush(nameof(CheckMarkForeground));
 
         /// <summary>
         /// 获取或设置左侧选择标识的边长。该值必须为大于或等于零的有限值。
