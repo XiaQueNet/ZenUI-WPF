@@ -54,41 +54,41 @@ namespace ZenUI.Wpf.Controls
                     FrameworkPropertyMetadataOptions.AffectsMeasure));
 
         /// <summary>
-        /// 获取或设置选项的显示模式。
+        /// 获取或设置选项的视觉外观。
         /// </summary>
-        public RadioGroupDisplayMode DisplayMode
+        public RadioGroupAppearance Appearance
         {
-            get { return (RadioGroupDisplayMode)GetValue(DisplayModeProperty); }
-            set { SetValue(DisplayModeProperty, value); }
+            get { return (RadioGroupAppearance)GetValue(AppearanceProperty); }
+            set { SetValue(AppearanceProperty, value); }
         }
 
         /// <summary>
-        /// 标识 <see cref="DisplayMode"/> 依赖属性。
+        /// 标识 <see cref="Appearance"/> 依赖属性。
         /// </summary>
-        public static readonly DependencyProperty DisplayModeProperty =
+        public static readonly DependencyProperty AppearanceProperty =
             DependencyProperty.Register(
-                nameof(DisplayMode),
-                typeof(RadioGroupDisplayMode),
+                nameof(Appearance),
+                typeof(RadioGroupAppearance),
                 typeof(ZenRadioGroupPanel),
                 new FrameworkPropertyMetadata(
-                    RadioGroupDisplayMode.Outline,
+                    RadioGroupAppearance.Outlined,
                     FrameworkPropertyMetadataOptions.AffectsMeasure));
 
         /// <summary>
         /// 获取或设置一个值，该值指示是否在排列方向上为子元素分配相同尺寸。
         /// </summary>
-        public bool IsItemWidthUniform
+        public bool IsItemSizeUniform
         {
-            get { return (bool)GetValue(IsItemWidthUniformProperty); }
-            set { SetValue(IsItemWidthUniformProperty, value); }
+            get { return (bool)GetValue(IsItemSizeUniformProperty); }
+            set { SetValue(IsItemSizeUniformProperty, value); }
         }
 
         /// <summary>
-        /// 标识 <see cref="IsItemWidthUniform"/> 依赖属性。
+        /// 标识 <see cref="IsItemSizeUniform"/> 依赖属性。
         /// </summary>
-        public static readonly DependencyProperty IsItemWidthUniformProperty =
+        public static readonly DependencyProperty IsItemSizeUniformProperty =
             DependencyProperty.Register(
-                nameof(IsItemWidthUniform),
+                nameof(IsItemSizeUniform),
                 typeof(bool),
                 typeof(ZenRadioGroupPanel),
                 new FrameworkPropertyMetadata(
@@ -110,7 +110,7 @@ namespace ZenUI.Wpf.Controls
             var spacing = GetEffectiveSpacing();
             var totalSpacing = spacing * Math.Max(0, visibleCount - 1);
             var hasFinitePrimary = !double.IsInfinity(availablePrimary);
-            var uniformPrimary = IsItemWidthUniform && hasFinitePrimary
+            var uniformPrimary = IsItemSizeUniform && hasFinitePrimary
                 ? Math.Max(0d, (availablePrimary - totalSpacing) / visibleCount)
                 : double.PositiveInfinity;
 
@@ -141,7 +141,7 @@ namespace ZenUI.Wpf.Controls
                 maxCross = Math.Max(maxCross, desiredCross);
             }
 
-            if (IsItemWidthUniform)
+            if (IsItemSizeUniform)
             {
                 if (hasFinitePrimary)
                 {
@@ -186,7 +186,7 @@ namespace ZenUI.Wpf.Controls
                 var desiredPrimary = horizontal
                     ? child.DesiredSize.Width
                     : child.DesiredSize.Height;
-                var childPrimary = IsItemWidthUniform ? uniformPrimary : desiredPrimary;
+                var childPrimary = IsItemSizeUniform ? uniformPrimary : desiredPrimary;
                 var rect = horizontal
                     ? new Rect(offset, 0d, childPrimary, finalCross)
                     : new Rect(0d, offset, finalCross, childPrimary);
@@ -213,7 +213,7 @@ namespace ZenUI.Wpf.Controls
 
         private double GetEffectiveSpacing()
         {
-            return DisplayMode == RadioGroupDisplayMode.Segment ? 0d : Spacing;
+            return Appearance == RadioGroupAppearance.Segmented ? 0d : Spacing;
         }
     }
 }

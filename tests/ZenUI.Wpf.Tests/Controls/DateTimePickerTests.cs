@@ -34,7 +34,7 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.IsFalse(picker.IsTextInputReadOnly);
             Assert.IsFalse(picker.IsDropDownOpen);
             Assert.AreEqual(new CornerRadius(6), picker.CornerRadius);
-            Assert.AreEqual(16d, picker.IconSize);
+            Assert.AreEqual(16d, picker.DropDownButtonIconSize);
             Assert.IsTrue(double.IsNaN(picker.DropDownWidth));
             Assert.IsTrue(double.IsNaN(picker.DropDownHeight));
             Assert.AreEqual(40d, picker.CalendarCellWidth);
@@ -144,7 +144,7 @@ namespace ZenUI.Wpf.Tests.Controls
         {
             var picker = CreateTemplatedPicker();
             picker.Padding = new Thickness(12, 8, 12, 8);
-            picker.IconSize = 24d;
+            picker.DropDownButtonIconSize = 24d;
             picker.DropDownWidth = 520d;
             picker.DropDownHeight = 400d;
             picker.CalendarCellWidth = 70d;
@@ -170,14 +170,14 @@ namespace ZenUI.Wpf.Tests.Controls
         }
 
         [TestMethod]
-        public void IconSizeRejectsInvalidValues()
+        public void DropDownButtonIconSizeRejectsInvalidValues()
         {
             var picker = new ZenDateTimePicker();
 
-            Assert.ThrowsExactly<ArgumentException>(() => picker.IconSize = -1d);
-            Assert.ThrowsExactly<ArgumentException>(() => picker.IconSize = double.NaN);
+            Assert.ThrowsExactly<ArgumentException>(() => picker.DropDownButtonIconSize = -1d);
+            Assert.ThrowsExactly<ArgumentException>(() => picker.DropDownButtonIconSize = double.NaN);
             Assert.ThrowsExactly<ArgumentException>(
-                () => picker.IconSize = double.PositiveInfinity);
+                () => picker.DropDownButtonIconSize = double.PositiveInfinity);
         }
 
         [TestMethod]

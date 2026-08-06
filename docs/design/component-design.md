@@ -65,6 +65,10 @@ Zen Style 是默认呈现原则，不是删减功能的理由。作为通用组�
 
 公共 API 应描述使用者能够理解和配置的控件语义，模板、触发器和代码应负责把这些语义映射到具体的 WPF 实现机制。不能仅因为模板使用 `IsMouseOver` 或名为 `MouseOver` 的 VisualState，就把触发机制直接暴露为公共属性名称。
 
+公共类型和成员遵循 .NET 命名规范，使用 `PascalCase`，不使用匈牙利命名、无意义前缀或只有项目内部才能理解的缩写。属性通常使用名词、名词短语或形容词命名；名称应仅包含理解该属性所必需的上下文。
+
+尚未发布的新自定义属性没有旧名称需要兼容，因此应优先选择最准确、最符合 WPF 常识的名称，不为假想的兼容性保留含糊或不恰当的命名。属性一旦作为公共 API 发布，其名称便成为 XAML、绑定、样式、反射和已编译代码共同依赖的兼容性契约，后续修改必须遵循项目的版本与发布规则。
+
 选择名称时按以下顺序判断：
 
 1. 相同语义是否已有 WPF 基类 API；有则直接复用。
@@ -73,7 +77,7 @@ Zen Style 是默认呈现原则，不是删减功能的理由。作为通用组�
 4. 名称是否会与 WPF 中已有的强语义产生错误预期。
 5. 在语义完整的前提下，删除由所属控件、属性或命名空间已经提供的重复上下文。
 
-WinUI、Web 或其他 UI 框架的名称只能作为参考。除非其语义与 ZenUI 属性完全一致，并且不会破坏 WPF 使用者的既有认知，否则不为了跨框架一致或表面上的“现代化”而改名。例如，输入控件继续使用 WPF 控件库中常见的 `Watermark`，数值步长可以使用清晰的 `Step`，不机械替换为其他框架的 `PlaceholderText` 或 `SmallChange`。
+WinUI、Web 或其他 UI 框架的名称只能作为参考。除非其语义与 ZenUI 属性完全一致，并且不会破坏 WPF 使用者的既有认知，否则不为了跨框架一致或表面上的“现代化”而改名。例如，输入控件继续使用 WPF 控件库中常见的 `Watermark`，数值步长可以使用清晰的 `Increment`，不机械替换为其他框架的 `PlaceholderText` 或 `SmallChange`。
 
 ### 状态属性
 
@@ -97,11 +101,26 @@ WinUI、Web 或其他 UI 框架的名称只能作为参考。除非其语义与 
 
 - 避免单独使用 `Mode`、`Type`、`Option`、`State` 等不能说明作用对象的宽泛名称。名称应指出被控制的对象和维度，例如使用 `SpinButtonLayout`，而不是 `ButtonMode`。
 - 不滥用 WPF 中已有强默认语义的名称。例如，`Orientation` 通常表示整个控件或内容的排列轴；若属性只控制 NumberBox 增减按钮的布局，应使用 `SpinButtonLayout`，不能让使用者误以为它会旋转或重排整个控件。
-- 布尔属性使用 `Is`、`Has`、`Can` 等前缀，并让名称准确说明 `true` 的效果。若属性控制的是密码显示按钮，应使用 `IsPasswordRevealButtonEnabled`，而不是可能被理解为控制整个明文显示能力的 `IsPasswordRevealEnabled`。
+- 布尔属性通常使用 `Is`、`Has`、`Can`、`Should` 等前缀，并让名称准确说明 `true` 的效果。若属性控制的是密码显示按钮，应使用 `IsPasswordRevealButtonEnabled`，而不是可能被理解为控制整个明文显示能力的 `IsPasswordRevealEnabled`。WPF 已有不带这些前缀的稳定惯例时，应沿用 `UseLayoutRounding`、`SnapsToDevicePixels` 一类名称，不机械添加 `Is`。
 - 枚举属性名称应表达枚举值共同描述的维度。Info、Success、Warning、Error 表达严重级别时，使用 `Severity` 和 `AlertSeverity`，不使用含义宽泛的 `Variant`。
 - 只有在名称可能冲突或离开所属类型后语义不完整时，才给类型增加控件名前缀。`SpinButtonLayout` 已经能够独立表达含义，不扩展为 `NumberBoxSpinButtonLayout`。
 - 属性名与枚举类型同名是允许的，例如 `SpinButtonLayout SpinButtonLayout`。不应仅为避免同名而引入 `Mode`、`Kind` 等无额外语义的后缀。
-- 表示尺寸时优先使用 WPF 已有后缀和类型，例如 `Width`、`Height`、`Size`、`Thickness`、`Padding` 和 `CornerRadius`；名称应说明尺寸属于哪个部件。
+- 表示尺寸时优先使用 WPF 已有后缀和类型，例如 `Width`、`Height`、`Size`、`Thickness`、`Padding` 和 `CornerRadius`；名称应说明尺寸属于哪个部件。单位或坐标系不能从 WPF 类型和惯例中自然推断时，必须在名称或 XML 文档中明确。
+- 相关属性应形成语义一致且可预测的属性族，例如 `Minimum` 与 `Maximum`、`SelectedItem` 与 `SelectedValue`。但对称性不能成为增加无实际用途 API 的理由。
+- 属性描述可持续观察或配置的状态；一次性动作使用方法或命令，通知使用事件。不要通过 `DoRefresh`、`StartExport` 一类布尔属性模拟操作。
+
+### XAML 可读性检查
+
+候选属性名应放入真实的 XAML 使用场景中评审，而不是只看 C# 声明。评审时至少检查属性与控件名连读是否自然、多个相关属性并列时是否一致，以及 `true`、枚举值和绑定表达式能否形成无歧义的语义。例如：
+
+```xaml
+<zen:ZenRadioGroup
+    Appearance="Segmented"
+    IsItemSizeUniform="True"
+    ItemsSource="{Binding Options}" />
+```
+
+若名称必须依赖模板实现、内部缩写或额外口头解释才能理解，应继续调整，而不是只靠文档补救。
 
 ### WPF 成员配对
 
@@ -187,10 +206,14 @@ public static readonly DependencyProperty SeverityProperty;
 - [ ] 动画服务于状态或空间关系的理解，时长与幅度克制，且没有非必要的循环动画。
 - [ ] 没有删除或屏蔽基类已有的公开能力。
 - [ ] 新增 API 复用了 WPF 语义，并具有完整的 XML 文档注释。
+- [ ] 新增公共类型和成员遵循 .NET `PascalCase` 等基础命名规范，没有无意义前缀或内部缩写。
 - [ ] 公共属性描述控件语义，没有泄漏触发器、VisualState 或模板部件等实现细节。
 - [ ] 状态属性使用一致的 `Hover`、`Pressed`、`Disabled`、`Focused`、`Selected` 或 `Checked` 前缀。
 - [ ] 没有为了跨框架一致而替换 WPF 使用者已经熟悉且语义准确的名称。
 - [ ] `Mode`、`Orientation`、`Variant` 等宽泛或具有强既定语义的名称经过了作用域和歧义检查。
+- [ ] 布尔属性遵循 WPF 惯例并准确说明 `true` 的效果；相关属性族的名称和语义保持一致。
+- [ ] 属性只表达状态或配置，一次性动作和通知分别使用方法、命令或事件。
+- [ ] 候选属性名已放入真实 XAML 片段检查，单独使用和并列使用均自然、清晰且无歧义。
 - [ ] CLR 属性、依赖属性标识符、附加属性访问器和路由事件标识符正确配对。
 - [ ] `PART_*`、VisualState、绑定和布局契约保持有效。
 - [ ] 默认、Hover、Pressed、键盘焦点、Disabled、只读、验证错误和高对比度状态已按适用范围覆盖。

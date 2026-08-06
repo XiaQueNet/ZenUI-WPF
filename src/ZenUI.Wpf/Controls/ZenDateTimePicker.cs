@@ -384,25 +384,25 @@ namespace ZenUI.Wpf.Controls
         /// 获取或设置输入框右侧日历图标的边长。该值必须为大于或等于零的有限值。
         /// </summary>
         [Bindable(true)]
-        public double IconSize
+        public double DropDownButtonIconSize
         {
-            get { return (double)GetValue(IconSizeProperty); }
-            set { SetValue(IconSizeProperty, value); }
+            get { return (double)GetValue(DropDownButtonIconSizeProperty); }
+            set { SetValue(DropDownButtonIconSizeProperty, value); }
         }
 
         /// <summary>
-        /// 标识 <see cref="IconSize"/> 依赖属性。
+        /// 标识 <see cref="DropDownButtonIconSize"/> 依赖属性。
         /// </summary>
-        public static readonly DependencyProperty IconSizeProperty =
+        public static readonly DependencyProperty DropDownButtonIconSizeProperty =
             DependencyProperty.Register(
-                nameof(IconSize),
+                nameof(DropDownButtonIconSize),
                 typeof(double),
                 SelfType,
                 new FrameworkPropertyMetadata(
                     16d,
                     FrameworkPropertyMetadataOptions.AffectsMeasure |
                     FrameworkPropertyMetadataOptions.AffectsRender),
-                IsValidIconSize);
+                IsValidDropDownButtonIconSize);
 
         /// <summary>
         /// 获取或设置下拉弹层的宽度。<see cref="double.NaN"/> 表示根据选择单元自然测量。
@@ -598,7 +598,7 @@ namespace ZenUI.Wpf.Controls
                 (!double.IsInfinity(dimension) && dimension > 0d);
         }
 
-        private static bool IsValidIconSize(object value)
+        private static bool IsValidDropDownButtonIconSize(object value)
         {
             var size = (double)value;
             return !double.IsNaN(size) &&

@@ -14,10 +14,10 @@
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="ThemeBackground" Value="{DynamicResource ZenInfoLightBrush}" />
         <Setter Property="ThemeBorderBrush" Value="{DynamicResource ZenBorderBrush}" />
-        <Setter Property="ThemeAccentBrush" Value="{DynamicResource ZenInfoBrush}" />
+        <Setter Property="ThemeIconBackground" Value="{DynamicResource ZenInfoBrush}" />
         <Setter Property="Background" Value="{Binding ThemeBackground, RelativeSource={RelativeSource Self}}" />
         <Setter Property="BorderBrush" Value="{Binding ThemeBorderBrush, RelativeSource={RelativeSource Self}}" />
-        <Setter Property="AccentBrush" Value="{Binding ThemeAccentBrush, RelativeSource={RelativeSource Self}}" />
+        <Setter Property="IconBackground" Value="{Binding ThemeIconBackground, RelativeSource={RelativeSource Self}}" />
         <Setter Property="Template">
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type zen:ZenAlert}">
@@ -39,7 +39,7 @@
                                     <Grid Width="18" Height="18">
                                         <Ellipse
                                             x:Name="Icon"
-                                            Fill="{TemplateBinding AccentBrush}" />
+                                            Fill="{TemplateBinding IconBackground}" />
                                         <TextBlock x:Name="IconText" HorizontalAlignment="Center" VerticalAlignment="Center" FontSize="{DynamicResource ZenFontSizeCaption}" FontWeight="{DynamicResource ZenFontWeightBold}" Foreground="{TemplateBinding IconForeground}" Text="i" />
                                     </Grid>
                                 </Viewbox>
@@ -50,17 +50,17 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="Severity" Value="Success">
                             <Setter Property="ThemeBackground" Value="{DynamicResource ZenSuccessLightBrush}" />
-                            <Setter Property="ThemeAccentBrush" Value="{DynamicResource ZenSuccessBrush}" />
+                            <Setter Property="ThemeIconBackground" Value="{DynamicResource ZenSuccessBrush}" />
                             <Setter TargetName="IconText" Property="Text" Value="✓" />
                         </Trigger>
                         <Trigger Property="Severity" Value="Warning">
                             <Setter Property="ThemeBackground" Value="{DynamicResource ZenWarningLightBrush}" />
-                            <Setter Property="ThemeAccentBrush" Value="{DynamicResource ZenWarningBrush}" />
+                            <Setter Property="ThemeIconBackground" Value="{DynamicResource ZenWarningBrush}" />
                             <Setter TargetName="IconText" Property="Text" Value="!" />
                         </Trigger>
                         <Trigger Property="Severity" Value="Error">
                             <Setter Property="ThemeBackground" Value="{DynamicResource ZenErrorLightBrush}" />
-                            <Setter Property="ThemeAccentBrush" Value="{DynamicResource ZenErrorBrush}" />
+                            <Setter Property="ThemeIconBackground" Value="{DynamicResource ZenErrorBrush}" />
                             <Setter TargetName="IconText" Property="Text" Value="×" />
                         </Trigger>
                     </ControlTemplate.Triggers>

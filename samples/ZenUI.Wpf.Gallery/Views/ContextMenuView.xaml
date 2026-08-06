@@ -146,10 +146,10 @@
                     <TextBlock Style="{StaticResource SectionTitleStyle}" Text="按钮触发" />
                     <TextBlock
                         Style="{StaticResource GallerySectionDescriptionStyle}"
-                        Text="同一个 ContextMenu 既可以响应右键，也可以由按钮单击后在按钮下方打开。" />
+                        Text="同一个 ContextMenu 既可以响应右键，也可以由按钮单击后在按钮下方打开；本例将 CornerRadius 设置为 18。" />
                     <zen:ZenButton HorizontalAlignment="Left" Click="OpenButtonMenu_Click">
                         <zen:ZenButton.ContextMenu>
-                            <zen:ZenContextMenu Placement="Bottom">
+                            <zen:ZenContextMenu CornerRadius="18" Placement="Bottom">
                                 <zen:ZenMenuItem Click="OpenWebsite_Click" Header="访问 ZenUI 官网">
                                     <zen:ZenMenuItem.Icon>
                                         <Viewbox Width="16" Height="16">

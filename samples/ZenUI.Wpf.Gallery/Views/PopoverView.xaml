@@ -15,6 +15,11 @@
             <Setter Property="FontWeight" Value="{DynamicResource ZenFontWeightSemibold}" />
             <Setter Property="Foreground" Value="{DynamicResource ZenPrimaryBrush}" />
         </Style>
+        <DataTemplate x:Key="PopoverAnchorTemplate">
+            <Border Padding="12,6" Background="#FFE9D5FF" CornerRadius="14">
+                <TextBlock FontWeight="SemiBold" Foreground="#FF5A189A" Text="{Binding}" />
+            </Border>
+        </DataTemplate>
     </UserControl.Resources>
 
     <ScrollViewer
@@ -147,6 +152,33 @@
                             AnchorButtonStyle="{StaticResource GalleryTextAnchorButtonStyle}"
                             Content="显示在锚点右侧"
                             Placement="Right" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <Border Style="{StaticResource GalleryCardStyle}">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="模板、开关与定位" />
+                    <TextBlock
+                        Style="{StaticResource GallerySectionDescriptionStyle}"
+                        Text="AnchorTemplate 定制锚点；IsOpen 支持双向绑定；偏移、AnchorGap 和 MinPopupWidth 可精确控制浮层位置与宽度。" />
+                    <StackPanel Orientation="Horizontal">
+                        <zen:ZenSwitch
+                            x:Name="PopoverOpenSwitch"
+                            Margin="0,0,24,0"
+                            CheckedContent="开"
+                            UncheckedContent="关" />
+                        <zen:ZenPopover
+                            Anchor="模板锚点"
+                            AnchorGap="14"
+                            AnchorTemplate="{StaticResource PopoverAnchorTemplate}"
+                            HorizontalOffset="18"
+                            IsOpen="{Binding IsChecked, ElementName=PopoverOpenSwitch, Mode=TwoWay}"
+                            MinPopupWidth="320"
+                            Placement="Bottom"
+                            VerticalOffset="12">
+                            <TextBlock Text="此浮层由外部开关控制，并应用了水平、垂直偏移和最小宽度。" TextWrapping="Wrap" />
+                        </zen:ZenPopover>
                     </StackPanel>
                 </StackPanel>
             </Border>

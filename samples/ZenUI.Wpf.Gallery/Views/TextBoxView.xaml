@@ -4,6 +4,18 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:gallery="clr-namespace:ZenUI.Wpf.Gallery.Controls"
     xmlns:zen="https://zenui.mnorg.cn/xaml/wpf">
+    <UserControl.Resources>
+        <DataTemplate x:Key="TextBoxLeadingContentTemplate">
+            <Border Margin="8,0,0,0" Padding="7,3" Background="#FFFFE29A" CornerRadius="8">
+                <TextBlock Foreground="#FF6B3A00" Text="{Binding}" />
+            </Border>
+        </DataTemplate>
+        <DataTemplate x:Key="TextBoxTrailingContentTemplate">
+            <Border Margin="0,0,8,0" Padding="7,3" Background="#FFDDF7F2" CornerRadius="8">
+                <TextBlock Foreground="#FF00695C" Text="{Binding}" />
+            </Border>
+        </DataTemplate>
+    </UserControl.Resources>
     <ScrollViewer
         Padding="{StaticResource GalleryPagePadding}"
         HorizontalContentAlignment="Stretch"
@@ -100,6 +112,24 @@
                             <zen:ZenTextBox Height="48" Watermark="宽松输入框" />
                         </StackPanel>
                     </UniformGrid>
+                </StackPanel>
+            </Border>
+
+            <Border Style="{StaticResource GalleryCardStyle}">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="内容模板与圆角" />
+                    <TextBlock
+                        Style="{StaticResource GallerySectionDescriptionStyle}"
+                        Text="LeadingContentTemplate 和 TrailingContentTemplate 可将数据内容呈现为任意 WPF 视觉；CornerRadius 控制输入框圆角。" />
+                    <zen:ZenTextBox
+                        Width="420"
+                        HorizontalAlignment="Left"
+                        CornerRadius="18"
+                        LeadingContent="协议"
+                        LeadingContentTemplate="{StaticResource TextBoxLeadingContentTemplate}"
+                        TrailingContent="已验证"
+                        TrailingContentTemplate="{StaticResource TextBoxTrailingContentTemplate}"
+                        Watermark="输入服务地址" />
                 </StackPanel>
             </Border>
 

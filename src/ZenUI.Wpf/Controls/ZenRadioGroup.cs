@@ -83,18 +83,18 @@ namespace ZenUI.Wpf.Controls
         /// 获取或设置一个值，该值指示是否沿排列方向为所有可见选项分配相同尺寸。
         /// </summary>
         [Bindable(true)]
-        public bool IsItemWidthUniform
+        public bool IsItemSizeUniform
         {
-            get { return (bool)GetValue(IsItemWidthUniformProperty); }
-            set { SetValue(IsItemWidthUniformProperty, value); }
+            get { return (bool)GetValue(IsItemSizeUniformProperty); }
+            set { SetValue(IsItemSizeUniformProperty, value); }
         }
 
         /// <summary>
-        /// 标识 <see cref="IsItemWidthUniform"/> 依赖属性。
+        /// 标识 <see cref="IsItemSizeUniform"/> 依赖属性。
         /// </summary>
-        public static readonly DependencyProperty IsItemWidthUniformProperty =
+        public static readonly DependencyProperty IsItemSizeUniformProperty =
             DependencyProperty.Register(
-                nameof(IsItemWidthUniform),
+                nameof(IsItemSizeUniform),
                 typeof(bool),
                 SelfType,
                 new FrameworkPropertyMetadata(
@@ -102,41 +102,41 @@ namespace ZenUI.Wpf.Controls
                     FrameworkPropertyMetadataOptions.AffectsMeasure));
 
         /// <summary>
-        /// 获取或设置选项的显示模式。
+        /// 获取或设置选项的视觉外观。
         /// </summary>
         [Bindable(true)]
-        public RadioGroupDisplayMode DisplayMode
+        public RadioGroupAppearance Appearance
         {
-            get { return (RadioGroupDisplayMode)GetValue(DisplayModeProperty); }
-            set { SetValue(DisplayModeProperty, value); }
+            get { return (RadioGroupAppearance)GetValue(AppearanceProperty); }
+            set { SetValue(AppearanceProperty, value); }
         }
 
         /// <summary>
-        /// 标识 <see cref="DisplayMode"/> 依赖属性。
+        /// 标识 <see cref="Appearance"/> 依赖属性。
         /// </summary>
-        public static readonly DependencyProperty DisplayModeProperty =
+        public static readonly DependencyProperty AppearanceProperty =
             DependencyProperty.Register(
-                nameof(DisplayMode),
-                typeof(RadioGroupDisplayMode),
+                nameof(Appearance),
+                typeof(RadioGroupAppearance),
                 SelfType,
-                new FrameworkPropertyMetadata(RadioGroupDisplayMode.Outline));
+                new FrameworkPropertyMetadata(RadioGroupAppearance.Outlined));
 
         /// <summary>
-        /// 获取或设置选中项的边框、背景或指示器所使用的强调色画刷。
+        /// 获取或设置选中项的边框、背景或指示器所使用的选择画刷。
         /// </summary>
         [Bindable(true)]
-        public Brush AccentBrush
+        public Brush SelectionBrush
         {
-            get { return (Brush)GetValue(AccentBrushProperty); }
-            set { SetValue(AccentBrushProperty, value); }
+            get { return (Brush)GetValue(SelectionBrushProperty); }
+            set { SetValue(SelectionBrushProperty, value); }
         }
 
         /// <summary>
-        /// 标识 <see cref="AccentBrush"/> 依赖属性。
+        /// 标识 <see cref="SelectionBrush"/> 依赖属性。
         /// </summary>
-        public static readonly DependencyProperty AccentBrushProperty =
+        public static readonly DependencyProperty SelectionBrushProperty =
             DependencyProperty.Register(
-                nameof(AccentBrush),
+                nameof(SelectionBrush),
                 typeof(Brush),
                 SelfType,
                 new FrameworkPropertyMetadata(

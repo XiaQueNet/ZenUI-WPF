@@ -355,6 +355,49 @@ namespace ZenUI.Wpf.Tests.Controls
         }
 
         [TestMethod]
+        public void RadioButtonAppliesStateSpecificBrushes()
+        {
+            var hoverBorder = new SolidColorBrush(Colors.Cyan);
+            var checkedBorder = new SolidColorBrush(Colors.Purple);
+            var checkedGlyph = new SolidColorBrush(Colors.Gold);
+            var radioButton = new ZenRadioButton
+            {
+                Content = "RadioButton",
+                HoverBorderBrush = hoverBorder,
+                CheckedBorderBrush = checkedBorder,
+                CheckedGlyphBrush = checkedGlyph,
+                IsChecked = true
+            };
+            var window = CreateTestWindow(radioButton, 300, 100);
+            window.Resources.MergedDictionaries.Add(new ResourceDictionary
+            {
+                Source = new Uri(
+                    "/ZenUI.Wpf;component/Themes/Generic.xaml",
+                    UriKind.Relative)
+            });
+
+            try
+            {
+                window.Show();
+                window.UpdateLayout();
+
+                var ring = radioButton.Template.FindName("Ring", radioButton) as Ellipse;
+                var dot = radioButton.Template.FindName("Dot", radioButton) as Ellipse;
+
+                Assert.IsNotNull(ring);
+                Assert.IsNotNull(dot);
+                Assert.AreSame(hoverBorder, radioButton.HoverBorderBrush);
+                Assert.AreSame(checkedBorder, ring.Stroke);
+                Assert.AreSame(checkedGlyph, dot.Fill);
+                Assert.AreEqual(Visibility.Visible, dot.Visibility);
+            }
+            finally
+            {
+                window.Close();
+            }
+        }
+
+        [TestMethod]
         public void AlertAppliesCustomIconSize()
         {
             var alert = new ZenAlert

@@ -22,6 +22,10 @@ namespace ZenUI.Wpf.Gallery.Views
                 new UserRow(5, 1005, "顾言川", "yanchuan.gu@example.com", "后端开发", 149, "在线")
             };
             Users[1].IsSelected = true;
+            ValidationRows = new ObservableCollection<ValidationRow>
+            {
+                new ValidationRow("组件审查", 8.5)
+            };
 
             foreach (var user in Users)
             {
@@ -34,6 +38,8 @@ namespace ZenUI.Wpf.Gallery.Views
         public event PropertyChangedEventHandler PropertyChanged;
 
         public ObservableCollection<UserRow> Users { get; }
+
+        public ObservableCollection<ValidationRow> ValidationRows { get; }
 
         public bool? AreAllUsersSelected
         {
@@ -123,6 +129,19 @@ namespace ZenUI.Wpf.Gallery.Views
                     PropertyChanged?.Invoke(this, new PropertyChangedEventArgs(nameof(IsSelected)));
                 }
             }
+        }
+
+        public sealed class ValidationRow
+        {
+            public ValidationRow(string name, double hours)
+            {
+                Name = name;
+                Hours = hours;
+            }
+
+            public string Name { get; }
+
+            public double Hours { get; set; }
         }
     }
 }

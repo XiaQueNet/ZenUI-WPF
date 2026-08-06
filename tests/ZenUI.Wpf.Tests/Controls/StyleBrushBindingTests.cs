@@ -88,7 +88,7 @@ namespace ZenUI.Wpf.Tests.Controls
             AddBrushBinding(style, Control.BackgroundProperty, nameof(palette.Surface), palette);
             AddBrushBinding(style, Control.BorderBrushProperty, nameof(palette.Border), palette);
             AddBrushBinding(style, Control.ForegroundProperty, nameof(palette.Foreground), palette);
-            AddBrushBinding(style, ZenAlert.AccentBrushProperty, nameof(palette.Accent), palette);
+            AddBrushBinding(style, ZenAlert.IconBackgroundProperty, nameof(palette.Accent), palette);
             AddBrushBinding(style, ZenAlert.IconForegroundProperty, nameof(palette.Glyph), palette);
             return new ZenAlert
             {
@@ -109,7 +109,7 @@ namespace ZenUI.Wpf.Tests.Controls
             AddBrushBinding(style, ZenCheckBox.CheckedBackgroundProperty, nameof(palette.Accent), palette);
             AddBrushBinding(style, ZenCheckBox.CheckedBorderBrushProperty, nameof(palette.Accent), palette);
             AddBrushBinding(style, ZenCheckBox.HoverBorderBrushProperty, nameof(palette.Accent), palette);
-            AddBrushBinding(style, ZenCheckBox.CheckMarkForegroundProperty, nameof(palette.Glyph), palette);
+            AddBrushBinding(style, ZenCheckBox.CheckedGlyphBrushProperty, nameof(palette.Glyph), palette);
             return new ZenCheckBox
             {
                 Content = "复选",
@@ -129,7 +129,21 @@ namespace ZenUI.Wpf.Tests.Controls
             AddBrushBinding(style, Control.BackgroundProperty, nameof(palette.Surface), palette);
             AddBrushBinding(style, Control.BorderBrushProperty, nameof(palette.Border), palette);
             AddBrushBinding(style, Control.ForegroundProperty, nameof(palette.Foreground), palette);
-            AddBrushBinding(style, ZenRadioButton.AccentBrushProperty, nameof(palette.Accent), palette);
+            AddBrushBinding(
+                style,
+                ZenRadioButton.HoverBorderBrushProperty,
+                nameof(palette.Accent),
+                palette);
+            AddBrushBinding(
+                style,
+                ZenRadioButton.CheckedBorderBrushProperty,
+                nameof(palette.Accent),
+                palette);
+            AddBrushBinding(
+                style,
+                ZenRadioButton.CheckedGlyphBrushProperty,
+                nameof(palette.Glyph),
+                palette);
             return new ZenRadioButton
             {
                 Content = "单选",
@@ -149,7 +163,7 @@ namespace ZenUI.Wpf.Tests.Controls
             AddBrushBinding(style, ZenSlider.ThumbBrushProperty, nameof(palette.Thumb), palette);
             AddBrushBinding(
                 style,
-                ZenSlider.ThumbHoverBrushProperty,
+                ZenSlider.HoverThumbBrushProperty,
                 nameof(palette.ThumbHover),
                 palette);
             return new ZenSlider
@@ -210,7 +224,7 @@ namespace ZenUI.Wpf.Tests.Controls
             var dot = (Ellipse)radioButton.Template.FindName("Dot", radioButton);
             Assert.AreSame(palette.Surface, ring.Fill);
             Assert.AreSame(palette.Border, ring.Stroke);
-            Assert.AreSame(palette.Accent, dot.Fill);
+            Assert.AreSame(palette.Glyph, dot.Fill);
             Assert.AreSame(palette.Foreground, radioButton.Foreground);
         }
 

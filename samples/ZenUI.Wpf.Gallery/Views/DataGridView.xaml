@@ -146,6 +146,53 @@
                     </zen:ZenDataGrid>
                 </StackPanel>
             </Border>
+            <Border Style="{StaticResource GalleryCardStyle}">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="外观、焦点与验证定制" />
+                    <TextBlock
+                        Style="{StaticResource GallerySectionDescriptionStyle}"
+                        Text="表头颜色、圆角、焦点边框和验证错误边框均可覆盖；用键盘聚焦单元格，或在工时列输入非数字内容查看效果。" />
+                    <zen:ZenDataGrid
+                        Height="180"
+                        AutoGenerateColumns="False"
+                        CellFocusVisualBorderThickness="3"
+                        CellValidationBorderThickness="4"
+                        ColumnHeaderBackground="#FF5A189A"
+                        ColumnHeaderForeground="White"
+                        CornerRadius="16"
+                        IsCellFocusVisualEnabled="True"
+                        ItemsSource="{Binding ValidationRows}"
+                        RowHeight="56">
+                        <DataGrid.Columns>
+                            <zen:ZenDataGridTextColumn
+                                Width="*"
+                                Binding="{Binding Name}"
+                                CellVerticalContentAlignment="Top"
+                                Header="项目"
+                                HeaderVerticalContentAlignment="Bottom"
+                                IsReadOnly="True" />
+                            <zen:ZenDataGridTextColumn
+                                Width="180"
+                                Binding="{Binding Hours, UpdateSourceTrigger=PropertyChanged, ValidatesOnExceptions=True}"
+                                CellHorizontalContentAlignment="Right"
+                                Header="工时（仅数字）"
+                                HeaderHorizontalContentAlignment="Right" />
+                        </DataGrid.Columns>
+                    </zen:ZenDataGrid>
+                    <zen:ZenDataGrid
+                        Height="130"
+                        Margin="0,18,0,0"
+                        AutoGenerateColumns="False"
+                        CornerRadius="16">
+                        <zen:ZenDataGrid.EmptyContent>
+                            <StackPanel HorizontalAlignment="Center">
+                                <TextBlock HorizontalAlignment="Center" FontSize="24" Text="◎" />
+                                <TextBlock Margin="0,6,0,0" Text="自定义 EmptyContent" />
+                            </StackPanel>
+                        </zen:ZenDataGrid.EmptyContent>
+                    </zen:ZenDataGrid>
+                </StackPanel>
+            </Border>
             <gallery:PropertyTable ControlType="{x:Type zen:ZenDataGrid}" />
             <gallery:PropertyTable ControlType="{x:Type zen:ZenDataGridTextColumn}" />
         </StackPanel>

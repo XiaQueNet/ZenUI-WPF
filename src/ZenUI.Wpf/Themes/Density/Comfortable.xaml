@@ -40,7 +40,7 @@
     <Thickness x:Key="ZenContextMenuSeparatorMargin">10,6</Thickness>
     <Thickness x:Key="ZenCalloutPadding">16,12</Thickness>
     <sys:Double x:Key="ZenCalloutTriggerSize">28</sys:Double>
-    <sys:Double x:Key="ZenCalloutTargetGap">5</sys:Double>
+    <sys:Double x:Key="ZenCalloutAnchorGap">5</sys:Double>
 
     <sys:Double x:Key="ZenDataGridColumnHeaderHeight">52</sys:Double>
     <sys:Double x:Key="ZenDataGridRowMinHeight">52</sys:Double>

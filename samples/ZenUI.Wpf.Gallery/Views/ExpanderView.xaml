@@ -206,6 +206,22 @@
                         IsEnabled="False" />
                 </StackPanel>
             </Border>
+            <Border Style="{StaticResource GalleryCardStyle}">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="外观尺寸定制" />
+                    <TextBlock
+                        Style="{StaticResource GallerySectionDescriptionStyle}"
+                        Text="CornerRadius、HeaderPadding 和 GlyphSize 分别控制外框圆角、标题内边距与展开标识尺寸。" />
+                    <zen:ZenExpander
+                        CornerRadius="18"
+                        GlyphSize="24"
+                        Header="大尺寸展开标识"
+                        HeaderPadding="24,18"
+                        IsExpanded="True">
+                        <TextBlock Text="自定义属性只作用于当前折叠面板。" />
+                    </zen:ZenExpander>
+                </StackPanel>
+            </Border>
             <gallery:PropertyTable ControlType="{x:Type zen:ZenExpander}" />
         </StackPanel>
     </ScrollViewer>

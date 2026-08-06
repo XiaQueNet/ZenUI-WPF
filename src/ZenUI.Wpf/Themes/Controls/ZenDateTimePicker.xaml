@@ -9,7 +9,7 @@
         <Setter Property="MinHeight" Value="{DynamicResource ZenInputControlMinHeight}" />
         <Setter Property="Padding" Value="{DynamicResource ZenInputControlPadding}" />
         <Setter Property="CornerRadius" Value="{DynamicResource ZenInputControlCornerRadius}" />
-        <Setter Property="IconSize" Value="{DynamicResource ZenDateTimePickerIconSize}" />
+        <Setter Property="DropDownButtonIconSize" Value="{DynamicResource ZenDateTimePickerDropDownButtonIconSize}" />
         <Setter Property="CalendarCellWidth" Value="{DynamicResource ZenDateTimePickerCalendarCellWidth}" />
         <Setter Property="CalendarCellHeight" Value="{DynamicResource ZenDateTimePickerCalendarCellHeight}" />
         <Setter Property="TimeItemWidth" Value="{DynamicResource ZenDateTimePickerTimeItemWidth}" />
@@ -65,8 +65,8 @@
                             Style="{DynamicResource ZenTimePickerDropDownButtonStyle}">
                             <Viewbox
                                 x:Name="CalendarIcon"
-                                Width="{TemplateBinding IconSize}"
-                                Height="{TemplateBinding IconSize}"
+                                Width="{TemplateBinding DropDownButtonIconSize}"
+                                Height="{TemplateBinding DropDownButtonIconSize}"
                                 Stretch="Uniform">
                                 <Grid Width="16" Height="16">
                                     <Rectangle

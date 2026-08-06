@@ -121,6 +121,22 @@
                     </zen:ZenListBox>
                 </StackPanel>
             </Border>
+            <Border Style="{StaticResource GalleryCardStyle}">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="嵌套滚轮衔接" />
+                    <TextBlock
+                        Style="{StaticResource GallerySectionDescriptionStyle}"
+                        Text="ScrollViewerAssist.IsMouseWheelChainingEnabled 使没有垂直滚动范围的内层 ScrollViewer 将滚轮操作继续传递给当前页面。" />
+                    <ScrollViewer
+                        Height="90"
+                        Padding="16"
+                        Background="{DynamicResource ZenSurfaceMutedBrush}"
+                        VerticalScrollBarVisibility="Auto"
+                        zen:ScrollViewerAssist.IsMouseWheelChainingEnabled="True">
+                        <TextBlock Text="将鼠标停在此区域滚动，外层 Gallery 页面仍会继续滚动。" TextWrapping="Wrap" />
+                    </ScrollViewer>
+                </StackPanel>
+            </Border>
             <gallery:PropertyTable ControlType="{x:Type zen:ZenListBox}" />
         </StackPanel>
     </ScrollViewer>

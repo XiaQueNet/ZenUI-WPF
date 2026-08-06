@@ -6,7 +6,10 @@
 
 ### Changed
 
-- `ZenCheckBox` 将含义宽泛的 `AccentBrush` 和 `GlyphBrush` 重构为 `CheckedBackground`、`CheckedBorderBrush`、`HoverBorderBrush` 和 `CheckMarkForeground`，分别控制选中背景、选中边框、悬停边框与复选标记前景。
+- 统一公开属性命名：`ZenAlert.AccentBrush` 更名为 `IconBackground`，`ZenCheckBox.CheckMarkForeground` 更名为 `CheckedGlyphBrush`，`ZenSlider.ThumbHoverBrush` 更名为 `HoverThumbBrush`，`ZenNumberBox.Step` 更名为 `Increment`，`ZenPopover.TargetGap` 更名为 `AnchorGap`，`ZenDateTimePicker.IconSize` 更名为 `DropDownButtonIconSize`。
+- `ZenRadioGroup` 将 `DisplayMode`、`IsItemWidthUniform` 和 `AccentBrush` 分别更名为 `Appearance`、`IsItemSizeUniform` 和 `SelectionBrush`；枚举类型同步更名为 `RadioGroupAppearance`，并使用 `Outlined`、`Segmented` 枚举值。
+- `ZenCheckBox` 将含义宽泛的 `AccentBrush` 和 `GlyphBrush` 重构为 `CheckedBackground`、`CheckedBorderBrush`、`HoverBorderBrush` 和 `CheckedGlyphBrush`，分别控制选中背景、选中边框、悬停边框与复选标记前景。
+- `ZenRadioButton` 将含义宽泛的 `AccentBrush` 重构为 `HoverBorderBrush`、`CheckedBorderBrush` 和 `CheckedGlyphBrush`，分别控制悬停边框、选中边框与选中圆点。
 - `ZenDateTimePicker` 使用 `DropDownWidth`、`DropDownHeight`、`CalendarCellWidth`、`CalendarCellHeight`、`TimeItemWidth` 和 `TimeItemHeight` 分别控制弹层、日历单元与时间选项尺寸；对应尺寸设为 `Auto` 后由弹层可用空间自动分配。
 - Calendar 的头部、星期栏与日期网格改为稳定比例布局，导航按钮、星期单元与日期单元保持相同尺寸；移除无效或破坏等分布局的 `ZenCalendar.NavigationButtonSize`、`ZenCalendar.ButtonPadding`、`ZenDatePicker.CalendarNavigationButtonSize`、`ZenDatePicker.CalendarButtonPadding` 及对应主题 Token。
 - `ZenDatePicker`、`ZenTimePicker` 和 `ZenDateTimePicker` 将文本输入开关更名为 `IsTextInputReadOnly`；默认值为 `false`，设为 `true` 时禁止键盘输入但仍允许通过弹层选择。

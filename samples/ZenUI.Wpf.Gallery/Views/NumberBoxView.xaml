@@ -4,6 +4,18 @@
     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
     xmlns:gallery="clr-namespace:ZenUI.Wpf.Gallery.Controls"
     xmlns:zen="https://zenui.mnorg.cn/xaml/wpf">
+    <UserControl.Resources>
+        <DataTemplate x:Key="NumberBoxIncreaseTemplate">
+            <Border Padding="8,2" Background="#FFDDF7F2" CornerRadius="8">
+                <TextBlock FontWeight="Bold" Foreground="#FF00695C" Text="{Binding}" />
+            </Border>
+        </DataTemplate>
+        <DataTemplate x:Key="NumberBoxDecreaseTemplate">
+            <Border Padding="8,2" Background="#FFFFE29A" CornerRadius="8">
+                <TextBlock FontWeight="Bold" Foreground="#FF6B3A00" Text="{Binding}" />
+            </Border>
+        </DataTemplate>
+    </UserControl.Resources>
     <ScrollViewer Padding="{StaticResource GalleryPagePadding}" HorizontalContentAlignment="Stretch" VerticalScrollBarVisibility="Auto">
         <StackPanel>
             <gallery:PageHeader Description="支持范围约束、可配置步长和两种按钮布局。" Title="NumberBox 数字输入框" />
@@ -21,7 +33,7 @@
                         Maximum="20"
                         Minimum="0"
                         SpinButtonWidth="42"
-                        Step="1"
+                        Increment="1"
                         Value="5" />
                 </StackPanel>
             </Border>
@@ -40,7 +52,7 @@
                         Maximum="10"
                         Minimum="0"
                         SpinButtonWidth="32"
-                        Step="0.5"
+                        Increment="0.5"
                         Value="2.5" />
                 </StackPanel>
             </Border>
@@ -77,12 +89,40 @@
 
             <Border Style="{StaticResource GalleryCardStyle}">
                 <StackPanel>
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="按钮模板与编辑区命令" />
+                    <TextBlock
+                        Style="{StaticResource GallerySectionDescriptionStyle}"
+                        Text="按钮 ContentTemplate 可完整定制增减按钮；点击数字编辑区域时会执行 EditorClickCommand 并传递参数。" />
+                    <StackPanel Orientation="Horizontal">
+                        <zen:ZenNumberBox
+                            Width="230"
+                            DecreaseButtonContent="−10"
+                            DecreaseButtonContentTemplate="{StaticResource NumberBoxDecreaseTemplate}"
+                            EditorClickCommand="{Binding EditorFeedbackCommand, RelativeSource={RelativeSource AncestorType={x:Type UserControl}}}"
+                            EditorClickCommandParameter="库存数量"
+                            IncreaseButtonContent="+10"
+                            IncreaseButtonContentTemplate="{StaticResource NumberBoxIncreaseTemplate}"
+                            Increment="10"
+                            SpinButtonWidth="64"
+                            Value="50" />
+                        <TextBlock
+                            x:Name="EditorCommandStatus"
+                            Margin="18,0,0,0"
+                            VerticalAlignment="Center"
+                            Style="{StaticResource GallerySupportingTextStyle}"
+                            Text="尚未点击数字编辑区域。" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <Border Style="{StaticResource GalleryCardStyle}">
+                <StackPanel>
                     <TextBlock Style="{StaticResource SectionTitleStyle}" Text="状态" />
                     <StackPanel Orientation="Horizontal">
                         <zen:ZenNumberBox
                             Width="180"
                             IsReadOnly="True"
-                            Step="10"
+                            Increment="10"
                             Value="100" />
                         <zen:ZenNumberBox
                             Width="180"

@@ -46,6 +46,65 @@
             </Border>
             <Border Style="{StaticResource GalleryCardStyle}">
                 <StackPanel>
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="外观定制" />
+                    <TextBlock
+                        Style="{StaticResource GallerySectionDescriptionStyle}"
+                        Text="HoverBorderBrush、CheckedBorderBrush 和 CheckedGlyphBrush 分别控制悬停外圈、选中外圈与选中圆点；IndicatorSize 控制选择指示器的直径。" />
+                    <DockPanel Margin="0,0,0,16">
+                        <TextBlock
+                            Width="88"
+                            VerticalAlignment="Center"
+                            DockPanel.Dock="Left"
+                            Style="{StaticResource GalleryFieldLabelStyle}"
+                            Text="交互颜色" />
+                        <StackPanel Orientation="Horizontal">
+                            <zen:ZenRadioButton
+                                Margin="0,0,28,0"
+                                CheckedBorderBrush="#FF7C3AED"
+                                CheckedGlyphBrush="#FFF59E0B"
+                                Content="悬停或选择"
+                                GroupName="CustomColorOptions"
+                                HoverBorderBrush="#FF06B6D4" />
+                            <zen:ZenRadioButton
+                                CheckedBorderBrush="#FF7C3AED"
+                                CheckedGlyphBrush="#FFF59E0B"
+                                Content="彩色选中状态"
+                                GroupName="CustomColorOptions"
+                                HoverBorderBrush="#FF06B6D4"
+                                IsChecked="True" />
+                        </StackPanel>
+                    </DockPanel>
+                    <DockPanel>
+                        <TextBlock
+                            Width="88"
+                            VerticalAlignment="Center"
+                            DockPanel.Dock="Left"
+                            Style="{StaticResource GalleryFieldLabelStyle}"
+                            Text="标识尺寸" />
+                        <StackPanel Orientation="Horizontal">
+                            <zen:ZenRadioButton
+                                Margin="0,0,28,0"
+                                Content="14"
+                                GroupName="IndicatorSize14"
+                                IndicatorSize="14"
+                                IsChecked="True" />
+                            <zen:ZenRadioButton
+                                Margin="0,0,28,0"
+                                Content="18"
+                                GroupName="IndicatorSize18"
+                                IndicatorSize="18"
+                                IsChecked="True" />
+                            <zen:ZenRadioButton
+                                Content="24"
+                                GroupName="IndicatorSize24"
+                                IndicatorSize="24"
+                                IsChecked="True" />
+                        </StackPanel>
+                    </DockPanel>
+                </StackPanel>
+            </Border>
+            <Border Style="{StaticResource GalleryCardStyle}">
+                <StackPanel>
                     <TextBlock Style="{StaticResource SectionTitleStyle}" Text="垂直选项组" />
                     <zen:ZenRadioButton
                         Margin="0,0,0,14"

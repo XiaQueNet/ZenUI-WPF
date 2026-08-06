@@ -34,13 +34,13 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.AreEqual(new CornerRadius(6), dictionary["ZenCalloutCornerRadius"]);
             Assert.AreEqual(360d, dictionary["ZenCalloutMaxWidth"]);
             Assert.AreEqual(24d, dictionary["ZenCalloutTriggerSize"]);
-            Assert.AreEqual(4d, dictionary["ZenCalloutTargetGap"]);
+            Assert.AreEqual(4d, dictionary["ZenCalloutAnchorGap"]);
             Assert.IsNull(popover.Anchor);
             Assert.AreEqual(new CornerRadius(6), popover.CornerRadius);
             Assert.IsTrue(popover.ShowArrow);
             Assert.AreEqual(0d, popover.MinPopupWidth);
             Assert.AreEqual(360d, popover.MaxPopupWidth);
-            Assert.AreEqual(4d, popover.TargetGap);
+            Assert.AreEqual(4d, popover.AnchorGap);
             Assert.IsNull(popover.AnchorButtonStyle);
         }
 
@@ -58,7 +58,7 @@ namespace ZenUI.Wpf.Tests.Controls
                 BorderThickness = new Thickness(2),
                 CornerRadius = new CornerRadius(10),
                 ShowArrow = false,
-                TargetGap = 8,
+                AnchorGap = 8,
                 MinPopupWidth = 120,
                 MaxPopupWidth = 280,
                 AnchorButtonStyle = anchorButtonStyle
@@ -266,7 +266,7 @@ namespace ZenUI.Wpf.Tests.Controls
                 var calloutBottom = callout.PointToScreen(
                     new Point(0d, callout.ActualHeight));
                 var expectedCalloutBottom = trigger.PointToScreen(
-                    new Point(0d, -popover.TargetGap));
+                    new Point(0d, -popover.AnchorGap));
 
                 Assert.AreEqual(
                     triggerCenter,
@@ -278,7 +278,7 @@ namespace ZenUI.Wpf.Tests.Controls
                     expectedCalloutBottom.Y,
                     calloutBottom.Y,
                     1.5d,
-                    $"TargetGap={popover.TargetGap}; VerticalOffset={popup.VerticalOffset}");
+                    $"AnchorGap={popover.AnchorGap}; VerticalOffset={popup.VerticalOffset}");
             }
             finally
             {

@@ -27,20 +27,20 @@ namespace ZenUI.Wpf.Controls
         }
 
         /// <summary>
-        /// 获取或设置提示图标的强调画刷。
+        /// 获取或设置提示图标的背景画刷。
         /// </summary>
         [Bindable(true)]
-        public Brush AccentBrush
+        public Brush IconBackground
         {
-            get { return (Brush)GetValue(AccentBrushProperty); }
-            set { SetValue(AccentBrushProperty, value); }
+            get { return (Brush)GetValue(IconBackgroundProperty); }
+            set { SetValue(IconBackgroundProperty, value); }
         }
 
         /// <summary>
-        /// 标识 <see cref="AccentBrush"/> 依赖属性。
+        /// 标识 <see cref="IconBackground"/> 依赖属性。
         /// </summary>
-        public static readonly DependencyProperty AccentBrushProperty =
-            RegisterBrush(nameof(AccentBrush));
+        public static readonly DependencyProperty IconBackgroundProperty =
+            RegisterBrush(nameof(IconBackground));
 
         /// <summary>
         /// 获取或设置提示图标的前景画刷。
@@ -115,20 +115,20 @@ namespace ZenUI.Wpf.Controls
             RegisterBrush(nameof(ThemeBorderBrush));
 
         /// <summary>
-        /// 获取或设置由提示级别提供的默认强调色画刷。
+        /// 获取或设置由提示级别提供的默认图标背景画刷。
         /// </summary>
         [EditorBrowsable(EditorBrowsableState.Never)]
-        public Brush ThemeAccentBrush
+        public Brush ThemeIconBackground
         {
-            get { return (Brush)GetValue(ThemeAccentBrushProperty); }
-            set { SetValue(ThemeAccentBrushProperty, value); }
+            get { return (Brush)GetValue(ThemeIconBackgroundProperty); }
+            set { SetValue(ThemeIconBackgroundProperty, value); }
         }
 
         /// <summary>
-        /// 标识 <see cref="ThemeAccentBrush"/> 依赖属性。
+        /// 标识 <see cref="ThemeIconBackground"/> 依赖属性。
         /// </summary>
-        public static readonly DependencyProperty ThemeAccentBrushProperty =
-            RegisterBrush(nameof(ThemeAccentBrush));
+        public static readonly DependencyProperty ThemeIconBackgroundProperty =
+            RegisterBrush(nameof(ThemeIconBackground));
 
         /// <summary>
         /// 获取或设置提示条所传达信息的严重级别。

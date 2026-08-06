@@ -42,6 +42,19 @@
                     </zen:ZenAlert>
                 </StackPanel>
             </Border>
+            <Border Style="{StaticResource GalleryCardStyle}">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="图标定制" />
+                    <TextBlock
+                        Style="{StaticResource GallerySectionDescriptionStyle}"
+                        Text="IconBackground、IconForeground 和 IconSize 可独立调整图标背景、文字与尺寸。" />
+                    <zen:ZenAlert
+                        Content="使用主题外的蓝紫色图标，并将图标尺寸增大到 28。"
+                        IconBackground="#FF6D28D9"
+                        IconForeground="#FFFFE45E"
+                        IconSize="28" />
+                </StackPanel>
+            </Border>
             <gallery:PropertyTable ControlType="{x:Type zen:ZenAlert}" />
         </StackPanel>
     </ScrollViewer>

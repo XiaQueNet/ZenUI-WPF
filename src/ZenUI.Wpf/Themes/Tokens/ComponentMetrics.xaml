@@ -44,7 +44,7 @@
     <sys:Double x:Key="ZenTimePickerItemHeight">36</sys:Double>
     <Thickness x:Key="ZenTimePickerItemMargin">0,2</Thickness>
     <Thickness x:Key="ZenDateTimePickerPopupPadding">4</Thickness>
-    <sys:Double x:Key="ZenDateTimePickerIconSize">16</sys:Double>
+    <sys:Double x:Key="ZenDateTimePickerDropDownButtonIconSize">16</sys:Double>
     <sys:Double x:Key="ZenDateTimePickerCalendarCellWidth">40</sys:Double>
     <sys:Double x:Key="ZenDateTimePickerCalendarCellHeight">36</sys:Double>
     <sys:Double x:Key="ZenDateTimePickerTimeItemWidth">64</sys:Double>
@@ -67,7 +67,7 @@
     <CornerRadius x:Key="ZenCalloutCornerRadius">6</CornerRadius>
     <sys:Double x:Key="ZenCalloutMaxWidth">360</sys:Double>
     <sys:Double x:Key="ZenCalloutTriggerSize">24</sys:Double>
-    <sys:Double x:Key="ZenCalloutTargetGap">4</sys:Double>
+    <sys:Double x:Key="ZenCalloutAnchorGap">4</sys:Double>
 
     <!--  数据网格  -->
     <sys:Double x:Key="ZenDataGridColumnHeaderHeight">44</sys:Double>

@@ -21,7 +21,7 @@
         <Setter Property="CheckedBackground" Value="{DynamicResource ZenPrimaryBrush}" />
         <Setter Property="CheckedBorderBrush" Value="{DynamicResource ZenPrimaryBrush}" />
         <Setter Property="HoverBorderBrush" Value="{DynamicResource ZenPrimaryBrush}" />
-        <Setter Property="CheckMarkForeground" Value="{DynamicResource ZenOnAccentBrush}" />
+        <Setter Property="CheckedGlyphBrush" Value="{DynamicResource ZenOnAccentBrush}" />
         <Setter Property="ThemeBackground" Value="{DynamicResource ZenSurfaceBrush}" />
         <Setter Property="ThemeBorderBrush" Value="{DynamicResource ZenBorderBrush}" />
         <Setter Property="Background" Value="{Binding ThemeBackground, RelativeSource={RelativeSource Self}}" />
@@ -56,7 +56,7 @@
                                         Width="10"
                                         Height="7"
                                         Data="M 1,3.5 L 4,6 L 9,1"
-                                        Stroke="{TemplateBinding CheckMarkForeground}"
+                                        Stroke="{TemplateBinding CheckedGlyphBrush}"
                                         StrokeEndLineCap="Round"
                                         StrokeLineJoin="Round"
                                         StrokeStartLineCap="Round"
@@ -103,7 +103,9 @@
         TargetType="{x:Type zen:ZenRadioButton}">
         <Setter Property="FontSize" Value="{DynamicResource ZenFontSizeBody}" />
         <Setter Property="Foreground" Value="{DynamicResource ZenTextPrimaryBrush}" />
-        <Setter Property="AccentBrush" Value="{DynamicResource ZenPrimaryBrush}" />
+        <Setter Property="HoverBorderBrush" Value="{DynamicResource ZenPrimaryBrush}" />
+        <Setter Property="CheckedBorderBrush" Value="{DynamicResource ZenPrimaryBrush}" />
+        <Setter Property="CheckedGlyphBrush" Value="{DynamicResource ZenPrimaryBrush}" />
         <Setter Property="ThemeBackground" Value="{DynamicResource ZenSurfaceBrush}" />
         <Setter Property="ThemeBorderBrush" Value="{DynamicResource ZenBorderBrush}" />
         <Setter Property="Background" Value="{Binding ThemeBackground, RelativeSource={RelativeSource Self}}" />
@@ -131,7 +133,7 @@
                                         x:Name="Dot"
                                         Width="8"
                                         Height="8"
-                                        Fill="{TemplateBinding AccentBrush}"
+                                        Fill="{TemplateBinding CheckedGlyphBrush}"
                                         Visibility="Collapsed" />
                                 </Grid>
                             </Viewbox>
@@ -140,10 +142,10 @@
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="ThemeBorderBrush" Value="{Binding AccentBrush, RelativeSource={RelativeSource Self}}" />
+                            <Setter Property="ThemeBorderBrush" Value="{Binding HoverBorderBrush, RelativeSource={RelativeSource Self}}" />
                         </Trigger>
                         <Trigger Property="IsChecked" Value="True">
-                            <Setter Property="ThemeBorderBrush" Value="{Binding AccentBrush, RelativeSource={RelativeSource Self}}" />
+                            <Setter Property="ThemeBorderBrush" Value="{Binding CheckedBorderBrush, RelativeSource={RelativeSource Self}}" />
                             <Setter TargetName="Ring" Property="StrokeThickness" Value="2" />
                             <Setter TargetName="Dot" Property="Visibility" Value="Visible" />
                         </Trigger>

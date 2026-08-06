@@ -154,7 +154,7 @@
                                     Style="{StaticResource NavigationGroupExpanderStyle}">
                                     <zen:ZenRadioGroup
                                         AutomationProperties.Name="{Binding Title}"
-                                        IsItemWidthUniform="False"
+                                        IsItemSizeUniform="False"
                                         ItemContainerStyle="{StaticResource NavigationRadioItemStyle}"
                                         ItemsSource="{Binding Items}"
                                         Orientation="Vertical"

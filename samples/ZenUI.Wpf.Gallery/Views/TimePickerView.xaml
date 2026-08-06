@@ -128,6 +128,24 @@
                 </StackPanel>
             </Border>
 
+            <Border Style="{StaticResource GalleryCardStyle}">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="弹层状态绑定" />
+                    <TextBlock Style="{StaticResource GallerySectionDescriptionStyle}" Text="IsDropDownOpen 可双向绑定，由业务状态显式打开或关闭时间选择弹层。" />
+                    <StackPanel Orientation="Horizontal">
+                        <zen:ZenSwitch
+                            x:Name="TimeDropDownSwitch"
+                            Margin="0,0,18,0"
+                            CheckedContent="开"
+                            UncheckedContent="关" />
+                        <zen:ZenTimePicker
+                            Width="230"
+                            IsDropDownOpen="{Binding IsChecked, ElementName=TimeDropDownSwitch, Mode=TwoWay}"
+                            Watermark="使用左侧开关控制" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
             <gallery:PropertyTable ControlType="{x:Type zen:ZenTimePicker}" />
         </StackPanel>
     </ScrollViewer>

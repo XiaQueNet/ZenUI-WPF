@@ -126,18 +126,18 @@ namespace ZenUI.Wpf.Controls
         /// 获取或设置单次增加或减少的步长。该值必须大于零。
         /// </summary>
         [Bindable(true)]
-        public decimal Step
+        public decimal Increment
         {
-            get { return (decimal)GetValue(StepProperty); }
-            set { SetValue(StepProperty, value); }
+            get { return (decimal)GetValue(IncrementProperty); }
+            set { SetValue(IncrementProperty, value); }
         }
 
         /// <summary>
-        /// 标识 <see cref="Step"/> 依赖属性。
+        /// 标识 <see cref="Increment"/> 依赖属性。
         /// </summary>
-        public static readonly DependencyProperty StepProperty =
+        public static readonly DependencyProperty IncrementProperty =
             DependencyProperty.Register(
-                nameof(Step),
+                nameof(Increment),
                 typeof(decimal),
                 SelfType,
                 new FrameworkPropertyMetadata(1m),
@@ -389,12 +389,12 @@ namespace ZenUI.Wpf.Controls
 
             if (e.Key == Key.Up)
             {
-                ChangeValue(Step);
+                ChangeValue(Increment);
                 e.Handled = true;
             }
             else if (e.Key == Key.Down)
             {
-                ChangeValue(-Step);
+                ChangeValue(-Increment);
                 e.Handled = true;
             }
         }
@@ -450,12 +450,12 @@ namespace ZenUI.Wpf.Controls
 
         private void OnIncreaseClick(object sender, RoutedEventArgs e)
         {
-            ChangeValue(Step);
+            ChangeValue(Increment);
         }
 
         private void OnDecreaseClick(object sender, RoutedEventArgs e)
         {
-            ChangeValue(-Step);
+            ChangeValue(-Increment);
         }
 
         private void ChangeValue(decimal delta)
@@ -686,10 +686,10 @@ namespace ZenUI.Wpf.Controls
         private ZenNumberBox NumberBox => (ZenNumberBox)Owner;
 
         public bool IsReadOnly => !NumberBox.IsEnabled || NumberBox.IsReadOnly;
-        public double LargeChange => (double)NumberBox.Step;
+        public double LargeChange => (double)NumberBox.Increment;
         public double Maximum => (double)NumberBox.Maximum;
         public double Minimum => (double)NumberBox.Minimum;
-        public double SmallChange => (double)NumberBox.Step;
+        public double SmallChange => (double)NumberBox.Increment;
         public double Value => (double)NumberBox.Value;
 
         public override object GetPattern(PatternInterface patternInterface)

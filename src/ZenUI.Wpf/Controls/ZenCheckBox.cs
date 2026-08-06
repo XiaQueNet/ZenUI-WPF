@@ -71,17 +71,17 @@ namespace ZenUI.Wpf.Controls
         /// 获取或设置勾号或不确定标记的前景画刷。
         /// </summary>
         [Bindable(true)]
-        public Brush CheckMarkForeground
+        public Brush CheckedGlyphBrush
         {
-            get { return (Brush)GetValue(CheckMarkForegroundProperty); }
-            set { SetValue(CheckMarkForegroundProperty, value); }
+            get { return (Brush)GetValue(CheckedGlyphBrushProperty); }
+            set { SetValue(CheckedGlyphBrushProperty, value); }
         }
 
         /// <summary>
-        /// 标识 <see cref="CheckMarkForeground"/> 依赖属性。
+        /// 标识 <see cref="CheckedGlyphBrush"/> 依赖属性。
         /// </summary>
-        public static readonly DependencyProperty CheckMarkForegroundProperty =
-            RegisterBrush(nameof(CheckMarkForeground));
+        public static readonly DependencyProperty CheckedGlyphBrushProperty =
+            RegisterBrush(nameof(CheckedGlyphBrush));
 
         /// <summary>
         /// 获取或设置左侧选择标识的边长。该值必须为大于或等于零的有限值。

@@ -46,7 +46,7 @@
             <Border Style="{StaticResource GalleryCardStyle}">
                 <StackPanel>
                     <TextBlock Style="{StaticResource SectionTitleStyle}" Text="自定义外观与尺寸" />
-                    <TextBlock Style="{StaticResource GallerySectionDescriptionStyle}" Text="圆角、整体尺寸、月份按钮内边距和导航按钮尺寸可单独覆盖。" />
+                    <TextBlock Style="{StaticResource GallerySectionDescriptionStyle}" Text="CornerRadius 控制日历外框圆角；Padding 与 FontSize 继续复用 WPF 原生属性。" />
                     <zen:ZenCalendar
                         Padding="5"
                         HorizontalAlignment="Left"

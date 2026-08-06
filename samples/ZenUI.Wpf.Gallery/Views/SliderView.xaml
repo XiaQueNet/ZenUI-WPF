@@ -68,6 +68,20 @@
                     </Grid>
                 </StackPanel>
             </Border>
+            <Border Style="{StaticResource GalleryCardStyle}">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="轨道与手柄定制" />
+                    <TextBlock
+                        Style="{StaticResource GallerySectionDescriptionStyle}"
+                        Text="TrackThickness 控制轨道厚度；ThumbBrush 与 HoverThumbBrush 分别控制手柄默认和悬停颜色。" />
+                    <zen:ZenSlider
+                        Maximum="100"
+                        TrackThickness="10"
+                        ThumbBrush="#FFFFB703"
+                        HoverThumbBrush="#FFD726A3"
+                        Value="62" />
+                </StackPanel>
+            </Border>
             <gallery:PropertyTable ControlType="{x:Type zen:ZenSlider}" />
         </StackPanel>
     </ScrollViewer>

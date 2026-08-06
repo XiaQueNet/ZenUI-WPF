@@ -73,6 +73,23 @@
                     </Grid>
                 </StackPanel>
             </Border>
+            <Border Style="{StaticResource GalleryCardStyle}">
+                <StackPanel>
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="指示器与遮罩定制" />
+                    <TextBlock
+                        Style="{StaticResource GallerySectionDescriptionStyle}"
+                        Text="IndicatorSize 调整加载指示器尺寸，OverlayBackground 覆盖内容上方的遮罩颜色。" />
+                    <zen:ZenLoading
+                        Height="140"
+                        Foreground="#FF7B2CBF"
+                        IndicatorSize="42"
+                        IsLoading="True"
+                        LoadingText="正在应用自定义样式…"
+                        OverlayBackground="#CCFFF0C2">
+                        <Border Background="#FF00A896" CornerRadius="8" />
+                    </zen:ZenLoading>
+                </StackPanel>
+            </Border>
             <gallery:PropertyTable ControlType="{x:Type zen:ZenLoading}" />
         </StackPanel>
     </ScrollViewer>

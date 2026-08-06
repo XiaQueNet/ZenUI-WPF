@@ -63,18 +63,18 @@ namespace ZenUI.Wpf.Controls
         /// 获取或设置鼠标悬停时滑块手柄的填充画刷。
         /// </summary>
         [Bindable(true)]
-        public Brush ThumbHoverBrush
+        public Brush HoverThumbBrush
         {
-            get { return (Brush)GetValue(ThumbHoverBrushProperty); }
-            set { SetValue(ThumbHoverBrushProperty, value); }
+            get { return (Brush)GetValue(HoverThumbBrushProperty); }
+            set { SetValue(HoverThumbBrushProperty, value); }
         }
 
         /// <summary>
-        /// 标识 <see cref="ThumbHoverBrush"/> 依赖属性。
+        /// 标识 <see cref="HoverThumbBrush"/> 依赖属性。
         /// </summary>
-        public static readonly DependencyProperty ThumbHoverBrushProperty =
+        public static readonly DependencyProperty HoverThumbBrushProperty =
             DependencyProperty.Register(
-                nameof(ThumbHoverBrush),
+                nameof(HoverThumbBrush),
                 typeof(Brush),
                 typeof(ZenSlider),
                 new FrameworkPropertyMetadata(

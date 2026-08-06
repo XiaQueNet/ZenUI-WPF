@@ -34,7 +34,7 @@
         <Setter Property="Foreground" Value="{DynamicResource ZenPrimaryBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource ZenPrimaryBrush}" />
         <Setter Property="ThumbBrush" Value="{DynamicResource ZenControlThumbBrush}" />
-        <Setter Property="ThumbHoverBrush" Value="{DynamicResource ZenInfoLightBrush}" />
+        <Setter Property="HoverThumbBrush" Value="{DynamicResource ZenInfoLightBrush}" />
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="Template">
             <Setter.Value>
@@ -63,7 +63,7 @@
                                     Background="{TemplateBinding ThumbBrush}"
                                     BorderBrush="{TemplateBinding BorderBrush}"
                                     Style="{StaticResource ZenSliderThumbStyle}"
-                                    Tag="{TemplateBinding ThumbHoverBrush}" />
+                                    Tag="{TemplateBinding HoverThumbBrush}" />
                             </Track.Thumb>
                         </Track>
                     </Grid>

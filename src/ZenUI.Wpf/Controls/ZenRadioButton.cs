@@ -20,20 +20,52 @@ namespace ZenUI.Wpf.Controls
         }
 
         /// <summary>
-        /// 获取或设置选中状态使用的强调色画刷。
+        /// 获取或设置鼠标悬停时选择指示器的边框画刷。
         /// </summary>
         [Bindable(true)]
-        public Brush AccentBrush
+        public Brush HoverBorderBrush
         {
-            get { return (Brush)GetValue(AccentBrushProperty); }
-            set { SetValue(AccentBrushProperty, value); }
+            get { return (Brush)GetValue(HoverBorderBrushProperty); }
+            set { SetValue(HoverBorderBrushProperty, value); }
         }
 
         /// <summary>
-        /// 标识 <see cref="AccentBrush"/> 依赖属性。
+        /// 标识 <see cref="HoverBorderBrush"/> 依赖属性。
         /// </summary>
-        public static readonly DependencyProperty AccentBrushProperty =
-            RegisterBrush(nameof(AccentBrush));
+        public static readonly DependencyProperty HoverBorderBrushProperty =
+            RegisterBrush(nameof(HoverBorderBrush));
+
+        /// <summary>
+        /// 获取或设置选中时选择指示器的边框画刷。
+        /// </summary>
+        [Bindable(true)]
+        public Brush CheckedBorderBrush
+        {
+            get { return (Brush)GetValue(CheckedBorderBrushProperty); }
+            set { SetValue(CheckedBorderBrushProperty, value); }
+        }
+
+        /// <summary>
+        /// 标识 <see cref="CheckedBorderBrush"/> 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty CheckedBorderBrushProperty =
+            RegisterBrush(nameof(CheckedBorderBrush));
+
+        /// <summary>
+        /// 获取或设置选中圆点的画刷。
+        /// </summary>
+        [Bindable(true)]
+        public Brush CheckedGlyphBrush
+        {
+            get { return (Brush)GetValue(CheckedGlyphBrushProperty); }
+            set { SetValue(CheckedGlyphBrushProperty, value); }
+        }
+
+        /// <summary>
+        /// 标识 <see cref="CheckedGlyphBrush"/> 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty CheckedGlyphBrushProperty =
+            RegisterBrush(nameof(CheckedGlyphBrush));
 
         /// <summary>
         /// 获取或设置左侧选择标识的直径。该值必须为大于或等于零的有限值。

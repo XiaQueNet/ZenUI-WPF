@@ -27,7 +27,7 @@ namespace ZenUI.Wpf.Tests.Controls
 
             Assert.AreEqual(typeof(ZenNumberBox), numberBox.ExposedDefaultStyleKey);
             Assert.AreEqual(0m, numberBox.Value);
-            Assert.AreEqual(1m, numberBox.Step);
+            Assert.AreEqual(1m, numberBox.Increment);
             Assert.AreEqual(SpinButtonLayout.Horizontal, numberBox.SpinButtonLayout);
             Assert.AreEqual(34d, numberBox.SpinButtonWidth);
             Assert.IsNull(numberBox.IncreaseButtonContent);
@@ -62,13 +62,13 @@ namespace ZenUI.Wpf.Tests.Controls
         }
 
         [TestMethod]
-        public void ButtonsUseConfiguredStepAndValueIsCoercedToRange()
+        public void ButtonsUseConfiguredIncrementAndValueIsCoercedToRange()
         {
             var numberBox = new ZenNumberBox
             {
                 Minimum = 0m,
                 Maximum = 2m,
-                Step = 0.5m,
+                Increment = 0.5m,
                 Value = 1m
             };
             var window = CreateWindow(numberBox);
@@ -115,7 +115,7 @@ namespace ZenUI.Wpf.Tests.Controls
             {
                 SpinButtonLayout = SpinButtonLayout.Vertical,
                 SpinButtonWidth = 40d,
-                Step = 2m,
+                Increment = 2m,
                 Value = 4m
             };
             var window = CreateWindow(numberBox);
@@ -168,9 +168,9 @@ namespace ZenUI.Wpf.Tests.Controls
         }
 
         [TestMethod]
-        public void InvalidStepIsRejected()
+        public void InvalidIncrementIsRejected()
         {
-            Assert.ThrowsExactly<ArgumentException>(() => new ZenNumberBox { Step = 0m });
+            Assert.ThrowsExactly<ArgumentException>(() => new ZenNumberBox { Increment = 0m });
         }
 
         [TestMethod]

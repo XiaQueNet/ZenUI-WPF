@@ -118,12 +118,25 @@
                                 CalendarCellHeight="44"
                                 CalendarCellWidth="52"
                                 CornerRadius="12"
-                                IconSize="20"
+                                DropDownButtonIconSize="20"
                                 IsSecondVisible="True"
                                 TimeItemHeight="44"
                                 TimeItemWidth="70" />
                         </StackPanel>
                     </WrapPanel>
+                    <StackPanel Margin="0,18,0,0" Orientation="Horizontal">
+                        <zen:ZenSwitch
+                            x:Name="DateTimeDropDownSwitch"
+                            Margin="0,0,18,0"
+                            CheckedContent="开"
+                            UncheckedContent="关" />
+                        <zen:ZenDateTimePicker
+                            Width="300"
+                            DropDownHeight="480"
+                            DropDownWidth="680"
+                            IsDropDownOpen="{Binding IsChecked, ElementName=DateTimeDropDownSwitch, Mode=TwoWay}"
+                            Watermark="固定 680 × 480 弹层" />
+                    </StackPanel>
                 </StackPanel>
             </Border>
 

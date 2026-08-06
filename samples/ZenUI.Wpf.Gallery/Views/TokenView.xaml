@@ -160,7 +160,7 @@
                                 <zen:ZenNumberBox
                                     Maximum="10"
                                     Minimum="0"
-                                    Step="0.5"
+                                    Increment="0.5"
                                     Value="2.5" />
                                 <zen:ZenComboBox Grid.Column="2" SelectedIndex="0">
                                     <ComboBoxItem Content="标准尺寸" />

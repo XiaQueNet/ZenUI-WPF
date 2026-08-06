@@ -325,7 +325,7 @@
                                 </StackPanel>
                                 <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="界面布局" />
                                 <zen:ZenRadioGroup
-                                    DisplayMode="Segment"
+                                    Appearance="Segmented"
                                     ItemsSource="{Binding ViewModes, ElementName=Root}"
                                     SelectedIndex="1"
                                     Spacing="6" />
@@ -357,7 +357,7 @@
                                         Maximum="20"
                                         Minimum="1"
                                         SpinButtonLayout="Vertical"
-                                        Step="1"
+                                        Increment="1"
                                         Value="4" />
                                 </StackPanel>
                                 <Grid Margin="0,3,0,0">

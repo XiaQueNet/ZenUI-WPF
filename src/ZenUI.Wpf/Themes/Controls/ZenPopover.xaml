@@ -6,7 +6,7 @@
 
     <zen:CalloutOffsetConverter
         x:Key="ZenCalloutOffsetConverter"
-        Gap="{DynamicResource ZenCalloutTargetGap}" />
+        Gap="{DynamicResource ZenCalloutAnchorGap}" />
 
     <!-- ToolTip 与 Popover 共用的气泡外壳。 -->
     <Style x:Key="ZenCalloutChromeStyle" TargetType="{x:Type zen:ZenCalloutChrome}">
@@ -264,7 +264,7 @@
         <Setter Property="BorderThickness" Value="1" />
         <Setter Property="CornerRadius" Value="{DynamicResource ZenCalloutCornerRadius}" />
         <Setter Property="ShowArrow" Value="True" />
-        <Setter Property="TargetGap" Value="{DynamicResource ZenCalloutTargetGap}" />
+        <Setter Property="AnchorGap" Value="{DynamicResource ZenCalloutAnchorGap}" />
         <Setter Property="AnchorButtonStyle" Value="{StaticResource ZenPopoverAnchorButtonStyle}" />
         <Setter Property="MaxPopupWidth" Value="{DynamicResource ZenCalloutMaxWidth}" />
         <Setter Property="HorizontalAlignment" Value="Left" />
@@ -296,7 +296,7 @@
                                     <Binding ElementName="CalloutChrome" Path="ActualWidth" />
                                     <Binding Path="Placement" RelativeSource="{RelativeSource TemplatedParent}" />
                                     <Binding Path="HorizontalOffset" RelativeSource="{RelativeSource TemplatedParent}" />
-                                    <Binding Path="TargetGap" RelativeSource="{RelativeSource TemplatedParent}" />
+                                    <Binding Path="AnchorGap" RelativeSource="{RelativeSource TemplatedParent}" />
                                 </MultiBinding>
                             </Popup.HorizontalOffset>
                             <Popup.VerticalOffset>
@@ -307,7 +307,7 @@
                                     <Binding ElementName="CalloutChrome" Path="ActualHeight" />
                                     <Binding Path="Placement" RelativeSource="{RelativeSource TemplatedParent}" />
                                     <Binding Path="VerticalOffset" RelativeSource="{RelativeSource TemplatedParent}" />
-                                    <Binding Path="TargetGap" RelativeSource="{RelativeSource TemplatedParent}" />
+                                    <Binding Path="AnchorGap" RelativeSource="{RelativeSource TemplatedParent}" />
                                 </MultiBinding>
                             </Popup.VerticalOffset>
                             <zen:ZenCalloutChrome

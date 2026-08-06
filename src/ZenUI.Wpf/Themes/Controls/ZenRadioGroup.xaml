@@ -47,7 +47,7 @@
                                     x:Name="Dot"
                                     Width="8"
                                     Height="8"
-                                    Fill="{Binding AccentBrush, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenRadioGroup}}}"
+                                    Fill="{Binding SelectionBrush, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenRadioGroup}}}"
                                     Visibility="Collapsed" />
                             </Grid>
                             <ContentPresenter
@@ -64,13 +64,13 @@
                             <Setter
                                 TargetName="Ring"
                                 Property="Stroke"
-                                Value="{Binding AccentBrush, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenRadioGroup}}}" />
+                                Value="{Binding SelectionBrush, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenRadioGroup}}}" />
                         </Trigger>
                         <Trigger Property="IsSelected" Value="True">
                             <Setter
                                 TargetName="Ring"
                                 Property="Stroke"
-                                Value="{Binding AccentBrush, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenRadioGroup}}}" />
+                                Value="{Binding SelectionBrush, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenRadioGroup}}}" />
                             <Setter TargetName="Ring" Property="StrokeThickness" Value="2" />
                             <Setter TargetName="Dot" Property="Visibility" Value="Visible" />
                         </Trigger>
@@ -139,9 +139,9 @@
                 <Setter Property="BorderBrush" Value="{DynamicResource ZenBorderHoverBrush}" />
             </Trigger>
             <Trigger Property="IsSelected" Value="True">
-                <Setter Property="Background" Value="{Binding AccentBrush, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenRadioGroup}}}" />
-                <Setter Property="BorderBrush" Value="{Binding AccentBrush, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenRadioGroup}}}" />
-                <Setter Property="Foreground" Value="{DynamicResource ZenOnAccentBrush}" />
+                <Setter Property="Background" Value="{Binding SelectionBrush, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenRadioGroup}}}" />
+                <Setter Property="BorderBrush" Value="{Binding SelectionBrush, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenRadioGroup}}}" />
+                <Setter Property="Foreground" Value="{DynamicResource ZenOnSelectionBrush}" />
                 <Setter Property="FontWeight" Value="SemiBold" />
             </Trigger>
             <MultiTrigger>
@@ -168,8 +168,8 @@
                 <Setter Property="BorderBrush" Value="{DynamicResource ZenBorderHoverBrush}" />
             </Trigger>
             <Trigger Property="IsSelected" Value="True">
-                <Setter Property="BorderBrush" Value="{Binding AccentBrush, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenRadioGroup}}}" />
-                <Setter Property="Foreground" Value="{Binding AccentBrush, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenRadioGroup}}}" />
+                <Setter Property="BorderBrush" Value="{Binding SelectionBrush, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenRadioGroup}}}" />
+                <Setter Property="Foreground" Value="{Binding SelectionBrush, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenRadioGroup}}}" />
                 <Setter Property="FontWeight" Value="SemiBold" />
             </Trigger>
         </Style.Triggers>
@@ -185,7 +185,7 @@
             </Trigger>
             <Trigger Property="IsSelected" Value="True">
                 <Setter Property="Background" Value="{DynamicResource ZenRadioSegmentedSelectedBrush}" />
-                <Setter Property="Foreground" Value="{Binding AccentBrush, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenRadioGroup}}}" />
+                <Setter Property="Foreground" Value="{Binding SelectionBrush, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenRadioGroup}}}" />
                 <Setter Property="FontWeight" Value="SemiBold" />
             </Trigger>
             <MultiTrigger>
@@ -216,15 +216,15 @@
                             x:Name="SelectionIndicator"
                             Height="2"
                             VerticalAlignment="Bottom"
-                            Background="{Binding AccentBrush, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenRadioGroup}}}"
+                            Background="{Binding SelectionBrush, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenRadioGroup}}}"
                             Visibility="Collapsed" />
                     </Grid>
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Foreground" Value="{Binding AccentBrush, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenRadioGroup}}}" />
+                            <Setter Property="Foreground" Value="{Binding SelectionBrush, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenRadioGroup}}}" />
                         </Trigger>
                         <Trigger Property="IsSelected" Value="True">
-                            <Setter Property="Foreground" Value="{Binding AccentBrush, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenRadioGroup}}}" />
+                            <Setter Property="Foreground" Value="{Binding SelectionBrush, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenRadioGroup}}}" />
                             <Setter Property="FontWeight" Value="SemiBold" />
                             <Setter TargetName="SelectionIndicator" Property="Visibility" Value="Visible" />
                         </Trigger>
@@ -305,7 +305,7 @@
         <Setter Property="Foreground" Value="{DynamicResource ZenTextPrimaryBrush}" />
         <Setter Property="Background" Value="Transparent" />
         <Setter Property="BorderThickness" Value="0" />
-        <Setter Property="AccentBrush" Value="{DynamicResource ZenPrimaryBrush}" />
+        <Setter Property="SelectionBrush" Value="{DynamicResource ZenPrimaryBrush}" />
         <Setter Property="HorizontalContentAlignment" Value="Stretch" />
         <Setter Property="VerticalContentAlignment" Value="Stretch" />
         <Setter Property="ItemContainerStyle" Value="{StaticResource ZenRadioItemOutlineStyle}" />
@@ -316,8 +316,8 @@
             <Setter.Value>
                 <ItemsPanelTemplate>
                     <zen:ZenRadioGroupPanel
-                        DisplayMode="{Binding DisplayMode, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenRadioGroup}}}"
-                        IsItemWidthUniform="{Binding IsItemWidthUniform, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenRadioGroup}}}"
+                        Appearance="{Binding Appearance, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenRadioGroup}}}"
+                        IsItemSizeUniform="{Binding IsItemSizeUniform, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenRadioGroup}}}"
                         Orientation="{Binding Orientation, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenRadioGroup}}}"
                         Spacing="{Binding Spacing, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenRadioGroup}}}" />
                 </ItemsPanelTemplate>
@@ -343,7 +343,7 @@
                         </ScrollViewer>
                     </Border>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="DisplayMode" Value="{x:Static zen:RadioGroupDisplayMode.Segment}">
+                        <Trigger Property="Appearance" Value="{x:Static zen:RadioGroupAppearance.Segmented}">
                             <Setter TargetName="GroupBorder" Property="Background" Value="{DynamicResource ZenSurfaceMutedBrush}" />
                             <Setter TargetName="GroupBorder" Property="BorderBrush" Value="{DynamicResource ZenBorderBrush}" />
                             <Setter TargetName="GroupBorder" Property="BorderThickness" Value="{DynamicResource ZenControlBorderThickness}" />
@@ -358,19 +358,19 @@
             </Setter.Value>
         </Setter>
         <Style.Triggers>
-            <Trigger Property="DisplayMode" Value="{x:Static zen:RadioGroupDisplayMode.Radio}">
+            <Trigger Property="Appearance" Value="{x:Static zen:RadioGroupAppearance.Radio}">
                 <Setter Property="ItemContainerStyle" Value="{StaticResource ZenRadioItemRadioStyle}" />
             </Trigger>
-            <Trigger Property="DisplayMode" Value="{x:Static zen:RadioGroupDisplayMode.Filled}">
+            <Trigger Property="Appearance" Value="{x:Static zen:RadioGroupAppearance.Filled}">
                 <Setter Property="ItemContainerStyle" Value="{StaticResource ZenRadioItemFilledStyle}" />
             </Trigger>
-            <Trigger Property="DisplayMode" Value="{x:Static zen:RadioGroupDisplayMode.Ghost}">
+            <Trigger Property="Appearance" Value="{x:Static zen:RadioGroupAppearance.Ghost}">
                 <Setter Property="ItemContainerStyle" Value="{StaticResource ZenRadioItemGhostStyle}" />
             </Trigger>
-            <Trigger Property="DisplayMode" Value="{x:Static zen:RadioGroupDisplayMode.Underline}">
+            <Trigger Property="Appearance" Value="{x:Static zen:RadioGroupAppearance.Underline}">
                 <Setter Property="ItemContainerStyle" Value="{StaticResource ZenRadioItemUnderlineStyle}" />
             </Trigger>
-            <Trigger Property="DisplayMode" Value="{x:Static zen:RadioGroupDisplayMode.Segment}">
+            <Trigger Property="Appearance" Value="{x:Static zen:RadioGroupAppearance.Segmented}">
                 <Setter Property="ItemContainerStyle" Value="{StaticResource ZenRadioItemSegmentStyle}" />
             </Trigger>
         </Style.Triggers>

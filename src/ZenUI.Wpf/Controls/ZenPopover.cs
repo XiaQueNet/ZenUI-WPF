@@ -176,22 +176,22 @@ namespace ZenUI.Wpf.Controls
         /// 该值必须为大于或等于零的有限值。
         /// </summary>
         [Bindable(true)]
-        public double TargetGap
+        public double AnchorGap
         {
-            get { return (double)GetValue(TargetGapProperty); }
-            set { SetValue(TargetGapProperty, value); }
+            get { return (double)GetValue(AnchorGapProperty); }
+            set { SetValue(AnchorGapProperty, value); }
         }
 
         /// <summary>
-        /// 标识 <see cref="TargetGap"/> 依赖属性。
+        /// 标识 <see cref="AnchorGap"/> 依赖属性。
         /// </summary>
-        public static readonly DependencyProperty TargetGapProperty =
+        public static readonly DependencyProperty AnchorGapProperty =
             DependencyProperty.Register(
-                nameof(TargetGap),
+                nameof(AnchorGap),
                 typeof(double),
                 SelfType,
                 new FrameworkPropertyMetadata(4d),
-                IsValidTargetGap);
+                IsValidAnchorGap);
 
         /// <summary>
         /// 获取或设置气泡主体的圆角半径。
@@ -281,7 +281,7 @@ namespace ZenUI.Wpf.Controls
             return !double.IsNaN(width) && width >= 0d;
         }
 
-        private static bool IsValidTargetGap(object value)
+        private static bool IsValidAnchorGap(object value)
         {
             var gap = (double)value;
             return !double.IsNaN(gap) &&

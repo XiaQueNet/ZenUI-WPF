@@ -17,32 +17,32 @@ namespace ZenUI.Wpf.Tests.Controls
     public class RadioGroupTests
     {
         [TestMethod]
-        public void RadioGroupSupportsDisplayModes()
+        public void RadioGroupSupportsAppearances()
         {
             var group = new ZenRadioGroup();
 
-            Assert.AreEqual(RadioGroupDisplayMode.Outline, group.DisplayMode);
+            Assert.AreEqual(RadioGroupAppearance.Outlined, group.Appearance);
 
             var modes = new[]
             {
-                RadioGroupDisplayMode.Radio,
-                RadioGroupDisplayMode.Filled,
-                RadioGroupDisplayMode.Outline,
-                RadioGroupDisplayMode.Ghost,
-                RadioGroupDisplayMode.Underline,
-                RadioGroupDisplayMode.Segment
+                RadioGroupAppearance.Radio,
+                RadioGroupAppearance.Filled,
+                RadioGroupAppearance.Outlined,
+                RadioGroupAppearance.Ghost,
+                RadioGroupAppearance.Underline,
+                RadioGroupAppearance.Segmented
             };
 
             foreach (var mode in modes)
             {
-                group.DisplayMode = mode;
-                Assert.AreEqual(mode, group.DisplayMode);
-                Assert.AreEqual(mode, group.GetValue(ZenRadioGroup.DisplayModeProperty));
+                group.Appearance = mode;
+                Assert.AreEqual(mode, group.Appearance);
+                Assert.AreEqual(mode, group.GetValue(ZenRadioGroup.AppearanceProperty));
             }
         }
 
         [TestMethod]
-        public void RadioGroupUsesDedicatedStyleForEachDisplayMode()
+        public void RadioGroupUsesDedicatedStyleForEachAppearance()
         {
             var group = new ZenRadioGroup
             {
@@ -51,12 +51,12 @@ namespace ZenUI.Wpf.Tests.Controls
             };
             var modes = new[]
             {
-                RadioGroupDisplayMode.Radio,
-                RadioGroupDisplayMode.Filled,
-                RadioGroupDisplayMode.Outline,
-                RadioGroupDisplayMode.Ghost,
-                RadioGroupDisplayMode.Underline,
-                RadioGroupDisplayMode.Segment
+                RadioGroupAppearance.Radio,
+                RadioGroupAppearance.Filled,
+                RadioGroupAppearance.Outlined,
+                RadioGroupAppearance.Ghost,
+                RadioGroupAppearance.Underline,
+                RadioGroupAppearance.Segmented
             };
             var styles = new HashSet<Style>();
             var window = CreateTestWindow(group, 540, 120);
@@ -67,7 +67,7 @@ namespace ZenUI.Wpf.Tests.Controls
 
                 foreach (var mode in modes)
                 {
-                    group.DisplayMode = mode;
+                    group.Appearance = mode;
                     window.UpdateLayout();
                     Assert.IsNotNull(group.ItemContainerStyle, mode.ToString());
                     Assert.AreEqual(
@@ -126,7 +126,7 @@ namespace ZenUI.Wpf.Tests.Controls
             {
                 Width = 620,
                 Spacing = 10,
-                IsItemWidthUniform = true,
+                IsItemSizeUniform = true,
                 ItemsSource = new List<string>
                 {
                     "全部",
@@ -155,7 +155,7 @@ namespace ZenUI.Wpf.Tests.Controls
                 var secondLeft = items[1].TranslatePoint(new Point(), group).X;
                 Assert.AreEqual(10d, secondLeft - firstRight, 0.1d);
 
-                group.DisplayMode = RadioGroupDisplayMode.Segment;
+                group.Appearance = RadioGroupAppearance.Segmented;
                 window.UpdateLayout();
 
                 firstRight = items[0].TranslatePoint(
@@ -178,7 +178,7 @@ namespace ZenUI.Wpf.Tests.Controls
                 Width = 260,
                 Orientation = Orientation.Vertical,
                 Spacing = 6,
-                IsItemWidthUniform = false
+                IsItemSizeUniform = false
             };
             group.Items.Add("标准版");
             group.Items.Add("带有更多说明的专业版");

@@ -26,7 +26,7 @@ namespace ZenUI.Wpf.Tests.Controls
             {
                 CheckedBackground = checkedBackground,
                 CheckedBorderBrush = checkedBorderBrush,
-                CheckMarkForeground = checkMarkForeground,
+                CheckedGlyphBrush = checkMarkForeground,
                 Content = "复选",
                 HoverBorderBrush = hoverBorderBrush,
                 IsChecked = true
