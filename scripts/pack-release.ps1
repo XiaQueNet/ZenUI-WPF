@@ -149,6 +149,210 @@ function Test-NuGetPackage {
     }
 }
 
+function Test-PackageConsumer {
+    param(
+        [Parameter(Mandatory = $true)]
+        [string]$PackageId,
+
+        [Parameter(Mandatory = $true)]
+        [string]$ExpectedVersion,
+
+        [Parameter(Mandatory = $true)]
+        [string]$PackageDirectory
+    )
+
+    $temporaryRoot = [System.IO.Path]::GetFullPath([System.IO.Path]::GetTempPath())
+    $consumerRoot = [System.IO.Path]::GetFullPath((Join-Path $temporaryRoot (
+        'ZenUI-WPF-consumer-' + [System.Guid]::NewGuid().ToString('N'))))
+    $temporaryRootPrefix = $temporaryRoot.TrimEnd(
+        [System.IO.Path]::DirectorySeparatorChar,
+        [System.IO.Path]::AltDirectorySeparatorChar) + [System.IO.Path]::DirectorySeparatorChar
+    if (-not $consumerRoot.StartsWith(
+            $temporaryRootPrefix,
+            [System.StringComparison]::OrdinalIgnoreCase)) {
+        throw "Consumer verification directory must remain under $temporaryRoot."
+    }
+    $frameworkAssets = [ordered]@{
+        'net462' = 'net462'
+        'net47' = 'net462'
+        'net471' = 'net471'
+        'net472' = 'net472'
+        'net48' = 'net472'
+        'net481' = 'net472'
+        'net5.0-windows' = 'net5.0-windows7.0'
+        'net6.0-windows' = 'net5.0-windows7.0'
+        'net7.0-windows' = 'net5.0-windows7.0'
+        'net8.0-windows' = 'net8.0-windows7.0'
+        'net9.0-windows' = 'net8.0-windows7.0'
+        'net10.0-windows' = 'net8.0-windows7.0'
+    }
+
+    try {
+        New-Item -ItemType Directory -Path $consumerRoot | Out-Null
+        $escapedPackageDirectory = [System.Security.SecurityElement]::Escape(
+            [System.IO.Path]::GetFullPath($PackageDirectory))
+        $nugetConfig = @"
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+  <config>
+    <add key="globalPackagesFolder" value="packages" />
+  </config>
+  <packageSources>
+    <clear />
+    <add key="release" value="$escapedPackageDirectory" />
+    <add key="nuget.org" value="https://api.nuget.org/v3/index.json" />
+  </packageSources>
+  <packageSourceMapping>
+    <packageSource key="release">
+      <package pattern="ZenUI.*" />
+    </packageSource>
+    <packageSource key="nuget.org">
+      <package pattern="Microsoft.*" />
+      <package pattern="NETStandard.Library" />
+    </packageSource>
+  </packageSourceMapping>
+</configuration>
+"@
+        $nugetConfigPath = Join-Path $consumerRoot 'NuGet.Config'
+        [System.IO.File]::WriteAllText(
+            $nugetConfigPath,
+            $nugetConfig,
+            [System.Text.UTF8Encoding]::new($false))
+
+        Write-Host "Verifying $PackageId $ExpectedVersion from local package output..."
+        foreach ($entry in $frameworkAssets.GetEnumerator()) {
+            $targetFramework = $entry.Key
+            $expectedAssetFramework = $entry.Value
+            $projectDirectory = Join-Path $consumerRoot $targetFramework
+            New-Item -ItemType Directory -Path $projectDirectory | Out-Null
+
+            $projectContent = @"
+<Project Sdk="Microsoft.NET.Sdk">
+  <PropertyGroup>
+    <TargetFramework>$targetFramework</TargetFramework>
+    <UseWPF>true</UseWPF>
+    <LangVersion>8.0</LangVersion>
+    <CheckEolTargetFramework>false</CheckEolTargetFramework>
+  </PropertyGroup>
+  <ItemGroup>
+    <PackageReference Include="$PackageId" Version="$ExpectedVersion" />
+  </ItemGroup>
+</Project>
+"@
+            $projectPath = Join-Path $projectDirectory 'Consumer.csproj'
+            [System.IO.File]::WriteAllText(
+                $projectPath,
+                $projectContent,
+                [System.Text.UTF8Encoding]::new($false))
+
+            if ($PackageId -eq 'ZenUI.Wpf') {
+                $codeContent = @'
+using System;
+using System.Windows;
+using ZenUI.Wpf.Controls;
+
+namespace ReleaseConsumer
+{
+    internal static class Contract
+    {
+        public static object Create()
+        {
+            var resources = new ResourceDictionary
+            {
+                Source = new Uri(
+                    "/ZenUI.Wpf;component/Themes/Generic.xaml",
+                    UriKind.Relative)
+            };
+            return new ZenButton { Content = resources };
+        }
+    }
+}
+'@
+                $xamlContent = @'
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:zen="https://zenui.mnorg.cn/xaml/wpf">
+    <Style x:Key="ConsumerButtonStyle" TargetType="{x:Type zen:ZenButton}" />
+</ResourceDictionary>
+'@
+            }
+            else {
+                $codeContent = @'
+using ZenUI.Wpf.Converters;
+
+namespace ReleaseConsumer
+{
+    internal static class Contract
+    {
+        public static object Create()
+        {
+            return new BoolToVisibilityConverter();
+        }
+    }
+}
+'@
+                $xamlContent = @'
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:zenConverters="https://zenui.mnorg.cn/xaml/wpf/converters">
+    <zenConverters:BoolToVisibilityConverter x:Key="BoolToVisibility" />
+</ResourceDictionary>
+'@
+            }
+
+            [System.IO.File]::WriteAllText(
+                (Join-Path $projectDirectory 'Contract.cs'),
+                $codeContent,
+                [System.Text.UTF8Encoding]::new($false))
+            [System.IO.File]::WriteAllText(
+                (Join-Path $projectDirectory 'Contract.xaml'),
+                $xamlContent,
+                [System.Text.UTF8Encoding]::new($false))
+
+            Invoke-NativeCommand -FilePath 'dotnet' -WorkingDirectory $projectDirectory -ArgumentList @(
+                'restore',
+                'Consumer.csproj',
+                '--configfile',
+                $nugetConfigPath
+            )
+            Invoke-NativeCommand -FilePath 'dotnet' -WorkingDirectory $projectDirectory -ArgumentList @(
+                'build',
+                'Consumer.csproj',
+                '-c',
+                'Release',
+                '--no-restore'
+            )
+
+            $assetsPath = Join-Path $projectDirectory 'obj\project.assets.json'
+            $assets = Get-Content -LiteralPath $assetsPath -Raw | ConvertFrom-Json
+            $packageKey = "$PackageId/$ExpectedVersion"
+            $target = $assets.targets.PSObject.Properties | Select-Object -First 1
+            $packageTarget = $target.Value.PSObject.Properties |
+                Where-Object { $_.Name -eq $packageKey } |
+                Select-Object -First 1
+            if ($null -eq $packageTarget) {
+                throw "$PackageId $ExpectedVersion was not restored for $targetFramework."
+            }
+
+            $compileAssets = @($packageTarget.Value.compile.PSObject.Properties.Name)
+            $expectedAssetPrefix = "lib/$expectedAssetFramework/"
+            if (-not ($compileAssets | Where-Object {
+                    $_.StartsWith($expectedAssetPrefix, [System.StringComparison]::OrdinalIgnoreCase)
+                })) {
+                throw "$PackageId selected incorrect assets for ${targetFramework}: $($compileAssets -join ', ')."
+            }
+        }
+        Write-Host "$PackageId consumer verification passed for $($frameworkAssets.Count) target frameworks."
+    }
+    finally {
+        if (Test-Path -LiteralPath $consumerRoot) {
+            Remove-Item -LiteralPath $consumerRoot -Recurse -Force
+        }
+    }
+}
+
 $repositoryRoot = [System.IO.Path]::GetFullPath((Join-Path $PSScriptRoot '..'))
 $releaseRoot = [System.IO.Path]::GetFullPath((Join-Path $repositoryRoot 'artifacts\releases'))
 $outputDirectory = [System.IO.Path]::GetFullPath((Join-Path $releaseRoot $Version))
@@ -229,6 +433,19 @@ try {
         '--no-build',
         '--no-restore'
     )
+    foreach ($framework in @('net5.0-windows', 'net6.0-windows', 'net7.0-windows')) {
+        Invoke-NativeCommand -FilePath 'dotnet' -WorkingDirectory $worktreePath -ArgumentList @(
+            'run',
+            '--project',
+            'tests\ZenUI.Wpf.ModernCompatibilityTests\ZenUI.Wpf.ModernCompatibilityTests.csproj',
+            '-c',
+            'Release',
+            '-f',
+            $framework,
+            '--no-build',
+            '--no-restore'
+        )
+    }
     Push-Location $worktreePath
     try {
         $vulnerabilityJson = & dotnet list ZenUI.Wpf.slnx package `
@@ -307,6 +524,13 @@ try {
         finally {
             $archive.Dispose()
         }
+    }
+
+    foreach ($releasePackage in $releasePackages) {
+        Test-PackageConsumer `
+            -PackageId $releasePackage.Id `
+            -ExpectedVersion $Version `
+            -PackageDirectory $outputDirectory
     }
 
     $hashLines = Get-ChildItem -LiteralPath $outputDirectory -File |

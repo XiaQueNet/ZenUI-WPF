@@ -161,13 +161,17 @@ git push origin v0.1.0-preview.2
 dotnet restore ZenUI.Wpf.slnx
 dotnet build ZenUI.Wpf.slnx -c Release --no-restore
 dotnet test ZenUI.Wpf.slnx -c Release --max-parallel-test-modules 1 --no-build --no-restore
+foreach ($framework in @('net5.0-windows', 'net6.0-windows', 'net7.0-windows')) {
+    dotnet run --project tests/ZenUI.Wpf.ModernCompatibilityTests/ZenUI.Wpf.ModernCompatibilityTests.csproj -c Release -f $framework --no-build --no-restore
+}
 dotnet list ZenUI.Wpf.slnx package --vulnerable --include-transitive
 ```
 
 要求：
 
 - 构建 0 警告、0 错误。
-- 两个目标框架测试全部通过。
+- .NET Framework 4.6.2～4.8.1 与 .NET 8～10 完整测试矩阵全部通过。
+- .NET 5、6、7 兼容性契约测试全部通过。
 - 公共属性、依赖属性、附加属性和路由事件的命名与类型配对审计通过。
 - 没有已知易受攻击的直接或传递依赖。
 - `git diff --check` 通过。
@@ -206,7 +210,7 @@ CD 会根据 Tag 版本选择 `PackageVersion` 完全一致的项目，并使用
 .\scripts\pack-release.ps1 -Version <version> -Package <package-id>
 ```
 
-同时发布两个确有变更的包时使用 `-Package ZenUI.Wpf,ZenUI.Wpf.Converters`。正式产物固定生成到 `artifacts/releases/<version>`。脚本只验证并打包显式选择的项目，同时检查 Tag 提交、包 ID、包版本、License、README、Changelog、Logo、目标框架、XML 文档、符号包和 Repository Commit，并生成 `SHA256SUMS.txt`。预检包不得写入该目录；需要重新生成尚未公开的同一版本时，显式传入 `-Force`。
+同时发布两个确有变更的包时使用 `-Package ZenUI.Wpf,ZenUI.Wpf.Converters`。正式产物固定生成到 `artifacts/releases/<version>`。脚本只验证并打包显式选择的项目，同时检查 Tag 提交、包 ID、包版本、License、README、Changelog、Logo、目标框架、XML 文档、符号包和 Repository Commit。随后使用隔离的临时 WPF 消费者项目，在 .NET Framework 4.6.2～4.8.1 与 .NET 5～10 上从本地发布目录安装包、编译 C# 和 XAML，并确认 NuGet 为每个目标框架选择了正确资产，最后生成 `SHA256SUMS.txt`。预检包不得写入该目录；需要重新生成尚未公开的同一版本时，显式传入 `-Force`。
 
 发布前检查 `.nupkg`：
 
