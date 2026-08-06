@@ -167,6 +167,7 @@ dotnet list ZenUI.Wpf.slnx package --vulnerable --include-transitive
 
 - 构建 0 警告、0 错误。
 - 两个目标框架测试全部通过。
+- 公共属性、依赖属性、附加属性和路由事件的命名与类型配对审计通过。
 - 没有已知易受攻击的直接或传递依赖。
 - `git diff --check` 通过。
 
