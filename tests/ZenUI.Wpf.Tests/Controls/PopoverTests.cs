@@ -56,6 +56,7 @@ namespace ZenUI.Wpf.Tests.Controls
                 Background = Brushes.Beige,
                 BorderBrush = Brushes.Orange,
                 BorderThickness = new Thickness(2),
+                FontSize = 18,
                 CornerRadius = new CornerRadius(10),
                 ShowArrow = false,
                 AnchorGap = 8,
@@ -93,6 +94,7 @@ namespace ZenUI.Wpf.Tests.Controls
                 Assert.AreEqual(popover.Background, chrome.Background);
                 Assert.AreEqual(popover.BorderBrush, chrome.BorderBrush);
                 Assert.AreEqual(popover.BorderThickness, chrome.BorderThickness);
+                Assert.AreEqual(popover.FontSize, chrome.FontSize);
                 Assert.AreEqual(popover.CornerRadius, chrome.CornerRadius);
                 Assert.AreEqual(popover.ShowArrow, chrome.ShowArrow);
                 Assert.AreEqual(popover.MinPopupWidth, chrome.MinWidth);

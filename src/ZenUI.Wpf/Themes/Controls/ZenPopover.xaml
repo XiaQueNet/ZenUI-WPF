@@ -322,6 +322,7 @@
                                 MaxWidth="{TemplateBinding MaxPopupWidth}"
                                 Content="{TemplateBinding Content}"
                                 ContentTemplate="{TemplateBinding ContentTemplate}"
+                                FontSize="{TemplateBinding FontSize}"
                                 Foreground="{TemplateBinding Foreground}"
                                 Placement="{TemplateBinding Placement}"
                                 ShowArrow="{TemplateBinding ShowArrow}" />
