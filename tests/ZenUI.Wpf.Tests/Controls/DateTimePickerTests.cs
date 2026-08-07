@@ -4,6 +4,7 @@ using System.Windows;
 using System.Windows.Automation.Peers;
 using System.Windows.Automation.Provider;
 using System.Windows.Controls;
+using System.Windows.Controls.Primitives;
 using System.Windows.Input;
 using System.Windows.Threading;
 
@@ -34,6 +35,8 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.IsFalse(picker.IsTextInputReadOnly);
             Assert.IsFalse(picker.IsDropDownOpen);
             Assert.AreEqual(new CornerRadius(6), picker.CornerRadius);
+            Assert.AreEqual(28d, picker.DropDownButtonWidth);
+            Assert.AreEqual(28d, picker.DropDownButtonHeight);
             Assert.AreEqual(16d, picker.DropDownButtonIconSize);
             Assert.IsTrue(double.IsNaN(picker.DropDownWidth));
             Assert.IsTrue(double.IsNaN(picker.DropDownHeight));
@@ -126,6 +129,42 @@ namespace ZenUI.Wpf.Tests.Controls
         }
 
         [TestMethod]
+        public void TextInputDoesNotRenderUnderDropDownIcon()
+        {
+            var picker = CreateTemplatedPicker();
+            picker.Width = 240d;
+            picker.Height = 36d;
+            var window = new Window
+            {
+                Width = 280d,
+                Height = 100d,
+                ShowInTaskbar = false,
+                WindowStyle = WindowStyle.None,
+                Content = picker
+            };
+
+            try
+            {
+                window.Show();
+                window.UpdateLayout();
+
+                var inputHost = GetPart<Grid>(picker, "InputContentHost");
+                var icon = GetPart<Viewbox>(picker, "CalendarIcon");
+                var inputHostRight = inputHost.TranslatePoint(
+                    new Point(inputHost.ActualWidth, 0d),
+                    picker).X;
+                var iconLeft = icon.TranslatePoint(new Point(), picker).X;
+
+                Assert.IsTrue(inputHost.ClipToBounds);
+                Assert.IsLessThanOrEqualTo(iconLeft, inputHostRight);
+            }
+            finally
+            {
+                window.Close();
+            }
+        }
+
+        [TestMethod]
         public void FontSizeFlowsToCalendarAndTimeSelector()
         {
             var picker = CreateTemplatedPicker();
@@ -144,6 +183,8 @@ namespace ZenUI.Wpf.Tests.Controls
         {
             var picker = CreateTemplatedPicker();
             picker.Padding = new Thickness(12, 8, 12, 8);
+            picker.DropDownButtonWidth = 34d;
+            picker.DropDownButtonHeight = 30d;
             picker.DropDownButtonIconSize = 24d;
             picker.DropDownWidth = 520d;
             picker.DropDownHeight = 400d;
@@ -156,8 +197,11 @@ namespace ZenUI.Wpf.Tests.Controls
             var selector = GetPart<ZenTimeSelector>(picker, "PART_TimeSelector");
             var textBox = GetPart<TextBox>(picker, "PART_TextBox");
             var icon = GetPart<Viewbox>(picker, "CalendarIcon");
+            var dropDownButton = GetPart<ToggleButton>(picker, "DropDownButton");
 
             Assert.AreEqual(new Thickness(12, 8, 12, 8), textBox.Padding);
+            Assert.AreEqual(34d, dropDownButton.Width);
+            Assert.AreEqual(30d, dropDownButton.Height);
             Assert.AreEqual(24d, icon.Width);
             Assert.AreEqual(24d, icon.Height);
             Assert.AreEqual(520d, GetPart<Border>(picker, "PART_DropDownBorder").Width);
@@ -174,6 +218,8 @@ namespace ZenUI.Wpf.Tests.Controls
         {
             var picker = new ZenDateTimePicker();
 
+            Assert.ThrowsExactly<ArgumentException>(() => picker.DropDownButtonWidth = -1d);
+            Assert.ThrowsExactly<ArgumentException>(() => picker.DropDownButtonHeight = double.NaN);
             Assert.ThrowsExactly<ArgumentException>(() => picker.DropDownButtonIconSize = -1d);
             Assert.ThrowsExactly<ArgumentException>(() => picker.DropDownButtonIconSize = double.NaN);
             Assert.ThrowsExactly<ArgumentException>(

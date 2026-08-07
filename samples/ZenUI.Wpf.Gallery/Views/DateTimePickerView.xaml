@@ -107,7 +107,7 @@
             <Border Style="{StaticResource GalleryCardStyle}">
                 <StackPanel>
                     <TextBlock Style="{StaticResource SectionTitleStyle}" Text="弹层布局" />
-                    <TextBlock Style="{StaticResource GallerySectionDescriptionStyle}" Text="分别设置日历单元与时间项的尺寸，弹层会按内容自然测量；本例使用等高但不同宽度的日期与时间选项。" />
+                    <TextBlock Style="{StaticResource GallerySectionDescriptionStyle}" Text="分别设置下拉按钮、内部图标、日历单元与时间项的尺寸，弹层会按内容自然测量。" />
                     <WrapPanel>
                         <StackPanel Width="320" Style="{StaticResource GalleryWrapFieldStyle}">
                             <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="自然测量 · 自定义单元" />
@@ -118,7 +118,9 @@
                                 CalendarCellHeight="44"
                                 CalendarCellWidth="52"
                                 CornerRadius="12"
+                                DropDownButtonHeight="32"
                                 DropDownButtonIconSize="20"
+                                DropDownButtonWidth="36"
                                 IsSecondVisible="True"
                                 TimeItemHeight="44"
                                 TimeItemWidth="70" />

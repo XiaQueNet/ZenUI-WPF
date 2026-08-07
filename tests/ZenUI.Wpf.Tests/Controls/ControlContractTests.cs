@@ -76,6 +76,9 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.AreEqual(new CornerRadius(8), listBox.CornerRadius);
             Assert.AreEqual(string.Empty, datePicker.Watermark);
             Assert.AreEqual(new CornerRadius(6), datePicker.CornerRadius);
+            Assert.AreEqual(28d, datePicker.DropDownButtonWidth);
+            Assert.AreEqual(28d, datePicker.DropDownButtonHeight);
+            Assert.AreEqual(16d, datePicker.DropDownButtonIconSize);
             Assert.AreEqual(new CornerRadius(8), dataGrid.CornerRadius);
             Assert.IsFalse(dataGrid.IsRowSelectionHighlightEnabled);
             Assert.IsFalse(dataGrid.IsCellFocusVisualEnabled);

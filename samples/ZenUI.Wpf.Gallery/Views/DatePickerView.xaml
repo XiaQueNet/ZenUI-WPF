@@ -91,6 +91,9 @@
             <Border Style="{StaticResource GalleryCardStyle}">
                 <StackPanel>
                     <TextBlock Style="{StaticResource SectionTitleStyle}" Text="圆角与尺寸" />
+                    <TextBlock
+                        Style="{StaticResource GallerySectionDescriptionStyle}"
+                        Text="控件尺寸、下拉按钮点击区域和日历图标可以分别调整。" />
                     <WrapPanel VerticalAlignment="Bottom">
                         <StackPanel Style="{StaticResource GalleryWrapFieldStyle}">
                             <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="紧凑 · 32px" />
@@ -109,12 +112,15 @@
                                 Watermark="默认圆角" />
                         </StackPanel>
                         <StackPanel Width="240" Style="{StaticResource GalleryWrapFieldStyle}">
-                            <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="宽松 · 44px" />
+                            <TextBlock Style="{StaticResource GalleryFieldLabelStyle}" Text="宽松 · 自定义按钮" />
                             <zen:ZenDatePicker
                                 Width="240"
                                 Height="44"
                                 CornerRadius="18"
-                                Watermark="大圆角" />
+                                DropDownButtonHeight="34"
+                                DropDownButtonIconSize="20"
+                                DropDownButtonWidth="36"
+                                Watermark="36 × 34 按钮" />
                         </StackPanel>
                     </WrapPanel>
                 </StackPanel>

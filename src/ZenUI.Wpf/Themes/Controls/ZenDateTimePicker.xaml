@@ -9,6 +9,8 @@
         <Setter Property="MinHeight" Value="{DynamicResource ZenInputControlMinHeight}" />
         <Setter Property="Padding" Value="{DynamicResource ZenInputControlPadding}" />
         <Setter Property="CornerRadius" Value="{DynamicResource ZenInputControlCornerRadius}" />
+        <Setter Property="DropDownButtonWidth" Value="{DynamicResource ZenDateTimePickerDropDownButtonWidth}" />
+        <Setter Property="DropDownButtonHeight" Value="{DynamicResource ZenDateTimePickerDropDownButtonHeight}" />
         <Setter Property="DropDownButtonIconSize" Value="{DynamicResource ZenDateTimePickerDropDownButtonIconSize}" />
         <Setter Property="CalendarCellWidth" Value="{DynamicResource ZenDateTimePickerCalendarCellWidth}" />
         <Setter Property="CalendarCellHeight" Value="{DynamicResource ZenDateTimePickerCalendarCellHeight}" />
@@ -24,39 +26,47 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type zen:ZenDateTimePicker}">
                     <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
                         <Border
                             x:Name="InputBorder"
+                            Grid.ColumnSpan="2"
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             CornerRadius="{TemplateBinding CornerRadius}" />
-                        <TextBox
-                            x:Name="PART_TextBox"
-                            AutomationProperties.Name="日期和时间"
-                            Padding="{TemplateBinding Padding}"
-                            Style="{DynamicResource ZenTimePickerTextBoxStyle}" />
-                        <TextBlock
-                            Margin="{TemplateBinding Padding}"
-                            VerticalAlignment="Center"
-                            Foreground="{DynamicResource ZenTextPlaceholderBrush}"
-                            IsHitTestVisible="False"
-                            Text="{TemplateBinding Watermark}">
-                            <TextBlock.Style>
-                                <Style TargetType="{x:Type TextBlock}">
-                                    <Setter Property="Visibility" Value="Collapsed" />
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Text, ElementName=PART_TextBox}" Value="">
-                                            <Setter Property="Visibility" Value="Visible" />
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </TextBlock.Style>
-                        </TextBlock>
+                        <Grid x:Name="InputContentHost" ClipToBounds="True">
+                            <TextBox
+                                x:Name="PART_TextBox"
+                                AutomationProperties.Name="日期和时间"
+                                Padding="{TemplateBinding Padding}"
+                                Style="{DynamicResource ZenTimePickerTextBoxStyle}" />
+                            <TextBlock
+                                Margin="{TemplateBinding Padding}"
+                                VerticalAlignment="Center"
+                                Foreground="{DynamicResource ZenTextPlaceholderBrush}"
+                                IsHitTestVisible="False"
+                                Text="{TemplateBinding Watermark}">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="Visibility" Value="Collapsed" />
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=PART_TextBox}" Value="">
+                                                <Setter Property="Visibility" Value="Visible" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </Grid>
                         <ToggleButton
                             x:Name="DropDownButton"
-                            Width="28"
-                            Height="28"
-                            Margin="0,0,4,0"
+                            Grid.Column="1"
+                            Width="{TemplateBinding DropDownButtonWidth}"
+                            Height="{TemplateBinding DropDownButtonHeight}"
+                            Margin="4,0,4,0"
                             HorizontalAlignment="Right"
                             VerticalAlignment="Center"
                             AutomationProperties.Name="打开日期时间选择器"
@@ -94,6 +104,7 @@
 
                         <Popup
                             x:Name="PART_Popup"
+                            Grid.ColumnSpan="2"
                             AllowsTransparency="True"
                             IsOpen="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                             Placement="Bottom"

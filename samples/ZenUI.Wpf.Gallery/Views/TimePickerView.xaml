@@ -106,6 +106,9 @@
             <Border Style="{StaticResource GalleryCardStyle}">
                 <StackPanel>
                     <TextBlock Style="{StaticResource SectionTitleStyle}" Text="圆角与尺寸" />
+                    <TextBlock
+                        Style="{StaticResource GallerySectionDescriptionStyle}"
+                        Text="控件尺寸、下拉按钮点击区域和时钟图标可以分别调整。" />
                     <WrapPanel VerticalAlignment="Bottom">
                         <zen:ZenTimePicker
                             Width="190"
@@ -123,7 +126,10 @@
                             Height="44"
                             Margin="{StaticResource GalleryFieldMargin}"
                             CornerRadius="18"
-                            Watermark="宽松 · 44px" />
+                            DropDownButtonHeight="34"
+                            DropDownButtonIconSize="20"
+                            DropDownButtonWidth="36"
+                            Watermark="自定义 36 × 34 按钮" />
                     </WrapPanel>
                 </StackPanel>
             </Border>

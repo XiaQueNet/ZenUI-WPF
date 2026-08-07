@@ -269,6 +269,76 @@ namespace ZenUI.Wpf.Controls
                 new FrameworkPropertyMetadata(new CornerRadius(6)));
 
         /// <summary>
+        /// 获取或设置下拉按钮的宽度。该值必须为大于或等于零的有限值。
+        /// </summary>
+        [Bindable(true)]
+        public double DropDownButtonWidth
+        {
+            get { return (double)GetValue(DropDownButtonWidthProperty); }
+            set { SetValue(DropDownButtonWidthProperty, value); }
+        }
+
+        /// <summary>
+        /// 标识 <see cref="DropDownButtonWidth"/> 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty DropDownButtonWidthProperty =
+            DependencyProperty.Register(
+                nameof(DropDownButtonWidth),
+                typeof(double),
+                SelfType,
+                new FrameworkPropertyMetadata(
+                    28d,
+                    FrameworkPropertyMetadataOptions.AffectsMeasure),
+                IsValidNonNegativeDimension);
+
+        /// <summary>
+        /// 获取或设置下拉按钮的高度。该值必须为大于或等于零的有限值。
+        /// </summary>
+        [Bindable(true)]
+        public double DropDownButtonHeight
+        {
+            get { return (double)GetValue(DropDownButtonHeightProperty); }
+            set { SetValue(DropDownButtonHeightProperty, value); }
+        }
+
+        /// <summary>
+        /// 标识 <see cref="DropDownButtonHeight"/> 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty DropDownButtonHeightProperty =
+            DependencyProperty.Register(
+                nameof(DropDownButtonHeight),
+                typeof(double),
+                SelfType,
+                new FrameworkPropertyMetadata(
+                    28d,
+                    FrameworkPropertyMetadataOptions.AffectsMeasure),
+                IsValidNonNegativeDimension);
+
+        /// <summary>
+        /// 获取或设置下拉按钮中时钟图标的边长。该值必须为大于或等于零的有限值。
+        /// </summary>
+        [Bindable(true)]
+        public double DropDownButtonIconSize
+        {
+            get { return (double)GetValue(DropDownButtonIconSizeProperty); }
+            set { SetValue(DropDownButtonIconSizeProperty, value); }
+        }
+
+        /// <summary>
+        /// 标识 <see cref="DropDownButtonIconSize"/> 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty DropDownButtonIconSizeProperty =
+            DependencyProperty.Register(
+                nameof(DropDownButtonIconSize),
+                typeof(double),
+                SelfType,
+                new FrameworkPropertyMetadata(
+                    16d,
+                    FrameworkPropertyMetadataOptions.AffectsMeasure |
+                    FrameworkPropertyMetadataOptions.AffectsRender),
+                IsValidNonNegativeDimension);
+
+        /// <summary>
         /// 获取或设置时间选择弹层是否打开。
         /// </summary>
         [Bindable(true)]
@@ -666,6 +736,14 @@ namespace ZenUI.Wpf.Controls
             {
                 IsDropDownOpen = false;
             }
+        }
+
+        private static bool IsValidNonNegativeDimension(object value)
+        {
+            var dimension = (double)value;
+            return !double.IsNaN(dimension) &&
+                !double.IsInfinity(dimension) &&
+                dimension >= 0d;
         }
     }
 }

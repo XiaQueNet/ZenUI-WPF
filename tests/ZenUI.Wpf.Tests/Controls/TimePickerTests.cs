@@ -32,6 +32,9 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.IsFalse(picker.IsTextInputReadOnly);
             Assert.IsFalse(picker.IsDropDownOpen);
             Assert.AreEqual(new CornerRadius(6), picker.CornerRadius);
+            Assert.AreEqual(28d, picker.DropDownButtonWidth);
+            Assert.AreEqual(28d, picker.DropDownButtonHeight);
+            Assert.AreEqual(16d, picker.DropDownButtonIconSize);
         }
 
         [TestMethod]

@@ -402,7 +402,53 @@ namespace ZenUI.Wpf.Controls
                     16d,
                     FrameworkPropertyMetadataOptions.AffectsMeasure |
                     FrameworkPropertyMetadataOptions.AffectsRender),
-                IsValidDropDownButtonIconSize);
+                IsValidDropDownButtonDimension);
+
+        /// <summary>
+        /// 获取或设置下拉按钮的宽度。该值必须为大于或等于零的有限值。
+        /// </summary>
+        [Bindable(true)]
+        public double DropDownButtonWidth
+        {
+            get { return (double)GetValue(DropDownButtonWidthProperty); }
+            set { SetValue(DropDownButtonWidthProperty, value); }
+        }
+
+        /// <summary>
+        /// 标识 <see cref="DropDownButtonWidth"/> 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty DropDownButtonWidthProperty =
+            DependencyProperty.Register(
+                nameof(DropDownButtonWidth),
+                typeof(double),
+                SelfType,
+                new FrameworkPropertyMetadata(
+                    28d,
+                    FrameworkPropertyMetadataOptions.AffectsMeasure),
+                IsValidDropDownButtonDimension);
+
+        /// <summary>
+        /// 获取或设置下拉按钮的高度。该值必须为大于或等于零的有限值。
+        /// </summary>
+        [Bindable(true)]
+        public double DropDownButtonHeight
+        {
+            get { return (double)GetValue(DropDownButtonHeightProperty); }
+            set { SetValue(DropDownButtonHeightProperty, value); }
+        }
+
+        /// <summary>
+        /// 标识 <see cref="DropDownButtonHeight"/> 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty DropDownButtonHeightProperty =
+            DependencyProperty.Register(
+                nameof(DropDownButtonHeight),
+                typeof(double),
+                SelfType,
+                new FrameworkPropertyMetadata(
+                    28d,
+                    FrameworkPropertyMetadataOptions.AffectsMeasure),
+                IsValidDropDownButtonDimension);
 
         /// <summary>
         /// 获取或设置下拉弹层的宽度。<see cref="double.NaN"/> 表示根据选择单元自然测量。
@@ -598,7 +644,7 @@ namespace ZenUI.Wpf.Controls
                 (!double.IsInfinity(dimension) && dimension > 0d);
         }
 
-        private static bool IsValidDropDownButtonIconSize(object value)
+        private static bool IsValidDropDownButtonDimension(object value)
         {
             var size = (double)value;
             return !double.IsNaN(size) &&

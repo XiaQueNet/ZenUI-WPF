@@ -49,6 +49,9 @@
         <Setter Property="MinWidth" Value="148" />
         <Setter Property="MinHeight" Value="{DynamicResource ZenInputControlMinHeight}" />
         <Setter Property="CornerRadius" Value="{DynamicResource ZenInputControlCornerRadius}" />
+        <Setter Property="DropDownButtonWidth" Value="{DynamicResource ZenTimePickerDropDownButtonWidth}" />
+        <Setter Property="DropDownButtonHeight" Value="{DynamicResource ZenTimePickerDropDownButtonHeight}" />
+        <Setter Property="DropDownButtonIconSize" Value="{DynamicResource ZenTimePickerDropDownButtonIconSize}" />
         <Setter Property="Background" Value="{DynamicResource ZenSurfaceBrush}" />
         <Setter Property="BorderBrush" Value="{DynamicResource ZenBorderBrush}" />
         <Setter Property="BorderThickness" Value="{DynamicResource ZenControlBorderThickness}" />
@@ -59,45 +62,58 @@
             <Setter.Value>
                 <ControlTemplate TargetType="{x:Type zen:ZenTimePicker}">
                     <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="*" />
+                            <ColumnDefinition Width="Auto" />
+                        </Grid.ColumnDefinitions>
                         <Border
                             x:Name="InputBorder"
+                            Grid.ColumnSpan="2"
                             Background="{TemplateBinding Background}"
                             BorderBrush="{TemplateBinding BorderBrush}"
                             BorderThickness="{TemplateBinding BorderThickness}"
                             CornerRadius="{TemplateBinding CornerRadius}" />
-                        <TextBox
-                            x:Name="PART_TextBox"
-                            AutomationProperties.Name="时间"
-                            Style="{StaticResource ZenTimePickerTextBoxStyle}" />
-                        <TextBlock
-                            Margin="{DynamicResource ZenInputControlPadding}"
-                            VerticalAlignment="Center"
-                            Foreground="{DynamicResource ZenTextPlaceholderBrush}"
-                            IsHitTestVisible="False"
-                            Text="{TemplateBinding Watermark}">
-                            <TextBlock.Style>
-                                <Style TargetType="{x:Type TextBlock}">
-                                    <Setter Property="Visibility" Value="Collapsed" />
-                                    <Style.Triggers>
-                                        <DataTrigger Binding="{Binding Text, ElementName=PART_TextBox}" Value="">
-                                            <Setter Property="Visibility" Value="Visible" />
-                                        </DataTrigger>
-                                    </Style.Triggers>
-                                </Style>
-                            </TextBlock.Style>
-                        </TextBlock>
+                        <Grid x:Name="InputContentHost" ClipToBounds="True">
+                            <TextBox
+                                x:Name="PART_TextBox"
+                                AutomationProperties.Name="时间"
+                                Style="{StaticResource ZenTimePickerTextBoxStyle}" />
+                            <TextBlock
+                                Margin="{DynamicResource ZenInputControlPadding}"
+                                VerticalAlignment="Center"
+                                Foreground="{DynamicResource ZenTextPlaceholderBrush}"
+                                IsHitTestVisible="False"
+                                Text="{TemplateBinding Watermark}">
+                                <TextBlock.Style>
+                                    <Style TargetType="{x:Type TextBlock}">
+                                        <Setter Property="Visibility" Value="Collapsed" />
+                                        <Style.Triggers>
+                                            <DataTrigger Binding="{Binding Text, ElementName=PART_TextBox}" Value="">
+                                                <Setter Property="Visibility" Value="Visible" />
+                                            </DataTrigger>
+                                        </Style.Triggers>
+                                    </Style>
+                                </TextBlock.Style>
+                            </TextBlock>
+                        </Grid>
                         <ToggleButton
                             x:Name="DropDownButton"
-                            Width="28"
-                            Height="28"
-                            Margin="0,0,4,0"
+                            Grid.Column="1"
+                            Width="{TemplateBinding DropDownButtonWidth}"
+                            Height="{TemplateBinding DropDownButtonHeight}"
+                            Margin="4,0,4,0"
                             HorizontalAlignment="Right"
                             VerticalAlignment="Center"
                             AutomationProperties.Name="打开时间选择器"
                             Focusable="False"
                             IsChecked="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                             Style="{StaticResource ZenTimePickerDropDownButtonStyle}">
-                            <Grid Width="16" Height="16">
+                            <Viewbox
+                                x:Name="ClockIcon"
+                                Width="{TemplateBinding DropDownButtonIconSize}"
+                                Height="{TemplateBinding DropDownButtonIconSize}"
+                                Stretch="Uniform">
+                                <Grid Width="16" Height="16">
                                 <Ellipse
                                     Margin="1"
                                     Stroke="{Binding Foreground, RelativeSource={RelativeSource AncestorType={x:Type ToggleButton}}}"
@@ -109,11 +125,13 @@
                                     StrokeLineJoin="Round"
                                     StrokeStartLineCap="Round"
                                     StrokeThickness="1.4" />
-                            </Grid>
+                                </Grid>
+                            </Viewbox>
                         </ToggleButton>
 
                         <Popup
                             x:Name="PART_Popup"
+                            Grid.ColumnSpan="2"
                             AllowsTransparency="True"
                             IsOpen="{Binding IsDropDownOpen, RelativeSource={RelativeSource TemplatedParent}, Mode=TwoWay}"
                             Placement="Bottom"

@@ -43,7 +43,15 @@
     <sys:Double x:Key="ZenTimePickerListHeight">196</sys:Double>
     <sys:Double x:Key="ZenTimePickerItemHeight">36</sys:Double>
     <Thickness x:Key="ZenTimePickerItemMargin">0,2</Thickness>
+    <sys:Double x:Key="ZenDatePickerDropDownButtonWidth">28</sys:Double>
+    <sys:Double x:Key="ZenDatePickerDropDownButtonHeight">28</sys:Double>
+    <sys:Double x:Key="ZenDatePickerDropDownButtonIconSize">16</sys:Double>
+    <sys:Double x:Key="ZenTimePickerDropDownButtonWidth">28</sys:Double>
+    <sys:Double x:Key="ZenTimePickerDropDownButtonHeight">28</sys:Double>
+    <sys:Double x:Key="ZenTimePickerDropDownButtonIconSize">16</sys:Double>
     <Thickness x:Key="ZenDateTimePickerPopupPadding">4</Thickness>
+    <sys:Double x:Key="ZenDateTimePickerDropDownButtonWidth">28</sys:Double>
+    <sys:Double x:Key="ZenDateTimePickerDropDownButtonHeight">28</sys:Double>
     <sys:Double x:Key="ZenDateTimePickerDropDownButtonIconSize">16</sys:Double>
     <sys:Double x:Key="ZenDateTimePickerCalendarCellWidth">40</sys:Double>
     <sys:Double x:Key="ZenDateTimePickerCalendarCellHeight">36</sys:Double>

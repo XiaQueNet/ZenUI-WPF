@@ -55,6 +55,9 @@
         <Setter Property="MinHeight" Value="{DynamicResource ZenInputControlMinHeight}" />
         <Setter Property="FontSize" Value="{DynamicResource ZenFontSizeBody}" />
         <Setter Property="CornerRadius" Value="{DynamicResource ZenInputControlCornerRadius}" />
+        <Setter Property="DropDownButtonWidth" Value="{DynamicResource ZenDatePickerDropDownButtonWidth}" />
+        <Setter Property="DropDownButtonHeight" Value="{DynamicResource ZenDatePickerDropDownButtonHeight}" />
+        <Setter Property="DropDownButtonIconSize" Value="{DynamicResource ZenDatePickerDropDownButtonIconSize}" />
         <Setter Property="CalendarPopupWidth" Value="{DynamicResource ZenCalendarPopupWidth}" />
         <Setter Property="CalendarPopupHeight" Value="{DynamicResource ZenCalendarPopupHeight}" />
         <Setter Property="CalendarFontSize" Value="{DynamicResource ZenFontSizeSubtitle}" />
@@ -82,8 +85,8 @@
                             Style="{StaticResource ZenDatePickerTextBoxStyle}" />
                         <Button
                             x:Name="PART_Button"
-                            Width="28"
-                            Height="28"
+                            Width="{TemplateBinding DropDownButtonWidth}"
+                            Height="{TemplateBinding DropDownButtonHeight}"
                             Margin="0,0,4,0"
                             HorizontalAlignment="Right"
                             VerticalAlignment="Center"
@@ -91,7 +94,12 @@
                             BorderThickness="0"
                             Focusable="False"
                             Style="{StaticResource ZenCalendarButtonChromeStyle}">
-                            <Grid Width="16" Height="16">
+                            <Viewbox
+                                x:Name="CalendarIcon"
+                                Width="{TemplateBinding DropDownButtonIconSize}"
+                                Height="{TemplateBinding DropDownButtonIconSize}"
+                                Stretch="Uniform">
+                                <Grid Width="16" Height="16">
                                 <Rectangle
                                     Margin="1,3,1,1"
                                     RadiusX="1"
@@ -119,7 +127,8 @@
                                     X2="11"
                                     Y1="1"
                                     Y2="5" />
-                            </Grid>
+                                </Grid>
+                            </Viewbox>
                         </Button>
                         <Popup
                             x:Name="PART_Popup"
