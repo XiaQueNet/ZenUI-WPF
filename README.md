@@ -144,7 +144,7 @@ dotnet test --project tests/ZenUI.Wpf.Tests/ZenUI.Wpf.Tests.csproj -c Release -f
 dotnet test --project tests/ZenUI.Wpf.Converters.Tests/ZenUI.Wpf.Converters.Tests.csproj -c Release -f net472 --max-parallel-test-modules 1 --no-build
 ```
 
-日常开发按组件测试、`net472` 单框架全量测试和全框架矩阵测试三个等级验证，具体触发条件参见[测试规范](docs/development/testing.md#回归与验证)。仓库在 Windows CI 中将编译器与 .NET 分析器警告视为错误，同时通过完整测试矩阵逐版本验证 .NET Framework 4.6.2～4.8.1 与 `.NET 8/9/10 for Windows`，并在对应运行时上对 `.NET 5/6/7 for Windows` 执行兼容性契约测试和依赖漏洞扫描。正式发布包包含 `net462`、`net471`、`net472`、`net5.0-windows` 与 `net8.0-windows` 五套资产，并验证 NuGet/Symbol 包、多目标框架消费者安装以及多主题、多 Density、多 DPI 视觉快照。正式产物通过 `.\scripts\pack-release.ps1 -Version <version> -Package <package-id>` 生成；只发布有实际变更的包。
+日常开发按组件测试、`net472` 单框架全量测试和全框架矩阵测试三个等级验证，具体触发条件参见[测试规范](docs/development/testing.md#回归与验证)。仓库在 Windows CI 中将编译器与 .NET 分析器警告视为错误；主分支 Push 验证 `net472` 与 `.NET 10 for Windows`，Pull Request 和发布流程通过完整测试矩阵逐版本验证 .NET Framework 4.6.2～4.8.1 与 `.NET 8/9/10 for Windows`，并在对应运行时上对 `.NET 5/6/7 for Windows` 执行兼容性契约测试和依赖漏洞扫描。正式发布包包含 `net462`、`net471`、`net472`、`net5.0-windows` 与 `net8.0-windows` 五套资产，并验证 NuGet/Symbol 包、多目标框架消费者安装以及多主题、多 Density、多 DPI 视觉快照。正式产物通过 `.\scripts\pack-release.ps1 -Version <version> -Package <package-id>` 生成；只发布有实际变更的包。
 
 ## 参与贡献
 

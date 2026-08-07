@@ -97,7 +97,7 @@ dotnet test --project tests/ZenUI.Wpf.Converters.Tests/ZenUI.Wpf.Converters.Test
 
 全框架矩阵在 .NET Framework 4.6.2～4.8.1 与 `.NET 8/9/10 for Windows` 上运行全部控件、主题和转换器测试，并在对应运行时上对 `.NET 5/6/7 for Windows` 运行兼容性契约测试。它用于目标框架或跨框架兼容层变更、构建与打包基础设施变更、发布验证，或明确要求全框架验证的场景；日常组件改动不要求在本地运行。
 
-远程 CI 在隔离 Runner 中执行完整矩阵。本地确需运行时，完整测试模块必须串行执行，避免共享的 WPF、主题、Dispatcher、视觉快照或其他进程级状态互相干扰：
+远程 CI 对 `main`/`master` 的普通 Push 运行 `net472` 与 `net10.0-windows` 两个代表性框架；Pull Request 和 `v*` Tag 发布验证执行完整矩阵。纯 Markdown 和 `docs/` 文档改动不触发 CI，同一分支或 Pull Request 的新提交会取消尚未完成的旧运行。本地确需运行完整矩阵时，测试模块必须串行执行，避免共享的 WPF、主题、Dispatcher、视觉快照或其他进程级状态互相干扰：
 
 ```powershell
 dotnet test --project tests/ZenUI.Wpf.Tests/ZenUI.Wpf.Tests.csproj -c Release --max-parallel-test-modules 1

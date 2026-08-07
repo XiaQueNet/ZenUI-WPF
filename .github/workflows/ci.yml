@@ -3,11 +3,21 @@ name: CI
 on:
   push:
     branches: [main, master]
+    paths-ignore:
+      - '**/*.md'
+      - 'docs/**'
   pull_request:
+    paths-ignore:
+      - '**/*.md'
+      - 'docs/**'
   workflow_call:
 
 permissions:
   contents: read
+
+concurrency:
+  group: ci-${{ github.workflow }}-${{ github.event.pull_request.number || github.ref }}
+  cancel-in-progress: true
 
 jobs:
   build-test-pack:
@@ -75,16 +85,7 @@ jobs:
     strategy:
       fail-fast: false
       matrix:
-        framework:
-          - net462
-          - net47
-          - net471
-          - net472
-          - net48
-          - net481
-          - net8.0-windows
-          - net9.0-windows
-          - net10.0-windows
+        framework: ${{ fromJSON(github.event_name == 'push' && github.ref_type == 'branch' && '["net472","net10.0-windows"]' || '["net462","net47","net471","net472","net48","net481","net8.0-windows","net9.0-windows","net10.0-windows"]') }}
 
     steps:
       - name: Checkout
@@ -113,6 +114,7 @@ jobs:
           if-no-files-found: error
 
   modern-compatibility-test:
+    if: github.event_name != 'push' || github.ref_type == 'tag'
     runs-on: windows-latest
     strategy:
       fail-fast: false
