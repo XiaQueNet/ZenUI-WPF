@@ -100,6 +100,17 @@
                 <Setter Property="ThemePressedBorderBrush" Value="{DynamicResource ZenWarningPressedBrush}" />
                 <Setter Property="ThemePressedForeground" Value="{DynamicResource ZenWarningForegroundBrush}" />
             </Trigger>
+            <Trigger Property="Variant" Value="Danger">
+                <Setter Property="ThemeBackground" Value="{DynamicResource ZenDangerBrush}" />
+                <Setter Property="ThemeBorderBrush" Value="{DynamicResource ZenDangerBrush}" />
+                <Setter Property="ThemeForeground" Value="{DynamicResource ZenOnAccentBrush}" />
+                <Setter Property="ThemeHoverBackground" Value="{DynamicResource ZenDangerHoverBrush}" />
+                <Setter Property="ThemeHoverBorderBrush" Value="{DynamicResource ZenDangerHoverBrush}" />
+                <Setter Property="ThemeHoverForeground" Value="{DynamicResource ZenOnAccentBrush}" />
+                <Setter Property="ThemePressedBackground" Value="{DynamicResource ZenDangerPressedBrush}" />
+                <Setter Property="ThemePressedBorderBrush" Value="{DynamicResource ZenDangerPressedBrush}" />
+                <Setter Property="ThemePressedForeground" Value="{DynamicResource ZenOnAccentBrush}" />
+            </Trigger>
             <Trigger Property="Appearance" Value="Outlined">
                 <Setter Property="ThemeBackground" Value="Transparent" />
                 <Setter Property="ThemeBorderBrush" Value="{DynamicResource ZenNeutralActionBrush}" />
@@ -154,6 +165,20 @@
                 <Setter Property="ThemePressedBorderBrush" Value="{DynamicResource ZenWarningPressedBrush}" />
                 <Setter Property="ThemePressedForeground" Value="{DynamicResource ZenWarningPressedBrush}" />
             </MultiTrigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="Appearance" Value="Outlined" />
+                    <Condition Property="Variant" Value="Danger" />
+                </MultiTrigger.Conditions>
+                <Setter Property="ThemeBorderBrush" Value="{DynamicResource ZenDangerBrush}" />
+                <Setter Property="ThemeForeground" Value="{DynamicResource ZenDangerBrush}" />
+                <Setter Property="ThemeHoverBackground" Value="{DynamicResource ZenDangerLightBrush}" />
+                <Setter Property="ThemeHoverBorderBrush" Value="{DynamicResource ZenDangerHoverBrush}" />
+                <Setter Property="ThemeHoverForeground" Value="{DynamicResource ZenDangerHoverBrush}" />
+                <Setter Property="ThemePressedBackground" Value="{DynamicResource ZenDangerLightBrush}" />
+                <Setter Property="ThemePressedBorderBrush" Value="{DynamicResource ZenDangerPressedBrush}" />
+                <Setter Property="ThemePressedForeground" Value="{DynamicResource ZenDangerPressedBrush}" />
+            </MultiTrigger>
             <Trigger Property="Appearance" Value="Text">
                 <Setter Property="ThemeBackground" Value="Transparent" />
                 <Setter Property="BorderThickness" Value="0" />
@@ -197,6 +222,17 @@
                 <Setter Property="ThemeHoverForeground" Value="{DynamicResource ZenWarningHoverBrush}" />
                 <Setter Property="ThemePressedBackground" Value="{DynamicResource ZenWarningLightBrush}" />
                 <Setter Property="ThemePressedForeground" Value="{DynamicResource ZenWarningPressedBrush}" />
+            </MultiTrigger>
+            <MultiTrigger>
+                <MultiTrigger.Conditions>
+                    <Condition Property="Appearance" Value="Text" />
+                    <Condition Property="Variant" Value="Danger" />
+                </MultiTrigger.Conditions>
+                <Setter Property="ThemeForeground" Value="{DynamicResource ZenDangerBrush}" />
+                <Setter Property="ThemeHoverBackground" Value="{DynamicResource ZenDangerLightBrush}" />
+                <Setter Property="ThemeHoverForeground" Value="{DynamicResource ZenDangerHoverBrush}" />
+                <Setter Property="ThemePressedBackground" Value="{DynamicResource ZenDangerLightBrush}" />
+                <Setter Property="ThemePressedForeground" Value="{DynamicResource ZenDangerPressedBrush}" />
             </MultiTrigger>
             <MultiTrigger>
                 <MultiTrigger.Conditions>

@@ -23,6 +23,11 @@ namespace ZenUI.Wpf.Controls
         /// <summary>
         /// 警告操作。
         /// </summary>
-        Warning
+        Warning,
+
+        /// <summary>
+        /// 危险或破坏性操作。
+        /// </summary>
+        Danger
     }
 }

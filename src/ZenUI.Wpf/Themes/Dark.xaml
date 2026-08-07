@@ -18,6 +18,9 @@
     <SolidColorBrush x:Key="ZenWarningPressedBrush" Color="#E6A93F" />
     <SolidColorBrush x:Key="ZenWarningForegroundBrush" Color="#241800" />
     <SolidColorBrush x:Key="ZenErrorBrush" Color="#FF7777" />
+    <SolidColorBrush x:Key="ZenDangerBrush" Color="#FF7777" />
+    <SolidColorBrush x:Key="ZenDangerHoverBrush" Color="#FF9191" />
+    <SolidColorBrush x:Key="ZenDangerPressedBrush" Color="#E85F5F" />
     <SolidColorBrush x:Key="ZenInfoBrush" Color="#7C9CFF" />
     <SolidColorBrush x:Key="ZenSurfaceBrush" Color="#1D2129" />
     <SolidColorBrush x:Key="ZenSurfaceMutedBrush" Color="#272C36" />
@@ -43,6 +46,7 @@
     <SolidColorBrush x:Key="ZenSuccessLightBrush" Color="#1E3D2B" />
     <SolidColorBrush x:Key="ZenWarningLightBrush" Color="#493819" />
     <SolidColorBrush x:Key="ZenErrorLightBrush" Color="#4A2628" />
+    <SolidColorBrush x:Key="ZenDangerLightBrush" Color="#4A2628" />
     <SolidColorBrush x:Key="ZenListBoxItemHoverBrush" Color="#333B4A" />
     <SolidColorBrush x:Key="ZenListBoxItemSelectedBrush" Color="#263557" />
     <SolidColorBrush x:Key="ZenListBoxItemSelectedHoverBrush" Color="#304269" />

@@ -27,6 +27,62 @@ namespace ZenUI.Wpf.Tests.Controls
     public class ButtonTests
     {
         [TestMethod]
+        public void DangerVariantUsesDangerThemeBrushesForEveryAppearance()
+        {
+            var resources = new ResourceDictionary
+            {
+                Source = new Uri(
+                    "/ZenUI.Wpf;component/Themes/Generic.xaml",
+                    UriKind.Relative)
+            };
+            var filled = new ZenButton { Variant = ButtonVariant.Danger };
+            var outlined = new ZenButton
+            {
+                Appearance = ButtonAppearance.Outlined,
+                Variant = ButtonVariant.Danger
+            };
+            var text = new ZenButton
+            {
+                Appearance = ButtonAppearance.Text,
+                Variant = ButtonVariant.Danger
+            };
+            var panel = new StackPanel();
+            panel.Children.Add(filled);
+            panel.Children.Add(outlined);
+            panel.Children.Add(text);
+            var window = CreateTestWindow(panel, 320, 180);
+            window.Resources.MergedDictionaries.Add(resources);
+
+            try
+            {
+                window.Show();
+                window.UpdateLayout();
+
+                Assert.AreSame(resources["ZenDangerBrush"], filled.ThemeBackground);
+                Assert.AreSame(resources["ZenOnAccentBrush"], filled.ThemeForeground);
+                Assert.AreSame(resources["ZenDangerHoverBrush"], filled.ThemeHoverBackground);
+                Assert.AreSame(resources["ZenDangerPressedBrush"], filled.ThemePressedBackground);
+
+                Assert.AreEqual(Brushes.Transparent, outlined.ThemeBackground);
+                Assert.AreSame(resources["ZenDangerBrush"], outlined.ThemeBorderBrush);
+                Assert.AreSame(resources["ZenDangerBrush"], outlined.ThemeForeground);
+                Assert.AreSame(resources["ZenDangerLightBrush"], outlined.ThemeHoverBackground);
+                Assert.AreSame(resources["ZenDangerHoverBrush"], outlined.ThemeHoverBorderBrush);
+                Assert.AreSame(resources["ZenDangerPressedBrush"], outlined.ThemePressedBorderBrush);
+
+                Assert.AreEqual(Brushes.Transparent, text.ThemeBackground);
+                Assert.AreSame(resources["ZenDangerBrush"], text.ThemeForeground);
+                Assert.AreSame(resources["ZenDangerLightBrush"], text.ThemeHoverBackground);
+                Assert.AreSame(resources["ZenDangerHoverBrush"], text.ThemeHoverForeground);
+                Assert.AreSame(resources["ZenDangerPressedBrush"], text.ThemePressedForeground);
+            }
+            finally
+            {
+                window.Close();
+            }
+        }
+
+        [TestMethod]
         public void NeutralVariantUsesNeutralThemeBrushesForEveryAppearance()
         {
             var resources = new ResourceDictionary

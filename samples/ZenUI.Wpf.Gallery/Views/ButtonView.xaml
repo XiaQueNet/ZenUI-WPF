@@ -43,7 +43,7 @@
         HorizontalContentAlignment="Stretch"
         VerticalScrollBarVisibility="Auto">
         <StackPanel>
-            <gallery:PageHeader Title="Button 按钮" Description="用于触发即时操作，支持三种外观、四种语义、丰富内容和完整交互状态。" />
+            <gallery:PageHeader Title="Button 按钮" Description="用于触发即时操作，支持三种外观、五种语义、丰富内容和完整交互状态。" />
 
             <Border Style="{StaticResource GalleryCardStyle}">
                 <StackPanel>
@@ -72,6 +72,10 @@
                                     Content="警告按钮"
                                     Style="{StaticResource GalleryButtonStyle}"
                                     Variant="Warning" />
+                                <zen:ZenButton
+                                    Content="危险按钮"
+                                    Style="{StaticResource GalleryButtonStyle}"
+                                    Variant="Danger" />
                             </WrapPanel>
                         </DockPanel>
                         <DockPanel Margin="0,0,0,12">
@@ -99,6 +103,11 @@
                                     Content="警告按钮"
                                     Style="{StaticResource GalleryButtonStyle}"
                                     Variant="Warning" />
+                                <zen:ZenButton
+                                    Appearance="Outlined"
+                                    Content="危险按钮"
+                                    Style="{StaticResource GalleryButtonStyle}"
+                                    Variant="Danger" />
                             </WrapPanel>
                         </DockPanel>
                         <DockPanel>
@@ -126,6 +135,11 @@
                                     Content="警告按钮"
                                     Style="{StaticResource GalleryButtonStyle}"
                                     Variant="Warning" />
+                                <zen:ZenButton
+                                    Appearance="Text"
+                                    Content="危险按钮"
+                                    Style="{StaticResource GalleryButtonStyle}"
+                                    Variant="Danger" />
                             </WrapPanel>
                         </DockPanel>
                     </StackPanel>
