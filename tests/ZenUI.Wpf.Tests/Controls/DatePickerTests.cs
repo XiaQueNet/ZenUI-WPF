@@ -98,6 +98,57 @@ namespace ZenUI.Wpf.Tests.Controls
         }
 
         [TestMethod]
+        public void DatePickerCalendarCellDimensionsDrivePopupCalendarSize()
+        {
+            var datePicker = new ZenDatePicker
+            {
+                CalendarCellWidth = 42d,
+                CalendarCellHeight = 34d
+            };
+            var window = CreateTestWindow(datePicker, 260, 320);
+
+            try
+            {
+                window.Show();
+                datePicker.IsDropDownOpen = true;
+                window.UpdateLayout();
+
+                var calendar = GetDatePickerCalendar(datePicker);
+                Assert.IsNotNull(calendar);
+                Assert.AreEqual(296d, calendar.Width);
+                Assert.AreEqual(282.5d, calendar.Height);
+
+                datePicker.CalendarCellWidth = double.NaN;
+                datePicker.CalendarCellHeight = double.NaN;
+
+                Assert.AreEqual(datePicker.CalendarPopupWidth, calendar.Width);
+                Assert.AreEqual(datePicker.CalendarPopupHeight, calendar.Height);
+            }
+            finally
+            {
+                datePicker.IsDropDownOpen = false;
+                window.Dispatcher.Invoke(DispatcherPriority.ContextIdle, new Action(() => { }));
+                window.Close();
+            }
+        }
+
+        [TestMethod]
+        public void DatePickerCalendarCellDimensionsAcceptAutoOrPositiveValues()
+        {
+            var datePicker = new ZenDatePicker();
+
+            Assert.IsTrue(double.IsNaN(datePicker.CalendarCellWidth));
+            Assert.IsTrue(double.IsNaN(datePicker.CalendarCellHeight));
+            Assert.ThrowsExactly<ArgumentException>(() => datePicker.CalendarCellWidth = 0d);
+            Assert.ThrowsExactly<ArgumentException>(() => datePicker.CalendarCellHeight = -1d);
+            Assert.ThrowsExactly<ArgumentException>(
+                () => datePicker.CalendarCellWidth = double.PositiveInfinity);
+
+            datePicker.CalendarCellWidth = 40d;
+            datePicker.CalendarCellHeight = double.NaN;
+        }
+
+        [TestMethod]
         public void DatePickerCalendarStyleOverrideCrossesPopupBoundary()
         {
             var datePicker = new ZenDatePicker();

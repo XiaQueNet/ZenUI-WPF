@@ -92,6 +92,17 @@ namespace ZenUI.Wpf.Controls
             }
         }
 
+        private static void HandleCalendarCellSizeChanged(
+            DependencyObject dependencyObject,
+            DependencyPropertyChangedEventArgs e)
+        {
+            var datePicker = (ZenDatePicker)dependencyObject;
+            if (datePicker._popupCalendar != null)
+            {
+                datePicker.ApplyPopupDimensions(datePicker._popupCalendar);
+            }
+        }
+
         private void ApplyPopupBindings()
         {
             var popup =
@@ -103,13 +114,51 @@ namespace ZenUI.Wpf.Controls
                 return;
             }
 
-            BindPopupProperty(calendar, FrameworkElement.WidthProperty, nameof(CalendarPopupWidth));
-            BindPopupProperty(calendar, FrameworkElement.HeightProperty, nameof(CalendarPopupHeight));
             BindPopupProperty(calendar, Calendar.FirstDayOfWeekProperty, nameof(FirstDayOfWeek));
             BindPopupProperty(calendar, FrameworkElement.FlowDirectionProperty, nameof(FlowDirection));
             BindPopupProperty(calendar, Control.FontSizeProperty, nameof(CalendarFontSize));
             BindPopupProperty(calendar, FrameworkElement.StyleProperty, nameof(CalendarStyle));
+            ApplyPopupDimensions(calendar);
             ApplyPopupDateConstraints(calendar);
+        }
+
+        private void ApplyPopupDimensions(Calendar calendar)
+        {
+            if (double.IsNaN(CalendarCellWidth))
+            {
+                BindPopupProperty(
+                    calendar,
+                    FrameworkElement.WidthProperty,
+                    nameof(CalendarPopupWidth));
+            }
+            else
+            {
+                BindingOperations.ClearBinding(calendar, FrameworkElement.WidthProperty);
+                calendar.Width =
+                    (7d * CalendarCellWidth) +
+                    calendar.Padding.Left +
+                    calendar.Padding.Right +
+                    calendar.BorderThickness.Left +
+                    calendar.BorderThickness.Right;
+            }
+
+            if (double.IsNaN(CalendarCellHeight))
+            {
+                BindPopupProperty(
+                    calendar,
+                    FrameworkElement.HeightProperty,
+                    nameof(CalendarPopupHeight));
+            }
+            else
+            {
+                BindingOperations.ClearBinding(calendar, FrameworkElement.HeightProperty);
+                calendar.Height =
+                    (8.25d * CalendarCellHeight) +
+                    calendar.Padding.Top +
+                    calendar.Padding.Bottom +
+                    calendar.BorderThickness.Top +
+                    calendar.BorderThickness.Bottom;
+            }
         }
 
         private void ApplyPopupDateConstraints(Calendar calendar)
@@ -297,6 +346,52 @@ namespace ZenUI.Wpf.Controls
                 new FrameworkPropertyMetadata(376d));
 
         /// <summary>
+        /// 获取或设置日历网格单元的宽度（以与设备无关的像素为单位）。
+        /// <see cref="double.NaN"/> 表示使用 <see cref="CalendarPopupWidth"/>。
+        /// </summary>
+        [Bindable(true)]
+        [TypeConverter(typeof(LengthConverter))]
+        public double CalendarCellWidth
+        {
+            get { return (double)GetValue(CalendarCellWidthProperty); }
+            set { SetValue(CalendarCellWidthProperty, value); }
+        }
+
+        /// <summary>
+        /// 标识 <see cref="CalendarCellWidth"/> 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty CalendarCellWidthProperty =
+            DependencyProperty.Register(
+                nameof(CalendarCellWidth),
+                typeof(double),
+                typeof(ZenDatePicker),
+                new FrameworkPropertyMetadata(double.NaN, HandleCalendarCellSizeChanged),
+                IsValidAutoOrPositiveDimension);
+
+        /// <summary>
+        /// 获取或设置日历网格单元的高度（以与设备无关的像素为单位）。
+        /// <see cref="double.NaN"/> 表示使用 <see cref="CalendarPopupHeight"/>。
+        /// </summary>
+        [Bindable(true)]
+        [TypeConverter(typeof(LengthConverter))]
+        public double CalendarCellHeight
+        {
+            get { return (double)GetValue(CalendarCellHeightProperty); }
+            set { SetValue(CalendarCellHeightProperty, value); }
+        }
+
+        /// <summary>
+        /// 标识 <see cref="CalendarCellHeight"/> 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty CalendarCellHeightProperty =
+            DependencyProperty.Register(
+                nameof(CalendarCellHeight),
+                typeof(double),
+                typeof(ZenDatePicker),
+                new FrameworkPropertyMetadata(double.NaN, HandleCalendarCellSizeChanged),
+                IsValidAutoOrPositiveDimension);
+
+        /// <summary>
         /// 获取或设置日历弹层内容的字号。
         /// </summary>
         [Bindable(true)]
@@ -315,5 +410,12 @@ namespace ZenUI.Wpf.Controls
                 typeof(double),
                 typeof(ZenDatePicker),
                 new FrameworkPropertyMetadata(16d));
+
+        private static bool IsValidAutoOrPositiveDimension(object value)
+        {
+            var dimension = (double)value;
+            return double.IsNaN(dimension) ||
+                (!double.IsInfinity(dimension) && dimension > 0d);
+        }
     }
 }

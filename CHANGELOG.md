@@ -4,6 +4,10 @@
 
 ## Unreleased
 
+### Added
+
+- `ZenDatePicker` 增加 `CalendarCellWidth` 和 `CalendarCellHeight`，支持按日历网格单元尺寸控制弹层布局；设为 `Auto` 时继续使用 `CalendarPopupWidth` 和 `CalendarPopupHeight`。
+
 ## [0.1.0-preview.11] - 2026-08-06
 
 ### Changed
