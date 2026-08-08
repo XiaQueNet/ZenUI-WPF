@@ -4,14 +4,25 @@
 
 ## Unreleased
 
+## [0.1.0-preview.12] - 2026-08-08
+
 ### Added
 
+- `ZenButton` 增加 `Danger` 变体，并为填充、描边和文本外观提供适配 Light、Dark 与 High Contrast 主题的危险操作样式。
 - `ZenDatePicker` 增加 `CalendarCellWidth` 和 `CalendarCellHeight`，支持按日历网格单元尺寸控制弹层布局；设为 `Auto` 时继续使用 `CalendarPopupWidth` 和 `CalendarPopupHeight`。
 - `ZenDatePicker`、`ZenTimePicker` 和 `ZenDateTimePicker` 增加 `DropDownButtonWidth` 与 `DropDownButtonHeight`，并统一通过 `DropDownButtonIconSize` 独立控制下拉按钮点击区域和内部图标尺寸。
+- `ZenTextBox`、`ZenPasswordBox`、`ZenComboBox`、`ZenDatePicker`、`ZenTimePicker` 和 `ZenDateTimePicker` 增加 `ShowWatermarkOnFocus`，支持按控件控制获得键盘焦点时是否继续显示空内容水印。
 
 ### Changed
 
+- 统一输入控件的聚焦水印策略，默认在内容为空时持续显示水印，并允许通过 `ShowWatermarkOnFocus="False"` 恢复仅未聚焦时显示的行为。
+- `ZenProgressBar` 的不确定状态改用带渐变遮罩的连续扫光动画，并分别适配水平与垂直方向。
 - CI 对主分支 Push 改用 `net472` 与 `.NET 10 for Windows` 代表性测试，Pull Request 和发布验证保留完整框架矩阵；纯文档改动不再触发 CI，同一分支的新提交会取消尚未完成的旧运行。
+
+### Fixed
+
+- 修复 `ZenPopover` 弹层内容未继承控件 `FontSize` 的问题。
+- 修复 `ZenButton` 外观样式直接覆盖应用设置的 `BorderThickness`，导致自定义边框粗细不生效的问题。
 
 ## [0.1.0-preview.11] - 2026-08-06
 
@@ -173,7 +184,8 @@
 - Password 明文绑定默认关闭，并标记为过时兼容 API。
 - DataGrid 恢复行虚拟化、行头、行详情、全选、冻结列偏移和高级编辑契约。
 
-[Unreleased]: https://github.com/XiaQueNet/ZenUI-WPF/compare/v0.1.0-preview.11...HEAD
+[Unreleased]: https://github.com/XiaQueNet/ZenUI-WPF/compare/v0.1.0-preview.12...HEAD
+[0.1.0-preview.12]: https://github.com/XiaQueNet/ZenUI-WPF/compare/v0.1.0-preview.11...v0.1.0-preview.12
 [0.1.0-preview.11]: https://github.com/XiaQueNet/ZenUI-WPF/compare/v0.1.0-preview.8...v0.1.0-preview.11
 [0.1.0-preview.8]: https://github.com/XiaQueNet/ZenUI-WPF/compare/v0.1.0-preview.7...v0.1.0-preview.8
 [0.1.0-preview.7]: https://github.com/XiaQueNet/ZenUI-WPF/compare/v0.1.0-preview.6...v0.1.0-preview.7

@@ -58,7 +58,7 @@ rc.1
 ```xml
 <!-- ZenUI.Wpf -->
 <VersionPrefix>0.1.0</VersionPrefix>
-<VersionSuffix>preview.11</VersionSuffix>
+<VersionSuffix>preview.12</VersionSuffix>
 <AssemblyVersion>0.1.0.0</AssemblyVersion>
 <FileVersion>0.1.0.0</FileVersion>
 
