@@ -156,6 +156,26 @@ namespace ZenUI.Wpf.Controls
             DependencyProperty.Register(nameof(Watermark), typeof(string), typeof(ZenPasswordBox), new FrameworkPropertyMetadata(string.Empty));
 
         /// <summary>
+        /// 获取或设置密码框内容为空时，获得键盘焦点是否仍显示水印。
+        /// </summary>
+        [Bindable(true)]
+        public bool ShowWatermarkOnFocus
+        {
+            get { return (bool)GetValue(ShowWatermarkOnFocusProperty); }
+            set { SetValue(ShowWatermarkOnFocusProperty, value); }
+        }
+
+        /// <summary>
+        /// 标识 <see cref="ShowWatermarkOnFocus"/> 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty ShowWatermarkOnFocusProperty =
+            DependencyProperty.Register(
+                nameof(ShowWatermarkOnFocus),
+                typeof(bool),
+                typeof(ZenPasswordBox),
+                new FrameworkPropertyMetadata(true));
+
+        /// <summary>
         /// 获取或设置显示在密码输入区域之前的内容。
         /// </summary>
         [Bindable(true)]

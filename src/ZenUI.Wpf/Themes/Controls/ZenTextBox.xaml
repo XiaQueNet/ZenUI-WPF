@@ -101,6 +101,13 @@
                             </MultiTrigger.Conditions>
                             <Setter TargetName="WatermarkText" Property="Visibility" Value="Visible" />
                         </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="Text" Value="" />
+                                <Condition Property="ShowWatermarkOnFocus" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="WatermarkText" Property="Visibility" Value="Visible" />
+                        </MultiTrigger>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="InputBorder" Property="BorderBrush" Value="{DynamicResource ZenBorderHoverBrush}" />
                         </Trigger>

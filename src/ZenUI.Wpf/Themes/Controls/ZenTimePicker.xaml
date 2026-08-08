@@ -79,6 +79,7 @@
                                 AutomationProperties.Name="时间"
                                 Style="{StaticResource ZenTimePickerTextBoxStyle}" />
                             <TextBlock
+                                x:Name="WatermarkText"
                                 Margin="{DynamicResource ZenInputControlPadding}"
                                 VerticalAlignment="Center"
                                 Foreground="{DynamicResource ZenTextPlaceholderBrush}"
@@ -91,6 +92,13 @@
                                             <DataTrigger Binding="{Binding Text, ElementName=PART_TextBox}" Value="">
                                                 <Setter Property="Visibility" Value="Visible" />
                                             </DataTrigger>
+                                            <MultiDataTrigger>
+                                                <MultiDataTrigger.Conditions>
+                                                    <Condition Binding="{Binding IsKeyboardFocusWithin, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenTimePicker}}}" Value="True" />
+                                                    <Condition Binding="{Binding ShowWatermarkOnFocus, RelativeSource={RelativeSource AncestorType={x:Type zen:ZenTimePicker}}}" Value="False" />
+                                                </MultiDataTrigger.Conditions>
+                                                <Setter Property="Visibility" Value="Collapsed" />
+                                            </MultiDataTrigger>
                                         </Style.Triggers>
                                     </Style>
                                 </TextBlock.Style>

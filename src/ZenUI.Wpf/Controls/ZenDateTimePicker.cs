@@ -256,6 +256,26 @@ namespace ZenUI.Wpf.Controls
                 new FrameworkPropertyMetadata(string.Empty));
 
         /// <summary>
+        /// 获取或设置尚未选择日期时间时，获得键盘焦点是否仍显示水印。
+        /// </summary>
+        [Bindable(true)]
+        public bool ShowWatermarkOnFocus
+        {
+            get { return (bool)GetValue(ShowWatermarkOnFocusProperty); }
+            set { SetValue(ShowWatermarkOnFocusProperty, value); }
+        }
+
+        /// <summary>
+        /// 标识 <see cref="ShowWatermarkOnFocus"/> 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty ShowWatermarkOnFocusProperty =
+            DependencyProperty.Register(
+                nameof(ShowWatermarkOnFocus),
+                typeof(bool),
+                SelfType,
+                new FrameworkPropertyMetadata(true));
+
+        /// <summary>
         /// 获取或设置日期时间的自定义显示格式；空字符串表示使用当前区域设置生成默认格式。
         /// </summary>
         [Bindable(true)]

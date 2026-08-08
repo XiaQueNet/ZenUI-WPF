@@ -20,7 +20,7 @@ namespace ZenUI.Wpf.Controls
         }
 
         /// <summary>
-        /// 获取或设置输入框没有内容且未获得键盘焦点时显示的水印。
+        /// 获取或设置输入框没有内容时显示的水印。
         /// </summary>
         [Bindable(true)]
         public string Watermark
@@ -38,6 +38,26 @@ namespace ZenUI.Wpf.Controls
                 typeof(string),
                 SelfType,
                 new FrameworkPropertyMetadata(string.Empty));
+
+        /// <summary>
+        /// 获取或设置输入框内容为空时，获得键盘焦点是否仍显示水印。
+        /// </summary>
+        [Bindable(true)]
+        public bool ShowWatermarkOnFocus
+        {
+            get { return (bool)GetValue(ShowWatermarkOnFocusProperty); }
+            set { SetValue(ShowWatermarkOnFocusProperty, value); }
+        }
+
+        /// <summary>
+        /// 标识 <see cref="ShowWatermarkOnFocus"/> 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty ShowWatermarkOnFocusProperty =
+            DependencyProperty.Register(
+                nameof(ShowWatermarkOnFocus),
+                typeof(bool),
+                SelfType,
+                new FrameworkPropertyMetadata(true));
 
         /// <summary>
         /// 获取或设置显示在文本输入区域之前的内容。

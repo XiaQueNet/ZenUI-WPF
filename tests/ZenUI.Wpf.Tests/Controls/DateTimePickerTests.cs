@@ -33,6 +33,7 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.IsTrue(picker.IsSecondVisible);
             Assert.IsTrue(picker.Is24HourFormat);
             Assert.IsFalse(picker.IsTextInputReadOnly);
+            Assert.IsTrue(picker.ShowWatermarkOnFocus);
             Assert.IsFalse(picker.IsDropDownOpen);
             Assert.AreEqual(new CornerRadius(6), picker.CornerRadius);
             Assert.AreEqual(28d, picker.DropDownButtonWidth);

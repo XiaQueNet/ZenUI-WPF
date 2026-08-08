@@ -229,6 +229,26 @@ namespace ZenUI.Wpf.Controls
                 new FrameworkPropertyMetadata(string.Empty));
 
         /// <summary>
+        /// 获取或设置尚未选择时间时，获得键盘焦点是否仍显示水印。
+        /// </summary>
+        [Bindable(true)]
+        public bool ShowWatermarkOnFocus
+        {
+            get { return (bool)GetValue(ShowWatermarkOnFocusProperty); }
+            set { SetValue(ShowWatermarkOnFocusProperty, value); }
+        }
+
+        /// <summary>
+        /// 标识 <see cref="ShowWatermarkOnFocus"/> 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty ShowWatermarkOnFocusProperty =
+            DependencyProperty.Register(
+                nameof(ShowWatermarkOnFocus),
+                typeof(bool),
+                SelfType,
+                new FrameworkPropertyMetadata(true));
+
+        /// <summary>
         /// 获取或设置一个值，该值指示时间文本输入是否只读。只读时，点击输入区域会打开时间选择弹层。
         /// </summary>
         [Bindable(true)]

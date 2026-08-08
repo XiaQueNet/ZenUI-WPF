@@ -178,6 +178,13 @@
                             <Setter TargetName="SelectionPresenter" Property="Visibility" Value="Hidden" />
                             <Setter TargetName="PART_EditableTextBox" Property="Visibility" Value="Visible" />
                         </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsKeyboardFocusWithin" Value="True" />
+                                <Condition Property="ShowWatermarkOnFocus" Value="False" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="WatermarkText" Property="Visibility" Value="Collapsed" />
+                        </MultiTrigger>
                         <Trigger Property="IsMouseOver" Value="True">
                             <Setter TargetName="InputBorder" Property="BorderBrush" Value="{DynamicResource ZenBorderHoverBrush}" />
                         </Trigger>

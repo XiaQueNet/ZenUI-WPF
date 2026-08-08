@@ -38,6 +38,7 @@ namespace ZenUI.Wpf.Tests.Controls
             var listBox = new TestZenListBox();
             var datePicker = new TestZenDatePicker();
             var dateTimePicker = new TestZenDateTimePicker();
+            var timePicker = new ZenTimePicker();
             var dataGrid = new TestZenDataGrid();
             var passwordBox = new TestZenPasswordBox();
             var slider = new TestZenSlider();
@@ -65,6 +66,7 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.AreEqual(ButtonVariant.Primary, button.Variant);
             Assert.AreEqual(ButtonAppearance.Filled, button.Appearance);
             Assert.AreEqual(string.Empty, textBox.Watermark);
+            Assert.IsTrue(textBox.ShowWatermarkOnFocus);
             Assert.AreEqual(default(CornerRadius), textBox.CornerRadius);
             Assert.IsNull(textBox.LeadingContent);
             Assert.IsNull(textBox.LeadingContentTemplate);
@@ -73,8 +75,12 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.AreEqual(18d, checkBox.IndicatorSize);
             Assert.AreEqual(18d, radioButton.IndicatorSize);
             Assert.AreEqual(string.Empty, comboBox.Watermark);
+            Assert.IsTrue(comboBox.ShowWatermarkOnFocus);
             Assert.AreEqual(new CornerRadius(8), listBox.CornerRadius);
             Assert.AreEqual(string.Empty, datePicker.Watermark);
+            Assert.IsTrue(datePicker.ShowWatermarkOnFocus);
+            Assert.IsTrue(dateTimePicker.ShowWatermarkOnFocus);
+            Assert.IsTrue(timePicker.ShowWatermarkOnFocus);
             Assert.AreEqual(new CornerRadius(6), datePicker.CornerRadius);
             Assert.AreEqual(28d, datePicker.DropDownButtonWidth);
             Assert.AreEqual(28d, datePicker.DropDownButtonHeight);
@@ -87,6 +93,7 @@ namespace ZenUI.Wpf.Tests.Controls
             Assert.AreEqual("暂无数据", dataGrid.EmptyContent);
             Assert.IsFalse(passwordBox.IsPasswordRevealButtonEnabled);
             Assert.IsFalse(passwordBox.IsPasswordRevealed);
+            Assert.IsTrue(passwordBox.ShowWatermarkOnFocus);
             Assert.IsNull(passwordBox.LeadingContent);
             Assert.IsNull(passwordBox.LeadingContentTemplate);
             Assert.IsNull(passwordBox.TrailingContent);
