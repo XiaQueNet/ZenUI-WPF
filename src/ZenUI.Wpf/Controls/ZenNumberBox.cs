@@ -30,6 +30,19 @@ namespace ZenUI.Wpf.Controls
         internal const string PartVerticalDecreaseButton = "PART_VerticalDecreaseButton";
 
         private static readonly Type SelfType = typeof(ZenNumberBox);
+
+        /// <summary>
+        /// 获取将当前值增加一个 <see cref="Increment"/> 的命令。
+        /// </summary>
+        public static readonly RoutedUICommand IncreaseCommand =
+            new RoutedUICommand("增加", nameof(IncreaseCommand), SelfType);
+
+        /// <summary>
+        /// 获取将当前值减少一个 <see cref="Increment"/> 的命令。
+        /// </summary>
+        public static readonly RoutedUICommand DecreaseCommand =
+            new RoutedUICommand("减少", nameof(DecreaseCommand), SelfType);
+
         private TextBox textBox;
         private TextBox verticalTextBox;
         private RepeatButton increaseButton;
@@ -44,6 +57,12 @@ namespace ZenUI.Wpf.Controls
             DefaultStyleKeyProperty.OverrideMetadata(
                 SelfType,
                 new FrameworkPropertyMetadata(SelfType));
+            CommandManager.RegisterClassCommandBinding(
+                SelfType,
+                new CommandBinding(IncreaseCommand, OnExecuteIncrease, OnCanExecuteIncrease));
+            CommandManager.RegisterClassCommandBinding(
+                SelfType,
+                new CommandBinding(DecreaseCommand, OnExecuteDecrease, OnCanExecuteDecrease));
         }
 
         /// <summary>
@@ -389,12 +408,12 @@ namespace ZenUI.Wpf.Controls
 
             if (e.Key == Key.Up)
             {
-                ChangeValue(Increment);
+                ExecuteCommand(IncreaseCommand);
                 e.Handled = true;
             }
             else if (e.Key == Key.Down)
             {
-                ChangeValue(-Increment);
+                ExecuteCommand(DecreaseCommand);
                 e.Handled = true;
             }
         }
@@ -450,12 +469,46 @@ namespace ZenUI.Wpf.Controls
 
         private void OnIncreaseClick(object sender, RoutedEventArgs e)
         {
-            ChangeValue(Increment);
+            ExecuteCommand(IncreaseCommand);
         }
 
         private void OnDecreaseClick(object sender, RoutedEventArgs e)
         {
-            ChangeValue(-Increment);
+            ExecuteCommand(DecreaseCommand);
+        }
+
+        private static void OnCanExecuteIncrease(object sender, CanExecuteRoutedEventArgs e)
+        {
+            var owner = (ZenNumberBox)sender;
+            e.CanExecute = owner.IsEnabled && owner.Value < owner.Maximum;
+            e.Handled = true;
+        }
+
+        private static void OnCanExecuteDecrease(object sender, CanExecuteRoutedEventArgs e)
+        {
+            var owner = (ZenNumberBox)sender;
+            e.CanExecute = owner.IsEnabled && owner.Value > owner.Minimum;
+            e.Handled = true;
+        }
+
+        private static void OnExecuteIncrease(object sender, ExecutedRoutedEventArgs e)
+        {
+            ((ZenNumberBox)sender).ChangeValue(((ZenNumberBox)sender).Increment);
+            e.Handled = true;
+        }
+
+        private static void OnExecuteDecrease(object sender, ExecutedRoutedEventArgs e)
+        {
+            ((ZenNumberBox)sender).ChangeValue(-((ZenNumberBox)sender).Increment);
+            e.Handled = true;
+        }
+
+        private void ExecuteCommand(RoutedCommand command)
+        {
+            if (command.CanExecute(null, this))
+            {
+                command.Execute(null, this);
+            }
         }
 
         private void ChangeValue(decimal delta)
@@ -601,6 +654,7 @@ namespace ZenUI.Wpf.Controls
             SetButtonEnabled(verticalIncreaseButton, Value < Maximum);
             SetButtonEnabled(decreaseButton, Value > Minimum);
             SetButtonEnabled(verticalDecreaseButton, Value > Minimum);
+            CommandManager.InvalidateRequerySuggested();
         }
 
         private void DetachTemplateHandlers()

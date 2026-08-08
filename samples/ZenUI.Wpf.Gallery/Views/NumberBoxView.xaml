@@ -117,6 +117,33 @@
 
             <Border Style="{StaticResource GalleryCardStyle}">
                 <StackPanel>
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="路由命令" />
+                    <TextBlock
+                        Style="{StaticResource GallerySectionDescriptionStyle}"
+                        Text="IncreaseCommand 和 DecreaseCommand 可绑定到外部操作入口，并自动遵循数值范围和禁用状态。" />
+                    <StackPanel Orientation="Horizontal">
+                        <zen:ZenNumberBox
+                            x:Name="CommandNumberBox"
+                            Width="180"
+                            Maximum="10"
+                            Minimum="0"
+                            Value="5" />
+                        <Button
+                            Margin="16,0,0,0"
+                            Command="{x:Static zen:ZenNumberBox.DecreaseCommand}"
+                            CommandTarget="{Binding ElementName=CommandNumberBox}"
+                            Content="减少" />
+                        <Button
+                            Margin="8,0,0,0"
+                            Command="{x:Static zen:ZenNumberBox.IncreaseCommand}"
+                            CommandTarget="{Binding ElementName=CommandNumberBox}"
+                            Content="增加" />
+                    </StackPanel>
+                </StackPanel>
+            </Border>
+
+            <Border Style="{StaticResource GalleryCardStyle}">
+                <StackPanel>
                     <TextBlock Style="{StaticResource SectionTitleStyle}" Text="状态" />
                     <StackPanel Orientation="Horizontal">
                         <zen:ZenNumberBox

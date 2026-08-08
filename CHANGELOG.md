@@ -4,6 +4,10 @@
 
 ## Unreleased
 
+### Added
+
+- `ZenNumberBox` 增加 `IncreaseCommand` 和 `DecreaseCommand` 路由命令，支持从外部命令源按配置步长增减当前值，并自动遵循范围与禁用状态。
+
 ## [0.1.0-preview.12] - 2026-08-08
 
 ### Added

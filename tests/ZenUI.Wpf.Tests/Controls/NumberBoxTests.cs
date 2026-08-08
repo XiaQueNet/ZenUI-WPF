@@ -174,6 +174,48 @@ namespace ZenUI.Wpf.Tests.Controls
         }
 
         [TestMethod]
+        public void RoutedCommandsChangeValueAndRespectControlState()
+        {
+            var numberBox = new ZenNumberBox
+            {
+                Minimum = 0m,
+                Maximum = 2m,
+                Increment = 0.5m,
+                Value = 1m
+            };
+            var window = CreateWindow(numberBox);
+
+            try
+            {
+                window.Show();
+                window.UpdateLayout();
+
+                Assert.IsTrue(ZenNumberBox.IncreaseCommand.CanExecute(null, numberBox));
+                ZenNumberBox.IncreaseCommand.Execute(null, numberBox);
+                Assert.AreEqual(1.5m, numberBox.Value);
+
+                Assert.IsTrue(ZenNumberBox.DecreaseCommand.CanExecute(null, numberBox));
+                ZenNumberBox.DecreaseCommand.Execute(null, numberBox);
+                Assert.AreEqual(1m, numberBox.Value);
+
+                numberBox.Value = numberBox.Maximum;
+                Assert.IsFalse(ZenNumberBox.IncreaseCommand.CanExecute(null, numberBox));
+
+                numberBox.Value = numberBox.Minimum;
+                Assert.IsFalse(ZenNumberBox.DecreaseCommand.CanExecute(null, numberBox));
+
+                numberBox.Value = 1m;
+                numberBox.IsEnabled = false;
+                Assert.IsFalse(ZenNumberBox.IncreaseCommand.CanExecute(null, numberBox));
+                Assert.IsFalse(ZenNumberBox.DecreaseCommand.CanExecute(null, numberBox));
+            }
+            finally
+            {
+                window.Close();
+            }
+        }
+
+        [TestMethod]
         public void SpinButtonsDisplayCustomContentAndTemplatesInBothLayouts()
         {
             var increaseTemplate = new DataTemplate();
