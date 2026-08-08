@@ -21,12 +21,50 @@
                                 VerticalAlignment="Stretch"
                                 Background="{TemplateBinding Foreground}"
                                 CornerRadius="{TemplateBinding CornerRadius}" />
-                            <Border
+                            <Grid
                                 x:Name="IndeterminateIndicator"
-                                Background="{TemplateBinding Foreground}"
-                                CornerRadius="{TemplateBinding CornerRadius}"
                                 Opacity="0"
-                                Visibility="Collapsed" />
+                                Visibility="Collapsed">
+                                <Border
+                                    x:Name="HorizontalIndeterminateIndicator"
+                                    Background="{TemplateBinding Foreground}"
+                                    CornerRadius="{TemplateBinding CornerRadius}">
+                                    <Border.OpacityMask>
+                                        <LinearGradientBrush StartPoint="0,0.5" EndPoint="1,0.5">
+                                            <LinearGradientBrush.RelativeTransform>
+                                                <TranslateTransform x:Name="HorizontalIndeterminateTransform" X="-1" />
+                                            </LinearGradientBrush.RelativeTransform>
+                                            <GradientStop Offset="0" Color="Transparent" />
+                                            <GradientStop Offset="0.22" Color="Transparent" />
+                                            <GradientStop Offset="0.38" Color="#66000000" />
+                                            <GradientStop Offset="0.5" Color="#FF000000" />
+                                            <GradientStop Offset="0.62" Color="#66000000" />
+                                            <GradientStop Offset="0.78" Color="Transparent" />
+                                            <GradientStop Offset="1" Color="Transparent" />
+                                        </LinearGradientBrush>
+                                    </Border.OpacityMask>
+                                </Border>
+                                <Border
+                                    x:Name="VerticalIndeterminateIndicator"
+                                    Background="{TemplateBinding Foreground}"
+                                    CornerRadius="{TemplateBinding CornerRadius}"
+                                    Visibility="Collapsed">
+                                    <Border.OpacityMask>
+                                        <LinearGradientBrush StartPoint="0.5,0" EndPoint="0.5,1">
+                                            <LinearGradientBrush.RelativeTransform>
+                                                <TranslateTransform x:Name="VerticalIndeterminateTransform" Y="1" />
+                                            </LinearGradientBrush.RelativeTransform>
+                                            <GradientStop Offset="0" Color="Transparent" />
+                                            <GradientStop Offset="0.22" Color="Transparent" />
+                                            <GradientStop Offset="0.38" Color="#66000000" />
+                                            <GradientStop Offset="0.5" Color="#FF000000" />
+                                            <GradientStop Offset="0.62" Color="#66000000" />
+                                            <GradientStop Offset="0.78" Color="Transparent" />
+                                            <GradientStop Offset="1" Color="Transparent" />
+                                        </LinearGradientBrush>
+                                    </Border.OpacityMask>
+                                </Border>
+                            </Grid>
                         </Grid>
                     </Border>
                     <ControlTemplate.Triggers>
@@ -35,19 +73,32 @@
                             <Setter Property="Height" Value="Auto" />
                             <Setter TargetName="PART_Indicator" Property="HorizontalAlignment" Value="Stretch" />
                             <Setter TargetName="PART_Indicator" Property="VerticalAlignment" Value="Bottom" />
+                            <Setter TargetName="HorizontalIndeterminateIndicator" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="VerticalIndeterminateIndicator" Property="Visibility" Value="Visible" />
                         </Trigger>
                         <Trigger Property="IsIndeterminate" Value="True">
                             <Setter TargetName="PART_Indicator" Property="Visibility" Value="Collapsed" />
+                            <Setter TargetName="IndeterminateIndicator" Property="Opacity" Value="1" />
                             <Setter TargetName="IndeterminateIndicator" Property="Visibility" Value="Visible" />
                             <Trigger.EnterActions>
                                 <BeginStoryboard x:Name="IndeterminateStoryboard">
-                                    <Storyboard AutoReverse="True" RepeatBehavior="Forever">
+                                    <Storyboard RepeatBehavior="Forever">
                                         <DoubleAnimation
-                                            Storyboard.TargetName="IndeterminateIndicator"
-                                            Storyboard.TargetProperty="Opacity"
-                                            From="0.4"
-                                            To="0.85"
-                                            Duration="0:0:1.2" />
+                                            Storyboard.TargetName="HorizontalIndeterminateTransform"
+                                            Storyboard.TargetProperty="X"
+                                            From="-1"
+                                            To="1"
+                                            Duration="0:0:1.5"
+                                            AccelerationRatio="0.12"
+                                            DecelerationRatio="0.12" />
+                                        <DoubleAnimation
+                                            Storyboard.TargetName="VerticalIndeterminateTransform"
+                                            Storyboard.TargetProperty="Y"
+                                            From="1"
+                                            To="-1"
+                                            Duration="0:0:1.5"
+                                            AccelerationRatio="0.12"
+                                            DecelerationRatio="0.12" />
                                     </Storyboard>
                                 </BeginStoryboard>
                             </Trigger.EnterActions>
