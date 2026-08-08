@@ -1,5 +1,10 @@
 using System.Windows;
 using System.Windows.Markup;
+#if NET5_0_OR_GREATER
+using System.Runtime.Versioning;
+
+[assembly: SupportedOSPlatform("windows")]
+#endif
 
 [assembly: ThemeInfo(
     ResourceDictionaryLocation.None,
