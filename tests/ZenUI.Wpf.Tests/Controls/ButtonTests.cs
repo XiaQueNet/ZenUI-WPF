@@ -292,6 +292,37 @@ namespace ZenUI.Wpf.Tests.Controls
             }
         }
 
+        [TestMethod]
+        public void DerivedStyleBorderThicknessOverridesAppearanceDefault()
+        {
+            var resources = (ResourceDictionary)Application.LoadComponent(
+                new Uri(
+                    "/ZenUI.Wpf;component/Themes/Generic.xaml",
+                    UriKind.Relative));
+            var expected = new Thickness(3, 2, 1, 0);
+            var style = new Style(typeof(ZenButton), (Style)resources["ZenButtonStyle"]);
+            style.Setters.Add(new Setter(Control.BorderThicknessProperty, expected));
+            var button = new ZenButton
+            {
+                Appearance = ButtonAppearance.Outlined,
+                Style = style
+            };
+            var window = CreateTestWindow(button, 240, 100);
+            window.Resources.MergedDictionaries.Add(resources);
+
+            try
+            {
+                window.Show();
+                window.UpdateLayout();
+
+                Assert.AreEqual(expected, button.BorderThickness);
+            }
+            finally
+            {
+                window.Close();
+            }
+        }
+
         private static Setter CreateBrushBindingSetter(
             DependencyProperty property,
             string path,

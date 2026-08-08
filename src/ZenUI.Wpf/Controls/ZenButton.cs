@@ -248,6 +248,25 @@ namespace ZenUI.Wpf.Controls
             RegisterThemeBrush(nameof(ThemeBorderBrush));
 
         /// <summary>
+        /// 获取或设置由按钮视觉呈现形式提供的默认边框粗细。
+        /// </summary>
+        internal Thickness ThemeBorderThickness
+        {
+            get { return (Thickness)GetValue(ThemeBorderThicknessProperty); }
+            set { SetValue(ThemeBorderThicknessProperty, value); }
+        }
+
+        /// <summary>
+        /// 标识 <see cref="ThemeBorderThickness"/> 依赖属性。
+        /// </summary>
+        internal static readonly DependencyProperty ThemeBorderThicknessProperty =
+            DependencyProperty.Register(
+                nameof(ThemeBorderThickness),
+                typeof(Thickness),
+                SelfType,
+                new FrameworkPropertyMetadata(default(Thickness), FrameworkPropertyMetadataOptions.AffectsRender));
+
+        /// <summary>
         /// 获取或设置由按钮语义外观提供的默认悬浮背景画刷。
         /// </summary>
         internal Brush ThemeHoverBackground

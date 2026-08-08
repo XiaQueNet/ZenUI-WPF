@@ -16,7 +16,7 @@
 
     <Style x:Key="ZenButtonStyle" TargetType="{x:Type zen:ZenButton}">
         <Setter Property="FontSize" Value="{DynamicResource ZenFontSizeBody}" />
-        <Setter Property="BorderThickness" Value="0" />
+        <Setter Property="BorderThickness" Value="{Binding ThemeBorderThickness, RelativeSource={RelativeSource Self}}" />
         <Setter Property="Cursor" Value="Hand" />
         <Setter Property="CornerRadius" Value="{DynamicResource ZenButtonCornerRadius}" />
         <Setter Property="MinHeight" Value="{DynamicResource ZenButtonMinHeight}" />
@@ -114,7 +114,7 @@
             <Trigger Property="Appearance" Value="Outlined">
                 <Setter Property="ThemeBackground" Value="Transparent" />
                 <Setter Property="ThemeBorderBrush" Value="{DynamicResource ZenNeutralActionBrush}" />
-                <Setter Property="BorderThickness" Value="{DynamicResource ZenControlBorderThickness}" />
+                <Setter Property="ThemeBorderThickness" Value="{DynamicResource ZenControlBorderThickness}" />
                 <Setter Property="ThemeForeground" Value="{DynamicResource ZenNeutralActionBrush}" />
                 <Setter Property="ThemeHoverBackground" Value="{DynamicResource ZenSurfaceMutedBrush}" />
                 <Setter Property="ThemeHoverBorderBrush" Value="{DynamicResource ZenNeutralActionHoverBrush}" />
@@ -181,7 +181,7 @@
             </MultiTrigger>
             <Trigger Property="Appearance" Value="Text">
                 <Setter Property="ThemeBackground" Value="Transparent" />
-                <Setter Property="BorderThickness" Value="0" />
+                <Setter Property="ThemeBorderThickness" Value="0" />
                 <Setter Property="ThemeForeground" Value="{DynamicResource ZenNeutralActionBrush}" />
                 <Setter Property="ThemeHoverBackground" Value="{DynamicResource ZenSurfaceMutedBrush}" />
                 <Setter Property="ThemeHoverBorderBrush" Value="Transparent" />
