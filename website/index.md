@@ -8,7 +8,7 @@ layout: landing
     <div class="zenui-hero-copy">
       <span class="zenui-eyebrow">ZENUI FOR WPF</span>
       <h1>让 WPF 界面<br>更现代，也更可靠。</h1>
-      <p class="zenui-lead">一套可主题化、可访问的 WPF 控件库，在改善默认视觉的同时保留完整的原生能力。</p>
+      <p class="zenui-lead">一套轻量、可主题化、可访问的 WPF 控件库，在改善默认视觉的同时兼顾性能并保留完整的原生能力。</p>
       <div class="zenui-actions">
         <a class="zenui-button zenui-button-primary" href="getting-started/quick-start.md">开始使用</a>
         <a class="zenui-button zenui-button-secondary" href="https://github.com/XiaQueNet/ZenUI-WPF">查看 GitHub</a>
