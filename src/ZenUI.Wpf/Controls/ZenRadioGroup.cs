@@ -1,4 +1,3 @@
-using System.Collections.Specialized;
 using System.ComponentModel;
 using System.Windows;
 using System.Windows.Automation.Peers;
@@ -153,22 +152,6 @@ namespace ZenUI.Wpf.Controls
         protected override DependencyObject GetContainerForItemOverride()
         {
             return new ZenRadioItem();
-        }
-
-        /// <inheritdoc />
-        protected override void PrepareContainerForItemOverride(
-            DependencyObject element,
-            object item)
-        {
-            base.PrepareContainerForItemOverride(element, item);
-            UpdateContainerTabStops();
-        }
-
-        /// <inheritdoc />
-        protected override void OnItemsChanged(NotifyCollectionChangedEventArgs e)
-        {
-            base.OnItemsChanged(e);
-            UpdateContainerTabStops();
         }
 
         /// <inheritdoc />

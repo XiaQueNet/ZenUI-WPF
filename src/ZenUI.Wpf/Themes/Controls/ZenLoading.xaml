@@ -76,7 +76,13 @@
                     <ControlTemplate.Triggers>
                         <Trigger Property="IsLoading" Value="True">
                             <Setter TargetName="LoadingLayer" Property="Visibility" Value="Visible" />
-                            <Trigger.EnterActions>
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsLoading" Value="True" />
+                                <Condition Property="IsVisible" Value="True" />
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.EnterActions>
                                 <BeginStoryboard x:Name="LoadingStoryboard">
                                     <Storyboard RepeatBehavior="Forever">
                                         <DoubleAnimation
@@ -87,11 +93,11 @@
                                             Duration="0:0:1.2" />
                                     </Storyboard>
                                 </BeginStoryboard>
-                            </Trigger.EnterActions>
-                            <Trigger.ExitActions>
+                            </MultiTrigger.EnterActions>
+                            <MultiTrigger.ExitActions>
                                 <StopStoryboard BeginStoryboardName="LoadingStoryboard" />
-                            </Trigger.ExitActions>
-                        </Trigger>
+                            </MultiTrigger.ExitActions>
+                        </MultiTrigger>
                         <Trigger Property="LoadingText" Value="">
                             <Setter TargetName="LoadingText" Property="Visibility" Value="Collapsed" />
                             <Setter TargetName="ContentSpacing" Property="Visibility" Value="Collapsed" />

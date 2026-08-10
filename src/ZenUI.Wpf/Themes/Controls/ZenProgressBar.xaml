@@ -80,8 +80,15 @@
                             <Setter TargetName="PART_Indicator" Property="Visibility" Value="Collapsed" />
                             <Setter TargetName="IndeterminateIndicator" Property="Opacity" Value="1" />
                             <Setter TargetName="IndeterminateIndicator" Property="Visibility" Value="Visible" />
-                            <Trigger.EnterActions>
-                                <BeginStoryboard x:Name="IndeterminateStoryboard">
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsIndeterminate" Value="True" />
+                                <Condition Property="IsVisible" Value="True" />
+                                <Condition Property="Orientation" Value="Horizontal" />
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.EnterActions>
+                                <BeginStoryboard x:Name="HorizontalIndeterminateStoryboard">
                                     <Storyboard RepeatBehavior="Forever">
                                         <DoubleAnimation
                                             Storyboard.TargetName="HorizontalIndeterminateTransform"
@@ -91,6 +98,22 @@
                                             Duration="0:0:1.5"
                                             AccelerationRatio="0.12"
                                             DecelerationRatio="0.12" />
+                                    </Storyboard>
+                                </BeginStoryboard>
+                            </MultiTrigger.EnterActions>
+                            <MultiTrigger.ExitActions>
+                                <StopStoryboard BeginStoryboardName="HorizontalIndeterminateStoryboard" />
+                            </MultiTrigger.ExitActions>
+                        </MultiTrigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="IsIndeterminate" Value="True" />
+                                <Condition Property="IsVisible" Value="True" />
+                                <Condition Property="Orientation" Value="Vertical" />
+                            </MultiTrigger.Conditions>
+                            <MultiTrigger.EnterActions>
+                                <BeginStoryboard x:Name="VerticalIndeterminateStoryboard">
+                                    <Storyboard RepeatBehavior="Forever">
                                         <DoubleAnimation
                                             Storyboard.TargetName="VerticalIndeterminateTransform"
                                             Storyboard.TargetProperty="Y"
@@ -101,11 +124,11 @@
                                             DecelerationRatio="0.12" />
                                     </Storyboard>
                                 </BeginStoryboard>
-                            </Trigger.EnterActions>
-                            <Trigger.ExitActions>
-                                <StopStoryboard BeginStoryboardName="IndeterminateStoryboard" />
-                            </Trigger.ExitActions>
-                        </Trigger>
+                            </MultiTrigger.EnterActions>
+                            <MultiTrigger.ExitActions>
+                                <StopStoryboard BeginStoryboardName="VerticalIndeterminateStoryboard" />
+                            </MultiTrigger.ExitActions>
+                        </MultiTrigger>
                         <Trigger Property="IsEnabled" Value="False">
                             <Setter Property="Opacity" Value="{DynamicResource ZenDisabledItemOpacity}" />
                         </Trigger>

@@ -70,6 +70,34 @@ namespace ZenUI.Wpf.Tests.Controls
                 Assert.AreEqual(Visibility.Visible, indeterminate.Visibility);
                 Assert.AreEqual(1d, indeterminate.Opacity);
 
+                var horizontalTransform = progressBar.Template.FindName(
+                    "HorizontalIndeterminateTransform",
+                    progressBar) as TranslateTransform;
+                var verticalTransform = progressBar.Template.FindName(
+                    "VerticalIndeterminateTransform",
+                    progressBar) as TranslateTransform;
+                Assert.IsNotNull(horizontalTransform);
+                Assert.IsNotNull(verticalTransform);
+                WaitForDispatcher(TimeSpan.FromMilliseconds(250));
+                Assert.AreEqual(-1d, horizontalTransform.X);
+                Assert.AreNotEqual(1d, verticalTransform.Y);
+
+                progressBar.Orientation = Orientation.Horizontal;
+                window.UpdateLayout();
+                WaitForDispatcher(TimeSpan.FromMilliseconds(250));
+                Assert.AreNotEqual(-1d, horizontalTransform.X);
+                Assert.AreEqual(1d, verticalTransform.Y);
+
+                progressBar.Visibility = Visibility.Collapsed;
+                window.UpdateLayout();
+                WaitForDispatcher(TimeSpan.FromMilliseconds(100));
+                var hiddenHorizontalOffset = horizontalTransform.X;
+                var hiddenVerticalOffset = verticalTransform.Y;
+                WaitForDispatcher(TimeSpan.FromMilliseconds(150));
+                Assert.AreEqual(hiddenHorizontalOffset, horizontalTransform.X);
+                Assert.AreEqual(hiddenVerticalOffset, verticalTransform.Y);
+                progressBar.Visibility = Visibility.Visible;
+
                 progressBar.IsEnabled = false;
                 window.UpdateLayout();
                 Assert.AreEqual(0.45d, progressBar.Opacity);
@@ -82,6 +110,22 @@ namespace ZenUI.Wpf.Tests.Controls
             {
                 window.Close();
             }
+        }
+
+        private static void WaitForDispatcher(TimeSpan duration)
+        {
+            var frame = new DispatcherFrame();
+            var timer = new DispatcherTimer(
+                duration,
+                DispatcherPriority.Background,
+                (sender, e) =>
+                {
+                    ((DispatcherTimer)sender).Stop();
+                    frame.Continue = false;
+                },
+                Dispatcher.CurrentDispatcher);
+            timer.Start();
+            Dispatcher.PushFrame(frame);
         }
     }
 }

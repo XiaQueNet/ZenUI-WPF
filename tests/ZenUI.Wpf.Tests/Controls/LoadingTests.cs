@@ -67,6 +67,19 @@ namespace ZenUI.Wpf.Tests.Controls
                 WaitForDispatcher(TimeSpan.FromMilliseconds(250));
                 Assert.AreNotEqual(initialAngle, rotation.Angle);
 
+                loading.Visibility = Visibility.Collapsed;
+                window.UpdateLayout();
+                WaitForDispatcher(TimeSpan.FromMilliseconds(100));
+                var hiddenAngle = rotation.Angle;
+                WaitForDispatcher(TimeSpan.FromMilliseconds(150));
+                Assert.AreEqual(hiddenAngle, rotation.Angle);
+
+                loading.Visibility = Visibility.Visible;
+                window.UpdateLayout();
+                initialAngle = rotation.Angle;
+                WaitForDispatcher(TimeSpan.FromMilliseconds(250));
+                Assert.AreNotEqual(initialAngle, rotation.Angle);
+
                 loading.Orientation = Orientation.Horizontal;
                 window.UpdateLayout();
                 Assert.AreEqual(Orientation.Horizontal, indicatorPanel.Orientation);

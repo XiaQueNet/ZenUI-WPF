@@ -221,8 +221,16 @@ namespace ZenUI.Wpf.Tests.Controls
                 window.Show();
                 window.UpdateLayout();
 
+                var first =
+                    (ZenRadioItem)group.ItemContainerGenerator.ContainerFromIndex(0);
                 var second =
                     (ZenRadioItem)group.ItemContainerGenerator.ContainerFromIndex(1);
+                var third =
+                    (ZenRadioItem)group.ItemContainerGenerator.ContainerFromIndex(2);
+                Assert.IsTrue(first.IsTabStop);
+                Assert.IsFalse(second.IsTabStop);
+                Assert.IsFalse(third.IsTabStop);
+
                 second.RaiseEvent(new MouseButtonEventArgs(
                     Mouse.PrimaryDevice,
                     System.Environment.TickCount,
@@ -231,6 +239,9 @@ namespace ZenUI.Wpf.Tests.Controls
                     RoutedEvent = UIElement.MouseLeftButtonDownEvent
                 });
                 Assert.AreEqual(1, group.SelectedIndex);
+                Assert.IsFalse(first.IsTabStop);
+                Assert.IsTrue(second.IsTabStop);
+                Assert.IsFalse(third.IsTabStop);
 
                 group.RaiseEvent(new KeyEventArgs(
                     Keyboard.PrimaryDevice,

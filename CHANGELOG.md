@@ -8,6 +8,10 @@
 
 - `ZenNumberBox` 增加 `IncreaseCommand` 和 `DecreaseCommand` 路由命令，支持从外部命令源按配置步长增减当前值，并自动遵循范围与禁用状态。
 
+### Changed
+
+- 优化 `ZenNumberBox` 命令状态更新和 `ZenRadioGroup` 容器生成，减少重复的全局命令查询与选项扫描；`ZenProgressBar` 和 `ZenLoading` 仅在可见时运行必要动画。
+
 ## [0.1.0-preview.12] - 2026-08-08
 
 ### Added

@@ -51,6 +51,8 @@ namespace ZenUI.Wpf.Controls
         private RepeatButton verticalDecreaseButton;
         private bool isUpdatingText;
         private bool isUpdatingValueFromText;
+        private bool? canIncrease;
+        private bool? canDecrease;
 
         static ZenNumberBox()
         {
@@ -650,11 +652,19 @@ namespace ZenUI.Wpf.Controls
 
         private void UpdateButtonStates()
         {
-            SetButtonEnabled(increaseButton, Value < Maximum);
-            SetButtonEnabled(verticalIncreaseButton, Value < Maximum);
-            SetButtonEnabled(decreaseButton, Value > Minimum);
-            SetButtonEnabled(verticalDecreaseButton, Value > Minimum);
-            CommandManager.InvalidateRequerySuggested();
+            var newCanIncrease = IsEnabled && Value < Maximum;
+            var newCanDecrease = IsEnabled && Value > Minimum;
+            SetButtonEnabled(increaseButton, newCanIncrease);
+            SetButtonEnabled(verticalIncreaseButton, newCanIncrease);
+            SetButtonEnabled(decreaseButton, newCanDecrease);
+            SetButtonEnabled(verticalDecreaseButton, newCanDecrease);
+
+            if (canIncrease != newCanIncrease || canDecrease != newCanDecrease)
+            {
+                canIncrease = newCanIncrease;
+                canDecrease = newCanDecrease;
+                CommandManager.InvalidateRequerySuggested();
+            }
         }
 
         private void DetachTemplateHandlers()
@@ -678,11 +688,11 @@ namespace ZenUI.Wpf.Controls
             target.CaretIndex = target.Text.Length;
         }
 
-        private void SetButtonEnabled(RepeatButton button, bool canChange)
+        private static void SetButtonEnabled(RepeatButton button, bool canChange)
         {
             if (button != null)
             {
-                button.IsEnabled = IsEnabled && canChange;
+                button.IsEnabled = canChange;
             }
         }
 
