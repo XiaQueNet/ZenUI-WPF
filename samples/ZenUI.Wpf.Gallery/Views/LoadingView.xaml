@@ -20,6 +20,7 @@
                         AutomationProperties.Name="切换加载状态"
                         IsChecked="True" />
                     <zen:ZenLoading
+                        DisplayDelay="0:0:0.2"
                         Height="190"
                         IsLoading="{Binding IsChecked, ElementName=LoadingSwitch}"
                         LoadingText="正在加载订单数据…">

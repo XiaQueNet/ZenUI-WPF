@@ -127,8 +127,11 @@ namespace ZenUI.Wpf.Tests.Controls
                 LoadingText = "正在读取数据"
             };
 
+            Assert.AreEqual(TimeSpan.Zero, loading.DisplayDelay);
             Assert.ThrowsExactly<ArgumentException>(() => loading.IndicatorSize = 0d);
             Assert.ThrowsExactly<ArgumentException>(() => loading.IndicatorSize = double.NaN);
+            Assert.ThrowsExactly<ArgumentException>(
+                () => loading.DisplayDelay = TimeSpan.FromMilliseconds(-1));
             Assert.ThrowsExactly<ArgumentException>(
                 () => loading.Orientation = (Orientation)99);
             Assert.AreEqual(typeof(ZenLoading), loading.ExposedDefaultStyleKey);
@@ -139,6 +142,54 @@ namespace ZenUI.Wpf.Tests.Controls
 #if ZENUI_LIVE_REGIONS
             Assert.AreEqual(AutomationLiveSetting.Polite, AutomationProperties.GetLiveSetting(loading));
 #endif
+        }
+
+        [TestMethod]
+        public void LoadingDelaysDisplayAndCancelsPendingDisplay()
+        {
+            var loading = new ZenLoading
+            {
+                Width = 180,
+                Height = 100,
+                DisplayDelay = TimeSpan.FromMilliseconds(180),
+                IsLoading = true
+            };
+            var window = CreateTestWindow(loading, 240, 160);
+            window.Resources.MergedDictionaries.Add(new ResourceDictionary
+            {
+                Source = new Uri(
+                    "/ZenUI.Wpf;component/Themes/Generic.xaml",
+                    UriKind.Relative)
+            });
+
+            try
+            {
+                window.Show();
+                window.UpdateLayout();
+
+                var loadingLayer = loading.Template.FindName("LoadingLayer", loading) as Border;
+                Assert.IsNotNull(loadingLayer);
+                Assert.AreEqual(TimeSpan.FromMilliseconds(180), loading.DisplayDelay);
+                Assert.AreEqual(Visibility.Collapsed, loadingLayer.Visibility);
+
+                WaitForDispatcher(TimeSpan.FromMilliseconds(60));
+                Assert.AreEqual(Visibility.Collapsed, loadingLayer.Visibility);
+
+                loading.IsLoading = false;
+                WaitForDispatcher(TimeSpan.FromMilliseconds(200));
+                Assert.AreEqual(Visibility.Collapsed, loadingLayer.Visibility);
+
+                loading.IsLoading = true;
+                WaitForDispatcher(TimeSpan.FromMilliseconds(240));
+                Assert.AreEqual(Visibility.Visible, loadingLayer.Visibility);
+
+                loading.IsLoading = false;
+                Assert.AreEqual(Visibility.Collapsed, loadingLayer.Visibility);
+            }
+            finally
+            {
+                window.Close();
+            }
         }
 
         [TestMethod]

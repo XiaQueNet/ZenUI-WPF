@@ -4,6 +4,7 @@ using System.Windows.Automation;
 using System.Windows.Automation.Peers;
 using System.Windows.Controls;
 using System.Windows.Media;
+using System.Windows.Threading;
 
 namespace ZenUI.Wpf.Controls
 {
@@ -13,6 +14,8 @@ namespace ZenUI.Wpf.Controls
     public class ZenLoading : ContentControl
     {
         private static readonly System.Type SelfType = typeof(ZenLoading);
+
+        private DispatcherTimer displayDelayTimer;
 
         static ZenLoading()
         {
@@ -45,6 +48,46 @@ namespace ZenUI.Wpf.Controls
                 typeof(bool),
                 SelfType,
                 new FrameworkPropertyMetadata(false, OnIsLoadingChanged));
+
+        /// <summary>
+        /// 获取或设置从 <see cref="IsLoading"/> 变为 <see langword="true"/>
+        /// 到呈现加载状态之前等待的时间。该值必须大于或等于
+        /// <see cref="System.TimeSpan.Zero"/>，默认值为 <see cref="System.TimeSpan.Zero"/>。
+        /// </summary>
+        [Bindable(true)]
+        public System.TimeSpan DisplayDelay
+        {
+            get { return (System.TimeSpan)GetValue(DisplayDelayProperty); }
+            set { SetValue(DisplayDelayProperty, value); }
+        }
+
+        /// <summary>
+        /// 标识 <see cref="DisplayDelay"/> 依赖属性。
+        /// </summary>
+        public static readonly DependencyProperty DisplayDelayProperty =
+            DependencyProperty.Register(
+                nameof(DisplayDelay),
+                typeof(System.TimeSpan),
+                SelfType,
+                new FrameworkPropertyMetadata(
+                    System.TimeSpan.Zero,
+                    OnDisplayDelayChanged),
+                IsValidDisplayDelay);
+
+        private static readonly DependencyPropertyKey IsLoadingDisplayedPropertyKey =
+            DependencyProperty.RegisterReadOnly(
+                nameof(IsLoadingDisplayed),
+                typeof(bool),
+                SelfType,
+                new FrameworkPropertyMetadata(false));
+
+        internal static readonly DependencyProperty IsLoadingDisplayedProperty =
+            IsLoadingDisplayedPropertyKey.DependencyProperty;
+
+        internal bool IsLoadingDisplayed
+        {
+            get { return (bool)GetValue(IsLoadingDisplayedProperty); }
+        }
 
         /// <summary>
         /// 获取或设置加载指示器下方显示的说明文字。
@@ -156,6 +199,14 @@ namespace ZenUI.Wpf.Controls
                 new FrameworkPropertyMetadata(true));
 
         /// <inheritdoc/>
+        protected override void OnInitialized(System.EventArgs e)
+        {
+            base.OnInitialized(e);
+            Loaded += OnLoaded;
+            Unloaded += OnUnloaded;
+        }
+
+        /// <inheritdoc/>
         protected override AutomationPeer OnCreateAutomationPeer()
         {
             return new ZenLoadingAutomationPeer(this);
@@ -167,6 +218,11 @@ namespace ZenUI.Wpf.Controls
             return !double.IsNaN(size) &&
                 !double.IsInfinity(size) &&
                 size > 0d;
+        }
+
+        private static bool IsValidDisplayDelay(object value)
+        {
+            return (System.TimeSpan)value >= System.TimeSpan.Zero;
         }
 
         private static bool IsValidOrientation(object value)
@@ -181,10 +237,87 @@ namespace ZenUI.Wpf.Controls
             DependencyPropertyChangedEventArgs e)
         {
             var loading = (ZenLoading)dependencyObject;
+            loading.UpdateLoadingDisplay();
 #if ZENUI_LIVE_REGIONS
             var peer = UIElementAutomationPeer.FromElement(loading);
             peer?.RaiseAutomationEvent(AutomationEvents.LiveRegionChanged);
 #endif
+        }
+
+        private static void OnDisplayDelayChanged(
+            DependencyObject dependencyObject,
+            DependencyPropertyChangedEventArgs e)
+        {
+            var loading = (ZenLoading)dependencyObject;
+            if (loading.IsLoading && !loading.IsLoadingDisplayed)
+            {
+                loading.UpdateLoadingDisplay();
+            }
+        }
+
+        private static void OnLoaded(object sender, RoutedEventArgs e)
+        {
+            ((ZenLoading)sender).UpdateLoadingDisplay();
+        }
+
+        private static void OnUnloaded(object sender, RoutedEventArgs e)
+        {
+            var loading = (ZenLoading)sender;
+            loading.StopDisplayDelayTimer();
+            loading.SetValue(IsLoadingDisplayedPropertyKey, false);
+        }
+
+        private void UpdateLoadingDisplay()
+        {
+            StopDisplayDelayTimer();
+
+            if (!IsLoading)
+            {
+                SetValue(IsLoadingDisplayedPropertyKey, false);
+                return;
+            }
+
+            if (DisplayDelay == System.TimeSpan.Zero)
+            {
+                SetValue(IsLoadingDisplayedPropertyKey, true);
+                return;
+            }
+
+            if (!IsLoaded)
+            {
+                SetValue(IsLoadingDisplayedPropertyKey, false);
+                return;
+            }
+
+            displayDelayTimer = new DispatcherTimer(
+                DispatcherPriority.Normal,
+                Dispatcher)
+            {
+                Interval = DisplayDelay
+            };
+            displayDelayTimer.Tick += OnDisplayDelayTimerTick;
+            displayDelayTimer.Start();
+        }
+
+        private void OnDisplayDelayTimerTick(object sender, System.EventArgs e)
+        {
+            StopDisplayDelayTimer();
+            if (IsLoading && IsLoaded)
+            {
+                SetValue(IsLoadingDisplayedPropertyKey, true);
+            }
+        }
+
+        private void StopDisplayDelayTimer()
+        {
+            if (displayDelayTimer == null)
+            {
+                return;
+            }
+
+            displayDelayTimer.Stop();
+            displayDelayTimer.Tick -= OnDisplayDelayTimerTick;
+            displayDelayTimer = null;
         }
 
         private sealed class ZenLoadingAutomationPeer : FrameworkElementAutomationPeer

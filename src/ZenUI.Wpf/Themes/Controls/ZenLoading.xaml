@@ -74,12 +74,12 @@
                         </Border>
                     </Grid>
                     <ControlTemplate.Triggers>
-                        <Trigger Property="IsLoading" Value="True">
+                        <Trigger Property="IsLoadingDisplayed" Value="True">
                             <Setter TargetName="LoadingLayer" Property="Visibility" Value="Visible" />
                         </Trigger>
                         <MultiTrigger>
                             <MultiTrigger.Conditions>
-                                <Condition Property="IsLoading" Value="True" />
+                                <Condition Property="IsLoadingDisplayed" Value="True" />
                                 <Condition Property="IsVisible" Value="True" />
                             </MultiTrigger.Conditions>
                             <MultiTrigger.EnterActions>
