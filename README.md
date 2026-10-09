@@ -169,6 +169,36 @@ dotnet test --project tests/ZenUI.Wpf.Converters.Tests/ZenUI.Wpf.Converters.Test
 - [贡献指南](CONTRIBUTING.md)
 - [变更记录](CHANGELOG.md)
 
+## AI 辅助使用
+
+提供面向应用开发的 [zenui-wpf Skill](skills/zenui-wpf/SKILL.md)，帮助 AI 正确选择组件、编写 XAML 和绑定、配置主题与密度，并排查接入问题。Skill 自带 API 要点、组合示例、表单视图和验收场景，可独立于本仓库使用。
+
+在 Windows PowerShell 5.1 或 PowerShell 7 中执行以下命令，即可下载并安装，无需 Git 或管理员权限。命令会执行仓库公开的[安装脚本](scripts/install-from-git.ps1)：
+
+```powershell
+iwr -UseBasicParsing "https://raw.githubusercontent.com/XiaQueNet/ZenUI-WPF/main/scripts/install-from-git.ps1" | iex
+```
+
+安装到 `$CODEX_HOME/skills/zenui-wpf`；未设置 `CODEX_HOME` 时使用用户目录下的 `.codex/skills/zenui-wpf`。再次运行同一命令即可更新，旧版本保存在 Codex 目录的 `skill-backups` 中，安装失败时保留或恢复旧版本。脚本下载仓库 ZIP，仅提取 Skill 文件，不修改应用项目或安装 NuGet 包。
+
+安装脚本和 `skills/zenui-wpf` 目录发布到 GitHub 的 `main` 分支后，上述在线命令才可使用。已有本地仓库时，也可在仓库根目录离线安装：
+
+```powershell
+& .\scripts\install-from-git.ps1 -SourcePath .\skills\zenui-wpf
+```
+
+需要指定安装位置时，为本地脚本添加 `-CodexHome 'D:\Codex'`；在线下载指定分支、Tag 或提交时可使用 `-Ref` 参数。
+
+安装后在 Codex 中调用；如果未出现在技能列表中，重启 Codex：
+
+```text
+使用 $zenui-wpf，为当前 WPF 项目实现一个订单编辑页，沿用现有 MVVM 架构和包版本。
+```
+
+安装后，Codex 可以在请求使用 ZenUI 或项目已引用 ZenUI 时按任务自动选用此 Skill；显式写出 `$zenui-wpf` 可明确指定使用。
+
+Skill 的参考基线为控件包 `0.1.0-preview.12` 和转换器包 `0.1.0-preview.11` 的本地源码 API，不代表最新发布版本。实际开发优先遵循消费者安装版本；组件 API 变化时应同步更新 Skill 资料。
+
 ## 交流与反馈
 
 <h3 align="center">

@@ -1,0 +1,4 @@
+interface:
+  display_name: "ZenUI WPF 应用开发"
+  short_description: "正确使用 ZenUI 控件、绑定与主题构建 WPF 应用界面"
+  default_prompt: "使用 $zenui-wpf，根据当前项目的包版本和架构实现所需的 WPF 界面，并验证控件 API、资源及绑定。"
