@@ -79,6 +79,7 @@ namespace ZenUI.Wpf.Gallery.ViewModels
                     "浮层与菜单",
                     SelectMenuItem,
                     new MenuItemViewModel("Popover", "气泡提示", NavigationKeys.Popover),
+                    new MenuItemViewModel("Dialog", "对话框", NavigationKeys.Dialog),
                     new MenuItemViewModel("ContextMenu", "右键菜单", NavigationKeys.ContextMenu))
             };
             selectedMenuItem = NavigationGroups[0].Items[0];

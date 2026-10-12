@@ -1,0 +1,11 @@
+<UserControl
+    x:Class="ZenUI.Wpf.Gallery.Views.ConfirmDialogView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:prism="http://prismlibrary.com/"
+    xmlns:zen="https://zenui.mnorg.cn/xaml/wpf"
+    zen:ZenDialogWindowOptions.ConfirmCommand="{Binding SaveCommand}"
+    zen:ZenDialogWindowOptions.CancelCommand="{Binding DiscardCommand}"
+    prism:Dialog.WindowStartupLocation="CenterOwner">
+    <TextBlock Text="{Binding Message}" TextWrapping="Wrap" />
+</UserControl>

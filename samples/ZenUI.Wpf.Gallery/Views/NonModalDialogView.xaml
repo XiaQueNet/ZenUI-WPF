@@ -1,0 +1,15 @@
+<UserControl
+    x:Class="ZenUI.Wpf.Gallery.Views.NonModalDialogView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:prism="http://prismlibrary.com/"
+    xmlns:zen="https://zenui.mnorg.cn/xaml/wpf"
+    zen:ZenDialogWindowOptions.ConfirmCommand="{Binding SaveCommand}"
+    zen:ZenDialogWindowOptions.CancelCommand="{Binding DiscardCommand}"
+    prism:Dialog.WindowStartupLocation="CenterOwner">
+    <StackPanel>
+        <TextBlock
+            Text="把弹窗拖到一旁，保持它打开，再点击 Gallery 页面上的计数按钮。"
+            TextWrapping="Wrap" />
+    </StackPanel>
+</UserControl>
