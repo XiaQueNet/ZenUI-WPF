@@ -11,7 +11,7 @@
 
     <IsPackable>true</IsPackable>
     <VersionPrefix>0.1.0</VersionPrefix>
-    <VersionSuffix>preview.12</VersionSuffix>
+    <VersionSuffix>rc.1</VersionSuffix>
     <AssemblyVersion>0.1.0.0</AssemblyVersion>
     <FileVersion>0.1.0.0</FileVersion>
     <PackageId>ZenUI.Wpf</PackageId>
@@ -41,6 +41,6 @@
     <None Include="..\..\README.md" Pack="true" PackagePath="\" />
     <None Include="..\..\CHANGELOG.md" Pack="true" PackagePath="\" />
     <None Include="..\..\assets\brand\zenui-icon.png" Pack="true" PackagePath="\" />
-    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="8.0.0" PrivateAssets="All" />
+    <PackageReference Include="Microsoft.SourceLink.GitHub" Version="10.0.111" PrivateAssets="All" />
   </ItemGroup>
 </Project>

@@ -4,14 +4,20 @@
 
 ## Unreleased
 
+## [0.1.0-rc.1] - 2026-10-13
+
 ### Added
 
 - `ZenNumberBox` 增加 `IncreaseCommand` 和 `DecreaseCommand` 路由命令，支持从外部命令源按配置步长增减当前值，并自动遵循范围与禁用状态。
 - `ZenLoading` 增加 `DisplayDelay`，支持延迟呈现加载状态，避免短时操作产生闪烁。
+- 新增 `ZenDialogWindowStyle` 统一弹窗样式，提供标题栏、关闭按钮、可配置的确认与取消操作，并在 Gallery 中演示模态和非模态用法。
+- 新增 `ZenOverlayDialogWindow` 和 `ZenOverlayDialogWindowStyle` 遮罩弹窗宿主，支持自定义面板尺寸，并随 Owner 窗口位置、尺寸和屏幕边界变化调整遮罩。
 
 ### Changed
 
 - 优化 `ZenNumberBox` 命令状态更新和 `ZenRadioGroup` 容器生成，减少重复的全局命令查询与选项扫描；`ZenProgressBar` 和 `ZenLoading` 仅在可见时运行必要动画。
+- 现代 .NET 程序集明确标记为仅支持 Windows。
+- 两个 NuGet 包的 Source Link 构建依赖升级至 `10.0.111`，移除存在安全公告的传递依赖版本。
 
 ## [0.1.0-preview.12] - 2026-08-08
 
@@ -193,7 +199,8 @@
 - Password 明文绑定默认关闭，并标记为过时兼容 API。
 - DataGrid 恢复行虚拟化、行头、行详情、全选、冻结列偏移和高级编辑契约。
 
-[Unreleased]: https://github.com/XiaQueNet/ZenUI-WPF/compare/v0.1.0-preview.12...HEAD
+[Unreleased]: https://github.com/XiaQueNet/ZenUI-WPF/compare/v0.1.0-rc.1...HEAD
+[0.1.0-rc.1]: https://github.com/XiaQueNet/ZenUI-WPF/compare/v0.1.0-preview.12...v0.1.0-rc.1
 [0.1.0-preview.12]: https://github.com/XiaQueNet/ZenUI-WPF/compare/v0.1.0-preview.11...v0.1.0-preview.12
 [0.1.0-preview.11]: https://github.com/XiaQueNet/ZenUI-WPF/compare/v0.1.0-preview.8...v0.1.0-preview.11
 [0.1.0-preview.8]: https://github.com/XiaQueNet/ZenUI-WPF/compare/v0.1.0-preview.7...v0.1.0-preview.8
