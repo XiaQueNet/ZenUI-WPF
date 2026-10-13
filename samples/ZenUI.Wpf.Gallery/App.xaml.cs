@@ -114,6 +114,8 @@ namespace ZenUI.Wpf.Gallery
 
         protected override void RegisterTypes(IContainerRegistry containerRegistry)
         {
+            containerRegistry.RegisterDialogWindow<GalleryDialogWindow>();
+            containerRegistry.RegisterDialogWindow<GalleryOverlayDialogWindow>(nameof(GalleryOverlayDialogWindow));
             containerRegistry.RegisterForNavigation<OverviewView>(NavigationKeys.Overview);
             containerRegistry.RegisterForNavigation<TokenView>(NavigationKeys.Token);
             containerRegistry.RegisterForNavigation<ButtonView>(NavigationKeys.Button);
@@ -137,7 +139,14 @@ namespace ZenUI.Wpf.Gallery
             containerRegistry.RegisterForNavigation<AlertView>(NavigationKeys.Alert);
             containerRegistry.RegisterForNavigation<ExpanderView>(NavigationKeys.Expander);
             containerRegistry.RegisterForNavigation<PopoverView>(NavigationKeys.Popover);
+            containerRegistry.RegisterForNavigation<DialogView, DialogViewModel>(NavigationKeys.Dialog);
             containerRegistry.RegisterForNavigation<ContextMenuView>(NavigationKeys.ContextMenu);
+            containerRegistry.RegisterDialog<ConfirmDialogView, ConfirmDialogViewModel>(nameof(ConfirmDialogView));
+            containerRegistry.RegisterDialog<ConfirmOnlyDialogView, ConfirmDialogViewModel>(nameof(ConfirmOnlyDialogView));
+            containerRegistry.RegisterDialog<CancelOnlyDialogView, ConfirmDialogViewModel>(nameof(CancelOnlyDialogView));
+            containerRegistry.RegisterDialog<ContentOnlyDialogView, ConfirmDialogViewModel>(nameof(ContentOnlyDialogView));
+            containerRegistry.RegisterDialog<NonModalDialogView, ConfirmDialogViewModel>(nameof(NonModalDialogView));
+            containerRegistry.RegisterDialog<OverlayDialogView, ConfirmDialogViewModel>(nameof(OverlayDialogView));
         }
 
         protected override void OnInitialized()

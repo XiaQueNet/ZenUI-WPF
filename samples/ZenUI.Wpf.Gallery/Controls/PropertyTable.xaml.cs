@@ -229,7 +229,7 @@ namespace ZenUI.Wpf.Gallery.Controls
                 ["ZenTimePicker.DropDownButtonHeight"] = "0.1.0-preview.12",
                 ["ZenTimePicker.DropDownButtonIconSize"] = "0.1.0-preview.12",
                 ["ZenTimePicker.ShowWatermarkOnFocus"] = "0.1.0-preview.12",
-                ["ZenLoading.DisplayDelay"] = UnreleasedPropertyVersion,
+                ["ZenLoading.DisplayDelay"] = "0.1.0-rc.1",
                 ["ZenNumberBox.DecreaseButtonContent"] = "0.1.0-preview.7",
                 ["ZenNumberBox.DecreaseButtonContentTemplate"] = "0.1.0-preview.7",
                 ["ZenNumberBox.EditorClickCommand"] = "0.1.0-preview.7",

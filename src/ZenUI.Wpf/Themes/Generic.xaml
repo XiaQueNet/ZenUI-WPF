@@ -18,6 +18,8 @@
 
         <!--  控件共用的基础样式  -->
         <ResourceDictionary Source="/ZenUI.Wpf;component/Themes/Controls/Common.xaml" />
+        <ResourceDictionary Source="/ZenUI.Wpf;component/Themes/Controls/ZenDialogWindow.xaml" />
+        <ResourceDictionary Source="/ZenUI.Wpf;component/Themes/Controls/ZenOverlayDialogWindow.xaml" />
         <ResourceDictionary Source="/ZenUI.Wpf;component/Themes/Controls/ZenScrollBar.xaml" />
         <ResourceDictionary Source="/ZenUI.Wpf;component/Themes/Controls/ZenButton.xaml" />
         <ResourceDictionary Source="/ZenUI.Wpf;component/Themes/Controls/ZenSwitch.xaml" />

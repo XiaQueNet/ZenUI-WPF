@@ -1,0 +1,24 @@
+<UserControl
+    x:Class="ZenUI.Wpf.Gallery.Views.CancelOnlyDialogView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:prism="http://prismlibrary.com/"
+    xmlns:zen="https://zenui.mnorg.cn/xaml/wpf"
+    zen:ZenDialogWindowOptions.CancelCommand="{Binding DiscardCommand}"
+    prism:Dialog.WindowStartupLocation="CenterOwner">
+    <prism:Dialog.WindowStyle>
+        <Style BasedOn="{StaticResource ZenDialogWindowStyle}" TargetType="{x:Type Window}">
+            <Setter Property="Width" Value="600" />
+            <Setter Property="Height" Value="320" />
+            <Setter Property="zen:ZenDialogWindowOptions.ShowConfirmButton" Value="False" />
+            <Setter Property="zen:ZenDialogWindowOptions.CancelContent" Value="返回" />
+            <Setter Property="zen:ZenDialogWindowOptions.FooterPadding" Value="28,18" />
+        </Style>
+    </prism:Dialog.WindowStyle>
+
+    <StackPanel>
+        <TextBlock
+            Text="底部按钮改为“返回”，并增大了底部操作区间距。"
+            TextWrapping="Wrap" />
+    </StackPanel>
+</UserControl>

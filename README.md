@@ -81,6 +81,79 @@ dotnet add package ZenUI.Wpf.Converters
 
 TextBox、PasswordBox、ComboBox 和 DataGrid 单元格支持 WPF `Validation.HasError`。Slider 支持水平与垂直方向，ProgressBar 支持垂直方向与 `IsIndeterminate`，ComboBox 支持 `IsEditable`。
 
+### Prism 弹窗外观
+
+合并 `Themes/Generic.xaml` 后，可为 Prism 注册统一的对话框宿主，让新弹窗自动使用 `ZenDialogWindowStyle`：
+
+```csharp
+public sealed class AppDialogWindow : Window, Prism.Services.Dialogs.IDialogWindow
+{
+    public AppDialogWindow()
+    {
+        WindowStartupLocation = WindowStartupLocation.CenterOwner;
+        SetBinding(TitleProperty, new System.Windows.Data.Binding("Title"));
+        Style = (Style)Application.Current.FindResource("ZenDialogWindowStyle");
+    }
+
+    public Prism.Services.Dialogs.IDialogResult Result { get; set; }
+}
+
+// PrismApplication.RegisterTypes 中
+containerRegistry.RegisterDialogWindow<AppDialogWindow>();
+```
+
+Gallery 的 `GalleryDialogWindow` 使用此方式。普通弹窗视图无需再写 `Dialog.WindowStyle`；需要单独调整尺寸、按钮或间距时，再继承具名样式。在弹窗视图根元素绑定操作命令，命令名称由应用决定：
+
+```xaml
+<UserControl
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:prism="http://prismlibrary.com/"
+    xmlns:zen="https://zenui.mnorg.cn/xaml/wpf"
+    zen:ZenDialogWindowOptions.ConfirmCommand="{Binding SaveCommand}"
+    zen:ZenDialogWindowOptions.CancelCommand="{Binding DiscardCommand}">
+    <prism:Dialog.WindowStyle>
+        <Style TargetType="{x:Type Window}" BasedOn="{StaticResource ZenDialogWindowStyle}">
+            <Setter Property="Width" Value="480" />
+            <Setter Property="zen:ZenDialogWindowOptions.ConfirmContent" Value="保存" />
+            <Setter Property="zen:ZenDialogWindowOptions.ContentMargin" Value="24,0,24,20" />
+        </Style>
+    </prism:Dialog.WindowStyle>
+    <!-- 弹窗正文 -->
+</UserControl>
+```
+
+样式统一呈现左侧标题、右侧关闭按钮和底部的取消／确定按钮，并跟随主题切换。标题来自 `Window.Title`；弹窗视图将按钮命令绑定到自己的 ViewModel，由命令请求 Prism 关闭弹窗并传回结果。右上角按钮直接关闭窗口，仍经过 Prism 的窗口关闭流程。内容区由弹窗视图提供；原有 POS 登录弹窗是全屏自定义布局，继续使用自己的窗口样式。
+
+默认窗口大小为 440 × 240；正文过长时在内容区滚动，底部操作区保持可见。应用可在继承样式中覆盖 `Width`、`Height` 或 `SizeToContent`。
+
+两个操作按钮默认都显示。需要只保留“确定”时，在弹窗视图的 `Dialog.WindowStyle` 中设置：
+
+```xaml
+<Setter Property="zen:ZenDialogWindowOptions.ShowCancelButton" Value="False" />
+```
+
+相应地，使用 `<Setter Property="zen:ZenDialogWindowOptions.ShowConfirmButton" Value="False" />` 可隐藏“确定”。两个选项都为 `False` 时，底部操作区一并收起。这里的 `zen` 使用 `https://zenui.mnorg.cn/xaml/wpf` 命名空间。
+
+`ConfirmContent`、`CancelContent` 可分别更换按钮内容，默认是“确定”和“取消”。`ContentMargin` 控制正文间距（默认 `20,0,20,20`），`FooterPadding` 控制底部操作区内边距（默认 `20,12`）。这些选项设置在窗口样式上；`ConfirmCommand`、`CancelCommand` 绑定在弹窗视图根元素上。两个命令都由应用提供，未绑定的按钮不会执行操作。
+
+标题栏默认可拖动窗口；若需要固定位置，在继承样式中设置 `<Setter Property="zen:ZenDialogWindowOptions.IsDraggable" Value="False" />`。右上角关闭按钮仍可使用。
+
+`ZenDialogWindowStyle` 同时适用于模态和非模态弹窗。使用 Prism `IDialogService.ShowDialog(...)` 打开模态弹窗；使用 `IDialogService.Show(...)` 打开非模态弹窗，主窗口仍可操作。Gallery 的 Dialog 页面提供非模态窗口和主窗口计数按钮，可直接验证两者的区别。
+
+需要遮罩弹窗时，使用独立的 `ZenOverlayDialogWindow` 和 `ZenOverlayDialogWindowStyle`。给窗口设置已显示的 `Owner`，再调用 `ShowDialog()`；宿主会按 Owner 的可见屏幕边界定位，半透明遮罩覆盖整个 Owner，内容面板默认以 600 × 360 居中显示，窗口不可拖动。面板在小窗口中会缩小以适应可用空间。原有 `ZenDialogWindowStyle` 不受影响。Gallery 的 Dialog 页面提供 Prism 示例：注册一个继承 `ZenOverlayDialogWindow` 的具名 `IDialogWindow`，然后通过 `IDialogService.ShowDialog(viewName, parameters, callback, windowName)` 打开。
+
+面板宽高可由调用方在遮罩窗口样式中设置，修改的是居中的内容面板，不改变外层遮罩的尺寸：
+
+```xaml
+<Style BasedOn="{StaticResource ZenOverlayDialogWindowStyle}" TargetType="{x:Type Window}">
+    <Setter Property="zen:ZenOverlayDialogWindowOptions.DialogWidth" Value="680" />
+    <Setter Property="zen:ZenOverlayDialogWindowOptions.DialogHeight" Value="400" />
+</Style>
+```
+
+`DialogWidth` 和 `DialogHeight` 的默认值分别为 600 和 360；也可在运行时通过 `ZenOverlayDialogWindowOptions.SetDialogWidth/SetDialogHeight` 修改。若主窗口空间不足，面板自动缩小并保持居中。
+
 ## 主题与 Density
 
 默认使用浅色主题。可以在运行时分别切换颜色主题和界面密度：
@@ -133,7 +206,7 @@ private void PasswordBox_OnPasswordChanged(object sender, RoutedEventArgs e)
 
 ## 示例与开发
 
-- `samples/ZenUI.Wpf.Gallery`：控件目录，使用 Prism Region Navigation 和 MVVM。
+- `samples/ZenUI.Wpf.Gallery`：控件目录，使用 Prism Region Navigation 和 MVVM；“对话框”页面演示 `ZenDialogWindowStyle` 与 Prism `IDialogService` 的配合。
 - `samples/ZenUI.Wpf.PosDemo`：完整业务应用示例。
 
 常用验证命令：

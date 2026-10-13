@@ -25,6 +25,7 @@ namespace ZenUI.Wpf.Gallery.Navigation
         public const string Alert = nameof(Alert);
         public const string Expander = nameof(Expander);
         public const string Popover = nameof(Popover);
+        public const string Dialog = nameof(Dialog);
         public const string ContextMenu = nameof(ContextMenu);
     }
 
