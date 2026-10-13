@@ -141,6 +141,19 @@ Gallery 的 `GalleryDialogWindow` 使用此方式。普通弹窗视图无需再�
 
 `ZenDialogWindowStyle` 同时适用于模态和非模态弹窗。使用 Prism `IDialogService.ShowDialog(...)` 打开模态弹窗；使用 `IDialogService.Show(...)` 打开非模态弹窗，主窗口仍可操作。Gallery 的 Dialog 页面提供非模态窗口和主窗口计数按钮，可直接验证两者的区别。
 
+需要遮罩弹窗时，使用独立的 `ZenOverlayDialogWindow` 和 `ZenOverlayDialogWindowStyle`。给窗口设置已显示的 `Owner`，再调用 `ShowDialog()`；宿主会按 Owner 的可见屏幕边界定位，半透明遮罩覆盖整个 Owner，内容面板默认以 600 × 360 居中显示，窗口不可拖动。面板在小窗口中会缩小以适应可用空间。原有 `ZenDialogWindowStyle` 不受影响。Gallery 的 Dialog 页面提供 Prism 示例：注册一个继承 `ZenOverlayDialogWindow` 的具名 `IDialogWindow`，然后通过 `IDialogService.ShowDialog(viewName, parameters, callback, windowName)` 打开。
+
+面板宽高可由调用方在遮罩窗口样式中设置，修改的是居中的内容面板，不改变外层遮罩的尺寸：
+
+```xaml
+<Style BasedOn="{StaticResource ZenOverlayDialogWindowStyle}" TargetType="{x:Type Window}">
+    <Setter Property="zen:ZenOverlayDialogWindowOptions.DialogWidth" Value="680" />
+    <Setter Property="zen:ZenOverlayDialogWindowOptions.DialogHeight" Value="400" />
+</Style>
+```
+
+`DialogWidth` 和 `DialogHeight` 的默认值分别为 600 和 360；也可在运行时通过 `ZenOverlayDialogWindowOptions.SetDialogWidth/SetDialogHeight` 修改。若主窗口空间不足，面板自动缩小并保持居中。
+
 ## 主题与 Density
 
 默认使用浅色主题。可以在运行时分别切换颜色主题和界面密度：

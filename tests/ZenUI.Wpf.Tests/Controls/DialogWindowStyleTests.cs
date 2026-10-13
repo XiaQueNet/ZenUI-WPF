@@ -1,11 +1,15 @@
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Runtime.InteropServices;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Input;
+using System.Windows.Interop;
 using System.Windows.Media;
+using System.Windows.Media.Imaging;
 using System.Windows.Shell;
+using System.Windows.Threading;
 
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 
@@ -118,6 +122,120 @@ namespace ZenUI.Wpf.Tests.Controls
             {
                 window.Close();
             }
+        }
+
+        [TestMethod]
+        public void OverlayDialogTracksOwnerAndCentersItsSurface()
+        {
+            _ = new ZenButton();
+            var resources = new ResourceDictionary
+            {
+                Source = new Uri("/ZenUI.Wpf;component/Themes/Generic.xaml", UriKind.Relative)
+            };
+            var owner = new Window
+            {
+                WindowStartupLocation = WindowStartupLocation.Manual,
+                Left = 120,
+                Top = 100,
+                Width = 900,
+                Height = 600
+            };
+            ZenOverlayDialogWindow overlay = null;
+
+            try
+            {
+                owner.Show();
+                overlay = new ZenOverlayDialogWindow
+                {
+                    Owner = owner,
+                    Style = (Style)resources["ZenOverlayDialogWindowStyle"],
+                    Content = new TextBlock { Text = "内容" }
+                };
+                overlay.Resources.MergedDictionaries.Add(resources);
+                overlay.Show();
+                overlay.UpdateLayout();
+
+                Assert.IsFalse(ZenDialogWindowOptions.GetIsDraggable(overlay));
+                Assert.AreEqual(WindowStyle.None, overlay.WindowStyle);
+                Assert.AreEqual(ResizeMode.NoResize, overlay.ResizeMode);
+                AssertOverlayMatchesVisibleOwner(owner, overlay);
+
+                var mask = (Border)overlay.Template.FindName("OverlayMask", overlay);
+                var bitmap = new RenderTargetBitmap((int)mask.ActualWidth, (int)mask.ActualHeight, 96, 96, PixelFormats.Pbgra32);
+                bitmap.Render(mask);
+                var pixels = new byte[bitmap.PixelWidth * bitmap.PixelHeight * 4];
+                bitmap.CopyPixels(pixels, bitmap.PixelWidth * 4, 0);
+                Assert.AreEqual(0, pixels[3]);
+                Assert.IsTrue(pixels[((16 * bitmap.PixelWidth) + 16) * 4 + 3] > 0);
+
+                var surface = (Border)overlay.Template.FindName("DialogSurface", overlay);
+                Assert.AreEqual(600, surface.ActualWidth, 1);
+                Assert.AreEqual(360, surface.ActualHeight, 1);
+                var center = surface.TranslatePoint(new Point(surface.ActualWidth / 2, surface.ActualHeight / 2), overlay);
+                Assert.AreEqual(overlay.ActualWidth / 2, center.X, 1);
+                Assert.AreEqual(overlay.ActualHeight / 2, center.Y, 1);
+
+                ZenOverlayDialogWindowOptions.SetDialogWidth(overlay, 680);
+                ZenOverlayDialogWindowOptions.SetDialogHeight(overlay, 400);
+                overlay.UpdateLayout();
+                Assert.AreEqual(680, surface.ActualWidth, 1);
+                Assert.AreEqual(400, surface.ActualHeight, 1);
+
+                owner.Width = 500;
+                owner.Height = 350;
+                overlay.UpdateLayout();
+                Assert.IsTrue(surface.ActualWidth < 680);
+                Assert.IsTrue(surface.ActualHeight < 400);
+
+                owner.Width = 900;
+                owner.Height = 600;
+
+                owner.Left += 35;
+                owner.Top += 25;
+                owner.Width += 80;
+                owner.Height += 40;
+                overlay.UpdateLayout();
+
+                AssertOverlayMatchesVisibleOwner(owner, overlay);
+
+                owner.Left = 2200;
+                owner.Top = 120;
+                overlay.Dispatcher.Invoke(() => { }, DispatcherPriority.ApplicationIdle);
+                overlay.UpdateLayout();
+                AssertOverlayMatchesVisibleOwner(owner, overlay);
+                center = surface.TranslatePoint(new Point(surface.ActualWidth / 2, surface.ActualHeight / 2), overlay);
+                Assert.AreEqual(overlay.ActualWidth / 2, center.X, 1);
+                Assert.AreEqual(overlay.ActualHeight / 2, center.Y, 1);
+            }
+            finally
+            {
+                overlay?.Close();
+                owner.Close();
+            }
+        }
+
+        private static void AssertOverlayMatchesVisibleOwner(Window owner, Window overlay)
+        {
+            var ownerHandle = new WindowInteropHelper(owner).Handle;
+            var overlayHandle = new WindowInteropHelper(overlay).Handle;
+            Assert.IsTrue(DwmGetWindowAttribute(ownerHandle, 9, out var visibleOwner, Marshal.SizeOf<WindowRect>()) >= 0);
+            Assert.IsTrue(DwmGetWindowAttribute(overlayHandle, 9, out var overlayBounds, Marshal.SizeOf<WindowRect>()) >= 0);
+            Assert.AreEqual(visibleOwner.Left, overlayBounds.Left);
+            Assert.AreEqual(visibleOwner.Top, overlayBounds.Top);
+            Assert.AreEqual(visibleOwner.Right, overlayBounds.Right);
+            Assert.AreEqual(visibleOwner.Bottom, overlayBounds.Bottom);
+        }
+
+        [DllImport("dwmapi.dll")]
+        private static extern int DwmGetWindowAttribute(IntPtr window, int attribute, out WindowRect rectangle, int size);
+
+        [StructLayout(LayoutKind.Sequential)]
+        private struct WindowRect
+        {
+            public int Left;
+            public int Top;
+            public int Right;
+            public int Bottom;
         }
 
         private static IEnumerable<T> Descendants<T>(DependencyObject root) where T : DependencyObject

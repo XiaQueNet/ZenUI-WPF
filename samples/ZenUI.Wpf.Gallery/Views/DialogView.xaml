@@ -46,6 +46,20 @@
 
             <Border Style="{StaticResource GalleryCardStyle}">
                 <StackPanel>
+                    <TextBlock Style="{StaticResource SectionTitleStyle}" Text="遮罩弹窗" />
+                    <TextBlock
+                        Style="{StaticResource GallerySectionDescriptionStyle}"
+                        Text="遮罩窗口与主窗口同位置、同大小；半透明遮罩内的弹窗内容固定居中。本示例将内容面板设为 680 × 400，打开期间不能操作主窗口。" />
+                    <zen:ZenButton
+                        HorizontalAlignment="Left"
+                        Command="{Binding ShowOverlayCommand}"
+                        Content="打开遮罩弹窗"
+                        Style="{StaticResource GalleryButtonStyle}" />
+                </StackPanel>
+            </Border>
+
+            <Border Style="{StaticResource GalleryCardStyle}">
+                <StackPanel>
                     <TextBlock Style="{StaticResource SectionTitleStyle}" Text="非模态弹窗" />
                     <TextBlock
                         Style="{StaticResource GallerySectionDescriptionStyle}"

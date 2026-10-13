@@ -20,6 +20,7 @@ namespace ZenUI.Wpf.Gallery.ViewModels
             ShowCancelOnlyCommand = new DelegateCommand(ShowCancelOnly);
             ShowContentOnlyCommand = new DelegateCommand(ShowContentOnly);
             ShowNonModalCommand = new DelegateCommand(ShowNonModal);
+            ShowOverlayCommand = new DelegateCommand(ShowOverlay);
             IncrementCounterCommand = new DelegateCommand(IncrementCounter);
         }
 
@@ -32,6 +33,8 @@ namespace ZenUI.Wpf.Gallery.ViewModels
         public DelegateCommand ShowContentOnlyCommand { get; }
 
         public DelegateCommand ShowNonModalCommand { get; }
+
+        public DelegateCommand ShowOverlayCommand { get; }
 
         public DelegateCommand IncrementCounterCommand { get; }
 
@@ -75,6 +78,16 @@ namespace ZenUI.Wpf.Gallery.ViewModels
                 { "message", "关闭前可以继续操作主窗口。" }
             };
             dialogService.Show(nameof(NonModalDialogView), parameters, OnDialogClosed);
+        }
+
+        private void ShowOverlay()
+        {
+            var parameters = new DialogParameters
+            {
+                { "title", "遮罩弹窗" },
+                { "message", "遮罩与主窗口重叠，弹窗内容固定在遮罩中央。" }
+            };
+            dialogService.ShowDialog(nameof(OverlayDialogView), parameters, OnDialogClosed, nameof(GalleryOverlayDialogWindow));
         }
 
         private void IncrementCounter()

@@ -1,0 +1,121 @@
+<ResourceDictionary
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:zen="clr-namespace:ZenUI.Wpf.Controls">
+
+    <Style x:Key="ZenOverlayDialogWindowStyle" TargetType="{x:Type Window}">
+        <Setter Property="Background" Value="Transparent" />
+        <Setter Property="Foreground" Value="{DynamicResource ZenTextPrimaryBrush}" />
+        <Setter Property="FontSize" Value="{DynamicResource ZenFontSizeBody}" />
+        <Setter Property="SizeToContent" Value="Manual" />
+        <Setter Property="ResizeMode" Value="NoResize" />
+        <Setter Property="ShowInTaskbar" Value="False" />
+        <Setter Property="WindowStyle" Value="None" />
+        <Setter Property="AllowsTransparency" Value="True" />
+        <Setter Property="zen:ZenDialogWindowOptions.IsDraggable" Value="False" />
+        <Setter Property="SnapsToDevicePixels" Value="True" />
+        <Setter Property="UseLayoutRounding" Value="True" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type Window}">
+                    <Border x:Name="OverlayMask" Background="#80000000" CornerRadius="8">
+                        <Grid ClipToBounds="True">
+                        <Border
+                            x:Name="DialogSurface"
+                            MaxWidth="{TemplateBinding zen:ZenOverlayDialogWindowOptions.DialogWidth}"
+                            MaxHeight="{TemplateBinding zen:ZenOverlayDialogWindowOptions.DialogHeight}"
+                            Margin="24"
+                            HorizontalAlignment="Stretch"
+                            VerticalAlignment="Stretch"
+                            Background="{DynamicResource ZenSurfaceBrush}"
+                            BorderBrush="{DynamicResource ZenBorderBrush}"
+                            BorderThickness="1"
+                            CornerRadius="8">
+                            <Grid>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="52" />
+                                    <RowDefinition Height="*" />
+                                    <RowDefinition Height="Auto" />
+                                </Grid.RowDefinitions>
+
+                                <Grid Margin="20,0,12,0">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="*" />
+                                        <ColumnDefinition Width="Auto" />
+                                    </Grid.ColumnDefinitions>
+                                    <TextBlock
+                                        VerticalAlignment="Center"
+                                        FontSize="{DynamicResource ZenFontSizeSubtitle}"
+                                        FontWeight="{DynamicResource ZenFontWeightSemibold}"
+                                        Foreground="{TemplateBinding Foreground}"
+                                        Text="{TemplateBinding Title}"
+                                        TextTrimming="CharacterEllipsis" />
+                                    <zen:ZenDialogCloseButton
+                                        Grid.Column="1"
+                                        Width="32"
+                                        Height="32"
+                                        VerticalAlignment="Center"
+                                        Appearance="Text"
+                                        AutomationProperties.Name="关闭弹窗"
+                                        Content="&#x2715;"
+                                        Variant="Neutral" />
+                                </Grid>
+
+                                <ScrollViewer
+                                    Grid.Row="1"
+                                    Margin="{TemplateBinding zen:ZenDialogWindowOptions.ContentMargin}"
+                                    HorizontalScrollBarVisibility="Disabled"
+                                    VerticalScrollBarVisibility="Auto">
+                                    <ContentPresenter
+                                        Content="{TemplateBinding Content}"
+                                        ContentTemplate="{TemplateBinding ContentTemplate}" />
+                                </ScrollViewer>
+
+                                <Border
+                                    x:Name="ActionsBorder"
+                                    Grid.Row="2"
+                                    Padding="{TemplateBinding zen:ZenDialogWindowOptions.FooterPadding}"
+                                    BorderBrush="{DynamicResource ZenDividerBrush}"
+                                    BorderThickness="0,1,0,0">
+                                    <StackPanel HorizontalAlignment="Right" Orientation="Horizontal">
+                                        <zen:ZenButton
+                                            x:Name="CancelButton"
+                                            MinWidth="80"
+                                            Margin="0,0,8,0"
+                                            Appearance="Outlined"
+                                            Command="{Binding Path=Content.(zen:ZenDialogWindowOptions.CancelCommand), RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                                            Content="{TemplateBinding zen:ZenDialogWindowOptions.CancelContent}"
+                                            IsCancel="True"
+                                            Variant="Neutral" />
+                                        <zen:ZenButton
+                                            x:Name="ConfirmButton"
+                                            MinWidth="80"
+                                            Command="{Binding Path=Content.(zen:ZenDialogWindowOptions.ConfirmCommand), RelativeSource={RelativeSource AncestorType={x:Type Window}}}"
+                                            Content="{TemplateBinding zen:ZenDialogWindowOptions.ConfirmContent}"
+                                            IsDefault="True" />
+                                    </StackPanel>
+                                </Border>
+                            </Grid>
+                        </Border>
+                        </Grid>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="zen:ZenDialogWindowOptions.ShowCancelButton" Value="False">
+                            <Setter TargetName="CancelButton" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                        <Trigger Property="zen:ZenDialogWindowOptions.ShowConfirmButton" Value="False">
+                            <Setter TargetName="ConfirmButton" Property="Visibility" Value="Collapsed" />
+                        </Trigger>
+                        <MultiTrigger>
+                            <MultiTrigger.Conditions>
+                                <Condition Property="zen:ZenDialogWindowOptions.ShowCancelButton" Value="False" />
+                                <Condition Property="zen:ZenDialogWindowOptions.ShowConfirmButton" Value="False" />
+                            </MultiTrigger.Conditions>
+                            <Setter TargetName="ActionsBorder" Property="Visibility" Value="Collapsed" />
+                        </MultiTrigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+</ResourceDictionary>

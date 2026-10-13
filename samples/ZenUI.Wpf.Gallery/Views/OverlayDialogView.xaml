@@ -1,0 +1,17 @@
+<UserControl
+    x:Class="ZenUI.Wpf.Gallery.Views.OverlayDialogView"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:prism="http://prismlibrary.com/"
+    xmlns:zen="https://zenui.mnorg.cn/xaml/wpf"
+    prism:Dialog.WindowStartupLocation="Manual"
+    zen:ZenDialogWindowOptions.ConfirmCommand="{Binding SaveCommand}"
+    zen:ZenDialogWindowOptions.CancelCommand="{Binding DiscardCommand}">
+    <prism:Dialog.WindowStyle>
+        <Style BasedOn="{StaticResource ZenOverlayDialogWindowStyle}" TargetType="{x:Type Window}">
+            <Setter Property="zen:ZenOverlayDialogWindowOptions.DialogWidth" Value="680" />
+            <Setter Property="zen:ZenOverlayDialogWindowOptions.DialogHeight" Value="400" />
+        </Style>
+    </prism:Dialog.WindowStyle>
+    <TextBlock Text="{Binding Message}" TextWrapping="Wrap" />
+</UserControl>
